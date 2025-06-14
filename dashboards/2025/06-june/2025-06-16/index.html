@@ -294,10 +294,12 @@ body {
     border-radius: 12px;
     border-left: 4px solid #B4B5DF;
     transition: transform 0.3s;
+    cursor: pointer;
 }
 
 .vector-card:hover {
     transform: translateX(5px);
+    background: rgba(26, 43, 61, 0.8);
 }
 
 .vector-header {
@@ -719,7 +721,7 @@ body {
 
     <!-- Attack Vectors -->
     <div class="vectors-section">
-        <div class="vector-card">
+        <div class="vector-card" onclick="showVectorDetail('credentials')">
             <div class="vector-header">
                 <span class="vector-name">Credenciales Comprometidas</span>
                 <span class="vector-effectiveness">78%</span>
@@ -730,7 +732,7 @@ body {
             <div class="vector-sectors">Crítico en: Financiero, Gobierno, Logística</div>
         </div>
 
-        <div class="vector-card">
+        <div class="vector-card" onclick="showVectorDetail('phishing')">
             <div class="vector-header">
                 <span class="vector-name">Phishing/Ingeniería Social</span>
                 <span class="vector-effectiveness">67%</span>
@@ -741,7 +743,7 @@ body {
             <div class="vector-sectors">"Nota Fiscal" Brasil: 67% efectividad</div>
         </div>
 
-        <div class="vector-card">
+        <div class="vector-card" onclick="showVectorDetail('cloud')">
             <div class="vector-header">
                 <span class="vector-name">Configuración Cloud</span>
                 <span class="vector-effectiveness">56%</span>
@@ -752,7 +754,7 @@ body {
             <div class="vector-sectors">99% fallas son del cliente, no del proveedor</div>
         </div>
 
-        <div class="vector-card">
+        <div class="vector-card" onclick="showVectorDetail('vulnerabilities')">
             <div class="vector-header">
                 <span class="vector-name">Vulnerabilidades Software</span>
                 <span class="vector-effectiveness">45%</span>
@@ -763,7 +765,7 @@ body {
             <div class="vector-sectors">CVE-2024-43451: Blind Eagle activo</div>
         </div>
 
-        <div class="vector-card">
+        <div class="vector-card" onclick="showVectorDetail('insider')">
             <div class="vector-header">
                 <span class="vector-name">Insider Malicioso</span>
                 <span class="vector-effectiveness">34%</span>
@@ -774,7 +776,7 @@ body {
             <div class="vector-sectors">34% de brechas en instituciones financieras</div>
         </div>
 
-        <div class="vector-card">
+        <div class="vector-card" onclick="showVectorDetail('supply-chain')">
             <div class="vector-header">
                 <span class="vector-name">Cadena de Suministro</span>
                 <span class="vector-effectiveness">42%</span>
@@ -966,12 +968,133 @@ function closeDetail() {
     document.getElementById('detailPanel').classList.remove('show');
 }
 
+// Show vector detail
+function showVectorDetail(vector) {
+    const vectorData = {
+        credentials: {
+            name: 'Credenciales Comprometidas',
+            effectiveness: '78%',
+            description: 'El vector más efectivo. Empleados reutilizan contraseñas, no usan MFA, y confían en "es solo interno".',
+            sectors: {
+                'Financiero': '91% vulnerable - mismo password en múltiples sistemas',
+                'Gobierno': '89% vulnerable - sistemas legacy sin MFA posible',
+                'Logística': '82% vulnerable - proveedores con accesos perpetuos'
+            },
+            weekend: 'Viernes 18:00 = momento perfecto. Menos personal, más tiempo para escalar privilegios.',
+            defense: 'MFA obligatorio + rotación automática + Zero Standing Privileges'
+        },
+        phishing: {
+            name: 'Phishing/Ingeniería Social',
+            effectiveness: '67%',
+            description: '"Nota Fiscal" en Brasil devastador. Ya no es el príncipe nigeriano - es sofisticado, creíble, urgente.',
+            sectors: {
+                'Financiero': '67% efectividad con "Nota Fiscal"',
+                'Salud': '71% con "Actualización protocolo COVID"',
+                'Todos': 'Deepfakes emergiendo como nueva amenaza'
+            },
+            weekend: 'Picos viernes tarde cuando la gente quiere irse. "Solo un click rápido".',
+            defense: 'Simulaciones constantes + sandbox automático + cultura de reporte'
+        },
+        cloud: {
+            name: 'Configuración Cloud',
+            effectiveness: '56%',
+            description: 'El 99% de brechas cloud son error del cliente, no del proveedor. La comodidad mata la seguridad.',
+            sectors: {
+                'Financiero': 'S3 buckets públicos con data de clientes',
+                'Gobierno': 'Azure Functions sin autenticación',
+                'Salud': 'Backups sin encriptar en cloud público'
+            },
+            weekend: 'Configuraciones "temporales" del viernes se vuelven permanentes.',
+            defense: 'Cloud Security Posture Management + Infrastructure as Code + Auditorías continuas'
+        },
+        vulnerabilities: {
+            name: 'Vulnerabilidades Software',
+            effectiveness: '45%',
+            description: 'CVEs conocidos sin parchear. El parche existe hace meses, la negligencia es la vulnerabilidad.',
+            sectors: {
+                'Gobierno': 'CVE-2024-43451 - Blind Eagle explotando AHORA',
+                'Salud': 'Dispositivos médicos con firmware 5+ años viejo',
+                'Industrial': 'SCADA/OT imposible de parchear'
+            },
+            weekend: 'Ventana perfecta para explotar - nadie parcheará hasta el lunes.',
+            defense: 'Patch management automatizado + virtual patching + segmentación'
+        },
+        insider: {
+            name: 'Insider Malicioso',
+            effectiveness: '34%',
+            description: 'No siempre es malicia - a veces es negligencia. El resultado es el mismo.',
+            sectors: {
+                'Financiero': '34% de brechas involucran insiders',
+                'Gobierno': 'Contratistas con accesos sin revocar',
+                'Telecom': 'Administradores con "las llaves del reino"'
+            },
+            weekend: 'Menos supervisión = más oportunidad. Logs revisados el lunes.',
+            defense: 'Least privilege + monitoring comportamiento + segregación de duties'
+        },
+        'supply-chain': {
+            name: 'Cadena de Suministro',
+            effectiveness: '42%',
+            description: 'Tu seguridad es tan fuerte como tu proveedor más débil. Y probablemente no sabes quién es.',
+            sectors: {
+                'Logística': 'Proveedores de GPS/telemetría comprometidos',
+                'Retail': 'POS vendors con backdoors',
+                'Todos': 'SolarWinds nos enseñó que nadie está a salvo'
+            },
+            weekend: 'Proveedores pequeños = sin SOC 24/7. Puerta abierta.',
+            defense: 'Vendor risk assessment + Zero Trust para terceros + monitoreo continuo'
+        }
+    };
+    
+    const data = vectorData[vector];
+    if (!data) return;
+    
+    const panel = document.getElementById('detailPanel');
+    const content = document.getElementById('detailContent');
+    
+    let sectorsHtml = '';
+    for (const [sector, desc] of Object.entries(data.sectors)) {
+        sectorsHtml += `<li style="margin-bottom: 8px;"><strong>${sector}:</strong> ${desc}</li>`;
+    }
+    
+    content.innerHTML = `
+        <h3>${data.name}</h3>
+        
+        <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 20px;">
+            <div style="font-size: 48px; font-weight: 600; color: #ff6b6b;">${data.effectiveness}</div>
+            <div style="flex: 1;">
+                <div style="font-size: 12px; color: #7A99AC; text-transform: uppercase; margin-bottom: 5px;">Efectividad del Vector</div>
+                <div style="font-size: 14px; color: #ffffff;">${data.description}</div>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <h4 style="color: #B4B5DF; margin-bottom: 10px;">Impacto por Sector</h4>
+            <ul style="list-style: none; padding: 0; font-size: 14px; color: #ffffff;">
+                ${sectorsHtml}
+            </ul>
+        </div>
+        
+        <div style="background: rgba(255, 107, 107, 0.1); padding: 15px; border-radius: 6px; margin-bottom: 20px;">
+            <h4 style="color: #ff6b6b; margin-bottom: 10px;">Factor Fin de Semana</h4>
+            <p style="font-size: 14px;">${data.weekend}</p>
+        </div>
+        
+        <div style="background: rgba(180, 181, 223, 0.1); padding: 15px; border-radius: 6px;">
+            <h4 style="color: #B4B5DF; margin-bottom: 10px;">Defensa Recomendada</h4>
+            <p style="font-size: 14px;">${data.defense}</p>
+        </div>
+    `;
+    
+    panel.classList.add('show');
+}
+
 // Click outside to close
 document.addEventListener('click', function(e) {
     if (!e.target.closest('.bar-wrapper') && 
         !e.target.closest('.risk-sector') && 
         !e.target.closest('.detail-panel') &&
-        !e.target.closest('.correlation-value')) {
+        !e.target.closest('.correlation-value') &&
+        !e.target.closest('.vector-card')) {
         closeDetail();
         document.getElementById('tooltip').style.display = 'none';
     }
