@@ -1,20 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <title>Lãberit Intelligence Hub</title>
-    <meta http-equiv="refresh" content="0; url=./dashboards/2025/06-june/">
+    <meta charset="UTF-8">
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 800px; 
+            margin: 0 auto; 
+            padding: 20px;
+            background-color: #091F2C;
+            color: #ffffff;
+        }
+        .alert-box {
+            background: #C10016;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .nav-links a {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            background: #B4B5DF;
+            color: #091F2C;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Lãberit Intelligence Hub</h1>
-    <p>Redirecting to latest dashboard...</p>
+    <h1>🛡️ Lãberit Intelligence Hub</h1>
     
-    <nav>
-        <h2>Quick Access</h2>
-        <ul>
-            <li><a href="./dashboards/2025/06-june/">Current Dashboard</a></li>
-            <li><a href="./alerts/active.json">Active Alerts API</a></li>
-            <li><a href="./intelligence-api/latest.json">Latest Intelligence Feed</a></li>
-        </ul>
-    </nav>
+    <!-- NUEVO: Alerta Semanal -->
+    <div class="alert-box">
+        <h3>🚨 NUEVA ACTUALIZACIÓN SEMANAL - 16 Junio 2025</h3>
+        <p>Amenazas críticas detectadas esta semana. Acción inmediata requerida.</p>
+        <a href="./dashboards/2025/06-june/2025-06-16/" style="color: white;">
+            Ver Actualización Semanal →
+        </a>
+    </div>
+    
+    <h2>Acceso Rápido</h2>
+    <div class="nav-links">
+        <a href="./dashboards/2025/06-june/">Dashboard Mensual Completo</a>
+        <a href="./dashboards/2025/06-june/2025-06-16/">🆕 Update Semanal</a>
+        <a href="./alerts/active.json">API Alertas Activas</a>
+    </div>
+    
+    <h2>Historial de Actualizaciones</h2>
+    <ul>
+        <li><strong>16 Jun:</strong> Actualización semanal - 3 nuevas amenazas críticas</li>
+        <li><strong>9 Jun:</strong> Dashboard mensual - 9 campañas activas</li>
+    </ul>
 </body>
 </html>
