@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Dashboard Inmunidad Digital | LATAM & España</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    background-color: #091F2C;
+    color: #ffffff;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    padding: 30px 20px;
+    background: rgba(26, 43, 61, 0.5);
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 36px;
+    font-weight: 300;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.header-date {
+    color: #A6BBC8;
+    font-size: 14px;
+}
+
+/* Key Metrics Bar */
+.metrics-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.metric-box {
+    background: rgba(26, 43, 61, 0.6);
+    padding: 25px;
+    border-radius: 8px;
+    text-align: center;
+    border-top: 3px solid #B4B5DF;
+    transition: transform 0.3s;
+}
+
+.metric-box:hover {
+    transform: translateY(-3px);
+}
+
+.metric-value {
+    font-size: 42px;
+    font-weight: 600;
+    color: #B4B5DF;
+    display: block;
+}
+
+.metric-label {
+    font-size: 13px;
+    color: #A6BBC8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.metric-source {
+    font-size: 11px;
+    color: #7A99AC;
+    font-style: italic;
+}
+
+/* Main Visual - Correlation Matrix */
+.correlation-section {
+    background: rgba(26, 43, 61, 0.6);
+    padding: 40px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+}
+
+.correlation-title {
+    text-align: center;
+    font-size: 28px;
+    color: #B4B5DF;
+    margin-bottom: 10px;
+    font-weight: 300;
+}
+
+.correlation-subtitle {
+    text-align: center;
+    font-size: 16px;
+    color: #A6BBC8;
+    margin-bottom: 40px;
+}
+
+.correlation-grid {
+    display: grid;
+    grid-template-columns: 150px repeat(5, 1fr);
+    gap: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2px;
+    border-radius: 8px;
+    margin-bottom: 40px;
+}
+
+.correlation-cell {
+    background: rgba(26, 43, 61, 0.8);
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+    position: relative;
+    transition: all 0.3s;
+}
+
+.correlation-header {
+    background: rgba(79, 117, 139, 0.3);
+    font-weight: 600;
+    color: #B4B5DF;
+}
+
+.correlation-label {
+    background: rgba(79, 117, 139, 0.2);
+    text-align: left;
+    font-weight: 500;
+}
+
+.correlation-value {
+    font-size: 24px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.correlation-cell:hover:not(.correlation-header):not(.correlation-label) {
+    background: rgba(180, 181, 223, 0.2);
+    transform: scale(1.05);
+}
+
+.heat-low { color: #ff6b6b; }
+.heat-medium { color: #ffb347; }
+.heat-high { color: #B4B5DF; }
+.heat-very-high { color: #4CAF50; }
+
+/* Immunity Formula Visual */
+.formula-section {
+    background: rgba(26, 43, 61, 0.6);
+    padding: 40px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.formula-title {
+    font-size: 24px;
+    color: #B4B5DF;
+    margin-bottom: 30px;
+    font-weight: 300;
+}
+
+.formula-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.formula-component {
+    background: rgba(180, 181, 223, 0.1);
+    padding: 15px 25px;
+    border-radius: 8px;
+    border: 1px solid rgba(180, 181, 223, 0.3);
+}
+
+.formula-pillar {
+    font-size: 14px;
+    color: #A6BBC8;
+    display: block;
+}
+
+.formula-weight {
+    font-size: 24px;
+    font-weight: 600;
+    color: #B4B5DF;
+}
+
+.formula-operator {
+    font-size: 24px;
+    color: #7A99AC;
+}
+
+/* Sector Immunity Chart */
+.chart-section {
+    background: rgba(26, 43, 61, 0.6);
+    padding: 40px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+}
+
+.chart-title {
+    text-align: center;
+    font-size: 28px;
+    color: #B4B5DF;
+    margin-bottom: 40px;
+    font-weight: 300;
+}
+
+.bar-chart {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    height: 400px;
+    padding: 0 40px;
+    position: relative;
+}
+
+.bar-wrapper {
+    flex: 1;
+    max-width: 120px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    cursor: pointer;
+}
+
+.bar {
+    width: 80%;
+    background: linear-gradient(to top, #C10016, #ff6b6b, #B4B5DF);
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.bar:hover {
+    transform: scaleY(1.05);
+    filter: brightness(1.2);
+}
+
+.bar-low { background: linear-gradient(to top, #C10016, #ff6b6b); }
+.bar-medium { background: linear-gradient(to top, #ff6b6b, #ffb347); }
+.bar-high { background: linear-gradient(to top, #ffb347, #B4B5DF); }
+
+.bar-value {
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    font-weight: 600;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.bar-label {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #A6BBC8;
+    text-align: center;
+}
+
+/* Attack Vector Analysis */
+.vectors-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.vector-card {
+    background: rgba(26, 43, 61, 0.6);
+    padding: 30px;
+    border-radius: 12px;
+    border-left: 4px solid #B4B5DF;
+    transition: transform 0.3s;
+}
+
+.vector-card:hover {
+    transform: translateX(5px);
+}
+
+.vector-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.vector-name {
+    font-size: 20px;
+    color: #ffffff;
+    font-weight: 400;
+}
+
+.vector-effectiveness {
+    font-size: 32px;
+    font-weight: 600;
+    color: #ff6b6b;
+}
+
+.vector-bar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.vector-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #C10016, #ff6b6b);
+    border-radius: 4px;
+    transition: width 1s ease;
+}
+
+.vector-sectors {
+    font-size: 13px;
+    color: #A6BBC8;
+}
+
+/* Weekend Risk Matrix */
+.risk-matrix-section {
+    background: rgba(26, 43, 61, 0.6);
+    padding: 40px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+}
+
+.risk-matrix-title {
+    text-align: center;
+    font-size: 28px;
+    color: #B4B5DF;
+    margin-bottom: 40px;
+    font-weight: 300;
+}
+
+.risk-matrix {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+}
+
+.risk-sector {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 25px;
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.risk-sector::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+}
+
+.risk-critical::before { background: #C10016; }
+.risk-high::before { background: #ff6b6b; }
+.risk-medium::before { background: #ffb347; }
+
+.risk-sector:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.risk-sector-name {
+    font-size: 16px;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.risk-percentage {
+    font-size: 48px;
+    font-weight: 200;
+    margin-bottom: 10px;
+}
+
+.risk-critical .risk-percentage { color: #C10016; }
+.risk-high .risk-percentage { color: #ff6b6b; }
+.risk-medium .risk-percentage { color: #ffb347; }
+
+.risk-label {
+    font-size: 12px;
+    color: #A6BBC8;
+    text-transform: uppercase;
+}
+
+/* Bottom Summary */
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.summary-card {
+    background: rgba(26, 43, 61, 0.6);
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.summary-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.summary-title {
+    font-size: 20px;
+    color: #B4B5DF;
+    margin-bottom: 15px;
+    font-weight: 400;
+}
+
+.summary-value {
+    font-size: 36px;
+    font-weight: 600;
+    color: #ff6b6b;
+}
+
+.summary-text {
+    font-size: 14px;
+    color: #A6BBC8;
+    margin-top: 10px;
+}
+
+/* Detail Tooltip */
+.tooltip {
+    position: absolute;
+    background: rgba(9, 31, 44, 0.95);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid rgba(180, 181, 223, 0.3);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    display: none;
+    z-index: 1000;
+    max-width: 300px;
+}
+
+.tooltip-title {
+    font-size: 18px;
+    color: #B4B5DF;
+    margin-bottom: 10px;
+}
+
+.tooltip-content {
+    font-size: 14px;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+/* Footer */
+.footer-message {
+    text-align: center;
+    padding: 50px 20px;
+    margin-top: 60px;
+    color: #A6BBC8;
+}
+
+.footer-quote {
+    font-size: 24px;
+    font-weight: 300;
+    color: #B4B5DF;
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+.footer-tagline {
+    font-size: 16px;
+    color: #A6BBC8;
+}
+
+/* Detail Panel - Full Overlay Style */
+.detail-panel {
+    position: fixed;
+    bottom: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(26, 43, 61, 0.98);
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid rgba(180, 181, 223, 0.3);
+    max-width: 600px;
+    width: 90%;
+    display: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+}
+
+.detail-panel.show {
+    display: block;
+}
+
+.detail-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
+    color: #A6BBC8;
+    font-size: 24px;
+}
+
+.detail-content h3 {
+    color: #B4B5DF;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.detail-content p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .correlation-grid {
+        grid-template-columns: 100px repeat(5, 1fr);
+        font-size: 12px;
+    }
+    
+    .bar-chart {
+        height: 300px;
+        padding: 0 20px;
+    }
+    
+    .risk-matrix {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <h1>Dashboard de Inmunidad Digital Sectorial</h1>
+        <div class="header-date">Sábado, 14 de Junio 2025 | Análisis LATAM & España</div>
+    </div>
+
+    <!-- Key Metrics -->
+    <div class="metrics-bar">
+        <div class="metric-box">
+            <span class="metric-value">37%</span>
+            <span class="metric-label">Inmunidad Promedio</span>
+            <span class="metric-source">Fuente: Análisis Zero-Trust 150 empresas</span>
+        </div>
+        <div class="metric-box">
+            <span class="metric-value">78%</span>
+            <span class="metric-label">Riesgo Fin de Semana</span>
+            <span class="metric-source">Fuente: SOCs LATAM/España 2025</span>
+        </div>
+        <div class="metric-box">
+            <span class="metric-value">€1.75B</span>
+            <span class="metric-label">Pérdidas 12 Meses</span>
+            <span class="metric-source">Fuente: FEBRABAN, CheckPoint, Crisis24</span>
+        </div>
+        <div class="metric-box">
+            <span class="metric-value">150</span>
+            <span class="metric-label">Empresas Evaluadas</span>
+            <span class="metric-source">2021-2025 | 14 sectores</span>
+        </div>
+    </div>
+
+    <!-- Correlation Matrix -->
+    <div class="correlation-section">
+        <h2 class="correlation-title">Correlación: Madurez Confianza Cero vs Capacidad de Protección</h2>
+        <p class="correlation-subtitle">Análisis de 150 empresas LATAM (2021-2025)</p>
+        
+        <div class="correlation-grid">
+            <!-- Headers -->
+            <div class="correlation-cell correlation-header">Sector</div>
+            <div class="correlation-cell correlation-header">Identidad</div>
+            <div class="correlation-cell correlation-header">Dispositivos</div>
+            <div class="correlation-cell correlation-header">Redes</div>
+            <div class="correlation-cell correlation-header">Datos</div>
+            <div class="correlation-cell correlation-header">Aplicaciones</div>
+            
+            <!-- Financial -->
+            <div class="correlation-cell correlation-label">Financiero</div>
+            <div class="correlation-cell correlation-value heat-low" onclick="showDetail('financial', 'identity')">42%</div>
+            <div class="correlation-cell correlation-value heat-low" onclick="showDetail('financial', 'devices')">38%</div>
+            <div class="correlation-cell correlation-value heat-low" onclick="showDetail('financial', 'network')">31%</div>
+            <div class="correlation-cell correlation-value heat-low" onclick="showDetail('financial', 'data')">22%</div>
+            <div class="correlation-cell correlation-value heat-low" onclick="showDetail('financial', 'apps')">28%</div>
+            
+            <!-- Government -->
+            <div class="correlation-cell correlation-label">Gobierno</div>
+            <div class="correlation-cell correlation-value heat-low" onclick="showDetail('government', 'identity')">35%</div>
+            <div class="correlation-cell correlation-value heat-low" onclick="showDetail('government', 'devices')">29%</div>
+            <div class="correlation-cell correlation-value heat-low" onclick="showDetail('government', 'network')">26%</div>
+            <div class="correlation-cell correlation-value heat-low" onclick="showDetail('government', 'data')">18%</div>
+            <div class="correlation-cell correlation-value heat-low" onclick="showDetail('government', 'apps')">32%</div>
+            
+            <!-- Healthcare -->
+            <div class="correlation-cell correlation-label">Salud</div>
+            <div class="correlation-cell correlation-value heat-low" onclick="showDetail('healthcare', 'identity')">38%</div>
+            <div class="correlation-cell correlation-value heat-low" onclick="showDetail('healthcare', 'devices')">24%</div>
+            <div class="correlation-cell correlation-value heat-medium" onclick="showDetail('healthcare', 'network')">41%</div>
+            <div class="correlation-cell correlation-value heat-low" onclick="showDetail('healthcare', 'data')">35%</div>
+            <div class="correlation-cell correlation-value heat-low" onclick="showDetail('healthcare', 'apps')">37%</div>
+            
+            <!-- Logistics -->
+            <div class="correlation-cell correlation-label">Logística</div>
+            <div class="correlation-cell correlation-value heat-medium" onclick="showDetail('logistics', 'identity')">45%</div>
+            <div class="correlation-cell correlation-value heat-low" onclick="showDetail('logistics', 'devices')">32%</div>
+            <div class="correlation-cell correlation-value heat-medium" onclick="showDetail('logistics', 'network')">48%</div>
+            <div class="correlation-cell correlation-value heat-low" onclick="showDetail('logistics', 'data')">29%</div>
+            <div class="correlation-cell correlation-value heat-medium" onclick="showDetail('logistics', 'apps')">41%</div>
+            
+            <!-- Telecom -->
+            <div class="correlation-cell correlation-label">Telecom</div>
+            <div class="correlation-cell correlation-value heat-medium" onclick="showDetail('telecom', 'identity')">52%</div>
+            <div class="correlation-cell correlation-value heat-medium" onclick="showDetail('telecom', 'devices')">46%</div>
+            <div class="correlation-cell correlation-value heat-medium" onclick="showDetail('telecom', 'network')">58%</div>
+            <div class="correlation-cell correlation-value heat-low" onclick="showDetail('telecom', 'data')">38%</div>
+            <div class="correlation-cell correlation-value heat-low" onclick="showDetail('telecom', 'apps')">31%</div>
+        </div>
+    </div>
+
+    <!-- Immunity Formula -->
+    <div class="formula-section">
+        <h3 class="formula-title">Cálculo de Inmunidad = Madurez Ponderada por Pilar</h3>
+        <div class="formula-visual">
+            <div class="formula-component">
+                <span class="formula-pillar">Identidad</span>
+                <span class="formula-weight">25%</span>
+            </div>
+            <span class="formula-operator">+</span>
+            <div class="formula-component">
+                <span class="formula-pillar">Datos</span>
+                <span class="formula-weight">30%</span>
+            </div>
+            <span class="formula-operator">+</span>
+            <div class="formula-component">
+                <span class="formula-pillar">Redes</span>
+                <span class="formula-weight">20%</span>
+            </div>
+            <span class="formula-operator">+</span>
+            <div class="formula-component">
+                <span class="formula-pillar">Dispositivos</span>
+                <span class="formula-weight">15%</span>
+            </div>
+            <span class="formula-operator">+</span>
+            <div class="formula-component">
+                <span class="formula-pillar">Apps</span>
+                <span class="formula-weight">10%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sector Immunity Chart -->
+    <div class="chart-section">
+        <h2 class="chart-title">Inmunidad Real por Sector</h2>
+        <div class="bar-chart">
+            <div class="bar-wrapper" onclick="showSectorDetail('financial')">
+                <div class="bar bar-low" data-height="31">
+                    <span class="bar-value">31%</span>
+                </div>
+                <span class="bar-label">Financiero</span>
+            </div>
+            <div class="bar-wrapper" onclick="showSectorDetail('government')">
+                <div class="bar bar-low" data-height="28">
+                    <span class="bar-value">28%</span>
+                </div>
+                <span class="bar-label">Gobierno</span>
+            </div>
+            <div class="bar-wrapper" onclick="showSectorDetail('healthcare')">
+                <div class="bar bar-low" data-height="35">
+                    <span class="bar-value">35%</span>
+                </div>
+                <span class="bar-label">Salud</span>
+            </div>
+            <div class="bar-wrapper" onclick="showSectorDetail('logistics')">
+                <div class="bar bar-medium" data-height="39">
+                    <span class="bar-value">39%</span>
+                </div>
+                <span class="bar-label">Logística</span>
+            </div>
+            <div class="bar-wrapper" onclick="showSectorDetail('telecom')">
+                <div class="bar bar-medium" data-height="45">
+                    <span class="bar-value">45%</span>
+                </div>
+                <span class="bar-label">Telecom</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Attack Vectors -->
+    <div class="vectors-section">
+        <div class="vector-card">
+            <div class="vector-header">
+                <span class="vector-name">Credenciales Comprometidas</span>
+                <span class="vector-effectiveness">78%</span>
+            </div>
+            <div class="vector-bar">
+                <div class="vector-fill" style="width: 78%"></div>
+            </div>
+            <div class="vector-sectors">Crítico en: Financiero, Gobierno, Logística</div>
+        </div>
+
+        <div class="vector-card">
+            <div class="vector-header">
+                <span class="vector-name">Phishing/Ingeniería Social</span>
+                <span class="vector-effectiveness">67%</span>
+            </div>
+            <div class="vector-bar">
+                <div class="vector-fill" style="width: 67%"></div>
+            </div>
+            <div class="vector-sectors">"Nota Fiscal" Brasil: 67% efectividad</div>
+        </div>
+
+        <div class="vector-card">
+            <div class="vector-header">
+                <span class="vector-name">Configuración Cloud</span>
+                <span class="vector-effectiveness">56%</span>
+            </div>
+            <div class="vector-bar">
+                <div class="vector-fill" style="width: 56%"></div>
+            </div>
+            <div class="vector-sectors">99% fallas son del cliente, no del proveedor</div>
+        </div>
+
+        <div class="vector-card">
+            <div class="vector-header">
+                <span class="vector-name">Vulnerabilidades Software</span>
+                <span class="vector-effectiveness">45%</span>
+            </div>
+            <div class="vector-bar">
+                <div class="vector-fill" style="width: 45%"></div>
+            </div>
+            <div class="vector-sectors">CVE-2024-43451: Blind Eagle activo</div>
+        </div>
+
+        <div class="vector-card">
+            <div class="vector-header">
+                <span class="vector-name">Insider Malicioso</span>
+                <span class="vector-effectiveness">34%</span>
+            </div>
+            <div class="vector-bar">
+                <div class="vector-fill" style="width: 34%"></div>
+            </div>
+            <div class="vector-sectors">34% de brechas en instituciones financieras</div>
+        </div>
+
+        <div class="vector-card">
+            <div class="vector-header">
+                <span class="vector-name">Cadena de Suministro</span>
+                <span class="vector-effectiveness">42%</span>
+            </div>
+            <div class="vector-bar">
+                <div class="vector-fill" style="width: 42%"></div>
+            </div>
+            <div class="vector-sectors">Tu proveedor es tu puerta trasera</div>
+        </div>
+    </div>
+
+    <!-- Weekend Risk Matrix -->
+    <div class="risk-matrix-section">
+        <h2 class="risk-matrix-title">Vulnerabilidad Fin de Semana por Sector</h2>
+        <div class="risk-matrix">
+            <div class="risk-sector risk-critical" onclick="showWeekendRisk('financial')">
+                <div class="risk-sector-name">Financiero</div>
+                <div class="risk-percentage">91%</div>
+                <div class="risk-label">Riesgo Weekend</div>
+            </div>
+            <div class="risk-sector risk-critical" onclick="showWeekendRisk('government')">
+                <div class="risk-sector-name">Gobierno</div>
+                <div class="risk-percentage">94%</div>
+                <div class="risk-label">Riesgo Weekend</div>
+            </div>
+            <div class="risk-sector risk-high" onclick="showWeekendRisk('healthcare')">
+                <div class="risk-sector-name">Salud</div>
+                <div class="risk-percentage">87%</div>
+                <div class="risk-label">Riesgo Weekend</div>
+            </div>
+            <div class="risk-sector risk-high" onclick="showWeekendRisk('logistics')">
+                <div class="risk-sector-name">Logística</div>
+                <div class="risk-percentage">76%</div>
+                <div class="risk-label">Riesgo Weekend</div>
+            </div>
+            <div class="risk-sector risk-medium" onclick="showWeekendRisk('telecom')">
+                <div class="risk-sector-name">Telecom</div>
+                <div class="risk-percentage">68%</div>
+                <div class="risk-label">Riesgo Weekend</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="summary-grid">
+        <div class="summary-card">
+            <div class="summary-icon">📊</div>
+            <h3 class="summary-title">La Paradoja</h3>
+            <div class="summary-value">58%</div>
+            <p class="summary-text">Inmunidad promedio empresas con incidentes vs 32% sin incidentes</p>
+        </div>
+        
+        <div class="summary-card">
+            <div class="summary-icon">🎭</div>
+            <h3 class="summary-title">El Teatro</h3>
+            <div class="summary-value">87%</div>
+            <p class="summary-text">Con certificaciones pero solo 22% con protección real</p>
+        </div>
+        
+        <div class="summary-card">
+            <div class="summary-icon">☁️</div>
+            <h3 class="summary-title">La Confianza</h3>
+            <div class="summary-value">99%</div>
+            <p class="summary-text">De fallas cloud son por mala configuración del cliente</p>
+        </div>
+    </div>
+</div>
+
+<!-- Footer Message -->
+<div class="footer-message">
+    <p class="footer-quote">"Transformamos la inteligencia en acción para impulsar tu rendimiento"</p>
+    <p class="footer-tagline">Claridad ejecutiva para decisiones que importan | Lãberit</p>
+</div>
+
+<!-- Detail Panel -->
+<div class="detail-panel" id="detailPanel">
+    <span class="detail-close" onclick="closeDetail()">×</span>
+    <div class="detail-content" id="detailContent"></div>
+</div>
+
+<!-- Tooltip -->
+<div class="tooltip" id="tooltip">
+    <div class="tooltip-title" id="tooltipTitle"></div>
+    <div class="tooltip-content" id="tooltipContent"></div>
+</div>
+
+<script>
+// Global detail data
+const detailData = {
+    financial: {
+        name: 'Sector Financiero',
+        immunity: '31%',
+        weekendRisk: '91%',
+        gaps: 'Confianza ciega en proveedores cloud (99% fallas son del cliente). APIs financieras sin rate limiting. MFA parcial o inexistente.',
+        threats: 'RansomHub: 38 víctimas globales. Banking trojans BR (Coyote/AllaSenha): 70+ bancos. Phishing "Nota Fiscal": 67% efectividad.',
+        recent: '€222M pérdidas verificadas 48h. Brasil €700M anuales por fraude electrónico.',
+        action: 'Auditar configuraciones cloud HOY. Activar MFA obligatorio. Bloquear "Nota Fiscal".'
+    },
+    government: {
+        name: 'Sector Gobierno',
+        immunity: '28%',
+        weekendRisk: '94%',
+        gaps: 'Sistemas legacy sin parchear. 14 días recovery vs 3 días privados. CVE-2024-43451 expuesto.',
+        threats: 'Blind Eagle: 1,600+ sistemas comprometidos. Pro-Russian hacktivists: DDoS coordinados. Earth Alux: espionaje activo.',
+        recent: 'Colombia €185M (judicial). México €37M (federal). España: 750% incremento ataques.',
+        action: 'Parchear CVE-2024-43451 URGENTE. SOC 24/7 este weekend. Protocolo crisis activo.'
+    },
+    healthcare: {
+        name: 'Sector Salud',
+        immunity: '35%',
+        weekendRisk: '87%',
+        gaps: 'IoMT en misma red que admin. Personal sin protocolo ransomware. Guardias sin preparación.',
+        threats: 'LockBit 3.0, INC, RansomHub activos. 130K registros España expuestos. 34% incremento ataques.',
+        recent: 'Hospitales cancelando cirugías. Vidas en riesgo directo por ransomware.',
+        action: 'Aislar IoMT YA. Backup offline sistemas críticos. Protocolo guardias HOY.'
+    },
+    logistics: {
+        name: 'Sector Logística',
+        immunity: '39%',
+        weekendRisk: '76%',
+        gaps: 'OT/IT sin separar (45% empresas). GPS/Telemetría vulnerable. Proveedores sin auditar.',
+        threats: 'DHL, UPS, FedEx credenciales expuestas. Supply chain attacks. Efecto cascada 3,500 empresas.',
+        recent: 'GTD Chile demostró vulnerabilidad sistémica del sector.',
+        action: 'Cambiar TODAS contraseñas GPS/Telemetría. Separar OT/IT. Auditar proveedores.'
+    },
+    telecom: {
+        name: 'Sector Telecomunicaciones',
+        immunity: '45%',
+        weekendRisk: '68%',
+        gaps: 'Protocolos legacy (SS7) activos. 5G security inmadura. Dependencias geopolíticas.',
+        threats: 'España 3° más atacado. DDoS 225+ Gbps. 750% incremento. Target crítico nation-state.',
+        recent: 'Blackout Mayo 2025 "fallo actualización". Fragilidad expuesta.',
+        action: 'Monitoreo 24/7 crítico. Protocolo aislamiento 5min. CERT nacional en speed dial.'
+    }
+};
+
+// Show sector detail (from bar chart)
+function showSectorDetail(sector) {
+    const detail = detailData[sector];
+    if (!detail) return;
+    
+    const panel = document.getElementById('detailPanel');
+    const content = document.getElementById('detailContent');
+    
+    content.innerHTML = `
+        <h3>${detail.name}</h3>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 20px;">
+            <div>
+                <span style="font-size: 36px; font-weight: 600; color: #B4B5DF;">${detail.immunity}</span>
+                <div style="font-size: 12px; color: #7A99AC; text-transform: uppercase;">Inmunidad</div>
+            </div>
+            <div>
+                <span style="font-size: 36px; font-weight: 600; color: #ff6b6b;">${detail.weekendRisk}</span>
+                <div style="font-size: 12px; color: #7A99AC; text-transform: uppercase;">Riesgo Weekend</div>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <h4 style="color: #B4B5DF; margin-bottom: 10px;">Brechas Confirmadas</h4>
+            <p style="font-size: 14px; color: #ffffff;">${detail.gaps}</p>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <h4 style="color: #B4B5DF; margin-bottom: 10px;">Amenazas Activas</h4>
+            <p style="font-size: 14px; color: #ffffff;">${detail.threats}</p>
+        </div>
+        
+        <div style="background: rgba(255, 107, 107, 0.1); padding: 15px; border-radius: 6px; margin-bottom: 20px;">
+            <h4 style="color: #ff6b6b; margin-bottom: 10px;">Incidentes Recientes</h4>
+            <p style="font-size: 14px;">${detail.recent}</p>
+        </div>
+        
+        <div style="background: rgba(180, 181, 223, 0.1); padding: 15px; border-radius: 6px;">
+            <h4 style="color: #B4B5DF; margin-bottom: 10px;">Acción Este Weekend</h4>
+            <p style="font-size: 14px;">${detail.action}</p>
+        </div>
+    `;
+    
+    panel.classList.add('show');
+}
+
+// Show weekend risk detail
+function showWeekendRisk(sector) {
+    showSectorDetail(sector);
+}
+
+// Close detail panel
+function closeDetail() {
+    document.getElementById('detailPanel').classList.remove('show');
+}
+
+// Click outside to close
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.bar-wrapper') && 
+        !e.target.closest('.risk-sector') && 
+        !e.target.closest('.detail-panel') &&
+        !e.target.closest('.correlation-value')) {
+        closeDetail();
+        document.getElementById('tooltip').style.display = 'none';
+    }
+});
+
+// Show correlation detail remains the same
+function showDetail(sector, pillar) {
+    const data = {
+        financial: {
+            identity: 'Solo 3% tienen Identity Intelligence madura. MFA parcial prevalece.',
+            devices: 'Dispositivos sin gestión unificada. BYOD sin control adecuado.',
+            network: 'Segmentación básica. Perímetro tradicional obsoleto.',
+            data: 'El punto más débil: 78% sin clasificación automática de datos.',
+            apps: 'APIs financieras expuestas. Desarrollo ágil sin seguridad integrada.'
+        },
+        government: {
+            identity: 'Sistemas heredados sin SSO. Contraseñas compartidas común.',
+            devices: 'Equipos sin actualizar. Windows 7 aún presente.',
+            network: 'Redes planas sin segmentación. DMZ como única defensa.',
+            data: 'Datos ciudadanos sin encriptar. Backups vulnerables.',
+            apps: 'Aplicaciones legacy imposibles de asegurar.'
+        },
+        healthcare: {
+            identity: 'Personal médico comparte credenciales "por emergencia".',
+            devices: 'IoMT crítico: dispositivos médicos = puerta abierta.',
+            network: 'Mejor que promedio pero mezcla redes clínicas/admin.',
+            data: 'HIPAA compliance no significa seguridad real.',
+            apps: 'Sistemas de historias clínicas obsoletos.'
+        },
+        logistics: {
+            identity: 'Mejor gestión pero proveedores sin control.',
+            devices: 'GPS/Telemetría con firmware vulnerable.',
+            network: 'OT/IT convergiendo pero sin seguridad adecuada.',
+            data: 'Rutas y manifiestos = data sensible desprotegida.',
+            apps: 'WMS/TMS con integraciones inseguras.'
+        },
+        telecom: {
+            identity: 'Líder del grupo pero aún bajo 60%.',
+            devices: 'Equipos de red con gestión centralizada.',
+            network: 'Mejor segmentación pero protocolos legacy (SS7).',
+            data: 'Metadatos de comunicaciones = tesoro sin proteger.',
+            apps: 'Portales cliente vulnerables. APIs sin rate limiting.'
+        }
+    };
+    
+    const tooltip = document.getElementById('tooltip');
+    const sectorNames = {
+        financial: 'Financiero',
+        government: 'Gobierno',
+        healthcare: 'Salud',
+        logistics: 'Logística',
+        telecom: 'Telecom'
+    };
+    const pillarNames = {
+        identity: 'Identidad',
+        devices: 'Dispositivos',
+        network: 'Redes',
+        data: 'Datos',
+        apps: 'Aplicaciones'
+    };
+    
+    document.getElementById('tooltipTitle').textContent = `${sectorNames[sector]} - ${pillarNames[pillar]}`;
+    document.getElementById('tooltipContent').textContent = data[sector][pillar];
+    
+    // Position tooltip
+    tooltip.style.display = 'block';
+    const rect = event.target.getBoundingClientRect();
+    tooltip.style.left = rect.left + 'px';
+    tooltip.style.top = (rect.bottom + 10) + 'px';
+    
+    // Hide after 5 seconds
+    setTimeout(() => {
+        tooltip.style.display = 'none';
+    }, 5000);
+}
+
+// Animate bars on load
+document.addEventListener('DOMContentLoaded', function() {
+    // Animate immunity bars
+    setTimeout(() => {
+        const bars = document.querySelectorAll('.bar');
+        bars.forEach((bar, index) => {
+            const height = bar.getAttribute('data-height');
+            setTimeout(() => {
+                bar.style.height = height + '%';
+            }, index * 150);
+        });
+    }, 500);
+    
+    // Animate vector fills
+    setTimeout(() => {
+        const fills = document.querySelectorAll('.vector-fill');
+        fills.forEach((fill, index) => {
+            setTimeout(() => {
+                fill.style.width = fill.style.width;
+            }, 1000 + index * 100);
+        });
+    }, 1000);
+});
+
+// Update time
+function updateTime() {
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('es-ES', { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+    });
+    const timeStr = now.toLocaleTimeString('es-ES', { 
+        hour: '2-digit', 
+        minute: '2-digit' 
+    });
+    
+    const header = document.querySelector('.header-date');
+    if (header) {
+        header.textContent = `${dateStr.charAt(0).toUpperCase() + dateStr.slice(1)} | Análisis LATAM & España`;
+    }
+}
+
+setInterval(updateTime, 60000);
+updateTime();
+</script>
+
+</body>
+</html>
