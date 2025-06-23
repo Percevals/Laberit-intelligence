@@ -17,7 +17,7 @@ Principios:
 - De lenguaje técnico a valor al negocio: Traducimos controles complejos en lo que más valora: su cliente, su operación y su diferenciación
 - De temor a resiliencia: no nos interesa promover noticias alarmistas, sino brindar claridad para actuar hacia la resiliencia y competitividad.
 
-[immunity-framework.html](https://percevals.github.io/Laberit-intelligence/immunity-framework.html)
+[Conozca el modelo de Inmunidad Digital](https://percevals.github.io/Laberit-intelligence/immunity-framework.html)
 
 ### ¿Qué es el índice de Inmunidad Digital?
 Una métrica en evolución que mide la capacidad real de resistencia 
