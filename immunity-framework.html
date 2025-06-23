@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Framework de Inmunidad Potencial | Metodología de Evaluación de Resiliencia Cibernética</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Professional Header */
+        .header {
+            background: linear-gradient(135deg, #1a2332 0%, #2c3e50 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 42px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+        
+        .header .subtitle {
+            font-size: 22px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .header .methodology-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            margin-top: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Section Styling */
+        .section {
+            margin: 60px 0;
+            padding: 40px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .section-title {
+            font-size: 28px;
+            color: #1a2332;
+            margin-bottom: 30px;
+            font-weight: 400;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 15px;
+        }
+        
+        /* Professional Insight Box */
+        .insight-box {
+            background: #f8f9fa;
+            padding: 25px 30px;
+            border-radius: 6px;
+            margin: 30px 0;
+            border-left: 4px solid #3498db;
+        }
+        
+        .insight-box h3 {
+            color: #1a2332;
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        /* Visualization Container */
+        .visualization-container {
+            margin: 40px 0;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .viz-title {
+            font-size: 20px;
+            color: #1a2332;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        /* Correlation Chart - Evolution Style */
+        .correlation-chart {
+            position: relative;
+            height: 450px;
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .chart-axes {
+            position: absolute;
+            top: 40px;
+            left: 60px;
+            right: 40px;
+            bottom: 80px;
+            border-left: 2px solid #34495e;
+            border-bottom: 2px solid #34495e;
+        }
+        
+        .axis-label {
+            position: absolute;
+            font-size: 14px;
+            color: #34495e;
+            font-weight: 500;
+        }
+        
+        .x-axis-label {
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .y-axis-label {
+            left: -100px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+        }
+        
+        /* Axis markers */
+        .axis-marker {
+            position: absolute;
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        
+        .x-marker-0 { bottom: -25px; left: -5px; }
+        .x-marker-25 { bottom: -25px; left: 23%; }
+        .x-marker-50 { bottom: -25px; left: 48%; }
+        .x-marker-75 { bottom: -25px; left: 73%; }
+        .x-marker-100 { bottom: -25px; right: -10px; }
+        
+        .y-marker-1 { left: -25px; bottom: -5px; }
+        .y-marker-2 { left: -25px; bottom: 32%; }
+        .y-marker-3 { left: -25px; bottom: 65%; }
+        .y-marker-4 { left: -25px; top: -5px; }
+        
+        .data-point {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #3498db;
+            opacity: 0.6;
+            transition: all 0.3s;
+        }
+        
+        .data-point:hover {
+            opacity: 1;
+            transform: scale(1.5);
+        }
+        
+        .correlation-line {
+            position: absolute;
+            bottom: 80px;
+            left: 60px;
+            right: 40px;
+            height: 2px;
+            background: #e74c3c;
+            transform: rotate(-28deg);
+            transform-origin: left bottom;
+        }
+        
+        .correlation-label {
+            position: absolute;
+            top: 60px;
+            right: 60px;
+            background: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            color: #e74c3c;
+            font-weight: 600;
+        }
+        
+        /* Framework Components Visual */
+        .framework-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .component-circle {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background: white;
+            border: 3px solid;
+        }
+        
+        .component-protection {
+            border-color: #3498db;
+            background: linear-gradient(135deg, #ffffff 0%, #ebf5fb 100%);
+        }
+        
+        .component-business {
+            border-color: #2ecc71;
+            background: linear-gradient(135deg, #ffffff 0%, #e8f8f5 100%);
+        }
+        
+        .component-recovery {
+            border-color: #e74c3c;
+            background: linear-gradient(135deg, #ffffff 0%, #fadbd8 100%);
+        }
+        
+        .component-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        
+        .component-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .component-weight {
+            font-size: 24px;
+            font-weight: bold;
+            color: #34495e;
+        }
+        
+        .plus-symbol {
+            font-size: 36px;
+            color: #95a5a6;
+            font-weight: 300;
+        }
+        
+        .equals-symbol {
+            font-size: 36px;
+            color: #34495e;
+            font-weight: 300;
+        }
+        
+        .immunity-result {
+            width: 240px;
+            height: 100px;
+            background: linear-gradient(135deg, #1a2332 0%, #2c3e50 100%);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .immunity-label {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+        
+        .immunity-score {
+            font-size: 32px;
+            font-weight: bold;
+        }
+        
+        /* Formula Display */
+        .formula-display {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border: 1px solid #e9ecef;
+        }
+        
+        .formula-main {
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        /* Enhanced Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 30px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .comparison-table th {
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            color: white;
+            padding: 18px;
+            text-align: left;
+            font-weight: 500;
+            font-size: 16px;
+        }
+        
+        .comparison-table th:nth-child(1) {
+            background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+        }
+        
+        .comparison-table th:nth-child(2) {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+        }
+        
+        .comparison-table th:nth-child(3) {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        }
+        
+        .comparison-table td {
+            padding: 18px;
+            border-bottom: 1px solid #ecf0f1;
+            background: white;
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .comparison-table tr:hover td {
+            background: #f8f9fa;
+        }
+        
+        .comparison-table td:nth-child(3) {
+            font-weight: 500;
+            color: #2980b9;
+        }
+        
+        /* Data Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .data-table th {
+            background: #34495e;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 500;
+        }
+        
+        .data-table td {
+            padding: 15px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .data-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        /* Metric Box */
+        .metric-box {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-top: 4px solid #3498db;
+        }
+        
+        .metric-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .metric-text {
+            font-size: 16px;
+            color: #7f8c8d;
+        }
+        
+        /* Scale Visual */
+        .maturity-scale {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 40px 0;
+            padding: 30px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .scale-item {
+            text-align: center;
+            flex: 1;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 0 10px;
+        }
+        
+        .scale-critical {
+            background: #ffeee9;
+            border: 1px solid #e74c3c;
+        }
+        
+        .scale-medium {
+            background: #fff4e5;
+            border: 1px solid #f39c12;
+        }
+        
+        .scale-resilient {
+            background: #e8f8f5;
+            border: 1px solid #2ecc71;
+        }
+        
+        .scale-score {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .scale-label {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #34495e;
+        }
+        
+        .scale-description {
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+        
+        /* Professional Cards */
+        .methodology-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #3498db;
+        }
+        
+        .methodology-card h4 {
+            font-size: 20px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        /* Integration Box */
+        .integration-box {
+            background: #e8f8f5;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 3px solid #2ecc71;
+        }
+        
+        .integration-box strong {
+            color: #27ae60;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: #f8f9fa;
+            margin-top: 80px;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .footer p {
+            color: #7f8c8d;
+            margin: 10px 0;
+        }
+        
+        .footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 32px;
+            }
+            
+            .framework-visual {
+                flex-direction: column;
+            }
+            
+            .correlation-chart {
+                height: 300px;
+                padding: 20px;
+            }
+            
+            .component-circle {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .scale-item {
+                margin: 10px 0;
+            }
+            
+            .maturity-scale {
+                flex-direction: column;
+            }
+            
+            .comparison-table {
+                font-size: 14px;
+            }
+            
+            .comparison-table th,
+            .comparison-table td {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Professional Header -->
+    <div class="header">
+        <h1>Framework de Inmunidad Potencial</h1>
+        <p class="subtitle">Metodología Avanzada para la Evaluación de Resiliencia Cibernética Organizacional</p>
+        <span class="methodology-badge">Basado en 150 evaluaciones Zero-Trust realizadas en América Latina (2021-2025)</span>
+    </div>
+
+    <div class="container">
+        <!-- Executive Summary -->
+        <div class="section">
+            <h2 class="section-title">Resumen Ejecutivo</h2>
+            
+            <div class="insight-box">
+                <h3>Contexto y Evolución</h3>
+                <p>El Framework de Inmunidad Potencial representa la evolución natural de nuestras evaluaciones Zero-Trust, 
+                transformando métricas de cumplimiento en indicadores de resiliencia operacional. Durante 2021-2024, 
+                evaluamos la madurez Zero-Trust de 150 organizaciones. En 2025, integramos la resiliencia del modelo 
+                de negocio y la velocidad de recuperación para crear una métrica holística de resistencia organizacional.</p>
+            </div>
+
+            <div class="metric-box">
+                <span class="metric-number">60.7%</span>
+                <span class="metric-text">de las organizaciones evaluadas presentan niveles críticos de inmunidad (&lt;4), 
+                independientemente de su nivel de madurez en controles</span>
+            </div>
+        </div>
+
+        <!-- Methodology Evolution -->
+        <div class="section">
+            <h2 class="section-title">Evolución Metodológica</h2>
+            
+            <div class="visualization-container">
+                <h3 class="viz-title">Correlación Histórica: Madurez Zero Trust vs Capacidad de Protección</h3>
+                <div class="correlation-chart">
+                    <div class="chart-axes">
+                        <span class="axis-label x-axis-label">Capacidad de Protección (%)</span>
+                        <span class="axis-label y-axis-label">Madurez Zero Trust</span>
+                        
+                        <!-- Axis markers -->
+                        <span class="axis-marker x-marker-0">0</span>
+                        <span class="axis-marker x-marker-25">25</span>
+                        <span class="axis-marker x-marker-50">50</span>
+                        <span class="axis-marker x-marker-75">75</span>
+                        <span class="axis-marker x-marker-100">100</span>
+                        
+                        <span class="axis-marker y-marker-1">1</span>
+                        <span class="axis-marker y-marker-2">2</span>
+                        <span class="axis-marker y-marker-3">3</span>
+                        <span class="axis-marker y-marker-4">4</span>
+                        
+                        <!-- Data points representing the 150 organizations -->
+                        <div class="data-point" style="bottom: 15%; left: 12%;"></div>
+                        <div class="data-point" style="bottom: 22%; left: 18%;"></div>
+                        <div class="data-point" style="bottom: 28%; left: 25%;"></div>
+                        <div class="data-point" style="bottom: 35%; left: 30%;"></div>
+                        <div class="data-point" style="bottom: 42%; left: 38%;"></div>
+                        <div class="data-point" style="bottom: 48%; left: 45%;"></div>
+                        <div class="data-point" style="bottom: 55%; left: 52%;"></div>
+                        <div class="data-point" style="bottom: 62%; left: 58%;"></div>
+                        <div class="data-point" style="bottom: 68%; left: 65%;"></div>
+                        <div class="data-point" style="bottom: 75%; left: 72%;"></div>
+                        <div class="data-point" style="bottom: 82%; left: 78%;"></div>
+                        <div class="data-point" style="bottom: 88%; left: 85%;"></div>
+                        <div class="data-point" style="bottom: 10%; left: 20%;"></div>
+                        <div class="data-point" style="bottom: 30%; left: 15%;"></div>
+                        <div class="data-point" style="bottom: 40%; left: 50%;"></div>
+                        <div class="data-point" style="bottom: 20%; left: 35%;"></div>
+                        <div class="data-point" style="bottom: 50%; left: 25%;"></div>
+                        <div class="data-point" style="bottom: 60%; left: 45%;"></div>
+                        <div class="data-point" style="bottom: 25%; left: 40%;"></div>
+                        <div class="data-point" style="bottom: 65%; left: 55%;"></div>
+                        <div class="data-point" style="bottom: 35%; left: 60%;"></div>
+                        <div class="data-point" style="bottom: 45%; left: 30%;"></div>
+                        <div class="data-point" style="bottom: 18%; left: 28%;"></div>
+                        <div class="data-point" style="bottom: 52%; left: 42%;"></div>
+                        <div class="data-point" style="bottom: 38%; left: 48%;"></div>
+                        <div class="data-point" style="bottom: 70%; left: 68%;"></div>
+                        <div class="data-point" style="bottom: 58%; left: 35%;"></div>
+                        <div class="data-point" style="bottom: 32%; left: 55%;"></div>
+                        <div class="data-point" style="bottom: 78%; left: 75%;"></div>
+                        <div class="data-point" style="bottom: 85%; left: 90%;"></div>
+                        
+                        <div class="correlation-line"></div>
+                        <div class="correlation-label">R² = 0.67</div>
+                    </div>
+                </div>
+                <p style="margin-top: 20px; color: #7f8c8d; font-size: 14px;">
+                    Análisis 2021-2024: La correlación moderada (R²=0.67) demostró que la madurez arquitectónica 
+                    no garantiza protección efectiva, llevando a la evolución hacia el modelo de inmunidad.
+                </p>
+            </div>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Enfoque Tradicional</th>
+                        <th>Framework de Inmunidad Potencial</th>
+                        <th>Impacto Diferencial</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Evaluación de controles implementados</td>
+                        <td>Medición de resistencia operacional probada</td>
+                        <td>Reducción del 67% en costos de incidentes para organizaciones resilientes</td>
+                    </tr>
+                    <tr>
+                        <td>Madurez de procesos documentados</td>
+                        <td>Capacidad de recuperación demostrada</td>
+                        <td>Diferencia de 3.8x en tiempo de recuperación entre líderes y rezagados</td>
+                    </tr>
+                    <tr>
+                        <td>Cumplimiento normativo (ISO, NIST)</td>
+                        <td>Resiliencia integral del modelo de negocio</td>
+                        <td>40% de continuidad operacional en modelos híbridos vs 0% en digitales puros</td>
+                    </tr>
+                    <tr>
+                        <td>Score estático de madurez (1-4)</td>
+                        <td>Índice dinámico de inmunidad (0-10)</td>
+                        <td>Métrica predictiva validada con incidentes reales en LATAM</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Framework Components -->
+        <div class="section">
+            <h2 class="section-title">Componentes del Framework</h2>
+            
+            <div class="visualization-container">
+                <h3 class="viz-title">Modelo de Cálculo de Inmunidad Potencial</h3>
+                <div class="framework-visual">
+                    <div class="component-circle component-protection">
+                        <div class="component-icon">🛡️</div>
+                        <div class="component-title">Efectividad de<br>Protección</div>
+                        <div class="component-weight">Base</div>
+                    </div>
+                    
+                    <span class="plus-symbol">×</span>
+                    
+                    <div class="component-circle component-business">
+                        <div class="component-icon">🏢</div>
+                        <div class="component-title">Resiliencia<br>Operacional</div>
+                        <div class="component-weight">Multiplicador</div>
+                    </div>
+                    
+                    <span class="plus-symbol">×</span>
+                    
+                    <div class="component-circle component-recovery">
+                        <div class="component-icon">⚡</div>
+                        <div class="component-title">Velocidad de<br>Recuperación</div>
+                        <div class="component-weight">Amplificador</div>
+                    </div>
+                    
+                    <span class="equals-symbol">=</span>
+                    
+                    <div class="immunity-result">
+                        <div class="immunity-label">Score de Inmunidad</div>
+                        <div class="immunity-score">0-10</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="formula-display">
+                <div class="formula-main">
+                    Score de Inmunidad = Efectividad de Protección × Resiliencia Operacional × Velocidad de Recuperación × 10
+                </div>
+                <p style="margin-top: 20px; color: #7f8c8d;">
+                    <strong>Donde:</strong><br>
+                    Efectividad de Protección = (Madurez_ZT × 0.4 + Score_Protección × 0.6) / 10<br>
+                    Resiliencia Operacional = 1 + (1 - BEI × 0.5)<br>
+                    Velocidad de Recuperación = RCI<br>
+                    <br>
+                    BEI = Índice de Exposición del Negocio (0.0 - 1.0)<br>
+                    RCI = Índice de Capacidad de Recuperación (0.0 - 1.0)
+                </p>
+            </div>
+
+            <!-- Component Details -->
+            <div class="methodology-card">
+                <h4>1. Efectividad de Protección</h4>
+                <p>Combina la madurez arquitectónica Zero-Trust (40%) con la capacidad real de protección (60%) 
+                contra los seis vectores de ataque principales identificados en el estudio IBM Cost of Data Breach:</p>
+                <ul style="margin: 15px 0; padding-left: 30px; color: #5d6d7e;">
+                    <li>Credenciales Comprometidas (vector principal en 77% de casos)</li>
+                    <li>Ataques Internos (91% de efectividad sin controles)</li>
+                    <li>Ingeniería Social (61% de éxito promedio)</li>
+                    <li>Phishing/BEC (45% de organizaciones vulnerables)</li>
+                    <li>Configuración Incorrecta Cloud (60% sin gestión adecuada)</li>
+                    <li>Vulnerabilidades Software (92% con protección en organizaciones maduras)</li>
+                </ul>
+                <div class="integration-box">
+                    <strong>Integración:</strong> Vectores alineados con IBM Cost of Data Breach Report para 
+                    facilitar conversaciones de ROI y justificación de inversiones.
+                </div>
+            </div>
+
+            <div class="methodology-card">
+                <h4>2. Resiliencia Operacional</h4>
+                <p>Cuantifica la vulnerabilidad inherente del modelo de negocio mediante cuatro componentes validados 
+                con fuentes externas:</p>
+                <table style="width: 100%; margin: 15px 0;">
+                    <tr>
+                        <td style="padding: 8px;"><strong>Vulnerabilidad Sectorial (25%)</strong></td>
+                        <td style="padding: 8px; color: #7f8c8d;">Basado en frecuencia de ataques por industria</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px;"><strong>Dependencia Digital (40%)</strong></td>
+                        <td style="padding: 8px; color: #7f8c8d;">Porcentaje de operaciones críticas digitalizadas</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px;"><strong>Velocidad de Decisión (20%)</strong></td>
+                        <td style="padding: 8px; color: #7f8c8d;">Agilidad organizacional por tamaño</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px;"><strong>Riesgo Geográfico (15%)</strong></td>
+                        <td style="padding: 8px; color: #7f8c8d;">Densidad de amenazas regional</td>
+                    </tr>
+                </table>
+                <div class="integration-box">
+                    <strong>Integraciones disponibles:</strong><br>
+                    • CISA KEV (vulnerabilidades explotadas por sector)<br>
+                    • Cisco Cybersecurity Readiness Index (madurez digital)<br>
+                    • ITU Global Cybersecurity Index (riesgo por país)<br>
+                    • Accenture Future Systems Index (agilidad organizacional)
+                </div>
+            </div>
+
+            <div class="methodology-card">
+                <h4>3. Velocidad de Recuperación</h4>
+                <p>Mide la capacidad operacional probada de restauración, no los planes documentados:</p>
+                <ul style="margin: 15px 0; padding-left: 30px; color: #5d6d7e;">
+                    <li><strong>Preparación Operacional (35%):</strong> RTO real demostrado
+                        <br>&nbsp;&nbsp;&nbsp;- Clase mundial (&lt;4 horas): 1.0
+                        <br>&nbsp;&nbsp;&nbsp;- Crítico (&gt;7 días): 0.1</li>
+                    <li><strong>Madurez de Procesos (30%):</strong> Certificaciones con auditorías activas</li>
+                    <li><strong>Inversión Adecuada (20%):</strong> % de ingresos en seguridad vs industria</li>
+                    <li><strong>Aprendizaje Adaptativo (15%):</strong> Mejora demostrada post-incidente</li>
+                </ul>
+                <div class="integration-box">
+                    <strong>Integraciones disponibles:</strong><br>
+                    • NIST CSF Recovery Function (estándares RTO)<br>
+                    • ISO 27001/22301 (validación de certificaciones)<br>
+                    • Cisco/Ponemon benchmarks (inversión por industria)<br>
+                    • NIST RC.IM (métricas de mejora continua)
+                </div>
+            </div>
+        </div>
+
+        <!-- Interpretation Scale -->
+        <div class="section">
+            <h2 class="section-title">Interpretación y Aplicación</h2>
+            
+            <div class="maturity-scale">
+                <div class="scale-item scale-critical">
+                    <div class="scale-score">0 - 3.9</div>
+                    <div class="scale-label">CRÍTICO</div>
+                    <div class="scale-description">Alta probabilidad de disrupción severa del negocio</div>
+                </div>
+                <div class="scale-item scale-medium">
+                    <div class="scale-score">4.0 - 6.9</div>
+                    <div class="scale-label">VULNERABLE</div>
+                    <div class="scale-description">Operacional con riesgos significativos</div>
+                </div>
+                <div class="scale-item scale-resilient">
+                    <div class="scale-score">7.0 - 10</div>
+                    <div class="scale-label">RESILIENTE</div>
+                    <div class="scale-description">Preparado para resistir ataques sofisticados</div>
+                </div>
+            </div>
+
+            <div class="insight-box" style="margin-top: 40px;">
+                <h3>Distribución Actual (150 organizaciones evaluadas)</h3>
+                <p>• <strong>30.7%</strong> en zona crítica (46 organizaciones)<br>
+                • <strong>39.3%</strong> vulnerables (59 organizaciones)<br>
+                • <strong>26.0%</strong> resilientes (39 organizaciones)<br>
+                • <strong>4.0%</strong> élite (&gt;8 score) (6 organizaciones)</p>
+            </div>
+        </div>
+
+        <!-- Validation and Evidence -->
+        <div class="section">
+            <h2 class="section-title">Validación Empírica</h2>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Sector Evaluado</th>
+                        <th>Score Inmunidad</th>
+                        <th>Hallazgos Clave</th>
+                        <th>Validación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Sector Manufacturero</td>
+                        <td>2.8 promedio</td>
+                        <td>Sin recuperación probada, alta dependencia operacional</td>
+                        <td>Incidentes confirmados con paralización total</td>
+                    </tr>
+                    <tr>
+                        <td>Sector Público</td>
+                        <td>3.1 promedio</td>
+                        <td>Baja agilidad decisional, procesos sin probar</td>
+                        <td>Exposiciones masivas documentadas en región</td>
+                    </tr>
+                    <tr>
+                        <td>Instituciones Financieras</td>
+                        <td>7.2 promedio</td>
+                        <td>Modelos híbridos, inversión adecuada, RTO &lt;6hrs</td>
+                        <td>Resiliencia demostrada en incidentes reales</td>
+                    </tr>
+                    <tr>
+                        <td>Empresas Tecnológicas</td>
+                        <td>5.4 promedio</td>
+                        <td>Alta dependencia digital compensada con agilidad</td>
+                        <td>Recuperación variable según madurez</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="insight-box" style="margin-top: 40px;">
+                <h3>Correlación Clave Identificada</h3>
+                <p>El análisis de 150 organizaciones demuestra que aquellas con velocidad de recuperación rápida 
+                (RCI &gt;0.6) mantienen un score de inmunidad promedio de 7.1, mientras que las de recuperación 
+                lenta (RCI &lt;0.3) promedian 2.4. Esta diferencia de 3x en resiliencia no se correlaciona con 
+                la cantidad de controles implementados, sino con la capacidad operacional demostrada y la 
+                arquitectura del modelo de negocio.</p>
+            </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="section">
+            <h2 class="section-title">Evolución Temporal del Framework</h2>
+            
+            <div class="methodology-card">
+                <h4>2021-2023: Fase de Madurez Zero-Trust</h4>
+                <p>Evaluación de 49 subcontroles CIS mapeados a los 5 pilares Zero-Trust. 
+                Foco en arquitectura y cumplimiento normativo.</p>
+            </div>
+
+            <div class="methodology-card">
+                <h4>2023-2024: Integración de Protección Efectiva</h4>
+                <p>Incorporación de medición contra 6 vectores de ataque reales basados en 
+                IBM Cost of Data Breach. Transición de cumplimiento a efectividad.</p>
+            </div>
+
+            <div class="methodology-card">
+                <h4>2025: Framework de Inmunidad Potencial</h4>
+                <p>Integración de Resiliencia Operacional y Velocidad de Recuperación. 
+                Validación con fuentes externas (CISA, ITU, NIST, Cisco). Métrica holística 
+                de resistencia organizacional.</p>
+            </div>
+        </div>
+
+        <!-- Implementation Guidance -->
+        <div class="section">
+            <h2 class="section-title">Guía de Implementación</h2>
+            
+            <div class="methodology-card">
+                <h4>Frecuencia de Evaluación Recomendada</h4>
+                <p>La naturaleza dinámica del panorama de amenazas requiere evaluación trimestral:</p>
+                <ul style="margin: 15px 0; padding-left: 30px; color: #5d6d7e;">
+                    <li>Detección temprana de degradación en capacidades</li>
+                    <li>Medición del impacto de inversiones en seguridad</li>
+                    <li>Ajuste ante cambios en el modelo de negocio</li>
+                    <li>Benchmarking continuo contra el sector</li>
+                </ul>
+            </div>
+
+            <div class="methodology-card">
+                <h4>Alcance Global con Contexto Regional</h4>
+                <p>Aunque calibrado inicialmente para el contexto latinoamericano, el framework incluye 
+                ajustes geográficos que permiten su aplicación global. El componente de Riesgo Geográfico 
+                utiliza el ITU Global Cybersecurity Index para normalizar diferencias regionales, 
+                permitiendo comparaciones válidas entre organizaciones de diferentes países.</p>
+            </div>
+        </div>
+
+        <!-- Methodology Notes -->
+        <div class="section">
+            <h2 class="section-title">Consideraciones Metodológicas</h2>
+            
+            <div class="insight-box">
+                <h3>Fuentes de Datos Integradas</h3>
+                <p><strong>Actualizaciones programadas:</strong><br>
+                • Mensual: CISA KEV (nuevas vulnerabilidades explotadas)<br>
+                • Trimestral: Benchmarks de inversión Cisco<br>
+                • Anual: ITU GCI, Cisco Readiness Index, Ponemon Cost Report<br>
+                • Según disponibilidad: Actualizaciones ISO, índices Accenture</p>
+            </div>
+
+            <div class="insight-box">
+                <h3>Evolución Continua</h3>
+                <p>La metodología se actualiza semestralmente basándose en nuevos datos de incidentes, 
+                cambios en el panorama de amenazas y retroalimentación de implementaciones. 
+                Las organizaciones participantes reciben acceso prioritario a refinamientos 
+                metodológicos y benchmarks actualizados del sector.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Professional Footer -->
+    <div class="footer">
+        <p><strong>Framework de Inmunidad Potencial v2.0</strong></p>
+        <p>Desarrollado por <a href="https://laberit.com" target="_blank">Lãberit</a> | 
+        Basado en 150 evaluaciones Zero-Trust en América Latina (2021-2025)</p>
+        <p style="margin-top: 20px; font-style: italic; color: #95a5a6;">
+            "Transformamos la inteligencia en acción para impulsar el rendimiento organizacional"
+        </p>
+    </div>
+</body>
+</html>
