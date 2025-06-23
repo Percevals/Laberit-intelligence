@@ -6,6 +6,22 @@
 
 En un mundo donde el cibercrimen evoluciona más rápido que las defensas tradicionales, necesitas claridad ejecutiva para tomar decisiones que importan. No más reportes de 200 páginas que nadie lee. No más alertas sin contexto. Solo inteligencia accionable.
 
+# Lãberit Intelligence
+
+## Framework de Inmunidad Digital
+
+Accede a nuestra metodología completa en: 
+[immunity-framework.html](https://percevals.github.io/Laberit-intelligence/immunity-framework.html)
+
+### ¿Qué es la Inmunidad Digital?
+Una métrica revolucionaria que mide la capacidad real de supervivencia 
+de las organizaciones ante ciberataques sofisticados.
+
+### Basado en Datos Reales
+- 150 organizaciones evaluadas en LATAM
+- Correlación probada con incidentes reales
+- Metodología validada y en evolución continua
+
 ### Nuestro Approach: Hybrid Pull-Push
 
 📤 **PUSH** (Proactivo)
