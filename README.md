@@ -1,4 +1,4 @@
-# 🛡️ Lãberit Intelligence Hub
+# Lãberit Intelligence Hub
 
 ## Transformamos la inteligencia en acción para impulsar tu rendimiento
 
@@ -6,33 +6,27 @@
 
 En un mundo donde el cibercrimen evoluciona más rápido que las defensas tradicionales, necesitas claridad ejecutiva para tomar decisiones que importan. No más reportes de 200 páginas que nadie lee. No más alertas sin contexto. Solo inteligencia accionable.
 
-# Lãberit Intelligence
-
 ## Framework de Inmunidad Digital
 
-Accede a nuestra metodología completa en: 
+Estamos desarrollando una metodología abierta (Open-Source) que ayuda a las organizaciones y sus líderes a gestionar el riesgo digital, 
+para ello nos centramos en la naturaleza de su modelo de negocio.
+
+Principios:
+
+- De una caja negra a un modelo abierto: Creemos que la confianza se construye sobre la transparencia
+- De lenguaje técnico a valor al negocio: Traducimos controles complejos en lo que más valora: su cliente, su operación y su diferenciación
+- De temor a resiliencia: no nos interesa promover noticias alarmistas, sino brindar claridad para actuar hacia la resiliencia y competitividad.
+
 [immunity-framework.html](https://percevals.github.io/Laberit-intelligence/immunity-framework.html)
 
-### ¿Qué es la Inmunidad Digital?
-Una métrica revolucionaria que mide la capacidad real de supervivencia 
+### ¿Qué es el índice de Inmunidad Digital?
+Una métrica en evolución que mide la capacidad real de resistencia 
 de las organizaciones ante ciberataques sofisticados.
 
 ### Basado en Datos Reales
 - 150 organizaciones evaluadas en LATAM
 - Correlación probada con incidentes reales
 - Metodología validada y en evolución continua
-
-### Nuestro Approach: Hybrid Pull-Push
-
-📤 **PUSH** (Proactivo)
-- Dashboard mensual: Panorama completo de amenazas
-- Alertas semanales: Solo cuando importa
-- Críticas inmediatas: Si afecta tu industria
-
-📥 **PULL** (On-Demand)  
-- Acceso 24/7 al dashboard interactivo
-- APIs para integración automática
-- Histórico de inteligencia
 
 ### 🎯 Acceso Directo
 
@@ -60,4 +54,4 @@ Tus equipos pueden consumir nuestra inteligencia vía:
 
 **¿Preguntas?** [Conecta en LinkedIn](https://linkedin.com/in/percys)
 
-*Lãberit - Modernización & Riesgos Empresariales*
+*Lãberit Sistemas - Modernización & Riesgos Empresariales*
