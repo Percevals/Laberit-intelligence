@@ -740,16 +740,262 @@
             
             <div class="visualization-container" style="background: #2c3e50; color: white; padding: 60px 30px;">
                 <h3 class="viz-title" style="color: white; margin-bottom: 30px;">Firma Visual de Resiliencia Organizacional</h3>
-                <div style="text-align: center; padding: 40px; background: rgba(255,255,255,0.1); border-radius: 8px; border: 2px dashed rgba(255,255,255,0.3);">
-                    <p style="font-size: 18px; margin-bottom: 20px;">📊 Visualización del Radar Trinity</p>
-                    <p style="font-size: 16px; opacity: 0.8;">Una firma visual única que transforma datos complejos en conocimiento estratégico:</p>
-                    <ul style="text-align: left; max-width: 600px; margin: 20px auto; list-style: none;">
-                        <li style="margin: 10px 0;">✓ <strong>Líder Balanceado</strong>: Triángulo equilátero grande (fuerte, estable)</li>
-                        <li style="margin: 10px 0;">✓ <strong>La Fortaleza</strong>: Pico estrecho hacia Protección (rígido, frágil)</li>
-                        <li style="margin: 10px 0;">✓ <strong>El Expuesto</strong>: Triángulo diminuto en el centro (vulnerable, alto riesgo)</li>
-                    </ul>
+                
+                <!-- Interactive SVG Radar Chart -->
+                <div style="display: flex; align-items: center; justify-content: center; gap: 60px; flex-wrap: wrap;">
+                    <svg width="500" height="500" viewBox="0 0 500 500" style="max-width: 100%;">
+                        <defs>
+                            <filter id="glow">
+                                <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        
+                        <!-- Background grid circles -->
+                        <g opacity="0.2">
+                            <circle cx="250" cy="250" r="50" fill="none" stroke="white" stroke-width="1"/>
+                            <circle cx="250" cy="250" r="100" fill="none" stroke="white" stroke-width="1"/>
+                            <circle cx="250" cy="250" r="150" fill="none" stroke="white" stroke-width="1"/>
+                            <circle cx="250" cy="250" r="200" fill="none" stroke="white" stroke-width="1"/>
+                        </g>
+                        
+                        <!-- Triangle axes -->
+                        <g opacity="0.3">
+                            <line x1="250" y1="250" x2="250" y2="50" stroke="white" stroke-width="2"/>
+                            <line x1="250" y1="250" x2="423" y2="350" stroke="white" stroke-width="2"/>
+                            <line x1="250" y1="250" x2="77" y2="350" stroke="white" stroke-width="2"/>
+                        </g>
+                        
+                        <!-- Outer triangle -->
+                        <polygon points="250,50 423,350 77,350" fill="none" stroke="white" stroke-width="2" opacity="0.5"/>
+                        
+                        <!-- Profile: Balanced Leader (green, large equilateral) - Bottom layer -->
+                        <g class="radar-profile" id="balanced-profile" style="z-index: 1;">
+                            <polygon points="250,100 380,300 120,300" 
+                                     fill="rgba(46, 204, 113, 0.2)" 
+                                     stroke="#2ecc71" 
+                                     stroke-width="3"
+                                     style="cursor: pointer; transition: all 0.3s ease;"
+                                     pointer-events="all"
+                                     filter="url(#glow)">
+                                <animate attributeName="opacity" values="0.6;0.8;0.6" dur="3s" repeatCount="indefinite" begin="2s"/>
+                            </polygon>
+                            <title>Líder Balanceado: Protección 7.5, Resiliencia 7.5, Agilidad 7.5</title>
+                        </g>
+                        
+                        <!-- Profile: The Fortress (amber, tall narrow) - Middle layer -->
+                        <g class="radar-profile" id="fortress-profile" style="z-index: 2;">
+                            <polygon points="250,80 320,310 180,310" 
+                                     fill="rgba(243, 156, 18, 0.25)" 
+                                     stroke="#f39c12" 
+                                     stroke-width="2"
+                                     style="cursor: pointer; transition: all 0.3s ease;"
+                                     pointer-events="all">
+                                <animate attributeName="opacity" values="0.7;0.9;0.7" dur="3s" repeatCount="indefinite" begin="1s"/>
+                            </polygon>
+                            <title>La Fortaleza: Protección 8.5, Resiliencia 3.5, Agilidad 3.5</title>
+                        </g>
+                        
+                        <!-- Profile: The Exposed (red, tiny) - Top layer, centered -->
+                        <g class="radar-profile" id="exposed-profile" style="z-index: 3;">
+                            <polygon points="250,225 270,250 230,250" 
+                                     fill="rgba(231, 76, 60, 0.4)" 
+                                     stroke="#e74c3c" 
+                                     stroke-width="2"
+                                     style="cursor: pointer; transition: all 0.3s ease;"
+                                     pointer-events="all">
+                                <animate attributeName="opacity" values="0.8;1;0.8" dur="3s" repeatCount="indefinite"/>
+                            </polygon>
+                            <title>El Expuesto: Protección 2.5, Resiliencia 2.5, Agilidad 2.5</title>
+                        </g>
+                        
+                        <!-- Vertex labels -->
+                        <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif" font-size="16" fill="white">
+                            <text x="250" y="35" text-anchor="middle" font-weight="600">PROTECCIÓN</text>
+                            <text x="440" y="360" text-anchor="middle" font-weight="600">RESILIENCIA</text>
+                            <text x="60" y="360" text-anchor="middle" font-weight="600">AGILIDAD</text>
+                        </g>
+                        
+                        <!-- Interactive hover info box -->
+                        <g id="hover-info" style="display: none;">
+                            <rect x="0" y="0" width="240" height="80" rx="5" fill="rgba(0,0,0,0.9)" stroke="white" stroke-width="1"/>
+                            <text x="10" y="25" fill="white" font-size="14" font-weight="600" id="hover-title"></text>
+                            <text x="10" y="45" fill="white" font-size="12" id="hover-protection"></text>
+                            <text x="10" y="60" fill="white" font-size="12" id="hover-resilience"></text>
+                            <text x="10" y="75" fill="white" font-size="12" id="hover-agility"></text>
+                        </g>
+                    </svg>
+                    
+                    <!-- Legend -->
+                    <div style="min-width: 280px;">
+                        <h4 style="font-size: 18px; margin-bottom: 20px; opacity: 0.9;">Perfiles de Inmunidad</h4>
+                        
+                        <div class="radar-legend-item" style="margin-bottom: 20px; padding: 15px; background: rgba(46, 204, 113, 0.2); border-radius: 8px; border-left: 4px solid #2ecc71; cursor: pointer;" data-profile="balanced">
+                            <h5 style="margin: 0 0 5px 0; color: #2ecc71;">Líder Balanceado</h5>
+                            <p style="margin: 0; font-size: 14px; opacity: 0.8;">Fortalezas equilibradas en todos los pilares. Resiliencia óptima ante cualquier amenaza.</p>
+                            <p style="margin: 5px 0 0 0; font-size: 12px; opacity: 0.6;">Índice de Inmunidad: 7.5</p>
+                        </div>
+                        
+                        <div class="radar-legend-item" style="margin-bottom: 20px; padding: 15px; background: rgba(243, 156, 18, 0.2); border-radius: 8px; border-left: 4px solid #f39c12; cursor: pointer;" data-profile="fortress">
+                            <h5 style="margin: 0 0 5px 0; color: #f39c12;">La Fortaleza</h5>
+                            <p style="margin: 0; font-size: 14px; opacity: 0.8;">Fuerte en protección pero carece de agilidad. Vulnerable a amenazas sofisticadas.</p>
+                            <p style="margin: 5px 0 0 0; font-size: 12px; opacity: 0.6;">Índice de Inmunidad: 5.2</p>
+                        </div>
+                        
+                        <div class="radar-legend-item" style="margin-bottom: 20px; padding: 15px; background: rgba(231, 76, 60, 0.2); border-radius: 8px; border-left: 4px solid #e74c3c; cursor: pointer;" data-profile="exposed">
+                            <h5 style="margin: 0 0 5px 0; color: #e74c3c;">El Expuesto</h5>
+                            <p style="margin: 0; font-size: 14px; opacity: 0.8;">Debilidades críticas en todos los aspectos. Requiere intervención urgente.</p>
+                            <p style="margin: 5px 0 0 0; font-size: 12px; opacity: 0.6;">Índice de Inmunidad: 2.5</p>
+                        </div>
+                    </div>
                 </div>
+                
+                <p style="text-align: center; margin-top: 30px; font-size: 14px; opacity: 0.7;">
+                    Pase el cursor sobre los perfiles para ver las puntuaciones detalladas
+                </p>
             </div>
+            
+            <style>
+                .radar-profile polygon {
+                    transition: all 0.3s ease;
+                }
+                
+                .radar-profile:hover polygon {
+                    opacity: 1 !important;
+                    stroke-width: 4;
+                }
+                
+                .radar-legend-item {
+                    transition: all 0.3s ease;
+                }
+                
+                .radar-legend-item:hover {
+                    transform: translateX(5px);
+                    opacity: 1 !important;
+                }
+            </style>
+            
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const profiles = {
+                        'exposed-profile': {
+                            title: 'El Expuesto',
+                            protection: 'Protección: 2.5',
+                            resilience: 'Resiliencia: 2.5',
+                            agility: 'Agilidad: 2.5'
+                        },
+                        'fortress-profile': {
+                            title: 'La Fortaleza',
+                            protection: 'Protección: 8.5',
+                            resilience: 'Resiliencia: 3.5',
+                            agility: 'Agilidad: 3.5'
+                        },
+                        'balanced-profile': {
+                            title: 'Líder Balanceado',
+                            protection: 'Protección: 7.5',
+                            resilience: 'Resiliencia: 7.5',
+                            agility: 'Agilidad: 7.5'
+                        }
+                    };
+                    
+                    const hoverInfo = document.getElementById('hover-info');
+                    const hoverTitle = document.getElementById('hover-title');
+                    const hoverProtection = document.getElementById('hover-protection');
+                    const hoverResilience = document.getElementById('hover-resilience');
+                    const hoverAgility = document.getElementById('hover-agility');
+                    
+                    // Profile hover interactions
+                    Object.keys(profiles).forEach(profileId => {
+                        const profileElement = document.getElementById(profileId);
+                        
+                        profileElement.addEventListener('mouseenter', function(e) {
+                            const profile = profiles[profileId];
+                            hoverTitle.textContent = profile.title;
+                            hoverProtection.textContent = profile.protection;
+                            hoverResilience.textContent = profile.resilience;
+                            hoverAgility.textContent = profile.agility;
+                            
+                            // Dynamic positioning of hover info box
+                            const svg = profileElement.closest('svg');
+                            const svgRect = svg.getBoundingClientRect();
+                            const mouseX = e.clientX - svgRect.left;
+                            const mouseY = e.clientY - svgRect.top;
+                            
+                            // Position the hover box avoiding edges
+                            let xPos = mouseX + 10;
+                            let yPos = mouseY - 90;
+                            
+                            // Adjust if too close to edges
+                            if (xPos + 240 > 500) xPos = mouseX - 250;
+                            if (yPos < 10) yPos = mouseY + 10;
+                            
+                            hoverInfo.setAttribute('transform', `translate(${xPos - 10}, ${yPos - 10})`);
+                            hoverInfo.style.display = 'block';
+                            
+                            // Highlight other profiles less
+                            Object.keys(profiles).forEach(otherId => {
+                                if (otherId !== profileId) {
+                                    document.getElementById(otherId).style.opacity = '0.3';
+                                }
+                            });
+                        });
+                        
+                        profileElement.addEventListener('mousemove', function(e) {
+                            // Update position on mouse move
+                            const svg = profileElement.closest('svg');
+                            const svgRect = svg.getBoundingClientRect();
+                            const mouseX = e.clientX - svgRect.left;
+                            const mouseY = e.clientY - svgRect.top;
+                            
+                            let xPos = mouseX + 10;
+                            let yPos = mouseY - 90;
+                            
+                            if (xPos + 240 > 500) xPos = mouseX - 250;
+                            if (yPos < 10) yPos = mouseY + 10;
+                            
+                            hoverInfo.setAttribute('transform', `translate(${xPos - 10}, ${yPos - 10})`);
+                        });
+                        
+                        profileElement.addEventListener('mouseleave', function() {
+                            hoverInfo.style.display = 'none';
+                            
+                            // Reset opacity
+                            Object.keys(profiles).forEach(otherId => {
+                                document.getElementById(otherId).style.opacity = '';
+                            });
+                        });
+                    });
+                    
+                    // Legend click interactions
+                    const legendItems = document.querySelectorAll('.radar-legend-item');
+                    legendItems.forEach(item => {
+                        item.addEventListener('click', function() {
+                            const profileName = this.getAttribute('data-profile');
+                            const profileMap = {
+                                'balanced': 'balanced-profile',
+                                'fortress': 'fortress-profile',
+                                'exposed': 'exposed-profile'
+                            };
+                            
+                            // Temporarily highlight the corresponding profile
+                            const profileElement = document.getElementById(profileMap[profileName]);
+                            const polygon = profileElement.querySelector('polygon');
+                            const originalOpacity = polygon.style.opacity;
+                            
+                            polygon.style.opacity = '1';
+                            polygon.style.strokeWidth = '5';
+                            
+                            setTimeout(() => {
+                                polygon.style.opacity = originalOpacity;
+                                polygon.style.strokeWidth = '';
+                            }, 1500);
+                        });
+                    });
+                });
+            </script>
         </div>
 
         <!-- Framework Components -->
