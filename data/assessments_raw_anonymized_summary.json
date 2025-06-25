@@ -1,16 +1,6 @@
 {
   "Intro": {},
   "Dim_Clients": {
-    "USERS_SIZE_mean": 2556.826666666667,
-    "USERS_SIZE_median": 906.0,
-    "USERS_SIZE_std": 8525.571845054745,
-    "USERS_SIZE_min": "31",
-    "USERS_SIZE_max": "101807",
-    "INVESTMENT_ADEQUACY_mean": 0.5206666666666666,
-    "INVESTMENT_ADEQUACY_median": 0.4,
-    "INVESTMENT_ADEQUACY_std": 0.19396833155577856,
-    "INVESTMENT_ADEQUACY_min": 0.3,
-    "INVESTMENT_ADEQUACY_max": 0.8,
     "sector_analysis": {
       "mean": {
         "Education": 0.5635,
@@ -44,12 +34,13 @@
       }
     }
   },
-  "Dim_SubControls": {},
+  "Dim_ProtectionEffectiveness": {},
+  "Fact_Protection_Effectiveness": {},
+  "Dim_DRAgility": {},
+  "Fact_DRAgility": {},
   "Dim_AttackVectors": {},
   "Dim_Sector": {},
   "Dim_BusinessModels": {},
   "Dim_Agility": {},
-  "Dim_Geo": {},
-  "Fact_Maturity_Scores": {},
-  "Fact_Protection_Scores": {}
+  "Dim_Geo": {}
 }
