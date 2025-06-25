@@ -1,0 +1,13 @@
+{
+  "project": {
+    "name": "Laberit Intelligence Platform",
+    "description": "Inteligencia ejecutiva de ciberseguridad para LATAM",
+    "language": "es",
+    "target_audience": "C-Suite LATAM/España"
+  },
+  "preferences": {
+    "output_format": "executive_ready",
+    "documentation": "spanish",
+    "code_comments": "spanish"
+  }
+}

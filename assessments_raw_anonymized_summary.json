@@ -1,0 +1,55 @@
+{
+  "Intro": {},
+  "Dim_Clients": {
+    "USERS_SIZE_mean": 2556.826666666667,
+    "USERS_SIZE_median": 906.0,
+    "USERS_SIZE_std": 8525.571845054745,
+    "USERS_SIZE_min": "31",
+    "USERS_SIZE_max": "101807",
+    "INVESTMENT_ADEQUACY_mean": 0.5206666666666666,
+    "INVESTMENT_ADEQUACY_median": 0.4,
+    "INVESTMENT_ADEQUACY_std": 0.19396833155577856,
+    "INVESTMENT_ADEQUACY_min": 0.3,
+    "INVESTMENT_ADEQUACY_max": 0.8,
+    "sector_analysis": {
+      "mean": {
+        "Education": 0.5635,
+        "Energy": 0.592625,
+        "Entertainment": 0.7766,
+        "Financial": 0.5756805555555555,
+        "Healthcare": 0.64942,
+        "Hospitality": 0.5546,
+        "Industrial": 0.6487058823529412,
+        "Pharma": 0.659775,
+        "Public": 0.615052,
+        "Retail": 0.5635,
+        "Services": 0.7700875,
+        "Technology": 0.7007666666666666,
+        "Transportation": 0.643625
+      },
+      "count": {
+        "Education": 6,
+        "Energy": 12,
+        "Entertainment": 2,
+        "Financial": 36,
+        "Healthcare": 5,
+        "Hospitality": 1,
+        "Industrial": 34,
+        "Pharma": 4,
+        "Public": 25,
+        "Retail": 10,
+        "Services": 8,
+        "Technology": 3,
+        "Transportation": 4
+      }
+    }
+  },
+  "Dim_SubControls": {},
+  "Dim_AttackVectors": {},
+  "Dim_Sector": {},
+  "Dim_BusinessModels": {},
+  "Dim_Agility": {},
+  "Dim_Geo": {},
+  "Fact_Maturity_Scores": {},
+  "Fact_Protection_Scores": {}
+}
