@@ -228,6 +228,28 @@
             background: #ddd;
             outline: none;
             -webkit-appearance: none;
+            position: relative;
+        }
+        
+        .slider-mark {
+            position: absolute;
+            width: 2px;
+            height: 20px;
+            background: #666;
+            top: -7px;
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+        
+        .slider-mark::after {
+            content: 'Estado actual';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            color: #666;
+            white-space: nowrap;
         }
         
         .slider::-webkit-slider-thumb {
@@ -335,6 +357,102 @@
         .critical-pulse {
             animation: pulse 2s infinite;
         }
+        
+        /* BEI Breakdown Styles */
+        .bei-breakdown {
+            margin-top: 20px;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .bei-header {
+            background: #f8f9fa;
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .bei-header:hover {
+            background: #e9ecef;
+        }
+        
+        .bei-chevron {
+            transition: transform 0.3s;
+            font-size: 18px;
+        }
+        
+        .bei-expanded .bei-chevron {
+            transform: rotate(180deg);
+        }
+        
+        .bei-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: white;
+        }
+        
+        .bei-expanded .bei-content {
+            max-height: 600px;
+        }
+        
+        .bei-inner {
+            padding: 20px;
+        }
+        
+        .bei-component {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .bei-component:last-child {
+            border-bottom: none;
+        }
+        
+        .bei-component-name {
+            font-weight: 500;
+            flex: 1;
+        }
+        
+        .bei-component-value {
+            font-weight: 600;
+            color: #dc3545;
+            margin: 0 20px;
+            min-width: 50px;
+            text-align: right;
+        }
+        
+        .bei-component-weight {
+            color: #6c757d;
+            font-size: 14px;
+        }
+        
+        .bei-impact-visual {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff3cd;
+            border-radius: 8px;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .bei-formula {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 13px;
+            margin-top: 15px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -394,6 +512,69 @@
                     Formula: (4.64 × 1.63 × 5.63) / 20<br>
                     = 42.52 / 20<br>
                     = <strong>2.13</strong> (Escala 0-10)
+                </div>
+                
+                <!-- BEI Breakdown Section -->
+                <div class="bei-breakdown" id="beiBreakdown">
+                    <div class="bei-header" onclick="toggleBEI()">
+                        <span>📉 Desglose del BEI (Business Exposure Index)</span>
+                        <span class="bei-chevron">▼</span>
+                    </div>
+                    <div class="bei-content">
+                        <div class="bei-inner">
+                            <div style="text-align: center; margin-bottom: 20px;">
+                                <h4 style="margin-bottom: 10px;">BEI Total: <span style="color: #dc3545;">0.75</span></h4>
+                                <p style="color: #6c757d; font-size: 14px;">Alto riesgo de exposición del negocio</p>
+                            </div>
+                            
+                            <div class="bei-component">
+                                <span class="bei-component-name">🎯 Vulnerabilidad de la Industria</span>
+                                <span class="bei-component-value">0.85</span>
+                                <span class="bei-component-weight">(25%)</span>
+                            </div>
+                            
+                            <div class="bei-component">
+                                <span class="bei-component-name">💻 Dependencia Digital</span>
+                                <span class="bei-component-value">0.75</span>
+                                <span class="bei-component-weight">(40%)</span>
+                            </div>
+                            
+                            <div class="bei-component">
+                                <span class="bei-component-name">⏱️ Velocidad de Decisión</span>
+                                <span class="bei-component-value">0.50</span>
+                                <span class="bei-component-weight">(20%)</span>
+                            </div>
+                            
+                            <div class="bei-component">
+                                <span class="bei-component-name">🌍 Riesgo Geográfico</span>
+                                <span class="bei-component-value">0.50</span>
+                                <span class="bei-component-weight">(15%)</span>
+                            </div>
+                            
+                            <div class="bei-impact-visual">
+                                <h5 style="margin-bottom: 10px;">📉 Impacto en la Resiliencia</h5>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <span>Base: 3.26</span>
+                                    <span>→</span>
+                                    <span style="color: #dc3545; font-weight: bold;">BEI reduce 50%</span>
+                                    <span>→</span>
+                                    <span style="color: #dc3545; font-weight: bold;">Final: 1.63</span>
+                                </div>
+                                <div class="bei-formula">
+                                    Resiliencia = Base × (1 - BEI × 0.5) = 3.26 × (1 - 0.75 × 0.5) = 1.63
+                                </div>
+                            </div>
+                            
+                            <div style="margin-top: 20px; padding: 15px; background: #d4edda; border-radius: 8px;">
+                                <strong style="color: #155724;">✓ Acciones para reducir BEI:</strong>
+                                <ul style="margin: 10px 0 0 0; padding-left: 20px; font-size: 14px;">
+                                    <li>Diversificar canales no digitales (reduciría Dependencia Digital)</li>
+                                    <li>Automatizar decisiones críticas (mejoraría Velocidad de Decisión)</li>
+                                    <li>Implementar redundancia geográfica (mitigaría Riesgo Geográfico)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -486,8 +667,6 @@
                     </div>
                 </div>
                 
-                <!-- Hover tooltip -->
-                <div class="hover-tooltip" id="radarTooltip"></div>
             </div>
             
             <!-- Client-Specific Recommendations -->
@@ -638,7 +817,10 @@
                                 <span>Efectividad de Protección</span>
                                 <span id="protectionValue">4.64</span>
                             </div>
-                            <input type="range" class="slider" id="protectionSlider" min="0" max="10" step="0.1" value="4.64">
+                            <div style="position: relative;">
+                                <input type="range" class="slider" id="protectionSlider" min="0" max="10" step="0.1" value="4.64">
+                                <div class="slider-mark" style="left: 46.4%;"></div>
+                            </div>
                         </div>
                         
                         <div class="slider-container">
@@ -646,7 +828,10 @@
                                 <span>Resiliencia Operacional</span>
                                 <span id="resilienceValue">1.63</span>
                             </div>
-                            <input type="range" class="slider" id="resilienceSlider" min="0" max="10" step="0.1" value="1.63">
+                            <div style="position: relative;">
+                                <input type="range" class="slider" id="resilienceSlider" min="0" max="10" step="0.1" value="1.63">
+                                <div class="slider-mark" style="left: 16.3%;"></div>
+                            </div>
                         </div>
                         
                         <div class="slider-container">
@@ -654,7 +839,10 @@
                                 <span>Agilidad D&R</span>
                                 <span id="agilityValue">5.63</span>
                             </div>
-                            <input type="range" class="slider" id="agilitySlider" min="0" max="10" step="0.1" value="5.63">
+                            <div style="position: relative;">
+                                <input type="range" class="slider" id="agilitySlider" min="0" max="10" step="0.1" value="5.63">
+                                <div class="slider-mark" style="left: 56.3%;"></div>
+                            </div>
                         </div>
                         
                         <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 5px;">
@@ -891,6 +1079,15 @@
                 plugins: {
                     legend: {
                         position: 'bottom'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const label = context.label || '';
+                                const value = context.parsed.r || 0;
+                                return `Vector: ${label} | Protección actual: ${value}%`;
+                            }
+                        }
                     }
                 }
             }
@@ -1121,6 +1318,15 @@
         
         // Make export function available globally
         window.powerBIData = exportToPowerBI;
+        
+        // BEI Breakdown toggle function
+        function toggleBEI() {
+            const beiBreakdown = document.getElementById('beiBreakdown');
+            beiBreakdown.classList.toggle('bei-expanded');
+        }
     </script>
+    
+    <!-- Hover tooltip (moved to end of body) -->
+    <div class="hover-tooltip" id="radarTooltip"></div>
 </body>
 </html>
