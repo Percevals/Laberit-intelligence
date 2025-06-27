@@ -134,3 +134,46 @@ Sin acción inmediata, se estima que el 50% de las organizaciones en LATAM sufri
 
 *Informe generado: Junio 2025*
 *Próxima actualización: Diciembre 2025*
+
+
+
+claude-code run "Fix immunity-MVP-CLH.html with CORRECT formula and Spanish language:
+
+1. CORRECT IMMUNITY INDEX FORMULA:
+   According to project documentation:
+   Immunity Index = (Protection × Resilience × Agility) / 20
+   
+   Where (from Excel screenshot):
+   - Protection (Protección) = 71
+   - Resilience (Resiliencia Operacional) = 63.84 
+   - Agility (Agilidad D_R) = 73
+   
+   Result: (71 × 63.84 × 73) / 20 = 16,544.16 / 20 = 827.2 (needs normalization to 0-10 scale)
+
+2. RENAME EVERYWHERE:
+   - 'Immunity Score' → 'Immunity Index' (Índice de Inmunidad)
+   - Remove all references to old BEI/RCI formula
+
+3. ADD TRIANGULAR RADAR from immunity-framework.html:
+   - PROTECCIÓN (top vertex)
+   - RESILIENCIA (bottom right vertex)  
+   - AGILIDAD (bottom left vertex)
+   - Show CLH current position vs optimal
+
+4. SPANISH WHAT-IF SCENARIOS:
+   - 'Si mejora Protección +20%' → Índice sube a X
+   - 'Si mejora Resiliencia +15%' → Índice sube a Y
+   - 'Si mejora Agilidad +10%' → Índice sube a Z
+   
+5. MATCH EXCEL VISUAL STYLE:
+   - Use protection percentages from Excel (71%, 63.84%, 73%)
+   - Keep consistent with PBIX design language
+
+6. USE EXISTING PBIX VISUAL STYLE:
+   - Copy the hexagonal radar style from 'Coherencia entre sus controles'
+   - Keep the roadmap table format from 'Hoja de ruta' 
+   - Use same color scheme (yellow/orange/green)
+
+
+Debug: Print the actual calculation steps to console to verify correctness."
+
