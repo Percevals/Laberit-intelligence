@@ -438,17 +438,20 @@
                         <!-- Outer triangle (100% reference) -->
                         <polygon points="175,35 296,245 54,245" fill="none" stroke="#666" stroke-width="2" opacity="0.5"/>
                         
-                        <!-- CLH Current State (critically small) -->
-                        <polygon points="175,145 212,211 138,211" 
+                        <!-- CLH Current State (proportional to actual values) -->
+                        <!-- Center: 175,175 -->
+                        <!-- Protection (46.4%): 175 + 0*(140*0.464) = 175, 175 - 140*0.464 = 110 -->
+                        <!-- Resilience (16.3%): 175 + 121*0.163 = 195, 175 + 70*0.163 = 186 -->
+                        <!-- Agility (56.3%): 175 - 121*0.563 = 107, 175 + 70*0.563 = 214 -->
+                        <polygon points="175,110 195,186 107,214" 
                                  fill="rgba(220, 53, 69, 0.3)" 
                                  stroke="#dc3545" 
                                  stroke-width="3"
                                  filter="url(#glow)"
-                                 class="radar-polygon"
+                                 class="radar-polygon critical-pulse"
                                  data-protection="46.4"
                                  data-resilience="16.3"
-                                 data-agility="56.25">
-                            <animate attributeName="opacity" values="0.3;0.6;0.3" dur="2s" repeatCount="indefinite"/>
+                                 data-agility="56.3">
                         </polygon>
                         
                         <!-- Target State -->
@@ -461,17 +464,20 @@
                         
                         <!-- Vertex labels -->
                         <g font-family="'Segoe UI', Arial, sans-serif" font-size="14" fill="#333">
-                            <text x="175" y="25" text-anchor="middle" font-weight="600" class="vertex-label" data-vertex="protection">PROTECCIÓN</text>
-                            <text x="310" y="255" text-anchor="middle" font-weight="600" class="vertex-label" data-vertex="resilience">RESILIENCIA</text>
-                            <text x="40" y="255" text-anchor="middle" font-weight="600" class="vertex-label" data-vertex="agility">AGILIDAD</text>
+                            <text x="175" y="25" text-anchor="middle" font-weight="600" class="vertex-label" data-vertex="protection" style="cursor: pointer;">PROTECCIÓN</text>
+                            <text x="310" y="255" text-anchor="middle" font-weight="600" class="vertex-label" data-vertex="resilience" style="cursor: pointer;">RESILIENCIA</text>
+                            <text x="40" y="255" text-anchor="middle" font-weight="600" class="vertex-label" data-vertex="agility" style="cursor: pointer;">AGILIDAD</text>
                         </g>
                         
                         <!-- Current values -->
                         <g font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#dc3545" font-weight="600">
-                            <text x="175" y="135" text-anchor="middle">46.4%</text>
-                            <text x="220" y="215" text-anchor="middle">16.3%</text>
-                            <text x="130" y="215" text-anchor="middle">56.3%</text>
+                            <text x="175" y="100" text-anchor="middle">46.4%</text>
+                            <text x="205" y="190" text-anchor="middle">16.3% ⚠️</text>
+                            <text x="97" y="218" text-anchor="middle">56.3%</text>
                         </g>
+                        
+                        <!-- Critical indicator for resilience -->
+                        <text x="296" y="275" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#dc3545" font-weight="600" text-anchor="middle">CRÍTICO</text>
                     </svg>
                     
                     <div style="margin-top: 20px; font-size: 14px; color: #6c757d;">
@@ -816,9 +822,9 @@
             const vertexLabels = document.querySelectorAll('.vertex-label');
             
             const tooltipTexts = {
-                protection: 'Madurez × Desempeño de Protección = 4.64/10 (por debajo del promedio)',
-                resilience: 'Capacidad operacional del modelo de negocio = 1.63/10 (MUY BAJA - CRÍTICA)',
-                agility: 'Madurez × Desempeño de Detección y Respuesta = 5.63/10 (moderada)'
+                protection: 'PROTECCIÓN: Capacidad de prevenir y bloquear ataques con una arquitectura Zero-Trust',
+                resilience: 'RESILIENCIA: Capacidad de mantener operación según su modelo de negocio',
+                agility: 'AGILIDAD: Capacidad de detectar y responder ante crecientes ciberamenazas'
             };
             
             vertexLabels.forEach(label => {
@@ -846,7 +852,7 @@
         const attackChart = new Chart(attackCtx, {
             type: 'radar',
             data: {
-                labels: ['Email', 'Endpoint', 'Web', 'Identidad', 'Red', 'Datos'],
+                labels: ['Phishing | BEC', 'Software Vulnerability', 'Compromised Credentials', 'Social Engineering', 'Cloud Misconfiguration', 'Malicious Insider'],
                 datasets: [{
                     label: 'Estado Actual CLH',
                     data: [40, 65, 85, 70, 75, 55],
