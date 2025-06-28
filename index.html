@@ -1,94 +1,660 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Lãberit Intelligence Hub</title>
     <meta charset="UTF-8">
-    <div class="container my-5">
-  <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
-    <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
-      <h1 class="display-4 fw-bold lh-1">El Mito de la Ciberseguridad</h1>
-      <p class="lead">Nos han hecho creer que es un problema de hackers y firewalls. Pero 150 evaluaciones en LATAM nos enseñaron una verdad incómoda: **la ignorancia sobre el valor del negocio cuesta más que cualquier ataque.** Por eso, evolucionamos del score a un <strong>Índice de Inmunidad Digital</strong>, una herramienta para que los líderes vean el riesgo a través del lente de su propio modelo de negocio.</p>
-    </div>
-    <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
-        <img class="rounded-lg-3" src="su-imagen-actual.jpg" alt="" width="720">
-    </div>
-  </div>
-</div>
-    <nav>
-    <a href="./docs/immunity-framework.html">Conozca el modelo de Inmunidad Digital</a>
-    <!-- otros enlaces -->
-    </nav>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lãberit Intelligence | Cyber Resilience Advisors</title>
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            max-width: 800px; 
-            margin: 0 auto; 
-            padding: 20px;
-            background-color: #091F2C;
-            color: #ffffff;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .alert-box {
-            background: #C10016;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            line-height: 1.6;
         }
-        .nav-links a {
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Professional Header */
+        .header {
+            background: linear-gradient(135deg, #1a2332 0%, #2c3e50 100%);
+            color: white;
+            padding: 100px 20px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.03"><rect width="100" height="100" fill="white"/><path d="M0 50 L50 0 L100 50 L50 100 Z" fill="none" stroke="white" stroke-width="0.5"/></svg>') repeat;
+            background-size: 100px 100px;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header h1 {
+            font-size: 48px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+        
+        .header .subtitle {
+            font-size: 24px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .header .tagline {
+            font-size: 18px;
+            font-weight: 400;
+            background: rgba(255, 255, 255, 0.1);
             display: inline-block;
-            padding: 10px 20px;
-            margin: 5px;
-            background: #B4B5DF;
-            color: #091F2C;
+            padding: 12px 30px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Navigation */
+        .nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: #2c3e50;
             text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #3498db;
+        }
+        
+        .cta-button {
+            background: #3498db;
+            color: white;
+            padding: 10px 25px;
             border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        
+        .cta-button:hover {
+            background: #2980b9;
+        }
+        
+        /* Executive Summary Section */
+        .executive-section {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .executive-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .executive-content h2 {
+            font-size: 36px;
+            font-weight: 400;
+            margin-bottom: 30px;
+            color: #1a2332;
+        }
+        
+        .paradox-box {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 10px;
+            margin: 40px 0;
+            border-left: 5px solid #e74c3c;
+        }
+        
+        .paradox-box h3 {
+            color: #e74c3c;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        /* Trinity Section */
+        .trinity-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .trinity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .trinity-card {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .trinity-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .trinity-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: white;
+        }
+        
+        .trinity-card.fortress .trinity-icon {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+        }
+        
+        .trinity-card.agility .trinity-icon {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+        
+        .trinity-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #1a2332;
+        }
+        
+        .new-badge {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            margin-left: 10px;
+            font-weight: 600;
+        }
+        
+        /* Archetypes Section */
+        .archetypes-section {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .archetype-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .archetype-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s;
+        }
+        
+        .archetype-card:hover {
+            border-color: #3498db;
+            box-shadow: 0 5px 20px rgba(52, 152, 219, 0.1);
+        }
+        
+        .archetype-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .archetype-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a2332;
+        }
+        
+        .resilience-score {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2ecc71;
+        }
+        
+        .resilience-score.low {
+            color: #e74c3c;
+        }
+        
+        .resilience-score.medium {
+            color: #f39c12;
+        }
+        
+        .archetype-examples {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        /* Intelligence Section */
+        .intelligence-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+        }
+        
+        .intelligence-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .intelligence-header h2 {
+            font-size: 36px;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+        
+        .threat-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .threat-level {
+            display: inline-block;
+            background: #e74c3c;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .threat-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: #3498db;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #1a2332;
+            color: white;
+            padding: 60px 0 40px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 36px;
+            }
+            
+            .header .subtitle {
+                font-size: 20px;
+            }
+            
+            .nav-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .trinity-grid,
+            .archetype-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>🛡️ Lãberit Intelligence Hub</h1>
-    <div class="container px-4 py-5" id="hanging-icons">
-  <h2 class="pb-2 border-bottom">Los 3 Pilares de la Inmunidad Digital</h2>
-  <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-    <div class="col d-flex align-items-start">
-      <div>
-        <h2>1. Preparación Técnica</h2>
-        <p>Mide la robustez de sus defensas contra las ciberamenazas clave (Ransomware, Fraude, Fuga de Datos). Traduce controles técnicos en capacidad de protección.</p>
-      </div>
-    </div>
-    <div class="col d-flex align-items-start">
-      <div>
-        <h2>2. Resiliencia del Negocio</h2>
-        <p>Evalúa la madurez de sus procesos, su capacidad de adaptación y la adecuación de su inversión. Mide qué tan rápido puede responder su organización, no solo su tecnología.</p>
-      </div>
-    </div>
-    <div class="col d-flex align-items-start">
-      <div>
-        <h2>3. Exposición a Amenazas</h2>
-        <p>Analiza su perfil de riesgo inherente. Considera la vulnerabilidad de su industria, su dependencia digital y los riesgos geopolíticos de sus mercados principales (LATAM vs. España).</p>
-      </div>
-    </div>
-  </div>
-</div>
-    <!-- NUEVO: Alerta Semanal -->
-    <div class="alert-box">
-        <h3>🚨 El Índice en Acción: Panoramas de Riesgo Semanales</h3>
-        <p> Ciberamenazas detectadas esta semana, con elementos de acción inmediata y a mediano/largo plazo</p>
-        <a href="./docs/immunity-dashboard-2025-06-20.html" style="color: white;">
-            Ver Actualización Semanal →
-        </a>
-    </div>
+    <!-- Professional Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1>Lãberit Intelligence</h1>
+            <p class="subtitle">Cyber Resilience Advisors</p>
+            <p class="tagline">Your Business Model is Your First Line of Defense™</p>
+        </div>
+    </header>
     
-    <h2>Acceso Rápido</h2>
-    <div class="nav-links">
-        <a href="./dashboards/2025/06-june/">Dashboard Mensual Completo</a>
-        <a href="./docs/immunity-dashboard-2025-06-20.html">📅 Update Semanal</a>
-        <a href="./alerts/active.json">API Alertas Activas</a>
-    </div>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container nav-content">
+            <div class="nav-links">
+                <a href="#framework">Framework v3.0</a>
+                <a href="#archetypes">Business Archetypes</a>
+                <a href="#intelligence">Threat Intelligence</a>
+                <a href="./docs/immunity-framework-v3.html">Documentation</a>
+            </div>
+            <a href="#contact" class="cta-button">Request Assessment</a>
+        </div>
+    </nav>
     
-    <h2>Historial de Actualizaciones</h2>
-    <ul>
-        <li><strong>20 Jun:</strong> Dashboard de Inmunidad - Score regional 4.2, 60.7% vulnerables</li>
-        <li><strong>9 Jun:</strong> Dashboard mensual - 9 campañas activas</li>
-    </ul>
+    <!-- Executive Summary -->
+    <section class="executive-section" id="framework">
+        <div class="container">
+            <div class="executive-content">
+                <h2>The Digital Transformation Paradox</h2>
+                <p style="font-size: 20px; color: #7f8c8d; margin-bottom: 40px;">
+                    150+ assessments across LATAM revealed an uncomfortable truth
+                </p>
+                
+                <div class="paradox-box">
+                    <h3>Traditional Businesses Often Have Better Cyber Resilience Than Fintechs</h3>
+                    <p style="font-size: 18px; line-height: 1.8;">
+                        A bank with branches survives cyber attacks better than a digital-only fintech.
+                        Why? Because when technology fails, branches still operate. ATMs still dispense cash.
+                        Phone banking still works. <strong>Multiple channels mean multiple survival paths.</strong>
+                    </p>
+                    <p style="margin-top: 20px; font-size: 16px; color: #7f8c8d;">
+                        Going 100% digital may actually reduce your cyber resilience.
+                    </p>
+                </div>
+                
+                <p style="font-size: 20px; margin-top: 40px;">
+                    <strong>Immunity Framework 3.0</strong> measures what truly matters:<br>
+                    Can your business survive when technology fails?
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Trinity Section -->
+    <section class="trinity-section">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 36px; margin-bottom: 20px;">The Immunity Trinity</h2>
+            <p style="text-align: center; font-size: 18px; color: #7f8c8d;">Three pillars of true cyber resilience</p>
+            
+            <div class="trinity-grid">
+                <div class="trinity-card">
+                    <div class="trinity-icon">🛡️</div>
+                    <h3>Protection Effectiveness</h3>
+                    <p>Your preventive defenses against threats. Measures how well your security investments actually protect your assets.</p>
+                    <p style="margin-top: 20px; font-size: 14px; color: #7f8c8d;">
+                        <strong>Metric:</strong> Readiness × Performance
+                    </p>
+                </div>
+                
+                <div class="trinity-card fortress">
+                    <div class="trinity-icon">🏰</div>
+                    <h3>Business Fortress <span class="new-badge">NEW</span></h3>
+                    <p>Your business model's inherent ability to operate through cyber incidents. Architecture matters more than technology.</p>
+                    <p style="margin-top: 20px; font-size: 14px; color: #7f8c8d;">
+                        <strong>Metric:</strong> Model_Resilience × (1 - Strategic_Exposure × 0.5)
+                    </p>
+                </div>
+                
+                <div class="trinity-card agility">
+                    <div class="trinity-icon">⚡</div>
+                    <h3>Detection & Response Agility</h3>
+                    <p>Your capability to quickly detect and neutralize threats that breach your defenses. Speed is survival.</p>
+                    <p style="margin-top: 20px; font-size: 14px; color: #7f8c8d;">
+                        <strong>Metric:</strong> Readiness × Performance
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Business Archetypes Section -->
+    <section class="archetypes-section" id="archetypes">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 36px; margin-bottom: 20px;">Business Archetypes & Resilience</h2>
+            <p style="text-align: center; font-size: 18px; color: #7f8c8d; max-width: 800px; margin: 0 auto;">
+                Your business model determines your baseline resilience. Technology can enhance it, but can't replace it.
+            </p>
+            
+            <div class="archetype-grid">
+                <div class="archetype-card">
+                    <div class="archetype-header">
+                        <span class="archetype-name">B2C Digital</span>
+                        <span class="resilience-score">0.86</span>
+                    </div>
+                    <p>Cloud-native, fully digital operations with automated recovery.</p>
+                    <p class="archetype-examples">Netflix • Spotify • Revolut • N26</p>
+                </div>
+                
+                <div class="archetype-card">
+                    <div class="archetype-header">
+                        <span class="archetype-name">Platform</span>
+                        <span class="resilience-score">0.76</span>
+                    </div>
+                    <p>Marketplace models with distributed risk and network effects.</p>
+                    <p class="archetype-examples">Uber • Airbnb • MercadoLibre • PayPal</p>
+                </div>
+                
+                <div class="archetype-card">
+                    <div class="archetype-header">
+                        <span class="archetype-name">Healthcare</span>
+                        <span class="resilience-score">0.70</span>
+                    </div>
+                    <p>Critical services with regulatory backups and manual procedures.</p>
+                    <p class="archetype-examples">Hospitals • Telemedicine • Pharma</p>
+                </div>
+                
+                <div class="archetype-card">
+                    <div class="archetype-header">
+                        <span class="archetype-name">B2C Volume</span>
+                        <span class="resilience-score medium">0.62</span>
+                    </div>
+                    <p>Multi-channel retail with physical and digital operations.</p>
+                    <p class="archetype-examples">Walmart • McDonald's • Carrefour</p>
+                </div>
+                
+                <div class="archetype-card">
+                    <div class="archetype-header">
+                        <span class="archetype-name">B2G</span>
+                        <span class="resilience-score medium">0.54</span>
+                    </div>
+                    <p>Government contractors with rigid requirements and legacy systems.</p>
+                    <p class="archetype-examples">Defense • Infrastructure • Gov IT</p>
+                </div>
+                
+                <div class="archetype-card">
+                    <div class="archetype-header">
+                        <span class="archetype-name">B2B Industrial</span>
+                        <span class="resilience-score low">0.48</span>
+                    </div>
+                    <p>Physical production that cannot be virtualized or automated.</p>
+                    <p class="archetype-examples">Manufacturing • Oil & Gas • Mining</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="./framework/business-archetype-reference.md" class="cta-button">Find Your Archetype →</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Intelligence Section -->
+    <section class="intelligence-section" id="intelligence">
+        <div class="container">
+            <div class="intelligence-header">
+                <h2>Latest Threat Intelligence</h2>
+                <p style="font-size: 18px; opacity: 0.9;">Regional insights from continuous monitoring</p>
+            </div>
+            
+            <div class="threat-card">
+                <span class="threat-level">CRITICAL ALERT</span>
+                <h3 style="font-size: 28px; margin-bottom: 20px;">LATAM Cyber Resilience Crisis</h3>
+                <p style="font-size: 18px; line-height: 1.8; opacity: 0.9;">
+                    Our latest intelligence report reveals critical vulnerabilities across the region.
+                    96% of organizations maintain low Zero Trust maturity, while 70% show high exposure
+                    to known exploits. The average immunity score of 4.2 indicates systemic vulnerability.
+                </p>
+                
+                <div class="threat-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">96%</div>
+                        <div class="stat-label">Low Zero Trust Maturity</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1,238</div>
+                        <div class="stat-label">Active Vulnerabilities</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4.2</div>
+                        <div class="stat-label">Avg Immunity Score</div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 40px;">
+                    <a href="./intelligence/weekly-reports/immunity-dashboard-2025-06-20.html" class="cta-button" style="background: white; color: #2c3e50;">
+                        View Full Intelligence Report →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>Framework</h4>
+                    <ul class="footer-links">
+                        <li><a href="./framework/immunity-framework-v3.md">Framework v3.0 Details</a></li>
+                        <li><a href="./framework/business-archetype-reference.md">Business Archetypes</a></li>
+                        <li><a href="./docs/immunity-framework-v3.html">Technical Documentation</a></li>
+                        <li><a href="./dashboards/immunity-MVP-CLH.html">Executive Dashboard</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Intelligence</h4>
+                    <ul class="footer-links">
+                        <li><a href="./intelligence/weekly-reports/">Weekly Reports</a></li>
+                        <li><a href="./latam_cybersecurity_trends_executive_report.md">LATAM Trends</a></li>
+                        <li><a href="./alerts/active.json">API - Active Alerts</a></li>
+                        <li><a href="./dashboards/">Monthly Dashboards</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="./README.md">Getting Started</a></li>
+                        <li><a href="./framework/immunity-framework-v2.md">Migration from v2.0</a></li>
+                        <li><a href="#contact">Request Assessment</a></li>
+                        <li><a href="https://github.com/Laberit">GitHub</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>About Lãberit</h4>
+                    <p style="opacity: 0.8; line-height: 1.8;">
+                        We transform cybersecurity from a technical checklist into strategic business intelligence.
+                        150+ assessments across LATAM have proven one thing: your business model is your first line of defense.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Lãberit Intelligence. All rights reserved. | Immunity Framework™ v3.0</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
