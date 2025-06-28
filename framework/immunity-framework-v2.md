@@ -15,7 +15,7 @@ El Framework de Inmunidad 2.0 visualiza su negocio como un organismo vivo, midie
   - Puntuación de Desempeño de Protección (pruebas del mundo real)
 - **Valor para C-Level**: Responde "¿El dinero que gastamos en defensa realmente nos hace más seguros?"
 
-### 2. Resiliencia Operacional (Su ADN)
+### 2. Business Fortress (Su ADN)
 - **Qué Es**: El perfil de riesgo inherente de su modelo de negocio basado en dependencia digital, industria y geografía
 - **Cómo Medimos**: Índice de Exposición del Negocio (BEI) combinando:
   - Vulnerabilidad de la Industria (25%)
@@ -78,7 +78,7 @@ Una firma visual que transforma datos complejos en conocimiento estratégico:
 
 ### Informe Estratégico (CEO/Junta)
 - Resumen ejecutivo de 1-2 páginas
-- Lidera con Resiliencia Operacional
+- Lidera con Business Fortress
 - Riesgo empresarial e implicaciones estratégicas
 - Prioridades de inversión
 
@@ -96,7 +96,7 @@ Una firma visual que transforma datos complejos en conocimiento estratégico:
 - Fortalecimiento de Seguridad en la Nube
 - Evaluación de Seguridad ERP
 
-### Servicios de Resiliencia Operacional
+### Servicios de Business Fortress
 - Talleres de Asesoría de Riesgo Estratégico
 - Modernización de Procesos de Negocio
 - Dashboards de Riesgo Ejecutivo (Power BI)

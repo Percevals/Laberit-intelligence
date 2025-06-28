@@ -84,7 +84,7 @@ Este informe analiza datos de 150 organizaciones únicas evaluadas en América L
 
 ---
 
-### 5. 🔄 **Deficiencia en Resiliencia Operacional: 70% Sin Capacidad de Recuperación Rápida**
+### 5. 🔄 **Deficiencia en Business Fortress: 70% Sin Capacidad de Recuperación Rápida**
 
 **Hallazgo Principal:** El 70% de las organizaciones carecen de capacidades adecuadas de recuperación, con solo 30% clasificados como "Resilientes" o "Elite".
 
@@ -145,7 +145,7 @@ claude-code run "Fix immunity-MVP-CLH.html with CORRECT formula and Spanish lang
    
    Where (from Excel screenshot):
    - Protection (Protección) = 71
-   - Resilience (Resiliencia Operacional) = 63.84 
+   - Resilience (Business Fortress) = 63.84 
    - Agility (Agilidad D_R) = 73
    
    Result: (71 × 63.84 × 73) / 20 = 16,544.16 / 20 = 827.2 (needs normalization to 0-10 scale)

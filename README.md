@@ -1,128 +1,118 @@
-# The Immunity Framework 2.0: An Executive's Guide to Corporate Biology
+# The Immunity Framework 3.0: Business Fortress Edition
 
 ## Executive Summary
 
-Traditional cybersecurity audits are failing business leaders. They provide technical checklists and generic scores, but don't answer the question that truly matters to the C-suite: **Will our business survive a sophisticated cyber attack?**
+Traditional cybersecurity assessments focus on technology while ignoring the fundamental truth: **Your business model determines your survival capacity more than your security stack.** A traditional bank with branches can survive a cyber attack better than a fintech with perfect security, because business architecture matters more than technology architecture.
 
-The Immunity Framework 2.0 views your business as a living organism, measuring resilience across three critical, interconnected pillars—**The Immunity Trinity**:
+The Immunity Framework 3.0 introduces the Business Fortress concept, measuring resilience across three critical pillars—**The Immunity Trinity**:
 
 ## The Immunity Trinity
 
-### 1. Protection Effectiveness (Your Armor)
-- **What It Is**: Your organization's preventative defenses - the armor that stops threats before they get inside
+### 1. Protection Effectiveness (Your Shield)
+- **What It Is**: Your organization's preventative defenses
 - **How We Measure**: 
-  - Protection Readiness Score (architectural maturity)
-  - Protection Performance Score (real-world testing)
-- **C-Level Value**: Answers "Is the money we're spending on defense actually making us safer?"
+  - Protection Readiness × Protection Performance
+- **C-Level Value**: "Is our security investment effective?"
 
-### 2. Operational Resilience (Your DNA)
-- **What It Is**: Your business model's inherent risk profile based on digital dependency, industry, and geography
-- **How We Measure**: Business Exposure Index (BEI) combining:
-  - Industry Vulnerability (25%)
-  - Digital Dependency (40%)
-  - Decision Speed (20%)
-  - Geographic Risk (15%)
-- **C-Level Value**: Transforms cybersecurity from IT issue to strategic planning component
-
-### 3. Detection & Response Agility (Your Immune System)
-- **What It Is**: Your ability to find and neutralize threats that breach your armor
+### 2. Business Fortress (Your Foundation) 🆕
+- **What It Is**: Your business model's inherent ability to withstand and operate through cyber incidents
+- **Key Innovation**: Recognizes that a retail chain (0.62) has different inherent resilience than a cloud platform (0.86)
 - **How We Measure**:
-  - Response Readiness Score (process maturity)
-  - Response Performance Score (MTTD + MTTC)
-- **C-Level Value**: Answers "When a threat gets in—and it will—do we survive?"
+  ```
+  Business_Fortress = Model_Resilience × (1 - Strategic_Exposure × 0.5)
+  ```
+- **C-Level Value**: "Can our business model survive when technology fails?"
 
-## The Formula: An Engine for Clarity
+### 3. Detection & Response Agility (Your Reflexes)
+- **What It Is**: Your capability to detect and neutralize active threats
+- **How We Measure**: 
+  - Response Readiness × Response Performance
+- **C-Level Value**: "How quickly can we recover?"
 
-**True resilience is a product of balanced strengths.**
+## The Formula: Business Model First
+
+**Framework 3.0 recognizes that resilience starts with architecture, not technology.**
 
 ```
-Immunity Index = (Protection × Resilience × Agility) / 20
+Immunity Index = (Protection × Business_Fortress × Agility) / 20
 ```
 
-Where:
-- **Protection** = Protection Readiness × Protection Performance
-- **Resilience** = 1 + (1 - BEI × 0.5)
-- **Agility** = Response Readiness × Response Performance
+Result: A 0-10 score that reflects true business resilience, not just technical maturity.
 
-Result: A 0-10 score that executives can understand and act upon.
+## What's New in Version 3.0
+
+### 1. Business Archetype Scoring
+Six archetypes with inherent resilience scores:
+- **B2C_DIGITAL** (0.86): Netflix, Spotify, Digital Banks
+- **PLATFORM** (0.76): Uber, Airbnb, Marketplaces
+- **HEALTHCARE** (0.70): Hospitals, Telemedicine
+- **B2C_VOLUME** (0.62): Walmart, McDonald's
+- **B2G** (0.54): Government contractors
+- **B2B_IND** (0.48): Manufacturing, Oil & Gas
+
+### 2. Strategic Exposure Integration
+BEI components now directly reduce fortress strength:
+- Industry Vulnerability (25%)
+- Digital Dependency (40%)
+- Decision Speed (20%)
+- Geographic Risk (15%)
+
+### 3. Architecture Over Investment Philosophy
+- Traditional business with moderate security > Digital-only with perfect security
+- Multiple channels > Single digital channel
+- Manual fallbacks > Full automation
+
+## Key Insight: The Digital Transformation Paradox
+
+**Going 100% digital may reduce your cyber resilience.** 
+
+Example:
+- **Traditional Bank**: Branches + ATMs + Phone + Digital = Multiple survival paths
+- **Digital Bank**: App-only = Single point of catastrophic failure
 
 ## Performance Scoring Tiers
 
-### Mean Time to Detect (MTTD) - 50 points max
-| Tier | Benchmark | Points | Business Impact |
-|------|-----------|--------|-----------------|
-| Elite | <10 minutes | 50 | "Automated, machine-speed detection" |
-| Advanced | 10 min - 1 hour | 40 | "Team alerted almost immediately" |
-| Competent | 1-24 hours | 25 | "Problems found same day" |
-| Basic | 1-7 days | 10 | "Reliant on manual reviews" |
-| Lacking | >7 days | 0 | "Attacker has free reign" |
+| Immunity Score | Classification | Business Impact |
+|---------------|----------------|-----------------|
+| 8.0 - 10.0 | **Elite** | Attacks become competitive advantages |
+| 6.0 - 7.9 | **Resilient** | Rapid recovery, minimal impact |
+| 4.0 - 5.9 | **Vulnerable** | Significant disruption likely |
+| 0.0 - 3.9 | **Critical** | Existential threat from attacks |
 
-### Mean Time to Contain (MTTC) - 50 points max
-| Tier | Benchmark | Points | Business Impact |
-|------|-----------|--------|-----------------|
-| Elite | <30 minutes | 50 | "Breach stopped before spread" |
-| Advanced | 30 min - 4 hours | 40 | "Contained within hours" |
-| Competent | 4-72 hours | 25 | "Stopped within days" |
-| Basic | 3-14 days | 10 | "Week of disruption" |
-| Lacking | >14 days | 0 | "Extinction-level event" |
+## Implementation Guidance
 
-## The Immunity Trinity Radar
+### 1. Identify Your Archetype
+Use our [Business Archetype Reference](framework/business-archetype-reference.md) to determine your Model_Resilience score.
 
-A visual signature that transforms complex data into strategic insight:
+### 2. Calculate Strategic Exposure
+Assess your BEI components to understand exposure reduction.
 
-- **Balanced Leader**: Large equilateral triangle (strong, stable)
-- **The Fortress**: Narrow spike toward Protection (rigid, fragile)
-- **The Exposed**: Tiny triangle at center (vulnerable, high-risk)
+### 3. Balance Your Trinity
+Remember: The multiplication means your weakest link determines overall immunity.
 
-## Dual-Audience Reporting
+## Repository Structure
 
-### Strategic Briefing (CEO/Board)
-- 1-2 page executive summary
-- Leads with Operational Resilience
-- Business risk and strategic implications
-- Investment priorities
+```
+/dashboards         # Power BI-ready visualizations
+/framework          # Framework documentation and methodology
+/assessments        # Assessment tools and migrations
+/docs              # Additional documentation
+/intelligence      # Threat intelligence integration
+```
 
-### Technical Roadmap (CIO/CISO)
-- Full detailed report
-- Deep dive into all pillars
-- 48 sub-control breakdowns
-- Specific service recommendations
+## The Bottom Line
 
-## Service Mapping by Pillar
+Framework 3.0 asks a simple question: **When technology fails, does your business survive?**
 
-### Protection Effectiveness Services
-- Zero-Trust Architecture Consulting
-- Ethical Hacking/Pentesting
-- Cloud Security Hardening
-- ERP Security Assessment
-
-### Operational Resilience Services
-- Strategic Risk Advisory Workshops
-- Business Process Modernization
-- Executive Risk Dashboards (Power BI)
-- Digital Transformation Planning
-
-### Detection & Response Services
-- Breach & Attack Simulation (BAS)
-- Incident Response Retainer
-- SIEM Implementation
-- Vulnerability Management as a Service
-
-## Key Differentiators
-
-1. **Business-First**: Speaks C-suite language, not tech jargon
-2. **Holistic View**: Multiplicative formula prevents gaming
-3. **Action-Oriented**: Clear service mapping to improvements
-4. **Visual Clarity**: Trinity Radar tells the story instantly
-5. **Dual Reporting**: Right message for right audience
-
-## Implementation Notes
-
-- Assessment includes 150+ real organization benchmarks
-- Combines Zero Trust maturity with business context
-- Validated against industry standards (Mandiant, Verizon)
-- Designed for LATAM & Spain market realities
+The strongest fortress isn't the one with the highest walls, but the one that stands when the walls fall.
 
 ---
 
-*"The result is not just a score; it's a strategic map. It shows you precisely where to invest your next dollar to build a business that is not just secure, but truly and demonstrably resilient."*
+*Framework 3.0: Because in cyber resilience, business model beats technology stack.*
+
+## Learn More
+
+- [Framework v3.0 Details](framework/immunity-framework-v3.md)
+- [Business Archetype Reference](framework/business-archetype-reference.md)
+- [Executive Dashboard](dashboards/immunity-MVP-CLH.html)
+- [Migration from v2.0](framework/immunity-framework-v2.md)

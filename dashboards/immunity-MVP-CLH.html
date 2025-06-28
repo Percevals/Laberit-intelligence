@@ -507,7 +507,7 @@
                 <div class="calculation-debug">
                     <strong>Cálculo del Índice:</strong><br>
                     Protección: 4.64<br>
-                    Resiliencia Operacional: 1.63 <span style="color: #dc3545;">(CRÍTICO)</span><br>
+                    Business Fortress: 1.63 <span style="color: #dc3545;">(CRÍTICO)</span><br>
                     Agilidad D&R: 5.63<br>
                     Formula: (4.64 × 1.63 × 5.63) / 20<br>
                     = 42.52 / 20<br>
@@ -552,16 +552,20 @@
                             </div>
                             
                             <div class="bei-impact-visual">
-                                <h5 style="margin-bottom: 10px;">📉 Impacto en la Resiliencia</h5>
+                                <h5 style="margin-bottom: 10px;">📉 Impacto en Business Fortress (v3.0)</h5>
                                 <div style="display: flex; align-items: center; gap: 10px;">
-                                    <span>Base: 3.26</span>
+                                    <span>Model: 0.62</span>
                                     <span>→</span>
-                                    <span style="color: #dc3545; font-weight: bold;">BEI reduce 50%</span>
+                                    <span style="color: #dc3545; font-weight: bold;">Strategic Exposure reduce 37.5%</span>
                                     <span>→</span>
-                                    <span style="color: #dc3545; font-weight: bold;">Final: 1.63</span>
+                                    <span style="color: #dc3545; font-weight: bold;">Fortress: 0.3875</span>
                                 </div>
                                 <div class="bei-formula">
-                                    Resiliencia = Base × (1 - BEI × 0.5) = 3.26 × (1 - 0.75 × 0.5) = 1.63
+                                    Business_Fortress = Model_Resilience × (1 - Strategic_Exposure × 0.5)<br>
+                                    = 0.62 × (1 - 0.75 × 0.5) = 0.3875 (normalizado: 1.63/10)
+                                </div>
+                                <div style="margin-top: 10px; font-size: 13px; color: #666;">
+                                    <em>Archetype: B2C_VOLUME (Retail/Volume Operations)</em>
                                 </div>
                             </div>
                             
@@ -662,7 +666,7 @@
                     </svg>
                     
                     <div style="margin-top: 20px; font-size: 14px; color: #6c757d;">
-                        <p><strong style="color: #dc3545;">Área Crítica:</strong> Resiliencia Operacional (16.3%)</p>
+                        <p><strong style="color: #dc3545;">Área Crítica:</strong> Business Fortress (16.3%)</p>
                         <p>El triángulo pequeño indica inmunidad muy baja</p>
                     </div>
                 </div>
@@ -673,9 +677,9 @@
             <div class="card" style="grid-column: span 2;">
                 <h2 class="card-title">Recomendaciones Específicas Basadas en Evaluación CLH</h2>
                 
-                <!-- URGENTE - Resiliencia Operacional -->
+                <!-- URGENTE - Business Fortress -->
                 <div style="background: #f8d7da; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                    <h3 style="color: #721c24; margin-bottom: 15px;">🔴 URGENTE - Resiliencia Operacional (1.63/10 CRÍTICO)</h3>
+                    <h3 style="color: #721c24; margin-bottom: 15px;">🔴 URGENTE - Business Fortress (1.63/10 CRÍTICO)</h3>
                     <ul class="recommendation-list">
                         <li class="recommendation-item" style="border-left-color: #dc3545;">
                             <div>
@@ -825,7 +829,7 @@
                         
                         <div class="slider-container">
                             <div class="slider-label">
-                                <span>Resiliencia Operacional</span>
+                                <span>Business Fortress</span>
                                 <span id="resilienceValue">1.63</span>
                             </div>
                             <div style="position: relative;">
@@ -877,7 +881,7 @@
             <div class="card">
                 <h2 class="card-title">Análisis de Brechas Críticas</h2>
                 <div style="margin-bottom: 20px;">
-                    <h4 style="color: #dc3545; margin-bottom: 10px;">🚨 Resiliencia Operacional: 1.63/10 (CRÍTICA)</h4>
+                    <h4 style="color: #dc3545; margin-bottom: 10px;">🚨 Business Fortress: 1.63/10 (CRÍTICA)</h4>
                     <p style="font-size: 14px; color: #6c757d;">
                         La capacidad del modelo de negocio para mantener operaciones es extremadamente baja. 
                         Factores contribuyentes:
@@ -912,7 +916,7 @@
                 <div class="export-note">
                     <strong>Para importar en Power BI:</strong><br>
                     1. La estructura de datos coincide con las dimensiones de CSEC_FY25_CLH.pbix<br>
-                    2. Crear medidas: Immunity_Index = (Protection_Effectiveness × Operational_Resilience × D_R_Agility) / 20<br>
+                    2. Crear medidas: Immunity_Index = (Protection_Effectiveness × Business_Fortress × D_R_Agility) / 20<br>
                     3. Valores normalizados en escala 0-10 (NO porcentajes)<br>
                     4. La tabla de datos oculta contiene los valores correctos de Client ID 139
                 </div>
@@ -928,7 +932,7 @@
                 <th>Assessment_Date</th>
                 <th>Immunity_Index</th>
                 <th>Protection_Effectiveness</th>
-                <th>Operational_Resilience</th>
+                <th>Business_Fortress</th>
                 <th>D_R_Agility</th>
                 <th>Risk_Level</th>
                 <th>Attack_Vector</th>
@@ -1098,7 +1102,7 @@
         const maturityChart = new Chart(maturityCtx, {
             type: 'bar',
             data: {
-                labels: ['Protección', 'Resiliencia Operacional', 'Agilidad D&R'],
+                labels: ['Protección', 'Business Fortress', 'Agilidad D&R'],
                 datasets: [{
                     label: 'Estado Actual',
                     data: [4.64, 1.63, 5.63],
@@ -1152,17 +1156,18 @@
                     'Cálculo: 2.15 × 2.16 = 4.64'
                 ]
             },
-            'Resiliencia Operacional': {
-                title: 'Resiliencia del Modelo de Negocio',
-                formula: 'Base_Resilience × (1 - BEI × 0.5) = 1.63',
+            'Business Fortress': {
+                title: 'Fortaleza del Modelo de Negocio (v3.0)',
+                formula: 'Model_Resilience × (1 - Strategic_Exposure × 0.5) = 1.63',
                 details: [
-                    'Base Resilience: 3.26/10',
-                    'BEI Factor: 0.75',
+                    'Model_Resilience: 0.62 (Archetype: B2C_VOLUME)',
+                    'Strategic_Exposure (BEI): 0.75',
                     '• Industry_Vulnerability: 0.85 (Sector altamente targeted)',
                     '• Digital_Dependency: 0.75 (Modelo 75% digital)',
                     '• Decision_Speed: 0.50 (Velocidad media de decisión)',
                     '• Geographic_Risk: 0.50 (Riesgo regional medio)',
-                    'Cálculo: 3.26 × (1 - 0.75 × 0.5) = 1.63'
+                    'Cálculo: 0.62 × (1 - 0.75 × 0.5) = 0.62 × 0.625 = 0.3875',
+                    'Normalizado (×4.2): 1.63/10'
                 ]
             },
             'Agilidad D&R': {
