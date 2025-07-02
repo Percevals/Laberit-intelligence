@@ -130,15 +130,9 @@ We publish weekly intelligence dashboards in the `/dashboards` folder, showing:
 Our tools help organizations assess their **Model_Resilience**, **BEI components**, and **Immunity Index score**, updated weekly with actionable insights derived from integrated threat data.
 
 Explore the `/assessments` and `/framework` folders to understand how your organization can improve resilience through architecture, not just security.
-```
 
 ---
 
-## ✅ Updated /framework/index.md Snippet
-
-Add this section to your `/framework/index.md` to reflect the new TI integration layer:
-
-```markdown
 ## 🛡️ Threat Intelligence & Immunity
 
 Framework 3.0 now includes a **Threat Intelligence Layer** that enriches the **Strategic Exposure** component of the **Business Fortress** and supports **Agility** through early threat detection.
@@ -175,7 +169,6 @@ Each week, we update the `/intelligence` folder with fresh threat intel and publ
 - Improve decision speed using real-time intelligence
 
 > The strongest fortress isn’t the one with the highest walls, but the one that stands when the walls fall.
-```
 
 ---
 
