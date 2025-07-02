@@ -335,6 +335,146 @@
             margin-top: 5px;
         }
         
+        /* Real-time Intelligence Section */
+        .realtime-intelligence-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .threat-stats-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 50px;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            flex-wrap: wrap;
+        }
+        
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: #e74c3c;
+        }
+        
+        .pulse {
+            width: 10px;
+            height: 10px;
+            background: #e74c3c;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(231, 76, 60, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
+            }
+        }
+        
+        .stat-highlight {
+            font-size: 18px;
+            color: #2c3e50;
+        }
+        
+        .stat-highlight strong {
+            color: #e74c3c;
+            font-size: 24px;
+        }
+        
+        .intel-categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .intel-category-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+        }
+        
+        .intel-category-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .category-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+        }
+        
+        .category-header h3 {
+            font-size: 20px;
+            color: #1a2332;
+            margin: 0;
+        }
+        
+        .intel-sources {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .source-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            transition: background 0.3s;
+        }
+        
+        .source-item:hover {
+            background: #e9ecef;
+        }
+        
+        .source-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        
+        .source-info {
+            flex: 1;
+        }
+        
+        .source-info strong {
+            display: block;
+            font-size: 14px;
+            color: #1a2332;
+            margin-bottom: 2px;
+        }
+        
+        .source-info span {
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        
         /* Footer */
         .footer {
             background: #1a2332;
@@ -497,6 +637,163 @@
         </div>
     </section>
     
+    <!-- Real-time Threat Intelligence Section -->
+    <section class="realtime-intelligence-section" id="realtime-intelligence">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 36px; margin-bottom: 20px;">Inteligencia de Amenazas en Tiempo Real</h2>
+            <p style="text-align: center; font-size: 18px; color: #7f8c8d; max-width: 800px; margin: 0 auto 50px;">
+                Monitoreamos continuamente el panorama de amenazas global y regional para calibrar su Índice de Inmunidad con datos reales del mundo.
+            </p>
+            
+            <!-- Statistics Bar -->
+            <div class="threat-stats-bar">
+                <div class="live-indicator">
+                    <span class="pulse"></span>
+                    <span>EN VIVO</span>
+                </div>
+                <div class="stat-highlight">
+                    <strong>Última actualización:</strong> <span id="last-update">20 de junio, 2025</span>
+                </div>
+                <div class="stat-highlight">
+                    <strong>2,569</strong> ataques/semana en LATAM
+                </div>
+            </div>
+            
+            <!-- Intelligence Categories Grid -->
+            <div class="intel-categories-grid">
+                <!-- Inteligencia Regional LATAM -->
+                <div class="intel-category-card">
+                    <div class="category-header">
+                        <div class="category-icon" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">🌎</div>
+                        <h3>Inteligencia Regional LATAM</h3>
+                    </div>
+                    <div class="intel-sources">
+                        <div class="source-item">
+                            <div class="source-icon">📱</div>
+                            <div class="source-info">
+                                <strong>Telegram API</strong>
+                                <span>Monitoreo de actores de amenazas regionales</span>
+                            </div>
+                        </div>
+                        <div class="source-item">
+                            <div class="source-icon">🌐</div>
+                            <div class="source-info">
+                                <strong>LATAM-CERT</strong>
+                                <span>Feeds de MX-CERT, AR-CERT, BR-CERT</span>
+                            </div>
+                        </div>
+                        <div class="source-item">
+                            <div class="source-icon">📄</div>
+                            <div class="source-info">
+                                <strong>IntelX.io</strong>
+                                <span>Pastes en español/portugués</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Análisis de Tendencias -->
+                <div class="intel-category-card">
+                    <div class="category-header">
+                        <div class="category-icon" style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);">📊</div>
+                        <h3>Análisis de Tendencias</h3>
+                    </div>
+                    <div class="intel-sources">
+                        <div class="source-item">
+                            <div class="source-icon">🔄</div>
+                            <div class="source-info">
+                                <strong>OTX AlienVault</strong>
+                                <span>Pulsos por industria y región</span>
+                            </div>
+                        </div>
+                        <div class="source-item">
+                            <div class="source-icon">🎯</div>
+                            <div class="source-info">
+                                <strong>MITRE ATT&CK</strong>
+                                <span>Técnicas y tácticas emergentes</span>
+                            </div>
+                        </div>
+                        <div class="source-item">
+                            <div class="source-icon">📈</div>
+                            <div class="source-info">
+                                <strong>Threat Intelligence Platforms</strong>
+                                <span>Predicciones agregadas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Vulnerabilidades Críticas -->
+                <div class="intel-category-card">
+                    <div class="category-header">
+                        <div class="category-icon" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);">🚨</div>
+                        <h3>Vulnerabilidades Críticas</h3>
+                    </div>
+                    <div class="intel-sources">
+                        <div class="source-item">
+                            <div class="source-icon">🔐</div>
+                            <div class="source-info">
+                                <strong>NVD/CVE</strong>
+                                <span>CVEs críticos CVSS >9.0</span>
+                            </div>
+                        </div>
+                        <div class="source-item">
+                            <div class="source-icon">💣</div>
+                            <div class="source-info">
+                                <strong>ExploitDB</strong>
+                                <span>Exploits públicos funcionales</span>
+                            </div>
+                        </div>
+                        <div class="source-item">
+                            <div class="source-icon">🔓</div>
+                            <div class="source-info">
+                                <strong>Have I Been Pwned</strong>
+                                <span>Brechas corporativas detectadas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Grupos APT -->
+                <div class="intel-category-card">
+                    <div class="category-header">
+                        <div class="category-icon" style="background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);">🎯</div>
+                        <h3>Grupos APT</h3>
+                    </div>
+                    <div class="intel-sources">
+                        <div class="source-item">
+                            <div class="source-icon">👥</div>
+                            <div class="source-info">
+                                <strong>APT Groups Tracker</strong>
+                                <span>Grupos activos por región</span>
+                            </div>
+                        </div>
+                        <div class="source-item">
+                            <div class="source-icon">🕵️</div>
+                            <div class="source-info">
+                                <strong>Threat Actor Profiles</strong>
+                                <span>Capacidades y herramientas</span>
+                            </div>
+                        </div>
+                        <div class="source-item">
+                            <div class="source-icon">🌐</div>
+                            <div class="source-info">
+                                <strong>OSINT APT Feeds</strong>
+                                <span>Campañas activas e infraestructura</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="./dashboards/2025/06-june/2025-06-16/index.html" class="cta-button" style="background: #e74c3c;">
+                    Ver Dashboard Semanal Completo →
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Business Archetypes Section -->
     <section class="archetypes-section" id="archetypes">
         <div class="container">
