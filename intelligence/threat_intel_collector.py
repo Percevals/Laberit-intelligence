@@ -3,6 +3,42 @@ import json
 import requests
 from telegram import Bot
 from urllib3.exceptions import NotOpenSSLWarning
+import sys
+
+# Debug mode
+DEBUG = os.getenv('DEBUG', 'false').lower() == 'true'
+
+def check_environment():
+    """Check if all required environment variables are set"""
+    required_vars = ['OTX_API_KEY', 'INTELX_API_KEY', 'TELEGRAM_TOKEN', 'TELEGRAM_CHAT_ID']
+    missing = [var for var in required_vars if not os.getenv(var)]
+    
+    if DEBUG:
+        print("=== DEBUG MODE ===")
+        for var in required_vars:
+            status = "✓ Present" if var in os.environ else "✗ Missing"
+            print(f"{var}: {status}")
+        print("==================\n")
+    
+    if missing:
+        error_msg = f"ERROR: Missing required environment variables: {', '.join(missing)}"
+        print(error_msg)
+        
+        # Try to send error to Telegram if token is available
+        if os.getenv('TELEGRAM_TOKEN') and os.getenv('TELEGRAM_CHAT_ID'):
+            try:
+                send_telegram_message(f"🚨 Threat Intel Collector Error:\n{error_msg}")
+            except:
+                pass  # Don't fail if Telegram fails
+        
+        sys.exit(1)
+    
+    return True
+
+# Call this right after imports and before any API usage
+if __name__ == "__main__":
+    check_environment()
+    # ... rest of your existing code END OF DEBUG
 
 # Suppress LibreSSL warning (macOS only)
 try:
