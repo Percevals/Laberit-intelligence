@@ -1,14 +1,27 @@
-import requests
+import os
 import json
+import requests
 from telegram import Bot
+from urllib3.exceptions import NotOpenSSLWarning
+
+# Suppress LibreSSL warning (macOS only)
+try:
+    import warnings
+    warnings.simplefilter("ignore", NotOpenSSLWarning)
+except Exception as e:
+    pass  # Fail gracefully if not applicable
 
 # === CONFIGURATION ===
-OTX_API_KEY = "82f9d5555d472fb61adff3c28b61d4a7bc4b81f1fd4b60070e552c08c36be281"
-INTELX_API_KEY = "65e4ca75-af14-417f-87f2-bd3f0ebdec90"
-TELEGRAM_TOKEN = "7878874413:AAGMNlGF-3G51EP7pqqhfK0_Qo1tREC17Lg"
-TELEGRAM_CHAT_ID = "percevals_bot"  # Optional if you want to send alerts
+OTX_API_KEY = os.getenv("OTX_API_KEY")             # Set via GitHub Secrets
+INTELX_API_KEY = os.getenv("INTELX_API_KEY")
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")       # Set via GitHub Secrets
+TELEGRAM_CHAT_ID = "percevals_bot"                              # Optional
 
-DOMAINS_TO_CHECK = ["losheroes.cl", "megalabs.com", "megalabs.app"]  # Add customer domains here
+DOMAINS_TO_CHECK = [
+    "losheroes.cl",
+    "megalabs.com",
+    "megalabs.app"
+]  # Add customer domains here
 
 # === HELPER FUNCTION ===
 def safe_write(data, filename):
@@ -21,7 +34,7 @@ def safe_write(data, filename):
 
 # === 1. OTX Threat Intelligence ===
 def fetch_otx():
-    if not OTX_API_KEY or OTX_API_KEY == "82f9d5555d472fb61adff3c28b61d4a7bc4b81f1fd4b60070e552c08c36be281":
+    if not OTX_API_KEY:
         print("⚠️ OTX: Skipped (no key provided)")
         return None
     print("📡 Fetching OTX intelligence...")
@@ -41,7 +54,7 @@ def fetch_otx():
 
 # === 2. IntelX Paste Monitoring ===
 def fetch_intelx():
-    if not INTELX_API_KEY or INTELX_API_KEY == "65e4ca75-af14-417f-87f2-bd3f0ebdec90":
+    if not INTELX_API_KEY:
         print("⚠️ IntelX: Skipped (no key provided)")
         return None
     print("📡 Fetching IntelX paste monitoring...")
@@ -61,7 +74,7 @@ def fetch_intelx():
 
 # === 3. Telegram Channel Monitor ===
 def fetch_telegram():
-    if not TELEGRAM_TOKEN or TELEGRAM_TOKEN == "7878874413:AAGMNlGF-3G51EP7pqqhfK0_Qo1tREC17Lg":
+    if not TELEGRAM_TOKEN:
         print("⚠️ Telegram: Skipped (no token provided)")
         return None
     print("📡 Testing Telegram bot connection...")
@@ -80,7 +93,7 @@ def fetch_hibp():
     print("📡 Checking Have I Been Pwned for breaches...")
     for domain in DOMAINS_TO_CHECK:
         try:
-            url = f"https://haveibeenpwned.com/api/v3/breachedorganization/ {domain}"
+            url = f" https://haveibeenpwned.com/api/v3/breachedorganization/ {domain}"
             headers = {"User-Agent": "ImmunityFrameworkScript"}
             response = requests.get(url, headers=headers, timeout=10)
             if response.status_code == 200:
