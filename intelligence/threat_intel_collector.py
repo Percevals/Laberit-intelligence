@@ -1,112 +1,118 @@
 import requests
-from telegram import Update
-from telegram.ext import Updater, CommandHandler, CallbackContext
+import json
+from telegram import Bot
 
-# === API KEYS ===
+# === CONFIGURATION ===
 OTX_API_KEY = "82f9d5555d472fb61adff3c28b61d4a7bc4b81f1fd4b60070e552c08c36be281"
 INTELX_API_KEY = "65e4ca75-af14-417f-87f2-bd3f0ebdec90"
 TELEGRAM_TOKEN = "7878874413:AAGMNlGF-3G51EP7pqqhfK0_Qo1tREC17Lg"
 TELEGRAM_CHAT_ID = "percevals_bot"  # Optional if you want to send alerts
 
-# === FUNCTIONS ===
+DOMAINS_TO_CHECK = ["losheroes.cl", "megalabs.com", "megalabs.app"]  # Add customer domains here
 
-# 1. OTX: Get pulses related to keywords like "LATAM", "B2C_DIGITAL", etc.
-def fetch_otx_intel(query="LATAM"):
-    url = f"https://otx.alienvault.com/api/v1/indicators/search/ {query}"
-    headers = {"X-OTX-API-KEY": OTX_API_KEY}
-    response = requests.get(url, headers=headers)
-    if response.status_code == 200:
-        return response.json()
-    else:
-        print("Error fetching OTX ", response.text)
-        return None
-
-# 2. IntelX: Search pastes for keywords related to LATAM threats
-def intelx_paste_search(query="password OR leaked"):
-    url = "https://api.intelx.io/paste/search "
-    headers = {
-        "x-key": INTELX_API_KEY,
-        "Content-Type": "application/json"
-    }
-    data = {"term": query}
-    response = requests.post(url, headers=headers, json=data)
-    if response.status_code == 200:
-        return response.json()
-    else:
-        print("Error fetching IntelX ", response.text)
-        return None
-
-# 3. Telegram: Monitor public threat actor channels (requires bot access)
-def monitor_telegram_channels(context: CallbackContext):
-    # Example: Fetch messages from a public channel (bot must have access)
-    chat_id = TELEGRAM_CHAT_ID
+# === HELPER FUNCTION ===
+def safe_write(data, filename):
     try:
-        updates = context.bot.get_updates()
-        for update in updates:
-            if update.channel_post:
-                message = update.channel_post.text
-                if any(keyword in message.lower() for keyword in ["latam", "breach", "leak"]):
-                    print(f"New potential threat post: {message}")
-                    # Map this to your Strategic Exposure or Agility pillar
+        with open(filename, 'w') as f:
+            json.dump(data, f, indent=2)
+        print(f"✅ Saved {filename}")
     except Exception as e:
-        print("Telegram error:", str(e))
+        print(f"❌ Failed to save {filename}: {e}")
 
-# 4. Have I Been Pwned: Check if a domain has been pwned (e.g., customer domains)
-def check_hibp(domain="example.com"):
-    url = f"https://haveibeenpwned.com/api/v3/breachedorganization/ {domain}"
-    headers = {"User-Agent": "PythonScript"}
-    response = requests.get(url, headers=headers)
-    if response.status_code == 200:
-        return response.json()
-    elif response.status_code == 404:
-        return []  # No breaches found
-    else:
-        print("HIBP Error:", response.text)
+# === 1. OTX Threat Intelligence ===
+def fetch_otx():
+    if not OTX_API_KEY or OTX_API_KEY == "82f9d5555d472fb61adff3c28b61d4a7bc4b81f1fd4b60070e552c08c36be281":
+        print("⚠️ OTX: Skipped (no key provided)")
+        return None
+    print("📡 Fetching OTX intelligence...")
+    try:
+        url = "https://otx.alienvault.com/api/v1/pulses/subscribed?limit=1"
+        headers = {"X-OTX-API-KEY": OTX_API_KEY}
+        response = requests.get(url, headers=headers, timeout=10)
+        if response.status_code == 200:
+            print("✅ OTX: Success")
+            return response.json()
+        else:
+            print(f"❌ OTX: Error {response.status_code} - {response.text[:100]}...")
+            return None
+    except Exception as e:
+        print(f"❌ OTX: Network error - {e}")
         return None
 
-# === MAIN FUNCTION TO RUN THE WORKFLOW ===
-def run_intel_gathering():
-    print("Fetching OTX Intelligence...")
-    otx_data = fetch_otx_intel("LATAM")
-    if otx_
-        print(f"Found {len(otx_data['results'])} OTX pulses related to LATAM.")
+# === 2. IntelX Paste Monitoring ===
+def fetch_intelx():
+    if not INTELX_API_KEY or INTELX_API_KEY == "65e4ca75-af14-417f-87f2-bd3f0ebdec90":
+        print("⚠️ IntelX: Skipped (no key provided)")
+        return None
+    print("📡 Fetching IntelX paste monitoring...")
+    try:
+        url = " https://api.intelx.io/intelx.ping "
+        headers = {"x-key": INTELX_API_KEY}
+        response = requests.get(url, headers=headers, timeout=10)
+        if response.status_code == 200:
+            print("✅ IntelX: Success")
+            return response.json()
+        else:
+            print(f"❌ IntelX: Error {response.status_code} - {response.text[:100]}...")
+            return None
+    except Exception as e:
+        print(f"❌ IntelX: Network error - {e}")
+        return None
 
-    print("\nSearching IntelX for pastes...")
-    intelx_data = intelx_paste_search("credential OR password")
-    if intelx_
-        print(f"Found {len(intelx_data.get('records', []))} matching paste records.")
+# === 3. Telegram Channel Monitor ===
+def fetch_telegram():
+    if not TELEGRAM_TOKEN or TELEGRAM_TOKEN == "7878874413:AAGMNlGF-3G51EP7pqqhfK0_Qo1tREC17Lg":
+        print("⚠️ Telegram: Skipped (no token provided)")
+        return None
+    print("📡 Testing Telegram bot connection...")
+    try:
+        bot = Bot(token=TELEGRAM_TOKEN)
+        user_info = bot.get_me()
+        print(f"✅ Telegram: Logged in as @{user_info.username}")
+        return {"username": user_info.username, "active": True}
+    except Exception as e:
+        print(f"❌ Telegram: Auth failed - {e}")
+        return None
 
-    print("\nChecking Have I Been Pwned for common domains...")
-    domains_to_check = ["gmail.com", "yahoo.com", "customerdomain.com"]
-    for domain in domains_to_check:
-        breaches = check_hibp(domain)
-        if breaches:
-            print(f"{domain} has been involved in breaches: {len(breaches)}")
+# === 4. Have I Been Pwned (HIBP) ===
+def fetch_hibp():
+    results = {}
+    print("📡 Checking Have I Been Pwned for breaches...")
+    for domain in DOMAINS_TO_CHECK:
+        try:
+            url = f"https://haveibeenpwned.com/api/v3/breachedorganization/ {domain}"
+            headers = {"User-Agent": "ImmunityFrameworkScript"}
+            response = requests.get(url, headers=headers, timeout=10)
+            if response.status_code == 200:
+                breaches = response.json()
+                results[domain] = [b["Name"] for b in breaches]
+                print(f"✅ HIBP: {domain} has {len(breaches)} breaches")
+            elif response.status_code == 404:
+                results[domain] = []
+                print(f"✅ HIBP: {domain} has no known breaches")
+            else:
+                print(f"❌ HIBP: Error {response.status_code} for {domain}")
+                results[domain] = f"Error {response.status_code}"
+        except Exception as e:
+            print(f"❌ HIBP: Network error for {domain} - {e}")
+            results[domain] = "Network error"
 
-# === OPTIONAL: Telegram Monitoring Scheduler ===
-def start_telegram_monitoring():
-    updater = Updater(token=TELEGRAM_TOKEN, use_context=True)
-    updater.start_polling()
-    updater.job_queue.run_repeating(monitor_telegram_channels, interval=3600, first=0)
+    return results
 
-# Run the main function
+# === RUN ALL MODULES SAFELY ===
 if __name__ == "__main__":
-    run_intel_gathering()
+    print("\n🚀 Starting Immunity Framework TI Collector\n" + "-" * 40)
 
-    # Optional: Start Telegram monitoring in background
-    # start_telegram_monitoring()
+    otx_data = fetch_otx()
+    intelx_data = fetch_intelx()
+    telegram_data = fetch_telegram()
+    hibp_data = fetch_hibp()
 
-import json
+    print("\n💾 Saving results...\n" + "-" * 40)
 
-# Example: Save OTX results to file
-with open('intelligence/otx_results.json', 'w') as f:
-    json.dump(otx_data, f)
+    safe_write(otx_data, "intelligence/otx_result.json")
+    safe_write(intelx_data, "intelligence/intelx_result.json")
+    safe_write(telegram_data, "intelligence/telegram_result.json")
+    safe_write(hibp_data, "intelligence/hibp_result.json")
 
-# Save IntelX results
-with open('intelligence/intelx_results.json', 'w') as f:
-    json.dump(intelx_data, f)
-
-# Save HIBP results
-hibp_output = {domain: check_hibp(domain) for domain in domains_to_check}
-with open('intelligence/hibp_results.json', 'w') as f:
-    json.dump(hibp_output, f)
+    print("\n🏁 Collection complete.")
