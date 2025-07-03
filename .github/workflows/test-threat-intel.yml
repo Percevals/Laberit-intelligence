@@ -1,0 +1,83 @@
+name: Test Threat Intel
+
+on:
+  workflow_dispatch:
+    inputs:
+      debug:
+        description: 'Enable debug mode'
+        required: false
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        pip install requests python-telegram-bot python-dotenv
+    
+    - name: Test environment variables
+      run: |
+        echo "=== Testing Secret Availability ==="
+        
+        # Function to check if secret is set
+        check_secret() {
+          if [ -z "${!1}" ]; then
+            echo "❌ $1 is NOT set"
+            return 1
+          else
+            echo "✅ $1 is available (length: ${#1})"
+            return 0
+          fi
+        }
+        
+        # Check each secret
+        MISSING=0
+        check_secret "OTX_API_KEY" || MISSING=$((MISSING + 1))
+        check_secret "INTELX_API_KEY" || MISSING=$((MISSING + 1))
+        check_secret "TELEGRAM_TOKEN" || MISSING=$((MISSING + 1))
+        check_secret "TELEGRAM_CHAT_ID" || MISSING=$((MISSING + 1))
+        
+        if [ $MISSING -gt 0 ]; then
+          echo "❌ $MISSING secrets are missing!"
+          exit 1
+        else
+          echo "✅ All secrets are properly configured!"
+        fi
+      env:
+        OTX_API_KEY: ${{ secrets.OTX_API_KEY }}
+        INTELX_API_KEY: ${{ secrets.INTELX_API_KEY }}
+        TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+    
+    - name: Run threat collector in debug mode
+      env:
+        OTX_API_KEY: ${{ secrets.OTX_API_KEY }}
+        INTELX_API_KEY: ${{ secrets.INTELX_API_KEY }}
+        TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        DEBUG: ${{ github.event.inputs.debug }}
+      run: |
+        echo "Running threat collector with DEBUG=$DEBUG"
+        python intelligence/threat_intel_collector.py
+      continue-on-error: true  # Don't fail the workflow if script fails
+    
+    - name: Check output
+      run: |
+        if [ -f "intelligence/threat-intelligence-*.html" ]; then
+          echo "✅ HTML dashboard was generated successfully!"
+          ls -la intelligence/threat-intelligence-*.html
+        else
+          echo "⚠️  No HTML dashboard was generated"
+        fi
