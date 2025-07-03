@@ -3,11 +3,11 @@ import json
 from telegram import Bot
 
 # === YOUR API KEYS ===
-OTX_API_KEY = "your_otx_key_here"
-INTELX_API_KEY = "your_intelx_key_here"
-TELEGRAM_TOKEN = "your_telegram_bot_token_here"
-TELEGRAM_CHAT_ID = "your_chat_id_or_empty"  # Optional
-DOMAINS_TO_CHECK = ["example.com", "gmail.com"]
+OTX_API_KEY = "82f9d5555d472fb61adff3c28b61d4a7bc4b81f1fd4b60070e552c08c36be281"
+INTELX_API_KEY = "65e4ca75-af14-417f-87f2-bd3f0ebdec90"
+TELEGRAM_TOKEN = "7878874413:AAGMNlGF-3G51EP7pqqhfK0_Qo1tREC17Lg"
+TELEGRAM_CHAT_ID = "percevals_bot"  # Optional
+DOMAINS_TO_CHECK = ["laberit.com", "exypnos.co"]
 
 
 # === UTILITY FUNCTIONS ===
