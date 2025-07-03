@@ -3,10 +3,10 @@ from telegram import Update
 from telegram.ext import Updater, CommandHandler, CallbackContext
 
 # === API KEYS ===
-OTX_API_KEY = '82f9d5555d472fb61adff3c28b61d4a7bc4b81f1fd4b60070e552c08c36be281'
-INTELX_API_KEY = '65e4ca75-af14-417f-87f2-bd3f0ebdec90'
-TELEGRAM_TOKEN = '7878874413:AAGMNlGF-3G51EP7pqqhfK0_Qo1tREC17Lg'
-TELEGRAM_CHAT_ID = 'percevals_bot'  # Optional if you want to send alerts
+OTX_API_KEY = "82f9d5555d472fb61adff3c28b61d4a7bc4b81f1fd4b60070e552c08c36be281"
+INTELX_API_KEY = "65e4ca75-af14-417f-87f2-bd3f0ebdec90"
+TELEGRAM_TOKEN = "7878874413:AAGMNlGF-3G51EP7pqqhfK0_Qo1tREC17Lg"
+TELEGRAM_CHAT_ID = "percevals_bot"  # Optional if you want to send alerts
 
 # === FUNCTIONS ===
 
