@@ -12,8 +12,8 @@ from pathlib import Path
 
 class ImmunityDashboardGenerator:
     def __init__(self):
-        self.template_path = "templates/immunity-dashboard-template.html"
-        self.output_dir = "intelligence"
+        self.template_path = "../templates/immunity_dashboard_template.html"
+        self.output_dir = "."
         self.week_date = datetime.now().strftime('%Y-%m-%d')
         
     def load_template(self):
