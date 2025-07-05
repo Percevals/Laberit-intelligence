@@ -93,7 +93,7 @@ class ImmunityDashboardGenerator:
         
         # Business model positions and scores
         models = {
-            "Gobierno": {"score": 1.5, "pos": "top: 300px; left: 480px;", "color": "#C10016", "trend": "↓"},
+            "Gobierno": {"score": 1.5, "pos": "top: 280px; left: 480px;", "color": "#C10016", "trend": "↓"},
             "Salud": {"score": 2.0, "pos": "top: 240px; left: 420px;", "color": "#C10016", "trend": "↓"},
             "Fintech": {"score": 2.5, "pos": "top: 200px; left: 480px;", "color": "#C10016", "trend": "→"},
             "B2B Ind": {"score": 2.5, "pos": "top: 240px; left: 100px;", "color": "#C10016", "trend": "→"},
