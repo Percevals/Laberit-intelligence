@@ -128,9 +128,9 @@ class ImmunityDashboardGenerator:
                 <li>
                     <div class="threat-name">
                         <span>{actor.get('name', 'Unknown')}</span>
-                        <span class="threat-value">Ataca < {actor.get('immunity_threshold', '?')}</span>
+                        <span class="threat-value">{actor.get('attacks_week', '15+')} ataques/sem</span>
                     </div>
-                    <div class="threat-source">{actor.get('attacks_week', '15+')} ataques/semana</div>
+                    <div class="threat-source">Preferencia: Inmunidad < {actor.get('immunity_threshold', '?')}</div>
                 </li>
             '''
         
