@@ -87,12 +87,12 @@ class ImmunityDashboardGenerator:
         """Generate immunity chart points HTML"""
         # Business model positions and scores
         models = {
-            "Gobierno": {"score": 1.5, "pos": "bottom: 20%; left: 85%;", "color": "#C10016"},
-            "Salud": {"score": 2.0, "pos": "bottom: 30%; left: 72%;", "color": "#C10016"},
-            "Fintech": {"score": 2.5, "pos": "bottom: 40%; left: 78%;", "color": "#C10016"},
-            "B2B Ind": {"score": 2.5, "pos": "bottom: 45%; left: 62%;", "color": "#C10016"},
-            "Platform": {"score": 3.5, "pos": "bottom: 65%; left: 35%;", "color": "#FFB84D"},
-            "B2C Digital": {"score": 4.2, "pos": "bottom: 72%; left: 28%;", "color": "#FFB84D"}
+            "Gobierno": {"score": 1.5, "pos": "bottom: 15%; left: 85%;", "color": "#C10016"},
+            "Salud": {"score": 2.0, "pos": "bottom: 25%; left: 75%;", "color": "#C10016"},
+            "Fintech": {"score": 2.5, "pos": "bottom: 35%; left: 80%;", "color": "#C10016"},
+            "B2B Ind": {"score": 2.5, "pos": "bottom: 40%; left: 60%;", "color": "#C10016"},
+            "Platform": {"score": 3.5, "pos": "bottom: 60%; left: 35%;", "color": "#FFB84D"},
+            "B2C Digital": {"score": 4.2, "pos": "bottom: 70%; left: 25%;", "color": "#FFB84D"}
         }
         
         html = ""
@@ -105,7 +105,7 @@ class ImmunityDashboardGenerator:
             <div class="chart-point" style="{data['pos']} background: {data['color']}; opacity: {opacity}; color: white;"
                  data-info="{name}: Inmunidad {data['score']}/10. {'⚠️ Incidentes esta semana' if affected else 'Sin incidentes recientes'}">
                 <span>{name}</span>
-                <span style="font-size: 18px;">{data['score']}</span>
+                <span style="font-size: 16px; font-weight: 700;">{data['score']}</span>
             </div>
             '''
         
