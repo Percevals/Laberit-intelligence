@@ -88,12 +88,12 @@ class ImmunityDashboardGenerator:
         """Generate immunity chart points HTML"""
         # Business model positions and scores
         models = {
-            "Gobierno": {"score": 1.5, "pos": "bottom: 18%; left: 80%;", "color": "#C10016", "trend": "↓"},
-            "Salud": {"score": 2.0, "pos": "bottom: 28%; left: 70%;", "color": "#C10016", "trend": "↓"},
-            "Fintech": {"score": 2.5, "pos": "bottom: 38%; left: 75%;", "color": "#C10016", "trend": "→"},
-            "B2B Ind": {"score": 2.5, "pos": "bottom: 42%; left: 58%;", "color": "#C10016", "trend": "→"},
-            "Platform": {"score": 3.5, "pos": "bottom: 62%; left: 35%;", "color": "#FFB84D", "trend": "→"},
-            "B2C Digital": {"score": 4.2, "pos": "bottom: 72%; left: 25%;", "color": "#FFB84D", "trend": "↑"}
+            "Gobierno": {"score": 1.5, "pos": "bottom: 10%; right: 15%;", "color": "#C10016", "trend": "↓"},
+            "Salud": {"score": 2.0, "pos": "bottom: 15%; right: 30%;", "color": "#C10016", "trend": "↓"},
+            "Fintech": {"score": 2.5, "pos": "bottom: 25%; right: 20%;", "color": "#C10016", "trend": "→"},
+            "B2B Ind": {"score": 2.5, "pos": "bottom: 40%; left: 35%;", "color": "#C10016", "trend": "→"},
+            "Platform": {"score": 3.5, "pos": "top: 30%; left: 25%;", "color": "#FFB84D", "trend": "→"},
+            "B2C Digital": {"score": 4.2, "pos": "top: 25%; left: 15%;", "color": "#FFB84D", "trend": "↑"}
         }
         
         html = ""

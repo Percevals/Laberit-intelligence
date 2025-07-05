@@ -219,9 +219,10 @@ display: flex;
 align-items: center;
 justify-content: center;
 text-align: center;
-padding: 10px;
+padding: 30px;
 font-size: 14px;
 color: #A6BBC8;
+z-index: 1;
 }
 
 .chart-point {
@@ -240,6 +241,7 @@ box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 text-align: center;
 flex-direction: column;
 transform: translate(-50%, -50%);
+z-index: 2;
 }
 
 .chart-point:hover {
@@ -611,16 +613,16 @@ Ver metodología completa →
 <div class="chart-inner">
 <!-- Quadrants -->
 <div class="chart-quadrant" style="top: 0; left: 0; width: 50%; height: 50%; background: rgba(76, 175, 80, 0.1);">
-<div>ZONA RESILIENTE<br>Baja exposición<br>Alta capacidad</div>
+<div>ZONA RESILIENTE<br>Baja exposición<br>Alta capacidad<br><small style="font-size: 11px; opacity: 0.7;">Raramente comprometidos</small></div>
 </div>
-<div class="chart-quadrant" style="top: 0; right: 0; width: 50%; height: 50%; background: rgba(255, 184, 77, 0.1);">
-<div>ZONA DE RIESGO<br>Alta exposición<br>Alta capacidad</div>
+<div class="chart-quadrant" style="top: 0; left: 50%; width: 50%; height: 50%; background: rgba(255, 184, 77, 0.1);">
+<div>ZONA DE RIESGO<br>Alta exposición<br>Alta capacidad<br><small style="font-size: 11px; opacity: 0.7;">Necesita monitoreo continuo</small></div>
 </div>
-<div class="chart-quadrant" style="bottom: 0; left: 0; width: 50%; height: 50%; background: rgba(255, 184, 77, 0.1);">
-<div>ZONA VULNERABLE<br>Baja exposición<br>Baja capacidad</div>
+<div class="chart-quadrant" style="top: 50%; left: 0; width: 50%; height: 50%; background: rgba(255, 184, 77, 0.1);">
+<div>ZONA VULNERABLE<br>Baja exposición<br>Baja capacidad<br><small style="font-size: 11px; opacity: 0.7;">Riesgo moderado-alto</small></div>
 </div>
-<div class="chart-quadrant" style="bottom: 0; right: 0; width: 50%; height: 50%; background: rgba(193, 0, 22, 0.1);">
-<div>ZONA CRÍTICA<br>Alta exposición<br>Baja capacidad</div>
+<div class="chart-quadrant" style="top: 50%; left: 50%; width: 50%; height: 50%; background: rgba(193, 0, 22, 0.1);">
+<div>ZONA CRÍTICA<br>Alta exposición<br>Baja capacidad<br><small style="font-size: 11px; opacity: 0.7;">Mayor frecuencia de incidentes</small></div>
 </div>
 {{IMMUNITY_CHART_POINTS}}
 </div><!-- End chart-inner -->
