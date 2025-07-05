@@ -159,10 +159,18 @@ margin-bottom: 30px;
 .scatter-chart {
 height: 400px;
 position: relative;
-margin: 0 20px;
-padding: 40px;
+margin: 0;
+padding: 0;
 overflow: hidden;
 box-sizing: border-box;
+}
+
+.chart-inner {
+position: absolute;
+top: 40px;
+right: 40px;
+bottom: 40px;
+left: 40px;
 }
 
 .chart-quadrant {
@@ -527,6 +535,7 @@ padding: 10px;
 <div class="chart-container">
 <h3 class="chart-title">Mapa de Inmunidad por Sector</h3>
 <div class="scatter-chart">
+<div class="chart-inner">
 <!-- Quadrants -->
 <div class="chart-quadrant" style="top: 0; left: 0; width: 50%; height: 50%; background: rgba(76, 175, 80, 0.1);">
 <div>ZONA RESILIENTE<br>Baja exposición<br>Alta capacidad</div>
@@ -541,6 +550,7 @@ padding: 10px;
 <div>ZONA CRÍTICA<br>Alta exposición<br>Baja capacidad</div>
 </div>
 {{IMMUNITY_CHART_POINTS}}
+</div><!-- End chart-inner -->
 </div>
 </div>
 
