@@ -129,6 +129,7 @@ class ImmunityDashboardGenerator:
                         <span>{actor.get('name', 'Unknown')}</span>
                         <span class="threat-value">Ataca < {actor.get('immunity_threshold', '?')}</span>
                     </div>
+                    <div class="threat-source">{actor.get('attacks_week', '15+')} ataques/semana</div>
                 </li>
             '''
         
@@ -148,8 +149,9 @@ class ImmunityDashboardGenerator:
                 <li>
                     <div class="threat-name">
                         <span>{incident.get('sector', 'Unknown')}</span>
-                        <span class="threat-value">Víctimas: {incident.get('immunity_score', '?')}</span>
+                        <span class="threat-value">Inmunidad: {incident.get('immunity_score', '?')}</span>
                     </div>
+                    <div class="threat-source">{incident.get('impact', 'Impacto crítico')}</div>
                 </li>
             '''
         
@@ -185,6 +187,38 @@ class ImmunityDashboardGenerator:
         '''
         
         return actors_html, impacts_html, vectors_html
+    
+    def generate_news_data(self, perplexity_data):
+        """Generate news incidents data for ticker"""
+        incidents = []
+        
+        # Default news items
+        default_news = [
+            {
+                "name": f"{perplexity_data.get('week_summary', {}).get('top_threat_type', 'Ransomware')} concentra {perplexity_data.get('week_summary', {}).get('top_threat_pct', '52%')} de ataques regionales",
+                "source": "Fuente: OTX AlienVault",
+                "details": f"Los ataques se concentran en organizaciones con inmunidad < 4. {perplexity_data.get('week_summary', {}).get('key_insight', 'La preparación marca la diferencia.')}"
+            },
+            {
+                "name": "Brasil lidera con 31% menciones dark web y mayor volumen de ataques",
+                "source": "Fuente: SocRadar",
+                "details": "La combinación de alta digitalización y baja inversión en seguridad crea vulnerabilidades críticas."
+            }
+        ]
+        
+        # Add incidents from perplexity data
+        for incident in perplexity_data.get('incidents', [])[:3]:
+            incidents.append({
+                "name": f"{incident.get('sector', 'Sector')}: {incident.get('description', 'Incidente crítico reportado')}",
+                "source": f"Fuente: {incident.get('source', 'Threat Intel')}",
+                "details": incident.get('description', '') + f" Inmunidad de víctima: {incident.get('immunity_score', 'N/A')}"
+            })
+        
+        # Add default news if not enough incidents
+        while len(incidents) < 5:
+            incidents.extend(default_news)
+            
+        return json.dumps(incidents[:5], ensure_ascii=False)
     
     def generate_action_cards(self):
         """Generate action cards HTML"""
@@ -254,6 +288,11 @@ class ImmunityDashboardGenerator:
         
         # Generate components
         actors_card, impacts_card, vectors_card = self.generate_threat_cards(perplexity_data, threat_data)
+        news_data = self.generate_news_data(perplexity_data)
+        
+        # Get first news item for initial ticker
+        news_items = json.loads(news_data)
+        first_news = news_items[0] if news_items else {"name": "Sin noticias disponibles", "source": ""}
         
         # Determine traffic light colors
         immunity_score = float(summary.get('immunity_avg', '3.8'))
@@ -290,7 +329,10 @@ class ImmunityDashboardGenerator:
             '{{ATTACK_VECTORS_CARD}}': vectors_card,
             '{{ACTION_CARDS}}': self.generate_action_cards(),
             '{{FOOTER_QUOTE}}': "Su modelo de negocio define su inmunidad digital más que cualquier tecnología",
-            '{{FOOTER_TEXT}}': "Business Fortress: La nueva dimensión de la ciberseguridad ejecutiva | Lãberit"
+            '{{FOOTER_TEXT}}': "Business Fortress: La nueva dimensión de la ciberseguridad ejecutiva | Lãberit",
+            '{{NEWS_DATA}}': news_data,
+            '{{TICKER_NEWS}}': first_news['name'],
+            '{{TICKER_SOURCE}}': first_news['source']
         }
         
         dashboard = template

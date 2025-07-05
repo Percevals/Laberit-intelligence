@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard de Inmunidad Digital: LATAM & España | {{WEEK_DATE}}</title>
+<title>Dashboard de Inmunidad Digital: LATAM & España | 2025-07-04</title>
 <style>
 * {
 margin: 0;
@@ -466,27 +466,27 @@ padding: 10px;
 <h2>Resumen Ejecutivo - Su Empresa en 30 Segundos</h2>
 <div class="summary-grid">
 <div class="summary-item">
-<div class="summary-number" style="color: #FFB84D;">{{IMMUNITY_AVG}}</div>
+<div class="summary-number" style="color: #FFB84D;">3.4</div>
 <div class="summary-label">Inmunidad Promedio Regional</div>
 </div>
 <div class="summary-item">
-<div class="summary-number" style="color: #4CAF50;">{{ATTACKS_WEEK}}</div>
+<div class="summary-number" style="color: #4CAF50;">2,847</div>
 <div class="summary-label">Ataques/Semana LATAM</div>
 </div>
 <div class="summary-item">
-<div class="summary-number" style="color: #C10016;">{{TOP_THREAT_PCT}}</div>
-<div class="summary-label">{{TOP_THREAT_TYPE}}</div>
+<div class="summary-number" style="color: #C10016;">52%</div>
+<div class="summary-label">Ransomware dirigido a Gobierno y Salud</div>
 </div>
 </div>
 <div class="summary-action">
-<strong>{{KEY_INSIGHT}}</strong>
+<strong>El 78% de las víctimas tenían inmunidad < 4. Los ataques se concentraron en sectores críticos con baja madurez digital.</strong>
 </div>
 </div>
 
 <!-- Header -->
 <div class="header">
 <h1>Dashboard de Inmunidad Digital: LATAM & España</h1>
-<div class="header-date">Análisis Semanal: {{WEEK_DATE}} | Framework 3.0</div>
+<div class="header-date">Análisis Semanal: 2025-07-04 | Framework 3.0</div>
 </div>
 
 <!-- Key Metrics -->
@@ -494,27 +494,27 @@ padding: 10px;
 
 <div class="metrics-grid">
 <div class="metric-card">
-<div class="traffic-light {{IMMUNITY_COLOR}}"></div>
-<span class="metric-number">{{IMMUNITY_SCORE}}/10</span>
+<div class="traffic-light red"></div>
+<span class="metric-number">3.4/10</span>
 <span class="metric-label">Inmunidad Digital v3.0</span>
-<span class="metric-context">{{IMMUNITY_CONTEXT}}</span>
+<span class="metric-context">19 amenazas detectadas</span>
 </div>
 <div class="metric-card">
 <div class="traffic-light red"></div>
-<span class="metric-number">{{ATTACKS_VS_GLOBAL}}</span>
+<span class="metric-number">42%</span>
 <span class="metric-label">Más Ataques que Global</span>
-<span class="metric-context">{{ATTACKS_CONTEXT}}</span>
+<span class="metric-context">2,847 vs 1,848/semana</span>
 </div>
 <div class="metric-card">
-<div class="traffic-light {{GOVT_COLOR}}"></div>
-<span class="metric-number">{{GOVT_IMMUNITY}}</span>
+<div class="traffic-light red"></div>
+<span class="metric-number">1.5</span>
 <span class="metric-label">Inmunidad Gobierno</span>
 <span class="metric-context">Modelo más vulnerable</span>
 </div>
 <div class="metric-card">
 <div class="traffic-light red"></div>
-<span class="metric-number">{{VECTOR_PCT}}</span>
-<span class="metric-label">{{MAIN_VECTOR}}</span>
+<span class="metric-number">67%</span>
+<span class="metric-label">Phishing/Ingeniería Social</span>
 <span class="metric-context">Vector principal LATAM</span>
 </div>
 </div>
@@ -536,30 +536,173 @@ padding: 10px;
 <div class="chart-quadrant" style="bottom: 0; right: 0; width: 50%; height: 50%; background: rgba(193, 0, 22, 0.1);">
 <div>ZONA CRÍTICA<br>Alta exposición<br>Baja capacidad</div>
 </div>
-{{IMMUNITY_CHART_POINTS}}
+
+            <div class="chart-point" style="bottom: 15%; right: 10%; background: #C10016; opacity: 1; color: white;"
+                 data-info="Gobierno: Inmunidad 1.5/10. ⚠️ Incidentes esta semana">
+                <span>Gobierno</span>
+                <span style="font-size: 18px;">1.5</span>
+            </div>
+            
+            <div class="chart-point" style="bottom: 25%; right: 25%; background: #C10016; opacity: 1; color: white;"
+                 data-info="Salud: Inmunidad 2.0/10. ⚠️ Incidentes esta semana">
+                <span>Salud</span>
+                <span style="font-size: 18px;">2.0</span>
+            </div>
+            
+            <div class="chart-point" style="bottom: 35%; right: 20%; background: #C10016; opacity: 1; color: white;"
+                 data-info="Fintech: Inmunidad 2.5/10. ⚠️ Incidentes esta semana">
+                <span>Fintech</span>
+                <span style="font-size: 18px;">2.5</span>
+            </div>
+            
+            <div class="chart-point" style="bottom: 45%; right: 40%; background: #C10016; opacity: 0.7; color: white;"
+                 data-info="B2B Ind: Inmunidad 2.5/10. Sin incidentes recientes">
+                <span>B2B Ind</span>
+                <span style="font-size: 18px;">2.5</span>
+            </div>
+            
+            <div class="chart-point" style="top: 35%; left: 35%; background: #FFB84D; opacity: 0.7; color: white;"
+                 data-info="Platform: Inmunidad 3.5/10. Sin incidentes recientes">
+                <span>Platform</span>
+                <span style="font-size: 18px;">3.5</span>
+            </div>
+            
+            <div class="chart-point" style="top: 25%; left: 25%; background: #FFB84D; opacity: 0.7; color: white;"
+                 data-info="B2C Digital: Inmunidad 4.2/10. Sin incidentes recientes">
+                <span>B2C Digital</span>
+                <span style="font-size: 18px;">4.2</span>
+            </div>
+            
 </div>
 </div>
 
 <!-- Weekly Threats -->
-<h2 style="text-align: center; margin: 40px 0 20px 0; color: #B4B5DF;">Amenazas Activas - {{WEEK_LABEL}}</h2>
+<h2 style="text-align: center; margin: 40px 0 20px 0; color: #B4B5DF;">Amenazas Activas - Semana 30-06 de July</h2>
 
 <div class="threat-grid">
-{{THREAT_ACTORS_CARD}}
-{{BUSINESS_IMPACTS_CARD}}
-{{ATTACK_VECTORS_CARD}}
+
+        <div class="threat-card">
+            <div class="threat-header">
+                <div class="threat-title">Grupos Más Activos</div>
+            </div>
+            <ul class="threat-list">
+        
+                <li>
+                    <div class="threat-name">
+                        <span>LockBit 3.0</span>
+                        <span class="threat-value">Ataca < 3.5</span>
+                    </div>
+                    <div class="threat-source">23 ataques/semana</div>
+                </li>
+            
+                <li>
+                    <div class="threat-name">
+                        <span>BlackCat/ALPHV</span>
+                        <span class="threat-value">Ataca < 4.0</span>
+                    </div>
+                    <div class="threat-source">18 ataques/semana</div>
+                </li>
+            
+                <li>
+                    <div class="threat-name">
+                        <span>Medusa</span>
+                        <span class="threat-value">Ataca < 3.8</span>
+                    </div>
+                    <div class="threat-source">12 ataques/semana</div>
+                </li>
+            </ul></div>
+
+        <div class="threat-card">
+            <div class="threat-header">
+                <div class="threat-title">Sectores Impactados</div>
+            </div>
+            <ul class="threat-list">
+        
+                <li>
+                    <div class="threat-name">
+                        <span>Gobierno</span>
+                        <span class="threat-value">Inmunidad: 1.5</span>
+                    </div>
+                    <div class="threat-source">Servicios públicos paralizados por 72h</div>
+                </li>
+            
+                <li>
+                    <div class="threat-name">
+                        <span>Salud</span>
+                        <span class="threat-value">Inmunidad: 2.0</span>
+                    </div>
+                    <div class="threat-source">500K registros médicos expuestos</div>
+                </li>
+            
+                <li>
+                    <div class="threat-name">
+                        <span>Fintech</span>
+                        <span class="threat-value">Inmunidad: 2.5</span>
+                    </div>
+                    <div class="threat-source">2M de transacciones comprometidas</div>
+                </li>
+            </ul></div>
+
+        <div class="threat-card">
+            <div class="threat-header">
+                <div class="threat-title">Vectores de Ataque</div>
+            </div>
+            <ul class="threat-list">
+                <li>
+                    <div class="threat-name">
+                        <span>Phishing/Ingeniería Social</span>
+                        <span class="threat-value">90% en < 3</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="threat-name">
+                        <span>Vulnerabilidades API</span>
+                        <span class="threat-value">85% en < 3.5</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="threat-name">
+                        <span>Infiltración Terceros</span>
+                        <span class="threat-value">75% en < 4</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        
 </div>
 
 <!-- Action Plan -->
 <h2 style="text-align: center; margin: 40px 0 20px 0; color: #B4B5DF;">Plan de Acción según Nivel de Inmunidad</h2>
 
 <div class="actions-grid">
-{{ACTION_CARDS}}
+
+            <div class="action-card">
+                <div class="action-header">
+                    <div class="action-title">Inmunidad Crítica</div>
+                    <div class="action-score">Score < 4</div>
+                </div>
+                <ul class="action-list">
+            <li>Active respaldo offline inmediato</li><li>Implemente MFA resistente a phishing</li><li>Presupueste 3-5% ingresos en ciberseguridad</li><li>Teste recuperación mensualmente</li></ul></div>
+            <div class="action-card">
+                <div class="action-header">
+                    <div class="action-title">Inmunidad Media</div>
+                    <div class="action-score">Score 4-7</div>
+                </div>
+                <ul class="action-list">
+            <li>Audite APIs continuamente</li><li>Diversifique proveedores críticos</li><li>Entrene contra ingeniería social mensualmente</li><li>Monitoree anomalías en tiempo real</li></ul></div>
+            <div class="action-card">
+                <div class="action-header">
+                    <div class="action-title">Inmunidad Resiliente</div>
+                    <div class="action-score">Score > 7</div>
+                </div>
+                <ul class="action-list">
+            <li>Comparta inteligencia sectorial</li><li>Implemente AI para detección predictiva</li><li>Negocie seguros cyber preferenciales</li><li>Desarrolle capacidad de threat hunting</li></ul></div>
 </div>
 
 <!-- Footer -->
 <div class="footer">
-<div class="footer-quote">"{{FOOTER_QUOTE}}"</div>
-<div>{{FOOTER_TEXT}}</div>
+<div class="footer-quote">"Su modelo de negocio define su inmunidad digital más que cualquier tecnología"</div>
+<div>Business Fortress: La nueva dimensión de la ciberseguridad ejecutiva | Lãberit</div>
 </div>
 </div>
 
@@ -573,26 +716,26 @@ padding: 10px;
 <div class="news-ticker">
 <div class="ticker-content">
 <strong>ALERTA CONTINUA:</strong>
-<span id="tickerVictim">{{TICKER_NEWS}}</span>
+<span id="tickerVictim">Gobierno: Ministerios en México y Colombia afectados por ransomware LockBit</span>
 </div>
 <div>
-<span class="ticker-source" id="tickerSource">{{TICKER_SOURCE}}</span> |
+<span class="ticker-source" id="tickerSource">Fuente: Reuters</span> |
 <span class="ticker-action" onclick="showVictimDetail()">Ver análisis</span>
 </div>
 </div>
 
 <script>
 // Incident data with sources
-const incidents = {{NEWS_DATA}};
+const incidents = [{"name": "Gobierno: Ministerios en México y Colombia afectados por ransomware LockBit", "source": "Fuente: Reuters", "details": "Ministerios en México y Colombia afectados por ransomware LockBit Inmunidad de víctima: 1.5"}, {"name": "Salud: Red hospitalaria en Brasil comprometida, datos de 500K pacientes expuestos", "source": "Fuente: Bitdefender", "details": "Red hospitalaria en Brasil comprometida, datos de 500K pacientes expuestos Inmunidad de víctima: 2.0"}, {"name": "Fintech: Plataforma de pagos en Argentina sufrió brecha por API vulnerable", "source": "Fuente: CyberSecurityDive", "details": "Plataforma de pagos en Argentina sufrió brecha por API vulnerable Inmunidad de víctima: 2.5"}, {"name": "Ransomware dirigido a Gobierno y Salud concentra 52% de ataques regionales", "source": "Fuente: OTX AlienVault", "details": "Los ataques se concentran en organizaciones con inmunidad < 4. El 78% de las víctimas tenían inmunidad < 4. Los ataques se concentraron en sectores críticos con baja madurez digital."}, {"name": "Brasil lidera con 31% menciones dark web y mayor volumen de ataques", "source": "Fuente: SocRadar", "details": "La combinación de alta digitalización y baja inversión en seguridad crea vulnerabilidades críticas."}];
 
 let currentIncident = 0;
 
 // Detail content database
 const detailContent = {
 metric: {
-immunity: '<h4>Inmunidad Digital: {{IMMUNITY_AVG}}/10</h4><p>El {{KEY_INSIGHT}} La región muestra una tendencia preocupante con la mayoría de organizaciones en zona crítica.</p>',
-attacks: '<h4>LATAM: {{ATTACKS_VS_GLOBAL}} Más Ataques que Promedio Global</h4><p>{{ATTACKS_WEEK}} ataques semanales en la región. {{TOP_THREAT_TYPE}} representa el {{TOP_THREAT_PCT}} de los incidentes.</p>',
-government: '<h4>Gobierno: Modelo Más Vulnerable</h4><p>Con inmunidad de {{GOVT_IMMUNITY}}/10, los gobiernos son el modelo de negocio más vulnerable. Sistemas obsoletos y presupuesto limitado crean una tormenta perfecta.</p>'
+immunity: '<h4>Inmunidad Digital: 3.4/10</h4><p>El El 78% de las víctimas tenían inmunidad < 4. Los ataques se concentraron en sectores críticos con baja madurez digital. La región muestra una tendencia preocupante con la mayoría de organizaciones en zona crítica.</p>',
+attacks: '<h4>LATAM: 42% Más Ataques que Promedio Global</h4><p>2,847 ataques semanales en la región. Ransomware dirigido a Gobierno y Salud representa el 52% de los incidentes.</p>',
+government: '<h4>Gobierno: Modelo Más Vulnerable</h4><p>Con inmunidad de 1.5/10, los gobiernos son el modelo de negocio más vulnerable. Sistemas obsoletos y presupuesto limitado crean una tormenta perfecta.</p>'
 },
 threat: {
 lockbit: '<h4>LockBit 3.0: El Más Activo</h4><p>Responsable de múltiples ataques en gobierno y salud. Utiliza doble extorsión y publica datos en menos de 24 horas si no hay pago.</p>',
@@ -600,7 +743,7 @@ blackcat: '<h4>BlackCat/ALPHV: Sofisticación Creciente</h4><p>Grupo RaaS que ev
 medusa: '<h4>Medusa: Emergente en LATAM</h4><p>Nuevo grupo enfocado en la región. Especializado en empresas medianas con poca inversión en ciberseguridad.</p>'
 },
 vector: {
-phishing: '<h4>Phishing: {{VECTOR_PCT}} de Ataques</h4><p>El vector más efectivo en LATAM. La ingeniería social explota la falta de capacitación y awareness en las organizaciones.</p>',
+phishing: '<h4>Phishing: 67% de Ataques</h4><p>El vector más efectivo en LATAM. La ingeniería social explota la falta de capacitación y awareness en las organizaciones.</p>',
 api: '<h4>APIs Vulnerables: Nuevo Perímetro</h4><p>Con la digitalización acelerada, las APIs mal configuradas son el nuevo punto débil. 85% de víctimas tenían inmunidad < 3.5.</p>',
 supply: '<h4>Supply Chain: Efecto Cascada</h4><p>Un solo proveedor comprometido puede afectar docenas de empresas. La interdependencia digital multiplica el riesgo.</p>'
 }
