@@ -185,15 +185,18 @@ border-radius: 50%;
 .chart-container {
 background: rgba(26, 43, 61, 0.5);
 padding: 30px;
+padding-bottom: 60px;
 border-radius: 8px;
 margin-bottom: 40px;
+position: relative;
 }
 
 .chart-title {
 text-align: center;
-font-size: 20px;
+font-size: 24px;
+font-weight: 600;
 color: #B4B5DF;
-margin-bottom: 30px;
+margin-bottom: 35px;
 }
 
 .scatter-chart {
@@ -202,7 +205,7 @@ height: 400px;
 position: relative;
 margin: 0 auto;
 padding: 0;
-overflow: hidden;
+overflow: visible;
 box-sizing: border-box;
 }
 
@@ -226,6 +229,34 @@ color: #A6BBC8;
 z-index: 1;
 }
 
+.chart-quadrant-title {
+font-size: 16px;
+font-weight: 700;
+color: #B4B5DF;
+margin-bottom: 8px;
+}
+
+.axis-label {
+position: absolute;
+color: #B4B5DF;
+font-size: 14px;
+font-weight: 600;
+white-space: nowrap;
+}
+
+.axis-label.x-axis {
+bottom: -45px;
+left: 50%;
+transform: translateX(-50%);
+}
+
+.axis-label.y-axis {
+left: -25px;
+top: 50%;
+transform: rotate(-90deg) translateX(50%);
+transform-origin: center;
+}
+
 .chart-point {
 position: absolute;
 width: 80px;
@@ -238,10 +269,11 @@ font-weight: 600;
 font-size: 11px;
 cursor: pointer;
 transition: all 0.3s;
-box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+box-shadow: 0 4px 15px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.2);
 text-align: center;
 flex-direction: column;
 z-index: 2;
+line-height: 1.2;
 }
 
 .chart-point:hover {
@@ -604,24 +636,39 @@ Ver metodología completa →
 
 <!-- Chart Section -->
 <div class="chart-container">
-<h3 class="chart-title">Mapa de Inmunidad por Sector</h3>
+<h3 class="chart-title">¿Dónde está su sector? Posición de Riesgo vs. Preparación</h3>
 <div class="scatter-chart">
 <div class="chart-inner">
 <!-- Quadrants -->
-<div class="chart-quadrant" style="top: 0; left: 0; width: 50%; height: 50%; background: rgba(76, 175, 80, 0.1);">
-<div>ZONA RESILIENTE<br>Baja exposición<br>Alta capacidad<br><small style="font-size: 11px; opacity: 0.7;">Raramente comprometidos</small></div>
+<div class="chart-quadrant" style="top: 0; left: 0; width: 50%; height: 50%; background: linear-gradient(135deg, rgba(76, 175, 80, 0.15), rgba(76, 175, 80, 0.1));">
+<div>
+<div class="chart-quadrant-title">BIEN PROTEGIDOS</div>
+Baja exposición<br>Alta capacidad<br><small style="font-size: 11px; opacity: 0.7;">Raramente comprometidos</small>
 </div>
-<div class="chart-quadrant" style="top: 0; left: 50%; width: 50%; height: 50%; background: rgba(255, 184, 77, 0.1);">
-<div>ZONA DE RIESGO<br>Alta exposición<br>Alta capacidad<br><small style="font-size: 11px; opacity: 0.7;">Necesita monitoreo continuo</small></div>
 </div>
-<div class="chart-quadrant" style="top: 50%; left: 0; width: 50%; height: 50%; background: rgba(255, 184, 77, 0.1);">
-<div>ZONA VULNERABLE<br>Baja exposición<br>Baja capacidad<br><small style="font-size: 11px; opacity: 0.7;">Riesgo moderado-alto</small></div>
+<div class="chart-quadrant" style="top: 0; left: 50%; width: 50%; height: 50%; background: linear-gradient(135deg, rgba(255, 152, 0, 0.1), rgba(255, 152, 0, 0.15));">
+<div>
+<div class="chart-quadrant-title">MONITOREAR</div>
+Alta exposición<br>Alta capacidad<br><small style="font-size: 11px; opacity: 0.7;">Necesita vigilancia continua</small>
 </div>
-<div class="chart-quadrant" style="top: 50%; left: 50%; width: 50%; height: 50%; background: rgba(193, 0, 22, 0.1);">
-<div>ZONA CRÍTICA<br>Alta exposición<br>Baja capacidad<br><small style="font-size: 11px; opacity: 0.7;">Mayor frecuencia de incidentes</small></div>
+</div>
+<div class="chart-quadrant" style="top: 50%; left: 0; width: 50%; height: 50%; background: linear-gradient(135deg, rgba(255, 184, 77, 0.15), rgba(255, 184, 77, 0.1));">
+<div>
+<div class="chart-quadrant-title">NECESITAN INVERSIÓN</div>
+Baja exposición<br>Baja capacidad<br><small style="font-size: 11px; opacity: 0.7;">Riesgo moderado-alto</small>
+</div>
+</div>
+<div class="chart-quadrant" style="top: 50%; left: 50%; width: 50%; height: 50%; background: linear-gradient(135deg, rgba(193, 0, 22, 0.1), rgba(193, 0, 22, 0.2));">
+<div>
+<div class="chart-quadrant-title">ALTO RIESGO</div>
+Alta exposición<br>Baja capacidad<br><small style="font-size: 11px; opacity: 0.7;">Mayor frecuencia de incidentes</small>
+</div>
 </div>
 {{IMMUNITY_CHART_POINTS}}
 </div><!-- End chart-inner -->
+<!-- Axis Labels -->
+<div class="axis-label x-axis">← Menor Riesgo de Ataque | Mayor Riesgo de Ataque →</div>
+<div class="axis-label y-axis">↓ Menor Capacidad de Defensa | Mayor Capacidad de Defensa ↑</div>
 </div>
 </div>
 

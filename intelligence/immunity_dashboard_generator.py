@@ -86,6 +86,11 @@ class ImmunityDashboardGenerator:
     
     def generate_chart_points(self, incidents):
         """Generate immunity chart points HTML"""
+        # Get average immunity from parsed data
+        avg_immunity = 3.4  # Default
+        if hasattr(self, '_perplexity_data'):
+            avg_immunity = float(self._perplexity_data.get('week_summary', {}).get('immunity_avg', '3.4'))
+        
         # Business model positions and scores
         models = {
             "Gobierno": {"score": 1.5, "pos": "top: 300px; left: 480px;", "color": "#C10016", "trend": "↓"},
@@ -102,11 +107,20 @@ class ImmunityDashboardGenerator:
             affected = any(name.lower() in inc.get('sector', '').lower() for inc in incidents)
             opacity = "1" if affected else "0.7"
             
+            # Determine comparison color based on trend
+            if data['trend'] == '↑':
+                comp_color = '#4CAF50'  # Green for improving
+            elif data['trend'] == '↓':
+                comp_color = '#C10016'  # Red for worsening  
+            else:
+                comp_color = '#7A99AC'  # Gray for stable
+            
             html += f'''
             <div class="chart-point" style="{data['pos']} background: {data['color']}; opacity: {opacity}; color: white;"
                  data-info="{name}: Inmunidad {data['score']}/10. {'⚠️ Incidentes esta semana' if affected else 'Sin incidentes recientes'}">
                 <span>{name}</span>
-                <span style="font-size: 16px; font-weight: 700;">{data['score']} {data['trend']}</span>
+                <span style="font-size: 16px; font-weight: 700;">{data['score']} {data['trend']}<br>
+                <small style='font-size: 10px; opacity: 0.8; color: {comp_color};'>vs. {avg_immunity}</small></span>
             </div>
             '''
         
@@ -282,6 +296,7 @@ class ImmunityDashboardGenerator:
         # Get data sources
         threat_data = self.process_threat_intelligence()
         perplexity_data = self.parse_perplexity_input()
+        self._perplexity_data = perplexity_data  # Store for use in other methods
         
         # Extract week summary
         summary = perplexity_data.get('week_summary', {})
