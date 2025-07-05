@@ -56,6 +56,7 @@ class ImmunityDashboardGenerator:
                 "attacks_week": "2,569",
                 "top_threat_pct": "51%",
                 "top_threat_type": "Phishing en Brasil",
+                "victims_low_immunity_pct": "78%",
                 "key_insight": "El 71% de víctimas tenían inmunidad < 4. La preparación marca la diferencia."
             },
             "incidents": [],
@@ -313,6 +314,7 @@ class ImmunityDashboardGenerator:
             '{{ATTACKS_WEEK}}': summary.get('attacks_week', '2,569'),
             '{{TOP_THREAT_PCT}}': summary.get('top_threat_pct', '51%'),
             '{{TOP_THREAT_TYPE}}': summary.get('top_threat_type', 'Phishing en Brasil'),
+            '{{VICTIMS_LOW_IMMUNITY_PCT}}': summary.get('victims_low_immunity_pct', '78%'),
             '{{KEY_INSIGHT}}': summary.get('key_insight', 'La nueva realidad: Su modelo de negocio ES su primera línea de defensa.'),
             '{{IMMUNITY_SCORE}}': summary.get('immunity_avg', '3.8'),
             '{{IMMUNITY_COLOR}}': immunity_color,

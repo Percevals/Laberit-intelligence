@@ -4,6 +4,7 @@
     "attacks_week": "2,847",
     "top_threat_pct": "52%",
     "top_threat_type": "Ransomware dirigido a Gobierno y Salud",
+    "victims_low_immunity_pct": "78%",
     "key_insight": "El 78% de las víctimas tenían inmunidad < 4. Los ataques se concentraron en sectores críticos con baja madurez digital."
   },
   "incidents": [
