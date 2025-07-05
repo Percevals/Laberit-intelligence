@@ -332,6 +332,7 @@ class ImmunityDashboardGenerator:
             '{{ACTION_CARDS}}': self.generate_action_cards(),
             '{{FOOTER_QUOTE}}': "Su modelo de negocio define su inmunidad digital más que cualquier tecnología",
             '{{FOOTER_TEXT}}': "Business Fortress: La nueva dimensión de la ciberseguridad ejecutiva | Lãberit",
+            '{{REPORT_METADATA}}': 'Reporte #3 | Fuentes: 12 feeds de inteligencia + análisis propietario | <a href="https://percevals.github.io/Laberit-intelligence/" target="_blank">Reportes anteriores →</a>',
             '{{NEWS_DATA}}': news_data,
             '{{TICKER_NEWS}}': first_news['name'],
             '{{TICKER_SOURCE}}': first_news['source']

@@ -367,6 +367,25 @@ color: #B4B5DF;
 margin-bottom: 8px;
 }
 
+.report-meta {
+margin-top: 20px;
+padding-top: 15px;
+border-top: 1px solid rgba(166, 187, 200, 0.2);
+font-size: 13px;
+color: #7A8B9A;
+}
+
+.report-meta a {
+color: #A6BBC8;
+text-decoration: none;
+transition: color 0.3s;
+}
+
+.report-meta a:hover {
+color: #B4B5DF;
+text-decoration: underline;
+}
+
 /* Interactive hover effects */
 .metric-card:hover {
 transform: translateY(-2px);
@@ -628,6 +647,9 @@ Ver metodología completa →
 <div class="footer">
 <div class="footer-quote">"{{FOOTER_QUOTE}}"</div>
 <div>{{FOOTER_TEXT}}</div>
+<div class="report-meta">
+{{REPORT_METADATA}}
+</div>
 </div>
 </div>
 
