@@ -91,14 +91,17 @@ class ImmunityDashboardGenerator:
         if hasattr(self, '_perplexity_data'):
             avg_immunity = float(self._perplexity_data.get('week_summary', {}).get('immunity_avg', '3.4'))
         
-        # Business model positions and scores
+        # Business model positions and scores (percentage-based for responsive design)
         models = {
-            "Gobierno": {"score": 1.5, "pos": "top: 280px; left: 480px;", "color": "#C10016", "trend": "↓"},
-            "Salud": {"score": 2.0, "pos": "top: 240px; left: 420px;", "color": "#C10016", "trend": "↓"},
-            "Fintech": {"score": 2.5, "pos": "top: 200px; left: 480px;", "color": "#C10016", "trend": "→"},
-            "B2B Ind": {"score": 2.5, "pos": "top: 240px; left: 100px;", "color": "#C10016", "trend": "→"},
-            "Platform": {"score": 3.5, "pos": "top: 80px; left: 160px;", "color": "#FFB84D", "trend": "→"},
-            "B2C Digital": {"score": 4.2, "pos": "top: 120px; left: 80px;", "color": "#FFB84D", "trend": "↑"}
+            # ALTO RIESGO (bottom-right quadrant)
+            "Gobierno": {"score": 1.5, "pos": "bottom: 15%; right: 10%;", "color": "#C10016", "trend": "↓"},
+            "Salud": {"score": 2.0, "pos": "bottom: 30%; right: 25%;", "color": "#C10016", "trend": "↓"},
+            "Fintech": {"score": 2.5, "pos": "bottom: 45%; right: 15%;", "color": "#C10016", "trend": "→"},
+            # NECESITAN INVERSIÓN (bottom-left quadrant)
+            "B2B Ind": {"score": 2.5, "pos": "bottom: 30%; left: 30%;", "color": "#C10016", "trend": "→"},
+            # BIEN PROTEGIDOS (top-left quadrant)
+            "Platform": {"score": 3.5, "pos": "top: 20%; left: 35%;", "color": "#FFB84D", "trend": "→"},
+            "B2C Digital": {"score": 4.2, "pos": "top: 35%; left: 20%;", "color": "#FFB84D", "trend": "↑"}
         }
         
         html = ""
