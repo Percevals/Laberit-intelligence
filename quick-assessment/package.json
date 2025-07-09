@@ -1,17 +1,19 @@
 {
-  "name": "@laberit/dii-calculator",
+  "name": "@laberit/dii-quick-assessment",
   "version": "4.0.0",
-  "description": "Digital Immunity Index 4.0 Calculator - Core module for calculating organizational cyber resilience",
+  "description": "Digital Immunity Index 4.0 Quick Assessment Tool",
   "type": "module",
-  "main": "src/core/dii-calculator.js",
+  "main": "src/index.js",
   "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "test": "npm run test:dii && npm run test:models",
     "test:dii": "node src/core/dii-calculator.test.js",
     "test:models": "node src/core/business-models.test.js",
     "example": "npm run example:dii && npm run example:models",
     "example:dii": "node src/core/dii-calculator.example.js",
-    "example:models": "node src/core/business-models.example.js",
-    "test:basic": "NODE_ENV=test node src/core/dii-calculator.js"
+    "example:models": "node src/core/business-models.example.js"
   },
   "keywords": [
     "cybersecurity",
@@ -27,23 +29,18 @@
     "type": "git",
     "url": "https://github.com/Laberit/Laberit-intelligence.git"
   },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.4.0",
+    "vite": "^5.0.10"
+  },
   "engines": {
     "node": ">=14.0.0"
-  },
-  "exports": {
-    ".": "./src/core/dii-calculator.js",
-    "./calculator": "./src/core/dii-calculator.js",
-    "./models": "./src/core/business-models.js",
-    "./test": "./src/core/dii-calculator.test.js",
-    "./example": "./src/core/dii-calculator.example.js"
-  },
-  "files": [
-    "src/core/dii-calculator.js",
-    "src/core/dii-calculator.test.js",
-    "src/core/dii-calculator.example.js",
-    "src/core/business-models.js",
-    "src/core/business-models.test.js",
-    "src/core/business-models.example.js",
-    "src/core/README.md"
-  ]
+  }
 }
