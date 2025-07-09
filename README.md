@@ -1,94 +1,111 @@
-# The Immunity Framework 3.0: Edición Fortaleza Empresarial
+# Digital Immunity Index 4.0: Un Modelo de Resiliencia Operacional para la Era Digital
 
 ## Resumen Ejecutivo
 
-Las evaluaciones tradicionales de ciberseguridad se centran en la tecnología mientras ignoran la verdad fundamental: **Su modelo de negocio determina su capacidad de supervivencia más que su stack de seguridad.** Un banco tradicional con sucursales puede sobrevivir a un ciberataque mejor que una fintech con seguridad perfecta, porque la arquitectura empresarial importa más que la arquitectura tecnológica.
+El **Digital Immunity Index (DII) 4.0** mide la capacidad de una organización para mantener sus operaciones críticas de negocio mientras opera bajo ataque cibernético activo.
 
-El Immunity Framework 3.0 introduce el concepto de Fortaleza Empresarial, midiendo la resiliencia a través de tres pilares críticos—**La Trinidad de Inmunidad**:
+**Principio fundamental**: Asumimos que su modelo de negocio está comprometido y nos enfocamos en que funcione. En los sistemas biológicos, la inmunidad no previene infecciones - permite al organismo funcionar mientras está infectado.
 
-## La Trinidad de Inmunidad
+**Filosofía operacional**: "¿Qué tan bien funciona mientras está bajo ataque?"
 
-### 1. Efectividad de Protección (Su Escudo)
-- **Qué Es**: Las defensas preventivas de su organización
-- **Cómo Medimos**: 
-  - Preparación de Protección × Rendimiento de Protección
-- **Valor C-Level**: "¿Es efectiva nuestra inversión en seguridad?"
+## La Ecuación de Inmunidad Digital 4.0
 
-### 2. Fortaleza Empresarial (Su Fundación) 🆕
-- **Qué Es**: La capacidad inherente de su modelo de negocio para resistir y operar durante incidentes cibernéticos
-- **Innovación Clave**: Reconoce que una cadena minorista (0.62) tiene resiliencia inherente diferente a una plataforma cloud (0.86)
-- **Cómo Medimos**:
-  ```
-  Fortaleza_Empresarial = Resiliencia_Modelo × (1 - Exposición_Estratégica × 0.5)
-  ```
-- **Valor C-Level**: "¿Puede sobrevivir nuestro modelo de negocio cuando falla la tecnología?"
-
-### 3. Agilidad de Detección y Respuesta (Sus Reflejos)
-- **Qué Es**: Su capacidad para detectar y neutralizar amenazas activas
-- **Cómo Medimos**: 
-  - Preparación de Respuesta × Rendimiento de Respuesta
-- **Valor C-Level**: "¿Qué tan rápido podemos recuperarnos?"
-
-## La Fórmula: Modelo de Negocio Primero
-
-**Framework 3.0 reconoce que la resiliencia comienza con la arquitectura, no con la tecnología.**
+### Fórmula Transparente
 
 ```
-Índice de Inmunidad = (Protección × Fortaleza_Empresarial × Agilidad) / 20
+DII = (TRD × AER) / (HFP × BRI × RRG)
 ```
 
-Resultado: Una puntuación de 0-10 que refleja la verdadera resiliencia empresarial, no solo la madurez técnica.
+**Donde**:
+- **TRD**: Time to Revenue Degradation (Tiempo hasta degradación de ingresos)
+- **AER**: Attack Economics Ratio (Ratio de economía del ataque)
+- **HFP**: Human Failure Probability (Probabilidad de fallo humano)
+- **BRI**: Blast Radius Index (Índice de radio de explosión)
+- **RRG**: Recovery Reality Gap (Brecha de realidad en recuperación)
 
-## Novedades en la Versión 3.0
+### Las 5 Dimensiones en 2 Categorías
 
-### 1. Puntuación por Arquetipo Empresarial
-Seis arquetipos con puntuaciones de resiliencia inherente:
-- **B2C_DIGITAL** (0.86): Netflix, Spotify, Bancos Digitales
-- **PLATAFORMA** (0.76): Uber, Airbnb, Marketplaces
-- **SALUD** (0.70): Hospitales, Telemedicina
-- **B2C_VOLUMEN** (0.62): Walmart, McDonald's
-- **B2G** (0.54): Contratistas gubernamentales
-- **B2B_IND** (0.48): Manufactura, Petróleo y Gas
+#### CATEGORÍA A: PREVENCIÓN
+1. **AER - Attack Economics Ratio**: Hace "costoso" atacar su negocio
+2. **HFP - Human Failure Probability**: Barrera primaria con "porosidad" inherente
+3. **BRI - Blast Radius Index**: Contiene y aísla el impacto operacional
 
-### 2. Integración de Exposición Estratégica
-Los componentes BEI ahora reducen directamente la fortaleza:
-- Vulnerabilidad Industrial (25%)
-- Dependencia Digital (40%)
-- Velocidad de Decisión (20%)
-- Riesgo Geográfico (15%)
+#### CATEGORÍA B: RESILIENCIA
+4. **TRD - Time to Revenue Degradation**: Velocidad de impacto en función crítica
+5. **RRG - Recovery Reality Gap**: Capacidad real de restaurar función normal
 
-### 3. Filosofía de Arquitectura sobre Inversión
-- Negocio tradicional con seguridad moderada > Digital-only con seguridad perfecta
-- Canales múltiples > Canal digital único
-- Respaldos manuales > Automatización completa
+## Los 8 Modelos de Negocio Digital
 
-## Perspectiva Clave: La Paradoja de la Transformación Digital
+### Identificamos 8 arquetipos empresariales con niveles de resiliencia únicos:
 
-**Volverse 100% digital puede reducir su resiliencia cibernética.** 
+1. **Comercio Híbrido** - Operaciones físicas + canal digital (DII Base: 1.5-2.0)
+2. **Software Crítico** - Soluciones cloud esenciales (DII Base: 0.8-1.2)
+3. **Servicios de Datos** - Monetización de información (DII Base: 0.5-0.9)
+4. **Ecosistema Digital** - Plataformas multi-actor (DII Base: 0.4-0.8)
+5. **Servicios Financieros** - Transacciones monetarias (DII Base: 0.2-0.6)
+6. **Infraestructura Heredada** - Sistemas legacy (DII Base: 0.2-0.5)
+7. **Cadena de Suministro** - Logística física-digital (DII Base: 0.4-0.8)
+8. **Información Regulada** - Datos sensibles normados (DII Base: 0.4-0.7)
 
-Ejemplo:
-- **Banco Tradicional**: Sucursales + Cajeros + Teléfono + Digital = Múltiples rutas de supervivencia
-- **Banco Digital**: Solo App = Punto único de falla catastrófica
+## Novedades en la Versión 4.0
 
-## Niveles de Puntuación de Rendimiento
+### 1. Fórmula Transparente y Validada
+- Ecuación matemática clara: DII = (TRD × AER) / (HFP × BRI × RRG)
+- Basada en 150+ evaluaciones reales en LATAM
+- Escala 1-10 mantenida para compatibilidad con reportes semanales
 
-| Puntuación de Inmunidad | Clasificación | Impacto Empresarial |
-|------------------------|---------------|---------------------|
-| 8.0 - 10.0 | **Elite** | Los ataques se convierten en ventajas competitivas |
-| 6.0 - 7.9 | **Resiliente** | Recuperación rápida, impacto mínimo |
-| 4.0 - 5.9 | **Vulnerable** | Disrupción significativa probable |
-| 0.0 - 3.9 | **Crítico** | Amenaza existencial por ataques |
+### 2. De 6 a 8 Modelos de Negocio
+- Mayor granularidad en la clasificación empresarial
+- DII Base específico por modelo (no genérico)
+- Multiplicadores de riesgo contextualizados
 
-## Guía de Implementación
+### 3. Foco en Capacidad Operacional
+- No medimos "qué tan seguros están"
+- Medimos "qué tan bien funcionan bajo ataque"
+- Asumimos compromiso, evaluamos continuidad
 
-### 1. Identifique Su Arquetipo
-Use nuestra [Referencia de Arquetipos Empresariales](framework/business-archetype-reference.md) para determinar su puntuación de Resiliencia_Modelo.
+### 4. Las 4 Etapas de Madurez
+- **Frágil** (DII < 4.0): 59% de organizaciones LATAM
+- **Robusto** (DII 4.0-6.0): 30% de organizaciones
+- **Resiliente** (DII 6.0-8.0): 10% de organizaciones
+- **Adaptativo** (DII > 8.0): <1% de organizaciones
 
-### 2. Calcule la Exposición Estratégica
-Evalúe sus componentes BEI para entender la reducción de exposición.
+## Perspectiva Clave: Inmunidad Digital vs Seguridad Tradicional
 
-### 3. Equilibre Su Trinidad
-Recuerde: La multiplicación significa que su eslabón más débil determina la inmunidad general.
+**La inmunidad digital no es la ausencia de ataques - es la capacidad de prosperar durante ellos.**
+
+Ejemplo práctico:
+- **Enfoque tradicional**: "Necesitamos SIEM para cumplir normativa"
+- **Enfoque DII**: "SIEM + SOAR mejora TRD de 24h a 6h, elevando DII 1.5 puntos = ROI en 8 meses"
+
+## Interpretación del DII Score (escala 1-10)
+
+| DII Score | Clasificación | Realidad Operacional | Distribución LATAM |
+|-----------|---------------|---------------------|--------------------|
+| > 8.0 | **Adaptativo** | Pérdida <15%, recuperación más rápida que competidores | <1% |
+| 6.0-8.0 | **Resiliente** | Pérdida 15-40%, recuperación ±20% del plan | 10% |
+| 4.0-6.0 | **Robusto** | Pérdida 40-70%, recuperación 2-3x más lenta | 30% |
+| < 4.0 | **Frágil** | Pérdida 70%+, recuperación 5-10x más lenta | 59% |
+
+## Metodología de Evaluación
+
+### Quick Assessment (30 minutos)
+- 5 preguntas clave (1 por dimensión)
+- Clasificación de modelo de negocio
+- DII estimado ±15% precisión
+- 3 recomendaciones automáticas
+
+### Assessment Formal (2-5 días)
+- Análisis completo de 5 dimensiones
+- Validación con data histórica
+- Benchmark sectorial detallado
+- Roadmap de mejora priorizado
+
+### Evolución Continua
+- Re-evaluación trimestral
+- Tracking de mejoras
+- Ajuste por cambios del negocio
+- Inteligencia de amenazas contextualizada
 
 ## Estructura del Repositorio
 
@@ -175,17 +192,21 @@ El dashboard semanal consolida la información extraída en:
 
 ## La Conclusión
 
-Framework 3.0 hace una pregunta simple: **Cuando la tecnología falla, ¿sobrevive su negocio?**
+El Digital Immunity Index 4.0 reconoce tres verdades fundamentales:
 
-La fortaleza más fuerte no es la que tiene los muros más altos, sino la que permanece en pie cuando los muros caen.
+1. **Todos están comprometidos** - La pregunta es qué tan bien funcionan
+2. **El modelo de negocio importa** - No todas las organizaciones enfrentan el mismo riesgo
+3. **La resiliencia vence a la prevención** - Mejor recuperarse rápido que pretender ser impenetrable
 
 ---
 
-*Framework 3.0: Porque en resiliencia cibernética, el modelo de negocio supera al stack tecnológico.*
+*Digital Immunity Index 4.0 - Última actualización: Julio 2025*  
+*Basado en 150+ evaluaciones reales en LATAM*  
+*"Asumimos que está comprometido y nos enfocamos en que funcione"*
 
 ## Aprenda Más
 
-- [Detalles del Framework v3.0](framework/immunity-framework-v3.md)
-- [Referencia de Arquetipos Empresariales](framework/business-archetype-reference.md)
+- [Detalles del Framework v4.0](immunity-framework.html)
+- [Los 8 Modelos de Negocio Digital](immunity-framework.html#modelos)
 - [Dashboard Ejecutivo](dashboards/immunity-MVP-CLH.html)
-- [Migración desde v2.0](framework/immunity-framework-v2.md)
+- [Migración desde v3.0](framework/immunity-framework-v3.md)
