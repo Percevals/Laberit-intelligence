@@ -1,0 +1,40 @@
+{
+  "name": "@laberit/dii-calculator",
+  "version": "4.0.0",
+  "description": "Digital Immunity Index 4.0 Calculator - Core module for calculating organizational cyber resilience",
+  "type": "module",
+  "main": "src/core/dii-calculator.js",
+  "scripts": {
+    "test": "node src/core/dii-calculator.test.js",
+    "example": "node src/core/dii-calculator.example.js",
+    "test:basic": "NODE_ENV=test node src/core/dii-calculator.js"
+  },
+  "keywords": [
+    "cybersecurity",
+    "resilience",
+    "digital-immunity",
+    "risk-assessment",
+    "dii",
+    "security-metrics"
+  ],
+  "author": "Lãberit Intelligence",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Laberit/Laberit-intelligence.git"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "exports": {
+    ".": "./src/core/dii-calculator.js",
+    "./test": "./src/core/dii-calculator.test.js",
+    "./example": "./src/core/dii-calculator.example.js"
+  },
+  "files": [
+    "src/core/dii-calculator.js",
+    "src/core/dii-calculator.test.js",
+    "src/core/dii-calculator.example.js",
+    "src/core/README.md"
+  ]
+}
