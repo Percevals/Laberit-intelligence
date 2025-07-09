@@ -5,8 +5,12 @@
   "type": "module",
   "main": "src/core/dii-calculator.js",
   "scripts": {
-    "test": "node src/core/dii-calculator.test.js",
-    "example": "node src/core/dii-calculator.example.js",
+    "test": "npm run test:dii && npm run test:models",
+    "test:dii": "node src/core/dii-calculator.test.js",
+    "test:models": "node src/core/business-models.test.js",
+    "example": "npm run example:dii && npm run example:models",
+    "example:dii": "node src/core/dii-calculator.example.js",
+    "example:models": "node src/core/business-models.example.js",
     "test:basic": "NODE_ENV=test node src/core/dii-calculator.js"
   },
   "keywords": [
@@ -28,6 +32,8 @@
   },
   "exports": {
     ".": "./src/core/dii-calculator.js",
+    "./calculator": "./src/core/dii-calculator.js",
+    "./models": "./src/core/business-models.js",
     "./test": "./src/core/dii-calculator.test.js",
     "./example": "./src/core/dii-calculator.example.js"
   },
@@ -35,6 +41,9 @@
     "src/core/dii-calculator.js",
     "src/core/dii-calculator.test.js",
     "src/core/dii-calculator.example.js",
+    "src/core/business-models.js",
+    "src/core/business-models.test.js",
+    "src/core/business-models.example.js",
     "src/core/README.md"
   ]
 }
