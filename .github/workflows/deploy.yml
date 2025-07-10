@@ -50,7 +50,7 @@ jobs:
         cp -r templates deploy/ 2>/dev/null || true
         
         # Copiar archivos sueltos importantes
-        cp -r *.html deploy/ 2>/dev/null || true
+        for f in *.html; do [ "$f" != "index.html" ] && cp "$f" deploy/ || true; done 2>/dev/null || true
         cp -r *.md deploy/ 2>/dev/null || true
         
         # Copiar el Quick Assessment build
