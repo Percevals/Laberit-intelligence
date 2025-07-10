@@ -28,8 +28,13 @@ jobs:
         cd quick-assessment
         npm run build
         
+    - name: Copy files to correct structure
+      run: |
+        cp main-index.html index.html
+        cp -r quick-assessment/dist/* quick-assessment/
+        
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./quick-assessment/dist
+        publish_dir: ./
