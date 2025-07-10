@@ -35,7 +35,7 @@ jobs:
         mkdir -p deploy/quick-assessment
         
         # Copiar el sitio principal
-        cp main-index.html deploy/index.html
+        cp index.html deploy/index.html
         
         # Copiar TODOS los directorios del sitio principal
         cp -r weekly-reports deploy/ 2>/dev/null || true
