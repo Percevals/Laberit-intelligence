@@ -28,13 +28,36 @@ jobs:
         cd quick-assessment
         npm run build
         
-    - name: Copy files to correct structure
+    - name: Prepare deployment structure
       run: |
-        cp main-index.html index.html
-        cp -r quick-assessment/dist/* quick-assessment/
+        # Limpiar cualquier estructura previa
+        rm -rf deploy
+        mkdir -p deploy/quick-assessment
+        
+        # Copiar el sitio principal
+        cp main-index.html deploy/index.html
+        
+        # Copiar TODOS los directorios del sitio principal
+        cp -r weekly-reports deploy/ 2>/dev/null || true
+        cp -r intelligence deploy/ 2>/dev/null || true
+        cp -r assessments deploy/ 2>/dev/null || true
+        cp -r dashboards deploy/ 2>/dev/null || true
+        cp -r framework deploy/ 2>/dev/null || true
+        cp -r docs deploy/ 2>/dev/null || true
+        cp -r data deploy/ 2>/dev/null || true
+        cp -r assets deploy/ 2>/dev/null || true
+        cp -r scripts deploy/ 2>/dev/null || true
+        cp -r templates deploy/ 2>/dev/null || true
+        
+        # Copiar archivos sueltos importantes
+        cp -r *.html deploy/ 2>/dev/null || true
+        cp -r *.md deploy/ 2>/dev/null || true
+        
+        # Copiar el Quick Assessment build
+        cp -r quick-assessment/dist/* deploy/quick-assessment/
         
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./
+        publish_dir: ./deploy
