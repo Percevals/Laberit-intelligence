@@ -209,4 +209,4 @@ El Digital Immunity Index 4.0 reconoce tres verdades fundamentales:
 - [Detalles del Framework v4.0](immunity-framework.html)
 - [Los 8 Modelos de Negocio Digital](immunity-framework.html#modelos)
 - [Dashboard Ejecutivo](dashboards/immunity-MVP-CLH.html)
-- [Migración desde v3.0](framework/immunity-framework-v3.md)
+- [Migración desde v3.0](framework/immunity-framework-v3.md)# Forcing new deployment
