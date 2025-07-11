@@ -34,27 +34,35 @@ jobs:
         rm -rf deploy
         mkdir -p deploy/quick-assessment
         
-        # Copiar el sitio principal
-        cp index.html deploy/index.html
+        # IMPORTANTE: Primero copiar Quick Assessment a su subdirectorio
+        cp -r quick-assessment/dist/* deploy/quick-assessment/
         
-        # Copiar TODOS los directorios del sitio principal
-        cp -r weekly-reports deploy/ 2>/dev/null || true
+        # Luego copiar el sitio principal (esto sobrescribirá cualquier index.html incorrecto)
+        cp index.html deploy/index.html
+        cp immunity-framework.html deploy/ 2>/dev/null || true
+        
+        # Copiar directorios del sitio principal
         cp -r intelligence deploy/ 2>/dev/null || true
         cp -r assessments deploy/ 2>/dev/null || true
         cp -r dashboards deploy/ 2>/dev/null || true
         cp -r framework deploy/ 2>/dev/null || true
         cp -r docs deploy/ 2>/dev/null || true
         cp -r data deploy/ 2>/dev/null || true
-        cp -r assets deploy/ 2>/dev/null || true
         cp -r scripts deploy/ 2>/dev/null || true
         cp -r templates deploy/ 2>/dev/null || true
         
-        # Copiar archivos sueltos importantes
-        for f in *.html; do [ "$f" != "index.html" ] && cp "$f" deploy/ || true; done 2>/dev/null || true
-        cp -r *.md deploy/ 2>/dev/null || true
+        # NO copiar assets del root para evitar conflictos
+        # NO copiar weekly-reports que no existe
         
-        # Copiar el Quick Assessment build
-        cp -r quick-assessment/dist/* deploy/quick-assessment/
+        # Copiar otros archivos HTML (excepto index.html)
+        for f in *.html; do 
+          if [ "$f" != "index.html" ] && [ -f "$f" ]; then 
+            cp "$f" deploy/
+          fi
+        done
+        
+        # Copiar archivos markdown
+        cp *.md deploy/ 2>/dev/null || true
         
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
