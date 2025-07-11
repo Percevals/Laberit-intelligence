@@ -38,18 +38,18 @@ DII = (TRD × AER) / (HFP × BRI × RRG)
 4. **TRD - Time to Revenue Degradation**: Velocidad de impacto en función crítica
 5. **RRG - Recovery Reality Gap**: Capacidad real de restaurar función normal
 
-## Los 8 Modelos de Negocio Digital
+## Los 8 Modelos de Negocio Digital (DII 4.0)
 
 ### Identificamos 8 arquetipos empresariales con niveles de resiliencia únicos:
 
-1. **Comercio Híbrido** - Operaciones físicas + canal digital (DII Base: 1.5-2.0)
-2. **Software Crítico** - Soluciones cloud esenciales (DII Base: 0.8-1.2)
-3. **Servicios de Datos** - Monetización de información (DII Base: 0.5-0.9)
-4. **Ecosistema Digital** - Plataformas multi-actor (DII Base: 0.4-0.8)
-5. **Servicios Financieros** - Transacciones monetarias (DII Base: 0.2-0.6)
-6. **Infraestructura Heredada** - Sistemas legacy (DII Base: 0.2-0.5)
-7. **Cadena de Suministro** - Logística física-digital (DII Base: 0.4-0.8)
-8. **Información Regulada** - Datos sensibles normados (DII Base: 0.4-0.7)
+1. **Servicios Financieros** - Banca, seguros, fintech (DII Base: 0.2-0.6)
+2. **Información Regulada** - Salud, gobierno, datos sensibles (DII Base: 0.4-0.7)
+3. **Ecosistema Digital** - Plataformas, marketplaces, APIs (DII Base: 0.4-0.8)
+4. **Servicios de Datos** - Analytics, IA, procesamiento datos (DII Base: 0.5-0.9)
+5. **Software Crítico** - Sistemas operativos, seguridad (DII Base: 0.8-1.2)
+6. **Infraestructura Heredada** - Manufactura, logística, OT (DII Base: 0.2-0.5)
+7. **Cadena de Suministro** - Distribución, aprovisionamiento (DII Base: 0.4-0.8)
+8. **Comercio Híbrido** - Retail físico y digital (DII Base: 1.5-2.0)
 
 ## Novedades en la Versión 4.0
 
@@ -69,10 +69,17 @@ DII = (TRD × AER) / (HFP × BRI × RRG)
 - Asumimos compromiso, evaluamos continuidad
 
 ### 4. Las 4 Etapas de Madurez
-- **Frágil** (DII < 4.0): 59% de organizaciones LATAM
-- **Robusto** (DII 4.0-6.0): 30% de organizaciones
-- **Resiliente** (DII 6.0-8.0): 10% de organizaciones
-- **Adaptativo** (DII > 8.0): <1% de organizaciones
+- **Frágil** (DII 0-2.5): Operaciones cesan bajo ataque
+- **Robusto** (DII 2.5-5): Degradación significativa pero funcional
+- **Resiliente** (DII 5-7.5): Mantiene operaciones esenciales
+- **Adaptativo** (DII 7.5-10): Opera efectivamente durante ataques
+
+### 5. Dashboard de Inteligencia Semanal Mejorado
+- **Escala DII interactiva**: Visualización 0-10 con descripciones de madurez
+- **8 Modelos de negocio**: Todos visibles con indicadores de incidentes
+- **Contenido bilingüe**: Incidentes y análisis en español
+- **Inteligencia interactiva**: Secciones de amenazas con detalles expandibles
+- **Distribución visual**: Iconos y colores basados en riesgo para cada modelo
 
 ## Perspectiva Clave: Inmunidad Digital vs Seguridad Tradicional
 
@@ -118,8 +125,42 @@ Ejemplo práctico:
 /framework          # Documentación y metodología del framework
 /assessments        # Herramientas de evaluación y migraciones
 /docs              # Documentación adicional
-/intelligence      # Integración de inteligencia de amenazas
+/intelligence      # Sistema de inteligencia de amenazas semanal
+  ├── data/        # Datos de incidentes y análisis
+  ├── outputs/     # Dashboards generados
+  └── templates/   # Plantillas HTML para dashboards
+/weekly-reports    # Reportes semanales de inmunidad digital
 ```
+
+## 🚀 Proceso de Inteligencia Semanal Automatizado
+
+### Pipeline de Generación (Implementado Julio 2025)
+
+1. **Recolección de Datos** (`quick_collect.py`)
+   - Fuentes RSS de seguridad LATAM
+   - Entrada manual de incidentes críticos
+   - Formato JSON estructurado
+
+2. **Enriquecimiento de Incidentes** (`enrich_incidents.py`)
+   - Cálculo automático de DII por incidente
+   - Mapeo a modelos de negocio DII 4.0
+   - Estimación de impacto financiero
+   - Clasificación de vectores de ataque
+
+3. **Generación de Dashboard** (`dii_dashboard_generator.py`)
+   - Template HTML responsivo
+   - Visualizaciones interactivas
+   - Análisis por modelo de negocio
+   - Recomendaciones automáticas
+
+### Características del Dashboard DII 4.0
+
+- **Resumen Ejecutivo**: Impacto semanal en 30 segundos
+- **Escala DII Visual**: Con modelos de madurez interactivos
+- **8 Modelos de Negocio**: Distribución completa con contexto
+- **Incidentes en Español**: Traducciones y análisis localizados
+- **Inteligencia Interactiva**: Click para detalles expandidos
+- **Métricas en Tiempo Real**: DII promedio, tendencias, sectores críticos
 
 ## 🔍 Integración de Inteligencia de Amenazas
 
