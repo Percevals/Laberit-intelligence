@@ -5,6 +5,41 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 
+## [4.1.1] - 2025-07-11
+
+### 📊 Datos Históricos DII v4.0
+
+#### Migración de Base de Datos
+- **150 assessments migrados** de v3.0 a DII v4.0
+- **Integración de Recovery Agility**: 60% de clientes con datos ZT_MATURITY
+- **Cobertura geográfica**: 18 países LATAM
+- **Nuevos archivos de datos**:
+  - `dii_v4_historical_data.json`: Registros completos de 150 empresas
+  - `dii_v4_benchmarks.json`: Benchmarks por modelo y sector
+  - `dii_v4_distribution.json`: Datos listos para visualización
+
+#### Insights de la Migración
+- **Distribución por etapa**: 
+  - Frágil: 18.7% (requieren atención inmediata)
+  - Robusto: 41.3% (protección básica)
+  - Resiliente: 32.0% (capacidades sólidas)
+  - Adaptativo: 8.0% (clase mundial)
+- **Mejor modelo**: Servicios Financieros (promedio 5.82)
+- **Mayor riesgo**: Infraestructura Heredada (promedio 2.18)
+- **Correlación v3→v4**: 0.847 (preserva rankings relativos)
+
+### 🔧 Cambios en Datos
+
+- Nuevo índice de datos en `/data/index.json`
+- Documentación de migración en `/docs/dii_v4_migration_notes.md`
+- Scripts de generación de datos para actualizaciones futuras
+
+### ⚠️ Breaking Changes
+
+- Los dashboards que usan datos v3.0 deben actualizarse
+- Nueva estructura de dimensiones (AER, HFP, BRI, TRD, RRG)
+- Escala DII ahora es 1.0-10.0 (antes 0-7.4)
+
 ## [4.1.0] - 2025-07-11
 
 ### 🎉 Nuevas Características

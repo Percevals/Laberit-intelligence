@@ -1,0 +1,173 @@
+DII v3.0 to v4.0 Business Model Mapping Matrix
+================================================================================
+
+Combination: Financial|Platform|B2B_PLATFORM|Hybrid
+Clients: 18
+Proposed Model: [4] Ecosistema Digital
+Confidence: HIGH
+Digital Dependency: 50-70%
+Reasoning: Platform business model indicates digital ecosystem
+----------------------------------------
+
+Combination: Industrial|Manufacturing|MANUFACTURING|Hybrid
+Clients: 15
+Proposed Model: [7] Cadena de Suministro
+Confidence: HIGH
+Digital Dependency: 50-70%
+Reasoning: Manufacturing with Hybrid cloud = supply chain
+----------------------------------------
+
+Combination: Public|Platform|B2G_PLATFORM|Hybrid
+Clients: 14
+Proposed Model: [4] Ecosistema Digital
+Confidence: HIGH
+Digital Dependency: 50-70%
+Reasoning: Platform business model indicates digital ecosystem
+REVIEW: Public sector - needs review
+----------------------------------------
+
+Combination: Financial|Financial Services|FINANCIAL_SERVICES|Hybrid
+Clients: 12
+Proposed Model: [5] Servicios Financieros
+Confidence: HIGH
+Digital Dependency: 50-70%
+Reasoning: Financial sector with Financial Services model
+----------------------------------------
+
+Combination: Industrial|Manufacturing|MANUFACTURING|Minimal
+Clients: 11
+Proposed Model: [6] Infraestructura Heredada
+Confidence: HIGH
+Digital Dependency: 20-40%
+Reasoning: Manufacturing with minimal cloud = legacy infrastructure
+----------------------------------------
+
+Combination: Retail|Traditional Retail|RETAIL|Hybrid
+Clients: 11
+Proposed Model: [1] Comercio Híbrido
+Confidence: HIGH
+Digital Dependency: 50-70%
+Reasoning: Retail sector/model maps to Comercio Híbrido
+----------------------------------------
+
+Combination: Services|Platform|B2B_PLATFORM|Cloud First
+Clients: 10
+Proposed Model: [4] Ecosistema Digital
+Confidence: HIGH
+Digital Dependency: 80-95%
+Reasoning: Platform business model indicates digital ecosystem
+----------------------------------------
+
+Combination: Energy|Manufacturing|INFRASTRUCTURE|Minimal
+Clients: 9
+Proposed Model: [6] Infraestructura Heredada
+Confidence: HIGH
+Digital Dependency: 20-40%
+Reasoning: Manufacturing with minimal cloud = legacy infrastructure
+----------------------------------------
+
+Combination: Industrial|Platform|IOT_PLATFORM|Hybrid
+Clients: 9
+Proposed Model: [4] Ecosistema Digital
+Confidence: HIGH
+Digital Dependency: 50-70%
+Reasoning: Platform business model indicates digital ecosystem
+----------------------------------------
+
+Combination: Education|Platform|B2C_PLATFORM|Hybrid
+Clients: 8
+Proposed Model: [4] Ecosistema Digital
+Confidence: HIGH
+Digital Dependency: 50-70%
+Reasoning: Platform business model indicates digital ecosystem
+----------------------------------------
+
+Combination: Technology|SaaS|B2B_SAAS|Cloud First
+Clients: 7
+Proposed Model: [2] Software Crítico
+Confidence: MEDIUM
+Digital Dependency: 80-95%
+Reasoning: Technology/SaaS defaults to Software Crítico
+Alternatives: Servicios de Datos (3), Ecosistema Digital (4)
+REVIEW: Technology sector ambiguity
+----------------------------------------
+
+Combination: Public|Financial Services|GOV_FINANCE|Minimal
+Clients: 7
+Proposed Model: [5] Servicios Financieros
+Confidence: MEDIUM
+Digital Dependency: 20-40%
+Reasoning: Public sector requires careful classification; Public + Financial = Servicios Financieros
+Alternatives: Información Regulada (8)
+REVIEW: Public sector - needs review
+----------------------------------------
+
+Combination: Financial|Platform|DATA_ANALYTICS|Hybrid
+Clients: 6
+Proposed Model: [4] Ecosistema Digital
+Confidence: MEDIUM
+Digital Dependency: 50-70%
+Reasoning: Platform business model indicates digital ecosystem; Could be Servicios de Datos if analytics-focused
+Alternatives: Servicios de Datos (3)
+----------------------------------------
+
+Combination: Healthcare|Healthcare|HEALTHCARE|Hybrid
+Clients: 5
+Proposed Model: [8] Información Regulada
+Confidence: HIGH
+Digital Dependency: 50-70%
+Reasoning: Healthcare sector maps directly to Información Regulada
+----------------------------------------
+
+Combination: Pharma|Manufacturing|REGULATED|Hybrid
+Clients: 5
+Proposed Model: [7] Cadena de Suministro
+Confidence: HIGH
+Digital Dependency: 50-70%
+Reasoning: Manufacturing with Hybrid cloud = supply chain
+----------------------------------------
+
+Combination: Services|SaaS|B2C_SAAS|Cloud First
+Clients: 4
+Proposed Model: [2] Software Crítico
+Confidence: HIGH
+Digital Dependency: 80-95%
+Reasoning: Technology/SaaS with B2C_SAAS = Software Crítico
+----------------------------------------
+
+Combination: Public|Manufacturing|GOV_INFRASTRUCTURE|Minimal
+Clients: 4
+Proposed Model: [6] Infraestructura Heredada
+Confidence: HIGH
+Digital Dependency: 20-40%
+Reasoning: Manufacturing with minimal cloud = legacy infrastructure
+REVIEW: Public sector - needs review
+----------------------------------------
+
+Combination: Technology|XaaS|B2B_XAAS|Cloud First
+Clients: 3
+Proposed Model: [2] Software Crítico
+Confidence: MEDIUM
+Digital Dependency: 80-95%
+Reasoning: Technology/SaaS defaults to Software Crítico
+Alternatives: Servicios de Datos (3), Ecosistema Digital (4)
+REVIEW: Technology sector ambiguity
+----------------------------------------
+
+Combination: Retail|Marketplace|MARKETPLACE|Cloud First
+Clients: 1
+Proposed Model: [1] Comercio Híbrido
+Confidence: HIGH
+Digital Dependency: 80-95%
+Reasoning: Retail sector/model maps to Comercio Híbrido
+REVIEW: Cloud First conflicts with model
+----------------------------------------
+
+Combination: Financial|Hybrid|HYBRID|Hybrid
+Clients: 1
+Proposed Model: [1] Comercio Híbrido
+Confidence: HIGH
+Digital Dependency: 50-70%
+Reasoning: Hybrid business model maps to Comercio Híbrido
+----------------------------------------
+

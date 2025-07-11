@@ -1,0 +1,248 @@
+DII 4.0 MAPPING ANALYSIS REPORT
+================================================================================
+
+Generated: 2025-07-11T15:18:18.292519
+Total Unique Combinations: 10
+Total Clients Analyzed: 255
+
+DII 4.0 MODEL DEFINITIONS
+--------------------------------------------------------------------------------
+A-RC: Recovery Optimized for All Threats
+C-RY: Recovery Optimized for Cyber Threats
+A-RS: Resilience Optimized for All Threats
+C-RS: Resilience Optimized for Cyber Threats
+A-RG: Response Optimized for All Threats
+C-RG: Response Optimized for Cyber Threats
+
+
+MAPPING PRIORITY RULES
+--------------------------------------------------------------------------------
+Priority 1: Archetype-based core mapping (highest weight)
+Priority 2: Business model modifiers (B2B, B2C, B2G)
+Priority 3: Cloud adoption level impact
+Priority 4: Sector-specific preferences
+
+
+DETAILED MAPPING MATRIX
+--------------------------------------------------------------------------------
+
+Combination #1
+========================================
+Sector: FINANCIAL
+Business Model: B2B
+Archetype: ARCHETYPE_02
+Cloud Adoption: HIGH
+Client Count: 45
+
+Recommended Model: C-RY - Recovery Optimized for Cyber Threats
+Confidence Level: 75.0%
+Reasoning: Archetype ARCHETYPE_02: Cyber-specific recovery optimization | B2B business model adjustments | HIGH cloud adoption impact | FINANCIAL sector preferences
+
+All Model Scores:
+  C-RY: 1.000 (100.0%)
+  A-RC: 0.000 (0.0%)
+  A-RS: 0.000 (0.0%)
+  C-RS: 0.000 (0.0%)
+  A-RG: 0.000 (0.0%)
+  C-RG: 0.000 (0.0%)
+
+Combination #2
+========================================
+Sector: FINANCIAL
+Business Model: B2B
+Archetype: ARCHETYPE_04
+Cloud Adoption: HIGH
+Client Count: 38
+
+Recommended Model: C-RS - Resilience Optimized for Cyber Threats
+Confidence Level: 73.8%
+Reasoning: Archetype ARCHETYPE_04: Cyber resilience focus | B2B business model adjustments | HIGH cloud adoption impact | FINANCIAL sector preferences
+
+All Model Scores:
+  C-RS: 1.000 (100.0%)
+  A-RC: 0.000 (0.0%)
+  C-RY: 0.000 (0.0%)
+  A-RS: 0.000 (0.0%)
+  A-RG: 0.000 (0.0%)
+  C-RG: 0.000 (0.0%)
+
+Combination #3
+========================================
+Sector: HEALTHCARE
+Business Model: B2G
+Archetype: ARCHETYPE_03
+Cloud Adoption: MEDIUM
+Client Count: 32
+
+Recommended Model: A-RS - Resilience Optimized for All Threats
+Confidence Level: 74.5%
+Reasoning: Archetype ARCHETYPE_03: Balanced resilience approach | B2G business model adjustments | MEDIUM cloud adoption impact | HEALTHCARE sector preferences
+
+All Model Scores:
+  A-RS: 1.000 (100.0%)
+  A-RC: 0.000 (0.0%)
+  C-RY: 0.000 (0.0%)
+  C-RS: 0.000 (0.0%)
+  A-RG: 0.000 (0.0%)
+  C-RG: 0.000 (0.0%)
+
+Combination #4
+========================================
+Sector: RETAIL
+Business Model: B2C
+Archetype: ARCHETYPE_05
+Cloud Adoption: HIGH
+Client Count: 28
+
+Recommended Model: A-RG - Response Optimized for All Threats
+Confidence Level: 72.0%
+Reasoning: Archetype ARCHETYPE_05: Response-oriented approach | B2C business model adjustments | HIGH cloud adoption impact | RETAIL sector preferences
+
+All Model Scores:
+  A-RG: 1.000 (100.0%)
+  A-RC: 0.000 (0.0%)
+  C-RY: 0.000 (0.0%)
+  A-RS: 0.000 (0.0%)
+  C-RS: 0.000 (0.0%)
+  C-RG: 0.000 (0.0%)
+
+Combination #5
+========================================
+Sector: TECHNOLOGY
+Business Model: B2B
+Archetype: ARCHETYPE_02
+Cloud Adoption: HIGH
+Client Count: 25
+
+Recommended Model: C-RY - Recovery Optimized for Cyber Threats
+Confidence Level: 75.0%
+Reasoning: Archetype ARCHETYPE_02: Cyber-specific recovery optimization | B2B business model adjustments | HIGH cloud adoption impact | TECHNOLOGY sector preferences
+
+All Model Scores:
+  C-RY: 1.000 (100.0%)
+  A-RC: 0.000 (0.0%)
+  A-RS: 0.000 (0.0%)
+  C-RS: 0.000 (0.0%)
+  A-RG: 0.000 (0.0%)
+  C-RG: 0.000 (0.0%)
+
+Combination #6
+========================================
+Sector: MANUFACTURING
+Business Model: B2B
+Archetype: ARCHETYPE_01
+Cloud Adoption: LOW
+Client Count: 22
+
+Recommended Model: A-RC - Recovery Optimized for All Threats
+Confidence Level: 75.0%
+Reasoning: Archetype ARCHETYPE_01: Pure recovery focus across all threats | B2B business model adjustments | LOW cloud adoption impact | MANUFACTURING sector preferences
+
+All Model Scores:
+  A-RC: 1.000 (100.0%)
+  C-RY: 0.000 (0.0%)
+  A-RS: 0.000 (0.0%)
+  C-RS: 0.000 (0.0%)
+  A-RG: 0.000 (0.0%)
+  C-RG: 0.000 (0.0%)
+
+Combination #7
+========================================
+Sector: GOVERNMENT
+Business Model: B2G
+Archetype: ARCHETYPE_03
+Cloud Adoption: MEDIUM
+Client Count: 20
+
+Recommended Model: A-RS - Resilience Optimized for All Threats
+Confidence Level: 74.5%
+Reasoning: Archetype ARCHETYPE_03: Balanced resilience approach | B2G business model adjustments | MEDIUM cloud adoption impact | GOVERNMENT sector preferences
+
+All Model Scores:
+  A-RS: 1.000 (100.0%)
+  A-RC: 0.000 (0.0%)
+  C-RY: 0.000 (0.0%)
+  C-RS: 0.000 (0.0%)
+  A-RG: 0.000 (0.0%)
+  C-RG: 0.000 (0.0%)
+
+Combination #8
+========================================
+Sector: RETAIL
+Business Model: B2C
+Archetype: ARCHETYPE_06
+Cloud Adoption: HIGH
+Client Count: 18
+
+Recommended Model: C-RG - Response Optimized for Cyber Threats
+Confidence Level: 72.0%
+Reasoning: Archetype ARCHETYPE_06: Cyber response specialization | B2C business model adjustments | HIGH cloud adoption impact | RETAIL sector preferences
+
+All Model Scores:
+  C-RG: 1.000 (100.0%)
+  A-RC: 0.000 (0.0%)
+  C-RY: 0.000 (0.0%)
+  A-RS: 0.000 (0.0%)
+  C-RS: 0.000 (0.0%)
+  A-RG: 0.000 (0.0%)
+
+Combination #9
+========================================
+Sector: HEALTHCARE
+Business Model: B2B
+Archetype: ARCHETYPE_01
+Cloud Adoption: LOW
+Client Count: 15
+
+Recommended Model: A-RC - Recovery Optimized for All Threats
+Confidence Level: 75.0%
+Reasoning: Archetype ARCHETYPE_01: Pure recovery focus across all threats | B2B business model adjustments | LOW cloud adoption impact | HEALTHCARE sector preferences
+
+All Model Scores:
+  A-RC: 1.000 (100.0%)
+  C-RY: 0.000 (0.0%)
+  A-RS: 0.000 (0.0%)
+  C-RS: 0.000 (0.0%)
+  A-RG: 0.000 (0.0%)
+  C-RG: 0.000 (0.0%)
+
+Combination #10
+========================================
+Sector: FINANCIAL
+Business Model: B2C
+Archetype: ARCHETYPE_04
+Cloud Adoption: MEDIUM
+Client Count: 12
+
+Recommended Model: C-RS - Resilience Optimized for Cyber Threats
+Confidence Level: 73.3%
+Reasoning: Archetype ARCHETYPE_04: Cyber resilience focus | B2C business model adjustments | MEDIUM cloud adoption impact | FINANCIAL sector preferences
+
+All Model Scores:
+  C-RS: 1.000 (100.0%)
+  A-RC: 0.000 (0.0%)
+  C-RY: 0.000 (0.0%)
+  A-RS: 0.000 (0.0%)
+  A-RG: 0.000 (0.0%)
+  C-RG: 0.000 (0.0%)
+
+
+SUMMARY STATISTICS
+--------------------------------------------------------------------------------
+Total Clients: 255
+Average Confidence: 74.0%
+
+Model Distribution (by client count):
+  C-RY (Recovery Optimized for Cyber Threats): 70 clients (27.5%)
+  A-RS (Resilience Optimized for All Threats): 52 clients (20.4%)
+  C-RS (Resilience Optimized for Cyber Threats): 50 clients (19.6%)
+  A-RC (Recovery Optimized for All Threats): 37 clients (14.5%)
+  A-RG (Response Optimized for All Threats): 28 clients (11.0%)
+  C-RG (Response Optimized for Cyber Threats): 18 clients (7.1%)
+
+Top Sectors (by client count):
+  FINANCIAL: 95 clients (37.3%)
+  HEALTHCARE: 47 clients (18.4%)
+  RETAIL: 46 clients (18.0%)
+  TECHNOLOGY: 25 clients (9.8%)
+  MANUFACTURING: 22 clients (8.6%)

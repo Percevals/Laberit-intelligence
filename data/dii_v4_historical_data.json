@@ -1,0 +1,3754 @@
+{
+  "clients": [
+    {
+      "id": 1,
+      "company_name": "Eléctrica SA 1",
+      "country": "Dominican Republic",
+      "sector": "Energy",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.79,
+        "HFP": 0.583,
+        "BRI": 0.47,
+        "TRD": 12.48,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-05",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 2,
+      "company_name": "Producción Solutions 2",
+      "country": "Colombia",
+      "sector": "Industrial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 7.25,
+      "dii_stage": "Resiliente",
+      "dimensions": {
+        "AER": 3.06,
+        "HFP": 0.556,
+        "BRI": 0.668,
+        "TRD": 2.94,
+        "RRG": 1.74
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-29",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 3,
+      "company_name": "Seguros Regional 3",
+      "country": "Colombia",
+      "sector": "Financial",
+      "business_model_v4": "Software Crítico",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.58,
+        "HFP": 0.562,
+        "BRI": 0.392,
+        "TRD": 20.28,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-20",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 4,
+      "company_name": "Software Regional 4",
+      "country": "Costa Rica",
+      "sector": "Technology",
+      "business_model_v4": "Comercio Híbrido",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.89,
+        "HFP": 0.627,
+        "BRI": 0.258,
+        "TRD": 33.6,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-11",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 5,
+      "company_name": "Seguros Corp 5",
+      "country": "Chile",
+      "sector": "Financial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.38,
+        "HFP": 0.268,
+        "BRI": 0.742,
+        "TRD": 10.14,
+        "RRG": 2.74
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-24",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 6,
+      "company_name": "Retail Group 6",
+      "country": "Ecuador",
+      "sector": "Retail",
+      "business_model_v4": "Cadena de Suministro",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.27,
+        "HFP": 0.578,
+        "BRI": 0.561,
+        "TRD": 40.32,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-02",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 7,
+      "company_name": "Software Group 7",
+      "country": "Dominican Republic",
+      "sector": "Technology",
+      "business_model_v4": "Servicios Financieros",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.7,
+        "HFP": 0.569,
+        "BRI": 0.555,
+        "TRD": 5.6,
+        "RRG": 2.15
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-29",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 8,
+      "company_name": "Planta Solutions 8",
+      "country": "Costa Rica",
+      "sector": "Industrial",
+      "business_model_v4": "Servicios Financieros",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.86,
+        "HFP": 0.617,
+        "BRI": 0.568,
+        "TRD": 7.28,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-09",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 9,
+      "company_name": "Petróleo Nacional 9",
+      "country": "Honduras",
+      "sector": "Energy",
+      "business_model_v4": "Servicios de Datos",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.33,
+        "HFP": 0.67,
+        "BRI": 0.433,
+        "TRD": 38.4,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-25",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 10,
+      "company_name": "Inversiones Nacional 10",
+      "country": "Colombia",
+      "sector": "Financial",
+      "business_model_v4": "Servicios Financieros",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.4,
+        "HFP": 0.534,
+        "BRI": 0.499,
+        "TRD": 10.4,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-09",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 11,
+      "company_name": "Ministerio SA 11",
+      "country": "Brazil",
+      "sector": "Public",
+      "business_model_v4": "Servicios de Datos",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.78,
+        "HFP": 0.718,
+        "BRI": 0.61,
+        "TRD": 16.8,
+        "RRG": 1.63
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-15",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 12,
+      "company_name": "Salud Regional 12",
+      "country": "Panama",
+      "sector": "Healthcare",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.91,
+        "HFP": 0.783,
+        "BRI": 0.353,
+        "TRD": 2.94,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-23",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 13,
+      "company_name": "Seguros Internacional 13",
+      "country": "Peru",
+      "sector": "Financial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.44,
+        "HFP": 0.694,
+        "BRI": 0.401,
+        "TRD": 7.8,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-25",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 14,
+      "company_name": "Clínica Corp 14",
+      "country": "Brazil",
+      "sector": "Healthcare",
+      "business_model_v4": "Software Crítico",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.02,
+        "HFP": 0.68,
+        "BRI": 0.49,
+        "TRD": 5.88,
+        "RRG": 1.24
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-18",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 15,
+      "company_name": "Gas Regional 15",
+      "country": "Colombia",
+      "sector": "Energy",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.66,
+        "HFP": 0.501,
+        "BRI": 0.42,
+        "TRD": 10.14,
+        "RRG": 1.02
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-28",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 16,
+      "company_name": "Industrias Regional 16",
+      "country": "Colombia",
+      "sector": "Industrial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.54,
+        "HFP": 0.654,
+        "BRI": 0.503,
+        "TRD": 12.48,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-18",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 17,
+      "company_name": "Instituto Partners 17",
+      "country": "Costa Rica",
+      "sector": "Public",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.73,
+        "HFP": 0.756,
+        "BRI": 0.502,
+        "TRD": 6.72,
+        "RRG": 1.68
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-16",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 18,
+      "company_name": "Farmacéutica Nacional 18",
+      "country": "Chile",
+      "sector": "Pharma",
+      "business_model_v4": "Infraestructura Heredada",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.31,
+        "HFP": 0.703,
+        "BRI": 0.541,
+        "TRD": 80.64,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-06",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 19,
+      "company_name": "Ministerio Regional 19",
+      "country": "Colombia",
+      "sector": "Public",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.84,
+        "HFP": 0.656,
+        "BRI": 0.491,
+        "TRD": 6.63,
+        "RRG": 1.08
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-01",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 20,
+      "company_name": "Academia Regional 20",
+      "country": "Argentina",
+      "sector": "Education",
+      "business_model_v4": "Cadena de Suministro",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.27,
+        "HFP": 0.584,
+        "BRI": 0.777,
+        "TRD": 74.88,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-13",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 21,
+      "company_name": "Supermercados Group 21",
+      "country": "Brazil",
+      "sector": "Retail",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.49,
+        "HFP": 0.696,
+        "BRI": 0.351,
+        "TRD": 4.2,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-02",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 22,
+      "company_name": "Industrias Corp 22",
+      "country": "Honduras",
+      "sector": "Industrial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.58,
+        "HFP": 0.599,
+        "BRI": 0.456,
+        "TRD": 3.57,
+        "RRG": 1.68
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-22",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 23,
+      "company_name": "Financiera Partners 23",
+      "country": "Mexico",
+      "sector": "Financial",
+      "business_model_v4": "Cadena de Suministro",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.43,
+        "HFP": 0.524,
+        "BRI": 0.406,
+        "TRD": 32.76,
+        "RRG": 1.29
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-26",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 24,
+      "company_name": "Eléctrica Solutions 24",
+      "country": "Brazil",
+      "sector": "Energy",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 8.76,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.3,
+        "HFP": 0.558,
+        "BRI": 0.384,
+        "TRD": 5.46,
+        "RRG": 5.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-15",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 25,
+      "company_name": "Producción SA 25",
+      "country": "Chile",
+      "sector": "Industrial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.54,
+        "HFP": 0.64,
+        "BRI": 0.896,
+        "TRD": 5.46,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-20",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 26,
+      "company_name": "Universidad Solutions 26",
+      "country": "Colombia",
+      "sector": "Education",
+      "business_model_v4": "Cadena de Suministro",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.5,
+        "HFP": 0.617,
+        "BRI": 0.388,
+        "TRD": 30.6,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-11",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 27,
+      "company_name": "Seguros Corp 27",
+      "country": "Panama",
+      "sector": "Financial",
+      "business_model_v4": "Infraestructura Heredada",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.39,
+        "HFP": 0.779,
+        "BRI": 0.435,
+        "TRD": 65.52,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-17",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 28,
+      "company_name": "Capital Holdings 28",
+      "country": "Brazil",
+      "sector": "Financial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.29,
+        "HFP": 0.429,
+        "BRI": 0.445,
+        "TRD": 6.72,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-14",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 29,
+      "company_name": "Producción Partners 29",
+      "country": "Dominican Republic",
+      "sector": "Industrial",
+      "business_model_v4": "Infraestructura Heredada",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.65,
+        "HFP": 0.44,
+        "BRI": 0.747,
+        "TRD": 65.52,
+        "RRG": 1.02
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-05",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 30,
+      "company_name": "Banco Nacional 30",
+      "country": "Nicaragua",
+      "sector": "Financial",
+      "business_model_v4": "Cadena de Suministro",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.31,
+        "HFP": 0.643,
+        "BRI": 0.776,
+        "TRD": 32.76,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-25",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 31,
+      "company_name": "Manufactura Solutions 31",
+      "country": "Argentina",
+      "sector": "Industrial",
+      "business_model_v4": "Comercio Híbrido",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.52,
+        "HFP": 0.669,
+        "BRI": 0.508,
+        "TRD": 23.52,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-11",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 32,
+      "company_name": "Retail LATAM 32",
+      "country": "Uruguay",
+      "sector": "Retail",
+      "business_model_v4": "Software Crítico",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.44,
+        "HFP": 0.234,
+        "BRI": 0.315,
+        "TRD": 20.28,
+        "RRG": 1.38
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-16",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 33,
+      "company_name": "Planta Corp 33",
+      "country": "Dominican Republic",
+      "sector": "Industrial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.58,
+        "HFP": 0.671,
+        "BRI": 0.484,
+        "TRD": 3.57,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-14",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 34,
+      "company_name": "Servicio Nacional 34",
+      "country": "Peru",
+      "sector": "Public",
+      "business_model_v4": "Infraestructura Heredada",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.86,
+        "HFP": 0.611,
+        "BRI": 0.444,
+        "TRD": 72.0,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-12",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 35,
+      "company_name": "Dirección LATAM 35",
+      "country": "Dominican Republic",
+      "sector": "Public",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.08,
+        "HFP": 0.695,
+        "BRI": 0.449,
+        "TRD": 7.8,
+        "RRG": 1.71
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-11",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 36,
+      "company_name": "Pharma SA 36",
+      "country": "Argentina",
+      "sector": "Pharma",
+      "business_model_v4": "Información Regulada",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.67,
+        "HFP": 0.84,
+        "BRI": 0.556,
+        "TRD": 27.04,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-08",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 37,
+      "company_name": "Inversiones Partners 37",
+      "country": "El Salvador",
+      "sector": "Financial",
+      "business_model_v4": "Información Regulada",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.34,
+        "HFP": 0.562,
+        "BRI": 0.691,
+        "TRD": 7.84,
+        "RRG": 1.52
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-08",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 38,
+      "company_name": "Tech Corp 38",
+      "country": "Chile",
+      "sector": "Technology",
+      "business_model_v4": "Cadena de Suministro",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.09,
+        "HFP": 0.524,
+        "BRI": 0.542,
+        "TRD": 21.42,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-04",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 39,
+      "company_name": "Seguros Corp 39",
+      "country": "Argentina",
+      "sector": "Financial",
+      "business_model_v4": "Comercio Híbrido",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.66,
+        "HFP": 0.84,
+        "BRI": 0.489,
+        "TRD": 28.56,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-15",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 40,
+      "company_name": "Manufactura Regional 40",
+      "country": "Costa Rica",
+      "sector": "Industrial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.85,
+        "HFP": 0.482,
+        "BRI": 0.423,
+        "TRD": 6.63,
+        "RRG": 1.35
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-07",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 41,
+      "company_name": "Digital Solutions 41",
+      "country": "Brazil",
+      "sector": "Technology",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.29,
+        "HFP": 0.52,
+        "BRI": 0.651,
+        "TRD": 2.94,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-30",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 42,
+      "company_name": "Tech Partners 42",
+      "country": "Dominican Republic",
+      "sector": "Technology",
+      "business_model_v4": "Servicios Financieros",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.07,
+        "HFP": 0.501,
+        "BRI": 0.664,
+        "TRD": 4.76,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-09",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 43,
+      "company_name": "Capital SA 43",
+      "country": "El Salvador",
+      "sector": "Financial",
+      "business_model_v4": "Cadena de Suministro",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.47,
+        "HFP": 0.368,
+        "BRI": 0.288,
+        "TRD": 46.8,
+        "RRG": 2.38
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-04",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 44,
+      "company_name": "Fábrica Corp 44",
+      "country": "Argentina",
+      "sector": "Industrial",
+      "business_model_v4": "Cadena de Suministro",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.03,
+        "HFP": 0.638,
+        "BRI": 0.24,
+        "TRD": 60.84,
+        "RRG": 1.8
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-29",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 45,
+      "company_name": "Capital Solutions 45",
+      "country": "Argentina",
+      "sector": "Financial",
+      "business_model_v4": "Servicios Financieros",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.47,
+        "HFP": 0.762,
+        "BRI": 0.444,
+        "TRD": 5.6,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-18",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 46,
+      "company_name": "Producción Partners 46",
+      "country": "Paraguay",
+      "sector": "Industrial",
+      "business_model_v4": "Infraestructura Heredada",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.65,
+        "HFP": 0.505,
+        "BRI": 0.624,
+        "TRD": 93.6,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-20",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 47,
+      "company_name": "Consultoría Nacional 47",
+      "country": "Costa Rica",
+      "sector": "Services",
+      "business_model_v4": "Cadena de Suministro",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.72,
+        "HFP": 0.603,
+        "BRI": 0.561,
+        "TRD": 32.76,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-29",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 48,
+      "company_name": "Soluciones Holdings 48",
+      "country": "Brazil",
+      "sector": "Services",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 9.75,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.11,
+        "HFP": 0.784,
+        "BRI": 0.623,
+        "TRD": 2.94,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-25",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 49,
+      "company_name": "Fábrica Internacional 49",
+      "country": "Argentina",
+      "sector": "Industrial",
+      "business_model_v4": "Servicios de Datos",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.81,
+        "HFP": 0.69,
+        "BRI": 0.34,
+        "TRD": 26.88,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-15",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 50,
+      "company_name": "Inversiones Regional 50",
+      "country": "Colombia",
+      "sector": "Financial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.72,
+        "HFP": 0.653,
+        "BRI": 0.421,
+        "TRD": 5.46,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-28",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 51,
+      "company_name": "Partners Nacional 51",
+      "country": "Colombia",
+      "sector": "Services",
+      "business_model_v4": "Comercio Híbrido",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.91,
+        "HFP": 0.62,
+        "BRI": 0.482,
+        "TRD": 76.8,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-30",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 52,
+      "company_name": "Inversiones Corp 52",
+      "country": "Brazil",
+      "sector": "Financial",
+      "business_model_v4": "Servicios Financieros",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.2,
+        "HFP": 0.424,
+        "BRI": 0.66,
+        "TRD": 8.0,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-18",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 53,
+      "company_name": "Centro Médico Group 53",
+      "country": "Costa Rica",
+      "sector": "Healthcare",
+      "business_model_v4": "Software Crítico",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.76,
+        "HFP": 0.548,
+        "BRI": 0.581,
+        "TRD": 5.88,
+        "RRG": 1.19
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-25",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 54,
+      "company_name": "Fábrica Partners 54",
+      "country": "Dominican Republic",
+      "sector": "Industrial",
+      "business_model_v4": "Servicios Financieros",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.62,
+        "HFP": 0.472,
+        "BRI": 0.715,
+        "TRD": 10.4,
+        "RRG": 1.86
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-06",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 55,
+      "company_name": "Instituto Solutions 55",
+      "country": "Chile",
+      "sector": "Public",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.12,
+        "HFP": 0.84,
+        "BRI": 0.684,
+        "TRD": 6.0,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-23",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 56,
+      "company_name": "Seguros Corp 56",
+      "country": "Brazil",
+      "sector": "Financial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.8,
+        "HFP": 0.472,
+        "BRI": 0.473,
+        "TRD": 10.14,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-21",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 57,
+      "company_name": "Seguros LATAM 57",
+      "country": "Argentina",
+      "sector": "Financial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.36,
+        "HFP": 0.588,
+        "BRI": 0.75,
+        "TRD": 10.14,
+        "RRG": 1.11
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-07",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 58,
+      "company_name": "Renovables Regional 58",
+      "country": "Brazil",
+      "sector": "Energy",
+      "business_model_v4": "Servicios Financieros",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.4,
+        "HFP": 0.615,
+        "BRI": 0.48,
+        "TRD": 5.6,
+        "RRG": 1.97
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-26",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 59,
+      "company_name": "Instituto Holdings 59",
+      "country": "Costa Rica",
+      "sector": "Public",
+      "business_model_v4": "Cadena de Suministro",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.87,
+        "HFP": 0.574,
+        "BRI": 0.24,
+        "TRD": 46.8,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-30",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 60,
+      "company_name": "Instituto Group 60",
+      "country": "Costa Rica",
+      "sector": "Public",
+      "business_model_v4": "Información Regulada",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.21,
+        "HFP": 0.598,
+        "BRI": 0.861,
+        "TRD": 11.2,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-18",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 61,
+      "company_name": "Seguros Nacional 61",
+      "country": "Colombia",
+      "sector": "Financial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.77,
+        "HFP": 0.445,
+        "BRI": 0.451,
+        "TRD": 6.72,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-05",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 62,
+      "company_name": "Sistemas Group 62",
+      "country": "Panama",
+      "sector": "Technology",
+      "business_model_v4": "Comercio Híbrido",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.01,
+        "HFP": 0.573,
+        "BRI": 0.392,
+        "TRD": 99.84,
+        "RRG": 2.1
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-07",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 63,
+      "company_name": "Agencia Partners 63",
+      "country": "Costa Rica",
+      "sector": "Public",
+      "business_model_v4": "Cadena de Suministro",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.79,
+        "HFP": 0.717,
+        "BRI": 0.92,
+        "TRD": 46.8,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-06",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 64,
+      "company_name": "Dirección Corp 64",
+      "country": "Chile",
+      "sector": "Public",
+      "business_model_v4": "Servicios Financieros",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.18,
+        "HFP": 0.447,
+        "BRI": 0.497,
+        "TRD": 4.76,
+        "RRG": 1.19
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-28",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 65,
+      "company_name": "Capital SA 65",
+      "country": "Guatemala",
+      "sector": "Financial",
+      "business_model_v4": "Comercio Híbrido",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.24,
+        "HFP": 0.713,
+        "BRI": 0.672,
+        "TRD": 28.56,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-10",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 66,
+      "company_name": "Medical Holdings 66",
+      "country": "Peru",
+      "sector": "Healthcare",
+      "business_model_v4": "Infraestructura Heredada",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.82,
+        "HFP": 0.698,
+        "BRI": 0.83,
+        "TRD": 72.0,
+        "RRG": 2.04
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-29",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 67,
+      "company_name": "Inversiones Partners 67",
+      "country": "Argentina",
+      "sector": "Financial",
+      "business_model_v4": "Infraestructura Heredada",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.25,
+        "HFP": 0.483,
+        "BRI": 0.523,
+        "TRD": 149.76,
+        "RRG": 3.08
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-19",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 68,
+      "company_name": "Seguros Group 68",
+      "country": "Costa Rica",
+      "sector": "Financial",
+      "business_model_v4": "Cadena de Suministro",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.72,
+        "HFP": 0.512,
+        "BRI": 0.36,
+        "TRD": 74.88,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-08",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 69,
+      "company_name": "Seguros Holdings 69",
+      "country": "Argentina",
+      "sector": "Financial",
+      "business_model_v4": "Infraestructura Heredada",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.67,
+        "HFP": 0.701,
+        "BRI": 0.472,
+        "TRD": 80.64,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-30",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 70,
+      "company_name": "Soluciones LATAM 70",
+      "country": "El Salvador",
+      "sector": "Services",
+      "business_model_v4": "Infraestructura Heredada",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.89,
+        "HFP": 0.613,
+        "BRI": 0.814,
+        "TRD": 79.56,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-22",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 71,
+      "company_name": "Almacenes Partners 71",
+      "country": "Brazil",
+      "sector": "Retail",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.23,
+        "HFP": 0.815,
+        "BRI": 0.656,
+        "TRD": 6.72,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-11",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 72,
+      "company_name": "Manufactura Regional 72",
+      "country": "Paraguay",
+      "sector": "Industrial",
+      "business_model_v4": "Cadena de Suministro",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.06,
+        "HFP": 0.531,
+        "BRI": 0.582,
+        "TRD": 36.0,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-03",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 73,
+      "company_name": "Supermercados Holdings 73",
+      "country": "Dominican Republic",
+      "sector": "Retail",
+      "business_model_v4": "Software Crítico",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.23,
+        "HFP": 0.612,
+        "BRI": 0.438,
+        "TRD": 7.14,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-21",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 74,
+      "company_name": "Seguros Partners 74",
+      "country": "Panama",
+      "sector": "Financial",
+      "business_model_v4": "Infraestructura Heredada",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.69,
+        "HFP": 0.607,
+        "BRI": 0.382,
+        "TRD": 80.64,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-23",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 75,
+      "company_name": "Seguros Internacional 75",
+      "country": "Guatemala",
+      "sector": "Financial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.27,
+        "HFP": 0.466,
+        "BRI": 0.607,
+        "TRD": 7.8,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-29",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 76,
+      "company_name": "Financiera Solutions 76",
+      "country": "Colombia",
+      "sector": "Financial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.38,
+        "HFP": 0.61,
+        "BRI": 0.492,
+        "TRD": 9.6,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-16",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 77,
+      "company_name": "Banco Corp 77",
+      "country": "Peru",
+      "sector": "Financial",
+      "business_model_v4": "Infraestructura Heredada",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.34,
+        "HFP": 0.625,
+        "BRI": 0.417,
+        "TRD": 42.84,
+        "RRG": 4.03
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-08",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 78,
+      "company_name": "Colegio Nacional 78",
+      "country": "Dominican Republic",
+      "sector": "Education",
+      "business_model_v4": "Comercio Híbrido",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.35,
+        "HFP": 0.6,
+        "BRI": 0.448,
+        "TRD": 23.52,
+        "RRG": 1.13
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-23",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 79,
+      "company_name": "Manufactura Solutions 79",
+      "country": "Argentina",
+      "sector": "Industrial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 9.22,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.54,
+        "HFP": 0.605,
+        "BRI": 0.527,
+        "TRD": 4.2,
+        "RRG": 1.89
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-25",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 80,
+      "company_name": "Servicio Corp 80",
+      "country": "Uruguay",
+      "sector": "Public",
+      "business_model_v4": "Infraestructura Heredada",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.27,
+        "HFP": 0.446,
+        "BRI": 0.562,
+        "TRD": 50.4,
+        "RRG": 5.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-29",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 81,
+      "company_name": "Dirección Internacional 81",
+      "country": "Colombia",
+      "sector": "Public",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.29,
+        "HFP": 0.47,
+        "BRI": 0.824,
+        "TRD": 7.8,
+        "RRG": 3.43
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-24",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 82,
+      "company_name": "Lab Nacional 82",
+      "country": "Costa Rica",
+      "sector": "Pharma",
+      "business_model_v4": "Infraestructura Heredada",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.24,
+        "HFP": 0.464,
+        "BRI": 0.612,
+        "TRD": 93.6,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-30",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 83,
+      "company_name": "Dirección Nacional 83",
+      "country": "Mexico",
+      "sector": "Public",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.77,
+        "HFP": 0.509,
+        "BRI": 0.666,
+        "TRD": 4.2,
+        "RRG": 1.08
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-13",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 84,
+      "company_name": "Medicamentos Group 84",
+      "country": "Dominican Republic",
+      "sector": "Pharma",
+      "business_model_v4": "Infraestructura Heredada",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.44,
+        "HFP": 0.488,
+        "BRI": 0.386,
+        "TRD": 121.68,
+        "RRG": 1.34
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-10",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 85,
+      "company_name": "Capital Internacional 85",
+      "country": "Dominican Republic",
+      "sector": "Financial",
+      "business_model_v4": "Servicios Financieros",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.56,
+        "HFP": 0.656,
+        "BRI": 0.358,
+        "TRD": 10.4,
+        "RRG": 1.01
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-23",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 86,
+      "company_name": "Academia Group 86",
+      "country": "Costa Rica",
+      "sector": "Education",
+      "business_model_v4": "Servicios Financieros",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.65,
+        "HFP": 0.444,
+        "BRI": 0.316,
+        "TRD": 12.8,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-30",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 87,
+      "company_name": "Dirección Partners 87",
+      "country": "Panama",
+      "sector": "Public",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.01,
+        "HFP": 0.654,
+        "BRI": 0.606,
+        "TRD": 10.14,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-28",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 88,
+      "company_name": "Planta Corp 88",
+      "country": "Guatemala",
+      "sector": "Industrial",
+      "business_model_v4": "Infraestructura Heredada",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.74,
+        "HFP": 0.549,
+        "BRI": 0.532,
+        "TRD": 65.52,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-18",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 89,
+      "company_name": "Industrias Solutions 89",
+      "country": "Peru",
+      "sector": "Industrial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.53,
+        "HFP": 0.734,
+        "BRI": 0.876,
+        "TRD": 7.8,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-29",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 90,
+      "company_name": "Fábrica Partners 90",
+      "country": "Dominican Republic",
+      "sector": "Industrial",
+      "business_model_v4": "Cadena de Suministro",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.96,
+        "HFP": 0.647,
+        "BRI": 0.425,
+        "TRD": 46.8,
+        "RRG": 2.1
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-11",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 91,
+      "company_name": "Universidad Corp 91",
+      "country": "Colombia",
+      "sector": "Education",
+      "business_model_v4": "Infraestructura Heredada",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.5,
+        "HFP": 0.414,
+        "BRI": 0.55,
+        "TRD": 121.68,
+        "RRG": 1.07
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-16",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 92,
+      "company_name": "Energía Group 92",
+      "country": "Costa Rica",
+      "sector": "Energy",
+      "business_model_v4": "Software Crítico",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.49,
+        "HFP": 0.595,
+        "BRI": 0.257,
+        "TRD": 12.0,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-21",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 93,
+      "company_name": "Instituto Solutions 93",
+      "country": "Dominican Republic",
+      "sector": "Public",
+      "business_model_v4": "Software Crítico",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.0,
+        "HFP": 0.688,
+        "BRI": 0.24,
+        "TRD": 10.92,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-17",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 94,
+      "company_name": "Servicios Partners 94",
+      "country": "Dominican Republic",
+      "sector": "Services",
+      "business_model_v4": "Servicios Financieros",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.92,
+        "HFP": 0.543,
+        "BRI": 0.711,
+        "TRD": 5.6,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-10",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 95,
+      "company_name": "Inversiones Regional 95",
+      "country": "Bolivia",
+      "sector": "Financial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.25,
+        "HFP": 0.773,
+        "BRI": 0.451,
+        "TRD": 5.46,
+        "RRG": 1.6
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-28",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 96,
+      "company_name": "Energía Solutions 96",
+      "country": "Panama",
+      "sector": "Energy",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.55,
+        "HFP": 0.509,
+        "BRI": 0.24,
+        "TRD": 2.94,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-30",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 97,
+      "company_name": "Servicios LATAM 97",
+      "country": "Brazil",
+      "sector": "Services",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.16,
+        "HFP": 0.702,
+        "BRI": 0.619,
+        "TRD": 9.6,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-12",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 98,
+      "company_name": "Seguros Holdings 98",
+      "country": "Ecuador",
+      "sector": "Financial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.5,
+        "HFP": 0.84,
+        "BRI": 0.289,
+        "TRD": 7.8,
+        "RRG": 1.25
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-11",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 99,
+      "company_name": "Manufactura Corp 99",
+      "country": "Colombia",
+      "sector": "Industrial",
+      "business_model_v4": "Software Crítico",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.04,
+        "HFP": 0.465,
+        "BRI": 0.594,
+        "TRD": 15.6,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-12",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 100,
+      "company_name": "Comercial LATAM 100",
+      "country": "Venezuela",
+      "sector": "Retail",
+      "business_model_v4": "Servicios Financieros",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.01,
+        "HFP": 0.758,
+        "BRI": 0.793,
+        "TRD": 7.28,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-12",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 101,
+      "company_name": "Tiendas Partners 101",
+      "country": "Colombia",
+      "sector": "Retail",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.02,
+        "HFP": 0.582,
+        "BRI": 0.728,
+        "TRD": 3.57,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-24",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 102,
+      "company_name": "Digital Group 102",
+      "country": "Mexico",
+      "sector": "Technology",
+      "business_model_v4": "Software Crítico",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.26,
+        "HFP": 0.463,
+        "BRI": 0.269,
+        "TRD": 24.96,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-23",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 103,
+      "company_name": "Retail Regional 103",
+      "country": "Chile",
+      "sector": "Retail",
+      "business_model_v4": "Servicios Financieros",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.16,
+        "HFP": 0.391,
+        "BRI": 0.788,
+        "TRD": 12.8,
+        "RRG": 1.01
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-13",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 104,
+      "company_name": "Fábrica Corp 104",
+      "country": "Argentina",
+      "sector": "Industrial",
+      "business_model_v4": "Infraestructura Heredada",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.03,
+        "HFP": 0.444,
+        "BRI": 0.304,
+        "TRD": 80.64,
+        "RRG": 2.77
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-11",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 105,
+      "company_name": "Dirección Nacional 105",
+      "country": "Costa Rica",
+      "sector": "Public",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.01,
+        "HFP": 0.692,
+        "BRI": 0.402,
+        "TRD": 10.14,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-17",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 106,
+      "company_name": "Capital Internacional 106",
+      "country": "Ecuador",
+      "sector": "Financial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.71,
+        "HFP": 0.589,
+        "BRI": 0.714,
+        "TRD": 5.46,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-26",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 107,
+      "company_name": "Inversiones Regional 107",
+      "country": "Brazil",
+      "sector": "Financial",
+      "business_model_v4": "Software Crítico",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.69,
+        "HFP": 0.428,
+        "BRI": 0.565,
+        "TRD": 8.4,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-10",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 108,
+      "company_name": "Eléctrica Partners 108",
+      "country": "Colombia",
+      "sector": "Energy",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.69,
+        "HFP": 0.561,
+        "BRI": 0.514,
+        "TRD": 3.57,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-04",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 109,
+      "company_name": "Financiera Holdings 109",
+      "country": "Brazil",
+      "sector": "Financial",
+      "business_model_v4": "Información Regulada",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.51,
+        "HFP": 0.695,
+        "BRI": 0.583,
+        "TRD": 17.92,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-23",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 110,
+      "company_name": "Partners LATAM 110",
+      "country": "Argentina",
+      "sector": "Services",
+      "business_model_v4": "Comercio Híbrido",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.26,
+        "HFP": 0.839,
+        "BRI": 0.482,
+        "TRD": 81.12,
+        "RRG": 5.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-11",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 111,
+      "company_name": "Industrias Nacional 111",
+      "country": "Costa Rica",
+      "sector": "Industrial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.76,
+        "HFP": 0.695,
+        "BRI": 0.24,
+        "TRD": 7.8,
+        "RRG": 2.28
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-12",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 112,
+      "company_name": "Medicamentos Nacional 112",
+      "country": "Colombia",
+      "sector": "Pharma",
+      "business_model_v4": "Servicios Financieros",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.23,
+        "HFP": 0.602,
+        "BRI": 0.399,
+        "TRD": 4.76,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-17",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 113,
+      "company_name": "Petróleo Partners 113",
+      "country": "Chile",
+      "sector": "Energy",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.21,
+        "HFP": 0.558,
+        "BRI": 0.487,
+        "TRD": 5.46,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-22",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 114,
+      "company_name": "Supermercados Solutions 114",
+      "country": "Chile",
+      "sector": "Retail",
+      "business_model_v4": "Cadena de Suministro",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.36,
+        "HFP": 0.445,
+        "BRI": 0.603,
+        "TRD": 25.2,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-09",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 115,
+      "company_name": "Instituto Holdings 115",
+      "country": "Colombia",
+      "sector": "Public",
+      "business_model_v4": "Infraestructura Heredada",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.18,
+        "HFP": 0.683,
+        "BRI": 0.376,
+        "TRD": 115.2,
+        "RRG": 1.89
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-24",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 116,
+      "company_name": "Financiera Holdings 116",
+      "country": "Colombia",
+      "sector": "Financial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.28,
+        "HFP": 0.564,
+        "BRI": 0.412,
+        "TRD": 2.94,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-02",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 117,
+      "company_name": "Fábrica SA 117",
+      "country": "El Salvador",
+      "sector": "Industrial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.61,
+        "HFP": 0.78,
+        "BRI": 0.416,
+        "TRD": 6.63,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-30",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 118,
+      "company_name": "Inversiones Solutions 118",
+      "country": "Uruguay",
+      "sector": "Financial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.42,
+        "HFP": 0.365,
+        "BRI": 0.366,
+        "TRD": 6.72,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-06",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 119,
+      "company_name": "Fábrica Solutions 119",
+      "country": "Panama",
+      "sector": "Industrial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.84,
+        "HFP": 0.84,
+        "BRI": 0.634,
+        "TRD": 7.8,
+        "RRG": 1.57
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-11",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 120,
+      "company_name": "Centro Partners 120",
+      "country": "Dominican Republic",
+      "sector": "Education",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 8.04,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.46,
+        "HFP": 0.757,
+        "BRI": 0.449,
+        "TRD": 4.2,
+        "RRG": 1.97
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-15",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 121,
+      "company_name": "Ministerio Holdings 121",
+      "country": "Mexico",
+      "sector": "Public",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.13,
+        "HFP": 0.659,
+        "BRI": 0.775,
+        "TRD": 10.14,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-24",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 122,
+      "company_name": "Ministerio LATAM 122",
+      "country": "Ecuador",
+      "sector": "Public",
+      "business_model_v4": "Cadena de Suministro",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.12,
+        "HFP": 0.745,
+        "BRI": 0.363,
+        "TRD": 32.76,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-07",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 123,
+      "company_name": "Producción LATAM 123",
+      "country": "Dominican Republic",
+      "sector": "Industrial",
+      "business_model_v4": "Software Crítico",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.0,
+        "HFP": 0.618,
+        "BRI": 0.623,
+        "TRD": 24.96,
+        "RRG": 1.09
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-26",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 124,
+      "company_name": "Dirección Corp 124",
+      "country": "Peru",
+      "sector": "Public",
+      "business_model_v4": "Comercio Híbrido",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.01,
+        "HFP": 0.775,
+        "BRI": 0.669,
+        "TRD": 43.68,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-02",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 125,
+      "company_name": "Partners Internacional 125",
+      "country": "Brazil",
+      "sector": "Services",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.78,
+        "HFP": 0.534,
+        "BRI": 0.339,
+        "TRD": 6.0,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-28",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 126,
+      "company_name": "Planta Regional 126",
+      "country": "Colombia",
+      "sector": "Industrial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.08,
+        "HFP": 0.499,
+        "BRI": 0.467,
+        "TRD": 9.6,
+        "RRG": 1.21
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-06",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 127,
+      "company_name": "Manufactura Regional 127",
+      "country": "Peru",
+      "sector": "Industrial",
+      "business_model_v4": "Infraestructura Heredada",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.91,
+        "HFP": 0.728,
+        "BRI": 0.763,
+        "TRD": 121.68,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-01",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 128,
+      "company_name": "Industrias Internacional 128",
+      "country": "Brazil",
+      "sector": "Industrial",
+      "business_model_v4": "Infraestructura Heredada",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.69,
+        "HFP": 0.572,
+        "BRI": 0.534,
+        "TRD": 93.6,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-14",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 129,
+      "company_name": "Planta SA 129",
+      "country": "Colombia",
+      "sector": "Industrial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.57,
+        "HFP": 0.536,
+        "BRI": 0.804,
+        "TRD": 3.57,
+        "RRG": 1.04
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-04",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 130,
+      "company_name": "Planta Internacional 130",
+      "country": "El Salvador",
+      "sector": "Industrial",
+      "business_model_v4": "Software Crítico",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.55,
+        "HFP": 0.2,
+        "BRI": 0.612,
+        "TRD": 8.4,
+        "RRG": 2.85
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-28",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 131,
+      "company_name": "Energía Corp 131",
+      "country": "Chile",
+      "sector": "Energy",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.77,
+        "HFP": 0.507,
+        "BRI": 0.655,
+        "TRD": 7.8,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-26",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 132,
+      "company_name": "Banco Corp 132",
+      "country": "Brazil",
+      "sector": "Financial",
+      "business_model_v4": "Cadena de Suministro",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.54,
+        "HFP": 0.643,
+        "BRI": 0.44,
+        "TRD": 46.8,
+        "RRG": 2.25
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-27",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 133,
+      "company_name": "Seguros Holdings 133",
+      "country": "Colombia",
+      "sector": "Financial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.76,
+        "HFP": 0.589,
+        "BRI": 0.295,
+        "TRD": 6.0,
+        "RRG": 1.16
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-23",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 134,
+      "company_name": "Industrias Regional 134",
+      "country": "Ecuador",
+      "sector": "Industrial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.78,
+        "HFP": 0.576,
+        "BRI": 0.824,
+        "TRD": 5.46,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-01",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 135,
+      "company_name": "Centro Holdings 135",
+      "country": "Colombia",
+      "sector": "Education",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.67,
+        "HFP": 0.771,
+        "BRI": 0.24,
+        "TRD": 6.72,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-12",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 136,
+      "company_name": "Planta Holdings 136",
+      "country": "Panama",
+      "sector": "Industrial",
+      "business_model_v4": "Cadena de Suministro",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.59,
+        "HFP": 0.668,
+        "BRI": 0.493,
+        "TRD": 32.76,
+        "RRG": 1.29
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-24",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 137,
+      "company_name": "Agencia Holdings 137",
+      "country": "Dominican Republic",
+      "sector": "Public",
+      "business_model_v4": "Comercio Híbrido",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.75,
+        "HFP": 0.634,
+        "BRI": 0.343,
+        "TRD": 33.6,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-21",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 138,
+      "company_name": "Planta Solutions 138",
+      "country": "Colombia",
+      "sector": "Industrial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.87,
+        "HFP": 0.59,
+        "BRI": 0.24,
+        "TRD": 7.8,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-07",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 139,
+      "company_name": "Servicio SA 139",
+      "country": "Colombia",
+      "sector": "Public",
+      "business_model_v4": "Infraestructura Heredada",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.05,
+        "HFP": 0.395,
+        "BRI": 0.24,
+        "TRD": 121.68,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-26",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 140,
+      "company_name": "Soluciones Regional 140",
+      "country": "Dominican Republic",
+      "sector": "Services",
+      "business_model_v4": "Servicios Financieros",
+      "dii_score": 8.72,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.19,
+        "HFP": 0.767,
+        "BRI": 0.813,
+        "TRD": 8.84,
+        "RRG": 2.7
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-16",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 141,
+      "company_name": "Salud Internacional 141",
+      "country": "Uruguay",
+      "sector": "Healthcare",
+      "business_model_v4": "Cadena de Suministro",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.52,
+        "HFP": 0.74,
+        "BRI": 0.577,
+        "TRD": 30.6,
+        "RRG": 2.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-26",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 142,
+      "company_name": "Dirección Holdings 142",
+      "country": "Chile",
+      "sector": "Public",
+      "business_model_v4": "Servicios Financieros",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.78,
+        "HFP": 0.68,
+        "BRI": 0.671,
+        "TRD": 8.96,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-23",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 143,
+      "company_name": "Seguros Internacional 143",
+      "country": "Chile",
+      "sector": "Financial",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 4.53,
+        "HFP": 0.653,
+        "BRI": 0.594,
+        "TRD": 5.46,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-25",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 144,
+      "company_name": "Fábrica Internacional 144",
+      "country": "Dominican Republic",
+      "sector": "Industrial",
+      "business_model_v4": "Infraestructura Heredada",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.01,
+        "HFP": 0.688,
+        "BRI": 0.566,
+        "TRD": 80.64,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-16",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 145,
+      "company_name": "Instituto Solutions 145",
+      "country": "Dominican Republic",
+      "sector": "Public",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.11,
+        "HFP": 0.619,
+        "BRI": 0.315,
+        "TRD": 5.46,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-01",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 146,
+      "company_name": "Energía Corp 146",
+      "country": "Colombia",
+      "sector": "Energy",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.64,
+        "HFP": 0.334,
+        "BRI": 0.437,
+        "TRD": 7.8,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-02",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 147,
+      "company_name": "Dirección LATAM 147",
+      "country": "Costa Rica",
+      "sector": "Public",
+      "business_model_v4": "Información Regulada",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.13,
+        "HFP": 0.639,
+        "BRI": 0.476,
+        "TRD": 27.04,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-10",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 148,
+      "company_name": "Petróleo Regional 148",
+      "country": "Colombia",
+      "sector": "Energy",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.27,
+        "HFP": 0.509,
+        "BRI": 0.589,
+        "TRD": 4.2,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-18",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": true,
+        "confidence_level": "HIGH",
+        "data_completeness": 1.0,
+        "needs_reassessment": false
+      }
+    },
+    {
+      "id": 149,
+      "company_name": "Manufactura LATAM 149",
+      "country": "Costa Rica",
+      "sector": "Industrial",
+      "business_model_v4": "Software Crítico",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 2.83,
+        "HFP": 0.416,
+        "BRI": 0.536,
+        "TRD": 24.96,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-07-04",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    },
+    {
+      "id": 150,
+      "company_name": "Retail Group 150",
+      "country": "Colombia",
+      "sector": "Retail",
+      "business_model_v4": "Ecosistema Digital",
+      "dii_score": 10.0,
+      "dii_stage": "Adaptativo",
+      "dimensions": {
+        "AER": 3.0,
+        "HFP": 0.61,
+        "BRI": 0.333,
+        "TRD": 6.72,
+        "RRG": 1.0
+      },
+      "migration_metadata": {
+        "migration_date": "2025-06-21",
+        "source_framework": "v3.0",
+        "target_framework": "v4.0",
+        "has_zt_maturity": false,
+        "confidence_level": "MEDIUM",
+        "data_completeness": 0.8,
+        "needs_reassessment": true
+      }
+    }
+  ]
+}

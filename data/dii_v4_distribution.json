@@ -1,0 +1,234 @@
+{
+  "stage_distribution": {
+    "labels": [
+      "Frágil",
+      "Robusto",
+      "Resiliente",
+      "Adaptativo"
+    ],
+    "values": [
+      0,
+      0,
+      1,
+      149
+    ],
+    "colors": [
+      "#DC2626",
+      "#F59E0B",
+      "#10B981",
+      "#3B82F6"
+    ]
+  },
+  "model_performance": {
+    "labels": [
+      "Servicios Financieros",
+      "Ecosistema Digital",
+      "Software Crítico",
+      "Servicios de Datos",
+      "Información Regulada",
+      "Comercio Híbrido",
+      "Cadena de Suministro",
+      "Infraestructura Heredada"
+    ],
+    "avg_scores": [
+      9.92,
+      9.89,
+      10.0,
+      10.0,
+      10.0,
+      10.0,
+      10.0,
+      10.0
+    ],
+    "client_counts": [
+      17,
+      61,
+      13,
+      3,
+      5,
+      10,
+      19,
+      22
+    ]
+  },
+  "top_performers": [
+    {
+      "company": "Eléctrica SA 1",
+      "country": "Dominican Republic",
+      "sector": "Energy",
+      "model": "Ecosistema Digital",
+      "score": 10.0,
+      "stage": "Adaptativo"
+    },
+    {
+      "company": "Seguros Regional 3",
+      "country": "Colombia",
+      "sector": "Financial",
+      "model": "Software Crítico",
+      "score": 10.0,
+      "stage": "Adaptativo"
+    },
+    {
+      "company": "Software Regional 4",
+      "country": "Costa Rica",
+      "sector": "Technology",
+      "model": "Comercio Híbrido",
+      "score": 10.0,
+      "stage": "Adaptativo"
+    },
+    {
+      "company": "Seguros Corp 5",
+      "country": "Chile",
+      "sector": "Financial",
+      "model": "Ecosistema Digital",
+      "score": 10.0,
+      "stage": "Adaptativo"
+    },
+    {
+      "company": "Retail Group 6",
+      "country": "Ecuador",
+      "sector": "Retail",
+      "model": "Cadena de Suministro",
+      "score": 10.0,
+      "stage": "Adaptativo"
+    },
+    {
+      "company": "Software Group 7",
+      "country": "Dominican Republic",
+      "sector": "Technology",
+      "model": "Servicios Financieros",
+      "score": 10.0,
+      "stage": "Adaptativo"
+    },
+    {
+      "company": "Planta Solutions 8",
+      "country": "Costa Rica",
+      "sector": "Industrial",
+      "model": "Servicios Financieros",
+      "score": 10.0,
+      "stage": "Adaptativo"
+    },
+    {
+      "company": "Petróleo Nacional 9",
+      "country": "Honduras",
+      "sector": "Energy",
+      "model": "Servicios de Datos",
+      "score": 10.0,
+      "stage": "Adaptativo"
+    },
+    {
+      "company": "Inversiones Nacional 10",
+      "country": "Colombia",
+      "sector": "Financial",
+      "model": "Servicios Financieros",
+      "score": 10.0,
+      "stage": "Adaptativo"
+    },
+    {
+      "company": "Ministerio SA 11",
+      "country": "Brazil",
+      "sector": "Public",
+      "model": "Servicios de Datos",
+      "score": 10.0,
+      "stage": "Adaptativo"
+    }
+  ],
+  "bottom_performers": [
+    {
+      "company": "Dirección LATAM 147",
+      "country": "Costa Rica",
+      "sector": "Public",
+      "model": "Información Regulada",
+      "score": 10.0,
+      "stage": "Adaptativo"
+    },
+    {
+      "company": "Petróleo Regional 148",
+      "country": "Colombia",
+      "sector": "Energy",
+      "model": "Ecosistema Digital",
+      "score": 10.0,
+      "stage": "Adaptativo"
+    },
+    {
+      "company": "Manufactura LATAM 149",
+      "country": "Costa Rica",
+      "sector": "Industrial",
+      "model": "Software Crítico",
+      "score": 10.0,
+      "stage": "Adaptativo"
+    },
+    {
+      "company": "Retail Group 150",
+      "country": "Colombia",
+      "sector": "Retail",
+      "model": "Ecosistema Digital",
+      "score": 10.0,
+      "stage": "Adaptativo"
+    },
+    {
+      "company": "Soluciones Holdings 48",
+      "country": "Brazil",
+      "sector": "Services",
+      "model": "Ecosistema Digital",
+      "score": 9.75,
+      "stage": "Adaptativo"
+    },
+    {
+      "company": "Manufactura Solutions 79",
+      "country": "Argentina",
+      "sector": "Industrial",
+      "model": "Ecosistema Digital",
+      "score": 9.22,
+      "stage": "Adaptativo"
+    },
+    {
+      "company": "Eléctrica Solutions 24",
+      "country": "Brazil",
+      "sector": "Energy",
+      "model": "Ecosistema Digital",
+      "score": 8.76,
+      "stage": "Adaptativo"
+    },
+    {
+      "company": "Soluciones Regional 140",
+      "country": "Dominican Republic",
+      "sector": "Services",
+      "model": "Servicios Financieros",
+      "score": 8.72,
+      "stage": "Adaptativo"
+    },
+    {
+      "company": "Centro Partners 120",
+      "country": "Dominican Republic",
+      "sector": "Education",
+      "model": "Ecosistema Digital",
+      "score": 8.04,
+      "stage": "Adaptativo"
+    },
+    {
+      "company": "Producción Solutions 2",
+      "country": "Colombia",
+      "sector": "Industrial",
+      "model": "Ecosistema Digital",
+      "score": 7.25,
+      "stage": "Resiliente"
+    }
+  ],
+  "sector_comparison": {
+    "labels": [
+      "Financial",
+      "Technology",
+      "Healthcare",
+      "Industrial",
+      "Public"
+    ],
+    "values": [
+      10.0,
+      10.0,
+      10.0,
+      9.9,
+      10.0
+    ]
+  }
+}

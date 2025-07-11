@@ -1,0 +1,71 @@
+{
+  "datasets": {
+    "dii_v4_historical": {
+      "filename": "dii_v4_historical_data.json",
+      "description": "150 companies migrated from v3.0 to DII v4.0",
+      "framework_version": "4.0",
+      "record_count": 150,
+      "date_range": {
+        "start": "2025-06-11",
+        "end": "2025-07-11"
+      },
+      "geographic_coverage": [
+        "Colombia",
+        "Dominican Republic",
+        "Brazil",
+        "Costa Rica",
+        "Argentina",
+        "Chile",
+        "Panama",
+        "Peru",
+        "Ecuador",
+        "El Salvador",
+        "Mexico",
+        "Uruguay",
+        "Guatemala",
+        "Honduras",
+        "Paraguay",
+        "Bolivia",
+        "Nicaragua",
+        "Venezuela"
+      ],
+      "sectors": [
+        "Financial",
+        "Industrial",
+        "Public",
+        "Energy",
+        "Retail",
+        "Services",
+        "Education",
+        "Healthcare",
+        "Pharma",
+        "Technology"
+      ]
+    },
+    "dii_v4_benchmarks": {
+      "filename": "dii_v4_benchmarks.json",
+      "description": "Aggregated benchmarks by business model and sector",
+      "framework_version": "4.0",
+      "last_updated": "2025-07-11"
+    },
+    "dii_v4_distribution": {
+      "filename": "dii_v4_distribution.json",
+      "description": "Visualization-ready distribution data",
+      "framework_version": "4.0",
+      "chart_types": [
+        "pie",
+        "bar",
+        "ranked_list"
+      ]
+    }
+  },
+  "metadata": {
+    "last_updated": "2025-07-11",
+    "total_companies": 150,
+    "framework_versions": [
+      "3.0",
+      "4.0"
+    ],
+    "data_quality": "production"
+  }
+}
