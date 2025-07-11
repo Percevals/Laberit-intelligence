@@ -1,0 +1,24 @@
+# Core dependencies for Laberit Intelligence
+# Install with: pip install -r requirements.txt
+
+# Data processing
+pandas>=2.0.0
+numpy>=1.24.0
+openpyxl>=3.1.0
+
+# Web requests and APIs
+requests>=2.31.0
+urllib3>=2.0.0
+
+# Template rendering
+jinja2>=3.1.0
+
+# Date handling
+python-dateutil>=2.8.0
+
+# Optional: Development tools
+# Uncomment if you want development dependencies
+# pytest>=7.4.0
+# black>=23.0.0
+# flake8>=6.0.0
+# pre-commit>=3.0.0

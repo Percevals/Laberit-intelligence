@@ -3,11 +3,19 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+lerna-debug.log*
+.npm
+.eslintcache
+.node_repl_history
+*.tsbuildinfo
 
 # Build outputs
 dist/
 build/
 _site/
+quick-assessment/dist/
+quick-assessment/.cache/
+quick-assessment/.parcel-cache/
 
 # Test directories
 test-deploy/
@@ -16,20 +24,110 @@ test-site/
 # OS files
 .DS_Store
 Thumbs.db
+.AppleDouble
+.LSOverride
+Icon
+._*
 
 # IDE
 .vscode/
 .idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
 
 # Python
 __pycache__/
+*.py[cod]
+*$py.class
 *.pyc
 .env
 venv/
+env/
+.venv/
+*.egg-info/
+
+# Virtual environments
+bin/
+include/
+lib/
+lib64
+share/
+pyvenv.cfg
 
 # Logs
 *.log
+logs/
+pip-log.txt
+pip-delete-this-directory.txt
 
 # Temporary files
 *.tmp
 *.temp
+*.bak
+
+# Data cache and generated analysis files
+data/cache/
+data/temp/
+intelligence/output/
+intelligence/*.html
+intelligence/*.json
+
+# Generated analysis files in root (to be moved)
+dii_*.json
+dii_*.txt
+dii_*.csv
+*_analysis.json
+*_analysis.txt
+*_report.txt
+*_matrix.csv
+*_matrix.json
+*_summary.json
+*_demo_summary.json
+
+# Testing
+coverage/
+.coverage
+.coverage.*
+.pytest_cache/
+htmlcov/
+.tox/
+.nox/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# Documentation build
+docs/_build/
+docs/.doctrees/
+site/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Archive files (but keep directory structure)
+archive/**/*.json
+archive/**/*.txt
+archive/**/*.csv
+!archive/**/README.md
+
+# Keep important generated data files
+!data/dii_v4_historical_data.json
+!data/dii_v4_benchmarks.json
+!data/dii_v4_distribution.json
+!data/index.json
