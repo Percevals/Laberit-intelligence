@@ -30,18 +30,22 @@ jobs:
         
     - name: Prepare deployment structure
       run: |
-        # Limpiar cualquier estructura previa
+        # Create deployment directory
         rm -rf deploy
-        mkdir -p deploy/quick-assessment
+        mkdir -p deploy
         
-        # IMPORTANTE: Primero copiar Quick Assessment a su subdirectorio
-        cp -r quick-assessment/dist/* deploy/quick-assessment/
-        
-        # Luego copiar el sitio principal (esto sobrescribirá cualquier index.html incorrecto)
-        cp index.html deploy/index.html
+        # Copy main site files FIRST
+        cp index.html deploy/
         cp immunity-framework.html deploy/ 2>/dev/null || true
         
-        # Copiar directorios del sitio principal
+        # Copy all HTML files except index.html
+        for f in *.html; do 
+          if [ "$f" != "index.html" ] && [ -f "$f" ]; then 
+            cp "$f" deploy/
+          fi
+        done
+        
+        # Copy directories
         cp -r intelligence deploy/ 2>/dev/null || true
         cp -r assessments deploy/ 2>/dev/null || true
         cp -r dashboards deploy/ 2>/dev/null || true
@@ -51,18 +55,18 @@ jobs:
         cp -r scripts deploy/ 2>/dev/null || true
         cp -r templates deploy/ 2>/dev/null || true
         
-        # NO copiar assets del root para evitar conflictos
-        # NO copiar weekly-reports que no existe
-        
-        # Copiar otros archivos HTML (excepto index.html)
-        for f in *.html; do 
-          if [ "$f" != "index.html" ] && [ -f "$f" ]; then 
-            cp "$f" deploy/
-          fi
-        done
-        
-        # Copiar archivos markdown
+        # Copy markdown files
         cp *.md deploy/ 2>/dev/null || true
+        
+        # Create quick-assessment directory and copy ONLY the built files
+        mkdir -p deploy/quick-assessment
+        
+        # Copy the built index.html and assets from dist
+        cp quick-assessment/dist/index.html deploy/quick-assessment/
+        cp -r quick-assessment/dist/assets deploy/quick-assessment/
+        
+        # Create .nojekyll file
+        touch deploy/.nojekyll
         
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
