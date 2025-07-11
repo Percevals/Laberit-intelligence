@@ -1,0 +1,18 @@
+# CODEOWNERS file for automated review assignments
+# Security best practice: Ensure code reviews for sensitive files
+
+# Default owners for everything in the repo
+* @percevals
+
+# Security-sensitive files require additional review
+/.github/workflows/ @percevals
+/SECURITY.md @percevals
+/.github/CODEOWNERS @percevals
+
+# Application-specific ownership
+/quick-assessment/ @percevals
+/intelligence/ @percevals
+
+# Documentation
+/docs/ @percevals
+*.md @percevals

@@ -1,0 +1,37 @@
+# Dependabot configuration for automated dependency updates
+# Security best practice: Keep dependencies up to date
+
+version: 2
+updates:
+  # Enable version updates for npm (Quick Assessment app)
+  - package-ecosystem: "npm"
+    directory: "/quick-assessment"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "javascript"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+    # Security: Automatically merge minor updates
+    allow:
+      - dependency-type: "direct"
+      - dependency-type: "indirect"
+    
+  # Enable version updates for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "ci"
+      include: "scope"

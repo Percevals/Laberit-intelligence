@@ -1,5 +1,9 @@
 # Digital Immunity Index 4.0: Un Modelo de Resiliencia Operacional para la Era Digital
 
+[![Deploy to GitHub Pages](https://github.com/Percevals/Laberit-intelligence/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/Percevals/Laberit-intelligence/actions/workflows/deploy-pages.yml)
+[![Security Audit](https://img.shields.io/badge/security-enabled-green.svg)](./SECURITY.md)
+[![Live Site](https://img.shields.io/badge/live-site-blue.svg)](https://percevals.github.io/Laberit-intelligence/)
+
 ## Resumen Ejecutivo
 
 El **Digital Immunity Index (DII) 4.0** mide la capacidad de una organización para mantener sus operaciones críticas de negocio mientras opera bajo ataque cibernético activo.
