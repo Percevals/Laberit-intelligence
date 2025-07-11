@@ -1,0 +1,283 @@
+{
+  "metadata": {
+    "report_date": "2025-07-11",
+    "report_period": "2025-07-05 to 2025-07-11",
+    "regions": ["LATAM", "Spain"],
+    "sources": ["CrowdStrike", "Check Point", "IBM X-Force", "Comparitech", "ReliaQuest", "SOCRadar"]
+  },
+  "financial_impacts": {
+    "healthcare_sector": {
+      "global_metrics": {
+        "daily_downtime_cost": {
+          "amount_usd": 1900000,
+          "source": "Comparitech/Becker's Hospital Review",
+          "verified": true
+        },
+        "average_total_attack_cost": {
+          "amount_usd": 5500000,
+          "range": "5.5-6 million",
+          "year": "2025",
+          "source": "Healthcare industry reports"
+        },
+        "recovery_time_over_month": {
+          "percentage": 37,
+          "trend": "increasing"
+        }
+      },
+      "specific_incidents": {
+        "kettering_health": {
+          "date": "2025-05-20",
+          "location": "Ohio, USA",
+          "ransomware_group": "Interlock",
+          "downtime_days": 21,
+          "estimated_cost_usd": 39900000,
+          "files_compromised": 732490,
+          "facilities_affected": 14,
+          "traditional_sector": "Healthcare",
+          "dii_business_model": "Información Regulada"
+        }
+      },
+      "latam_projections": {
+        "weekly_attacks": 2716,
+        "above_global_average_percent": 39,
+        "projected_daily_downtime_cost_usd": 900000
+      }
+    },
+    "financial_sector": {
+      "brazil_cm_software_breach": {
+        "incident_date": "2025-06-30 to 2025-07-01",
+        "total_attempted_theft_brl": 1000000000,
+        "total_attempted_theft_usd": 180000000,
+        "insider_bribe_amount_brl": 15000,
+        "insider_bribe_amount_usd": 2700,
+        "roi_for_attackers": "66,666x",
+        "institutions_affected": 6,
+        "breakdown": {
+          "bmp_money_plus_loss_brl": 400000000,
+          "recovered_by_smartpay_brl": 130000000,
+          "frozen_by_authorities_brl": 270000000,
+          "laundered_via_crypto_brl": 40000000,
+          "crypto_used": ["Bitcoin", "USDT"]
+        },
+        "traditional_sector": "Financial Services",
+        "dii_business_models": ["Servicios Financieros", "Infraestructura Heredada", "Cadena de Suministro"],
+        "attribution": "Insider threat - confirmed by authorities",
+        "attack_vector": "Compromised credentials from employee"
+      },
+      "spain_incidents": {
+        "bank_of_spain_ddos": {
+          "date": "2025-07",
+          "duration_hours": 4,
+          "financial_impact": "None reported",
+          "data_breach": false
+        }
+      }
+    }
+  },
+  "attack_vector_distribution": {
+    "comparison": {
+      "cloud_misconfiguration": {
+        "latam_percentage": 23,
+        "spain_percentage": 21,
+        "average_breach_cost_usd": 5170000
+      },
+      "supply_chain": {
+        "latam_growth_2021_2023": "431%",
+        "organizations_with_advertised_access": 428,
+        "top_targeted_countries": ["Brazil", "Mexico", "Colombia", "Argentina", "Peru"]
+      },
+      "phishing": {
+        "latam": {
+          "weekly_attacks": 2569,
+          "malicious_files_via_email_percent": 62,
+          "vs_global_average": "+39%"
+        },
+        "spain": {
+          "banking_sector_percent": 47.47,
+          "finance_sector_percent": 11.39,
+          "telecom_sector_percent": 8.86,
+          "detection_improvement": "4x after training"
+        }
+      },
+      "insider_threats": {
+        "latam": {
+          "organizations_reporting_increase": "48%",
+          "dprk_nexus_infiltrations": ["Argentina", "Brazil", "Uruguay"]
+        },
+        "spain": {
+          "organizations_vulnerable": "74%",
+          "financial_firms_with_open_access": "64%",
+          "sensitive_files_accessible": ">1000 per org"
+        }
+      },
+      "compromised_credentials": {
+        "individuals_affected_latam": "1 billion+",
+        "access_brokers_active": 107
+      }
+    }
+  },
+  "threat_actor_intelligence": {
+    "confirmed_groups": {
+      "qilin_phantom_mantis": {
+        "confirmed_victims_june_2025": 86,
+        "targeting": "Spanish-speaking entities initially, then global",
+        "exploited_vulnerabilities": ["CVE-2024-21762", "CVE-2024-55591"],
+        "platform": "FortiGate",
+        "tactics": "Double extortion with data exfiltration",
+        "attribution_confidence": "High - security firms consensus"
+      },
+      "scattered_spider": {
+        "aliases": ["UNC3944", "Octo Tempest"],
+        "confirmed_victims_june_2025": {
+          "north_face": {
+            "accounts_compromised": 3000,
+            "date": "Early June 2025"
+          },
+          "cartier": {
+            "date": "June 2025"
+          },
+          "aflac": {
+            "date": "June 2025"
+          }
+        },
+        "ttps": [
+          "Social engineering via help desk calls",
+          "SIM swapping",
+          "Partnership with RansomHub and Qilin"
+        ],
+        "attribution": "CrowdStrike Intelligence - High confidence"
+      },
+      "ransomhub": {
+        "government_targets_june_1_2025": [
+          "Puerto Rico Justice Department",
+          "Durant, Oklahoma",
+          "Lorain County, Ohio"
+        ],
+        "impact": "Courts, communications, digital services disrupted",
+        "targeting_pattern": "Entities with limited security resources"
+      }
+    },
+    "regional_trends": {
+      "latam_ransomware_growth_yoy": "15%",
+      "victims_on_extortion_sites": 291,
+      "access_brokers_advertising": 107,
+      "organizations_with_access_for_sale": 428
+    }
+  },
+  "regional_statistics": {
+    "incident_reports_july_5_11": {
+      "mexico": 0,
+      "colombia": 0,
+      "chile": 0,
+      "argentina": 0,
+      "brazil": 0,
+      "spain": 0,
+      "note": "Unusual quiet period - likely reporting delays"
+    },
+    "vulnerability_ratings": {
+      "mexico": {
+        "companies_breached_percent": 97,
+        "rank": "1st globally"
+      },
+      "colombia": {
+        "companies_breached_percent": 87.5
+      },
+      "spain": {
+        "companies_breached_percent": 87.5
+      },
+      "brazil": {
+        "companies_breached_percent": 85.3
+      }
+    },
+    "most_targeted_sectors": {
+      "manufacturing": {
+        "percent_of_incidents": 68,
+        "focus": "Food/beverage and transportation"
+      }
+    },
+    "average_breakout_time": {
+      "2025_minutes": 48,
+      "2023_minutes": 62,
+      "trend": "Accelerating attack speed"
+    },
+    "historical_context": {
+      "chile_2023": {
+        "incidents": 21,
+        "monthly_average": 1.9,
+        "new_agency": "ANCI launched January 2025"
+      },
+      "argentina_2023": {
+        "incidents": 23,
+        "latam_rank": "3rd after Brazil and Mexico"
+      }
+    }
+  },
+  "business_model_mapping": {
+    "note": "Mapping incidents to DII 4.0 business models for operational impact analysis",
+    "mappings": [
+      {
+        "incident": "Brazil C&M Software",
+        "traditional_sector": "Financial Services",
+        "dii_models": [
+          {
+            "model": "Servicios Financieros",
+            "model_id": 5,
+            "reason": "Core banking infrastructure compromised"
+          },
+          {
+            "model": "Infraestructura Heredada",
+            "model_id": 6,
+            "reason": "Legacy third-party payment systems"
+          },
+          {
+            "model": "Cadena de Suministro",
+            "model_id": 7,
+            "reason": "Technology service provider vulnerability"
+          }
+        ]
+      },
+      {
+        "incident": "Kettering Health Ransomware",
+        "traditional_sector": "Healthcare",
+        "dii_models": [
+          {
+            "model": "Información Regulada",
+            "model_id": 8,
+            "reason": "HIPAA-regulated data and critical health systems"
+          }
+        ]
+      }
+    ]
+  },
+  "executive_insights": {
+    "key_findings": [
+      {
+        "finding": "Insider threat ROI",
+        "detail": "R$15,000 bribe yielded R$1 billion target - 66,666x return",
+        "impact": "Expect copycat attempts across financial infrastructure"
+      },
+      {
+        "finding": "Healthcare downtime costs",
+        "detail": "$1.9 million daily globally, $900K projected for LATAM",
+        "impact": "Critical need for offline backup and rapid recovery"
+      },
+      {
+        "finding": "Spanish-language targeting",
+        "detail": "Ransomware groups pivoting to linguistic familiarity",
+        "impact": "Social engineering effectiveness increases"
+      }
+    ],
+    "recommendations": {
+      "immediate": [
+        "Implement real-time anomaly detection for payment systems",
+        "Mandatory cooling-off periods for large institutional transfers",
+        "Continuous security awareness training in Spanish/Portuguese"
+      ],
+      "strategic": [
+        "Third-party risk management for payment providers",
+        "Pre-negotiated incident response contracts",
+        "Privileged access management reforms"
+      ]
+    }
+  }
+}

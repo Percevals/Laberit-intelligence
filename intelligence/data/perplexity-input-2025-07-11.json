@@ -1,0 +1,121 @@
+{
+  "incidents": [
+    {
+      "title": "Major Ransomware Attack on Brazilian Healthcare Network",
+      "description": "A sophisticated ransomware group targeted Brazil's second-largest healthcare network, affecting 15 hospitals across São Paulo state. The attack encrypted patient records and disrupted emergency services for 48 hours, forcing hospitals to operate on manual backup procedures.",
+      "date": "2025-07-08",
+      "source": "CERT Brazil",
+      "url": "https://example.com/brazil-healthcare-ransomware",
+      "tags": ["ransomware", "healthcare", "brazil", "critical-infrastructure"],
+      "affectedSector": "Healthcare",
+      "impactScore": 95,
+      "immunity": {
+        "financialServices": 0,
+        "healthcare": 95,
+        "retail": 0,
+        "government": 0,
+        "energy": 0
+      }
+    },
+    {
+      "title": "Data Breach at Mexican Financial Institution Exposes 2M Records",
+      "description": "A major Mexican bank suffered a significant data breach exposing personal and financial information of over 2 million customers. The breach was caused by an unpatched vulnerability in their online banking platform that had been exploited for several weeks before detection.",
+      "date": "2025-07-07",
+      "source": "CERT Mexico",
+      "url": "https://example.com/mexico-bank-breach",
+      "tags": ["data-breach", "financial", "mexico", "vulnerability"],
+      "affectedSector": "Financial Services",
+      "impactScore": 85,
+      "immunity": {
+        "financialServices": 85,
+        "healthcare": 0,
+        "retail": 0,
+        "government": 0,
+        "energy": 0
+      }
+    },
+    {
+      "title": "Colombian Government Websites Hit by DDoS Campaign",
+      "description": "Multiple Colombian government websites were taken offline by a coordinated DDoS attack lasting 6 hours. The attack disrupted critical citizen services including tax payments, document processing, and public information access.",
+      "date": "2025-07-06",
+      "source": "CERT Colombia",
+      "url": "https://example.com/colombia-gov-ddos",
+      "tags": ["ddos", "government", "colombia", "public-services"],
+      "affectedSector": "Government",
+      "impactScore": 60,
+      "immunity": {
+        "financialServices": 0,
+        "healthcare": 0,
+        "retail": 0,
+        "government": 60,
+        "energy": 0
+      }
+    },
+    {
+      "title": "Supply Chain Attack Targets LATAM E-commerce Platforms",
+      "description": "A sophisticated supply chain attack compromised a popular payment processing library used by multiple e-commerce platforms across Latin America. The malware was designed to steal credit card information during checkout, affecting thousands of online transactions.",
+      "date": "2025-07-09",
+      "source": "SOCRadar",
+      "url": "https://example.com/latam-supply-chain",
+      "tags": ["supply-chain", "e-commerce", "malware", "payment-systems"],
+      "affectedSector": "Retail",
+      "impactScore": 80,
+      "immunity": {
+        "financialServices": 20,
+        "healthcare": 0,
+        "retail": 80,
+        "government": 0,
+        "energy": 0
+      }
+    },
+    {
+      "title": "Argentine Energy Company Targeted by Industrial Cyber Attack",
+      "description": "An Argentine energy distribution company reported a targeted cyber attack on their industrial control systems. The attack attempted to manipulate SCADA systems to disrupt power distribution but was detected and contained by security teams before causing outages.",
+      "date": "2025-07-10",
+      "source": "Regional News",
+      "url": "https://example.com/argentina-energy-attack",
+      "tags": ["ics", "energy", "argentina", "critical-infrastructure"],
+      "affectedSector": "Energy",
+      "impactScore": 75,
+      "immunity": {
+        "financialServices": 0,
+        "healthcare": 0,
+        "retail": 0,
+        "government": 0,
+        "energy": 75
+      }
+    }
+  ],
+  "analysis": {
+    "trends": [
+      "Ransomware attacks continue targeting healthcare infrastructure in LATAM",
+      "Supply chain attacks are becoming more sophisticated and widespread",
+      "Critical infrastructure (energy, healthcare) facing increased threats",
+      "Financial sector vulnerabilities being actively exploited",
+      "Government services increasingly targeted for disruption"
+    ],
+    "recommendations": [
+      "Implement zero-trust architecture to limit lateral movement in ransomware attacks",
+      "Enhanced third-party risk management for supply chain security",
+      "Accelerate patch management programs, especially in financial services",
+      "Strengthen DDoS mitigation capabilities for public-facing services",
+      "Increase investment in OT/ICS security for critical infrastructure"
+    ],
+    "sectorRisks": {
+      "Healthcare": "Critical",
+      "Financial Services": "High",
+      "Retail": "High",
+      "Government": "Medium",
+      "Energy": "High"
+    },
+    "weeklyInsight": "This week saw a significant escalation in attacks against critical infrastructure across LATAM, with healthcare and energy sectors being primary targets. The sophistication of attacks, particularly the supply chain compromise affecting e-commerce platforms, indicates well-resourced threat actors focusing on maximum economic impact. Organizations should prioritize resilience planning and assume breach scenarios."
+  },
+  "metadata": {
+    "reportDate": "2025-07-11",
+    "region": "LATAM & Spain",
+    "totalIncidents": 5,
+    "criticalIncidents": 2,
+    "dataSources": ["CERT Brazil", "CERT Mexico", "CERT Colombia", "SOCRadar", "Regional News"],
+    "immunityTrend": "Declining - Critical sectors showing reduced resilience"
+  }
+}
