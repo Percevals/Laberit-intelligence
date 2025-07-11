@@ -325,10 +325,7 @@ export class OfflineProvider extends BaseProvider {
       8: 3500000   // Información Regulada
     };
     
-    const modelId = Object.keys(this.riskProfiles).find(
-      key => this.riskProfiles[key].name === profile.name
-    );
-    
+    // modelId was already declared above, reuse it
     const multiplier = diiScore < 2 ? 3 : diiScore < 5 ? 1.5 : 0.5;
     const impact = (baseImpact[modelId] || 2000000) * multiplier;
     
