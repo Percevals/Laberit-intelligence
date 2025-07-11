@@ -222,21 +222,21 @@ border-radius: 8px;
 }
 
 .dii-scale-bar {
-height: 30px;
+height: 40px;
 background: linear-gradient(to right, 
   #C10016 0%, 
-  #C10016 20%, 
-  #FF6B6B 20%, 
-  #FF6B6B 40%, 
-  #FFB84D 40%, 
-  #FFB84D 60%, 
-  #4CAF50 60%, 
-  #4CAF50 80%, 
-  #2E7D32 80%, 
-  #2E7D32 100%);
-border-radius: 15px;
+  #C10016 25%, 
+  #FF6B6B 25%, 
+  #FF6B6B 50%, 
+  #FFB84D 50%, 
+  #FFB84D 75%, 
+  #4CAF50 75%, 
+  #4CAF50 100%);
+border-radius: 20px;
 position: relative;
-margin: 10px 0;
+margin: 15px 0;
+cursor: pointer;
+box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .dii-scale-labels {
@@ -245,6 +245,48 @@ justify-content: space-between;
 font-size: 12px;
 color: #A6BBC8;
 margin-top: 10px;
+}
+
+.dii-maturity-info {
+margin-top: 20px;
+padding: 15px;
+background: rgba(180, 181, 223, 0.1);
+border-radius: 8px;
+text-align: center;
+min-height: 80px;
+transition: all 0.3s ease;
+}
+
+.dii-maturity-info h4 {
+font-size: 16px;
+color: #B4B5DF;
+margin-bottom: 8px;
+}
+
+.dii-maturity-info p {
+font-size: 14px;
+color: #A6BBC8;
+line-height: 1.4;
+}
+
+.maturity-fragil {
+background: rgba(193, 0, 22, 0.2);
+border: 1px solid rgba(193, 0, 22, 0.3);
+}
+
+.maturity-robusto {
+background: rgba(255, 107, 107, 0.2);
+border: 1px solid rgba(255, 107, 107, 0.3);
+}
+
+.maturity-resiliente {
+background: rgba(255, 184, 77, 0.2);
+border: 1px solid rgba(255, 184, 77, 0.3);
+}
+
+.maturity-adaptativo {
+background: rgba(76, 175, 80, 0.2);
+border: 1px solid rgba(76, 175, 80, 0.3);
 }
 
 .dii-pointer {
@@ -593,12 +635,28 @@ text-align: center;
 padding: 15px;
 background: rgba(180, 181, 223, 0.1);
 border-radius: 8px;
+transition: all 0.3s ease;
+}
+
+.model-item-highlight {
+border: 2px solid rgba(180, 181, 223, 0.4);
+background: rgba(180, 181, 223, 0.2);
+transform: scale(1.05);
+}
+
+.model-item-empty {
+opacity: 0.6;
+background: rgba(180, 181, 223, 0.05);
 }
 
 .model-count {
 font-size: 28px;
 font-weight: 600;
 color: #B4B5DF;
+}
+
+.model-item-empty .model-count {
+color: #7A99AC;
 }
 
 .model-name {
@@ -790,7 +848,7 @@ font-size: 12px;
 <div class="container">
 <!-- Executive Summary Card -->
 <div class="executive-summary">
-<h2>Resumen Ejecutivo - Su Empresa en 30 Segundos</h2>
+<h2>El Impacto de los Incidentes de Esta Semana en 30 Segundos</h2>
 <div class="summary-grid">
 <div class="summary-item">
 <div class="summary-number" style="color: #FFB84D;">3.0</div>
@@ -835,14 +893,18 @@ Ver metodología completa →
 <h3 style="text-align: center; color: #B4B5DF; margin-bottom: 20px;">Análisis del Índice de Inmunidad Digital</h3>
 <div class="dii-scale">
 <div class="dii-scale-bar">
-<div class="dii-pointer" style="left: 19.733333333333334%;"></div>
+<div class="dii-pointer" style="left: 29.599999999999998%;"></div>
 </div>
 <div class="dii-scale-labels">
-<span>0 - Crítico</span>
-<span>2 - Bajo</span>
-<span>5 - Medio</span>
-<span>10 - Alto</span>
-<span>15+ - Excelente</span>
+<span>0</span>
+<span>2.5</span>
+<span>5</span>
+<span>7.5</span>
+<span>10</span>
+</div>
+<div class="dii-maturity-info" id="maturityInfo">
+<h4 id="maturityTitle">Mueve el cursor sobre la escala para ver los modelos de madurez</h4>
+<p id="maturityDesc"></p>
 </div>
 </div>
 <div class="dii-components">
@@ -877,29 +939,44 @@ DII = (13 × 0.48) / (0.30 × 4.6 × 4.2) = 3.0
 <h3 style="text-align: center; color: #B4B5DF; margin-bottom: 20px;">Distribución por Modelo de Negocio</h3>
 <div class="model-grid">
 
-            <div class="model-item">
-                <div class="model-count">1</div>
-                <div class="model-name">Información Regulada</div>
-            </div>
-            
-            <div class="model-item">
-                <div class="model-count">1</div>
-                <div class="model-name">Servicios Financieros</div>
-            </div>
-            
-            <div class="model-item">
+            <div class="model-item model-item-highlight">
                 <div class="model-count">1</div>
                 <div class="model-name">Servicios Básicos</div>
             </div>
             
-            <div class="model-item">
+            <div class="model-item model-item-highlight">
                 <div class="model-count">1</div>
                 <div class="model-name">Retail/Punto de Venta</div>
             </div>
             
-            <div class="model-item">
+            <div class="model-item model-item-empty">
+                <div class="model-count">0</div>
+                <div class="model-name">Servicios Profesionales</div>
+            </div>
+            
+            <div class="model-item model-item-empty">
+                <div class="model-count">0</div>
+                <div class="model-name">Suscripción Digital</div>
+            </div>
+            
+            <div class="model-item model-item-highlight">
+                <div class="model-count">1</div>
+                <div class="model-name">Servicios Financieros</div>
+            </div>
+            
+            <div class="model-item model-item-highlight">
                 <div class="model-count">1</div>
                 <div class="model-name">Infraestructura Heredada</div>
+            </div>
+            
+            <div class="model-item model-item-empty">
+                <div class="model-count">0</div>
+                <div class="model-name">Cadena de Suministro</div>
+            </div>
+            
+            <div class="model-item model-item-highlight">
+                <div class="model-count">1</div>
+                <div class="model-name">Información Regulada</div>
             </div>
             
 </div>
@@ -1013,15 +1090,15 @@ DII < 2<br>Cese de operaciones<br><small style="font-size: 11px; opacity: 0.7;">
 
             <div class="incident-card">
                 <div class="incident-header">
-                    <h3>Major Ransomware Attack on Brazilian Healthcare Network</h3>
+                    <h3>Ataque Masivo de Ransomware a Red Hospitalaria Brasileña</h3>
                     <span class="severity-badge critical">DII: 0.21</span>
                 </div>
                 <p class="incident-date">2025-07-08 14:30:00 | CERT Brazil</p>
-                <p>A sophisticated ransomware group targeted Brazil's second-largest healthcare network, affecting 15 hospitals and encrypting patient records. The attack disrupted emergency services across São Paulo state for 48 hours.</p>
+                <p>Un sofisticado grupo de ransomware atacó la segunda red hospitalaria más grande de Brasil, afectando 15 hospitales y cifrando registros de pacientes. El ataque interrumpió servicios de emergencia en el estado de São Paulo durante 48 horas.</p>
                 <div class="incident-metrics">
                     <span>💰 Impacto: $15,000,000</span>
                     <span>🏢 Modelo: Información Regulada</span>
-                    <span>⚡ Vector: ransomware</span>
+                    <span>⚡ Vector: Ransomware</span>
                 </div>
                 <div class="dii-breakdown">
                     <small>TRD: 4h | 
@@ -1035,15 +1112,15 @@ DII < 2<br>Cese de operaciones<br><small style="font-size: 11px; opacity: 0.7;">
 
             <div class="incident-card">
                 <div class="incident-header">
-                    <h3>Data Breach at Mexican Financial Institution Exposes 2M Records</h3>
+                    <h3>Fuga de Datos en Institución Financiera Mexicana Expone 2M de Registros</h3>
                     <span class="severity-badge critical">DII: 0.29</span>
                 </div>
                 <p class="incident-date">2025-07-07 09:15:00 | CERT Mexico</p>
-                <p>A major Mexican bank suffered a data breach exposing personal and financial information of over 2 million customers. The breach was attributed to an unpatched vulnerability in their online banking platform.</p>
+                <p>Un importante banco mexicano sufrió una fuga de datos exponiendo información personal y financiera de más de 2 millones de clientes. La brecha se atribuyó a una vulnerabilidad sin parchear en su plataforma de banca en línea.</p>
                 <div class="incident-metrics">
                     <span>💰 Impacto: $20,000,000</span>
                     <span>🏢 Modelo: Servicios Financieros</span>
-                    <span>⚡ Vector: data_breach</span>
+                    <span>⚡ Vector: Fuga de Datos</span>
                 </div>
                 <div class="dii-breakdown">
                     <small>TRD: 12h | 
@@ -1057,15 +1134,15 @@ DII < 2<br>Cese de operaciones<br><small style="font-size: 11px; opacity: 0.7;">
 
             <div class="incident-card">
                 <div class="incident-header">
-                    <h3>Colombian Government Websites Hit by DDoS Campaign</h3>
+                    <h3>Sitios Web del Gobierno Colombiano Afectados por Campaña DDoS</h3>
                     <span class="severity-badge high">DII: 12.0</span>
                 </div>
                 <p class="incident-date">2025-07-06 16:45:00 | CERT Colombia</p>
-                <p>Multiple Colombian government websites were taken offline by a coordinated DDoS attack. The attack lasted 6 hours and affected citizen services including tax payments and document processing.</p>
+                <p>Múltiples sitios web del gobierno colombiano fueron desconectados por un ataque DDoS coordinado. El ataque duró 6 horas y afectó servicios ciudadanos incluyendo pagos de impuestos y procesamiento de documentos.</p>
                 <div class="incident-metrics">
                     <span>💰 Impacto: $500,000</span>
                     <span>🏢 Modelo: Servicios Básicos</span>
-                    <span>⚡ Vector: ddos</span>
+                    <span>⚡ Vector: DDoS</span>
                 </div>
                 <div class="dii-breakdown">
                     <small>TRD: 24h | 
@@ -1079,15 +1156,15 @@ DII < 2<br>Cese de operaciones<br><small style="font-size: 11px; opacity: 0.7;">
 
             <div class="incident-card">
                 <div class="incident-header">
-                    <h3>Supply Chain Attack Targets LATAM E-commerce Platforms</h3>
+                    <h3>Ataque a Cadena de Suministro Afecta Plataformas E-commerce de LATAM</h3>
                     <span class="severity-badge high">DII: 1.2</span>
                 </div>
                 <p class="incident-date">2025-07-09 11:00:00 | SOCRadar</p>
-                <p>A supply chain attack targeting a popular payment processing library affected multiple e-commerce platforms across Latin America. The malware was designed to steal credit card information during checkout.</p>
+                <p>Un ataque a la cadena de suministro dirigido a una popular librería de procesamiento de pagos afectó múltiples plataformas de comercio electrónico en América Latina. El malware fue diseñado para robar información de tarjetas de crédito durante el proceso de pago.</p>
                 <div class="incident-metrics">
                     <span>💰 Impacto: $8,000,000</span>
                     <span>🏢 Modelo: Retail/Punto de Venta</span>
-                    <span>⚡ Vector: supply_chain</span>
+                    <span>⚡ Vector: Cadena de Suministro</span>
                 </div>
                 <div class="dii-breakdown">
                     <small>TRD: 12h | 
@@ -1101,15 +1178,15 @@ DII < 2<br>Cese de operaciones<br><small style="font-size: 11px; opacity: 0.7;">
 
             <div class="incident-card">
                 <div class="incident-header">
-                    <h3>Argentine Energy Company Targeted by Industrial Cyber Attack</h3>
+                    <h3>Empresa Energética Argentina Víctima de Ciberataque Industrial</h3>
                     <span class="severity-badge high">DII: 1.12</span>
                 </div>
                 <p class="incident-date">2025-07-10 08:30:00 | Regional News</p>
-                <p>An Argentine energy distribution company reported a cyber attack on their industrial control systems. The attack attempted to disrupt power distribution but was contained before causing outages.</p>
+                <p>Una empresa de distribución de energía argentina reportó un ciberataque a sus sistemas de control industrial. El ataque intentó interrumpir la distribución de energía pero fue contenido antes de causar apagones.</p>
                 <div class="incident-metrics">
                     <span>💰 Impacto: $3,000,000</span>
                     <span>🏢 Modelo: Infraestructura Heredada</span>
-                    <span>⚡ Vector: ics_attack</span>
+                    <span>⚡ Vector: Ataque ICS/OT</span>
                 </div>
                 <div class="dii-breakdown">
                     <small>TRD: 12h | 
@@ -1295,7 +1372,7 @@ DII < 2<br>Cese de operaciones<br><small style="font-size: 11px; opacity: 0.7;">
 <div class="footer-quote">"La inmunidad digital no previene ataques, permite operar mientras ocurren"</div>
 <div>Framework DII 4.0 - Resiliencia Operacional Medible</div>
 <div class="report-meta">
-Generado: 2025-07-11 08:32 | Fuente: Análisis DII 4.0 | <a href="https://laberit.com">Lãberit Intelligence</a>
+Generado: 2025-07-11 08:58 | Fuente: Análisis DII 4.0 | <a href="https://laberit.com">Lãberit Intelligence</a>
 </div>
 </div>
 </div>
@@ -1382,8 +1459,89 @@ document.getElementById('detailPanel').classList.add('show');
 }
 }
 
+// Maturity models for DII scale
+const maturityModels = {
+  fragil: {
+    range: [0, 2.5],
+    title: 'Frágil (DII 0-2.5)',
+    description: 'Operaciones cesan completamente bajo ataque. Sin capacidad de resiliencia operacional. Recuperación manual prolongada (días/semanas). Pérdida total de ingresos durante incidentes.',
+    class: 'maturity-fragil'
+  },
+  robusto: {
+    range: [2.5, 5],
+    title: 'Robusto (DII 2.5-5)',
+    description: 'Degradación significativa pero mantiene funciones críticas. Recuperación parcialmente automatizada (horas/días). Pérdida de 50-80% de capacidad operativa.',
+    class: 'maturity-robusto'
+  },
+  resiliente: {
+    range: [5, 7.5],
+    title: 'Resiliente (DII 5-7.5)',
+    description: 'Mantiene operaciones esenciales con degradación limitada. Recuperación automatizada en horas. Pérdida menor al 30% de capacidad. Procesos alternativos activos.',
+    class: 'maturity-resiliente'
+  },
+  adaptativo: {
+    range: [7.5, 10],
+    title: 'Adaptativo (DII 7.5-10)',
+    description: 'Opera efectivamente durante ataques activos. Auto-recuperación en minutos. Mínima pérdida de capacidad (<10%). Aprende y mejora de cada incidente.',
+    class: 'maturity-adaptativo'
+  }
+};
+
+// Handle DII scale interaction
+function updateMaturityInfo(diiValue) {
+  const maturityInfo = document.getElementById('maturityInfo');
+  const maturityTitle = document.getElementById('maturityTitle');
+  const maturityDesc = document.getElementById('maturityDesc');
+  
+  // Find which maturity model applies
+  let selectedModel = null;
+  for (const [key, model] of Object.entries(maturityModels)) {
+    if (diiValue >= model.range[0] && diiValue <= model.range[1]) {
+      selectedModel = model;
+      break;
+    }
+  }
+  
+  if (selectedModel) {
+    maturityTitle.textContent = selectedModel.title;
+    maturityDesc.textContent = selectedModel.description;
+    
+    // Update styling
+    maturityInfo.className = 'dii-maturity-info ' + selectedModel.class;
+  }
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
+// Add DII scale interaction
+const diiScaleBar = document.querySelector('.dii-scale-bar');
+const diiPointer = document.querySelector('.dii-pointer');
+
+if (diiScaleBar) {
+  // Handle mouse movement over scale
+  diiScaleBar.addEventListener('mousemove', function(e) {
+    const rect = this.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const percentage = (x / rect.width) * 100;
+    const diiValue = (percentage / 100) * 10; // Convert to 0-10 scale
+    
+    updateMaturityInfo(diiValue);
+  });
+  
+  // Handle mouse leave
+  diiScaleBar.addEventListener('mouseleave', function() {
+    // Reset to current DII value
+    const currentPosition = parseFloat(diiPointer.style.left) || 0;
+    const currentDII = (currentPosition / 100) * 10;
+    updateMaturityInfo(currentDII);
+  });
+  
+  // Initialize with current DII value
+  const initialPosition = parseFloat(diiPointer.style.left) || 0;
+  const initialDII = (initialPosition / 100) * 10;
+  updateMaturityInfo(initialDII);
+}
+
 // Add click handlers to metric cards
 document.querySelectorAll('.metric-card').forEach((card, index) => {
 const types = ['dii', 'trend', 'sector', 'vector'];
@@ -1404,6 +1562,75 @@ document.getElementById('detailContent').innerHTML = `
 `;
 document.getElementById('detailPanel').classList.add('show');
 });
+});
+
+// Add click handlers to threat cards
+document.querySelectorAll('.threat-card').forEach(card => {
+  card.style.cursor = 'pointer';
+  card.addEventListener('click', function() {
+    const title = this.querySelector('.threat-title').textContent;
+    let detailType = 'ransomware';
+    
+    if (title.includes('Grupos Activos')) {
+      detailType = 'ransomware';
+    } else if (title.includes('Vectores de Ataque')) {
+      detailType = 'supply_chain';
+    } else if (title.includes('Sectores Afectados')) {
+      detailType = 'regulated';
+    }
+    
+    showDetail('threat', detailType);
+  });
+  
+  // Add hover effect
+  card.addEventListener('mouseenter', function() {
+    this.style.transform = 'translateY(-2px)';
+    this.style.borderColor = 'rgba(180, 181, 223, 0.4)';
+  });
+  
+  card.addEventListener('mouseleave', function() {
+    this.style.transform = '';
+    this.style.borderColor = '';
+  });
+});
+
+// Add click handlers to threat list items for more specific details
+document.querySelectorAll('.threat-list li').forEach(item => {
+  item.addEventListener('click', function(e) {
+    e.stopPropagation(); // Prevent card click
+    const threatName = this.querySelector('.threat-name span:first-child').textContent;
+    const threatValue = this.querySelector('.threat-value').textContent;
+    const threatSource = this.querySelector('.threat-source')?.textContent || '';
+    
+    let content = `<h4 style="color: #B4B5DF;">${threatName}</h4>`;
+    content += `<p style="margin: 15px 0;"><strong>${threatValue}</strong></p>`;
+    
+    // Add specific content based on threat type
+    if (threatName.includes('Ransomware')) {
+      content += '<p>Los grupos de ransomware han evolucionado sus tácticas, ahora utilizan:</p>';
+      content += '<ul style="margin: 10px 0; padding-left: 20px;">';
+      content += '<li>Doble extorsión: cifrado + filtración de datos</li>';
+      content += '<li>Ataques dirigidos a infraestructura crítica</li>';
+      content += '<li>Períodos de inactividad antes del cifrado (dwelling time)</li>';
+      content += '<li>Exfiltración selectiva de datos sensibles</li>';
+      content += '</ul>';
+      content += '<p style="margin-top: 15px;"><strong>Recomendación:</strong> Implementar EDR, backups offline, y simulacros de recuperación semanales.</p>';
+    } else if (threatName.includes('Supply Chain') || threatName.includes('Cadena')) {
+      content += '<p>Los ataques a la cadena de suministro representan el mayor riesgo sistémico:</p>';
+      content += '<ul style="margin: 10px 0; padding-left: 20px;">';
+      content += '<li>Un proveedor comprometido puede afectar cientos de empresas</li>';
+      content += '<li>Difíciles de detectar: código malicioso en actualizaciones legítimas</li>';
+      content += '<li>Requieren evaluación continua de terceros</li>';
+      content += '</ul>';
+      content += '<p style="margin-top: 15px;"><strong>Mitigación:</strong> Auditorías de seguridad a proveedores, SBOM (Software Bill of Materials), y ambientes de prueba aislados.</p>';
+    } else if (threatSource) {
+      content += `<p>${threatSource}</p>`;
+      content += '<p style="margin-top: 15px;">Análisis detallado disponible en el reporte completo.</p>';
+    }
+    
+    document.getElementById('detailContent').innerHTML = content;
+    document.getElementById('detailPanel').classList.add('show');
+  });
 });
 
 // Start ticker rotation

@@ -97,7 +97,7 @@ class DIIDashboardGenerator:
             'KEY_INSIGHT': f"{(len(critical_incidents)/len(incidents)*100):.0f}% de incidentes muestran inmunidad crítica (DII < 1). Sectores regulados requieren fortalecimiento urgente.",
             
             # DII Analysis
-            'DII_POINTER_POSITION': min(100, (avg_dii / 15) * 100),  # Position on scale
+            'DII_POINTER_POSITION': min(100, (avg_dii / 10) * 100),  # Position on scale for 0-10 range
             'AVG_TRD': f"{avg_components['trd']:.0f}",
             'AVG_AER': f"{avg_components['aer']:.2f}",
             'AVG_HFP': f"{avg_components['hfp']:.2f}",
@@ -161,21 +161,34 @@ class DIIDashboardGenerator:
         """Format incidents as HTML cards"""
         html_cards = []
         
+        # Translation map for attack vectors
+        vector_translations = {
+            'ransomware': 'Ransomware',
+            'data_breach': 'Fuga de Datos',
+            'ddos': 'DDoS',
+            'supply_chain': 'Cadena de Suministro',
+            'ics_attack': 'Ataque ICS/OT'
+        }
+        
         for incident in incidents:
             severity_class = 'critical' if incident['dii_analysis']['dii_score'] < 1 else 'high'
+            
+            # Translate the summary to Spanish (simplified translation for demo)
+            spanish_summary = self.translate_incident_summary(incident['summary'])
+            vector_spanish = vector_translations.get(incident['attack_vector']['type'], incident['attack_vector']['type'])
             
             card = f'''
             <div class="incident-card">
                 <div class="incident-header">
-                    <h3>{incident['title']}</h3>
+                    <h3>{self.translate_incident_title(incident['title'])}</h3>
                     <span class="severity-badge {severity_class}">DII: {incident['dii_analysis']['dii_score']}</span>
                 </div>
                 <p class="incident-date">{incident['date']} | {incident['source']}</p>
-                <p>{incident['summary']}</p>
+                <p>{spanish_summary}</p>
                 <div class="incident-metrics">
                     <span>💰 Impacto: ${incident['financial_impact']['estimated_cost_usd']:,}</span>
                     <span>🏢 Modelo: {incident['business_model']['primary_model_name']}</span>
-                    <span>⚡ Vector: {incident['attack_vector']['type']}</span>
+                    <span>⚡ Vector: {vector_spanish}</span>
                 </div>
                 <div class="dii-breakdown">
                     <small>TRD: {incident['dii_analysis']['components']['trd_hours']}h | 
@@ -189,6 +202,38 @@ class DIIDashboardGenerator:
             html_cards.append(card)
         
         return '\n'.join(html_cards)
+    
+    def translate_incident_title(self, title: str) -> str:
+        """Simple translation of incident titles"""
+        translations = {
+            'Major Ransomware Attack on Brazilian Healthcare Network': 'Ataque Masivo de Ransomware a Red Hospitalaria Brasileña',
+            'Data Breach at Mexican Financial Institution Exposes 2M Records': 'Fuga de Datos en Institución Financiera Mexicana Expone 2M de Registros',
+            'Colombian Government Websites Hit by DDoS Campaign': 'Sitios Web del Gobierno Colombiano Afectados por Campaña DDoS',
+            'Supply Chain Attack Targets LATAM E-commerce Platforms': 'Ataque a Cadena de Suministro Afecta Plataformas E-commerce de LATAM',
+            'Argentine Energy Company Targeted by Industrial Cyber Attack': 'Empresa Energética Argentina Víctima de Ciberataque Industrial'
+        }
+        return translations.get(title, title)
+    
+    def translate_incident_summary(self, summary: str) -> str:
+        """Simple translation of incident summaries"""
+        # For demo purposes, providing direct translations
+        translations = {
+            "A sophisticated ransomware group targeted Brazil's second-largest healthcare network, affecting 15 hospitals and encrypting patient records. The attack disrupted emergency services across São Paulo state for 48 hours.": 
+            "Un sofisticado grupo de ransomware atacó la segunda red hospitalaria más grande de Brasil, afectando 15 hospitales y cifrando registros de pacientes. El ataque interrumpió servicios de emergencia en el estado de São Paulo durante 48 horas.",
+            
+            "A major Mexican bank suffered a data breach exposing personal and financial information of over 2 million customers. The breach was attributed to an unpatched vulnerability in their online banking platform.":
+            "Un importante banco mexicano sufrió una fuga de datos exponiendo información personal y financiera de más de 2 millones de clientes. La brecha se atribuyó a una vulnerabilidad sin parchear en su plataforma de banca en línea.",
+            
+            "Multiple Colombian government websites were taken offline by a coordinated DDoS attack. The attack lasted 6 hours and affected citizen services including tax payments and document processing.":
+            "Múltiples sitios web del gobierno colombiano fueron desconectados por un ataque DDoS coordinado. El ataque duró 6 horas y afectó servicios ciudadanos incluyendo pagos de impuestos y procesamiento de documentos.",
+            
+            "A supply chain attack targeting a popular payment processing library affected multiple e-commerce platforms across Latin America. The malware was designed to steal credit card information during checkout.":
+            "Un ataque a la cadena de suministro dirigido a una popular librería de procesamiento de pagos afectó múltiples plataformas de comercio electrónico en América Latina. El malware fue diseñado para robar información de tarjetas de crédito durante el proceso de pago.",
+            
+            "An Argentine energy distribution company reported a cyber attack on their industrial control systems. The attack attempted to disrupt power distribution but was contained before causing outages.":
+            "Una empresa de distribución de energía argentina reportó un ciberataque a sus sistemas de control industrial. El ataque intentó interrumpir la distribución de energía pero fue contenido antes de causar apagones."
+        }
+        return translations.get(summary, summary)
     
     def format_actors_html(self, perplexity_data: Dict) -> str:
         """Format threat actors information"""
@@ -259,10 +304,24 @@ class DIIDashboardGenerator:
     
     def format_model_distribution(self, model_counts: Dict) -> str:
         """Format business model distribution for grid"""
+        # All 8 business models
+        all_models = [
+            'Servicios Básicos',
+            'Retail/Punto de Venta', 
+            'Servicios Profesionales',
+            'Suscripción Digital',
+            'Servicios Financieros',
+            'Infraestructura Heredada',
+            'Cadena de Suministro',
+            'Información Regulada'
+        ]
+        
         html = ""
-        for model, count in sorted(model_counts.items(), key=lambda x: x[1], reverse=True):
+        for model in all_models:
+            count = model_counts.get(model, 0)
+            highlight_class = "model-item-highlight" if count > 0 else "model-item-empty"
             html += f'''
-            <div class="model-item">
+            <div class="model-item {highlight_class}">
                 <div class="model-count">{count}</div>
                 <div class="model-name">{model}</div>
             </div>

@@ -222,21 +222,21 @@ border-radius: 8px;
 }
 
 .dii-scale-bar {
-height: 30px;
+height: 40px;
 background: linear-gradient(to right, 
   #C10016 0%, 
-  #C10016 20%, 
-  #FF6B6B 20%, 
-  #FF6B6B 40%, 
-  #FFB84D 40%, 
-  #FFB84D 60%, 
-  #4CAF50 60%, 
-  #4CAF50 80%, 
-  #2E7D32 80%, 
-  #2E7D32 100%);
-border-radius: 15px;
+  #C10016 25%, 
+  #FF6B6B 25%, 
+  #FF6B6B 50%, 
+  #FFB84D 50%, 
+  #FFB84D 75%, 
+  #4CAF50 75%, 
+  #4CAF50 100%);
+border-radius: 20px;
 position: relative;
-margin: 10px 0;
+margin: 15px 0;
+cursor: pointer;
+box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .dii-scale-labels {
@@ -245,6 +245,48 @@ justify-content: space-between;
 font-size: 12px;
 color: #A6BBC8;
 margin-top: 10px;
+}
+
+.dii-maturity-info {
+margin-top: 20px;
+padding: 15px;
+background: rgba(180, 181, 223, 0.1);
+border-radius: 8px;
+text-align: center;
+min-height: 80px;
+transition: all 0.3s ease;
+}
+
+.dii-maturity-info h4 {
+font-size: 16px;
+color: #B4B5DF;
+margin-bottom: 8px;
+}
+
+.dii-maturity-info p {
+font-size: 14px;
+color: #A6BBC8;
+line-height: 1.4;
+}
+
+.maturity-fragil {
+background: rgba(193, 0, 22, 0.2);
+border: 1px solid rgba(193, 0, 22, 0.3);
+}
+
+.maturity-robusto {
+background: rgba(255, 107, 107, 0.2);
+border: 1px solid rgba(255, 107, 107, 0.3);
+}
+
+.maturity-resiliente {
+background: rgba(255, 184, 77, 0.2);
+border: 1px solid rgba(255, 184, 77, 0.3);
+}
+
+.maturity-adaptativo {
+background: rgba(76, 175, 80, 0.2);
+border: 1px solid rgba(76, 175, 80, 0.3);
 }
 
 .dii-pointer {
@@ -593,12 +635,28 @@ text-align: center;
 padding: 15px;
 background: rgba(180, 181, 223, 0.1);
 border-radius: 8px;
+transition: all 0.3s ease;
+}
+
+.model-item-highlight {
+border: 2px solid rgba(180, 181, 223, 0.4);
+background: rgba(180, 181, 223, 0.2);
+transform: scale(1.05);
+}
+
+.model-item-empty {
+opacity: 0.6;
+background: rgba(180, 181, 223, 0.05);
 }
 
 .model-count {
 font-size: 28px;
 font-weight: 600;
 color: #B4B5DF;
+}
+
+.model-item-empty .model-count {
+color: #7A99AC;
 }
 
 .model-name {
@@ -790,7 +848,7 @@ font-size: 12px;
 <div class="container">
 <!-- Executive Summary Card -->
 <div class="executive-summary">
-<h2>Resumen Ejecutivo - Su Empresa en 30 Segundos</h2>
+<h2>El Impacto de los Incidentes de Esta Semana en 30 Segundos</h2>
 <div class="summary-grid">
 <div class="summary-item">
 <div class="summary-number" style="color: #FFB84D;">{{DII_AVG}}</div>
@@ -838,11 +896,15 @@ Ver metodología completa →
 <div class="dii-pointer" style="left: {{DII_POINTER_POSITION}}%;"></div>
 </div>
 <div class="dii-scale-labels">
-<span>0 - Crítico</span>
-<span>2 - Bajo</span>
-<span>5 - Medio</span>
-<span>10 - Alto</span>
-<span>15+ - Excelente</span>
+<span>0</span>
+<span>2.5</span>
+<span>5</span>
+<span>7.5</span>
+<span>10</span>
+</div>
+<div class="dii-maturity-info" id="maturityInfo">
+<h4 id="maturityTitle">Mueve el cursor sobre la escala para ver los modelos de madurez</h4>
+<p id="maturityDesc"></p>
 </div>
 </div>
 <div class="dii-components">
@@ -1061,8 +1123,89 @@ document.getElementById('detailPanel').classList.add('show');
 }
 }
 
+// Maturity models for DII scale
+const maturityModels = {
+  fragil: {
+    range: [0, 2.5],
+    title: 'Frágil (DII 0-2.5)',
+    description: 'Operaciones cesan completamente bajo ataque. Sin capacidad de resiliencia operacional. Recuperación manual prolongada (días/semanas). Pérdida total de ingresos durante incidentes.',
+    class: 'maturity-fragil'
+  },
+  robusto: {
+    range: [2.5, 5],
+    title: 'Robusto (DII 2.5-5)',
+    description: 'Degradación significativa pero mantiene funciones críticas. Recuperación parcialmente automatizada (horas/días). Pérdida de 50-80% de capacidad operativa.',
+    class: 'maturity-robusto'
+  },
+  resiliente: {
+    range: [5, 7.5],
+    title: 'Resiliente (DII 5-7.5)',
+    description: 'Mantiene operaciones esenciales con degradación limitada. Recuperación automatizada en horas. Pérdida menor al 30% de capacidad. Procesos alternativos activos.',
+    class: 'maturity-resiliente'
+  },
+  adaptativo: {
+    range: [7.5, 10],
+    title: 'Adaptativo (DII 7.5-10)',
+    description: 'Opera efectivamente durante ataques activos. Auto-recuperación en minutos. Mínima pérdida de capacidad (<10%). Aprende y mejora de cada incidente.',
+    class: 'maturity-adaptativo'
+  }
+};
+
+// Handle DII scale interaction
+function updateMaturityInfo(diiValue) {
+  const maturityInfo = document.getElementById('maturityInfo');
+  const maturityTitle = document.getElementById('maturityTitle');
+  const maturityDesc = document.getElementById('maturityDesc');
+  
+  // Find which maturity model applies
+  let selectedModel = null;
+  for (const [key, model] of Object.entries(maturityModels)) {
+    if (diiValue >= model.range[0] && diiValue <= model.range[1]) {
+      selectedModel = model;
+      break;
+    }
+  }
+  
+  if (selectedModel) {
+    maturityTitle.textContent = selectedModel.title;
+    maturityDesc.textContent = selectedModel.description;
+    
+    // Update styling
+    maturityInfo.className = 'dii-maturity-info ' + selectedModel.class;
+  }
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
+// Add DII scale interaction
+const diiScaleBar = document.querySelector('.dii-scale-bar');
+const diiPointer = document.querySelector('.dii-pointer');
+
+if (diiScaleBar) {
+  // Handle mouse movement over scale
+  diiScaleBar.addEventListener('mousemove', function(e) {
+    const rect = this.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const percentage = (x / rect.width) * 100;
+    const diiValue = (percentage / 100) * 10; // Convert to 0-10 scale
+    
+    updateMaturityInfo(diiValue);
+  });
+  
+  // Handle mouse leave
+  diiScaleBar.addEventListener('mouseleave', function() {
+    // Reset to current DII value
+    const currentPosition = parseFloat(diiPointer.style.left) || 0;
+    const currentDII = (currentPosition / 100) * 10;
+    updateMaturityInfo(currentDII);
+  });
+  
+  // Initialize with current DII value
+  const initialPosition = parseFloat(diiPointer.style.left) || 0;
+  const initialDII = (initialPosition / 100) * 10;
+  updateMaturityInfo(initialDII);
+}
+
 // Add click handlers to metric cards
 document.querySelectorAll('.metric-card').forEach((card, index) => {
 const types = ['dii', 'trend', 'sector', 'vector'];
@@ -1083,6 +1226,75 @@ document.getElementById('detailContent').innerHTML = `
 `;
 document.getElementById('detailPanel').classList.add('show');
 });
+});
+
+// Add click handlers to threat cards
+document.querySelectorAll('.threat-card').forEach(card => {
+  card.style.cursor = 'pointer';
+  card.addEventListener('click', function() {
+    const title = this.querySelector('.threat-title').textContent;
+    let detailType = 'ransomware';
+    
+    if (title.includes('Grupos Activos')) {
+      detailType = 'ransomware';
+    } else if (title.includes('Vectores de Ataque')) {
+      detailType = 'supply_chain';
+    } else if (title.includes('Sectores Afectados')) {
+      detailType = 'regulated';
+    }
+    
+    showDetail('threat', detailType);
+  });
+  
+  // Add hover effect
+  card.addEventListener('mouseenter', function() {
+    this.style.transform = 'translateY(-2px)';
+    this.style.borderColor = 'rgba(180, 181, 223, 0.4)';
+  });
+  
+  card.addEventListener('mouseleave', function() {
+    this.style.transform = '';
+    this.style.borderColor = '';
+  });
+});
+
+// Add click handlers to threat list items for more specific details
+document.querySelectorAll('.threat-list li').forEach(item => {
+  item.addEventListener('click', function(e) {
+    e.stopPropagation(); // Prevent card click
+    const threatName = this.querySelector('.threat-name span:first-child').textContent;
+    const threatValue = this.querySelector('.threat-value').textContent;
+    const threatSource = this.querySelector('.threat-source')?.textContent || '';
+    
+    let content = `<h4 style="color: #B4B5DF;">${threatName}</h4>`;
+    content += `<p style="margin: 15px 0;"><strong>${threatValue}</strong></p>`;
+    
+    // Add specific content based on threat type
+    if (threatName.includes('Ransomware')) {
+      content += '<p>Los grupos de ransomware han evolucionado sus tácticas, ahora utilizan:</p>';
+      content += '<ul style="margin: 10px 0; padding-left: 20px;">';
+      content += '<li>Doble extorsión: cifrado + filtración de datos</li>';
+      content += '<li>Ataques dirigidos a infraestructura crítica</li>';
+      content += '<li>Períodos de inactividad antes del cifrado (dwelling time)</li>';
+      content += '<li>Exfiltración selectiva de datos sensibles</li>';
+      content += '</ul>';
+      content += '<p style="margin-top: 15px;"><strong>Recomendación:</strong> Implementar EDR, backups offline, y simulacros de recuperación semanales.</p>';
+    } else if (threatName.includes('Supply Chain') || threatName.includes('Cadena')) {
+      content += '<p>Los ataques a la cadena de suministro representan el mayor riesgo sistémico:</p>';
+      content += '<ul style="margin: 10px 0; padding-left: 20px;">';
+      content += '<li>Un proveedor comprometido puede afectar cientos de empresas</li>';
+      content += '<li>Difíciles de detectar: código malicioso en actualizaciones legítimas</li>';
+      content += '<li>Requieren evaluación continua de terceros</li>';
+      content += '</ul>';
+      content += '<p style="margin-top: 15px;"><strong>Mitigación:</strong> Auditorías de seguridad a proveedores, SBOM (Software Bill of Materials), y ambientes de prueba aislados.</p>';
+    } else if (threatSource) {
+      content += `<p>${threatSource}</p>`;
+      content += '<p style="margin-top: 15px;">Análisis detallado disponible en el reporte completo.</p>';
+    }
+    
+    document.getElementById('detailContent').innerHTML = content;
+    document.getElementById('detailPanel').classList.add('show');
+  });
 });
 
 // Start ticker rotation
