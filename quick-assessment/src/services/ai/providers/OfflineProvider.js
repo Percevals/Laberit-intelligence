@@ -11,16 +11,16 @@ export class OfflineProvider extends BaseProvider {
   constructor(config = {}) {
     super(config);
     
-    // Business model risk profiles based on DII 4.0
+    // Business model risk profiles based on actual DII 4.0 models
     this.riskProfiles = {
-      1: { name: 'Servicios Financieros', baseRisk: 0.85, diiRange: [0.2, 0.6] },
-      2: { name: 'Información Regulada', baseRisk: 0.78, diiRange: [0.4, 0.7] },
-      3: { name: 'Ecosistema Digital', baseRisk: 0.72, diiRange: [0.4, 0.8] },
-      4: { name: 'Servicios de Datos', baseRisk: 0.68, diiRange: [0.5, 0.9] },
-      5: { name: 'Software Crítico', baseRisk: 0.55, diiRange: [0.8, 1.2] },
+      1: { name: 'Comercio Híbrido', baseRisk: 0.45, diiRange: [1.5, 2.0] },
+      2: { name: 'Software Crítico', baseRisk: 0.65, diiRange: [0.8, 1.2] },
+      3: { name: 'Servicios de Datos', baseRisk: 0.72, diiRange: [0.5, 0.9] },
+      4: { name: 'Ecosistema Digital', baseRisk: 0.78, diiRange: [0.4, 0.8] },
+      5: { name: 'Servicios Financieros', baseRisk: 0.85, diiRange: [0.2, 0.6] },
       6: { name: 'Infraestructura Heredada', baseRisk: 0.82, diiRange: [0.2, 0.5] },
-      7: { name: 'Cadena de Suministro', baseRisk: 0.75, diiRange: [0.4, 0.8] },
-      8: { name: 'Comercio Híbrido', baseRisk: 0.45, diiRange: [1.5, 2.0] }
+      7: { name: 'Cadena de Suministro', baseRisk: 0.68, diiRange: [0.4, 0.8] },
+      8: { name: 'Información Regulada', baseRisk: 0.75, diiRange: [0.4, 0.7] }
     };
 
     // Common compromise indicators by dimension
@@ -284,18 +284,22 @@ export class OfflineProvider extends BaseProvider {
 
   estimateFinancialImpact(profile, diiScore) {
     const baseImpact = {
-      1: 5000000,  // Financial Services
-      2: 3000000,  // Regulated Information
-      3: 2000000,  // Digital Ecosystem
-      4: 1500000,  // Data Services
-      5: 1000000,  // Critical Software
-      6: 4000000,  // Legacy Infrastructure
-      7: 2500000,  // Supply Chain
-      8: 800000    // Hybrid Commerce
+      1: 800000,   // Comercio Híbrido
+      2: 1500000,  // Software Crítico
+      3: 2000000,  // Servicios de Datos
+      4: 3000000,  // Ecosistema Digital
+      5: 5000000,  // Servicios Financieros
+      6: 4000000,  // Infraestructura Heredada
+      7: 2500000,  // Cadena de Suministro
+      8: 3500000   // Información Regulada
     };
     
+    const modelId = Object.keys(this.riskProfiles).find(
+      key => this.riskProfiles[key].name === profile.name
+    );
+    
     const multiplier = diiScore < 2 ? 3 : diiScore < 5 ? 1.5 : 0.5;
-    const impact = (baseImpact[profile.name] || 2000000) * multiplier;
+    const impact = (baseImpact[modelId] || 2000000) * multiplier;
     
     return `$${(impact / 1000000).toFixed(1)}M USD`;
   }
@@ -348,14 +352,14 @@ export class OfflineProvider extends BaseProvider {
 
   getThreatActors(businessModel, region) {
     const actors = {
-      'Servicios Financieros': ['Carbanak', 'FIN7', 'Lazarus Group'],
-      'Información Regulada': ['APT29', 'APT28', 'Darkside'],
-      'Ecosistema Digital': ['Magecart', 'Silent Librarian', 'ShinyHunters'],
-      'Servicios de Datos': ['APT33', 'Turla', 'CloudAtlas'],
+      'Comercio Híbrido': ['Magecart', 'POS malware groups', 'Skimmers'],
       'Software Crítico': ['Equation Group', 'Fancy Bear', 'SolarWinds actors'],
+      'Servicios de Datos': ['APT33', 'Turla', 'CloudAtlas'],
+      'Ecosistema Digital': ['Magecart', 'Silent Librarian', 'ShinyHunters'],
+      'Servicios Financieros': ['Carbanak', 'FIN7', 'Lazarus Group'],
       'Infraestructura Heredada': ['Dragonfly', 'Xenotime', 'Trisis/Triton'],
       'Cadena de Suministro': ['APT41', 'Cobalt Group', 'FIN6'],
-      'Comercio Híbrido': ['Magecart variants', 'POS malware groups', 'Skimmers']
+      'Información Regulada': ['APT29', 'APT28', 'Darkside']
     };
     
     return actors[businessModel] || ['Unknown Actors'];
@@ -381,14 +385,14 @@ export class OfflineProvider extends BaseProvider {
 
   getEmergingVectors(businessModel) {
     const vectors = {
-      'Servicios Financieros': ['API attacks', 'Mobile banking trojans', 'Deepfake fraud'],
-      'Información Regulada': ['Medical device hacking', 'HIPAA ransomware', 'Insider threats'],
-      'Ecosistema Digital': ['Supply chain injection', 'OAuth abuse', 'API key exposure'],
-      'Servicios de Datos': ['Model poisoning', 'Data exfiltration', 'Cloud misconfig'],
+      'Comercio Híbrido': ['E-skimming', 'Loyalty fraud', 'Inventory manipulation'],
       'Software Crítico': ['Zero-day exploits', 'Supply chain attacks', 'Code signing abuse'],
+      'Servicios de Datos': ['Model poisoning', 'Data exfiltration', 'Cloud misconfig'],
+      'Ecosistema Digital': ['Supply chain injection', 'OAuth abuse', 'API key exposure'],
+      'Servicios Financieros': ['API attacks', 'Mobile banking trojans', 'Deepfake fraud'],
       'Infraestructura Heredada': ['ICS/SCADA attacks', 'Firmware implants', 'Physical access'],
       'Cadena de Suministro': ['Third-party compromise', 'Logistics disruption', 'GPS spoofing'],
-      'Comercio Híbrido': ['E-skimming', 'Loyalty fraud', 'Inventory manipulation']
+      'Información Regulada': ['Medical device hacking', 'HIPAA ransomware', 'Insider threats']
     };
     
     return vectors[businessModel] || ['Emerging threats'];

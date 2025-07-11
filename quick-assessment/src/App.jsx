@@ -4,6 +4,7 @@ import { businessModels, getBusinessModel } from './core/business-models.js';
 import ModelSelector from './components/ModelSelector';
 import QuestionSlider from './components/QuestionSlider';
 import ResultDisplay from './components/ResultDisplay';
+import { AIStatusBadge } from './components/AIStatusBadge';
 
 const DIMENSIONS = [
   {
@@ -114,8 +115,11 @@ function App() {
               <h1 className="text-2xl font-bold text-gray-900">DII Quick Assessment</h1>
               <p className="text-sm text-gray-500">Digital Immunity Index 4.0</p>
             </div>
-            <div className="text-sm text-gray-500">
-              Paso {currentStep} de 3
+            <div className="flex items-center space-x-4">
+              <AIStatusBadge />
+              <div className="text-sm text-gray-500">
+                Paso {currentStep} de 3
+              </div>
             </div>
           </div>
         </div>

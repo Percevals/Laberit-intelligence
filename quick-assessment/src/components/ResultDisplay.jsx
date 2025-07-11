@@ -1,4 +1,5 @@
 import React from 'react';
+import { CompromiseScore } from './CompromiseScore';
 
 function ResultDisplay({ result, businessModel, onRestart }) {
   const getScoreColor = (score) => {
@@ -144,6 +145,17 @@ function ResultDisplay({ result, businessModel, onRestart }) {
               Esto representa una pérdida estimada de <span className="font-bold text-red-600">
               ${estimatedHourlyLoss.toLocaleString()}/hora</span> durante incidentes de seguridad
             </p>
+            <div className="mt-3">
+              <CompromiseScore 
+                assessmentData={{
+                  businessModel: businessModel.id,
+                  scores: result.dimensions,
+                  diiScore: result.diiScore,
+                  dimensions: result.dimensions
+                }}
+                mode="inline"
+              />
+            </div>
           </div>
           <div className="text-center">
             <div className={`text-5xl font-bold ${getScoreColor(result.diiScore)}`}>
@@ -153,6 +165,18 @@ function ResultDisplay({ result, businessModel, onRestart }) {
           </div>
         </div>
       </div>
+
+      {/* AI-Powered Compromise Analysis */}
+      <CompromiseScore 
+        assessmentData={{
+          businessModel: businessModel.id,
+          scores: result.dimensions,
+          diiScore: result.diiScore,
+          dimensions: result.dimensions
+        }}
+        mode="executive"
+        className="mb-8"
+      />
 
       <div className="grid md:grid-cols-2 gap-8 mb-8">
         {/* Pentagon Visualization */}
