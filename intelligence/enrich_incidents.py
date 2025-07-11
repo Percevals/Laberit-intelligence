@@ -8,39 +8,39 @@ import json
 from datetime import datetime
 from typing import Dict, List, Any, Optional
 
-# DII 4.0 Business Models
+# DII 4.0 Business Models (Version 4.0)
 BUSINESS_MODELS = {
-    1: "Servicios Básicos",
-    2: "Retail/Punto de Venta",
-    3: "Servicios Profesionales",
-    4: "Suscripción Digital",
-    5: "Servicios Financieros",
+    1: "Servicios Financieros",
+    2: "Información Regulada",
+    3: "Ecosistema Digital",
+    4: "Servicios de Datos",
+    5: "Software Crítico",
     6: "Infraestructura Heredada",
     7: "Cadena de Suministro",
-    8: "Información Regulada"
+    8: "Comercio Híbrido"
 }
 
-# Sector to Business Model Mapping
+# Sector to Business Model Mapping (DII 4.0)
 SECTOR_TO_BUSINESS_MODEL = {
     "Healthcare": {
-        "primary": 8,  # Información Regulada
+        "primary": 2,  # Información Regulada
         "secondary": [6]  # Infraestructura Heredada
     },
     "Financial Services": {
-        "primary": 5,  # Servicios Financieros
-        "secondary": [6, 7]  # Infraestructura Heredada, Cadena de Suministro
+        "primary": 1,  # Servicios Financieros
+        "secondary": [4, 7]  # Servicios de Datos, Cadena de Suministro
     },
     "Government": {
-        "primary": 1,  # Servicios Básicos
-        "secondary": [8]  # Información Regulada
+        "primary": 2,  # Información Regulada (changed from Servicios Básicos)
+        "secondary": [5]  # Software Crítico
     },
     "Retail": {
-        "primary": 2,  # Retail/Punto de Venta
+        "primary": 8,  # Comercio Híbrido (updated from Retail/Punto de Venta)
         "secondary": [7]  # Cadena de Suministro
     },
     "Energy": {
         "primary": 6,  # Infraestructura Heredada
-        "secondary": [1]  # Servicios Básicos
+        "secondary": [5]  # Software Crítico (critical control systems)
     }
 }
 
@@ -262,16 +262,16 @@ def map_to_business_model(incident: Dict[str, Any]) -> Dict[str, Any]:
     }
 
 def get_operational_impact(model_id: int) -> str:
-    """Get operational impact description based on business model"""
+    """Get operational impact description based on DII 4.0 business model"""
     impacts = {
-        1: "Essential public services disrupted",
-        2: "Point-of-sale and customer transactions halted",
-        3: "Professional service delivery impaired",
-        4: "Digital subscription services unavailable",
-        5: "Financial transactions and banking services frozen",
+        1: "Financial transactions and banking services frozen",
+        2: "Regulated data compromised with compliance implications",
+        3: "Digital ecosystem and platform services disrupted",
+        4: "Data analytics and intelligence services unavailable",
+        5: "Critical software systems and security controls failed",
         6: "Legacy infrastructure failures cascade",
         7: "Supply chain disruptions affect multiple entities",
-        8: "Regulated data compromised with compliance implications"
+        8: "Hybrid commerce operations halted across channels"
     }
     return impacts.get(model_id, "Business operations impacted")
 

@@ -305,39 +305,39 @@ class DIIDashboardGenerator:
     
     def format_model_distribution(self, model_counts: Dict) -> str:
         """Format business model distribution for grid"""
-        # All 8 business models with descriptions and icons
+        # All 8 business models DII 4.0 with descriptions and icons
         model_info = {
-            'Servicios Básicos': {
-                'desc': 'Critical infrastructure (utilities, telco)',
-                'icon': '🏛️'
-            },
-            'Retail/Punto de Venta': {
-                'desc': 'Physical & digital commerce',
-                'icon': '🛒'
-            },
-            'Servicios Profesionales': {
-                'desc': 'Consulting, legal, accounting',
-                'icon': '💼'
-            },
-            'Suscripción Digital': {
-                'desc': 'SaaS, streaming, cloud services',
-                'icon': '☁️'
-            },
             'Servicios Financieros': {
-                'desc': 'Banking, insurance, fintech',
+                'desc': 'Banca, seguros, fintech',
                 'icon': '🏦'
             },
+            'Información Regulada': {
+                'desc': 'Salud, gobierno, datos sensibles',
+                'icon': '🏥'
+            },
+            'Ecosistema Digital': {
+                'desc': 'Plataformas, marketplaces, APIs',
+                'icon': '🌐'
+            },
+            'Servicios de Datos': {
+                'desc': 'Analytics, IA, procesamiento datos',
+                'icon': '📊'
+            },
+            'Software Crítico': {
+                'desc': 'Sistemas operativos, seguridad',
+                'icon': '💻'
+            },
             'Infraestructura Heredada': {
-                'desc': 'Manufacturing, logistics',
+                'desc': 'Manufactura, logística, OT',
                 'icon': '🏭'
             },
             'Cadena de Suministro': {
-                'desc': 'Distribution, procurement',
+                'desc': 'Distribución, aprovisionamiento',
                 'icon': '📦'
             },
-            'Información Regulada': {
-                'desc': 'Healthcare, government',
-                'icon': '🏥'
+            'Comercio Híbrido': {
+                'desc': 'Retail físico y digital',
+                'icon': '🛒'
             }
         }
         
@@ -348,7 +348,7 @@ class DIIDashboardGenerator:
             if count == 0:
                 item_class = "model-item-empty"
                 count_display = '<span class="model-zero">0</span>'
-                status_text = '<span class="model-status">(No incidents this week)</span>'
+                status_text = '<span class="model-status">(Sin incidentes esta semana)</span>'
             else:
                 # Determine risk level based on average DII for this model
                 model_incidents = [inc for inc in self.incidents if inc['business_model']['primary_model_name'] == model]
