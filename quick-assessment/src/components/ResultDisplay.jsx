@@ -1,5 +1,6 @@
 import React from 'react';
 import { CompromiseScore } from './CompromiseScore';
+import { EnhancedCompromiseScore } from './EnhancedCompromiseScore';
 
 function ResultDisplay({ result, businessModel, onRestart }) {
   const getScoreColor = (score) => {
@@ -146,7 +147,7 @@ function ResultDisplay({ result, businessModel, onRestart }) {
               ${estimatedHourlyLoss.toLocaleString()}/hora</span> durante incidentes de seguridad
             </p>
             <div className="mt-3">
-              <CompromiseScore 
+              <EnhancedCompromiseScore 
                 assessmentData={{
                   businessModel: businessModel.id,
                   scores: result.dimensions,
@@ -166,8 +167,8 @@ function ResultDisplay({ result, businessModel, onRestart }) {
         </div>
       </div>
 
-      {/* AI-Powered Compromise Analysis */}
-      <CompromiseScore 
+      {/* AI-Powered Compromise Analysis with Economic Impact */}
+      <EnhancedCompromiseScore 
         assessmentData={{
           businessModel: businessModel.id,
           scores: result.dimensions,

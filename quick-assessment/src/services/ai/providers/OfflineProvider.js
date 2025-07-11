@@ -282,7 +282,38 @@ export class OfflineProvider extends BaseProvider {
     return Math.max(0.1, avg);
   }
 
-  estimateFinancialImpact(profile, diiScore) {
+  estimateFinancialImpact(profile, diiScore, monthlyRevenue = null) {
+    // Get model ID to look up base impacts
+    const modelId = typeof profile === 'object' ? 
+      Object.keys(this.riskProfiles).find(key => this.riskProfiles[key].name === profile.name) :
+      profile;
+    
+    // If we have actual revenue, use it for more accurate calculations
+    if (monthlyRevenue) {
+      const hourlyRevenue = monthlyRevenue / (30 * 24);
+      
+      // Use profile data if available, otherwise use defaults
+      const digitalDep = 0.7; // Default 70% digital dependency
+      const undetectedHours = 6;
+      
+      // Calculate phased impact
+      const degradationPhases = [
+        { hours: 24, rate: 0.1 * digitalDep },
+        { hours: 72, rate: 0.4 * digitalDep },
+        { hours: 168, rate: 0.8 * digitalDep }
+      ];
+      
+      let totalImpact = 0;
+      degradationPhases.forEach(phase => {
+        const hoursInPhase = Math.max(0, phase.hours - undetectedHours);
+        totalImpact += hourlyRevenue * phase.rate * hoursInPhase;
+      });
+      
+      const multiplier = diiScore < 2 ? 2 : diiScore < 5 ? 1.2 : 0.7;
+      return totalImpact * multiplier;
+    }
+    
+    // Fallback to estimates if no revenue provided
     const baseImpact = {
       1: 800000,   // Comercio Híbrido
       2: 1500000,  // Software Crítico
