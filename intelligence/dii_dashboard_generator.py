@@ -51,6 +51,7 @@ class DIIDashboardGenerator:
         
         # Calculate summary statistics
         incidents = enriched_data['incidents']
+        self.incidents = incidents  # Store for use in format_model_distribution
         total_impact = enriched_data['metadata']['enrichment_metrics']['total_estimated_cost_usd']
         avg_dii = enriched_data['metadata']['enrichment_metrics']['average_dii_score']
         
@@ -304,26 +305,74 @@ class DIIDashboardGenerator:
     
     def format_model_distribution(self, model_counts: Dict) -> str:
         """Format business model distribution for grid"""
-        # All 8 business models
-        all_models = [
-            'Servicios Básicos',
-            'Retail/Punto de Venta', 
-            'Servicios Profesionales',
-            'Suscripción Digital',
-            'Servicios Financieros',
-            'Infraestructura Heredada',
-            'Cadena de Suministro',
-            'Información Regulada'
-        ]
+        # All 8 business models with descriptions and icons
+        model_info = {
+            'Servicios Básicos': {
+                'desc': 'Critical infrastructure (utilities, telco)',
+                'icon': '🏛️'
+            },
+            'Retail/Punto de Venta': {
+                'desc': 'Physical & digital commerce',
+                'icon': '🛒'
+            },
+            'Servicios Profesionales': {
+                'desc': 'Consulting, legal, accounting',
+                'icon': '💼'
+            },
+            'Suscripción Digital': {
+                'desc': 'SaaS, streaming, cloud services',
+                'icon': '☁️'
+            },
+            'Servicios Financieros': {
+                'desc': 'Banking, insurance, fintech',
+                'icon': '🏦'
+            },
+            'Infraestructura Heredada': {
+                'desc': 'Manufacturing, logistics',
+                'icon': '🏭'
+            },
+            'Cadena de Suministro': {
+                'desc': 'Distribution, procurement',
+                'icon': '📦'
+            },
+            'Información Regulada': {
+                'desc': 'Healthcare, government',
+                'icon': '🏥'
+            }
+        }
         
         html = ""
-        for model in all_models:
+        for model, info in model_info.items():
             count = model_counts.get(model, 0)
-            highlight_class = "model-item-highlight" if count > 0 else "model-item-empty"
+            
+            if count == 0:
+                item_class = "model-item-empty"
+                count_display = '<span class="model-zero">0</span>'
+                status_text = '<span class="model-status">(No incidents this week)</span>'
+            else:
+                # Determine risk level based on average DII for this model
+                model_incidents = [inc for inc in self.incidents if inc['business_model']['primary_model_name'] == model]
+                if model_incidents:
+                    avg_dii = sum(inc['dii_analysis']['dii_score'] for inc in model_incidents) / len(model_incidents)
+                    if avg_dii < 2:
+                        item_class = "model-item-critical"
+                    elif avg_dii < 5:
+                        item_class = "model-item-high"
+                    else:
+                        item_class = "model-item-medium"
+                else:
+                    item_class = "model-item-highlight"
+                
+                count_display = f'<span class="model-count-active">{count}</span>'
+                status_text = ''
+            
             html += f'''
-            <div class="model-item {highlight_class}">
-                <div class="model-count">{count}</div>
+            <div class="model-item {item_class}">
+                <div class="model-icon">{info['icon']}</div>
+                <div class="model-count">{count_display}</div>
                 <div class="model-name">{model}</div>
+                <div class="model-desc">{info['desc']}</div>
+                {status_text}
             </div>
             '''
         return html

@@ -632,37 +632,113 @@ margin-top: 20px;
 
 .model-item {
 text-align: center;
-padding: 15px;
+padding: 20px 15px;
 background: rgba(180, 181, 223, 0.1);
 border-radius: 8px;
 transition: all 0.3s ease;
+min-height: 180px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+position: relative;
+border: 2px solid transparent;
 }
 
-.model-item-highlight {
-border: 2px solid rgba(180, 181, 223, 0.4);
-background: rgba(180, 181, 223, 0.2);
-transform: scale(1.05);
-}
-
-.model-item-empty {
-opacity: 0.6;
-background: rgba(180, 181, 223, 0.05);
+.model-icon {
+font-size: 36px;
+margin-bottom: 10px;
 }
 
 .model-count {
-font-size: 28px;
-font-weight: 600;
-color: #B4B5DF;
+margin: 5px 0;
 }
 
-.model-item-empty .model-count {
+.model-count-active {
+font-size: 32px;
+font-weight: 700;
+}
+
+.model-zero {
+font-size: 28px;
+font-weight: 600;
 color: #7A99AC;
 }
 
 .model-name {
-font-size: 13px;
-color: #A6BBC8;
+font-size: 14px;
+color: #B4B5DF;
+font-weight: 500;
 margin-top: 5px;
+}
+
+.model-desc {
+font-size: 11px;
+color: #A6BBC8;
+margin-top: 3px;
+line-height: 1.3;
+}
+
+.model-status {
+font-size: 10px;
+color: #7A99AC;
+margin-top: 8px;
+font-style: italic;
+display: block;
+}
+
+/* Risk-based coloring */
+.model-item-critical {
+background: rgba(193, 0, 22, 0.15);
+border-color: rgba(193, 0, 22, 0.4);
+}
+
+.model-item-critical .model-count-active {
+color: #FF6B6B;
+}
+
+.model-item-high {
+background: rgba(255, 184, 77, 0.15);
+border-color: rgba(255, 184, 77, 0.4);
+}
+
+.model-item-high .model-count-active {
+color: #FFB84D;
+}
+
+.model-item-medium {
+background: rgba(76, 175, 80, 0.15);
+border-color: rgba(76, 175, 80, 0.4);
+}
+
+.model-item-medium .model-count-active {
+color: #4CAF50;
+}
+
+.model-item-highlight {
+background: rgba(180, 181, 223, 0.2);
+border-color: rgba(180, 181, 223, 0.4);
+}
+
+.model-item-empty {
+opacity: 0.5;
+background: rgba(180, 181, 223, 0.03);
+border-color: rgba(180, 181, 223, 0.1);
+}
+
+.model-item-empty .model-icon {
+opacity: 0.6;
+}
+
+/* Hover effects */
+.model-item:hover {
+transform: translateY(-3px);
+box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.model-item-empty:hover {
+transform: none;
+box-shadow: none;
 }
 
 /* Footer */
