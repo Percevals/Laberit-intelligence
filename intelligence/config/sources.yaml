@@ -1,0 +1,89 @@
+# Intelligence Sources Configuration
+# This file defines all data sources for the weekly intelligence reports
+
+# RSS Feeds for LATAM/Spain cybersecurity news
+rss_feeds:
+  - name: "SOCRadar LATAM"
+    url: "https://www.soc-radar.com/feed/"
+    region: "LATAM"
+    language: "es"
+    priority: "high"
+    
+  - name: "WeLiveSecurity Spanish"
+    url: "https://www.welivesecurity.com/es/feed/"
+    region: "LATAM"
+    language: "es"
+    priority: "high"
+    
+  - name: "INCIBE Spain"
+    url: "https://www.incibe.es/rss/cert"
+    region: "Spain"
+    language: "es"
+    priority: "high"
+    
+  - name: "Fluid Attacks Blog"
+    url: "https://fluidattacks.com/blog/feed/"
+    region: "LATAM"
+    language: "en"
+    priority: "medium"
+    
+  - name: "CERT Colombia"
+    url: "https://www.cert.gov.co/rss.xml"
+    region: "Colombia"
+    language: "es"
+    priority: "high"
+
+# API configurations
+apis:
+  otx:
+    base_url: "https://otx.alienvault.com/api/v1"
+    endpoints:
+      pulses: "/pulses/subscribed"
+      events: "/pulses/events"
+    rate_limit: 300  # requests per hour
+    
+  intelx:
+    base_url: "https://public.intelx.io"
+    endpoints:
+      search: "/intelligent/search"
+    rate_limit: 100  # requests per hour
+
+# Search keywords for LATAM/Spain focus
+keywords:
+  spanish:
+    - "ciberataque"
+    - "ransomware"
+    - "violación de datos"
+    - "vulnerabilidad"
+    - "amenaza"
+  english:
+    - "latin america"
+    - "latam"
+    - "spain"
+    - "cyber attack"
+    - "data breach"
+  portuguese:
+    - "ataque cibernético"
+    - "vazamento de dados"
+    
+# Business sectors for impact analysis
+sectors:
+  - name: "Financial Services"
+    weight: 1.5
+    keywords: ["banco", "bank", "fintech", "financial"]
+    
+  - name: "Healthcare"
+    weight: 1.3
+    keywords: ["hospital", "salud", "health", "medical"]
+    
+  - name: "Retail"
+    weight: 1.0
+    keywords: ["retail", "comercio", "e-commerce"]
+    
+  - name: "Government"
+    weight: 1.4
+    keywords: ["gobierno", "government", "público", "public"]
+    
+  - name: "Energy"
+    weight: 1.5
+    keywords: ["energía", "energy", "oil", "gas", "petróleo"]
