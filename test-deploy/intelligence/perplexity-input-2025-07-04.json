@@ -1,0 +1,69 @@
+{
+  "week_summary": {
+    "immunity_avg": "3.4",
+    "attacks_week": "2,847",
+    "top_threat_pct": "52%",
+    "top_threat_type": "Ransomware dirigido a Gobierno y Salud",
+    "victims_low_immunity_pct": "78%",
+    "key_insight": "El 78% de las víctimas tenían inmunidad < 4. Los ataques se concentraron en sectores críticos con baja madurez digital."
+  },
+  "incidents": [
+    {
+      "sector": "Gobierno",
+      "immunity_score": "1.5",
+      "description": "Ministerios en México y Colombia afectados por ransomware LockBit",
+      "impact": "Servicios públicos paralizados por 72h",
+      "source": "Reuters"
+    },
+    {
+      "sector": "Salud",
+      "immunity_score": "2.0",
+      "description": "Red hospitalaria en Brasil comprometida, datos de 500K pacientes expuestos",
+      "impact": "500K registros médicos expuestos",
+      "source": "Bitdefender"
+    },
+    {
+      "sector": "Fintech",
+      "immunity_score": "2.5",
+      "description": "Plataforma de pagos en Argentina sufrió brecha por API vulnerable",
+      "impact": "2M de transacciones comprometidas",
+      "source": "CyberSecurityDive"
+    },
+    {
+      "sector": "Educación",
+      "immunity_score": "2.8",
+      "description": "Universidades en Chile y Perú afectadas por campaña de phishing",
+      "impact": "15K credenciales comprometidas",
+      "source": "Perplexity Analysis"
+    },
+    {
+      "sector": "Retail",
+      "immunity_score": "3.2",
+      "description": "Cadena de tiendas en España comprometida via supply chain",
+      "impact": "POS de 250 tiendas afectados",
+      "source": "El País Tech"
+    }
+  ],
+  "threat_actors": [
+    {
+      "name": "LockBit 3.0",
+      "immunity_threshold": "3.5",
+      "attacks_week": "23"
+    },
+    {
+      "name": "BlackCat/ALPHV",
+      "immunity_threshold": "4.0",
+      "attacks_week": "18"
+    },
+    {
+      "name": "Medusa",
+      "immunity_threshold": "3.8",
+      "attacks_week": "12"
+    }
+  ],
+  "statistics": {
+    "attacks_vs_global": "42%",
+    "main_vector": "Phishing/Ingeniería Social",
+    "vector_pct": "67%"
+  }
+}
