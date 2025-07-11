@@ -132,9 +132,28 @@ Ejemplo práctico:
 /weekly-reports    # Reportes semanales de inmunidad digital
 ```
 
-## 🚀 Proceso de Inteligencia Semanal Automatizado
+## 🚀 Herramientas y Servicios Disponibles
 
-### Pipeline de Generación (Implementado Julio 2025)
+### 1. Quick Assessment PWA (DII 4.0)
+**URL**: [https://percevals.github.io/Laberit-intelligence/quick-assessment/](https://percevals.github.io/Laberit-intelligence/quick-assessment/)
+
+Evaluación rápida (30 minutos) del Digital Immunity Index con:
+- **Cálculo DII en tiempo real**: Basado en 5 dimensiones críticas
+- **8 Modelos de negocio**: Cada uno con características únicas de resiliencia
+- **Análisis de compromiso con IA**: Probabilidad de estar ya comprometido
+- **Análisis económico inteligente**: Impacto personalizado basado en ingresos
+- **Simulador What-If**: ROI de mejoras de seguridad
+
+#### 🤖 Nuevas Capacidades con IA (Julio 2025):
+- **Compromise Score**: Análisis probabilístico de compromiso existente
+- **Contexto de ingresos**: Cálculos económicos específicos a su escala
+- **Impacto por fases**: 0h→10%→40%→80% degradación operacional
+- **Comparación con pares**: "Empresas similares enfrentan pérdidas de X"
+- **Simulación interactiva**: Ajuste detección, recuperación y ver ROI
+
+### 2. Proceso de Inteligencia Semanal Automatizado
+
+#### Pipeline de Generación (Implementado Julio 2025)
 
 1. **Recolección de Datos** (`quick_collect.py`)
    - Fuentes RSS de seguridad LATAM
@@ -153,7 +172,7 @@ Ejemplo práctico:
    - Análisis por modelo de negocio
    - Recomendaciones automáticas
 
-### Características del Dashboard DII 4.0
+### 3. Características del Dashboard DII 4.0
 
 - **Resumen Ejecutivo**: Impacto semanal en 30 segundos
 - **Escala DII Visual**: Con modelos de madurez interactivos
