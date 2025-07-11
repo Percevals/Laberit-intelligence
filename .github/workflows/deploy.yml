@@ -45,15 +45,18 @@ jobs:
           fi
         done
         
-        # Copy directories
-        cp -r intelligence deploy/ 2>/dev/null || true
-        cp -r assessments deploy/ 2>/dev/null || true
-        cp -r dashboards deploy/ 2>/dev/null || true
-        cp -r framework deploy/ 2>/dev/null || true
-        cp -r docs deploy/ 2>/dev/null || true
-        cp -r data deploy/ 2>/dev/null || true
-        cp -r scripts deploy/ 2>/dev/null || true
-        cp -r templates deploy/ 2>/dev/null || true
+        # Copy directories (explicitly excluding any root assets)
+        [ -d "intelligence" ] && cp -r intelligence deploy/
+        [ -d "assessments" ] && cp -r assessments deploy/
+        [ -d "dashboards" ] && cp -r dashboards deploy/
+        [ -d "framework" ] && cp -r framework deploy/
+        [ -d "docs" ] && cp -r docs deploy/
+        [ -d "data" ] && cp -r data deploy/
+        [ -d "scripts" ] && cp -r scripts deploy/
+        [ -d "templates" ] && cp -r templates deploy/
+        
+        # Explicitly ensure no root assets directory is copied
+        rm -rf deploy/assets 2>/dev/null || true
         
         # Copy markdown files
         cp *.md deploy/ 2>/dev/null || true
@@ -67,6 +70,17 @@ jobs:
         
         # Create .nojekyll file
         touch deploy/.nojekyll
+        
+        # Verify correct structure
+        echo "=== Deployment structure verification ==="
+        echo "Root index.html first 5 lines:"
+        head -5 deploy/index.html
+        echo ""
+        echo "Quick Assessment index.html exists:"
+        [ -f "deploy/quick-assessment/index.html" ] && echo "YES" || echo "NO"
+        echo ""
+        echo "Root assets directory:"
+        ls -la deploy/assets 2>/dev/null || echo "No root assets directory (correct)"
         
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
