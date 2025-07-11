@@ -2,10 +2,11 @@
 
 ## ✅ Completed Actions
 
-### 0. Fixed Weekly Reports Duplication
+### 0. Fixed Duplications and Redundancies
 - ✅ Removed duplicate `weekly-reports/` folder from root
 - ✅ Kept consolidated reports in `intelligence/weekly-reports/`
 - ✅ Latest version (with enhanced features) preserved
+- ✅ Removed redundant `main-index.html` (kept comprehensive `index.html`)
 
 ### 1. Created Organized Directory Structure
 - ✅ `scripts/` - Organized Python scripts by purpose

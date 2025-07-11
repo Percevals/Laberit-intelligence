@@ -46,6 +46,8 @@ Laberit-intelligence/
 ├── LICENSE                     # MIT License
 ├── README.md                   # Main documentation
 ├── SECURITY.md                 # Security policies
+├── immunity-framework.html     # DII 4.0 Framework documentation
+├── index.html                  # Main landing page
 ├── pyproject.toml              # Python project config
 └── requirements.txt            # Python dependencies
 ```
