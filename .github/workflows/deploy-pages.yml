@@ -1,0 +1,99 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: quick-assessment/package-lock.json
+          
+      - name: Install Quick Assessment dependencies
+        run: |
+          cd quick-assessment
+          npm ci
+          
+      - name: Build Quick Assessment
+        run: |
+          cd quick-assessment
+          npm run build
+          
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+        
+      - name: Build site structure
+        run: |
+          # Create the _site directory (GitHub Pages convention)
+          mkdir -p _site
+          
+          # Copy main site files
+          echo "📁 Copying main site files..."
+          cp index.html _site/
+          cp -r intelligence _site/ 2>/dev/null || echo "No intelligence directory"
+          cp -r assessments _site/ 2>/dev/null || echo "No assessments directory"
+          cp -r dashboards _site/ 2>/dev/null || echo "No dashboards directory"
+          cp -r framework _site/ 2>/dev/null || echo "No framework directory"
+          cp -r docs _site/ 2>/dev/null || echo "No docs directory"
+          cp -r data _site/ 2>/dev/null || echo "No data directory"
+          cp -r scripts _site/ 2>/dev/null || echo "No scripts directory"
+          cp -r templates _site/ 2>/dev/null || echo "No templates directory"
+          
+          # Copy other HTML files
+          for f in *.html; do
+            if [ "$f" != "index.html" ] && [ -f "$f" ]; then
+              cp "$f" _site/
+            fi
+          done
+          
+          # Copy Quick Assessment build
+          echo "📦 Copying Quick Assessment build..."
+          mkdir -p _site/quick-assessment
+          cp -r quick-assessment/dist/* _site/quick-assessment/
+          
+          # Create .nojekyll file
+          touch _site/.nojekyll
+          
+          # Verify deployment structure
+          echo "✅ Deployment structure:"
+          echo "Main index.html (first 3 lines):"
+          head -3 _site/index.html
+          echo ""
+          echo "Quick Assessment:"
+          ls -la _site/quick-assessment/
+          echo ""
+          echo "Weekly reports:"
+          ls _site/intelligence/weekly-reports/*.html 2>/dev/null | head -3 || echo "No reports found"
+          
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
