@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Inmunidad MVP - CLH | Listo para Power BI</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+        }
+        
+        /* Executive Score Card */
+        .executive-card {
+            grid-column: span 1;
+            text-align: center;
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+        }
+        
+        .immunity-score {
+            font-size: 72px;
+            font-weight: bold;
+            margin: 20px 0;
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .risk-level {
+            display: inline-block;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .risk-critical {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #dc3545;
+        }
+        
+        .traffic-light {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .light {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+        
+        .light.active {
+            opacity: 1;
+            box-shadow: 0 0 10px currentColor;
+        }
+        
+        .light.red { background: #dc3545; }
+        .light.yellow { background: #ffc107; }
+        .light.green { background: #28a745; }
+        
+        /* Component Scores */
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .component-item {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .component-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 5px;
+        }
+        
+        .component-label {
+            font-size: 12px;
+            color: #6c757d;
+            text-transform: uppercase;
+        }
+        
+        /* Trinity Radar */
+        .trinity-radar-container {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        /* Hover tooltip */
+        .hover-tooltip {
+            position: absolute;
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 12px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+            max-width: 250px;
+        }
+        
+        /* Recommendations */
+        .recommendation-list {
+            list-style: none;
+        }
+        
+        .recommendation-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .recommendation-impact {
+            background: #d4edda;
+            color: #155724;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        /* Chart Container */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-top: 20px;
+        }
+        
+        /* What-if Sliders */
+        .slider-container {
+            margin: 20px 0;
+        }
+        
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        .slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+            position: relative;
+        }
+        
+        .slider-mark {
+            position: absolute;
+            width: 2px;
+            height: 20px;
+            background: #666;
+            top: -7px;
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+        
+        .slider-mark::after {
+            content: 'Estado actual';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            color: #666;
+            white-space: nowrap;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #3498db;
+            cursor: pointer;
+        }
+        
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #3498db;
+            cursor: pointer;
+        }
+        
+        /* Data Export Table */
+        .data-export {
+            display: none;
+        }
+        
+        .export-note {
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        
+        .full-width-card {
+            grid-column: 1 / -1;
+        }
+        
+        .calculation-debug {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+            margin-top: 20px;
+            text-align: left;
+        }
+        
+        .critical-alert {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .component-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .hover-tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+            max-width: 300px;
+        }
+        
+        .component-tooltip {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.98);
+            color: #333;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 13px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            border: 1px solid #e9ecef;
+            min-width: 280px;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+            100% { opacity: 0.3; }
+        }
+        
+        .critical-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* BEI Breakdown Styles */
+        .bei-breakdown {
+            margin-top: 20px;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .bei-header {
+            background: #f8f9fa;
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .bei-header:hover {
+            background: #e9ecef;
+        }
+        
+        .bei-chevron {
+            transition: transform 0.3s;
+            font-size: 18px;
+        }
+        
+        .bei-expanded .bei-chevron {
+            transform: rotate(180deg);
+        }
+        
+        .bei-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: white;
+        }
+        
+        .bei-expanded .bei-content {
+            max-height: 600px;
+        }
+        
+        .bei-inner {
+            padding: 20px;
+        }
+        
+        .bei-component {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .bei-component:last-child {
+            border-bottom: none;
+        }
+        
+        .bei-component-name {
+            font-weight: 500;
+            flex: 1;
+        }
+        
+        .bei-component-value {
+            font-weight: 600;
+            color: #dc3545;
+            margin: 0 20px;
+            min-width: 50px;
+            text-align: right;
+        }
+        
+        .bei-component-weight {
+            color: #6c757d;
+            font-size: 14px;
+        }
+        
+        .bei-impact-visual {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff3cd;
+            border-radius: 8px;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .bei-formula {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 13px;
+            margin-top: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Dashboard de Evaluación de Inmunidad - CLH</h1>
+            <p class="subtitle">MVP Listo para Power BI | Cliente ID: 139 | Fecha: 2025-06-25</p>
+        </div>
+        
+        <!-- Critical Alert -->
+        <div class="critical-alert">
+            <strong>⚠️ ALERTA CRÍTICA:</strong> La organización presenta un índice de inmunidad extremadamente bajo. 
+            La resiliencia operacional es crítica (16.3%). Se requiere acción inmediata.
+        </div>
+        
+        <!-- Main Grid -->
+        <div class="grid-container">
+            <!-- Executive Score Card -->
+            <div class="card executive-card">
+                <h2 class="card-title">Índice de Inmunidad</h2>
+                <div class="immunity-score">2.13</div>
+                <div class="risk-level risk-critical">RIESGO CRÍTICO</div>
+                <p style="color: #721c24; margin-bottom: 20px; font-weight: 600;">
+                    Altamente vulnerable - Colapso probable ante ataques
+                </p>
+                <div class="traffic-light">
+                    <div class="light red active"></div>
+                    <div class="light yellow"></div>
+                    <div class="light green"></div>
+                </div>
+                
+                <!-- Component Breakdown -->
+                <div class="component-grid">
+                    <div class="component-item">
+                        <div class="component-label">Protección</div>
+                        <div class="component-value">4.64</div>
+                        <small style="color: #6c757d;">de 10</small>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-label">Resiliencia</div>
+                        <div class="component-value" style="color: #dc3545;">1.63</div>
+                        <small style="color: #6c757d;">de 10</small>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-label">Agilidad</div>
+                        <div class="component-value">5.63</div>
+                        <small style="color: #6c757d;">de 10</small>
+                    </div>
+                </div>
+                
+                <div class="calculation-debug">
+                    <strong>Cálculo del Índice:</strong><br>
+                    Protección: 4.64<br>
+                    Business Fortress: 1.63 <span style="color: #dc3545;">(CRÍTICO)</span><br>
+                    Agilidad D&R: 5.63<br>
+                    Formula: (4.64 × 1.63 × 5.63) / 20<br>
+                    = 42.52 / 20<br>
+                    = <strong>2.13</strong> (Escala 0-10)
+                </div>
+                
+                <!-- BEI Breakdown Section -->
+                <div class="bei-breakdown" id="beiBreakdown">
+                    <div class="bei-header" onclick="toggleBEI()">
+                        <span>📉 Desglose del BEI (Business Exposure Index)</span>
+                        <span class="bei-chevron">▼</span>
+                    </div>
+                    <div class="bei-content">
+                        <div class="bei-inner">
+                            <div style="text-align: center; margin-bottom: 20px;">
+                                <h4 style="margin-bottom: 10px;">BEI Total: <span style="color: #dc3545;">0.75</span></h4>
+                                <p style="color: #6c757d; font-size: 14px;">Alto riesgo de exposición del negocio</p>
+                            </div>
+                            
+                            <div class="bei-component">
+                                <span class="bei-component-name">🎯 Vulnerabilidad de la Industria</span>
+                                <span class="bei-component-value">0.85</span>
+                                <span class="bei-component-weight">(25%)</span>
+                            </div>
+                            
+                            <div class="bei-component">
+                                <span class="bei-component-name">💻 Dependencia Digital</span>
+                                <span class="bei-component-value">0.75</span>
+                                <span class="bei-component-weight">(40%)</span>
+                            </div>
+                            
+                            <div class="bei-component">
+                                <span class="bei-component-name">⏱️ Velocidad de Decisión</span>
+                                <span class="bei-component-value">0.50</span>
+                                <span class="bei-component-weight">(20%)</span>
+                            </div>
+                            
+                            <div class="bei-component">
+                                <span class="bei-component-name">🌍 Riesgo Geográfico</span>
+                                <span class="bei-component-value">0.50</span>
+                                <span class="bei-component-weight">(15%)</span>
+                            </div>
+                            
+                            <div class="bei-impact-visual">
+                                <h5 style="margin-bottom: 10px;">📉 Impacto en Business Fortress (v3.0)</h5>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <span>Model: 0.62</span>
+                                    <span>→</span>
+                                    <span style="color: #dc3545; font-weight: bold;">Strategic Exposure reduce 37.5%</span>
+                                    <span>→</span>
+                                    <span style="color: #dc3545; font-weight: bold;">Fortress: 0.3875</span>
+                                </div>
+                                <div class="bei-formula">
+                                    Business_Fortress = Model_Resilience × (1 - Strategic_Exposure × 0.5)<br>
+                                    = 0.62 × (1 - 0.75 × 0.5) = 0.3875 (normalizado: 1.63/10)
+                                </div>
+                                <div style="margin-top: 10px; font-size: 13px; color: #666;">
+                                    <em>Archetype: B2C_VOLUME (Retail/Volume Operations)</em>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-top: 20px; padding: 15px; background: #d4edda; border-radius: 8px;">
+                                <strong style="color: #155724;">✓ Acciones para reducir BEI:</strong>
+                                <ul style="margin: 10px 0 0 0; padding-left: 20px; font-size: 14px;">
+                                    <li>Diversificar canales no digitales (reduciría Dependencia Digital)</li>
+                                    <li>Automatizar decisiones críticas (mejoraría Velocidad de Decisión)</li>
+                                    <li>Implementar redundancia geográfica (mitigaría Riesgo Geográfico)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Trinity Radar Visualization -->
+            <div class="card">
+                <h2 class="card-title">Radar de la Trinidad de Inmunidad</h2>
+                <div class="trinity-radar-container">
+                    <svg width="350" height="350" viewBox="0 0 350 350" style="max-width: 100%; position: relative;">
+                        <defs>
+                            <filter id="glow">
+                                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        
+                        <!-- Background circles -->
+                        <g opacity="0.2">
+                            <circle cx="175" cy="175" r="35" fill="none" stroke="#ddd" stroke-width="1"/>
+                            <circle cx="175" cy="175" r="70" fill="none" stroke="#ddd" stroke-width="1"/>
+                            <circle cx="175" cy="175" r="105" fill="none" stroke="#ddd" stroke-width="1"/>
+                            <circle cx="175" cy="175" r="140" fill="none" stroke="#ddd" stroke-width="1"/>
+                        </g>
+                        
+                        <!-- Grid labels -->
+                        <g font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#999">
+                            <text x="175" y="70" text-anchor="middle">100%</text>
+                            <text x="175" y="105" text-anchor="middle">75%</text>
+                            <text x="175" y="140" text-anchor="middle">50%</text>
+                            <text x="175" y="175" text-anchor="middle">25%</text>
+                        </g>
+                        
+                        <!-- Triangle axes -->
+                        <g opacity="0.3">
+                            <line x1="175" y1="175" x2="175" y2="35" stroke="#666" stroke-width="2"/>
+                            <line x1="175" y1="175" x2="296" y2="245" stroke="#666" stroke-width="2"/>
+                            <line x1="175" y1="175" x2="54" y2="245" stroke="#666" stroke-width="2"/>
+                        </g>
+                        
+                        <!-- Outer triangle (100% reference) -->
+                        <polygon points="175,35 296,245 54,245" fill="none" stroke="#666" stroke-width="2" opacity="0.5"/>
+                        
+                        <!-- CLH Current State (proportional to actual values) -->
+                        <!-- Center: 175,175 -->
+                        <!-- Protection (46.4%): 175 + 0*(140*0.464) = 175, 175 - 140*0.464 = 110 -->
+                        <!-- Resilience (16.3%): 175 + 121*0.163 = 195, 175 + 70*0.163 = 186 -->
+                        <!-- Agility (56.3%): 175 - 121*0.563 = 107, 175 + 70*0.563 = 214 -->
+                        <polygon points="175,110 195,186 107,214" 
+                                 fill="rgba(220, 53, 69, 0.3)" 
+                                 stroke="#dc3545" 
+                                 stroke-width="3"
+                                 filter="url(#glow)"
+                                 class="radar-polygon critical-pulse"
+                                 data-protection="46.4"
+                                 data-resilience="16.3"
+                                 data-agility="56.3">
+                        </polygon>
+                        
+                        <!-- Target State -->
+                        <polygon points="175,70 250,225 100,225" 
+                                 fill="none" 
+                                 stroke="#28a745" 
+                                 stroke-width="2"
+                                 stroke-dasharray="5,5"
+                                 opacity="0.5"/>
+                        
+                        <!-- Vertex labels -->
+                        <g font-family="'Segoe UI', Arial, sans-serif" font-size="14" fill="#333">
+                            <text x="175" y="25" text-anchor="middle" font-weight="600" class="vertex-label" data-vertex="protection" style="cursor: pointer;">PROTECCIÓN</text>
+                            <text x="310" y="255" text-anchor="middle" font-weight="600" class="vertex-label" data-vertex="resilience" style="cursor: pointer;">RESILIENCIA</text>
+                            <text x="40" y="255" text-anchor="middle" font-weight="600" class="vertex-label" data-vertex="agility" style="cursor: pointer;">AGILIDAD</text>
+                        </g>
+                        
+                        <!-- Current values -->
+                        <g font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#dc3545" font-weight="600">
+                            <text x="175" y="100" text-anchor="middle">46.4%</text>
+                            <text x="205" y="190" text-anchor="middle">16.3% ⚠️</text>
+                            <text x="97" y="218" text-anchor="middle">56.3%</text>
+                        </g>
+                        
+                        <!-- Critical indicator for resilience -->
+                        <text x="296" y="275" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#dc3545" font-weight="600" text-anchor="middle">CRÍTICO</text>
+                    </svg>
+                    
+                    <div style="margin-top: 20px; font-size: 14px; color: #6c757d;">
+                        <p><strong style="color: #dc3545;">Área Crítica:</strong> Business Fortress (16.3%)</p>
+                        <p>El triángulo pequeño indica inmunidad muy baja</p>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <!-- Client-Specific Recommendations -->
+            <div class="card" style="grid-column: span 2;">
+                <h2 class="card-title">Recomendaciones Específicas Basadas en Evaluación CLH</h2>
+                
+                <!-- URGENTE - Business Fortress -->
+                <div style="background: #f8d7da; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <h3 style="color: #721c24; margin-bottom: 15px;">🔴 URGENTE - Business Fortress (1.63/10 CRÍTICO)</h3>
+                    <ul class="recommendation-list">
+                        <li class="recommendation-item" style="border-left-color: #dc3545;">
+                            <div>
+                                <strong>Control 3.1: Implementar Gobierno de Datos</strong>
+                                <br><small>Actual: Política básica (Score 2) → Objetivo: Comité activo (Score 4)</small>
+                                <br><small style="color: #495057;">• Crear comité de gobierno de datos con reuniones mensuales<br>
+                                • Designar Data Stewards por área de negocio<br>
+                                • Tiempo: 4 semanas</small>
+                            </div>
+                            <span class="recommendation-impact" style="background: #721c24; color: white;">+0.8 inmunidad</span>
+                        </li>
+                        
+                        <li class="recommendation-item" style="border-left-color: #dc3545;">
+                            <div>
+                                <strong>Control 3.13: Activar DLP en modo bloqueo</strong>
+                                <br><small>Actual: Solo auditoría en SharePoint → Objetivo: Bloqueo activo empresa-wide</small>
+                                <br><small style="color: #495057;">• Cambiar Microsoft DLP de auditoría a bloqueo para SETH<br>
+                                • Expandir políticas DLP a Exchange, Teams y OneDrive<br>
+                                • Tiempo: 2 semanas</small>
+                            </div>
+                            <span class="recommendation-impact" style="background: #721c24; color: white;">+0.6 inmunidad</span>
+                        </li>
+                        
+                        <li class="recommendation-item" style="border-left-color: #dc3545;">
+                            <div>
+                                <strong>Control 3.11: Implementar encriptación en reposo</strong>
+                                <br><small>Actual: Sin encriptación (Score 2) → Objetivo: Full encryption (Score 4)</small>
+                                <br><small style="color: #495057;">• Activar Azure Information Protection para clasificación automática<br>
+                                • Implementar BitLocker en todos los endpoints (no solo portátiles)<br>
+                                • Activar Azure Storage Service Encryption<br>
+                                • Tiempo: 6 semanas</small>
+                            </div>
+                            <span class="recommendation-impact" style="background: #721c24; color: white;">+0.9 inmunidad</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- ALTO - Protección Email -->
+                <div style="background: #fff3cd; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <h3 style="color: #856404; margin-bottom: 15px;">🟡 ALTO - Protección contra Amenazas (4.64/10)</h3>
+                    <ul class="recommendation-list">
+                        <li class="recommendation-item" style="border-left-color: #ffc107;">
+                            <div>
+                                <strong>Control 9.7: Upgrade a Microsoft Defender for Office 365</strong>
+                                <br><small>Actual: Exchange Online Protection básico (Score 2) → Objetivo: Defender completo (Score 4)</small>
+                                <br><small style="color: #495057;">• Ya tienen EOP con DMARC habilitado<br>
+                                • Agregar Safe Attachments y Safe Links<br>
+                                • Habilitar Anti-phishing con protección de suplantación<br>
+                                • Tiempo: 1 semana</small>
+                            </div>
+                            <span class="recommendation-impact">+0.5 inmunidad</span>
+                        </li>
+                        
+                        <li class="recommendation-item" style="border-left-color: #ffc107;">
+                            <div>
+                                <strong>Control 10.1: Expandir cobertura EDR al 100%</strong>
+                                <br><small>Actual: 50% con Defender for Endpoint → Objetivo: 100% cobertura</small>
+                                <br><small style="color: #495057;">• Completar despliegue en filiales (actualmente solo Windows Defender nativo)<br>
+                                • Incluir servidores Linux con Microsoft Defender for Linux<br>
+                                • Tiempo: 4 semanas</small>
+                            </div>
+                            <span class="recommendation-impact">+0.4 inmunidad</span>
+                        </li>
+                        
+                        <li class="recommendation-item" style="border-left-color: #ffc107;">
+                            <div>
+                                <strong>Control 2.3: Completar implementación ASR</strong>
+                                <br><small>Actual: Piloto ASR → Objetivo: Producción con listas gestionadas</small>
+                                <br><small style="color: #495057;">• Finalizar configuración de lista blanca y gris<br>
+                                • Expandir Attack Surface Reduction a todas las filiales<br>
+                                • Integrar con Cisco ISE existente<br>
+                                • Tiempo: 3 semanas</small>
+                            </div>
+                            <span class="recommendation-impact">+0.3 inmunidad</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- MEDIO - Agilidad D&R -->
+                <div style="background: #d1ecf1; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <h3 style="color: #0c5460; margin-bottom: 15px;">🔵 MEDIO - Agilidad de Detección y Respuesta (5.63/10)</h3>
+                    <ul class="recommendation-list">
+                        <li class="recommendation-item" style="border-left-color: #17a2b8;">
+                            <div>
+                                <strong>Control 10.7: Implementar XDR completo</strong>
+                                <br><small>Actual: Solo endpoints Windows → Objetivo: XDR multi-plataforma</small>
+                                <br><small style="color: #495057;">• Completar piloto de XDR en sistemas Linux<br>
+                                • Integrar Microsoft Sentinel con QRadar existente<br>
+                                • Correlacionar eventos de F5, Palo Alto y Defender<br>
+                                • Tiempo: 8 semanas</small>
+                            </div>
+                            <span class="recommendation-impact">+0.4 inmunidad</span>
+                        </li>
+                        
+                        <li class="recommendation-item" style="border-left-color: #17a2b8;">
+                            <div>
+                                <strong>Control 6.7: Centralizar control de acceso con IAM</strong>
+                                <br><small>Actual: SAP independiente, matriz manual → Objetivo: IAM unificado</small>
+                                <br><small style="color: #495057;">• Integrar SAP con Entra ID existente<br>
+                                • Implementar Azure AD Connect para sincronización<br>
+                                • Establecer RBAC consistente cross-platform<br>
+                                • Tiempo: 10 semanas</small>
+                            </div>
+                            <span class="recommendation-impact">+0.3 inmunidad</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Quick Wins -->
+                <div style="background: #d4edda; padding: 20px; border-radius: 8px;">
+                    <h3 style="color: #155724; margin-bottom: 15px;">✅ Quick Wins - Implementación Inmediata</h3>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li style="margin-bottom: 10px;">• <strong>Esta semana:</strong> Upgrade a Defender for Office 365 (ya tienen la base con EOP)</li>
+                        <li style="margin-bottom: 10px;">• <strong>2 semanas:</strong> Cambiar DLP de auditoría a bloqueo (configuración lista en SETH)</li>
+                        <li style="margin-bottom: 10px;">• <strong>1 mes:</strong> Completar ASR del piloto a producción</li>
+                        <li><strong>Impacto combinado:</strong> +1.4 en índice de inmunidad (de 2.13 a 3.53)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Full Width Cards -->
+        <div class="grid-container">
+            <!-- Attack Vector Analysis -->
+            <div class="card full-width-card">
+                <h2 class="card-title">Análisis de Protección por Vector de Ataque</h2>
+                <div class="chart-container">
+                    <canvas id="attackVectorChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- What-If Analysis -->
+            <div class="card full-width-card">
+                <h2 class="card-title">Análisis de Escenarios What-If</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                    <div>
+                        <div class="slider-container">
+                            <div class="slider-label">
+                                <span>Efectividad de Protección</span>
+                                <span id="protectionValue">4.64</span>
+                            </div>
+                            <div style="position: relative;">
+                                <input type="range" class="slider" id="protectionSlider" min="0" max="10" step="0.1" value="4.64">
+                                <div class="slider-mark" style="left: 46.4%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="slider-container">
+                            <div class="slider-label">
+                                <span>Business Fortress</span>
+                                <span id="resilienceValue">1.63</span>
+                            </div>
+                            <div style="position: relative;">
+                                <input type="range" class="slider" id="resilienceSlider" min="0" max="10" step="0.1" value="1.63">
+                                <div class="slider-mark" style="left: 16.3%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="slider-container">
+                            <div class="slider-label">
+                                <span>Agilidad D&R</span>
+                                <span id="agilityValue">5.63</span>
+                            </div>
+                            <div style="position: relative;">
+                                <input type="range" class="slider" id="agilitySlider" min="0" max="10" step="0.1" value="5.63">
+                                <div class="slider-mark" style="left: 56.3%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 5px;">
+                            <h4 style="margin-bottom: 10px;">Escenarios de Mejora Crítica:</h4>
+                            <ul style="list-style: none; font-size: 14px;">
+                                <li id="scenario1" style="color: #dc3545;">• Si mejora Resiliencia a 4.0 → Índice sube a <strong>5.22</strong></li>
+                                <li id="scenario2">• Si mejora Protección a 7.0 → Índice sube a <strong>3.20</strong></li>
+                                <li id="scenario3" style="color: #28a745;">• Si mejora las 3 áreas a 7.0 → Índice sube a <strong>8.58</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; display: flex; flex-direction: column; justify-content: center;">
+                        <h3 style="color: #6c757d; margin-bottom: 10px;">Índice de Inmunidad Proyectado</h3>
+                        <div id="projectedScore" style="font-size: 48px; font-weight: bold; color: #dc3545;">2.13</div>
+                        <div id="riskLevelProjected" style="margin: 10px 0; font-weight: 600;">RIESGO CRÍTICO</div>
+                        <div id="improvementMessage" style="color: #6c757d; margin-top: 10px;">Ajuste los controles para simular mejoras</div>
+                        <div id="projectedDebug" style="margin-top: 20px; font-size: 12px; color: #6c757d;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Maturity Progression -->
+            <div class="card full-width-card">
+                <h2 class="card-title">Componentes del Índice de Inmunidad</h2>
+                <div class="chart-container" style="height: 400px;">
+                    <canvas id="maturityChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Critical Gaps Analysis -->
+            <div class="card">
+                <h2 class="card-title">Análisis de Brechas Críticas</h2>
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #dc3545; margin-bottom: 10px;">🚨 Business Fortress: 1.63/10 (CRÍTICA)</h4>
+                    <p style="font-size: 14px; color: #6c757d;">
+                        La capacidad del modelo de negocio para mantener operaciones es extremadamente baja. 
+                        Factores contribuyentes:
+                    </p>
+                    <ul style="margin: 10px 0; padding-left: 20px; font-size: 14px;">
+                        <li>Alta dependencia digital sin redundancia</li>
+                        <li>Procesos manuales sin automatización</li>
+                        <li>Falta de planes de continuidad probados</li>
+                        <li>Baja inversión en resiliencia</li>
+                    </ul>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px;">
+                    <div style="text-align: center; padding: 15px; background: #f8d7da; border-radius: 5px;">
+                        <div style="font-size: 24px; font-weight: bold; color: #721c24;">16.3%</div>
+                        <div style="font-size: 12px; color: #721c24;">Resiliencia</div>
+                    </div>
+                    <div style="text-align: center; padding: 15px; background: #fff3cd; border-radius: 5px;">
+                        <div style="font-size: 24px; font-weight: bold; color: #856404;">46.4%</div>
+                        <div style="font-size: 12px; color: #856404;">Protección</div>
+                    </div>
+                    <div style="text-align: center; padding: 15px; background: #fff3cd; border-radius: 5px;">
+                        <div style="font-size: 24px; font-weight: bold; color: #856404;">56.3%</div>
+                        <div style="font-size: 12px; color: #856404;">Agilidad</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Power BI Export Note -->
+            <div class="card">
+                <h2 class="card-title">Integración con Power BI</h2>
+                <div class="export-note">
+                    <strong>Para importar en Power BI:</strong><br>
+                    1. La estructura de datos coincide con las dimensiones de CSEC_FY25_CLH.pbix<br>
+                    2. Crear medidas: Immunity_Index = (Protection_Effectiveness × Business_Fortress × D_R_Agility) / 20<br>
+                    3. Valores normalizados en escala 0-10 (NO porcentajes)<br>
+                    4. La tabla de datos oculta contiene los valores correctos de Client ID 139
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Hidden Data Table for Power BI Export -->
+    <table class="data-export" id="powerBiData">
+        <thead>
+            <tr>
+                <th>Client_ID</th>
+                <th>Assessment_Date</th>
+                <th>Immunity_Index</th>
+                <th>Protection_Effectiveness</th>
+                <th>Business_Fortress</th>
+                <th>D_R_Agility</th>
+                <th>Risk_Level</th>
+                <th>Attack_Vector</th>
+                <th>Protection_Percentage</th>
+                <th>Current_Technology</th>
+                <th>Recommendation</th>
+                <th>Impact</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>139</td>
+                <td>2025-06-25</td>
+                <td>2.13</td>
+                <td>4.64</td>
+                <td>1.63</td>
+                <td>5.63</td>
+                <td>Crítico</td>
+                <td>Email</td>
+                <td>40</td>
+                <td>Exchange Online Protection</td>
+                <td>Actualizar a Defender for Office 365</td>
+                <td>0.8</td>
+            </tr>
+            <tr>
+                <td>139</td>
+                <td>2025-06-25</td>
+                <td>2.13</td>
+                <td>4.64</td>
+                <td>1.63</td>
+                <td>5.63</td>
+                <td>Crítico</td>
+                <td>Endpoint</td>
+                <td>65</td>
+                <td>Defender for Endpoint (50%)</td>
+                <td>Expandir EDR a cobertura 100%</td>
+                <td>0.6</td>
+            </tr>
+            <tr>
+                <td>139</td>
+                <td>2025-06-25</td>
+                <td>2.13</td>
+                <td>4.64</td>
+                <td>1.63</td>
+                <td>5.63</td>
+                <td>Crítico</td>
+                <td>Business_Resilience</td>
+                <td>16.3</td>
+                <td>Manual Processes</td>
+                <td>Implementar continuidad de negocio</td>
+                <td>3.09</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <script>
+        // Correct calculation function
+        function calculateImmunityIndex(protection, resilience, agility) {
+            const immunityIndex = (protection * resilience * agility) / 20;
+            
+            console.log('=== Immunity Index Calculation ===');
+            console.log(`Protection Effectiveness: ${protection} (normalized 0-10)`);
+            console.log(`Operational Resilience: ${resilience} (normalized 0-10)`);
+            console.log(`D&R Agility: ${agility} (normalized 0-10)`);
+            console.log(`Formula: (${protection} × ${resilience} × ${agility}) / 20`);
+            console.log(`Immunity Index: ${immunityIndex.toFixed(3)}`);
+            console.log('=================================');
+            
+            return immunityIndex;
+        }
+        
+        // Calculate initial immunity index with correct values
+        const initialImmunity = calculateImmunityIndex(4.64, 1.63, 5.63);
+        
+        // Radar hover interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            const tooltip = document.getElementById('radarTooltip');
+            const radarPolygon = document.querySelector('.radar-polygon');
+            const vertexLabels = document.querySelectorAll('.vertex-label');
+            
+            const tooltipTexts = {
+                protection: 'PROTECCIÓN: Capacidad de prevenir y bloquear ataques con una arquitectura Zero-Trust',
+                resilience: 'RESILIENCIA: Capacidad de mantener operación según su modelo de negocio',
+                agility: 'AGILIDAD: Capacidad de detectar y responder ante crecientes ciberamenazas'
+            };
+            
+            vertexLabels.forEach(label => {
+                label.addEventListener('mouseenter', function(e) {
+                    const vertex = this.getAttribute('data-vertex');
+                    tooltip.textContent = tooltipTexts[vertex];
+                    tooltip.style.opacity = '1';
+                    tooltip.style.left = e.pageX + 10 + 'px';
+                    tooltip.style.top = e.pageY - 30 + 'px';
+                });
+                
+                label.addEventListener('mouseleave', function() {
+                    tooltip.style.opacity = '0';
+                });
+                
+                label.addEventListener('mousemove', function(e) {
+                    tooltip.style.left = e.pageX + 10 + 'px';
+                    tooltip.style.top = e.pageY - 30 + 'px';
+                });
+            });
+        });
+        
+        // Attack Vector Radar Chart
+        const attackCtx = document.getElementById('attackVectorChart').getContext('2d');
+        const attackChart = new Chart(attackCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Phishing | BEC', 'Software Vulnerability', 'Compromised Credentials', 'Social Engineering', 'Cloud Misconfiguration', 'Malicious Insider'],
+                datasets: [{
+                    label: 'Estado Actual CLH',
+                    data: [40, 65, 85, 70, 75, 55],
+                    borderColor: '#dc3545',
+                    backgroundColor: 'rgba(220, 53, 69, 0.2)',
+                    pointBackgroundColor: '#dc3545',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#dc3545'
+                }, {
+                    label: 'Estado Objetivo Mínimo',
+                    data: [70, 70, 70, 70, 70, 70],
+                    borderColor: '#ffc107',
+                    backgroundColor: 'rgba(255, 193, 7, 0.1)',
+                    borderDash: [5, 5]
+                }, {
+                    label: 'Estado Inmune',
+                    data: [90, 90, 90, 90, 90, 90],
+                    borderColor: '#28a745',
+                    backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                    borderDash: [10, 5]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            stepSize: 20
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const label = context.label || '';
+                                const value = context.parsed.r || 0;
+                                return `Vector: ${label} | Protección actual: ${value}%`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Component Scores Bar Chart
+        const maturityCtx = document.getElementById('maturityChart').getContext('2d');
+        const maturityChart = new Chart(maturityCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Protección', 'Business Fortress', 'Agilidad D&R'],
+                datasets: [{
+                    label: 'Estado Actual',
+                    data: [4.64, 1.63, 5.63],
+                    backgroundColor: ['#ffc107', '#dc3545', '#ffc107'],
+                    borderColor: ['#e0a800', '#bd2130', '#e0a800'],
+                    borderWidth: 2,
+                    barPercentage: 0.8
+                }, {
+                    label: 'Objetivo Mínimo',
+                    data: [7, 4, 7],
+                    backgroundColor: 'rgba(40, 167, 69, 0.3)',
+                    borderColor: '#28a745',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 10,
+                        title: {
+                            display: true,
+                            text: 'Puntuación (0-10)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    },
+                    tooltip: {
+                        enabled: false
+                    }
+                },
+                onHover: (event, activeElements) => {
+                    event.native.target.style.cursor = activeElements.length > 0 ? 'pointer' : 'default';
+                }
+            }
+        });
+        
+        // Component breakdowns data
+        const componentBreakdowns = {
+            'Protección': {
+                title: 'Efectividad de Protección',
+                formula: 'Protection_Readiness × Protection_Performance = 4.64',
+                details: [
+                    'Protection_Readiness: 2.15/10',
+                    'Protection_Performance: 2.16/10',
+                    'Cálculo: 2.15 × 2.16 = 4.64'
+                ]
+            },
+            'Business Fortress': {
+                title: 'Fortaleza del Modelo de Negocio (v3.0)',
+                formula: 'Model_Resilience × (1 - Strategic_Exposure × 0.5) = 1.63',
+                details: [
+                    'Model_Resilience: 0.62 (Archetype: B2C_VOLUME)',
+                    'Strategic_Exposure (BEI): 0.75',
+                    '• Industry_Vulnerability: 0.85 (Sector altamente targeted)',
+                    '• Digital_Dependency: 0.75 (Modelo 75% digital)',
+                    '• Decision_Speed: 0.50 (Velocidad media de decisión)',
+                    '• Geographic_Risk: 0.50 (Riesgo regional medio)',
+                    'Cálculo: 0.62 × (1 - 0.75 × 0.5) = 0.62 × 0.625 = 0.3875',
+                    'Normalizado (×4.2): 1.63/10'
+                ]
+            },
+            'Agilidad D&R': {
+                title: 'Agilidad de Detección y Respuesta',
+                formula: 'Response_Readiness × Response_Performance = 5.63',
+                details: [
+                    'Response_Readiness: 2.37/10',
+                    'Response_Performance: 2.37/10',
+                    'Cálculo: 2.37 × 2.37 = 5.63'
+                ]
+            }
+        };
+        
+        // Create component tooltip
+        const componentTooltip = document.createElement('div');
+        componentTooltip.className = 'component-tooltip';
+        document.body.appendChild(componentTooltip);
+        
+        // Add hover event to bar chart
+        maturityChart.options.onHover = (event, activeElements) => {
+            if (activeElements.length > 0) {
+                const element = activeElements[0];
+                const label = maturityChart.data.labels[element.index];
+                const breakdown = componentBreakdowns[label];
+                
+                if (breakdown) {
+                    let content = `<strong>${breakdown.title}</strong><br><br>`;
+                    content += `<div style="background: #f8f9fa; padding: 8px; border-radius: 4px; margin-bottom: 10px; font-family: monospace; font-size: 12px;">${breakdown.formula}</div>`;
+                    breakdown.details.forEach(detail => {
+                        content += `<div style="margin: 4px 0; ${detail.startsWith('•') ? 'margin-left: 15px;' : ''}">${detail}</div>`;
+                    });
+                    
+                    componentTooltip.innerHTML = content;
+                    componentTooltip.style.opacity = '1';
+                    componentTooltip.style.left = event.x + 15 + 'px';
+                    componentTooltip.style.top = event.y - 100 + 'px';
+                }
+                
+                event.native.target.style.cursor = 'pointer';
+            } else {
+                componentTooltip.style.opacity = '0';
+                event.native.target.style.cursor = 'default';
+            }
+        };
+        
+        // Hide tooltip when mouse leaves canvas
+        maturityCtx.canvas.addEventListener('mouseleave', () => {
+            componentTooltip.style.opacity = '0';
+        });
+        
+        // What-If Sliders
+        const protectionSlider = document.getElementById('protectionSlider');
+        const resilienceSlider = document.getElementById('resilienceSlider');
+        const agilitySlider = document.getElementById('agilitySlider');
+        
+        function updateProjectedScore() {
+            const protection = parseFloat(protectionSlider.value);
+            const resilience = parseFloat(resilienceSlider.value);
+            const agility = parseFloat(agilitySlider.value);
+            
+            const projectedImmunity = calculateImmunityIndex(protection, resilience, agility);
+            
+            document.getElementById('protectionValue').textContent = protection.toFixed(2);
+            document.getElementById('resilienceValue').textContent = resilience.toFixed(2);
+            document.getElementById('agilityValue').textContent = agility.toFixed(2);
+            
+            document.getElementById('projectedScore').textContent = projectedImmunity.toFixed(2);
+            
+            // Debug info
+            document.getElementById('projectedDebug').innerHTML = 
+                `(${protection.toFixed(2)} × ${resilience.toFixed(2)} × ${agility.toFixed(2)}) / 20 = ${projectedImmunity.toFixed(2)}`;
+            
+            // Update risk level
+            const riskElement = document.getElementById('riskLevelProjected');
+            const scoreElement = document.getElementById('projectedScore');
+            
+            if (projectedImmunity < 4) {
+                riskElement.textContent = 'RIESGO CRÍTICO';
+                riskElement.style.color = '#dc3545';
+                scoreElement.style.color = '#dc3545';
+            } else if (projectedImmunity < 6) {
+                riskElement.textContent = 'RIESGO MEDIO';
+                riskElement.style.color = '#ffc107';
+                scoreElement.style.color = '#ffc107';
+            } else if (projectedImmunity < 8) {
+                riskElement.textContent = 'RESILIENTE';
+                riskElement.style.color = '#28a745';
+                scoreElement.style.color = '#28a745';
+            } else {
+                riskElement.textContent = 'ELITE';
+                riskElement.style.color = '#20c997';
+                scoreElement.style.color = '#20c997';
+            }
+            
+            const improvement = projectedImmunity - 2.13;
+            const message = document.getElementById('improvementMessage');
+            
+            if (improvement > 0) {
+                message.textContent = `+${improvement.toFixed(2)} mejora desde el estado actual`;
+                message.style.color = '#28a745';
+            } else if (improvement < 0) {
+                message.textContent = `${improvement.toFixed(2)} por debajo del estado actual`;
+                message.style.color = '#dc3545';
+            } else {
+                message.textContent = 'Mismo que el estado actual';
+                message.style.color = '#6c757d';
+            }
+        }
+        
+        // Update scenarios with correct calculations
+        function updateScenarios() {
+            // Scenario 1: Improve Resilience to 4.0
+            const scenario1Score = calculateImmunityIndex(4.64, 4.0, 5.63);
+            document.getElementById('scenario1').innerHTML = 
+                `• Si mejora Resiliencia a 4.0 → Índice sube a <strong>${scenario1Score.toFixed(2)}</strong>`;
+            
+            // Scenario 2: Improve Protection to 7.0
+            const scenario2Score = calculateImmunityIndex(7.0, 1.63, 5.63);
+            document.getElementById('scenario2').innerHTML = 
+                `• Si mejora Protección a 7.0 → Índice sube a <strong>${scenario2Score.toFixed(2)}</strong>`;
+            
+            // Scenario 3: All areas to 7.0
+            const scenario3Score = calculateImmunityIndex(7.0, 7.0, 7.0);
+            document.getElementById('scenario3').innerHTML = 
+                `• Si mejora las 3 áreas a 7.0 → Índice sube a <strong>${scenario3Score.toFixed(2)}</strong>`;
+        }
+        
+        protectionSlider.addEventListener('input', updateProjectedScore);
+        resilienceSlider.addEventListener('input', updateProjectedScore);
+        agilitySlider.addEventListener('input', updateProjectedScore);
+        
+        // Initialize
+        updateProjectedScore();
+        updateScenarios();
+        
+        // Export data function for Power BI
+        function exportToPowerBI() {
+            const table = document.getElementById('powerBiData');
+            const data = [];
+            const headers = Array.from(table.querySelectorAll('thead th')).map(th => th.textContent);
+            
+            table.querySelectorAll('tbody tr').forEach(row => {
+                const rowData = {};
+                row.querySelectorAll('td').forEach((cell, index) => {
+                    rowData[headers[index]] = cell.textContent;
+                });
+                data.push(rowData);
+            });
+            
+            console.log('Power BI Ready Data (Client 139):', data);
+            return data;
+        }
+        
+        // Make export function available globally
+        window.powerBIData = exportToPowerBI;
+        
+        // BEI Breakdown toggle function
+        function toggleBEI() {
+            const beiBreakdown = document.getElementById('beiBreakdown');
+            beiBreakdown.classList.toggle('bei-expanded');
+        }
+    </script>
+    
+    <!-- Hover tooltip (moved to end of body) -->
+    <div class="hover-tooltip" id="radarTooltip"></div>
+</body>
+</html>

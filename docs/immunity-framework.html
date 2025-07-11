@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Framework de Inmunidad 2.0 | Una Guía Ejecutiva para la Biología Corporativa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Professional Header */
+        .header {
+            background: linear-gradient(135deg, #1a2332 0%, #2c3e50 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 42px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+        
+        .header .subtitle {
+            font-size: 22px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .header .methodology-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            margin-top: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Section Styling */
+        .section {
+            margin: 60px 0;
+            padding: 40px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .section-title {
+            font-size: 28px;
+            color: #1a2332;
+            margin-bottom: 30px;
+            font-weight: 400;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 15px;
+        }
+        
+        /* Professional Insight Box */
+        .insight-box {
+            background: #f8f9fa;
+            padding: 25px 30px;
+            border-radius: 6px;
+            margin: 30px 0;
+            border-left: 4px solid #3498db;
+        }
+        
+        .insight-box h3 {
+            color: #1a2332;
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        /* Visualization Container */
+        .visualization-container {
+            margin: 40px 0;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .viz-title {
+            font-size: 20px;
+            color: #1a2332;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        /* Correlation Chart - Evolution Style */
+        .correlation-chart {
+            position: relative;
+            height: 450px;
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .chart-axes {
+            position: absolute;
+            top: 40px;
+            left: 60px;
+            right: 40px;
+            bottom: 80px;
+            border-left: 2px solid #34495e;
+            border-bottom: 2px solid #34495e;
+        }
+        
+        .axis-label {
+            position: absolute;
+            font-size: 14px;
+            color: #34495e;
+            font-weight: 500;
+        }
+        
+        .x-axis-label {
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .y-axis-label {
+            left: -100px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+        }
+        
+        /* Axis markers */
+        .axis-marker {
+            position: absolute;
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        
+        .x-marker-0 { bottom: -25px; left: -5px; }
+        .x-marker-25 { bottom: -25px; left: 23%; }
+        .x-marker-50 { bottom: -25px; left: 48%; }
+        .x-marker-75 { bottom: -25px; left: 73%; }
+        .x-marker-100 { bottom: -25px; right: -10px; }
+        
+        .y-marker-1 { left: -25px; bottom: -5px; }
+        .y-marker-2 { left: -25px; bottom: 32%; }
+        .y-marker-3 { left: -25px; bottom: 65%; }
+        .y-marker-4 { left: -25px; top: -5px; }
+        
+        .data-point {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #3498db;
+            opacity: 0.6;
+            transition: all 0.3s;
+        }
+        
+        .data-point:hover {
+            opacity: 1;
+            transform: scale(1.5);
+        }
+        
+        .correlation-line {
+            position: absolute;
+            bottom: 80px;
+            left: 60px;
+            right: 40px;
+            height: 2px;
+            background: #e74c3c;
+            transform: rotate(-28deg);
+            transform-origin: left bottom;
+        }
+        
+        .correlation-label {
+            position: absolute;
+            top: 60px;
+            right: 60px;
+            background: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            color: #e74c3c;
+            font-weight: 600;
+        }
+        
+        /* Framework Components Visual */
+        .framework-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .component-circle {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background: white;
+            border: 3px solid;
+        }
+        
+        .component-protection {
+            border-color: #3498db;
+            background: linear-gradient(135deg, #ffffff 0%, #ebf5fb 100%);
+        }
+        
+        .component-business {
+            border-color: #2ecc71;
+            background: linear-gradient(135deg, #ffffff 0%, #e8f8f5 100%);
+        }
+        
+        .component-recovery {
+            border-color: #e74c3c;
+            background: linear-gradient(135deg, #ffffff 0%, #fadbd8 100%);
+        }
+        
+        .component-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        
+        .component-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .component-weight {
+            font-size: 24px;
+            font-weight: bold;
+            color: #34495e;
+        }
+        
+        .plus-symbol {
+            font-size: 36px;
+            color: #95a5a6;
+            font-weight: 300;
+        }
+        
+        .equals-symbol {
+            font-size: 36px;
+            color: #34495e;
+            font-weight: 300;
+        }
+        
+        .immunity-result {
+            width: 240px;
+            height: 100px;
+            background: linear-gradient(135deg, #1a2332 0%, #2c3e50 100%);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .immunity-label {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+        
+        .immunity-score {
+            font-size: 32px;
+            font-weight: bold;
+        }
+        
+        /* Formula Display */
+        .formula-display {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border: 1px solid #e9ecef;
+        }
+        
+        .formula-main {
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        /* Enhanced Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 30px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .comparison-table th {
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            color: white;
+            padding: 18px;
+            text-align: left;
+            font-weight: 500;
+            font-size: 16px;
+        }
+        
+        .comparison-table th:nth-child(1) {
+            background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+        }
+        
+        .comparison-table th:nth-child(2) {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+        }
+        
+        .comparison-table th:nth-child(3) {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        }
+        
+        .comparison-table td {
+            padding: 18px;
+            border-bottom: 1px solid #ecf0f1;
+            background: white;
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .comparison-table tr:hover td {
+            background: #f8f9fa;
+        }
+        
+        .comparison-table td:nth-child(3) {
+            font-weight: 500;
+            color: #2980b9;
+        }
+        
+        /* Data Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .data-table th {
+            background: #34495e;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 500;
+        }
+        
+        .data-table td {
+            padding: 15px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .data-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        /* Metric Box */
+        .metric-box {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-top: 4px solid #3498db;
+        }
+        
+        .metric-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .metric-text {
+            font-size: 16px;
+            color: #7f8c8d;
+        }
+        
+        /* Scale Visual */
+        .maturity-scale {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 40px 0;
+            padding: 30px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .scale-item {
+            text-align: center;
+            flex: 1;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 0 10px;
+        }
+        
+        .scale-critical {
+            background: #ffeee9;
+            border: 1px solid #e74c3c;
+        }
+        
+        .scale-medium {
+            background: #fff4e5;
+            border: 1px solid #f39c12;
+        }
+        
+        .scale-resilient {
+            background: #e8f8f5;
+            border: 1px solid #2ecc71;
+        }
+        
+        .scale-score {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .scale-label {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #34495e;
+        }
+        
+        .scale-description {
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+        
+        /* Professional Cards */
+        .methodology-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #3498db;
+        }
+        
+        .methodology-card h4 {
+            font-size: 20px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        /* Integration Box */
+        .integration-box {
+            background: #e8f8f5;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 3px solid #2ecc71;
+        }
+        
+        .integration-box strong {
+            color: #27ae60;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: #f8f9fa;
+            margin-top: 80px;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .footer p {
+            color: #7f8c8d;
+            margin: 10px 0;
+        }
+        
+        .footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 32px;
+            }
+            
+            .framework-visual {
+                flex-direction: column;
+            }
+            
+            .correlation-chart {
+                height: 300px;
+                padding: 20px;
+            }
+            
+            .component-circle {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .scale-item {
+                margin: 10px 0;
+            }
+            
+            .maturity-scale {
+                flex-direction: column;
+            }
+            
+            .comparison-table {
+                font-size: 14px;
+            }
+            
+            .comparison-table th,
+            .comparison-table td {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Professional Header -->
+    <div class="header">
+        <h1>Framework de Inmunidad 2.0</h1>
+        <p class="subtitle">Una Guía Ejecutiva para la Biología Corporativa</p>
+        <span class="methodology-badge">Basado en 150+ organizaciones evaluadas en LATAM y validado con estándares globales</span>
+    </div>
+
+    <div class="container">
+        <!-- Executive Summary -->
+        <div class="section">
+            <h2 class="section-title">Resumen Ejecutivo</h2>
+            
+            <div class="insight-box">
+                <h3>La Pregunta que Importa</h3>
+                <p>Las auditorías tradicionales de ciberseguridad están fallando a los líderes empresariales. 
+                Proporcionan listas de verificación técnicas y puntuaciones genéricas, pero no responden la pregunta 
+                que realmente importa al C-suite: <strong>¿Sobrevivirá nuestro negocio a un ciberataque sofisticado?</strong></p>
+            </div>
+
+            <div class="metric-box">
+                <span class="metric-number">0-10</span>
+                <span class="metric-text">Una puntuación simple que los ejecutivos pueden entender y actuar, 
+                resultado de la multiplicación de tres fortalezas críticas</span>
+            </div>
+        </div>
+
+        <!-- The Immunity Trinity -->
+        <div class="section">
+            <h2 class="section-title">La Trinidad de Inmunidad</h2>
+            
+            <div class="visualization-container">
+                <h3 class="viz-title">Los Tres Pilares de la Resiliencia Corporativa</h3>
+                <div class="framework-visual">
+                    <div class="component-circle component-protection">
+                        <div class="component-icon">🛡️</div>
+                        <div class="component-title">Efectividad de<br>Protección</div>
+                        <div class="component-weight">Su Armadura</div>
+                    </div>
+                    
+                    <span class="plus-symbol">×</span>
+                    
+                    <div class="component-circle component-business">
+                        <div class="component-icon">🧬</div>
+                        <div class="component-title">Resiliencia<br>Operacional</div>
+                        <div class="component-weight">Su ADN</div>
+                    </div>
+                    
+                    <span class="plus-symbol">×</span>
+                    
+                    <div class="component-circle component-recovery">
+                        <div class="component-icon">💪</div>
+                        <div class="component-title">Agilidad de<br>Detección y Respuesta</div>
+                        <div class="component-weight">Su Sistema Inmune</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="formula-display">
+                <div class="formula-main">
+                    Índice de Inmunidad = (Protección × Resiliencia × Agilidad) / 20
+                </div>
+                <p style="margin-top: 20px; color: #7f8c8d;">
+                    <strong>La verdadera resiliencia es producto de fortalezas balanceadas.</strong><br><br>
+                    Donde:<br>
+                    • <strong>Protección</strong> = Preparación de Protección × Desempeño de Protección<br>
+                    • <strong>Resiliencia</strong> = 1 + (1 - BEI × 0.5)<br>
+                    • <strong>Agilidad</strong> = Preparación de Respuesta × Desempeño de Respuesta<br>
+                </p>
+            </div>
+        </div>
+
+        <!-- Methodology Evolution -->
+        <div class="section">
+            <h2 class="section-title">Evolución del Enfoque</h2>
+            
+            <div class="visualization-container">
+                <h3 class="viz-title">Correlación Histórica: Madurez Zero Trust vs Capacidad de Protección</h3>
+                <div class="correlation-chart">
+                    <div class="chart-axes">
+                        <span class="axis-label x-axis-label">Capacidad de Protección (%)</span>
+                        <span class="axis-label y-axis-label">Madurez Zero Trust</span>
+                        
+                        <!-- Axis markers -->
+                        <span class="axis-marker x-marker-0">0</span>
+                        <span class="axis-marker x-marker-25">25</span>
+                        <span class="axis-marker x-marker-50">50</span>
+                        <span class="axis-marker x-marker-75">75</span>
+                        <span class="axis-marker x-marker-100">100</span>
+                        
+                        <span class="axis-marker y-marker-1">1</span>
+                        <span class="axis-marker y-marker-2">2</span>
+                        <span class="axis-marker y-marker-3">3</span>
+                        <span class="axis-marker y-marker-4">4</span>
+                        
+                        <!-- Data points representing the 150 organizations -->
+                        <div class="data-point" style="bottom: 15%; left: 12%;"></div>
+                        <div class="data-point" style="bottom: 22%; left: 18%;"></div>
+                        <div class="data-point" style="bottom: 28%; left: 25%;"></div>
+                        <div class="data-point" style="bottom: 35%; left: 30%;"></div>
+                        <div class="data-point" style="bottom: 42%; left: 38%;"></div>
+                        <div class="data-point" style="bottom: 48%; left: 45%;"></div>
+                        <div class="data-point" style="bottom: 55%; left: 52%;"></div>
+                        <div class="data-point" style="bottom: 62%; left: 58%;"></div>
+                        <div class="data-point" style="bottom: 68%; left: 65%;"></div>
+                        <div class="data-point" style="bottom: 75%; left: 72%;"></div>
+                        <div class="data-point" style="bottom: 82%; left: 78%;"></div>
+                        <div class="data-point" style="bottom: 88%; left: 85%;"></div>
+                        <div class="data-point" style="bottom: 10%; left: 20%;"></div>
+                        <div class="data-point" style="bottom: 30%; left: 15%;"></div>
+                        <div class="data-point" style="bottom: 40%; left: 50%;"></div>
+                        <div class="data-point" style="bottom: 20%; left: 35%;"></div>
+                        <div class="data-point" style="bottom: 50%; left: 25%;"></div>
+                        <div class="data-point" style="bottom: 60%; left: 45%;"></div>
+                        <div class="data-point" style="bottom: 25%; left: 40%;"></div>
+                        <div class="data-point" style="bottom: 65%; left: 55%;"></div>
+                        <div class="data-point" style="bottom: 35%; left: 60%;"></div>
+                        <div class="data-point" style="bottom: 45%; left: 30%;"></div>
+                        <div class="data-point" style="bottom: 18%; left: 28%;"></div>
+                        <div class="data-point" style="bottom: 52%; left: 42%;"></div>
+                        <div class="data-point" style="bottom: 38%; left: 48%;"></div>
+                        <div class="data-point" style="bottom: 70%; left: 68%;"></div>
+                        <div class="data-point" style="bottom: 58%; left: 35%;"></div>
+                        <div class="data-point" style="bottom: 32%; left: 55%;"></div>
+                        <div class="data-point" style="bottom: 78%; left: 75%;"></div>
+                        <div class="data-point" style="bottom: 85%; left: 90%;"></div>
+                        
+                        <div class="correlation-line"></div>
+                        <div class="correlation-label">R² = 0.67</div>
+                    </div>
+                </div>
+                <p style="margin-top: 20px; color: #7f8c8d; font-size: 14px;">
+                    Análisis 2021-2024: La correlación moderada (R²=0.67) demostró que la madurez arquitectónica 
+                    no garantiza protección efectiva, llevando a la evolución hacia el modelo de inmunidad.
+                </p>
+            </div>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Enfoque Tradicional</th>
+                        <th>Framework de Inmunidad 2.0</th>
+                        <th>Valor para el Negocio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Evaluación de controles implementados</td>
+                        <td>Medición de resistencia operacional probada</td>
+                        <td>Reducción del 67% en costos de incidentes para organizaciones resilientes</td>
+                    </tr>
+                    <tr>
+                        <td>Madurez de procesos documentados</td>
+                        <td>Capacidad de recuperación demostrada</td>
+                        <td>Diferencia de 3.8x en tiempo de recuperación entre líderes y rezagados</td>
+                    </tr>
+                    <tr>
+                        <td>Cumplimiento normativo (ISO, NIST)</td>
+                        <td>Resiliencia integral del modelo de negocio</td>
+                        <td>40% de continuidad operacional en modelos híbridos vs 0% en digitales puros</td>
+                    </tr>
+                    <tr>
+                        <td>Score técnico de madurez (1-4)</td>
+                        <td>Índice ejecutivo de inmunidad (0-10)</td>
+                        <td>Una sola métrica que el CEO puede entender y actuar</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Trinity Radar Visualization -->
+        <div class="section">
+            <h2 class="section-title">El Radar de la Trinidad de Inmunidad</h2>
+            
+            <div class="visualization-container" style="background: #2c3e50; color: white; padding: 60px 30px;">
+                <h3 class="viz-title" style="color: white; margin-bottom: 30px;">Firma Visual de Resiliencia Organizacional</h3>
+                
+                <!-- Interactive SVG Radar Chart -->
+                <div style="display: flex; align-items: center; justify-content: center; gap: 60px; flex-wrap: wrap;">
+                    <svg width="500" height="500" viewBox="0 0 500 500" style="max-width: 100%;">
+                        <defs>
+                            <filter id="glow">
+                                <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        
+                        <!-- Background grid circles -->
+                        <g opacity="0.2">
+                            <circle cx="250" cy="250" r="50" fill="none" stroke="white" stroke-width="1"/>
+                            <circle cx="250" cy="250" r="100" fill="none" stroke="white" stroke-width="1"/>
+                            <circle cx="250" cy="250" r="150" fill="none" stroke="white" stroke-width="1"/>
+                            <circle cx="250" cy="250" r="200" fill="none" stroke="white" stroke-width="1"/>
+                        </g>
+                        
+                        <!-- Triangle axes -->
+                        <g opacity="0.3">
+                            <line x1="250" y1="250" x2="250" y2="50" stroke="white" stroke-width="2"/>
+                            <line x1="250" y1="250" x2="423" y2="350" stroke="white" stroke-width="2"/>
+                            <line x1="250" y1="250" x2="77" y2="350" stroke="white" stroke-width="2"/>
+                        </g>
+                        
+                        <!-- Outer triangle -->
+                        <polygon points="250,50 423,350 77,350" fill="none" stroke="white" stroke-width="2" opacity="0.5"/>
+                        
+                        <!-- Profile: Balanced Leader (green, large equilateral) - Bottom layer -->
+                        <g class="radar-profile" id="balanced-profile" style="z-index: 1;">
+                            <polygon points="250,100 380,300 120,300" 
+                                     fill="rgba(46, 204, 113, 0.2)" 
+                                     stroke="#2ecc71" 
+                                     stroke-width="3"
+                                     style="cursor: pointer; transition: all 0.3s ease;"
+                                     pointer-events="all"
+                                     filter="url(#glow)">
+                                <animate attributeName="opacity" values="0.6;0.8;0.6" dur="3s" repeatCount="indefinite" begin="2s"/>
+                            </polygon>
+                            <title>Líder Balanceado: Protección 7.5, Resiliencia 7.5, Agilidad 7.5</title>
+                        </g>
+                        
+                        <!-- Profile: The Fortress (amber, tall narrow) - Middle layer -->
+                        <g class="radar-profile" id="fortress-profile" style="z-index: 2;">
+                            <polygon points="250,80 320,310 180,310" 
+                                     fill="rgba(243, 156, 18, 0.25)" 
+                                     stroke="#f39c12" 
+                                     stroke-width="2"
+                                     style="cursor: pointer; transition: all 0.3s ease;"
+                                     pointer-events="all">
+                                <animate attributeName="opacity" values="0.7;0.9;0.7" dur="3s" repeatCount="indefinite" begin="1s"/>
+                            </polygon>
+                            <title>La Fortaleza: Protección 8.5, Resiliencia 3.5, Agilidad 3.5</title>
+                        </g>
+                        
+                        <!-- Profile: The Exposed (red, tiny) - Top layer, centered -->
+                        <g class="radar-profile" id="exposed-profile" style="z-index: 3;">
+                            <polygon points="250,225 270,250 230,250" 
+                                     fill="rgba(231, 76, 60, 0.4)" 
+                                     stroke="#e74c3c" 
+                                     stroke-width="2"
+                                     style="cursor: pointer; transition: all 0.3s ease;"
+                                     pointer-events="all">
+                                <animate attributeName="opacity" values="0.8;1;0.8" dur="3s" repeatCount="indefinite"/>
+                            </polygon>
+                            <title>El Expuesto: Protección 2.5, Resiliencia 2.5, Agilidad 2.5</title>
+                        </g>
+                        
+                        <!-- Vertex labels -->
+                        <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif" font-size="16" fill="white">
+                            <text x="250" y="35" text-anchor="middle" font-weight="600">PROTECCIÓN</text>
+                            <text x="440" y="360" text-anchor="middle" font-weight="600">RESILIENCIA</text>
+                            <text x="60" y="360" text-anchor="middle" font-weight="600">AGILIDAD</text>
+                        </g>
+                        
+                        <!-- Interactive hover info box -->
+                        <g id="hover-info" style="display: none;">
+                            <rect x="0" y="0" width="240" height="80" rx="5" fill="rgba(0,0,0,0.9)" stroke="white" stroke-width="1"/>
+                            <text x="10" y="25" fill="white" font-size="14" font-weight="600" id="hover-title"></text>
+                            <text x="10" y="45" fill="white" font-size="12" id="hover-protection"></text>
+                            <text x="10" y="60" fill="white" font-size="12" id="hover-resilience"></text>
+                            <text x="10" y="75" fill="white" font-size="12" id="hover-agility"></text>
+                        </g>
+                    </svg>
+                    
+                    <!-- Legend -->
+                    <div style="min-width: 280px;">
+                        <h4 style="font-size: 18px; margin-bottom: 20px; opacity: 0.9;">Perfiles de Inmunidad</h4>
+                        
+                        <div class="radar-legend-item" style="margin-bottom: 20px; padding: 15px; background: rgba(46, 204, 113, 0.2); border-radius: 8px; border-left: 4px solid #2ecc71; cursor: pointer;" data-profile="balanced">
+                            <h5 style="margin: 0 0 5px 0; color: #2ecc71;">Líder Balanceado</h5>
+                            <p style="margin: 0; font-size: 14px; opacity: 0.8;">Fortalezas equilibradas en todos los pilares. Resiliencia óptima ante cualquier amenaza.</p>
+                            <p style="margin: 5px 0 0 0; font-size: 12px; opacity: 0.6;">Índice de Inmunidad: 7.5</p>
+                        </div>
+                        
+                        <div class="radar-legend-item" style="margin-bottom: 20px; padding: 15px; background: rgba(243, 156, 18, 0.2); border-radius: 8px; border-left: 4px solid #f39c12; cursor: pointer;" data-profile="fortress">
+                            <h5 style="margin: 0 0 5px 0; color: #f39c12;">La Fortaleza</h5>
+                            <p style="margin: 0; font-size: 14px; opacity: 0.8;">Fuerte en protección pero carece de agilidad. Vulnerable a amenazas sofisticadas.</p>
+                            <p style="margin: 5px 0 0 0; font-size: 12px; opacity: 0.6;">Índice de Inmunidad: 5.2</p>
+                        </div>
+                        
+                        <div class="radar-legend-item" style="margin-bottom: 20px; padding: 15px; background: rgba(231, 76, 60, 0.2); border-radius: 8px; border-left: 4px solid #e74c3c; cursor: pointer;" data-profile="exposed">
+                            <h5 style="margin: 0 0 5px 0; color: #e74c3c;">El Expuesto</h5>
+                            <p style="margin: 0; font-size: 14px; opacity: 0.8;">Debilidades críticas en todos los aspectos. Requiere intervención urgente.</p>
+                            <p style="margin: 5px 0 0 0; font-size: 12px; opacity: 0.6;">Índice de Inmunidad: 2.5</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <p style="text-align: center; margin-top: 30px; font-size: 14px; opacity: 0.7;">
+                    Pase el cursor sobre los perfiles para ver las puntuaciones detalladas
+                </p>
+            </div>
+            
+            <style>
+                .radar-profile polygon {
+                    transition: all 0.3s ease;
+                }
+                
+                .radar-profile:hover polygon {
+                    opacity: 1 !important;
+                    stroke-width: 4;
+                }
+                
+                .radar-legend-item {
+                    transition: all 0.3s ease;
+                }
+                
+                .radar-legend-item:hover {
+                    transform: translateX(5px);
+                    opacity: 1 !important;
+                }
+            </style>
+            
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const profiles = {
+                        'exposed-profile': {
+                            title: 'El Expuesto',
+                            protection: 'Protección: 2.5',
+                            resilience: 'Resiliencia: 2.5',
+                            agility: 'Agilidad: 2.5'
+                        },
+                        'fortress-profile': {
+                            title: 'La Fortaleza',
+                            protection: 'Protección: 8.5',
+                            resilience: 'Resiliencia: 3.5',
+                            agility: 'Agilidad: 3.5'
+                        },
+                        'balanced-profile': {
+                            title: 'Líder Balanceado',
+                            protection: 'Protección: 7.5',
+                            resilience: 'Resiliencia: 7.5',
+                            agility: 'Agilidad: 7.5'
+                        }
+                    };
+                    
+                    const hoverInfo = document.getElementById('hover-info');
+                    const hoverTitle = document.getElementById('hover-title');
+                    const hoverProtection = document.getElementById('hover-protection');
+                    const hoverResilience = document.getElementById('hover-resilience');
+                    const hoverAgility = document.getElementById('hover-agility');
+                    
+                    // Profile hover interactions
+                    Object.keys(profiles).forEach(profileId => {
+                        const profileElement = document.getElementById(profileId);
+                        
+                        profileElement.addEventListener('mouseenter', function(e) {
+                            const profile = profiles[profileId];
+                            hoverTitle.textContent = profile.title;
+                            hoverProtection.textContent = profile.protection;
+                            hoverResilience.textContent = profile.resilience;
+                            hoverAgility.textContent = profile.agility;
+                            
+                            // Dynamic positioning of hover info box
+                            const svg = profileElement.closest('svg');
+                            const svgRect = svg.getBoundingClientRect();
+                            const mouseX = e.clientX - svgRect.left;
+                            const mouseY = e.clientY - svgRect.top;
+                            
+                            // Position the hover box avoiding edges
+                            let xPos = mouseX + 10;
+                            let yPos = mouseY - 90;
+                            
+                            // Adjust if too close to edges
+                            if (xPos + 240 > 500) xPos = mouseX - 250;
+                            if (yPos < 10) yPos = mouseY + 10;
+                            
+                            hoverInfo.setAttribute('transform', `translate(${xPos - 10}, ${yPos - 10})`);
+                            hoverInfo.style.display = 'block';
+                            
+                            // Highlight other profiles less
+                            Object.keys(profiles).forEach(otherId => {
+                                if (otherId !== profileId) {
+                                    document.getElementById(otherId).style.opacity = '0.3';
+                                }
+                            });
+                        });
+                        
+                        profileElement.addEventListener('mousemove', function(e) {
+                            // Update position on mouse move
+                            const svg = profileElement.closest('svg');
+                            const svgRect = svg.getBoundingClientRect();
+                            const mouseX = e.clientX - svgRect.left;
+                            const mouseY = e.clientY - svgRect.top;
+                            
+                            let xPos = mouseX + 10;
+                            let yPos = mouseY - 90;
+                            
+                            if (xPos + 240 > 500) xPos = mouseX - 250;
+                            if (yPos < 10) yPos = mouseY + 10;
+                            
+                            hoverInfo.setAttribute('transform', `translate(${xPos - 10}, ${yPos - 10})`);
+                        });
+                        
+                        profileElement.addEventListener('mouseleave', function() {
+                            hoverInfo.style.display = 'none';
+                            
+                            // Reset opacity
+                            Object.keys(profiles).forEach(otherId => {
+                                document.getElementById(otherId).style.opacity = '';
+                            });
+                        });
+                    });
+                    
+                    // Legend click interactions
+                    const legendItems = document.querySelectorAll('.radar-legend-item');
+                    legendItems.forEach(item => {
+                        item.addEventListener('click', function() {
+                            const profileName = this.getAttribute('data-profile');
+                            const profileMap = {
+                                'balanced': 'balanced-profile',
+                                'fortress': 'fortress-profile',
+                                'exposed': 'exposed-profile'
+                            };
+                            
+                            // Temporarily highlight the corresponding profile
+                            const profileElement = document.getElementById(profileMap[profileName]);
+                            const polygon = profileElement.querySelector('polygon');
+                            const originalOpacity = polygon.style.opacity;
+                            
+                            polygon.style.opacity = '1';
+                            polygon.style.strokeWidth = '5';
+                            
+                            setTimeout(() => {
+                                polygon.style.opacity = originalOpacity;
+                                polygon.style.strokeWidth = '';
+                            }, 1500);
+                        });
+                    });
+                });
+            </script>
+        </div>
+
+        <!-- Framework Components -->
+        <div class="section">
+            <h2 class="section-title">Detalles de los Componentes</h2>
+
+            <!-- Component Details -->
+            <div class="methodology-card">
+                <h4>1. Efectividad de Protección (Su Armadura)</h4>
+                <p><strong>Qué Es:</strong> Las defensas preventivas de su organización - la armadura que detiene las amenazas antes de que entren.<br>
+                <strong>Valor para C-Level:</strong> Responde "¿El dinero que gastamos en defensa realmente nos hace más seguros?"</p>
+                <p style="margin-top: 15px;">Medimos mediante:</p>
+                <ul style="margin: 15px 0; padding-left: 30px; color: #5d6d7e;">
+                    <li><strong>Puntuación de Preparación de Protección</strong> - Madurez arquitectónica</li>
+                    <li><strong>Puntuación de Desempeño de Protección</strong> - Pruebas del mundo real</li>
+                </ul>
+                <div class="integration-box">
+                    <strong>Servicios Relacionados:</strong> Consultoría de Arquitectura Zero-Trust, Hacking Ético/Pentesting, 
+                    Fortalecimiento de Seguridad en la Nube, Evaluación de Seguridad ERP
+                </div>
+            </div>
+
+            <div class="methodology-card">
+                <h4>2. Resiliencia Operacional (Su ADN)</h4>
+                <p><strong>Qué Es:</strong> El perfil de riesgo inherente de su modelo de negocio basado en dependencia digital, industria y geografía.<br>
+                <strong>Valor para C-Level:</strong> Transforma la ciberseguridad de problema de TI a componente de planificación estratégica.</p>
+                <p style="margin-top: 15px;">Medimos el Índice de Exposición del Negocio (BEI) combinando:</p>
+                <table style="width: 100%; margin: 15px 0;">
+                    <tr>
+                        <td style="padding: 8px;"><strong>Vulnerabilidad de la Industria (25%)</strong></td>
+                        <td style="padding: 8px; color: #7f8c8d;">Exposición sectorial a amenazas</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px;"><strong>Dependencia Digital (40%)</strong></td>
+                        <td style="padding: 8px; color: #7f8c8d;">Criticidad de operaciones digitales</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px;"><strong>Velocidad de Decisión (20%)</strong></td>
+                        <td style="padding: 8px; color: #7f8c8d;">Agilidad organizacional</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px;"><strong>Riesgo Geográfico (15%)</strong></td>
+                        <td style="padding: 8px; color: #7f8c8d;">Ambiente de amenazas regional</td>
+                    </tr>
+                </table>
+                <div class="integration-box">
+                    <strong>Servicios Relacionados:</strong> Talleres de Asesoría de Riesgo Estratégico, Modernización de Procesos de Negocio, 
+                    Dashboards de Riesgo Ejecutivo (Power BI), Planificación de Transformación Digital
+                </div>
+            </div>
+
+            <div class="methodology-card">
+                <h4>3. Agilidad de Detección y Respuesta (Su Sistema Inmune)</h4>
+                <p><strong>Qué Es:</strong> Su capacidad para encontrar y neutralizar amenazas que penetran su armadura.<br>
+                <strong>Valor para C-Level:</strong> Responde "Cuando una amenaza entra—y lo hará—¿sobrevivimos?"</p>
+                <p style="margin-top: 15px;">Medimos mediante:</p>
+                <ul style="margin: 15px 0; padding-left: 30px; color: #5d6d7e;">
+                    <li><strong>Puntuación de Preparación de Respuesta</strong> - Madurez de procesos</li>
+                    <li><strong>Puntuación de Desempeño de Respuesta</strong> - MTTD + MTTC</li>
+                </ul>
+                
+                <div style="margin-top: 20px;">
+                    <h5 style="margin-bottom: 10px;">Niveles de Desempeño MTTD (Tiempo Medio de Detección):</h5>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li>• <strong>Elite (&lt;10 min):</strong> "Detección automatizada a velocidad de máquina"</li>
+                        <li>• <strong>Avanzado (10 min - 1 hora):</strong> "Equipo alertado casi inmediatamente"</li>
+                        <li>• <strong>Competente (1-24 horas):</strong> "Problemas encontrados el mismo día"</li>
+                        <li>• <strong>Básico (1-7 días):</strong> "Dependiente de revisiones manuales"</li>
+                        <li>• <strong>Deficiente (&gt;7 días):</strong> "El atacante tiene rienda suelta"</li>
+                    </ul>
+                </div>
+                <div class="integration-box">
+                    <strong>Servicios Relacionados:</strong> Simulación de Brechas y Ataques (BAS), Retainer de Respuesta a Incidentes, 
+                    Implementación SIEM, Gestión de Vulnerabilidades como Servicio
+                </div>
+            </div>
+        </div>
+
+        <!-- Business Value & Reporting -->
+        <div class="section">
+            <h2 class="section-title">Reportes de Doble Audiencia</h2>
+            
+            <div class="methodology-card">
+                <h4>Informe Estratégico (CEO/Junta)</h4>
+                <ul style="margin: 15px 0; padding-left: 30px; color: #5d6d7e;">
+                    <li>Resumen ejecutivo de 1-2 páginas</li>
+                    <li>Lidera con Resiliencia Operacional</li>
+                    <li>Riesgo empresarial e implicaciones estratégicas</li>
+                    <li>Prioridades de inversión</li>
+                </ul>
+            </div>
+            
+            <div class="methodology-card">
+                <h4>Hoja de Ruta Técnica (CIO/CISO)</h4>
+                <ul style="margin: 15px 0; padding-left: 30px; color: #5d6d7e;">
+                    <li>Informe detallado completo</li>
+                    <li>Inmersión profunda en todos los pilares</li>
+                    <li>Desglose de 48 sub-controles</li>
+                    <li>Recomendaciones específicas de servicios</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Interpretation Scale -->
+        <div class="section">
+            <h2 class="section-title">Escala de Inmunidad</h2>
+            
+            <div class="maturity-scale">
+                <div class="scale-item scale-critical">
+                    <div class="scale-score">0 - 4</div>
+                    <div class="scale-label">CRÍTICO</div>
+                    <div class="scale-description">Evento de nivel de extinción probable</div>
+                </div>
+                <div class="scale-item scale-medium">
+                    <div class="scale-score">4 - 6</div>
+                    <div class="scale-label">VULNERABLE</div>
+                    <div class="scale-description">Semanas de interrupción potencial</div>
+                </div>
+                <div class="scale-item scale-resilient">
+                    <div class="scale-score">6 - 8</div>
+                    <div class="scale-label">RESILIENTE</div>
+                    <div class="scale-description">Recuperación en días</div>
+                </div>
+                <div class="scale-item scale-resilient" style="background: #d4edda; border-color: #27ae60;">
+                    <div class="scale-score">8 - 10</div>
+                    <div class="scale-label">ELITE</div>
+                    <div class="scale-description">Recuperación en horas</div>
+                </div>
+            </div>
+
+            <div class="insight-box" style="margin-top: 40px;">
+                <h3>Diferenciadores Clave del Framework</h3>
+                <p>• <strong>Negocio Primero:</strong> Habla el lenguaje del C-suite, no jerga técnica<br>
+                • <strong>Vista Holística:</strong> Fórmula multiplicativa previene manipulación<br>
+                • <strong>Orientado a la Acción:</strong> Mapeo claro de servicios a mejoras<br>
+                • <strong>Claridad Visual:</strong> El Radar Trinity cuenta la historia instantáneamente<br>
+                • <strong>Reporte Dual:</strong> Mensaje correcto para la audiencia correcta</p>
+            </div>
+        </div>
+
+        <!-- Implementation Notes -->
+        <div class="section">
+            <h2 class="section-title">Notas de Implementación</h2>
+            
+            <div class="methodology-card">
+                <h4>Base de Evidencia</h4>
+                <ul style="margin: 15px 0; padding-left: 30px; color: #5d6d7e;">
+                    <li>La evaluación incluye más de 150 benchmarks de organizaciones reales</li>
+                    <li>Combina madurez Zero Trust con contexto de negocio</li>
+                    <li>Validado contra estándares de la industria (Mandiant, Verizon)</li>
+                    <li>Diseñado para las realidades del mercado LATAM y España</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Validation and Evidence -->
+        <div class="section">
+            <h2 class="section-title">Resultados Comprobados</h2>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Sector Evaluado</th>
+                        <th>Índice de Inmunidad</th>
+                        <th>Situación del Negocio</th>
+                        <th>Impacto Real</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Sector Manufacturero</td>
+                        <td>2.8 promedio</td>
+                        <td>Operaciones paralizadas por semanas</td>
+                        <td>Pérdidas millonarias documentadas</td>
+                    </tr>
+                    <tr>
+                        <td>Sector Público</td>
+                        <td>3.1 promedio</td>
+                        <td>Decisión lenta, burocracia crítica</td>
+                        <td>Servicios ciudadanos interrumpidos</td>
+                    </tr>
+                    <tr>
+                        <td>Instituciones Financieras</td>
+                        <td>7.2 promedio</td>
+                        <td>Continuidad garantizada, recuperación rápida</td>
+                        <td>Mínimo impacto en clientes</td>
+                    </tr>
+                    <tr>
+                        <td>Empresas Tecnológicas</td>
+                        <td>5.4 promedio</td>
+                        <td>100% digital pero ágil en respuesta</td>
+                        <td>Supervivencia depende de preparación</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="insight-box" style="margin-top: 40px;">
+                <h3>El Resultado Final</h3>
+                <p style="font-size: 18px; font-style: italic; color: #2c3e50;">
+                "El resultado no es solo una puntuación; es un mapa estratégico. Te muestra precisamente 
+                dónde invertir tu próximo dólar para construir un negocio que no solo sea seguro, 
+                sino verdadera y demostrablemente resiliente."
+                </p>
+            </div>
+        </div>
+
+
+    </div>
+
+    <!-- Professional Footer -->
+    <div class="footer">
+        <p><strong>Framework de Inmunidad 2.0</strong></p>
+        <p>Una Guía Ejecutiva para la Biología Corporativa</p>
+        <p>Desarrollado por <a href="https://laberit.com" target="_blank">Lãberit</a> | 
+        Validado con 150+ organizaciones en LATAM</p>
+        <p style="margin-top: 20px; font-size: 18px; font-weight: 500; color: #2c3e50;">
+            "Su negocio como organismo vivo: medimos si sobrevivirá."
+        </p>
+    </div>
+</body>
+</html>
