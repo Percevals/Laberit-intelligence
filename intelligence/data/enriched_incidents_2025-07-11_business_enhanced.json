@@ -1,0 +1,654 @@
+{
+  "metadata": {
+    "generated_at": "2025-07-11 18:30:00",
+    "total_incidents": 5,
+    "date_range": {
+      "start": "2025-07-05",
+      "end": "2025-07-11"
+    },
+    "sources": [
+      "Manual Research",
+      "SOCRadar",
+      "CERT Advisories",
+      "Regional News"
+    ],
+    "enrichment_date": "2025-07-11 09:35:14",
+    "research_sources": [
+      "CrowdStrike",
+      "Check Point",
+      "IBM X-Force",
+      "Comparitech",
+      "ReliaQuest",
+      "SOCRadar"
+    ],
+    "enrichment_metrics": {
+      "total_incidents": 5,
+      "total_estimated_cost_usd": 46500000,
+      "average_dii_score": 2.96
+    },
+    "business_model_enhancement": {
+      "enhanced_date": "2025-07-12T15:06:43.843751",
+      "mapper_version": "1.0.0",
+      "total_incidents_mapped": 5
+    }
+  },
+  "incidents": [
+    {
+      "title": "Major Ransomware Attack on Brazilian Healthcare Network",
+      "url": "https://example.com/brazil-healthcare-ransomware",
+      "date": "2025-07-08 14:30:00",
+      "source": "CERT Brazil",
+      "summary": "A sophisticated ransomware group targeted Brazil's second-largest healthcare network, affecting 15 hospitals and encrypting patient records. The attack disrupted emergency services across São Paulo state for 48 hours.",
+      "business_impacts": [
+        "healthcare",
+        "hospital",
+        "medical"
+      ],
+      "relevance_score": 5,
+      "immunity_impact": {
+        "sector": "Healthcare",
+        "severity": "Critical",
+        "business_functions_affected": [
+          "Patient Care",
+          "Emergency Services",
+          "Medical Records"
+        ],
+        "estimated_recovery_time": "7-14 days"
+      },
+      "attack_vector": {
+        "type": "ransomware",
+        "categories": [
+          "malware",
+          "encryption",
+          "extortion"
+        ],
+        "average_downtime_days": 21,
+        "detection_difficulty": "medium"
+      },
+      "financial_impact": {
+        "estimated_cost_usd": 15000000,
+        "daily_downtime_cost_usd": 900000,
+        "recovery_cost_usd": 5500000,
+        "confidence": "high",
+        "calculation_method": "sector_benchmark"
+      },
+      "dii_analysis": {
+        "dii_score": 0.21,
+        "components": {
+          "trd_hours": 4,
+          "aer_ratio": 0.4,
+          "hfp_probability": 0.3,
+          "bri_index": 5,
+          "rrg_grade": 5
+        },
+        "interpretation": "Critical vulnerability - Operations will cease under attack"
+      },
+      "business_model": {
+        "primary_model_id": 2,
+        "primary_model_name": "Información Regulada",
+        "secondary_models": [
+          {
+            "id": 6,
+            "name": "Infraestructura Heredada"
+          }
+        ],
+        "operational_impact": "Regulated data compromised with compliance implications"
+      },
+      "enrichment": {
+        "enriched_at": "2025-07-11 09:35:14",
+        "enrichment_version": "1.0",
+        "data_sources": [
+          "raw_incidents",
+          "weekly_research"
+        ]
+      },
+      "business_model_analysis": {
+        "affected_models": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "primary_impact_models": [
+          6,
+          8
+        ],
+        "model_names": {
+          "1": "Comercio Híbrido",
+          "2": "Software Crítico",
+          "3": "Servicios de Datos",
+          "4": "Ecosistema Digital",
+          "5": "Servicios Financieros",
+          "6": "Infraestructura Heredada",
+          "7": "Cadena de Suministro",
+          "8": "Información Regulada"
+        },
+        "attack_type": "ransomware",
+        "model_exposures": {
+          "1": {
+            "model_name": "Comercio Híbrido",
+            "exposure_score": 0.0,
+            "is_primary_impact": false
+          },
+          "2": {
+            "model_name": "Software Crítico",
+            "exposure_score": 0.0,
+            "is_primary_impact": false
+          },
+          "3": {
+            "model_name": "Servicios de Datos",
+            "exposure_score": 0.0,
+            "is_primary_impact": false
+          },
+          "4": {
+            "model_name": "Ecosistema Digital",
+            "exposure_score": 0.0,
+            "is_primary_impact": false
+          },
+          "5": {
+            "model_name": "Servicios Financieros",
+            "exposure_score": 0.0,
+            "is_primary_impact": false
+          },
+          "6": {
+            "model_name": "Infraestructura Heredada",
+            "exposure_score": 0.0,
+            "is_primary_impact": true
+          },
+          "7": {
+            "model_name": "Cadena de Suministro",
+            "exposure_score": 0.0,
+            "is_primary_impact": false
+          },
+          "8": {
+            "model_name": "Información Regulada",
+            "exposure_score": 0.0,
+            "is_primary_impact": true
+          }
+        }
+      }
+    },
+    {
+      "title": "Data Breach at Mexican Financial Institution Exposes 2M Records",
+      "url": "https://example.com/mexico-bank-breach",
+      "date": "2025-07-07 09:15:00",
+      "source": "CERT Mexico",
+      "summary": "A major Mexican bank suffered a data breach exposing personal and financial information of over 2 million customers. The breach was attributed to an unpatched vulnerability in their online banking platform.",
+      "business_impacts": [
+        "financial",
+        "bank",
+        "payment"
+      ],
+      "relevance_score": 5,
+      "immunity_impact": {
+        "sector": "Financial Services",
+        "severity": "High",
+        "business_functions_affected": [
+          "Online Banking",
+          "Customer Trust",
+          "Regulatory Compliance"
+        ],
+        "estimated_recovery_time": "30-45 days"
+      },
+      "attack_vector": {
+        "type": "data_breach",
+        "categories": [
+          "vulnerability",
+          "unauthorized_access",
+          "data_theft"
+        ],
+        "average_downtime_days": 5,
+        "detection_difficulty": "high"
+      },
+      "financial_impact": {
+        "estimated_cost_usd": 20000000,
+        "daily_downtime_cost_usd": 2500000,
+        "recovery_cost_usd": 5000000,
+        "confidence": "high",
+        "calculation_method": "incident_reference"
+      },
+      "dii_analysis": {
+        "dii_score": 0.29,
+        "components": {
+          "trd_hours": 12,
+          "aer_ratio": 0.3,
+          "hfp_probability": 0.5,
+          "bri_index": 5,
+          "rrg_grade": 5
+        },
+        "interpretation": "Critical vulnerability - Operations will cease under attack"
+      },
+      "business_model": {
+        "primary_model_id": 1,
+        "primary_model_name": "Servicios Financieros",
+        "secondary_models": [
+          {
+            "id": 4,
+            "name": "Servicios de Datos"
+          },
+          {
+            "id": 7,
+            "name": "Cadena de Suministro"
+          }
+        ],
+        "operational_impact": "Financial transactions and banking services frozen"
+      },
+      "enrichment": {
+        "enriched_at": "2025-07-11 09:35:14",
+        "enrichment_version": "1.0",
+        "data_sources": [
+          "raw_incidents",
+          "weekly_research"
+        ]
+      },
+      "business_model_analysis": {
+        "affected_models": [
+          1,
+          3,
+          4,
+          5,
+          8
+        ],
+        "primary_impact_models": [
+          1,
+          3,
+          5
+        ],
+        "model_names": {
+          "1": "Comercio Híbrido",
+          "3": "Servicios de Datos",
+          "4": "Ecosistema Digital",
+          "5": "Servicios Financieros",
+          "8": "Información Regulada"
+        },
+        "attack_type": "data_exfiltration",
+        "model_exposures": {
+          "1": {
+            "model_name": "Comercio Híbrido",
+            "exposure_score": 0.0,
+            "is_primary_impact": true
+          },
+          "3": {
+            "model_name": "Servicios de Datos",
+            "exposure_score": 0.0,
+            "is_primary_impact": true
+          },
+          "4": {
+            "model_name": "Ecosistema Digital",
+            "exposure_score": 0.0,
+            "is_primary_impact": false
+          },
+          "5": {
+            "model_name": "Servicios Financieros",
+            "exposure_score": 0.0,
+            "is_primary_impact": true
+          },
+          "8": {
+            "model_name": "Información Regulada",
+            "exposure_score": 0.0,
+            "is_primary_impact": false
+          }
+        }
+      }
+    },
+    {
+      "title": "Colombian Government Websites Hit by DDoS Campaign",
+      "url": "https://example.com/colombia-gov-ddos",
+      "date": "2025-07-06 16:45:00",
+      "source": "CERT Colombia",
+      "summary": "Multiple Colombian government websites were taken offline by a coordinated DDoS attack. The attack lasted 6 hours and affected citizen services including tax payments and document processing.",
+      "business_impacts": [
+        "government",
+        "public"
+      ],
+      "relevance_score": 4,
+      "immunity_impact": {
+        "sector": "Government",
+        "severity": "Medium",
+        "business_functions_affected": [
+          "Citizen Services",
+          "Online Payments",
+          "Document Processing"
+        ],
+        "estimated_recovery_time": "1-2 days"
+      },
+      "attack_vector": {
+        "type": "ddos",
+        "categories": [
+          "availability",
+          "network",
+          "disruption"
+        ],
+        "average_downtime_days": 0.25,
+        "detection_difficulty": "low"
+      },
+      "financial_impact": {
+        "estimated_cost_usd": 500000,
+        "daily_downtime_cost_usd": 100000,
+        "recovery_cost_usd": 50000,
+        "confidence": "medium",
+        "calculation_method": "sector_average"
+      },
+      "dii_analysis": {
+        "dii_score": 12.0,
+        "components": {
+          "trd_hours": 24,
+          "aer_ratio": 0.8,
+          "hfp_probability": 0.1,
+          "bri_index": 4,
+          "rrg_grade": 4
+        },
+        "interpretation": "Excellent immunity - Organization can operate effectively under attack"
+      },
+      "business_model": {
+        "primary_model_id": 2,
+        "primary_model_name": "Información Regulada",
+        "secondary_models": [
+          {
+            "id": 5,
+            "name": "Software Crítico"
+          }
+        ],
+        "operational_impact": "Regulated data compromised with compliance implications"
+      },
+      "enrichment": {
+        "enriched_at": "2025-07-11 09:35:14",
+        "enrichment_version": "1.0",
+        "data_sources": [
+          "raw_incidents",
+          "weekly_research"
+        ]
+      },
+      "business_model_analysis": {
+        "affected_models": [
+          2,
+          4,
+          5
+        ],
+        "primary_impact_models": [
+          4,
+          5
+        ],
+        "model_names": {
+          "2": "Software Crítico",
+          "4": "Ecosistema Digital",
+          "5": "Servicios Financieros"
+        },
+        "attack_type": "financial_malware",
+        "model_exposures": {
+          "2": {
+            "model_name": "Software Crítico",
+            "exposure_score": 0.0,
+            "is_primary_impact": false
+          },
+          "4": {
+            "model_name": "Ecosistema Digital",
+            "exposure_score": 0.0,
+            "is_primary_impact": true
+          },
+          "5": {
+            "model_name": "Servicios Financieros",
+            "exposure_score": 0.0,
+            "is_primary_impact": true
+          }
+        }
+      }
+    },
+    {
+      "title": "Supply Chain Attack Targets LATAM E-commerce Platforms",
+      "url": "https://example.com/latam-supply-chain",
+      "date": "2025-07-09 11:00:00",
+      "source": "SOCRadar",
+      "summary": "A supply chain attack targeting a popular payment processing library affected multiple e-commerce platforms across Latin America. The malware was designed to steal credit card information during checkout.",
+      "business_impacts": [
+        "retail",
+        "e-commerce",
+        "payment"
+      ],
+      "relevance_score": 5,
+      "immunity_impact": {
+        "sector": "Retail",
+        "severity": "High",
+        "business_functions_affected": [
+          "Payment Processing",
+          "Customer Data",
+          "Sales Operations"
+        ],
+        "estimated_recovery_time": "3-5 days"
+      },
+      "attack_vector": {
+        "type": "supply_chain",
+        "categories": [
+          "third_party",
+          "software",
+          "trust_exploitation"
+        ],
+        "average_downtime_days": 7,
+        "detection_difficulty": "very_high"
+      },
+      "financial_impact": {
+        "estimated_cost_usd": 8000000,
+        "daily_downtime_cost_usd": 1000000,
+        "recovery_cost_usd": 2000000,
+        "confidence": "medium",
+        "calculation_method": "attack_type_average"
+      },
+      "dii_analysis": {
+        "dii_score": 1.2,
+        "components": {
+          "trd_hours": 12,
+          "aer_ratio": 0.6,
+          "hfp_probability": 0.4,
+          "bri_index": 5,
+          "rrg_grade": 3
+        },
+        "interpretation": "Poor immunity - Significant disruption likely"
+      },
+      "business_model": {
+        "primary_model_id": 8,
+        "primary_model_name": "Comercio Híbrido",
+        "secondary_models": [
+          {
+            "id": 7,
+            "name": "Cadena de Suministro"
+          }
+        ],
+        "operational_impact": "Hybrid commerce operations halted across channels"
+      },
+      "enrichment": {
+        "enriched_at": "2025-07-11 09:35:14",
+        "enrichment_version": "1.0",
+        "data_sources": [
+          "raw_incidents",
+          "weekly_research"
+        ]
+      },
+      "business_model_analysis": {
+        "affected_models": [
+          1,
+          4,
+          5,
+          6,
+          7
+        ],
+        "primary_impact_models": [
+          1,
+          5,
+          7
+        ],
+        "model_names": {
+          "1": "Comercio Híbrido",
+          "4": "Ecosistema Digital",
+          "5": "Servicios Financieros",
+          "6": "Infraestructura Heredada",
+          "7": "Cadena de Suministro"
+        },
+        "attack_type": "supply_chain",
+        "model_exposures": {
+          "1": {
+            "model_name": "Comercio Híbrido",
+            "exposure_score": 0.0,
+            "is_primary_impact": true
+          },
+          "4": {
+            "model_name": "Ecosistema Digital",
+            "exposure_score": 0.0,
+            "is_primary_impact": false
+          },
+          "5": {
+            "model_name": "Servicios Financieros",
+            "exposure_score": 0.0,
+            "is_primary_impact": true
+          },
+          "6": {
+            "model_name": "Infraestructura Heredada",
+            "exposure_score": 0.0,
+            "is_primary_impact": false
+          },
+          "7": {
+            "model_name": "Cadena de Suministro",
+            "exposure_score": 0.0,
+            "is_primary_impact": true
+          }
+        }
+      }
+    },
+    {
+      "title": "Argentine Energy Company Targeted by Industrial Cyber Attack",
+      "url": "https://example.com/argentina-energy-attack",
+      "date": "2025-07-10 08:30:00",
+      "source": "Regional News",
+      "summary": "An Argentine energy distribution company reported a cyber attack on their industrial control systems. The attack attempted to disrupt power distribution but was contained before causing outages.",
+      "business_impacts": [
+        "energy",
+        "industrial"
+      ],
+      "relevance_score": 4,
+      "immunity_impact": {
+        "sector": "Energy",
+        "severity": "High",
+        "business_functions_affected": [
+          "Power Distribution",
+          "SCADA Systems",
+          "Grid Management"
+        ],
+        "estimated_recovery_time": "2-3 days"
+      },
+      "attack_vector": {
+        "type": "ics_attack",
+        "categories": [
+          "operational_technology",
+          "critical_infrastructure",
+          "sabotage"
+        ],
+        "average_downtime_days": 3,
+        "detection_difficulty": "high"
+      },
+      "financial_impact": {
+        "estimated_cost_usd": 3000000,
+        "daily_downtime_cost_usd": 500000,
+        "recovery_cost_usd": 1000000,
+        "confidence": "low",
+        "calculation_method": "sector_projection"
+      },
+      "dii_analysis": {
+        "dii_score": 1.12,
+        "components": {
+          "trd_hours": 12,
+          "aer_ratio": 0.3,
+          "hfp_probability": 0.2,
+          "bri_index": 4,
+          "rrg_grade": 4
+        },
+        "interpretation": "Poor immunity - Significant disruption likely"
+      },
+      "business_model": {
+        "primary_model_id": 6,
+        "primary_model_name": "Infraestructura Heredada",
+        "secondary_models": [
+          {
+            "id": 5,
+            "name": "Software Crítico"
+          }
+        ],
+        "operational_impact": "Legacy infrastructure failures cascade"
+      },
+      "enrichment": {
+        "enriched_at": "2025-07-11 09:35:14",
+        "enrichment_version": "1.0",
+        "data_sources": [
+          "raw_incidents",
+          "weekly_research"
+        ]
+      },
+      "business_model_analysis": {
+        "affected_models": [
+          6,
+          7
+        ],
+        "primary_impact_models": [
+          6
+        ],
+        "model_names": {
+          "6": "Infraestructura Heredada",
+          "7": "Cadena de Suministro"
+        },
+        "attack_type": "ics_ot_attack",
+        "model_exposures": {
+          "6": {
+            "model_name": "Infraestructura Heredada",
+            "exposure_score": 0.0,
+            "is_primary_impact": true
+          },
+          "7": {
+            "model_name": "Cadena de Suministro",
+            "exposure_score": 0.0,
+            "is_primary_impact": false
+          }
+        }
+      }
+    }
+  ],
+  "executive_summary": {
+    "critical_findings": [
+      "Healthcare sector shows lowest immunity (DII < 2) with $15,000,000 impact",
+      "Financial services breach could reach $20,000,000 based on regional benchmarks",
+      "Supply chain attacks showing 431% growth with high detection difficulty"
+    ],
+    "regional_context": {
+      "key_findings": [
+        {
+          "finding": "Insider threat ROI",
+          "detail": "R$15,000 bribe yielded R$1 billion target - 66,666x return",
+          "impact": "Expect copycat attempts across financial infrastructure"
+        },
+        {
+          "finding": "Healthcare downtime costs",
+          "detail": "$1.9 million daily globally, $900K projected for LATAM",
+          "impact": "Critical need for offline backup and rapid recovery"
+        },
+        {
+          "finding": "Spanish-language targeting",
+          "detail": "Ransomware groups pivoting to linguistic familiarity",
+          "impact": "Social engineering effectiveness increases"
+        }
+      ],
+      "recommendations": {
+        "immediate": [
+          "Implement real-time anomaly detection for payment systems",
+          "Mandatory cooling-off periods for large institutional transfers",
+          "Continuous security awareness training in Spanish/Portuguese"
+        ],
+        "strategic": [
+          "Third-party risk management for payment providers",
+          "Pre-negotiated incident response contracts",
+          "Privileged access management reforms"
+        ]
+      }
+    }
+  }
+}
