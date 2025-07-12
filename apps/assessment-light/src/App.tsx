@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { calculateDII, businessModels } from '@dii/core';
 import { ModelSelector, QuestionSlider, AIStatusBadge } from '@dii/ui-kit';
-import ResultDisplay from './components/ResultDisplay';
+import SimpleResultDisplay from './components/SimpleResultDisplay';
+import ErrorBoundary from './components/ErrorBoundary';
 import { useAIStatus } from './services/ai/hooks';
 import type { DIIDimensions, DIIResults } from '@dii/types';
 
@@ -96,16 +97,26 @@ function App(): React.ReactElement {
       return;
     }
 
-    const calculationResult = calculateDII({
-      businessModel: selectedModel,
-      dimensions: dimensions
-    });
-    
-    if (calculationResult.success && calculationResult.results) {
-      setResult(calculationResult.results);
-      setCurrentStep(3);
-    } else {
-      alert('Error al calcular: ' + (calculationResult.error || 'Error desconocido'));
+    console.log('Calculating DII with:', { businessModel: selectedModel, dimensions });
+
+    try {
+      const calculationResult = calculateDII({
+        businessModel: selectedModel,
+        dimensions: dimensions
+      });
+      
+      console.log('Calculation result:', calculationResult);
+      
+      if (calculationResult.success && calculationResult.results) {
+        setResult(calculationResult.results);
+        setCurrentStep(3);
+      } else {
+        console.error('Calculation failed:', calculationResult.error);
+        alert('Error al calcular: ' + (calculationResult.error || 'Error desconocido'));
+      }
+    } catch (error) {
+      console.error('Exception during calculation:', error);
+      alert('Error inesperado: ' + error.message);
     }
   };
 
@@ -215,10 +226,12 @@ function App(): React.ReactElement {
 
         {currentStep === 3 && result && (
           <div className="fade-in">
-            <ResultDisplay
-              result={result}
-              onRestart={restart}
-            />
+            <ErrorBoundary>
+              <SimpleResultDisplay
+                result={result}
+                onRestart={restart}
+              />
+            </ErrorBoundary>
           </div>
         )}
       </main>
