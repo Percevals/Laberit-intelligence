@@ -3,6 +3,8 @@ import { calculateDII, businessModels } from '@dii/core';
 import { ModelSelector, QuestionSlider, AIStatusBadge } from '@dii/ui-kit';
 import SimpleResultDisplay from './components/SimpleResultDisplay';
 import ErrorBoundary from './components/ErrorBoundary';
+import { AssessmentFallback, CalculationFallback, UIFallback } from './components/SimpleFallback';
+import ErrorTester from './components/ErrorTester';
 import type { DIIDimensions, DIIResults } from '@dii/types';
 
 interface DimensionConfig {
@@ -116,11 +118,27 @@ function App(): React.ReactElement {
         setCurrentStep(3);
       } else {
         console.error('Calculation failed:', calculationResult.error);
-        alert('Error al calcular: ' + (calculationResult.error || 'Error desconocido'));
+        
+        // Show user-friendly error instead of alert
+        setResult({
+          error: true,
+          message: calculationResult.error || 'Error en el cálculo',
+          fallbackScore: 5.0,
+          dimensions: dimensions
+        } as any);
+        setCurrentStep(3);
       }
     } catch (error) {
       console.error('Exception during calculation:', error);
-      alert('Error inesperado: ' + error.message);
+      
+      // Create fallback result
+      setResult({
+        error: true,
+        message: error.message || 'Error inesperado en el cálculo',
+        fallbackScore: 5.0,
+        dimensions: dimensions
+      } as any);
+      setCurrentStep(3);
     }
   };
 
@@ -178,38 +196,59 @@ function App(): React.ReactElement {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {currentStep === 1 && (
           <div className="fade-in">
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">
-              Seleccione su modelo de negocio
-            </h2>
-            <p className="text-lg text-gray-600 mb-8">
-              Identifique el modelo que mejor describe su organización
-            </p>
-            <ModelSelector 
-              businessModels={businessModels}
-              onSelect={handleModelSelect}
-            />
+            <ErrorBoundary 
+              componentName="Model Selection"
+              fallbackComponent={<AssessmentFallback />}
+            >
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                Seleccione su modelo de negocio
+              </h2>
+              <p className="text-lg text-gray-600 mb-8">
+                Identifique el modelo que mejor describe su organización
+              </p>
+              <ModelSelector 
+                businessModels={businessModels}
+                onSelect={handleModelSelect}
+              />
+            </ErrorBoundary>
           </div>
         )}
 
         {currentStep === 2 && selectedModel && (
           <div className="fade-in">
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">
-              Evalúe sus dimensiones de inmunidad
-            </h2>
-            <p className="text-lg text-gray-600 mb-8">
-              Ajuste cada dimensión según la realidad actual de su organización
-            </p>
-            
-            <div className="space-y-6">
-              {DIMENSIONS.map((dimension) => (
-                <QuestionSlider
-                  key={dimension.key}
-                  dimension={dimension}
-                  value={dimensions[dimension.key]}
-                  onChange={(value) => handleDimensionChange(dimension.key, value)}
-                />
-              ))}
-            </div>
+            <ErrorBoundary 
+              componentName="Dimension Assessment"
+              fallbackComponent={<UIFallback componentName="Assessment Questions" />}
+            >
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                Evalúe sus dimensiones de inmunidad
+              </h2>
+              <p className="text-lg text-gray-600 mb-8">
+                Ajuste cada dimensión según la realidad actual de su organización
+              </p>
+              
+              <div className="space-y-6">
+                {DIMENSIONS.map((dimension) => (
+                  <ErrorBoundary 
+                    key={dimension.key}
+                    componentName={`${dimension.name} Slider`}
+                    fallbackComponent={
+                      <div className="bg-gray-100 p-4 rounded-lg">
+                        <p className="text-sm text-gray-600">
+                          {dimension.name}: Value saved as {dimensions[dimension.key]}
+                        </p>
+                      </div>
+                    }
+                  >
+                    <QuestionSlider
+                      dimension={dimension}
+                      value={dimensions[dimension.key]}
+                      onChange={(value) => handleDimensionChange(dimension.key, value)}
+                    />
+                  </ErrorBoundary>
+                ))}
+              </div>
+            </ErrorBoundary>
 
             <div className="flex justify-between mt-8">
               <button
@@ -240,6 +279,11 @@ function App(): React.ReactElement {
           </div>
         )}
       </main>
+      
+      {/* Error Boundary Tester (Development Only) */}
+      <ErrorBoundary componentName="Error Tester">
+        <ErrorTester />
+      </ErrorBoundary>
     </div>
   );
 }

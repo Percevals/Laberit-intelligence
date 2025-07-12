@@ -252,3 +252,9 @@ Low Price │ Generic Tools
 - **Prevention**: Incidents avoided (tracked via testimonials)
 - **Community**: Active participants in risk trading
 - **Recognition**: Industry citations and partnerships
+
+### Must Read
+1. `/docs/DII-DUAL-SYSTEM-STRATEGY.md` - Complete technical strategy
+2. `/docs/DII-ASSESSMENT-VISION.md` - Product vision & 6-month roadmap (Reality Check Edition)
+3. `/framework/dii_framework_v4.md` - DII methodology
+4. `/framework/dii_datastructure_v4.md` - Data structures and calculations
