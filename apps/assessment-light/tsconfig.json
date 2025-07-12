@@ -1,0 +1,20 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@dii/core": ["../../packages/core/src"],
+      "@dii/core/*": ["../../packages/core/src/*"],
+      "@dii/types": ["../../packages/types/src"],
+      "@dii/types/*": ["../../packages/types/src/*"],
+      "@dii/ui-kit": ["../../packages/ui-kit/src"],
+      "@dii/ui-kit/*": ["../../packages/ui-kit/src/*"]
+    }
+  },
+  "include": ["src"],
+  "references": [
+    { "path": "../../packages/core" },
+    { "path": "../../packages/types" },
+    { "path": "../../packages/ui-kit" }
+  ]
+}

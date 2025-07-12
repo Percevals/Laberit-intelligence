@@ -26,9 +26,8 @@ jobs:
         
       - name: Run security audit
         run: |
-          cd apps/assessment-light
-          # Install first to create package-lock.json
-          npm install --legacy-peer-deps || true
+          # Install workspace dependencies first
+          npm install --workspaces --if-present --legacy-peer-deps || true
           # Then run audit
           npm audit --audit-level=high || true
           echo "Security audit completed."
@@ -47,9 +46,8 @@ jobs:
           
       - name: Install dependencies
         run: |
-          # Go to the app directory and install
-          cd apps/assessment-light
-          npm install --legacy-peer-deps
+          # Install workspace dependencies
+          npm install --workspaces --if-present --legacy-peer-deps
           
       - name: Build Quick Assessment
         run: |
