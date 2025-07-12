@@ -3,8 +3,19 @@ import { calculateDII, businessModels } from '@dii/core';
 import { ModelSelector, QuestionSlider, AIStatusBadge } from '@dii/ui-kit';
 import ResultDisplay from './components/ResultDisplay';
 import { useAIStatus } from './services/ai/hooks';
+import type { DIIDimensions, DIIResults } from '@dii/types';
 
-const DIMENSIONS = [
+interface DimensionConfig {
+  key: keyof DIIDimensions;
+  name: string;
+  description: string;
+  tooltip: string;
+  lowLabel: string;
+  highLabel: string;
+  inverse: boolean;
+}
+
+const DIMENSIONS: DimensionConfig[] = [
   {
     key: 'TRD',
     name: 'Time to Revenue Degradation',
@@ -52,48 +63,53 @@ const DIMENSIONS = [
   }
 ];
 
-function App() {
-  const [currentStep, setCurrentStep] = useState(1);
-  const [selectedModel, setSelectedModel] = useState(null);
-  const [dimensions, setDimensions] = useState({
+function App(): React.ReactElement {
+  const [currentStep, setCurrentStep] = useState<number>(1);
+  const [selectedModel, setSelectedModel] = useState<number | null>(null);
+  const [dimensions, setDimensions] = useState<DIIDimensions>({
     TRD: 5,
     AER: 5,
     HFP: 5,
     BRI: 5,
     RRG: 5
   });
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState<DIIResults | null>(null);
   
   // Get AI status for the badge
   const aiStatus = useAIStatus();
 
-  const handleModelSelect = (modelId) => {
+  const handleModelSelect = (modelId: number): void => {
     setSelectedModel(modelId);
     setCurrentStep(2);
   };
 
-  const handleDimensionChange = (key, value) => {
+  const handleDimensionChange = (dimension: keyof DIIDimensions, value: number): void => {
     setDimensions(prev => ({
       ...prev,
-      [key]: value
+      [dimension]: value
     }));
   };
 
-  const calculateResult = () => {
+  const calculateResult = (): void => {
+    if (!selectedModel) {
+      alert('Por favor selecciona un modelo de negocio');
+      return;
+    }
+
     const calculationResult = calculateDII({
       businessModel: selectedModel,
       dimensions: dimensions
     });
     
-    if (calculationResult.success) {
+    if (calculationResult.success && calculationResult.results) {
       setResult(calculationResult.results);
       setCurrentStep(3);
     } else {
-      alert('Error al calcular: ' + calculationResult.error);
+      alert('Error al calcular: ' + (calculationResult.error || 'Error desconocido'));
     }
   };
 
-  const restart = () => {
+  const restart = (): void => {
     setCurrentStep(1);
     setSelectedModel(null);
     setDimensions({
@@ -109,9 +125,9 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
+          <div className="flex items-center justify-between py-4">
             <div>
               <h1 className="text-2xl font-bold text-gray-900">DII Quick Assessment</h1>
               <p className="text-sm text-gray-500">Digital Immunity Index 4.0</p>
@@ -136,7 +152,7 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="h-2 bg-gray-200 rounded-full my-4">
             <div 
-              className="h-full bg-dii-secondary rounded-full transition-all duration-500"
+              className="h-full bg-blue-600 rounded-full transition-all duration-500"
               style={{ width: `${(currentStep / 3) * 100}%` }}
             />
           </div>
@@ -160,18 +176,16 @@ function App() {
           </div>
         )}
 
-        {currentStep === 2 && (
+        {currentStep === 2 && selectedModel && (
           <div className="fade-in">
-            <div className="mb-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">
-                Evalúe sus dimensiones de inmunidad
-              </h2>
-              <p className="text-lg text-gray-600">
-                Modelo seleccionado: <span className="font-semibold">{getBusinessModel(selectedModel)?.name}</span>
-              </p>
-            </div>
-
-            <div className="space-y-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">
+              Evalúe sus dimensiones de inmunidad
+            </h2>
+            <p className="text-lg text-gray-600 mb-8">
+              Ajuste cada dimensión según la realidad actual de su organización
+            </p>
+            
+            <div className="space-y-6">
               {DIMENSIONS.map((dimension) => (
                 <QuestionSlider
                   key={dimension.key}
@@ -182,18 +196,18 @@ function App() {
               ))}
             </div>
 
-            <div className="mt-12 flex justify-between">
+            <div className="flex justify-between mt-8">
               <button
                 onClick={() => setCurrentStep(1)}
-                className="px-6 py-3 text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors"
+                className="px-6 py-3 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors"
               >
-                ← Cambiar modelo
+                ← Anterior
               </button>
               <button
                 onClick={calculateResult}
-                className="px-8 py-3 bg-dii-secondary text-white rounded-lg hover:bg-blue-600 transition-colors font-semibold"
+                className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
               >
-                Calcular DII Score →
+                Calcular DII →
               </button>
             </div>
           </div>
@@ -201,23 +215,13 @@ function App() {
 
         {currentStep === 3 && result && (
           <div className="fade-in">
-            <ResultDisplay 
+            <ResultDisplay
               result={result}
-              businessModel={getBusinessModel(selectedModel)}
               onRestart={restart}
             />
           </div>
         )}
       </main>
-
-      {/* Footer */}
-      <footer className="mt-auto bg-white border-t">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <p className="text-center text-sm text-gray-500">
-            © 2025 Lãberit Intelligence. Digital Immunity Index 4.0
-          </p>
-        </div>
-      </footer>
     </div>
   );
 }

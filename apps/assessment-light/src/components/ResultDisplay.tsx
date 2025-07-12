@@ -1,16 +1,53 @@
 import React from 'react';
 import { CompromiseScore } from './CompromiseScore';
 import { EnhancedCompromiseScore } from './EnhancedCompromiseScore';
+import type { DIIResults, DIIDimensions } from '@dii/types';
 
-function ResultDisplay({ result, businessModel, onRestart }) {
-  const getScoreColor = (score) => {
+interface BusinessModel {
+  id: number;
+  key: string;
+  name: string;
+  diiBase: {
+    average: number;
+  };
+}
+
+interface ResultDisplayProps {
+  result: DIIResults;
+  businessModel: BusinessModel;
+  onRestart: () => void;
+}
+
+interface Dimension {
+  key: keyof DIIDimensions;
+  name: string;
+  value: number;
+}
+
+interface WeakDimension {
+  dimension: Dimension;
+  currentValue: number;
+  improvement: number;
+  potentialDII: number;
+  recommendation: string;
+}
+
+interface BenchmarkStage {
+  name: string;
+  min: number;
+  max: number;
+  color: string;
+}
+
+function ResultDisplay({ result, businessModel, onRestart }: ResultDisplayProps): React.ReactElement {
+  const getScoreColor = (score: number): string => {
     if (score >= 8) return 'text-blue-600';
     if (score >= 6) return 'text-green-600';
     if (score >= 4) return 'text-yellow-600';
     return 'text-red-600';
   };
 
-  const getStageColor = (stage) => {
+  const getStageColor = (stage: string): string => {
     switch (stage) {
       case 'ADAPTATIVO': return 'bg-blue-100 text-blue-800 border-blue-300';
       case 'RESILIENTE': return 'bg-green-100 text-green-800 border-green-300';
@@ -20,7 +57,7 @@ function ResultDisplay({ result, businessModel, onRestart }) {
     }
   };
 
-  const getPercentileMessage = (percentile) => {
+  const getPercentileMessage = (percentile: number): string => {
     if (percentile >= 90) return 'Top 10% en su categoría';
     if (percentile >= 75) return 'Mejor que 3 de cada 4 organizaciones';
     if (percentile >= 50) return 'Por encima del promedio';
@@ -32,7 +69,7 @@ function ResultDisplay({ result, businessModel, onRestart }) {
   const operationalCapacity = Math.round(result.diiScore * 10);
   
   // Estimate hourly loss based on business model
-  const hourlyLossBase = {
+  const hourlyLossBase: Record<number, number> = {
     1: 250000,  // Comercio Híbrido
     2: 500000,  // Servicios Esenciales
     3: 100000,  // Negocio Tradicional
@@ -48,7 +85,7 @@ function ResultDisplay({ result, businessModel, onRestart }) {
   );
 
   // Pentagon chart data
-  const dimensions = [
+  const dimensions: Dimension[] = [
     { key: 'TRD', name: 'Time to Revenue Degradation', value: result.dimensions.TRD },
     { key: 'AER', name: 'Attack Economics Ratio', value: result.dimensions.AER },
     { key: 'HFP', name: 'Human Failure Probability', value: 10 - result.dimensions.HFP },
@@ -57,7 +94,7 @@ function ResultDisplay({ result, businessModel, onRestart }) {
   ];
 
   // Industry averages
-  const industryAverages = {
+  const industryAverages: Record<keyof DIIDimensions, number> = {
     TRD: 5,
     AER: 4,
     HFP: 4,
@@ -66,7 +103,7 @@ function ResultDisplay({ result, businessModel, onRestart }) {
   };
 
   // Create pentagon path
-  const createPentagonPath = (values, scale = 1) => {
+  const createPentagonPath = (values: number[], scale: number = 1): string => {
     const centerX = 150;
     const centerY = 150;
     const angleStep = (2 * Math.PI) / 5;
@@ -82,7 +119,7 @@ function ResultDisplay({ result, businessModel, onRestart }) {
   };
 
   // Get top 3 weak dimensions
-  const weakDimensions = dimensions
+  const weakDimensions: WeakDimension[] = dimensions
     .sort((a, b) => a.value - b.value)
     .slice(0, 3)
     .map(dim => {
@@ -105,8 +142,8 @@ function ResultDisplay({ result, businessModel, onRestart }) {
       };
     });
 
-  function getRecommendation(dimension) {
-    const recommendations = {
+  function getRecommendation(dimension: keyof DIIDimensions): string {
+    const recommendations: Record<keyof DIIDimensions, string> = {
       TRD: 'Implementar redundancia activa y sistemas de failover automático',
       AER: 'Optimizar costos de defensa y automatizar respuesta a incidentes',
       HFP: 'Implementar MFA y capacitación continua en ciberseguridad',
@@ -117,7 +154,7 @@ function ResultDisplay({ result, businessModel, onRestart }) {
   }
 
   // Benchmark data for visualization
-  const benchmarkStages = [
+  const benchmarkStages: BenchmarkStage[] = [
     { name: 'Frágil', min: 0, max: 3, color: '#e74c3c' },
     { name: 'Robusto', min: 3, max: 5, color: '#f39c12' },
     { name: 'Resiliente', min: 5, max: 7, color: '#2ecc71' },

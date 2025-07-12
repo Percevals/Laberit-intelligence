@@ -5,16 +5,83 @@
  */
 
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { getAIService } from './AIService.js';
-import { aiConfig } from '../config/ai.config.js';
+import { getAIService } from './AIService';
+import { aiConfig } from '../config/ai.config';
+import type { DIIDimensions } from '@dii/types';
+
+interface AIService {
+  ensureInitialized(): Promise<void>;
+  isAvailable(): boolean;
+  getProviderName(): string;
+  analyzeCompromiseRisk(data: AssessmentData): Promise<AnalysisResult>;
+  generateExecutiveInsights(data: AssessmentData): Promise<InsightsResult>;
+  getThreatContext(businessModel: number, region: string): Promise<ThreatContextResult>;
+  simulateScenario(baseAssessment: AssessmentData, changes: ScenarioChanges): Promise<SimulationResult>;
+  getInsightWithFallback(data: any, insightType: string): Promise<InsightResult>;
+  provider: {
+    getCapabilities(): Capabilities;
+  };
+}
+
+interface AssessmentData {
+  businessModel: number;
+  scores: DIIDimensions;
+  diiScore: number;
+  dimensions: DIIDimensions;
+}
+
+interface AnalysisResult {
+  score: number;
+  level: string;
+  factors: string[];
+}
+
+interface InsightsResult {
+  summary: string;
+  recommendations: string[];
+}
+
+interface ThreatContextResult {
+  threats: string[];
+  riskLevel: string;
+}
+
+interface SimulationResult {
+  newScore: number;
+  impact: string;
+}
+
+interface ScenarioChanges {
+  [key: string]: number;
+}
+
+interface InsightResult {
+  content: string;
+  confidence: number;
+}
+
+interface Capabilities {
+  [key: string]: boolean;
+}
+
+interface AIInsightOptions {
+  enableCache?: boolean;
+  cacheDuration?: number;
+  autoFetch?: boolean;
+}
+
+interface CachedInsight {
+  data: InsightResult;
+  timestamp: number;
+}
 
 /**
  * Main hook for accessing AI service
  */
 export function useAIService() {
-  const [aiService, setAIService] = useState(null);
+  const [aiService, setAIService] = useState<AIService | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const initializeAI = async () => {
@@ -26,7 +93,7 @@ export function useAIService() {
         setError(null);
       } catch (err) {
         console.error('Failed to initialize AI service:', err);
-        setError(err.message);
+        setError(err instanceof Error ? err.message : 'Unknown error');
       } finally {
         setIsLoading(false);
       }
@@ -47,14 +114,14 @@ export function useAIService() {
 /**
  * Hook for compromise analysis
  */
-export function useCompromiseAnalysis(assessmentData) {
-  const [analysis, setAnalysis] = useState(null);
+export function useCompromiseAnalysis(assessmentData?: AssessmentData) {
+  const [analysis, setAnalysis] = useState<AnalysisResult | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const { aiService, isAvailable } = useAIService();
-  const abortControllerRef = useRef(null);
+  const abortControllerRef = useRef<AbortController | null>(null);
 
-  const analyzeCompromise = useCallback(async (data = assessmentData) => {
+  const analyzeCompromise = useCallback(async (data: AssessmentData | undefined = assessmentData) => {
     if (!aiService || !isAvailable || !data) return;
 
     // Cancel any pending analysis
@@ -76,7 +143,7 @@ export function useCompromiseAnalysis(assessmentData) {
     } catch (err) {
       if (!abortControllerRef.current.signal.aborted) {
         console.error('Compromise analysis failed:', err);
-        setError(err.message);
+        setError(err instanceof Error ? err.message : 'Unknown error');
       }
     } finally {
       if (!abortControllerRef.current.signal.aborted) {
@@ -109,13 +176,13 @@ export function useCompromiseAnalysis(assessmentData) {
 /**
  * Hook for executive insights
  */
-export function useExecutiveInsights(assessmentData) {
-  const [insights, setInsights] = useState(null);
+export function useExecutiveInsights(assessmentData?: AssessmentData) {
+  const [insights, setInsights] = useState<InsightsResult | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const { aiService, isAvailable } = useAIService();
 
-  const generateInsights = useCallback(async (data = assessmentData) => {
+  const generateInsights = useCallback(async (data: AssessmentData | undefined = assessmentData) => {
     if (!aiService || !isAvailable || !data) return;
 
     try {
@@ -126,7 +193,7 @@ export function useExecutiveInsights(assessmentData) {
       setInsights(result);
     } catch (err) {
       console.error('Executive insights generation failed:', err);
-      setError(err.message);
+      setError(err instanceof Error ? err.message : 'Unknown error');
     } finally {
       setIsGenerating(false);
     }
@@ -143,10 +210,10 @@ export function useExecutiveInsights(assessmentData) {
 /**
  * Hook for threat context
  */
-export function useThreatContext(businessModel, region = 'LATAM') {
-  const [threatContext, setThreatContext] = useState(null);
+export function useThreatContext(businessModel?: number, region: string = 'LATAM') {
+  const [threatContext, setThreatContext] = useState<ThreatContextResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const { aiService, isAvailable } = useAIService();
 
   useEffect(() => {
@@ -161,7 +228,7 @@ export function useThreatContext(businessModel, region = 'LATAM') {
         setThreatContext(result);
       } catch (err) {
         console.error('Threat context retrieval failed:', err);
-        setError(err.message);
+        setError(err instanceof Error ? err.message : 'Unknown error');
       } finally {
         setIsLoading(false);
       }
@@ -182,13 +249,13 @@ export function useThreatContext(businessModel, region = 'LATAM') {
 /**
  * Hook for scenario simulation
  */
-export function useScenarioSimulation(baseAssessment) {
-  const [simulation, setSimulation] = useState(null);
+export function useScenarioSimulation(baseAssessment?: AssessmentData) {
+  const [simulation, setSimulation] = useState<SimulationResult | null>(null);
   const [isSimulating, setIsSimulating] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const { aiService, isAvailable } = useAIService();
 
-  const simulateScenario = useCallback(async (changes) => {
+  const simulateScenario = useCallback(async (changes: ScenarioChanges) => {
     if (!aiService || !isAvailable || !baseAssessment || !changes) return;
 
     try {
@@ -199,7 +266,7 @@ export function useScenarioSimulation(baseAssessment) {
       setSimulation(result);
     } catch (err) {
       console.error('Scenario simulation failed:', err);
-      setError(err.message);
+      setError(err instanceof Error ? err.message : 'Unknown error');
     } finally {
       setIsSimulating(false);
     }
@@ -222,12 +289,12 @@ export function useScenarioSimulation(baseAssessment) {
 /**
  * Hook for AI-powered insights with caching
  */
-export function useAIInsight(data, insightType, options = {}) {
-  const [insight, setInsight] = useState(null);
+export function useAIInsight(data: any, insightType: string, options: AIInsightOptions = {}) {
+  const [insight, setInsight] = useState<InsightResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const { aiService, isAvailable } = useAIService();
-  const cacheRef = useRef(new Map());
+  const cacheRef = useRef<Map<string, CachedInsight>>(new Map());
 
   const {
     enableCache = aiConfig.performance.cacheResponses,
@@ -242,7 +309,7 @@ export function useAIInsight(data, insightType, options = {}) {
     const cacheKey = JSON.stringify({ data, insightType });
     if (enableCache && cacheRef.current.has(cacheKey)) {
       const cached = cacheRef.current.get(cacheKey);
-      if (Date.now() - cached.timestamp < cacheDuration) {
+      if (cached && Date.now() - cached.timestamp < cacheDuration) {
         setInsight(cached.data);
         return;
       }
@@ -264,7 +331,7 @@ export function useAIInsight(data, insightType, options = {}) {
       }
     } catch (err) {
       console.error('AI insight fetch failed:', err);
-      setError(err.message);
+      setError(err instanceof Error ? err.message : 'Unknown error');
     } finally {
       setIsLoading(false);
     }
@@ -289,7 +356,7 @@ export function useAIInsight(data, insightType, options = {}) {
  */
 export function useAIStatus() {
   const { aiService, isLoading, error, isAvailable, provider } = useAIService();
-  const [capabilities, setCapabilities] = useState(null);
+  const [capabilities, setCapabilities] = useState<Capabilities | null>(null);
 
   useEffect(() => {
     if (aiService && isAvailable) {

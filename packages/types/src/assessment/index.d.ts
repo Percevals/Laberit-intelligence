@@ -76,7 +76,7 @@ export interface DIIResults {
   diiScore: number;
   stage: MaturityStage;
   percentile: number;
-  interpretation: DIIInterpretation;
+  interpretation?: DIIInterpretation;
   businessModel: number;
   diiBase: number;
   dimensions: DIIDimensions;

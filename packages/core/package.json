@@ -4,20 +4,32 @@
   "description": "Core DII calculation engine and business logic",
   "type": "module",
   "main": "./src/index.js",
+  "types": "./src/index.ts",
   "exports": {
-    ".": "./src/index.js",
-    "./calculator": "./src/calculator/index.js",
+    ".": {
+      "import": "./src/index.js",
+      "types": "./src/index.ts"
+    },
+    "./calculator": {
+      "import": "./src/calculator/index.js",
+      "types": "./src/calculator/index.ts"
+    },
     "./models": "./src/models/index.js",
     "./constants": "./src/constants/index.js"
   },
   "scripts": {
     "test": "node --test src/**/*.test.js",
     "lint": "eslint src/",
-    "type-check": "echo 'No TypeScript yet'"
+    "type-check": "tsc --noEmit",
+    "build": "tsc"
   },
   "keywords": ["dii", "digital-immunity", "cybersecurity", "risk-assessment"],
   "author": "Laberit Intelligence",
   "license": "MIT",
-  "dependencies": {},
-  "devDependencies": {}
+  "dependencies": {
+    "@dii/types": "file:../types"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
 }
