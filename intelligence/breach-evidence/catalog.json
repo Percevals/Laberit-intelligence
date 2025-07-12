@@ -1,0 +1,40 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2024-12-15T00:00:00Z",
+  "total_breaches": 0,
+  "breaches_by_model": {
+    "1": { "name": "Comercio Híbrido", "count": 0 },
+    "2": { "name": "Software Crítico", "count": 0 },
+    "3": { "name": "Servicios de Datos", "count": 0 },
+    "4": { "name": "Ecosistema Digital", "count": 0 },
+    "5": { "name": "Servicios Financieros", "count": 0 },
+    "6": { "name": "Infraestructura Heredada", "count": 0 },
+    "7": { "name": "Cadena de Suministro", "count": 0 },
+    "8": { "name": "Información Regulada", "count": 0 }
+  },
+  "breaches_by_region": {
+    "Colombia": 0,
+    "Mexico": 0,
+    "Chile": 0,
+    "Peru": 0,
+    "Argentina": 0,
+    "Brazil": 0,
+    "Spain": 0,
+    "Other": 0
+  },
+  "breaches_by_vector": {
+    "Phishing": 0,
+    "Business Email Compromise": 0,
+    "Ransomware": 0,
+    "Supply Chain": 0,
+    "Insider Threat": 0,
+    "API Exploitation": 0,
+    "Cloud Misconfiguration": 0,
+    "Vulnerability Exploitation": 0,
+    "Physical Access": 0,
+    "Other": 0
+  },
+  "financial_impact_total_usd": 0,
+  "average_recovery_time_hours": 0,
+  "breaches": []
+}

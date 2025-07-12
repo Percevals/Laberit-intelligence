@@ -1,0 +1,178 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2025-01-12T15:30:00Z",
+  "total_breaches": 5,
+  "breaches_by_model": {
+    "3": { "name": "Physical Delivery Network", "count": 2 },
+    "5": { "name": "E-Commerce Platform", "count": 1 },
+    "7": { "name": "FinTech Platform", "count": 1 },
+    "14": { "name": "Healthcare Services", "count": 1 }
+  },
+  "breaches": [
+    {
+      "breach_id": "BR-2024-LATAM-001",
+      "date_discovered": "2024-11-15",
+      "victim_profile": {
+        "size_employees": "1000-5000",
+        "region": "Latin America",
+        "sector": "Logistics",
+        "dii_estimate": 3.2
+      },
+      "business_model_match": {
+        "primary_model": 3,
+        "confidence": "high"
+      },
+      "attack": {
+        "vector": "Ransomware",
+        "method": "Phishing email with malicious attachment",
+        "duration_days": 12
+      },
+      "impact": {
+        "financial_loss_usd": 2500000,
+        "operational_impact": {
+          "downtime_hours": 168,
+          "recovery_time_hours": 336
+        }
+      },
+      "dii_dimensions_impact": {
+        "TRD": { "hours_to_revenue_impact": 4 },
+        "AER": { "ratio": 0.15 },
+        "HFP": { "human_factor_involved": true },
+        "BRI": { "blast_radius_percent": 65 },
+        "RRG": { "gap_multiplier": 3.5 }
+      }
+    },
+    {
+      "breach_id": "BR-2024-LATAM-002",
+      "date_discovered": "2024-10-28",
+      "victim_profile": {
+        "size_employees": "500-1000",
+        "region": "Latin America",
+        "sector": "E-Commerce",
+        "dii_estimate": 4.1
+      },
+      "business_model_match": {
+        "primary_model": 5,
+        "confidence": "high"
+      },
+      "attack": {
+        "vector": "API Exploitation",
+        "method": "Exposed API endpoint with weak authentication",
+        "duration_days": 45
+      },
+      "impact": {
+        "financial_loss_usd": 850000,
+        "operational_impact": {
+          "downtime_hours": 48,
+          "recovery_time_hours": 96
+        }
+      },
+      "dii_dimensions_impact": {
+        "TRD": { "hours_to_revenue_impact": 1 },
+        "AER": { "ratio": 0.08 },
+        "HFP": { "human_factor_involved": false },
+        "BRI": { "blast_radius_percent": 40 },
+        "RRG": { "gap_multiplier": 2.0 }
+      }
+    },
+    {
+      "breach_id": "BR-2024-LATAM-003",
+      "date_discovered": "2024-09-12",
+      "victim_profile": {
+        "size_employees": "5000+",
+        "region": "Latin America",
+        "sector": "Financial Services",
+        "dii_estimate": 5.8
+      },
+      "business_model_match": {
+        "primary_model": 7,
+        "confidence": "high"
+      },
+      "attack": {
+        "vector": "Supply Chain Attack",
+        "method": "Compromised third-party payment processor",
+        "duration_days": 23
+      },
+      "impact": {
+        "financial_loss_usd": 4200000,
+        "operational_impact": {
+          "downtime_hours": 12,
+          "recovery_time_hours": 72
+        }
+      },
+      "dii_dimensions_impact": {
+        "TRD": { "hours_to_revenue_impact": 0.5 },
+        "AER": { "ratio": 0.22 },
+        "HFP": { "human_factor_involved": false },
+        "BRI": { "blast_radius_percent": 85 },
+        "RRG": { "gap_multiplier": 1.5 }
+      }
+    },
+    {
+      "breach_id": "BR-2024-LATAM-004",
+      "date_discovered": "2024-08-05",
+      "victim_profile": {
+        "size_employees": "100-500",
+        "region": "Latin America",
+        "sector": "Logistics",
+        "dii_estimate": 2.5
+      },
+      "business_model_match": {
+        "primary_model": 3,
+        "confidence": "medium"
+      },
+      "attack": {
+        "vector": "Physical Security Breach",
+        "method": "Theft of delivery vehicles with IoT devices",
+        "duration_days": 1
+      },
+      "impact": {
+        "financial_loss_usd": 380000,
+        "operational_impact": {
+          "downtime_hours": 24,
+          "recovery_time_hours": 48
+        }
+      },
+      "dii_dimensions_impact": {
+        "TRD": { "hours_to_revenue_impact": 8 },
+        "AER": { "ratio": 0.05 },
+        "HFP": { "human_factor_involved": true },
+        "BRI": { "blast_radius_percent": 20 },
+        "RRG": { "gap_multiplier": 4.0 }
+      }
+    },
+    {
+      "breach_id": "BR-2024-LATAM-005",
+      "date_discovered": "2024-07-20",
+      "victim_profile": {
+        "size_employees": "1000-5000",
+        "region": "Latin America",
+        "sector": "Healthcare",
+        "dii_estimate": 4.5
+      },
+      "business_model_match": {
+        "primary_model": 14,
+        "confidence": "high"
+      },
+      "attack": {
+        "vector": "Data Breach",
+        "method": "SQL injection on patient portal",
+        "duration_days": 90
+      },
+      "impact": {
+        "financial_loss_usd": 1800000,
+        "operational_impact": {
+          "downtime_hours": 6,
+          "recovery_time_hours": 24
+        }
+      },
+      "dii_dimensions_impact": {
+        "TRD": { "hours_to_revenue_impact": 2 },
+        "AER": { "ratio": 0.12 },
+        "HFP": { "human_factor_involved": true },
+        "BRI": { "blast_radius_percent": 55 },
+        "RRG": { "gap_multiplier": 2.5 }
+      }
+    }
+  ]
+}

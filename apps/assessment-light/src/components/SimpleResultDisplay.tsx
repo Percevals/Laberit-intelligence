@@ -1,5 +1,6 @@
 import React from 'react';
 import type { DIIResults } from '@dii/types';
+import { BreachEvidence } from './intelligence/BreachEvidence';
 
 interface SimpleResultDisplayProps {
   result: DIIResults;
@@ -134,6 +135,20 @@ function SimpleResultDisplay({ result, businessModelId, onRestart }: SimpleResul
           ))}
         </div>
       </div>
+
+      {/* Breach Evidence Section */}
+      {businessModelId && (
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            Evidencia de Incidentes Similares
+          </h3>
+          <BreachEvidence
+            businessModel={businessModelId}
+            diiScore={result.diiScore}
+            mode="summary"
+          />
+        </div>
+      )}
 
       {/* Basic Recommendations */}
       <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
