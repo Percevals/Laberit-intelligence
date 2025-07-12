@@ -48,12 +48,15 @@ jobs:
           
       - name: Install dependencies
         run: |
-          # Install packages first
+          # Install root dependencies first (for workspaces)
+          npm install
+          
+          # Install and build packages (ignoring TypeScript errors for now)
           cd packages/core && npm install || true && cd ../..
           cd packages/types && npm install || true && cd ../..
           cd packages/ui-kit && npm install || true && cd ../..
           
-          # Then install app dependencies
+          # Install app dependencies
           cd apps/assessment-light
           npm install --legacy-peer-deps
           
@@ -61,6 +64,8 @@ jobs:
         run: |
           cd apps/assessment-light
           npm run build
+          # Note: Step 3 white page issue is due to workspace dependencies
+          # Will be fixed when TypeScript migration is complete
           
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -89,10 +94,19 @@ jobs:
             fi
           done
           
-          # Copy Quick Assessment build
+          # Copy Quick Assessment build to BOTH paths for backward compatibility
           echo "📦 Copying Quick Assessment build..."
+          # Old path (for compatibility)
           mkdir -p _site/quick-assessment
           cp -r apps/assessment-light/dist/* _site/quick-assessment/
+          
+          # New path (proper monorepo structure)
+          mkdir -p _site/apps/assessment-light
+          cp -r apps/assessment-light/dist/* _site/apps/assessment-light/
+          
+          # Copy redirect page for /apps/ path
+          mkdir -p _site/apps
+          cp apps-redirect.html _site/apps/index.html
           
           # Create .nojekyll file
           touch _site/.nojekyll
@@ -102,8 +116,11 @@ jobs:
           echo "Main index.html (first 3 lines):"
           head -3 _site/index.html
           echo ""
-          echo "Quick Assessment:"
+          echo "Quick Assessment (old path for compatibility):"
           ls -la _site/quick-assessment/
+          echo ""
+          echo "Quick Assessment (new monorepo path):"
+          ls -la _site/apps/assessment-light/
           echo ""
           echo "Weekly reports:"
           ls _site/intelligence/weekly-reports/*.html 2>/dev/null | head -3 || echo "No reports found"
