@@ -134,7 +134,7 @@ def collect_intelx_data(api_key):
         return []
     
     headers = {'x-key': api_key}
-    search_url = "https://2.intelx.io/intelligent/search"
+    search_url = "https://free.intelx.io/intelligent/search"
     
     all_results = []
     
