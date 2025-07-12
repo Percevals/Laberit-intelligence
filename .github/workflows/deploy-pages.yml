@@ -27,8 +27,11 @@ jobs:
       - name: Run security audit
         run: |
           cd apps/assessment-light
+          # Install first to create package-lock.json
+          npm install --legacy-peer-deps || true
+          # Then run audit
           npm audit --audit-level=high || true
-          echo "Security audit completed. Critical vulnerabilities will fail the build."
+          echo "Security audit completed."
 
   build:
     runs-on: ubuntu-latest
@@ -41,21 +44,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
           
       - name: Install dependencies
         run: |
-          # Install root dependencies first (includes Turborepo)
-          npm ci || npm install
-          
-          # Install all workspace dependencies
-          npm run install:all || (cd apps/assessment-light && npm install)
+          # Go to the app directory and install
+          cd apps/assessment-light
+          npm install --legacy-peer-deps
           
       - name: Build Quick Assessment
         run: |
-          # Try monorepo build first, fallback to direct build
-          npm run build:light || (cd apps/assessment-light && npm run build)
+          cd apps/assessment-light
+          npm run build
           
       - name: Setup Pages
         uses: actions/configure-pages@v5
