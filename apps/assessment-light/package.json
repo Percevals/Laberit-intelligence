@@ -35,10 +35,7 @@
   },
   "dependencies": {
     "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "@dii/core": "^1.0.0",
-    "@dii/types": "^1.0.0",
-    "@dii/ui-kit": "^1.0.0"
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.2.1",

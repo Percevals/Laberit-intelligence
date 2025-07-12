@@ -16,7 +16,8 @@
     "dev:light": "turbo run dev --filter=assessment-light",
     "dev:premium": "turbo run dev --filter=assessment-premium",
     "build:light": "turbo run build --filter=assessment-light",
-    "build:premium": "turbo run build --filter=assessment-premium"
+    "build:premium": "turbo run build --filter=assessment-premium",
+    "install:all": "npm install --workspaces --if-present"
   },
   "devDependencies": {
     "turbo": "^2.3.3"

@@ -42,17 +42,20 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-          cache-dependency-path: apps/assessment-light/package-lock.json
+          cache-dependency-path: '**/package-lock.json'
           
-      - name: Install Quick Assessment dependencies
+      - name: Install dependencies
         run: |
-          cd apps/assessment-light
-          npm ci
+          # Install root dependencies first (includes Turborepo)
+          npm ci || npm install
+          
+          # Install all workspace dependencies
+          npm run install:all || (cd apps/assessment-light && npm install)
           
       - name: Build Quick Assessment
         run: |
-          cd apps/assessment-light
-          npm run build
+          # Try monorepo build first, fallback to direct build
+          npm run build:light || (cd apps/assessment-light && npm run build)
           
       - name: Setup Pages
         uses: actions/configure-pages@v5
