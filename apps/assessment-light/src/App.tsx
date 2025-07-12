@@ -3,7 +3,6 @@ import { calculateDII, businessModels } from '@dii/core';
 import { ModelSelector, QuestionSlider, AIStatusBadge } from '@dii/ui-kit';
 import SimpleResultDisplay from './components/SimpleResultDisplay';
 import ErrorBoundary from './components/ErrorBoundary';
-import { useAIStatus } from './services/ai/hooks';
 import type { DIIDimensions, DIIResults } from '@dii/types';
 
 interface DimensionConfig {
@@ -76,8 +75,13 @@ function App(): React.ReactElement {
   });
   const [result, setResult] = useState<DIIResults | null>(null);
   
-  // Get AI status for the badge
-  const aiStatus = useAIStatus();
+  // Temporary AI status (will be restored with proper AI service)
+  const aiStatus = {
+    isLoading: false,
+    isAvailable: false,
+    provider: 'offline',
+    mode: 'offline' as const
+  };
 
   const handleModelSelect = (modelId: number): void => {
     setSelectedModel(modelId);

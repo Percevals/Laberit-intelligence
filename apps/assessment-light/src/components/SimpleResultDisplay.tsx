@@ -1,5 +1,4 @@
 import React from 'react';
-import { CompromiseAnalysis } from './ai/CompromiseAnalysis';
 import type { DIIResults } from '@dii/types';
 
 interface SimpleResultDisplayProps {
@@ -23,18 +22,11 @@ function SimpleResultDisplay({ result, businessModelId, onRestart }: SimpleResul
 
   const operationalCapacity = Math.round(result.diiScore * 10);
   
-  // Get business model from props or result
-  const businessModel: BusinessModel = {
-    id: businessModelId || (result as any).businessModelId || 1,
-    name: 'Modelo de Negocio'
-  };
-
-  // Prepare assessment data for AI analysis
-  const assessmentData = {
-    businessModel: businessModel.id,
-    dimensions: result.dimensions,
-    diiScore: result.diiScore
-  };
+  // Remove unused variables for now
+  // const businessModel: BusinessModel = {
+  //   id: businessModelId || (result as any).businessModelId || 1,
+  //   name: 'Modelo de Negocio'
+  // };
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -66,12 +58,18 @@ function SimpleResultDisplay({ result, businessModelId, onRestart }: SimpleResul
         </div>
       </div>
 
-      {/* AI-Powered Compromise Analysis */}
-      <CompromiseAnalysis 
-        assessmentData={assessmentData}
-        mode="executive"
-        className="mb-8"
-      />
+      {/* AI Analysis Placeholder */}
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8">
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+          <span className="text-sm text-blue-800 font-medium">
+            Análisis AI: Disponible en Claude Artifacts y entornos de desarrollo
+          </span>
+        </div>
+        <p className="text-xs text-blue-600 mt-1">
+          Riesgo estimado basado en DII: {result.diiScore < 4 ? 'Alto' : result.diiScore < 6 ? 'Medio' : 'Bajo'}
+        </p>
+      </div>
 
       {/* Dimensions Summary */}
       <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
