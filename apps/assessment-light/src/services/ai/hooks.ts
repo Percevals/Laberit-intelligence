@@ -1,376 +1,355 @@
 /**
- * React hooks for AI service integration
- * 
- * Provides easy access to AI capabilities in React components
+ * Modern AI Hooks
+ * Type-safe React hooks for AI service integration
  */
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { getAIService } from './AIService';
-import { aiConfig } from '../config/ai.config';
-import type { DIIDimensions } from '@dii/types';
+import type { 
+  UseAIResult, 
+  UseCompromiseAnalysisResult, 
+  UseExecutiveInsightsResult,
+  AIRequest,
+  AIResponse,
+  AIError,
+  AIServiceState,
+  AssessmentData,
+  CompromiseAnalysisResponse,
+  ExecutiveInsightsResponse
+} from './types';
 
-interface AIService {
-  ensureInitialized(): Promise<void>;
-  isAvailable(): boolean;
-  getProviderName(): string;
-  analyzeCompromiseRisk(data: AssessmentData): Promise<AnalysisResult>;
-  generateExecutiveInsights(data: AssessmentData): Promise<InsightsResult>;
-  getThreatContext(businessModel: number, region: string): Promise<ThreatContextResult>;
-  simulateScenario(baseAssessment: AssessmentData, changes: ScenarioChanges): Promise<SimulationResult>;
-  getInsightWithFallback(data: any, insightType: string): Promise<InsightResult>;
-  provider: {
-    getCapabilities(): Capabilities;
-  };
-}
-
-interface AssessmentData {
-  businessModel: number;
-  scores: DIIDimensions;
-  diiScore: number;
-  dimensions: DIIDimensions;
-}
-
-interface AnalysisResult {
-  score: number;
-  level: string;
-  factors: string[];
-}
-
-interface InsightsResult {
-  summary: string;
-  recommendations: string[];
-}
-
-interface ThreatContextResult {
-  threats: string[];
-  riskLevel: string;
-}
-
-interface SimulationResult {
-  newScore: number;
-  impact: string;
-}
-
-interface ScenarioChanges {
-  [key: string]: number;
-}
-
-interface InsightResult {
-  content: string;
-  confidence: number;
-}
-
-interface Capabilities {
-  [key: string]: boolean;
-}
-
-interface AIInsightOptions {
-  enableCache?: boolean;
-  cacheDuration?: number;
-  autoFetch?: boolean;
-}
-
-interface CachedInsight {
-  data: InsightResult;
-  timestamp: number;
-}
-
-/**
- * Main hook for accessing AI service
- */
-export function useAIService() {
-  const [aiService, setAIService] = useState<AIService | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+// Core AI service hook
+export function useAI(): UseAIResult {
+  const [state, setState] = useState<AIServiceState | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<AIError | null>(null);
+  const serviceRef = useRef(getAIService());
 
   useEffect(() => {
-    const initializeAI = async () => {
+    const service = serviceRef.current;
+    let mounted = true;
+
+    // Initialize service
+    const initService = async () => {
       try {
         setIsLoading(true);
-        const service = getAIService();
-        await service.ensureInitialized();
-        setAIService(service);
-        setError(null);
+        await service.initialize();
+        
+        if (mounted) {
+          setState(service.getState());
+          setError(null);
+        }
       } catch (err) {
-        console.error('Failed to initialize AI service:', err);
-        setError(err instanceof Error ? err.message : 'Unknown error');
+        if (mounted) {
+          setError(err as AIError);
+        }
       } finally {
-        setIsLoading(false);
+        if (mounted) {
+          setIsLoading(false);
+        }
       }
     };
 
-    initializeAI();
+    // Listen for service events
+    const handleServiceEvent = () => {
+      if (mounted) {
+        setState(service.getState());
+      }
+    };
+
+    service.addEventListener(handleServiceEvent);
+    initService();
+
+    return () => {
+      mounted = false;
+      service.removeEventListener(handleServiceEvent);
+    };
+  }, []);
+
+  const request = useCallback(async (req: Omit<AIRequest, 'id'>): Promise<AIResponse> => {
+    const service = serviceRef.current;
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const response = await service.request(req);
+      
+      if (!response.success && response.error) {
+        setError(response.error);
+      }
+      
+      return response;
+    } catch (err) {
+      const error = err as AIError;
+      setError(error);
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
   }, []);
 
   return {
-    aiService,
     isLoading,
+    isAvailable: state?.isInitialized && serviceRef.current.isServiceAvailable(),
+    provider: state?.currentProvider || 'unknown',
     error,
-    isAvailable: aiService?.isAvailable() || false,
-    provider: aiService?.getProviderName() || 'Unknown'
+    request
   };
 }
 
-/**
- * Hook for compromise analysis
- */
-export function useCompromiseAnalysis(assessmentData?: AssessmentData) {
-  const [analysis, setAnalysis] = useState<AnalysisResult | null>(null);
+// Compromise analysis hook
+export function useCompromiseAnalysis(
+  assessmentData?: AssessmentData,
+  options: { autoRun?: boolean; interval?: number } = {}
+): UseCompromiseAnalysisResult {
+  const { autoRun = false, interval } = options;
+  const [analysis, setAnalysis] = useState<CompromiseAnalysisResponse | undefined>();
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const { aiService, isAvailable } = useAIService();
+  const [error, setError] = useState<AIError | undefined>();
+  const { request, isAvailable } = useAI();
   const abortControllerRef = useRef<AbortController | null>(null);
 
-  const analyzeCompromise = useCallback(async (data: AssessmentData | undefined = assessmentData) => {
-    if (!aiService || !isAvailable || !data) return;
+  const runAnalysis = useCallback(async (data?: AssessmentData) => {
+    const targetData = data || assessmentData;
+    
+    if (!targetData || !isAvailable) {
+      return;
+    }
 
-    // Cancel any pending analysis
+    // Abort previous request
     if (abortControllerRef.current) {
       abortControllerRef.current.abort();
     }
-
+    
     abortControllerRef.current = new AbortController();
+    
+    setIsAnalyzing(true);
+    setError(undefined);
 
     try {
-      setIsAnalyzing(true);
-      setError(null);
-      
-      const result = await aiService.analyzeCompromiseRisk(data);
-      
-      if (!abortControllerRef.current.signal.aborted) {
-        setAnalysis(result);
+      const response = await request({
+        type: 'compromise-analysis',
+        data: targetData,
+        options: {
+          timeout: 30000,
+          retries: 2,
+          cache: true
+        }
+      });
+
+      if (response.success && response.data) {
+        setAnalysis(response.data as CompromiseAnalysisResponse);
+      } else if (response.error) {
+        setError(response.error);
       }
     } catch (err) {
-      if (!abortControllerRef.current.signal.aborted) {
-        console.error('Compromise analysis failed:', err);
-        setError(err instanceof Error ? err.message : 'Unknown error');
+      if (err.name !== 'AbortError') {
+        setError(err as AIError);
       }
     } finally {
-      if (!abortControllerRef.current.signal.aborted) {
-        setIsAnalyzing(false);
-      }
+      setIsAnalyzing(false);
+      abortControllerRef.current = null;
     }
-  }, [aiService, isAvailable, assessmentData]);
+  }, [assessmentData, isAvailable, request]);
 
-  // Auto-analyze when data changes
+  const refresh = useCallback(() => {
+    if (assessmentData) {
+      runAnalysis(assessmentData);
+    }
+  }, [runAnalysis, assessmentData]);
+
+  // Auto-run effect
   useEffect(() => {
-    if (assessmentData && aiConfig.features.compromiseScore) {
-      analyzeCompromise(assessmentData);
+    if (autoRun && assessmentData && isAvailable) {
+      runAnalysis();
     }
+  }, [autoRun, assessmentData, isAvailable, runAnalysis]);
 
+  // Interval effect
+  useEffect(() => {
+    if (interval && interval > 0 && assessmentData && isAvailable) {
+      const timer = setInterval(() => {
+        runAnalysis();
+      }, interval);
+
+      return () => clearInterval(timer);
+    }
+  }, [interval, assessmentData, isAvailable, runAnalysis]);
+
+  // Cleanup effect
+  useEffect(() => {
     return () => {
       if (abortControllerRef.current) {
         abortControllerRef.current.abort();
       }
     };
-  }, [assessmentData, analyzeCompromise]);
+  }, []);
 
   return {
     analysis,
     isAnalyzing,
     error,
-    reanalyze: analyzeCompromise
+    refresh
   };
 }
 
-/**
- * Hook for executive insights
- */
-export function useExecutiveInsights(assessmentData?: AssessmentData) {
-  const [insights, setInsights] = useState<InsightsResult | null>(null);
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const { aiService, isAvailable } = useAIService();
+// Executive insights hook
+export function useExecutiveInsights(
+  assessmentData?: AssessmentData,
+  options: { autoRun?: boolean } = {}
+): UseExecutiveInsightsResult {
+  const { autoRun = false } = options;
+  const [insights, setInsights] = useState<ExecutiveInsightsResponse | undefined>();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<AIError | undefined>();
+  const { request, isAvailable } = useAI();
+  const abortControllerRef = useRef<AbortController | null>(null);
 
-  const generateInsights = useCallback(async (data: AssessmentData | undefined = assessmentData) => {
-    if (!aiService || !isAvailable || !data) return;
+  const runAnalysis = useCallback(async (data?: AssessmentData) => {
+    const targetData = data || assessmentData;
+    
+    if (!targetData || !isAvailable) {
+      return;
+    }
+
+    // Abort previous request
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+    
+    abortControllerRef.current = new AbortController();
+    
+    setIsLoading(true);
+    setError(undefined);
 
     try {
-      setIsGenerating(true);
-      setError(null);
-      
-      const result = await aiService.generateExecutiveInsights(data);
-      setInsights(result);
+      const response = await request({
+        type: 'executive-insights',
+        data: targetData,
+        options: {
+          timeout: 45000,
+          retries: 1,
+          cache: true
+        }
+      });
+
+      if (response.success && response.data) {
+        setInsights(response.data as ExecutiveInsightsResponse);
+      } else if (response.error) {
+        setError(response.error);
+      }
     } catch (err) {
-      console.error('Executive insights generation failed:', err);
-      setError(err instanceof Error ? err.message : 'Unknown error');
+      if (err.name !== 'AbortError') {
+        setError(err as AIError);
+      }
     } finally {
-      setIsGenerating(false);
+      setIsLoading(false);
+      abortControllerRef.current = null;
     }
-  }, [aiService, isAvailable, assessmentData]);
+  }, [assessmentData, isAvailable, request]);
 
-  return {
-    insights,
-    isGenerating,
-    error,
-    generateInsights
-  };
-}
+  const refresh = useCallback(() => {
+    if (assessmentData) {
+      runAnalysis(assessmentData);
+    }
+  }, [runAnalysis, assessmentData]);
 
-/**
- * Hook for threat context
- */
-export function useThreatContext(businessModel?: number, region: string = 'LATAM') {
-  const [threatContext, setThreatContext] = useState<ThreatContextResult | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const { aiService, isAvailable } = useAIService();
-
+  // Auto-run effect
   useEffect(() => {
-    if (!aiService || !isAvailable || !businessModel) return;
+    if (autoRun && assessmentData && isAvailable) {
+      runAnalysis();
+    }
+  }, [autoRun, assessmentData, isAvailable, runAnalysis]);
 
-    const fetchThreatContext = async () => {
-      try {
-        setIsLoading(true);
-        setError(null);
-        
-        const result = await aiService.getThreatContext(businessModel, region);
-        setThreatContext(result);
-      } catch (err) {
-        console.error('Threat context retrieval failed:', err);
-        setError(err instanceof Error ? err.message : 'Unknown error');
-      } finally {
-        setIsLoading(false);
+  // Cleanup effect
+  useEffect(() => {
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
       }
     };
-
-    if (aiConfig.features.threatContext) {
-      fetchThreatContext();
-    }
-  }, [aiService, isAvailable, businessModel, region]);
-
-  return {
-    threatContext,
-    isLoading,
-    error
-  };
-}
-
-/**
- * Hook for scenario simulation
- */
-export function useScenarioSimulation(baseAssessment?: AssessmentData) {
-  const [simulation, setSimulation] = useState<SimulationResult | null>(null);
-  const [isSimulating, setIsSimulating] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const { aiService, isAvailable } = useAIService();
-
-  const simulateScenario = useCallback(async (changes: ScenarioChanges) => {
-    if (!aiService || !isAvailable || !baseAssessment || !changes) return;
-
-    try {
-      setIsSimulating(true);
-      setError(null);
-      
-      const result = await aiService.simulateScenario(baseAssessment, changes);
-      setSimulation(result);
-    } catch (err) {
-      console.error('Scenario simulation failed:', err);
-      setError(err instanceof Error ? err.message : 'Unknown error');
-    } finally {
-      setIsSimulating(false);
-    }
-  }, [aiService, isAvailable, baseAssessment]);
-
-  const reset = useCallback(() => {
-    setSimulation(null);
-    setError(null);
   }, []);
 
   return {
-    simulation,
-    isSimulating,
-    error,
-    simulateScenario,
-    reset
-  };
-}
-
-/**
- * Hook for AI-powered insights with caching
- */
-export function useAIInsight(data: any, insightType: string, options: AIInsightOptions = {}) {
-  const [insight, setInsight] = useState<InsightResult | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const { aiService, isAvailable } = useAIService();
-  const cacheRef = useRef<Map<string, CachedInsight>>(new Map());
-
-  const {
-    enableCache = aiConfig.performance.cacheResponses,
-    cacheDuration = aiConfig.performance.cacheDuration,
-    autoFetch = true
-  } = options;
-
-  const fetchInsight = useCallback(async () => {
-    if (!aiService || !isAvailable || !data || !insightType) return;
-
-    // Check cache
-    const cacheKey = JSON.stringify({ data, insightType });
-    if (enableCache && cacheRef.current.has(cacheKey)) {
-      const cached = cacheRef.current.get(cacheKey);
-      if (cached && Date.now() - cached.timestamp < cacheDuration) {
-        setInsight(cached.data);
-        return;
-      }
-    }
-
-    try {
-      setIsLoading(true);
-      setError(null);
-      
-      const result = await aiService.getInsightWithFallback(data, insightType);
-      setInsight(result);
-      
-      // Cache the result
-      if (enableCache) {
-        cacheRef.current.set(cacheKey, {
-          data: result,
-          timestamp: Date.now()
-        });
-      }
-    } catch (err) {
-      console.error('AI insight fetch failed:', err);
-      setError(err instanceof Error ? err.message : 'Unknown error');
-    } finally {
-      setIsLoading(false);
-    }
-  }, [aiService, isAvailable, data, insightType, enableCache, cacheDuration]);
-
-  useEffect(() => {
-    if (autoFetch) {
-      fetchInsight();
-    }
-  }, [fetchInsight, autoFetch]);
-
-  return {
-    insight,
+    insights,
     isLoading,
     error,
-    refetch: fetchInsight
+    refresh
   };
 }
 
-/**
- * Hook for AI provider status
- */
+// AI status hook (simplified version of useAI for status only)
 export function useAIStatus() {
-  const { aiService, isLoading, error, isAvailable, provider } = useAIService();
-  const [capabilities, setCapabilities] = useState<Capabilities | null>(null);
+  const [state, setState] = useState({
+    isLoading: true,
+    isAvailable: false,
+    provider: 'unknown',
+    mode: 'offline' as 'online' | 'offline' | 'hybrid'
+  });
 
   useEffect(() => {
-    if (aiService && isAvailable) {
-      setCapabilities(aiService.provider.getCapabilities());
-    }
-  }, [aiService, isAvailable]);
+    const service = getAIService();
+    let mounted = true;
 
-  return {
-    isLoading,
-    error,
-    isAvailable,
-    provider,
-    capabilities,
-    mode: aiConfig.mode,
-    features: aiConfig.features
-  };
+    const updateStatus = () => {
+      if (!mounted) return;
+      
+      const serviceState = service.getState();
+      const isAvailable = service.isServiceAvailable();
+      
+      setState({
+        isLoading: false,
+        isAvailable,
+        provider: serviceState.currentProvider,
+        mode: isAvailable ? 'online' : 'offline'
+      });
+    };
+
+    // Initialize and set up listener
+    service.initialize()
+      .then(updateStatus)
+      .catch(() => {
+        if (mounted) {
+          setState({
+            isLoading: false,
+            isAvailable: false,
+            provider: 'offline',
+            mode: 'offline'
+          });
+        }
+      });
+
+    service.addEventListener(updateStatus);
+
+    return () => {
+      mounted = false;
+      service.removeEventListener(updateStatus);
+    };
+  }, []);
+
+  return state;
+}
+
+// Utility hook for checking feature availability
+export function useAIFeature(feature: keyof import('./types').FeatureFlags) {
+  const [isEnabled, setIsEnabled] = useState(false);
+  
+  useEffect(() => {
+    const service = getAIService();
+    const state = service.getState();
+    setIsEnabled(state.config.features[feature]);
+    
+    const handleConfigUpdate = () => {
+      const newState = service.getState();
+      setIsEnabled(newState.config.features[feature]);
+    };
+    
+    service.addEventListener(handleConfigUpdate);
+    
+    return () => {
+      service.removeEventListener(handleConfigUpdate);
+    };
+  }, [feature]);
+  
+  return isEnabled;
 }

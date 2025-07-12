@@ -1,12 +1,19 @@
 import React from 'react';
+import { CompromiseAnalysis } from './ai/CompromiseAnalysis';
 import type { DIIResults } from '@dii/types';
 
 interface SimpleResultDisplayProps {
   result: DIIResults;
+  businessModelId?: number;
   onRestart: () => void;
 }
 
-function SimpleResultDisplay({ result, onRestart }: SimpleResultDisplayProps): React.ReactElement {
+interface BusinessModel {
+  id: number;
+  name: string;
+}
+
+function SimpleResultDisplay({ result, businessModelId, onRestart }: SimpleResultDisplayProps): React.ReactElement {
   const getScoreColor = (score: number): string => {
     if (score >= 8) return 'text-blue-600';
     if (score >= 6) return 'text-green-600';
@@ -15,6 +22,19 @@ function SimpleResultDisplay({ result, onRestart }: SimpleResultDisplayProps): R
   };
 
   const operationalCapacity = Math.round(result.diiScore * 10);
+  
+  // Get business model from props or result
+  const businessModel: BusinessModel = {
+    id: businessModelId || (result as any).businessModelId || 1,
+    name: 'Modelo de Negocio'
+  };
+
+  // Prepare assessment data for AI analysis
+  const assessmentData = {
+    businessModel: businessModel.id,
+    dimensions: result.dimensions,
+    diiScore: result.diiScore
+  };
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -45,6 +65,13 @@ function SimpleResultDisplay({ result, onRestart }: SimpleResultDisplayProps): R
           Percentil: <span className="font-semibold">{result.percentile}%</span>
         </div>
       </div>
+
+      {/* AI-Powered Compromise Analysis */}
+      <CompromiseAnalysis 
+        assessmentData={assessmentData}
+        mode="executive"
+        className="mb-8"
+      />
 
       {/* Dimensions Summary */}
       <div className="bg-white rounded-lg shadow-lg p-6 mb-8">

@@ -229,6 +229,7 @@ function App(): React.ReactElement {
             <ErrorBoundary>
               <SimpleResultDisplay
                 result={result}
+                businessModelId={selectedModel || undefined}
                 onRestart={restart}
               />
             </ErrorBoundary>
