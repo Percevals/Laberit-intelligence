@@ -10,7 +10,8 @@
   },
   "scripts": {
     "dev": "echo 'No dev script needed for ui-kit'",
-    "build": "echo 'No build needed for ui-kit'",
+    "build": "tsc",
+    "type-check": "tsc --noEmit",
     "lint": "eslint src/"
   },
   "keywords": ["dii", "ui", "components", "react"],
@@ -21,9 +22,10 @@
     "react-dom": "^18.0.0 || ^19.0.0"
   },
   "dependencies": {
-    "@dii/types": "^1.0.0"
+    "@dii/types": "file:../types"
   },
   "devDependencies": {
-    "eslint": "^8.0.0"
+    "eslint": "^8.0.0",
+    "typescript": "^5.0.0"
   }
 }
