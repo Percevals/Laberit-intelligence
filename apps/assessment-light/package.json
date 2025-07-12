@@ -36,9 +36,9 @@
   "dependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "@dii/core": "workspace:*",
-    "@dii/types": "workspace:*",
-    "@dii/ui-kit": "workspace:*"
+    "@dii/core": "file:../../packages/core",
+    "@dii/types": "file:../../packages/types",
+    "@dii/ui-kit": "file:../../packages/ui-kit"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.2.1",
