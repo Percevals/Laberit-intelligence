@@ -1,4 +1,5 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "target": "ES2020",
     "module": "ESNext",
@@ -7,6 +8,9 @@
     "declarationMap": true,
     "outDir": "./dist",
     "rootDir": "./src",
+    "composite": true,
+    "noEmit": false,
+    "allowImportingTsExtensions": false,
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,

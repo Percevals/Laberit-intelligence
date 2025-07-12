@@ -21,7 +21,7 @@
     "test": "node --test src/**/*.test.js",
     "lint": "eslint src/",
     "type-check": "tsc --noEmit",
-    "build": "tsc"
+    "build": "echo 'No build needed - using source files directly'"
   },
   "keywords": ["dii", "digital-immunity", "cybersecurity", "risk-assessment"],
   "author": "Laberit Intelligence",

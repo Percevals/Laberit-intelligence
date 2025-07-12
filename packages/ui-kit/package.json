@@ -10,7 +10,7 @@
   },
   "scripts": {
     "dev": "echo 'No dev script needed for ui-kit'",
-    "build": "tsc",
+    "build": "echo 'No build needed - using source files directly'",
     "type-check": "tsc --noEmit",
     "lint": "eslint src/"
   },

@@ -5,7 +5,8 @@
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**", "!.next/cache/**"],
-      "env": ["NODE_ENV", "VITE_*", "REACT_APP_*"]
+      "env": ["NODE_ENV", "VITE_*", "REACT_APP_*"],
+      "outputLogs": "new-only"
     },
     "dev": {
       "cache": false,

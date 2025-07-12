@@ -48,24 +48,14 @@ jobs:
           
       - name: Install dependencies
         run: |
-          # Install root dependencies first (for workspaces)
+          # Install root dependencies (includes turbo)
           npm install
           
-          # Install and build packages (ignoring TypeScript errors for now)
-          cd packages/core && npm install || true && cd ../..
-          cd packages/types && npm install || true && cd ../..
-          cd packages/ui-kit && npm install || true && cd ../..
-          
-          # Install app dependencies
-          cd apps/assessment-light
-          npm install --legacy-peer-deps
-          
-      - name: Build Quick Assessment
+      - name: Build with Turbo
         run: |
-          cd apps/assessment-light
+          # Build all packages and apps using Turbo
           npm run build
-          # Note: Step 3 white page issue is due to workspace dependencies
-          # Will be fixed when TypeScript migration is complete
+          # Note: The packages use source files directly (no compilation needed)
           
       - name: Setup Pages
         uses: actions/configure-pages@v5
