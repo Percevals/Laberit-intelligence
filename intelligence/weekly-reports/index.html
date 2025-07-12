@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laberit Intelligence - Weekly Intelligence Reports</title>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+background-color: #091F2C;
+color: #ffffff;
+line-height: 1.6;
+padding-bottom: 60px;
+}
+
+.container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 20px;
+}
+
+/* Header Section */
+.header {
+background: linear-gradient(135deg, rgba(180, 181, 223, 0.2), rgba(26, 43, 61, 0.6));
+padding: 40px;
+border-radius: 12px;
+margin-bottom: 40px;
+border: 2px solid rgba(180, 181, 223, 0.3);
+text-align: center;
+}
+
+.header h1 {
+font-size: 36px;
+color: #B4B5DF;
+margin-bottom: 20px;
+}
+
+.header p {
+font-size: 18px;
+color: #a0a9c9;
+margin-bottom: 10px;
+}
+
+/* Module Overview */
+.module-overview {
+background: rgba(20, 35, 50, 0.8);
+padding: 30px;
+border-radius: 12px;
+margin-bottom: 30px;
+border: 1px solid rgba(180, 181, 223, 0.2);
+}
+
+.module-overview h2 {
+font-size: 28px;
+color: #B4B5DF;
+margin-bottom: 20px;
+}
+
+.module-overview p {
+font-size: 16px;
+color: #a0a9c9;
+margin-bottom: 15px;
+}
+
+/* Integration Section */
+.integration-section {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+gap: 30px;
+margin-bottom: 40px;
+}
+
+.integration-card {
+background: rgba(20, 35, 50, 0.6);
+padding: 25px;
+border-radius: 12px;
+border: 1px solid rgba(180, 181, 223, 0.2);
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.integration-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.integration-card h3 {
+font-size: 22px;
+color: #B4B5DF;
+margin-bottom: 15px;
+}
+
+.integration-card p {
+font-size: 15px;
+color: #a0a9c9;
+margin-bottom: 10px;
+}
+
+.integration-card .status {
+display: inline-block;
+padding: 5px 15px;
+border-radius: 20px;
+font-size: 14px;
+margin-top: 10px;
+}
+
+.status.active {
+background: rgba(0, 255, 135, 0.2);
+color: #00ff87;
+border: 1px solid rgba(0, 255, 135, 0.3);
+}
+
+.status.development {
+background: rgba(255, 193, 7, 0.2);
+color: #ffc107;
+border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+/* Reports Section */
+.reports-section {
+background: rgba(20, 35, 50, 0.8);
+padding: 30px;
+border-radius: 12px;
+margin-bottom: 30px;
+border: 1px solid rgba(180, 181, 223, 0.2);
+}
+
+.reports-section h2 {
+font-size: 28px;
+color: #B4B5DF;
+margin-bottom: 20px;
+}
+
+.reports-list {
+display: grid;
+gap: 15px;
+}
+
+.report-item {
+background: rgba(30, 45, 60, 0.6);
+padding: 20px;
+border-radius: 8px;
+border: 1px solid rgba(180, 181, 223, 0.1);
+display: flex;
+justify-content: space-between;
+align-items: center;
+transition: background 0.3s ease;
+}
+
+.report-item:hover {
+background: rgba(40, 55, 70, 0.8);
+}
+
+.report-info h3 {
+font-size: 18px;
+color: #B4B5DF;
+margin-bottom: 5px;
+}
+
+.report-info p {
+font-size: 14px;
+color: #a0a9c9;
+}
+
+.view-button {
+background: linear-gradient(135deg, #B4B5DF, #9394b8);
+color: #091F2C;
+padding: 10px 20px;
+border: none;
+border-radius: 6px;
+font-size: 14px;
+font-weight: 600;
+cursor: pointer;
+text-decoration: none;
+display: inline-block;
+transition: all 0.3s ease;
+}
+
+.view-button:hover {
+transform: translateY(-2px);
+box-shadow: 0 5px 15px rgba(180, 181, 223, 0.3);
+}
+
+/* Features Grid */
+.features-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 20px;
+margin-top: 30px;
+}
+
+.feature-item {
+background: rgba(30, 45, 60, 0.4);
+padding: 20px;
+border-radius: 8px;
+border: 1px solid rgba(180, 181, 223, 0.1);
+text-align: center;
+}
+
+.feature-item .icon {
+font-size: 36px;
+margin-bottom: 15px;
+}
+
+.feature-item h4 {
+font-size: 18px;
+color: #B4B5DF;
+margin-bottom: 10px;
+}
+
+.feature-item p {
+font-size: 14px;
+color: #a0a9c9;
+}
+
+/* Footer */
+.footer {
+text-align: center;
+padding: 30px 0;
+color: #a0a9c9;
+font-size: 14px;
+}
+
+.footer a {
+color: #B4B5DF;
+text-decoration: none;
+}
+
+.footer a:hover {
+text-decoration: underline;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<!-- Header -->
+<div class="header">
+<h1>Weekly Intelligence Dashboard</h1>
+<p>Automated Cybersecurity Intelligence for LATAM & Spain</p>
+<p>Part of the Laberit Intelligence Ecosystem</p>
+</div>
+
+<!-- Module Overview -->
+<div class="module-overview">
+<h2>About This Module</h2>
+<p>The Weekly Intelligence Dashboard delivers automated cybersecurity threat intelligence reports focused on the LATAM and Spain regions. Our system analyzes regional threats, vulnerabilities, and incidents to provide actionable insights for security teams.</p>
+<p>This module is one of three core components in the Laberit Intelligence platform, working in conjunction with the DII 4.0 Framework and Quick Assessment tools to deliver comprehensive security intelligence.</p>
+</div>
+
+<!-- Integration Section -->
+<div class="integration-section">
+<div class="integration-card">
+<h3>🎯 DII 4.0 Framework</h3>
+<p>Digital Immunity Index (DII) provides the analytical foundation for our threat intelligence. It measures and quantifies cyber resilience across multiple dimensions.</p>
+<p>Integration: Weekly reports use DII metrics to score regional threats and provide immunity recommendations.</p>
+<span class="status active">Active</span>
+</div>
+
+<div class="integration-card">
+<h3>⚡ Quick Assessment</h3>
+<p>Rapid security evaluation tool that provides instant insights into organizational security posture using the DII framework.</p>
+<p>Integration: Assessment results feed into weekly intelligence to identify trending vulnerabilities.</p>
+<span class="status active">Active</span>
+</div>
+
+<div class="integration-card">
+<h3>📊 Weekly Intel Dashboard</h3>
+<p>Automated collection and analysis of regional cybersecurity incidents, delivering weekly insights through interactive dashboards.</p>
+<p>Integration: Provides real-time threat context for both DII scoring and Quick Assessments.</p>
+<span class="status active">Active</span>
+</div>
+</div>
+
+<!-- Recent Reports -->
+<div class="reports-section">
+<h2>Recent Intelligence Reports</h2>
+<div class="reports-list">
+<div class="report-item">
+<div class="report-info">
+<h3>Weekly Report - July 11, 2025</h3>
+<p>Latest threats and vulnerabilities affecting LATAM & Spain</p>
+</div>
+<a href="immunity-dashboard-2025-07-11.html" class="view-button">View Report</a>
+</div>
+<div class="report-item">
+<div class="report-info">
+<h3>Weekly Report - July 4, 2025</h3>
+<p>Independence Day special: US-LATAM threat connections</p>
+</div>
+<a href="immunity-dashboard-2025-07-04.html" class="view-button">View Report</a>
+</div>
+<div class="report-item">
+<div class="report-info">
+<h3>Weekly Report - June 28, 2025</h3>
+<p>Mid-year threat landscape analysis</p>
+</div>
+<a href="immunity-dashboard-2025-06-28.html" class="view-button">View Report</a>
+</div>
+<div class="report-item">
+<div class="report-info">
+<h3>Weekly Report - June 20, 2025</h3>
+<p>Emerging ransomware campaigns in the region</p>
+</div>
+<a href="immunity-dashboard-2025-06-20.html" class="view-button">View Report</a>
+</div>
+</div>
+</div>
+
+<!-- Features -->
+<div class="module-overview">
+<h2>Key Features</h2>
+<div class="features-grid">
+<div class="feature-item">
+<div class="icon">🌎</div>
+<h4>Regional Focus</h4>
+<p>Specialized intelligence for LATAM and Spain cybersecurity landscape</p>
+</div>
+<div class="feature-item">
+<div class="icon">🤖</div>
+<h4>AI-Powered Analysis</h4>
+<p>Automated threat analysis using advanced AI for faster insights</p>
+</div>
+<div class="feature-item">
+<div class="icon">📈</div>
+<h4>DII Integration</h4>
+<p>Every threat scored using the Digital Immunity Index framework</p>
+</div>
+<div class="feature-item">
+<div class="icon">⏱️</div>
+<h4>Weekly Updates</h4>
+<p>Fresh intelligence delivered every Friday without fail</p>
+</div>
+<div class="feature-item">
+<div class="icon">🎨</div>
+<h4>Interactive Dashboards</h4>
+<p>Visual threat data with actionable recommendations</p>
+</div>
+<div class="feature-item">
+<div class="icon">🔄</div>
+<h4>Automated Pipeline</h4>
+<p>From data collection to report generation in 30 minutes</p>
+</div>
+</div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+<p>© 2025 Laberit Intelligence | Powered by DII 4.0 Framework</p>
+<p><a href="https://github.com/Percevals/Laberit-intelligence">View on GitHub</a> | <a href="README.md">Technical Documentation</a></p>
+</div>
+</div>
+</body>
+</html>
