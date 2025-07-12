@@ -1,0 +1,18 @@
+{
+  "name": "@dii/types",
+  "version": "1.0.0",
+  "description": "TypeScript type definitions for DII platform",
+  "types": "./src/index.d.ts",
+  "main": "./src/index.js",
+  "type": "module",
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "build": "tsc"
+  },
+  "keywords": ["dii", "types", "typescript"],
+  "author": "Laberit Intelligence",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

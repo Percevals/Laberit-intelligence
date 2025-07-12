@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { calculateDII, BUSINESS_MODELS } from './core/dii-calculator.js';
-import { businessModels, getBusinessModel } from './core/business-models.js';
-import ModelSelector from './components/ModelSelector';
-import QuestionSlider from './components/QuestionSlider';
+import { calculateDII } from '@dii/core';
+import { businessModels } from '@dii/core';
+import { ModelSelector, QuestionSlider, AIStatusBadge } from '@dii/ui-kit';
 import ResultDisplay from './components/ResultDisplay';
-import { AIStatusBadge } from './components/AIStatusBadge';
+import { useAIStatus } from './services/ai/hooks';
 
 const DIMENSIONS = [
   {
@@ -65,6 +64,9 @@ function App() {
     RRG: 5
   });
   const [result, setResult] = useState(null);
+  
+  // Get AI status for the badge
+  const aiStatus = useAIStatus();
 
   const handleModelSelect = (modelId) => {
     setSelectedModel(modelId);
@@ -116,7 +118,12 @@ function App() {
               <p className="text-sm text-gray-500">Digital Immunity Index 4.0</p>
             </div>
             <div className="flex items-center space-x-4">
-              <AIStatusBadge />
+              <AIStatusBadge 
+                isLoading={aiStatus.isLoading}
+                isAvailable={aiStatus.isAvailable}
+                provider={aiStatus.provider}
+                mode={aiStatus.mode}
+              />
               <div className="text-sm text-gray-500">
                 Paso {currentStep} de 3
               </div>

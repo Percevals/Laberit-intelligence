@@ -1,0 +1,29 @@
+{
+  "name": "@dii/ui-kit",
+  "version": "1.0.0",
+  "description": "Shared UI components for DII platform",
+  "type": "module",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./styles": "./src/styles/index.css"
+  },
+  "scripts": {
+    "dev": "echo 'No dev script needed for ui-kit'",
+    "build": "echo 'No build needed for ui-kit'",
+    "lint": "eslint src/"
+  },
+  "keywords": ["dii", "ui", "components", "react"],
+  "author": "Laberit Intelligence",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "dependencies": {
+    "@dii/types": "^1.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0"
+  }
+}
