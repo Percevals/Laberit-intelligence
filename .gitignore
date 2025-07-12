@@ -73,6 +73,7 @@ data/cache/
 data/temp/
 intelligence/output/
 intelligence/*.html
+!intelligence/index.html
 intelligence/*.json
 
 # Generated analysis files in root (to be moved)
