@@ -3,7 +3,7 @@
  * 8 distinct models based on revenue generation, not industry
  */
 
-import type { Currency, Hours, Percentage } from './brand.types';
+import type { Hours, Percentage } from './brand.types';
 
 export type BusinessModelId = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 

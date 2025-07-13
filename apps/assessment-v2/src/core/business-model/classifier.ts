@@ -24,7 +24,7 @@ export class BusinessModelClassifier {
       model: classification.model,
       confidence: classification.confidence,
       reasoning: classification.reasoning,
-      alternativeModel: classification.alternativeModel
+      ...(classification.alternativeModel && { alternativeModel: classification.alternativeModel })
     };
   }
   
@@ -125,10 +125,11 @@ export class BusinessModelClassifier {
           reasoning: 'Complex B2B sales with long cycles and high touch'
         };
         
-      default:
+      default: {
         // Type safety ensures this is never reached
         const _exhaustive: never = revenue;
-        throw new Error(`Unknown revenue model: ${revenue}`);
+        return _exhaustive;
+      }
     }
   }
   

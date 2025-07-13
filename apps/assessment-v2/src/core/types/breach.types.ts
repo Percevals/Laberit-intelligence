@@ -66,8 +66,8 @@ export interface BreachCase {
   sources: Source[];
   confidence: 'VERIFIED' | 'PROBABLE' | 'ESTIMATED';
   
-  // Immutability marker
-  readonly [Symbol.for('immutable')]: true;
+  // Immutability marker - using a string key instead of computed property
+  readonly _immutable: true;
 }
 
 export type AttackVector = 

@@ -12,7 +12,7 @@ import type {
   MaturityStage,
   DIIInterpretation 
 } from '@core/types/dii.types';
-import type { BusinessModel } from '@core/types/business-model.types';
+import type { BusinessModel, BusinessModelId } from '@core/types/business-model.types';
 import { Score, Percentage } from '@core/types/brand.types';
 import { validateDimension } from '@core/types/dii.types';
 import { MODEL_PROFILES } from '@core/business-model/model-profiles';
@@ -234,9 +234,9 @@ export class DIICalculator {
    * Generate interpretation messages
    */
   private static generateMessages(
-    score: Score,
+    _score: Score,
     stage: MaturityStage,
-    businessModel: BusinessModel
+    _businessModel: BusinessModel
   ): Pick<DIIInterpretation, 'headline' | 'strengths' | 'vulnerabilities'> {
     const messages = {
       FRAGIL: {

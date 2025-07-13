@@ -6,6 +6,9 @@
 import type { Score, Percentage } from './brand.types';
 import type { BusinessModel } from './business-model.types';
 
+// Re-export Score for components that need it
+export type { Score };
+
 // DII Dimensions - each scored 1-10
 export interface DIIDimensions {
   TRD: number; // Time to Revenue Degradation (1-10) - Higher is better
