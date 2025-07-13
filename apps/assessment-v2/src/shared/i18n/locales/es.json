@@ -189,5 +189,63 @@
     "founded": "Año de fundación",
     "website": "Sitio web",
     "techStack": "Tecnologías"
+  },
+  
+  "steps": {
+    "search": "Búsqueda",
+    "searchDesc": "Encuentra tu empresa",
+    "confirm": "Confirmar",
+    "confirmDesc": "Verifica los datos",
+    "discover": "Descubrir",
+    "discoverDesc": "Tu modelo de negocio"
+  },
+  
+  "ai": {
+    "health": {
+      "active": "Verificación de datos: Activa",
+      "cached": "Usando datos en caché",
+      "offline": "Entrada manual"
+    }
+  },
+  
+  "confirmation": {
+    "title": "Confirmemos la información de su empresa",
+    "subtitle": "Verifique que los datos sean correctos"
+  },
+  
+  "reveal": {
+    "title": "Hemos identificado su modelo de negocio",
+    "subtitle": "Esto es lo que descubrimos sobre su empresa",
+    "confidence": "Confianza",
+    "modelNumber": "Modelo",
+    "attackSurface": "Superficie de Ataque",
+    "impactSeverity": "Severidad del Impacto",
+    "resilienceWindow": "Ventana de resiliencia",
+    "operationalRisk": "Riesgo operacional",
+    "fatalFlaw": "Vulnerabilidad clave",
+    "similarCompanies": "Empresas similares que sufrieron brechas",
+    "readyToAssess": "¿Listo para evaluar su inmunidad digital?",
+    "startAssessment": "Iniciar evaluación"
+  },
+  
+  "frequency": {
+    "rare": "Raro",
+    "occasional": "Ocasional",
+    "common": "Común",
+    "very_common": "Muy común"
+  },
+  
+  "impact": {
+    "low": "Bajo",
+    "medium": "Medio",
+    "high": "Alto",
+    "critical": "Crítico"
+  },
+  
+  "risk": {
+    "low": "BAJO",
+    "medium": "MEDIO",
+    "high": "ALTO",
+    "critical": "CRÍTICO"
   }
 }

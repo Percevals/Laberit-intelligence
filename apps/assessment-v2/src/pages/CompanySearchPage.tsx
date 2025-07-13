@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, CheckCircle2, Edit2 } from 'lucide-react';
 import { CompanySearchInput } from '@features/company-search';
 import { useAssessmentStore } from '@/store/assessment-store';
+import { ProgressIndicator } from '@/components/ProgressIndicator';
 import type { CompanyInfo } from '@services/ai/types';
 
 export function CompanySearchPage() {
@@ -25,17 +26,23 @@ export function CompanySearchPage() {
   const handleConfirm = () => {
     confirmCompany();
     startAssessment();
-    navigate('/assessment/smart-classify');
+    navigate('/assessment/confirm');
   };
 
   const handleEdit = () => {
-    // For now, just navigate to smart classification with current data
-    // In the future, implement inline editing
-    navigate('/assessment/smart-classify');
+    // Navigate to confirmation page where they can edit
+    navigate('/assessment/confirm');
   };
 
+  const steps = [
+    { label: t('steps.search', 'Búsqueda'), description: t('steps.searchDesc', 'Encuentra tu empresa') },
+    { label: t('steps.confirm', 'Confirmar'), description: t('steps.confirmDesc', 'Verifica los datos') },
+    { label: t('steps.discover', 'Descubrir'), description: t('steps.discoverDesc', 'Tu modelo de negocio') }
+  ];
+
   return (
-    <div className="min-h-screen bg-dark-bg flex items-center justify-center p-4">
+    <div className="min-h-screen bg-dark-bg flex flex-col items-center justify-center p-4">
+      <ProgressIndicator currentStep={1} steps={steps} />
       <div className="max-w-2xl w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -111,7 +118,7 @@ export function CompanySearchPage() {
                 {t('companySearch.nextStep', 'Ahora identifiquemos su modelo de negocio')}
               </p>
               <button
-                onClick={() => navigate('/assessment/smart-classify')}
+                onClick={() => navigate('/assessment/confirm')}
                 className="btn-primary inline-flex items-center gap-2"
               >
                 {t('common.continue', 'Continuar')}
