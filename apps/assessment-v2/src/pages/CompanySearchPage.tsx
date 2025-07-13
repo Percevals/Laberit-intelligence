@@ -29,8 +29,9 @@ export function CompanySearchPage() {
   };
 
   const handleEdit = () => {
-    // Navigate to manual edit page or open modal
-    navigate('/assessment/company-edit');
+    // For now, just navigate to smart classification with current data
+    // In the future, implement inline editing
+    navigate('/assessment/smart-classify');
   };
 
   return (
@@ -195,13 +196,6 @@ function CompanyInfoDisplay({ company }: CompanyInfoDisplayProps) {
         )}
       </div>
 
-      {company.description && (
-        <div className="pt-4 border-t border-dark-border">
-          <p className="text-sm text-dark-text-secondary">
-            {company.description}
-          </p>
-        </div>
-      )}
 
       {company.techStack && company.techStack.length > 0 && (
         <div className="pt-4 border-t border-dark-border">

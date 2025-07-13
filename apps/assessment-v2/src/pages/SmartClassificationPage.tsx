@@ -47,7 +47,11 @@ export function SmartClassificationPage() {
 
   // Suggest business model based on company data
   useEffect(() => {
-    if (companySearch.selectedCompany && classification.industry) {
+    // Only suggest when all fields are complete
+    const allFieldsComplete = fieldsToShow.length === 0 && 
+      classification.criticalInfra !== null;
+    
+    if (allFieldsComplete && companySearch.selectedCompany && classification.industry) {
       // Simple heuristic for demo - in production, use AI
       const suggestions: Record<string, BusinessModel> = {
         'Financial Services': 'TRANSACTION_BASED',
@@ -73,11 +77,11 @@ export function SmartClassificationPage() {
         setSuggestedModel({
           model: matchedModel[1],
           confidence: 0.85,
-          reasoning: `Based on your ${industry} industry classification`
+          reasoning: `Basado en su industria: ${industry}`
         });
       }
     }
-  }, [companySearch.selectedCompany, classification.industry]);
+  }, [companySearch.selectedCompany, classification.industry, classification.criticalInfra, fieldsToShow.length]);
 
   const handleFieldUpdate = (field: string, value: any) => {
     switch (field) {
@@ -296,14 +300,11 @@ export function SmartClassificationPage() {
             )}
           </div>
 
-          {/* Continue Button */}
-          {!suggestedModel && (
+          {/* Continue Button - only show when all fields are filled and no model suggestion yet */}
+          {!suggestedModel && fieldsToShow.length === 0 && (
             <div className="mt-8 flex justify-center">
               <button
                 onClick={handleContinue}
-                disabled={fieldsToShow.some(field => 
-                  field === 'criticalInfra' ? classification.criticalInfra === null : true
-                )}
                 className="btn-primary flex items-center gap-2"
               >
                 {t('common.continue', 'Continuar')}
