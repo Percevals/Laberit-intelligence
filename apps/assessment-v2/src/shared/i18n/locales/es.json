@@ -167,7 +167,7 @@
   
   "companySearch": {
     "title": "Comencemos con su empresa",
-    "subtitle": "Buscaremos información para ahorrarle tiempo",
+    "subtitle": "Hagamos inteligencia con su información pública",
     "placeholder": "Ingrese el nombre de su empresa...",
     "privacy": "Su información es confidencial y no será almacenada",
     "noResults": "No encontramos resultados para",
@@ -225,7 +225,8 @@
     "fatalFlaw": "Vulnerabilidad clave",
     "similarCompanies": "Empresas similares que sufrieron brechas",
     "readyToAssess": "¿Listo para evaluar su inmunidad digital?",
-    "startAssessment": "Iniciar evaluación"
+    "startAssessment": "Iniciar evaluación",
+    "keyRisks": "Riesgos principales para su modelo"
   },
   
   "frequency": {

@@ -55,7 +55,7 @@ export function CompanySearchPage() {
               {t('companySearch.title', 'Comencemos con su empresa')}
             </h1>
             <p className="text-xl text-dark-text-secondary">
-              {t('companySearch.subtitle', 'Buscaremos información para ahorrarle tiempo')}
+              {t('companySearch.subtitle', 'Hagamos inteligencia con su información pública')}
             </p>
           </div>
 

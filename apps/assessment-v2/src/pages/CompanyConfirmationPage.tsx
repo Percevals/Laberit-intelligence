@@ -18,6 +18,7 @@ import { useAssessmentStore } from '@/store/assessment-store';
 import { ProgressIndicator } from '@/components/ProgressIndicator';
 import { AIHealthIndicator } from '@/components/AIHealthIndicator';
 import { cn } from '@shared/utils/cn';
+import { INDUSTRY_OPTIONS } from '@/constants/industries';
 
 export function CompanyConfirmationPage() {
   const { t } = useTranslation();
@@ -105,10 +106,12 @@ export function CompanyConfirmationPage() {
           </div>
 
           {/* Company Info Card */}
-          <div className="card p-8 mb-6">
+          <div className="card p-8 mb-6 relative">
+            <div className="absolute top-4 right-4">
+              <AIHealthIndicator status={aiStatus} />
+            </div>
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-semibold">{companySearch.selectedCompany.name}</h2>
-              <AIHealthIndicator status={aiStatus} />
             </div>
 
             <div className="space-y-4">
@@ -272,14 +275,30 @@ function EditableField({
         <div className="text-primary-600">{icon}</div>
         <div className="flex-1">
           <p className="text-sm text-dark-text-secondary mb-1">{label}</p>
-          <input
-            type={type}
-            value={type === 'number' && value ? value / 1000000 : value}
-            onChange={(e) => onChange(e.target.value)}
-            placeholder={placeholder}
-            className="w-full px-2 py-1 bg-dark-bg border border-dark-border rounded focus:outline-none focus:border-primary-600"
-            autoFocus
-          />
+          {label.includes('Industria') ? (
+            <select
+              value={value}
+              onChange={(e) => onChange(e.target.value)}
+              className="w-full px-2 py-1 bg-dark-bg border border-dark-border rounded focus:outline-none focus:border-primary-600"
+              autoFocus
+            >
+              <option value="">Seleccione...</option>
+              {INDUSTRY_OPTIONS.map(option => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          ) : (
+            <input
+              type={type}
+              value={type === 'number' && value ? value / 1000000 : value}
+              onChange={(e) => onChange(e.target.value)}
+              placeholder={placeholder}
+              className="w-full px-2 py-1 bg-dark-bg border border-dark-border rounded focus:outline-none focus:border-primary-600"
+              autoFocus
+            />
+          )}
         </div>
         <div className="flex gap-2">
           <button

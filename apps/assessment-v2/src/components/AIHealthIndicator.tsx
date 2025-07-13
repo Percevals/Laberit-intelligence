@@ -35,12 +35,12 @@ export function AIHealthIndicator({ status, className }: AIHealthIndicatorProps)
     <div className={cn('relative group inline-flex items-center', className)}>
       <div className="relative">
         <div className={cn(
-          'w-2 h-2 rounded-full',
+          'w-3 h-3 rounded-full',
           config.color
         )} />
         {config.pulse && (
           <div className={cn(
-            'absolute inset-0 w-2 h-2 rounded-full animate-ping',
+            'absolute inset-0 w-3 h-3 rounded-full animate-ping',
             config.color,
             'opacity-75'
           )} />

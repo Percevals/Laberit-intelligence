@@ -11,7 +11,7 @@ interface ProgressIndicatorProps {
 
 export function ProgressIndicator({ currentStep, steps }: ProgressIndicatorProps) {
   return (
-    <div className="w-full max-w-3xl mx-auto mb-8">
+    <div className="w-full max-w-3xl mx-auto mb-12 mt-8">
       <div className="flex items-center justify-between">
         {steps.map((step, index) => {
           const stepNumber = index + 1;
@@ -38,7 +38,7 @@ export function ProgressIndicator({ currentStep, steps }: ProgressIndicatorProps
                     <span>{stepNumber}</span>
                   )}
                 </div>
-                <div className="absolute top-12 text-center w-24">
+                <div className="absolute top-12 text-center w-32 -ml-4">
                   <p className={cn(
                     'text-sm font-medium',
                     isCurrent ? 'text-dark-text-primary' : 'text-dark-text-secondary'
@@ -46,7 +46,7 @@ export function ProgressIndicator({ currentStep, steps }: ProgressIndicatorProps
                     {step.label}
                   </p>
                   {step.description && (
-                    <p className="text-xs text-dark-text-secondary mt-1">
+                    <p className="text-xs text-dark-text-secondary mt-1 hidden sm:block">
                       {step.description}
                     </p>
                   )}
