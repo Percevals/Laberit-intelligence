@@ -16,6 +16,7 @@ import { SmartClassificationPage } from './pages/SmartClassificationPage';
 import { ClassificationPage } from './pages/ClassificationPage';
 import { QuestionsPage } from './pages/QuestionsPage';
 import { ResultsPage } from './pages/ResultsPage';
+import { ConfigDebugPage } from './pages/ConfigDebugPage';
 
 // Core providers and setup
 const queryClient = new QueryClient({
@@ -55,6 +56,7 @@ export default function App() {
             <Route path="/assessment/classify" element={<ClassificationPage />} />
             <Route path="/assessment/questions" element={<QuestionsPage />} />
             <Route path="/assessment/results" element={<ResultsPage />} />
+            <Route path="/debug" element={<ConfigDebugPage />} />
           </Routes>
         </Suspense>
       </BrowserRouter>

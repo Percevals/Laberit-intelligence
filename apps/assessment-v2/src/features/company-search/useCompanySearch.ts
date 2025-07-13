@@ -1,24 +1,21 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { AIService } from '@services/ai/ai-service';
+import { getAIConfig, getConfigDebugInfo } from '@/config/ai-config';
 import type { CompanySearchResult } from '@services/ai/types';
 
-// Initialize AI service - in production, this would use environment variables
+// Initialize AI service with robust configuration
+const aiConfig = getAIConfig();
 const aiService = new AIService({
   providers: {
-    openai: { 
-      apiKey: import.meta.env.VITE_OPENAI_API_KEY || '',
-      model: 'gpt-3.5-turbo'
-    },
-    mistral: {
-      apiKey: import.meta.env.VITE_MISTRAL_API_KEY || ''
-    }
+    ...(aiConfig.openai && { openai: aiConfig.openai }),
+    ...(aiConfig.mistral && { mistral: aiConfig.mistral })
   },
-  useMockInDev: true,
-  cache: {
-    enabled: true,
-    ttl: 3600 // 1 hour
-  }
+  useMockInDev: aiConfig.useMockInDev,
+  cache: aiConfig.cache
 });
+
+// Debug info in console
+console.log('AI Configuration:', getConfigDebugInfo());
 
 export function useCompanySearch() {
   const [results, setResults] = useState<CompanySearchResult>({

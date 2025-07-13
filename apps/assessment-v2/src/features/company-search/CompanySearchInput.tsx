@@ -4,6 +4,7 @@ import { Search, Building2, Loader2, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@shared/utils/cn';
 import { useCompanySearch } from './useCompanySearch';
+import { AIHealthIndicator } from '@/components/AIHealthIndicator';
 import type { CompanyInfo } from '@services/ai/types';
 
 interface CompanySearchInputProps {
@@ -70,9 +71,15 @@ export function CompanySearchInput({ onSelect, className }: CompanySearchInputPr
           )}
         />
         <Search className="absolute left-4 top-3.5 w-5 h-5 text-dark-text-secondary" />
-        {loading && (
-          <Loader2 className="absolute right-4 top-3.5 w-5 h-5 text-primary-600 animate-spin" />
-        )}
+        <div className="absolute right-4 top-3.5 flex items-center gap-2">
+          {loading && (
+            <Loader2 className="w-5 h-5 text-primary-600 animate-spin" />
+          )}
+          <AIHealthIndicator 
+            status={results.provider === 'Mistral AI' || results.provider === 'OpenAI Provider' ? 'active' : 
+                   results.provider === 'cache' ? 'cached' : 'offline'} 
+          />
+        </div>
       </div>
 
       <AnimatePresence>
