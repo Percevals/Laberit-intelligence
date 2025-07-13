@@ -94,6 +94,11 @@ jobs:
           mkdir -p _site/apps/assessment-light
           cp -r apps/assessment-light/dist/* _site/apps/assessment-light/
           
+          # Copy Assessment v2 build
+          echo "📦 Copying Assessment v2 build..."
+          mkdir -p _site/apps/assessment-v2
+          cp -r apps/assessment-v2/dist/* _site/apps/assessment-v2/
+          
           # Copy redirect page for /apps/ path
           mkdir -p _site/apps
           cp apps-redirect.html _site/apps/index.html
@@ -111,6 +116,9 @@ jobs:
           echo ""
           echo "Quick Assessment (new monorepo path):"
           ls -la _site/apps/assessment-light/
+          echo ""
+          echo "Assessment v2:"
+          ls -la _site/apps/assessment-v2/
           echo ""
           echo "Weekly reports:"
           ls _site/intelligence/weekly-reports/*.html 2>/dev/null | head -3 || echo "No reports found"

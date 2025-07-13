@@ -40,7 +40,7 @@ function LoadingScreen() {
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <BrowserRouter basename="/Laberit-intelligence/apps/assessment-v2">
         <Suspense fallback={<LoadingScreen />}>
           <Routes>
             <Route path="/" element={<HomePage />} />

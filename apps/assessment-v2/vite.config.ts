@@ -4,6 +4,8 @@ import path from 'path';
 
 // https://vite.dev/config/
 export default defineConfig({
+  // Base path for GitHub Pages deployment
+  base: '/Laberit-intelligence/apps/assessment-v2/',
   plugins: [react()] as any,
   resolve: {
     alias: {
