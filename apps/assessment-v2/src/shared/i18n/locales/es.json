@@ -7,7 +7,12 @@
     "finish": "Finalizar",
     "loading": "Cargando...",
     "error": "Error",
-    "success": "Éxito"
+    "success": "Éxito",
+    "yes": "Sí",
+    "no": "No",
+    "edit": "Editar",
+    "confirm": "Confirmar",
+    "enterValue": "Ingrese valor"
   },
   
   "nav": {
@@ -76,6 +81,22 @@
     "classification": {
       "title": "Primero, identifiquemos tu modelo de negocio",
       "subtitle": "Responde estas 2 preguntas para personalizar tu evaluación",
+      "complete": "Completemos su perfil",
+      "confirm": "Confirmemos su información",
+      "fillMissing": "Solo necesitamos algunos datos más",
+      "review": "Revise que todo esté correcto",
+      "aiEnhanced": "Hemos pre-llenado algunos campos con IA. Por favor verifique.",
+      "revenue": "Ingresos anuales",
+      "employees": "Número de empleados",
+      "geography": "Ubicación principal",
+      "industry": "Industria",
+      "criticalInfra": {
+        "title": "¿Opera infraestructura crítica?",
+        "description": "Servicios esenciales como energía, agua, telecomunicaciones, salud, finanzas"
+      },
+      "modelSuggestion": "Modelo de negocio sugerido",
+      "acceptSuggestion": "Aceptar sugerencia",
+      "chooseDifferent": "Elegir otro",
       "q1": {
         "label": "¿Cómo generas ingresos principalmente?",
         "options": {
@@ -142,5 +163,31 @@
     "privacy": "Privacidad",
     "terms": "Términos",
     "contact": "Contacto"
+  },
+  
+  "companySearch": {
+    "title": "Comencemos con su empresa",
+    "subtitle": "Buscaremos información para ahorrarle tiempo",
+    "placeholder": "Ingrese el nombre de su empresa...",
+    "privacy": "Su información es confidencial y no será almacenada",
+    "noResults": "No encontramos resultados para",
+    "enterManually": "Ingresar manualmente",
+    "notListed": "¿No encuentra su empresa? Ingrese manualmente",
+    "employees": "empleados",
+    "revenue": "ingresos",
+    "confidence": "Confianza",
+    "confirmTitle": "¿Es esta su empresa?",
+    "confirmed": "¡Perfecto!",
+    "nextStep": "Ahora identifiquemos su modelo de negocio"
+  },
+  
+  "company": {
+    "employees": "Empleados",
+    "revenue": "Ingresos anuales",
+    "headquarters": "Sede principal",
+    "industry": "Industria",
+    "founded": "Año de fundación",
+    "website": "Sitio web",
+    "techStack": "Tecnologías"
   }
 }

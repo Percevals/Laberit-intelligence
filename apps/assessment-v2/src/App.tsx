@@ -10,6 +10,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { HomePage } from './pages/HomePage';
 import { CompanySearchPage } from './pages/CompanySearchPage';
+import { SmartClassificationPage } from './pages/SmartClassificationPage';
 import { ClassificationPage } from './pages/ClassificationPage';
 import { QuestionsPage } from './pages/QuestionsPage';
 import { ResultsPage } from './pages/ResultsPage';
@@ -46,6 +47,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/assessment/company" element={<CompanySearchPage />} />
+            <Route path="/assessment/smart-classify" element={<SmartClassificationPage />} />
             <Route path="/assessment/classify" element={<ClassificationPage />} />
             <Route path="/assessment/questions" element={<QuestionsPage />} />
             <Route path="/assessment/results" element={<ResultsPage />} />

@@ -72,11 +72,16 @@ export interface AIProvider {
   // Core functionality
   searchCompany(query: string): Promise<CompanyInfo[]>;
   enhanceCompanyData(partial: Partial<CompanyInfo>): Promise<CompanyInfo>;
+  suggestBusinessModel?(company: CompanyInfo): Promise<{
+    model: string;
+    confidence: number;
+    reasoning: string;
+  }>;
   
   // Health & availability
   isAvailable(): Promise<boolean>;
   checkRateLimit(): Promise<{ available: boolean; resetIn?: number }>;
-  estimateCost(operation: 'search' | 'enhance'): number;
+  estimateCost(operation: 'search' | 'enhance' | 'suggest'): number;
   
   // Configuration
   configure(config: AIProviderConfig): void;

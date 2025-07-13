@@ -25,7 +25,7 @@ export function CompanySearchPage() {
   const handleConfirm = () => {
     confirmCompany();
     startAssessment();
-    navigate('/assessment/classify');
+    navigate('/assessment/smart-classify');
   };
 
   const handleEdit = () => {
@@ -110,7 +110,7 @@ export function CompanySearchPage() {
                 {t('companySearch.nextStep', 'Ahora identifiquemos su modelo de negocio')}
               </p>
               <button
-                onClick={() => navigate('/assessment/classify')}
+                onClick={() => navigate('/assessment/smart-classify')}
                 className="btn-primary inline-flex items-center gap-2"
               >
                 {t('common.continue', 'Continuar')}

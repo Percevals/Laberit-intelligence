@@ -1,12 +1,14 @@
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { useAssessmentStore } from '@/store/assessment-store';
 
 export function QuestionsPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { classification } = useAssessmentStore();
   
   // TODO: Implement full assessment flow
-  const businessModel = sessionStorage.getItem('businessModel');
+  const businessModel = classification.businessModel;
   
   return (
     <div className="min-h-screen bg-dark-bg flex items-center justify-center p-4">

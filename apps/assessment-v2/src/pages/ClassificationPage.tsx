@@ -5,13 +5,15 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Building2, Cpu } from 'lucide-react';
 import { BusinessModelClassifier } from '@core/business-model/classifier';
 import type { ClassificationAnswers } from '@core/types/business-model.types';
+import { useAssessmentStore } from '@/store/assessment-store';
 import { cn } from '@shared/utils/cn';
 
 export function ClassificationPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { classification, setBusinessModel, setClassificationAnswer } = useAssessmentStore();
   const [currentQuestion, setCurrentQuestion] = useState(1);
-  const [answers, setAnswers] = useState<Partial<ClassificationAnswers>>({});
+  const [answers, setAnswers] = useState<Partial<ClassificationAnswers>>(classification.answers || {});
   
   const revenueOptions = [
     { value: 'recurring_subscriptions', icon: '🔄', translationKey: 'recurring' },
@@ -44,9 +46,10 @@ export function ClassificationPage() {
     // Classify the business model
     const classification = BusinessModelClassifier.classify(completeAnswers);
     
-    // Store in session/state for the assessment
-    sessionStorage.setItem('businessModel', classification.model);
-    sessionStorage.setItem('classification', JSON.stringify(classification));
+    // Store in state
+    setBusinessModel(classification.model);
+    setClassificationAnswer('revenueModel', completeAnswers.revenueModel);
+    setClassificationAnswer('operationalDependency', completeAnswers.operationalDependency);
     
     // Navigate to assessment questions
     navigate('/assessment/questions');
