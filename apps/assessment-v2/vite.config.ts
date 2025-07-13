@@ -14,6 +14,7 @@ export default defineConfig({
       '@features': path.resolve(__dirname, './src/features'),
       '@shared': path.resolve(__dirname, './src/shared'),
       '@ui': path.resolve(__dirname, './src/ui'),
+      '@services': path.resolve(__dirname, './src/services'),
     },
   },
   server: {

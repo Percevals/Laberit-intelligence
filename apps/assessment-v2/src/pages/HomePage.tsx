@@ -43,7 +43,7 @@ export function HomePage() {
   const maturityStages = ['fragil', 'robusto', 'resiliente', 'adaptativo'];
   
   const startAssessment = () => {
-    navigate('/assessment/classify');
+    navigate('/assessment/company');
   };
   
   return (
@@ -126,7 +126,7 @@ export function HomePage() {
             {businessModels.map((model, i) => (
               <div
                 key={i}
-                onClick={() => navigate('/assessment/classify')}
+                onClick={() => navigate('/assessment/company')}
                 className={cn(
                   'card-interactive text-center cursor-pointer',
                   'hover:border-primary-600/50 hover:scale-105 transition-transform'

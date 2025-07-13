@@ -41,7 +41,8 @@
       "@core/*": ["./src/core/*"],
       "@features/*": ["./src/features/*"],
       "@shared/*": ["./src/shared/*"],
-      "@ui/*": ["./src/ui/*"]
+      "@ui/*": ["./src/ui/*"],
+      "@services/*": ["./src/services/*"]
     }
   },
   "include": ["src"]
