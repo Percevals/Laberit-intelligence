@@ -14,9 +14,9 @@
     "lint": "turbo run lint",
     "type-check": "turbo run type-check",
     "dev:light": "turbo run dev --filter=assessment-light",
-    "dev:premium": "turbo run dev --filter=assessment-premium",
+    "dev:v2": "turbo run dev --filter=assessment-v2",
     "build:light": "turbo run build --filter=assessment-light",
-    "build:premium": "turbo run build --filter=assessment-premium",
+    "build:v2": "turbo run build --filter=assessment-v2",
     "install:all": "npm install --workspaces --if-present"
   },
   "devDependencies": {
