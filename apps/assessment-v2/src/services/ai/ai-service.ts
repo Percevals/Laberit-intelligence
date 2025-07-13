@@ -11,6 +11,7 @@ import type {
 } from './types';
 import { MockProvider } from './providers/mock-provider';
 import { OpenAIProvider } from './providers/openai-provider';
+import { MistralProvider } from './providers/mistral-provider';
 
 export interface AIServiceConfig {
   providers?: {
@@ -58,6 +59,13 @@ export class AIService {
       });
       this.providers.set('openai', openai);
       this.priority.get('primary')!.push('openai');
+    }
+
+    // Add Mistral provider
+    if (this.config.providers?.mistral?.apiKey) {
+      const mistral = new MistralProvider(this.config.providers.mistral.apiKey);
+      this.providers.set('mistral', mistral);
+      this.priority.get('primary')!.push('mistral');
     }
 
     // Add other providers as they're implemented

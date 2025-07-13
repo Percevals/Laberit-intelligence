@@ -8,6 +8,9 @@ const aiService = new AIService({
     openai: { 
       apiKey: import.meta.env.VITE_OPENAI_API_KEY || '',
       model: 'gpt-3.5-turbo'
+    },
+    mistral: {
+      apiKey: import.meta.env.VITE_MISTRAL_API_KEY || ''
     }
   },
   useMockInDev: true,
