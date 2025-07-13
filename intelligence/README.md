@@ -10,7 +10,7 @@ The DII Intelligence Platform combines historical vulnerability assessments with
 
 ### 1. Historical Vulnerability Baseline
 - **Source**: 150 companies assessed with DII v4.0
-- **Data**: DII scores, dimensions (AER, HFP, BRI, TRD, RRG), business models
+- **Data**: Digital Immunity Index, dimensions (AER, HFP, BRI, TRD, RRG), business models
 - **Purpose**: Establish vulnerability patterns per business model
 - **Key Insight**: We know WHO is vulnerable and WHY
 
