@@ -6,6 +6,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Suspense } from 'react';
+import { useTranslation } from 'react-i18next';
 import { cn } from '@shared/utils/cn';
 
 // Core providers and setup
@@ -21,18 +22,48 @@ const queryClient = new QueryClient({
 
 // Loading component
 function LoadingScreen() {
+  const { t } = useTranslation();
   return (
     <div className="flex h-screen w-full items-center justify-center">
       <div className="text-center">
         <div className="mb-4 h-16 w-16 animate-spin rounded-full border-4 border-primary-600 border-t-transparent" />
-        <p className="text-dark-text-secondary">Initializing DII Assessment...</p>
+        <p className="text-dark-text-secondary">{t('common.loading')}</p>
       </div>
     </div>
   );
 }
 
-// Temporary home component - will be replaced with assessment flow
+// Language switcher component
+function LanguageSwitcher() {
+  const { i18n } = useTranslation();
+  
+  return (
+    <button
+      onClick={() => i18n.changeLanguage(i18n.language === 'es' ? 'en' : 'es')}
+      className="text-sm text-dark-text-secondary hover:text-dark-text-primary transition-colors"
+    >
+      {i18n.language === 'es' ? 'EN' : 'ES'}
+    </button>
+  );
+}
+
+// Home component with Spanish translations
 function Home() {
+  const { t } = useTranslation();
+  
+  const businessModels = [
+    { key: 'subscription', color: 'text-primary-600' },
+    { key: 'transaction', color: 'text-primary-500' },
+    { key: 'assetLight', color: 'text-primary-400' },
+    { key: 'assetHeavy', color: 'text-primary-700' },
+    { key: 'dataDrivern', color: 'text-primary-600' },
+    { key: 'platform', color: 'text-primary-500' },
+    { key: 'directConsumer', color: 'text-primary-400' },
+    { key: 'b2bEnterprise', color: 'text-primary-700' },
+  ];
+  
+  const maturityStages = ['fragil', 'robusto', 'resiliente', 'adaptativo'];
+  
   return (
     <div className="min-h-screen bg-dark-bg">
       {/* Header */}
@@ -48,13 +79,14 @@ function Home() {
             </div>
             <nav className="flex items-center gap-6">
               <a href="#" className="text-dark-text-secondary hover:text-dark-text-primary transition-colors">
-                About
+                {t('nav.about')}
               </a>
               <a href="#" className="text-dark-text-secondary hover:text-dark-text-primary transition-colors">
-                Intelligence
+                {t('nav.intelligence')}
               </a>
+              <LanguageSwitcher />
               <button className="btn-primary">
-                Start Assessment
+                {t('nav.startAssessment')}
               </button>
             </nav>
           </div>
@@ -69,33 +101,33 @@ function Home() {
         <div className="container relative mx-auto px-4">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="mb-6 text-5xl font-light">
-              Your <span className="font-bold text-gradient">Digital Immunity</span> Score
+              {t('hero.title')} <span className="font-bold text-gradient">{t('hero.titleHighlight')}</span>
               <br />
-              in 30 Minutes
+              {t('hero.subtitle')}
             </h2>
             <p className="mb-8 text-xl text-dark-text-secondary">
-              Based on 150+ real breach assessments. No fluff, just truth about your cyber resilience.
+              {t('hero.description')}
             </p>
             
             {/* Key metrics */}
             <div className="mb-12 grid grid-cols-3 gap-6">
               <div className="card text-center">
                 <div className="mb-2 text-3xl font-bold text-primary-600">8</div>
-                <p className="text-sm text-dark-text-secondary">Business Models</p>
+                <p className="text-sm text-dark-text-secondary">{t('metrics.businessModels')}</p>
               </div>
               <div className="card text-center">
                 <div className="mb-2 text-3xl font-bold text-primary-600">150+</div>
-                <p className="text-sm text-dark-text-secondary">Validated Assessments</p>
+                <p className="text-sm text-dark-text-secondary">{t('metrics.assessments')}</p>
               </div>
               <div className="card text-center">
                 <div className="mb-2 text-3xl font-bold text-primary-600">95%</div>
-                <p className="text-sm text-dark-text-secondary">Prediction Accuracy</p>
+                <p className="text-sm text-dark-text-secondary">{t('metrics.accuracy')}</p>
               </div>
             </div>
             
             {/* CTA */}
             <button className="btn-primary text-lg px-8 py-4">
-              Begin Free Assessment →
+              {t('hero.cta')}
             </button>
           </div>
         </div>
@@ -105,20 +137,11 @@ function Home() {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <h3 className="mb-8 text-center text-3xl font-light">
-            Which Business Model Are You?
+            {t('businessModels.title')}
           </h3>
           
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-            {[
-              { name: 'Subscription Based', color: 'text-primary-600' },
-              { name: 'Transaction Based', color: 'text-primary-500' },
-              { name: 'Asset Light', color: 'text-primary-400' },
-              { name: 'Asset Heavy', color: 'text-primary-700' },
-              { name: 'Data Driven', color: 'text-primary-600' },
-              { name: 'Platform Ecosystem', color: 'text-primary-500' },
-              { name: 'Direct to Consumer', color: 'text-primary-400' },
-              { name: 'B2B Enterprise', color: 'text-primary-700' },
-            ].map((model, i) => (
+            {businessModels.map((model, i) => (
               <div
                 key={i}
                 className={cn(
@@ -129,7 +152,7 @@ function Home() {
                 <div className={cn('mb-2 text-2xl font-bold', model.color)}>
                   {i + 1}
                 </div>
-                <p className="text-sm">{model.name}</p>
+                <p className="text-sm">{t(`businessModels.${model.key}`)}</p>
               </div>
             ))}
           </div>
@@ -140,34 +163,20 @@ function Home() {
       <section className="border-t border-dark-border py-16">
         <div className="container mx-auto px-4">
           <h3 className="mb-8 text-center text-3xl font-light">
-            Four Stages of Digital Immunity
+            {t('maturityStages.title')}
           </h3>
           
           <div className="grid gap-6 md:grid-cols-4">
-            <div className="card border-fragil/30">
-              <h4 className="mb-2 text-xl font-bold text-fragil">FRAGIL</h4>
-              <p className="text-sm text-dark-text-secondary">
-                High risk, minimal resilience. Immediate action required.
-              </p>
-            </div>
-            <div className="card border-robusto/30">
-              <h4 className="mb-2 text-xl font-bold text-robusto">ROBUSTO</h4>
-              <p className="text-sm text-dark-text-secondary">
-                Basic defenses, but vulnerable. Significant gaps remain.
-              </p>
-            </div>
-            <div className="card border-resiliente/30">
-              <h4 className="mb-2 text-xl font-bold text-resiliente">RESILIENTE</h4>
-              <p className="text-sm text-dark-text-secondary">
-                Good recovery capability. Can handle most attacks.
-              </p>
-            </div>
-            <div className="card border-adaptativo/30">
-              <h4 className="mb-2 text-xl font-bold text-adaptativo">ADAPTATIVO</h4>
-              <p className="text-sm text-dark-text-secondary">
-                Excellent resilience. Learns and adapts from threats.
-              </p>
-            </div>
+            {maturityStages.map((stage) => (
+              <div key={stage} className={`card border-${stage}/30`}>
+                <h4 className={`mb-2 text-xl font-bold text-${stage}`}>
+                  {t(`maturityStages.${stage}.name`)}
+                </h4>
+                <p className="text-sm text-dark-text-secondary">
+                  {t(`maturityStages.${stage}.description`)}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

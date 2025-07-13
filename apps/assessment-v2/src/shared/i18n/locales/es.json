@@ -1,0 +1,136 @@
+{
+  "common": {
+    "start": "Comenzar",
+    "continue": "Continuar",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "finish": "Finalizar",
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito"
+  },
+  
+  "nav": {
+    "about": "Acerca de",
+    "intelligence": "Inteligencia",
+    "startAssessment": "Iniciar Evaluación"
+  },
+  
+  "hero": {
+    "title": "Tu Índice de",
+    "titleHighlight": "Inmunidad Digital",
+    "subtitle": "en 30 Minutos",
+    "description": "Basado en más de 150 evaluaciones de brechas reales. Sin rodeos, solo la verdad sobre tu resiliencia cibernética.",
+    "cta": "Comenzar Evaluación Gratuita →"
+  },
+  
+  "metrics": {
+    "businessModels": "Modelos de Negocio",
+    "assessments": "Evaluaciones Validadas",
+    "accuracy": "Precisión Predictiva"
+  },
+  
+  "businessModels": {
+    "title": "¿Cuál es tu Modelo de Negocio?",
+    "subscription": "Basado en Suscripción",
+    "transaction": "Basado en Transacciones",
+    "assetLight": "Activos Ligeros",
+    "assetHeavy": "Activos Pesados",
+    "dataDrivern": "Impulsado por Datos",
+    "platform": "Ecosistema de Plataforma",
+    "directConsumer": "Directo al Consumidor",
+    "b2bEnterprise": "B2B Empresarial"
+  },
+  
+  "maturityStages": {
+    "title": "Cuatro Etapas de Inmunidad Digital",
+    "fragil": {
+      "name": "FRÁGIL",
+      "description": "Alto riesgo, resiliencia mínima. Se requiere acción inmediata."
+    },
+    "robusto": {
+      "name": "ROBUSTO",
+      "description": "Defensas básicas, pero vulnerable. Quedan brechas significativas."
+    },
+    "resiliente": {
+      "name": "RESILIENTE",
+      "description": "Buena capacidad de recuperación. Puede manejar la mayoría de los ataques."
+    },
+    "adaptativo": {
+      "name": "ADAPTATIVO",
+      "description": "Excelente resiliencia. Aprende y se adapta a las amenazas."
+    }
+  },
+  
+  "assessment": {
+    "classification": {
+      "title": "Primero, identifiquemos tu modelo de negocio",
+      "subtitle": "Responde estas 2 preguntas para personalizar tu evaluación",
+      "q1": {
+        "label": "¿Cómo generas ingresos principalmente?",
+        "options": {
+          "recurring": "Suscripciones recurrentes",
+          "transaction": "Por transacción",
+          "project": "Basado en proyectos",
+          "product": "Venta de productos",
+          "data": "Monetización de datos",
+          "platform": "Comisiones de plataforma",
+          "direct": "Ventas directas",
+          "enterprise": "Contratos empresariales"
+        }
+      },
+      "q2": {
+        "label": "¿Cuál es tu dependencia operacional?",
+        "options": {
+          "digital": "Completamente digital",
+          "hybrid": "Modelo híbrido",
+          "physical": "Físico crítico"
+        }
+      }
+    },
+    
+    "questions": {
+      "title": "Evaluación de Inmunidad Digital",
+      "progress": "Pregunta {{current}} de {{total}}",
+      "impact": "Impacto en tu DII"
+    },
+    
+    "results": {
+      "title": "Tu Índice de Inmunidad Digital",
+      "score": "Puntuación",
+      "stage": "Etapa de Madurez",
+      "betterThan": "Mejor que el {{percentage}}% de empresas similares",
+      "operationalRisk": "Riesgo Operacional",
+      "estimatedDowntime": "Tiempo de inactividad estimado",
+      "revenueAtRisk": "Ingresos en riesgo"
+    }
+  },
+  
+  "report": {
+    "title": "Informe de Realidad Cibernética",
+    "executive": "Resumen Ejecutivo",
+    "strengths": "Fortalezas",
+    "vulnerabilities": "Vulnerabilidades",
+    "recommendations": "Recomendaciones",
+    "breachComparison": "Casos Similares de Brechas",
+    "downloadPDF": "Descargar PDF",
+    "shareReport": "Compartir Informe"
+  },
+  
+  "breaches": {
+    "similarCompanies": "Empresas similares que sufrieron brechas",
+    "whatHappened": "¿Qué sucedió?",
+    "impact": "Impacto",
+    "couldYouSurvive": "¿Podrías sobrevivir a esto?",
+    "financialLoss": "Pérdida financiera",
+    "downtime": "Tiempo de inactividad",
+    "dataLost": "Datos comprometidos"
+  },
+  
+  "footer": {
+    "tagline": "Construido con convicción. Probado contra la realidad. Entregado con orgullo.",
+    "privacy": "Privacidad",
+    "terms": "Términos",
+    "contact": "Contacto"
+  }
+}

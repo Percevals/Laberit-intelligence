@@ -1,0 +1,136 @@
+{
+  "common": {
+    "start": "Start",
+    "continue": "Continue",
+    "back": "Back",
+    "next": "Next",
+    "finish": "Finish",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success"
+  },
+  
+  "nav": {
+    "about": "About",
+    "intelligence": "Intelligence",
+    "startAssessment": "Start Assessment"
+  },
+  
+  "hero": {
+    "title": "Your",
+    "titleHighlight": "Digital Immunity",
+    "subtitle": "Score in 30 Minutes",
+    "description": "Based on 150+ real breach assessments. No fluff, just truth about your cyber resilience.",
+    "cta": "Begin Free Assessment →"
+  },
+  
+  "metrics": {
+    "businessModels": "Business Models",
+    "assessments": "Validated Assessments",
+    "accuracy": "Prediction Accuracy"
+  },
+  
+  "businessModels": {
+    "title": "Which Business Model Are You?",
+    "subscription": "Subscription Based",
+    "transaction": "Transaction Based",
+    "assetLight": "Asset Light",
+    "assetHeavy": "Asset Heavy",
+    "dataDrivern": "Data Driven",
+    "platform": "Platform Ecosystem",
+    "directConsumer": "Direct to Consumer",
+    "b2bEnterprise": "B2B Enterprise"
+  },
+  
+  "maturityStages": {
+    "title": "Four Stages of Digital Immunity",
+    "fragil": {
+      "name": "FRAGILE",
+      "description": "High risk, minimal resilience. Immediate action required."
+    },
+    "robusto": {
+      "name": "ROBUST",
+      "description": "Basic defenses, but vulnerable. Significant gaps remain."
+    },
+    "resiliente": {
+      "name": "RESILIENT",
+      "description": "Good recovery capability. Can handle most attacks."
+    },
+    "adaptativo": {
+      "name": "ADAPTIVE",
+      "description": "Excellent resilience. Learns and adapts from threats."
+    }
+  },
+  
+  "assessment": {
+    "classification": {
+      "title": "First, let's identify your business model",
+      "subtitle": "Answer these 2 questions to personalize your assessment",
+      "q1": {
+        "label": "How do you primarily generate revenue?",
+        "options": {
+          "recurring": "Recurring subscriptions",
+          "transaction": "Per transaction",
+          "project": "Project based",
+          "product": "Product sales",
+          "data": "Data monetization",
+          "platform": "Platform fees",
+          "direct": "Direct sales",
+          "enterprise": "Enterprise contracts"
+        }
+      },
+      "q2": {
+        "label": "What's your operational dependency?",
+        "options": {
+          "digital": "Fully digital",
+          "hybrid": "Hybrid model",
+          "physical": "Physical critical"
+        }
+      }
+    },
+    
+    "questions": {
+      "title": "Digital Immunity Assessment",
+      "progress": "Question {{current}} of {{total}}",
+      "impact": "Impact on your DII"
+    },
+    
+    "results": {
+      "title": "Your Digital Immunity Index",
+      "score": "Score",
+      "stage": "Maturity Stage",
+      "betterThan": "Better than {{percentage}}% of similar companies",
+      "operationalRisk": "Operational Risk",
+      "estimatedDowntime": "Estimated downtime",
+      "revenueAtRisk": "Revenue at risk"
+    }
+  },
+  
+  "report": {
+    "title": "Cyber Reality Report",
+    "executive": "Executive Summary",
+    "strengths": "Strengths",
+    "vulnerabilities": "Vulnerabilities",
+    "recommendations": "Recommendations",
+    "breachComparison": "Similar Breach Cases",
+    "downloadPDF": "Download PDF",
+    "shareReport": "Share Report"
+  },
+  
+  "breaches": {
+    "similarCompanies": "Similar companies that suffered breaches",
+    "whatHappened": "What happened?",
+    "impact": "Impact",
+    "couldYouSurvive": "Could you survive this?",
+    "financialLoss": "Financial loss",
+    "downtime": "Downtime",
+    "dataLost": "Data compromised"
+  },
+  
+  "footer": {
+    "tagline": "Built with conviction. Tested against reality. Ship with pride.",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "contact": "Contact"
+  }
+}
