@@ -16,7 +16,9 @@ export function QuestionsPage() {
             {t('assessment.questions.title')}
           </h2>
           <p className="text-xl text-dark-text-secondary mb-8">
-            Modelo de negocio: <span className="text-primary-600 font-bold">{businessModel}</span>
+            Modelo de negocio: <span className="text-primary-600 font-bold">
+              {businessModel ? t(`businessModels.names.${businessModel}`) : ''}
+            </span>
           </p>
           <p className="text-dark-text-secondary mb-8">
             [Próximamente: Flujo completo de evaluación con preguntas dinámicas]

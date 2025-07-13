@@ -19,6 +19,16 @@ export function HomePage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   
+  const getStageColor = (stage: string) => {
+    const colors: Record<string, string> = {
+      fragil: '#DC2626',
+      robusto: '#F59E0B',
+      resiliente: '#10B981',
+      adaptativo: '#3B82F6',
+    };
+    return colors[stage] || '#666';
+  };
+  
   const businessModels = [
     { key: 'subscription', color: 'text-primary-600' },
     { key: 'transaction', color: 'text-primary-500' },
@@ -116,9 +126,10 @@ export function HomePage() {
             {businessModels.map((model, i) => (
               <div
                 key={i}
+                onClick={() => navigate('/assessment/classify')}
                 className={cn(
-                  'card-interactive text-center',
-                  'hover:border-primary-600/50'
+                  'card-interactive text-center cursor-pointer',
+                  'hover:border-primary-600/50 hover:scale-105 transition-transform'
                 )}
               >
                 <div className={cn('mb-2 text-2xl font-bold', model.color)}>
@@ -140,8 +151,8 @@ export function HomePage() {
           
           <div className="grid gap-6 md:grid-cols-4">
             {maturityStages.map((stage) => (
-              <div key={stage} className={`card border-${stage}/30`}>
-                <h4 className={`mb-2 text-xl font-bold text-${stage}`}>
+              <div key={stage} className="card" style={{ borderColor: `${getStageColor(stage)}30` }}>
+                <h4 className="mb-2 text-xl font-bold" style={{ color: getStageColor(stage) }}>
                   {t(`maturityStages.${stage}.name`)}
                 </h4>
                 <p className="text-sm text-dark-text-secondary">

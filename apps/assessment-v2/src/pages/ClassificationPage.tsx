@@ -14,20 +14,20 @@ export function ClassificationPage() {
   const [answers, setAnswers] = useState<Partial<ClassificationAnswers>>({});
   
   const revenueOptions = [
-    { value: 'recurring_subscriptions', icon: '🔄' },
-    { value: 'per_transaction', icon: '💳' },
-    { value: 'project_based', icon: '📋' },
-    { value: 'product_sales', icon: '📦' },
-    { value: 'data_monetization', icon: '📊' },
-    { value: 'platform_fees', icon: '🏛️' },
-    { value: 'direct_sales', icon: '🛒' },
-    { value: 'enterprise_contracts', icon: '🏢' },
+    { value: 'recurring_subscriptions', icon: '🔄', translationKey: 'recurring' },
+    { value: 'per_transaction', icon: '💳', translationKey: 'transaction' },
+    { value: 'project_based', icon: '📋', translationKey: 'project' },
+    { value: 'product_sales', icon: '📦', translationKey: 'product' },
+    { value: 'data_monetization', icon: '📊', translationKey: 'data' },
+    { value: 'platform_fees', icon: '🏛️', translationKey: 'platform' },
+    { value: 'direct_sales', icon: '🛒', translationKey: 'direct' },
+    { value: 'enterprise_contracts', icon: '🏢', translationKey: 'enterprise' },
   ] as const;
   
   const dependencyOptions = [
-    { value: 'fully_digital', icon: <Cpu className="w-6 h-6" />, color: 'text-primary-500' },
-    { value: 'hybrid_model', icon: '🔀', color: 'text-primary-600' },
-    { value: 'physical_critical', icon: <Building2 className="w-6 h-6" />, color: 'text-primary-700' },
+    { value: 'fully_digital', icon: <Cpu className="w-6 h-6" />, color: 'text-primary-500', translationKey: 'digital' },
+    { value: 'hybrid_model', icon: '🔀', color: 'text-primary-600', translationKey: 'hybrid' },
+    { value: 'physical_critical', icon: <Building2 className="w-6 h-6" />, color: 'text-primary-700', translationKey: 'physical' },
   ] as const;
   
   const handleRevenueSelect = (value: ClassificationAnswers['revenueModel']) => {
@@ -119,7 +119,7 @@ export function ClassificationPage() {
                     <div className="flex items-center gap-4">
                       <span className="text-3xl">{option.icon}</span>
                       <span className="text-lg">
-                        {t(`assessment.classification.q1.options.${option.value.split('_')[0]}`)}
+                        {t(`assessment.classification.q1.options.${option.translationKey}`)}
                       </span>
                     </div>
                   </button>
@@ -164,7 +164,7 @@ export function ClassificationPage() {
                         {option.icon}
                       </div>
                       <span className="text-lg">
-                        {t(`assessment.classification.q2.options.${option.value.split('_')[0]}`)}
+                        {t(`assessment.classification.q2.options.${option.translationKey}`)}
                       </span>
                       <ArrowRight className="w-5 h-5 text-dark-text-secondary group-hover:text-primary-600 transition-colors" />
                     </div>

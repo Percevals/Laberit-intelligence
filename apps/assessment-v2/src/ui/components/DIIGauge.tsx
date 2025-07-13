@@ -66,8 +66,8 @@ export function DIIGauge({
         {/* Background track */}
         <path
           d={`
-            M ${config.strokeWidth / 2} ${center}
-            A ${radius} ${radius} 0 0 1 ${config.width - config.strokeWidth / 2} ${center}
+            M ${config.width - config.strokeWidth / 2} ${center}
+            A ${radius} ${radius} 0 0 0 ${config.strokeWidth / 2} ${center}
           `}
           fill="none"
           stroke="currentColor"
@@ -78,8 +78,8 @@ export function DIIGauge({
         {/* Animated progress arc */}
         <motion.path
           d={`
-            M ${config.strokeWidth / 2} ${center}
-            A ${radius} ${radius} 0 0 1 ${config.width - config.strokeWidth / 2} ${center}
+            M ${config.width - config.strokeWidth / 2} ${center}
+            A ${radius} ${radius} 0 0 0 ${config.strokeWidth / 2} ${center}
           `}
           fill="none"
           stroke={stageColors[stage]}
@@ -95,8 +95,6 @@ export function DIIGauge({
           }}
           style={{
             strokeDasharray: circumference,
-            transform: 'rotate(180deg)',
-            transformOrigin: 'center',
           }}
         />
 

@@ -39,7 +39,17 @@
     "dataDrivern": "Impulsado por Datos",
     "platform": "Ecosistema de Plataforma",
     "directConsumer": "Directo al Consumidor",
-    "b2bEnterprise": "B2B Empresarial"
+    "b2bEnterprise": "B2B Empresarial",
+    "names": {
+      "SUBSCRIPTION_BASED": "Basado en Suscripción",
+      "TRANSACTION_BASED": "Basado en Transacciones",
+      "ASSET_LIGHT": "Activos Ligeros",
+      "ASSET_HEAVY": "Activos Pesados",
+      "DATA_DRIVEN": "Impulsado por Datos",
+      "PLATFORM_ECOSYSTEM": "Ecosistema de Plataforma",
+      "DIRECT_TO_CONSUMER": "Directo al Consumidor",
+      "B2B_ENTERPRISE": "B2B Empresarial"
+    }
   },
   
   "maturityStages": {
