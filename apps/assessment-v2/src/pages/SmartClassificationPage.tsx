@@ -13,8 +13,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import { useAssessmentStore } from '@/store/assessment-store';
-import { BusinessModelClassifier } from '@core/business-model/classifier';
-import type { ClassificationAnswers, BusinessModel } from '@core/types/business-model.types';
+import type { BusinessModel } from '@core/types/business-model.types';
 import { cn } from '@shared/utils/cn';
 
 export function SmartClassificationPage() {
@@ -24,9 +23,7 @@ export function SmartClassificationPage() {
     companySearch, 
     classification,
     setBusinessModel,
-    setClassificationAnswer,
-    updateProgress,
-    isCompanyInfoComplete
+    updateProgress
   } = useAssessmentStore();
 
   const [suggestedModel, setSuggestedModel] = useState<{
