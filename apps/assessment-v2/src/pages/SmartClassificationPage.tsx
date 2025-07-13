@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
-  ArrowRight, 
   Building2, 
   Users, 
   DollarSign, 
@@ -113,21 +112,8 @@ export function SmartClassificationPage() {
     }
   };
 
-  const handleContinue = () => {
-    if (classification.businessModel) {
-      updateProgress('questions');
-      navigate('/assessment/questions');
-    } else {
-      // Show business model selection
-      navigate('/assessment/classify');
-    }
-  };
 
-  // If all fields are filled, skip to business model
-  if (fieldsToShow.length === 0 && !classification.businessModel) {
-    navigate('/assessment/classify');
-    return null;
-  }
+  // Don't auto-navigate - let user complete the flow here
 
   return (
     <div className="min-h-screen bg-dark-bg flex items-center justify-center p-4">
@@ -166,7 +152,7 @@ export function SmartClassificationPage() {
           {/* Classification Fields */}
           <div className="space-y-6">
             {/* Revenue Field */}
-            {(fieldsToShow.includes('revenue') || classification.revenue) && (
+            {fieldsToShow.includes('revenue') && (
               <ClassificationField
                 icon={<DollarSign className="w-5 h-5" />}
                 label={t('assessment.classification.revenue', 'Ingresos anuales')}
@@ -179,7 +165,7 @@ export function SmartClassificationPage() {
             )}
 
             {/* Employees Field */}
-            {(fieldsToShow.includes('employees') || classification.employees) && (
+            {fieldsToShow.includes('employees') && (
               <ClassificationField
                 icon={<Users className="w-5 h-5" />}
                 label={t('assessment.classification.employees', 'Número de empleados')}
@@ -192,7 +178,7 @@ export function SmartClassificationPage() {
             )}
 
             {/* Geography Field */}
-            {(fieldsToShow.includes('geography') || classification.geography) && (
+            {fieldsToShow.includes('geography') && (
               <ClassificationField
                 icon={<Globe className="w-5 h-5" />}
                 label={t('assessment.classification.geography', 'Ubicación principal')}
@@ -205,7 +191,7 @@ export function SmartClassificationPage() {
             )}
 
             {/* Industry Field */}
-            {(fieldsToShow.includes('industry') || classification.industry) && (
+            {fieldsToShow.includes('industry') && (
               <ClassificationField
                 icon={<Building2 className="w-5 h-5" />}
                 label={t('assessment.classification.industry', 'Industria')}
@@ -217,8 +203,8 @@ export function SmartClassificationPage() {
               />
             )}
 
-            {/* Critical Infrastructure */}
-            {fieldsToShow.includes('criticalInfra') && (
+            {/* Critical Infrastructure - Always show if not answered */}
+            {classification.criticalInfra === null && (
               <div className="card p-6">
                 <div className="flex items-start gap-3 mb-4">
                   <Shield className="w-5 h-5 text-primary-600 mt-0.5" />
@@ -283,14 +269,20 @@ export function SmartClassificationPage() {
                   <button
                     onClick={() => {
                       setBusinessModel(suggestedModel.model);
-                      handleContinue();
+                      updateProgress('questions');
+                      navigate('/assessment/questions');
                     }}
                     className="btn-primary flex-1"
                   >
                     {t('assessment.classification.acceptSuggestion', 'Aceptar sugerencia')}
                   </button>
                   <button
-                    onClick={() => navigate('/assessment/classify')}
+                    onClick={() => {
+                      // For now, use the suggested model but let user know we'll add selection later
+                      setBusinessModel(suggestedModel.model);
+                      updateProgress('questions');
+                      navigate('/assessment/questions');
+                    }}
                     className="btn-secondary"
                   >
                     {t('assessment.classification.chooseDifferent', 'Elegir otro')}
@@ -300,18 +292,6 @@ export function SmartClassificationPage() {
             )}
           </div>
 
-          {/* Continue Button - only show when all fields are filled and no model suggestion yet */}
-          {!suggestedModel && fieldsToShow.length === 0 && (
-            <div className="mt-8 flex justify-center">
-              <button
-                onClick={handleContinue}
-                className="btn-primary flex items-center gap-2"
-              >
-                {t('common.continue', 'Continuar')}
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
-          )}
         </motion.div>
       </div>
     </div>
