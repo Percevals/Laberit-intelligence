@@ -40,10 +40,10 @@ export function DIIGauge({
 
   // Stage colors
   const stageColors = {
-    FRAGIL: 'stroke-fragil',
-    ROBUSTO: 'stroke-robusto',
-    RESILIENTE: 'stroke-resiliente',
-    ADAPTATIVO: 'stroke-adaptativo',
+    FRAGIL: '#DC2626',      // Red
+    ROBUSTO: '#F59E0B',     // Amber
+    RESILIENTE: '#10B981',  // Green
+    ADAPTATIVO: '#3B82F6',  // Blue
   };
 
   const stageGlows = {
@@ -82,10 +82,10 @@ export function DIIGauge({
             A ${radius} ${radius} 0 0 1 ${config.width - config.strokeWidth / 2} ${center}
           `}
           fill="none"
-          stroke="currentColor"
+          stroke={stageColors[stage]}
           strokeWidth={config.strokeWidth}
           strokeLinecap="round"
-          className={cn(stageColors[stage], stageGlows[stage])}
+          className={stageGlows[stage]}
           initial={animated ? { strokeDashoffset: circumference } : {}}
           animate={{ strokeDashoffset }}
           transition={{
@@ -105,10 +105,10 @@ export function DIIGauge({
           x={center}
           y={center - 10}
           textAnchor="middle"
+          fill={stageColors[stage]}
           className={cn(
-            'fill-current font-bold tabular-nums',
-            config.fontSize,
-            stageColors[stage].replace('stroke-', 'text-')
+            'font-bold tabular-nums',
+            config.fontSize
           )}
         >
           {animated ? (

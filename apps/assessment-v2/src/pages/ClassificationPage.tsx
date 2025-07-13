@@ -119,7 +119,7 @@ export function ClassificationPage() {
                     <div className="flex items-center gap-4">
                       <span className="text-3xl">{option.icon}</span>
                       <span className="text-lg">
-                        {t(`assessment.classification.q1.options.${option.value.replace('_', '')}`)}
+                        {t(`assessment.classification.q1.options.${option.value.split('_')[0]}`)}
                       </span>
                     </div>
                   </button>
@@ -164,7 +164,7 @@ export function ClassificationPage() {
                         {option.icon}
                       </div>
                       <span className="text-lg">
-                        {t(`assessment.classification.q2.options.${option.value.replace('_', '')}`)}
+                        {t(`assessment.classification.q2.options.${option.value.split('_')[0]}`)}
                       </span>
                       <ArrowRight className="w-5 h-5 text-dark-text-secondary group-hover:text-primary-600 transition-colors" />
                     </div>
