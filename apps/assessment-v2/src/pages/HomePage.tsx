@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { cn } from '@shared/utils/cn';
+import { useAssessmentStore } from '@/store/assessment-store';
 
 function LanguageSwitcher() {
   const { i18n } = useTranslation();
@@ -18,6 +19,7 @@ function LanguageSwitcher() {
 export function HomePage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { reset } = useAssessmentStore();
   
   const getStageColor = (stage: string) => {
     const colors: Record<string, string> = {
@@ -43,6 +45,7 @@ export function HomePage() {
   const maturityStages = ['fragil', 'robusto', 'resiliente', 'adaptativo'];
   
   const startAssessment = () => {
+    reset(); // Clear any previous assessment data
     navigate('/assessment/company');
   };
   
@@ -126,7 +129,10 @@ export function HomePage() {
             {businessModels.map((model, i) => (
               <div
                 key={i}
-                onClick={() => navigate('/assessment/company')}
+                onClick={() => {
+                  reset();
+                  navigate('/assessment/company');
+                }}
                 className={cn(
                   'card-interactive text-center cursor-pointer',
                   'hover:border-primary-600/50 hover:scale-105 transition-transform'
