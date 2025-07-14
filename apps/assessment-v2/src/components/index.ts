@@ -5,3 +5,7 @@ export { AIHealthIndicator } from './AIHealthIndicator';
 export { ImmunityTimelineNavigation } from './ImmunityTimelineNavigation';
 export { ImmunityTimelineDemo } from './ImmunityTimelineDemo';
 export type { DIIDimension, ImmunityDimensionState } from './ImmunityTimelineNavigation';
+
+// DII State Management Components
+export { DIIProgressiveDemo } from './DIIProgressiveDemo';
+export { DIIWhatIfScenarios } from './DIIWhatIfScenarios';
