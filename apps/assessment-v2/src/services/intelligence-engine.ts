@@ -345,7 +345,12 @@ export class IntelligenceEngine {
   /**
    * Analyze relevant threat patterns
    */
-  private analyzeThreatLandscape() {
+  private analyzeThreatLandscape(): {
+    relevantPatterns: ThreatPattern[];
+    emergingThreats: string[];
+    industryTrends: string[];
+    regionalFactors: RegionalRisk;
+  } {
     const relevantPatterns = THREAT_PATTERNS.filter(pattern => {
       const industryMatch = pattern.industries.includes(this.context.classification.industry);
       const businessModelMatch = pattern.businessModels.includes(
@@ -358,7 +363,7 @@ export class IntelligenceEngine {
     });
     
     const region = this.context.classification.region || 'LATAM';
-    const regionalRisk = REGIONAL_RISKS[region] || REGIONAL_RISKS.LATAM;
+    const regionalRisk: RegionalRisk = REGIONAL_RISKS[region] ?? REGIONAL_RISKS.LATAM;
     
     // Identify emerging threats based on weak dimensions
     const emergingThreats = this.identifyEmergingThreats();
