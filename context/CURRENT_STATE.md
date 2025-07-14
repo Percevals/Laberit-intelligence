@@ -1,5 +1,5 @@
 # DII Assessment Platform - Current State
-*Last Updated: 2025-01-14*
+*Last Updated: 2025-01-14 (Evening)*
 
 ## 🚀 What's Implemented
 
@@ -9,11 +9,13 @@
   - Manual data entry fallback
   - Company confirmation with edit capability
   
-- **Business Model Classification** ✓
-  - 8 business models defined with detailed profiles
-  - 2-question classification system (revenue model + operational dependency)
+- **DII-Specific Business Model Classification** ✓
+  - 8 DII-specific business models (COMERCIO_HIBRIDO, SOFTWARE_CRITICO, etc.)
+  - Industry-based classification shortcuts (airlines → ECOSISTEMA_DIGITAL)
+  - 2-question classification system with cyber risk context
   - Smart classification using industry heuristics
   - Confidence scoring for classifications
+  - Backwards compatibility with legacy models
   
 - **8x5 Pain Discovery Matrix** ✓
   - Complete scenario matrix (8 models × 5 dimensions)
@@ -31,6 +33,14 @@
   - Business model-specific normalization
   - Percentile calculation within model cohort
   - Maturity stage determination
+
+- **Modular Dimension Conversion System** ✓
+  - New `/packages/@dii/core/converters/` architecture
+  - Individual converters for each dimension (TRD, AER, HFP, BRI, RRG)
+  - Business model-specific adjustments per dimension
+  - Validation system with proper bounds checking
+  - TypeScript-first with comprehensive test suite
+  - Factory pattern for easy integration
 
 ### Assessment Flow
 1. Company Search → 2. Confirmation → 3. Business Model Reveal → 4. Scenario Questions (TRD only) → 5. Results
@@ -100,7 +110,21 @@ Example: "recurring_subscriptions" + "purely_digital" → SUBSCRIPTION_BASED (95
 
 ## 🔄 Recent Changes (Last 7 Days)
 
-### 2025-01-14
+### 2025-01-14 (Evening)
+- **Modular Dimension Conversion System**
+  - Created `/packages/@dii/core/converters/` package
+  - Implemented 5 specialized converters (TRD, AER, HFP, BRI, RRG)
+  - Added business model adjustments per dimension
+  - Comprehensive test suite with real-world scenarios
+  - Factory pattern and batch conversion utilities
+  - TypeScript-first architecture with strict typing
+
+- **Translation System Updates**
+  - Added DII business model names to i18n files
+  - Fixed UI showing "businessModels.names.SOFTWARE_CRITICO" keys
+  - Complete Spanish and English translations for all 8 DII models
+
+### 2025-01-14 (Morning)
 - **Measurement Questions Update (v2.0.0)**
   - Replaced satisfaction questions with quantifiable metrics
   - Added response_options with specific values
@@ -111,6 +135,7 @@ Example: "recurring_subscriptions" + "purely_digital" → SUBSCRIPTION_BASED (95
   - Fixed ResponseOption interface structure
   - Added proper type assertions for JSON data
   - Made premium_questions optional
+  - Fixed undefined return value in dii-classifier.ts
 
 - **DII-Specific Business Models**
   - Replaced generic models with 8 DII-specific models
@@ -123,6 +148,9 @@ Example: "recurring_subscriptions" + "purely_digital" → SUBSCRIPTION_BASED (95
 - Responses directly map to operational metrics
 - Business model context affects question wording
 - DII scores based on actual metrics, not generic scales
+- Business models now cyber risk-specific (e.g., airlines → digital ecosystems)
+- Modular conversion system allows independent dimension updates
+- UI properly displays business model names instead of translation keys
 
 ## ⚠️ Known Issues
 
@@ -140,10 +168,12 @@ Example: "recurring_subscriptions" + "purely_digital" → SUBSCRIPTION_BASED (95
 ## 📁 Key File Locations
 
 ### Core Logic
-- Business Model Classifier: `/src/core/business-model/classifier.ts`
+- DII Business Model Classifier: `/src/core/business-model/dii-classifier.ts`
+- Legacy Business Model Classifier: `/src/core/business-model/classifier.ts`
 - DII Calculator: `/src/core/dii-engine/calculator.ts`
 - Response Interpreter: `/src/services/assessment/response-interpreter.ts`
 - Assessment Calculator: `/src/services/assessment/assessment-calculator.ts`
+- **NEW** Dimension Converters: `/packages/@dii/core/converters/dimension-converters.ts`
 
 ### Data
 - Scenario Matrix: `/data/business-model-scenarios.json` (v2.0.0)

@@ -1,5 +1,5 @@
 # DII Platform - Business Logic Documentation
-*Last Updated: 2025-01-14*
+*Last Updated: 2025-01-14 (Evening)*
 
 ## 🎯 Business Model Detection (Updated: DII-Specific)
 
@@ -18,7 +18,7 @@
 Company Data → Classification Questions → DII Business Model → Cyber Risk Assessment
 ```
 
-### Classification Logic (`/src/core/business-model/classifier.ts`)
+### Classification Logic (`/src/core/business-model/dii-classifier.ts`)
 
 #### Input: Two Key Questions
 
@@ -37,30 +37,54 @@ Company Data → Classification Questions → DII Business Model → Cyber Risk 
 - `hybrid` - Mix of digital and physical
 - `primarily_physical` - Mostly physical operations
 
-#### Decision Matrix
+#### Decision Matrix (DII-Specific Models)
 
 ```typescript
-// Simplified decision rules:
+// DII-specific decision rules:
 if (revenueModel === 'recurring_subscriptions') {
-  if (operationalDependency === 'purely_digital') {
-    return 'SUBSCRIPTION_BASED' // 95% confidence
+  if (operationalDependency === 'fully_digital') {
+    return 'SOFTWARE_CRITICO' // 95% confidence - SaaS platform
+  } else if (operationalDependency === 'hybrid_model') {
+    return 'SOFTWARE_CRITICO' // 80% confidence - some physical touchpoints
   } else {
-    return 'SUBSCRIPTION_BASED' // 70% confidence
+    return 'INFRAESTRUCTURA_HEREDADA' // 75% confidence - subscription on legacy
   }
 }
 
 if (revenueModel === 'per_transaction') {
-  return 'TRANSACTION_BASED' // 90% confidence
+  return 'SERVICIOS_FINANCIEROS' // 90% confidence - payment processing
 }
 
-if (revenueModel === 'project_based') {
-  if (operationalDependency === 'primarily_physical') {
-    return 'B2B_ENTERPRISE' // Alternative suggestion
-  }
-  return 'ASSET_LIGHT' // 85% confidence
+if (revenueModel === 'platform_fees') {
+  return 'ECOSISTEMA_DIGITAL' // 95% confidence - digital ecosystem
 }
 
-// ... continues for all 8 combinations
+if (revenueModel === 'data_monetization') {
+  return 'SERVICIOS_DATOS' // 95% confidence - data-centric business
+}
+
+// ... continues for all DII model combinations
+```
+
+#### Industry-Based Shortcuts (New Feature)
+
+```typescript
+// Smart classification bypasses questions for obvious cases:
+if (industry.includes('airline') || company.includes('aero')) {
+  return 'ECOSISTEMA_DIGITAL' // Airlines = booking platforms
+}
+
+if (industry.includes('bank') || company.includes('banco')) {
+  return 'SERVICIOS_FINANCIEROS' // Banking = financial services
+}
+
+if (industry.includes('retail') || company.includes('walmart')) {
+  return 'COMERCIO_HIBRIDO' // Retail = hybrid commerce
+}
+
+if (industry.includes('software') || industry.includes('saas')) {
+  return 'SOFTWARE_CRITICO' // Software = critical software
+}
 ```
 
 ### Smart Classification Enhancement
@@ -76,6 +100,91 @@ if (industry.includes('Manufacturing')) return 'ASSET_HEAVY'
 if (industry.includes('Analytics')) return 'DATA_DRIVEN'
 if (industry.includes('Marketplace')) return 'PLATFORM_ECOSYSTEM'
 if (industry.includes('Retail')) return 'DIRECT_TO_CONSUMER'
+```
+
+## 🔄 Modular Dimension Conversion System (NEW)
+
+### Architecture (`/packages/@dii/core/converters/`)
+
+The new modular system replaces hardcoded response interpretation with specialized converters:
+
+```typescript
+// Old approach (embedded in response-interpreter.ts)
+if (dimension === 'TRD') {
+  if (hours <= 2) return 1.5;
+  // ... hardcoded logic
+}
+
+// New approach (modular converters)
+const trdConverter = DimensionConverterFactory.get('TRD');
+const score = trdConverter.convertToScore(hours, businessModelId);
+```
+
+### Conversion Logic Per Dimension
+
+#### TRD (Time to Revenue Degradation)
+- **Input**: Hours until 10% revenue loss
+- **Scale**: Lower hours = Lower score (worse resilience)
+- **Table**: <2h→2.0, 2-6h→4.0, 6-24h→6.0, 24-72h→8.0, >72h→9.5
+
+#### AER (Attack Economics Ratio)  
+- **Input**: Dollar value extractable vs attack cost
+- **Scale**: Higher value = Lower score (more attractive target)
+- **Table**: <$10K→9.0, $10K-50K→7.0, $50K-200K→5.0, $200K-1M→3.0, >$1M→1.5
+
+#### HFP (Human Failure Probability)
+- **Input**: Percentage who fail phishing tests
+- **Scale**: Higher % = Lower score (worse human factor)  
+- **Table**: 0-5%→8.5, 5-15%→7.0, 15-30%→5.0, 30-50%→3.0, >50%→1.5
+
+#### BRI (Blast Radius Index)
+- **Input**: % systems accessible from initial compromise
+- **Scale**: Higher % = Lower score (worse isolation)
+- **Table**: 0-20%→8.0, 20-40%→6.5, 40-60%→4.5, 60-80%→2.5, 80-100%→1.0
+
+#### RRG (Recovery Reality Gap)
+- **Input**: Actual vs planned recovery time multiplier
+- **Scale**: Higher gap = Lower score (worse recovery)
+- **Table**: 1x→9.0, 1.5-2x→7.0, 2-3x→5.0, 3-5x→3.0, >5x→1.5
+
+### Business Model Adjustments (Per Dimension)
+
+```typescript
+const modelAdjustments = {
+  'COMERCIO_HIBRIDO': {
+    TRD: (score) => score * 1.2, // Physical backup channels
+    BRI: (score) => score * 1.1, // Natural channel isolation
+    HFP: (score) => score * 0.9  // Multiple touchpoints increase risk
+  },
+  'SOFTWARE_CRITICO': {
+    TRD: (score) => score * 0.8, // Zero downtime tolerance
+    HFP: (score) => score * 1.1, // Technical staff, better training
+    BRI: (score) => score * 0.9, // Interconnected systems
+    RRG: (score) => score * 1.1  // Better automation
+  },
+  'SERVICIOS_FINANCIEROS': {
+    TRD: (score) => score * 0.7, // Critical real-time operations
+    AER: (score) => score * 0.7, // Prime financial target
+    RRG: (score) => score * 1.2  // Regulatory DR requirements
+  }
+  // ... all 8 DII models have specific adjustments
+}
+```
+
+### Usage Integration
+
+```typescript
+// Batch conversion for full assessment
+const responses = {
+  TRD: 6,        // 6 hours
+  AER: 100000,   // $100K value
+  HFP: 15,       // 15% failure rate
+  BRI: 30,       // 30% blast radius
+  RRG: 2.0       // 2x recovery gap
+};
+
+const results = convertMultipleDimensions(responses, 2); // SOFTWARE_CRITICO
+// Returns normalized 1-10 scores ready for DII formula
 ```
 
 ## 📊 DII Calculation Flow
