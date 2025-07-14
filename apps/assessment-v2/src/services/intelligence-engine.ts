@@ -276,6 +276,72 @@ const REGIONAL_RISKS: Record<string, RegionalRisk> = {
       'Critical infrastructure targeting',
       'Supply chain compromises'
     ]
+  },
+  NA: {
+    region: 'NA',
+    factors: {
+      regulatoryMaturity: 9,
+      cybercrimePrevalnce: 7,
+      infrastructureResilience: 8,
+      skillsAvailability: 8,
+      economicStability: 8
+    },
+    specificThreats: [
+      'Ransomware targeting critical infrastructure',
+      'Nation-state APT groups',
+      'Supply chain attacks',
+      'Insider threats'
+    ],
+    emergingRisks: [
+      'AI-powered attacks',
+      'IoT device compromises',
+      'Cloud service attacks',
+      'Zero-day exploits'
+    ]
+  },
+  EMEA: {
+    region: 'EMEA',
+    factors: {
+      regulatoryMaturity: 9,
+      cybercrimePrevalnce: 6,
+      infrastructureResilience: 7,
+      skillsAvailability: 7,
+      economicStability: 7
+    },
+    specificThreats: [
+      'GDPR-related data breaches',
+      'Cross-border cyber attacks',
+      'Industrial espionage',
+      'Critical infrastructure targeting'
+    ],
+    emergingRisks: [
+      'Geopolitical cyber conflicts',
+      'Supply chain vulnerabilities',
+      'Cloud sovereignty issues',
+      'Quantum computing threats'
+    ]
+  },
+  APAC: {
+    region: 'APAC',
+    factors: {
+      regulatoryMaturity: 7,
+      cybercrimePrevalnce: 8,
+      infrastructureResilience: 6,
+      skillsAvailability: 6,
+      economicStability: 7
+    },
+    specificThreats: [
+      'Advanced persistent threats',
+      'Mobile payment fraud',
+      'Cryptocurrency theft',
+      'Supply chain attacks'
+    ],
+    emergingRisks: [
+      'AI-powered social engineering',
+      '5G infrastructure vulnerabilities',
+      'Cross-border data regulations',
+      'Emerging technology risks'
+    ]
   }
 };
 
@@ -363,7 +429,10 @@ export class IntelligenceEngine {
     });
     
     const region = this.context.classification.region || 'LATAM';
-    const regionalRisk: RegionalRisk = REGIONAL_RISKS[region] ?? REGIONAL_RISKS.LATAM;
+    // Ensure we always have a valid RegionalRisk, defaulting to LATAM if region not found
+    const regionalRisk: RegionalRisk = (region in REGIONAL_RISKS) 
+      ? REGIONAL_RISKS[region] 
+      : REGIONAL_RISKS.LATAM;
     
     // Identify emerging threats based on weak dimensions
     const emergingThreats = this.identifyEmergingThreats();
