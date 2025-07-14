@@ -117,6 +117,10 @@
     "minutesRemaining": "minutos restantes",
     "continue": "Continuar evaluación",
     "viewCompleteProfile": "Ver perfil completo",
+    "adaptiveTitle": "Evaluación Adaptativa de Inmunidad",
+    "immunityProfileProgress": "Progreso del Perfil de Inmunidad",
+    "of": "de",
+    "dimensions": "dimensiones",
     "responses": {
       "veryPoor": "Muy deficiente",
       "poor": "Deficiente",

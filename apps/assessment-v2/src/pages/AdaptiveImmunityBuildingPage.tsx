@@ -21,7 +21,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAssessmentStore } from '@/store/assessment-store';
 import { useDIIDimensionsStore } from '@/store/dii-dimensions-store';
-import { ProgressIndicator } from '@/components/ProgressIndicator';
+// Removed ProgressIndicator - using only InsightProgressBar for immunity profile
 import { 
   ImmunityTimelineNavigation,
   InsightRevelationCard,
@@ -468,12 +468,13 @@ export function AdaptiveImmunityBuildingPage() {
     }
   });
 
-  const steps = [
-    { label: t('steps.search', 'Búsqueda') },
-    { label: t('steps.confirm', 'Confirmar') },
-    { label: t('steps.discover', 'Descubrir') },
-    { label: t('steps.evaluate', 'Evaluar') }
-  ];
+  // Steps removed - using only immunity profile progress
+  // const steps = [
+  //   { label: t('steps.search', 'Búsqueda') },
+  //   { label: t('steps.confirm', 'Confirmar') },
+  //   { label: t('steps.discover', 'Descubrir') },
+  //   { label: t('steps.evaluate', 'Evaluar') }
+  // ];
 
   const hasCurrentResponse = currentQuestion && getScenarioResponse(currentQuestion.dimension);
 
@@ -533,7 +534,7 @@ export function AdaptiveImmunityBuildingPage() {
 
   return (
     <div className="min-h-screen bg-dark-bg flex flex-col">
-      <ProgressIndicator currentStep={4} steps={steps} />
+      {/* Top progress bar removed - using immunity profile progress instead */}
       
       <div className="flex-1 container mx-auto px-4 py-8">
         {/* Header */}
@@ -542,7 +543,7 @@ export function AdaptiveImmunityBuildingPage() {
             {t('assessment.adaptiveTitle', 'Adaptive Immunity Assessment')}
           </h1>
           <p className="text-dark-text-secondary">
-            {companySearch.selectedCompany?.name} • {classification.businessModel}
+            {companySearch.selectedCompany?.name} • {classification.businessModel && t(`businessModels.names.${classification.businessModel}`)}
           </p>
         </div>
 

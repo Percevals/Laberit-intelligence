@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { 
   TrendingUp, 
   TrendingDown, 
@@ -163,6 +164,7 @@ interface InsightProgressBarProps {
 }
 
 export function InsightProgressBar({ current, total, message }: InsightProgressBarProps) {
+  const { t } = useTranslation();
   const percentage = (current / total) * 100;
   
   return (
@@ -173,10 +175,10 @@ export function InsightProgressBar({ current, total, message }: InsightProgressB
     >
       <div className="flex items-center justify-between mb-2">
         <span className="text-sm font-medium text-dark-text">
-          Immunity Profile Progress
+          {t('assessment.immunityProfileProgress', 'Progreso del Perfil de Inmunidad')}
         </span>
         <span className="text-sm text-dark-text-secondary">
-          {current} of {total} dimensions
+          {current} {t('assessment.of', 'de')} {total} {t('assessment.dimensions', 'dimensiones')}
         </span>
       </div>
       

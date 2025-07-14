@@ -112,6 +112,10 @@
     "minutesRemaining": "minutes remaining",
     "continue": "Continue Assessment",
     "viewCompleteProfile": "View Complete Profile",
+    "adaptiveTitle": "Adaptive Immunity Assessment",
+    "immunityProfileProgress": "Immunity Profile Progress",
+    "of": "of",
+    "dimensions": "dimensions",
     "classification": {
       "title": "First, let's identify your business model",
       "subtitle": "Answer these 2 questions to personalize your assessment",
