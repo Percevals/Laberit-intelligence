@@ -228,45 +228,46 @@ export function ImmunityTimelineDemo() {
     }));
   };
 
-  const handleResponseSelect = (dimension: DIIDimension, value: number) => {
-    const option = responseOptions[dimension].find(opt => opt.value === value);
-    if (!option) return;
+  // Removed handleResponseSelect as questions are no longer shown in timeline
+  // const handleResponseSelect = (dimension: DIIDimension, value: number) => {
+  //   const option = responseOptions[dimension].find(opt => opt.value === value);
+  //   if (!option) return;
 
-    setDimensions(prev => prev.map((d, index) => {
-      if (d.dimension === dimension) {
-        // Mark current as completed
-        const completed: ImmunityDimensionState = {
-          ...d,
-          status: 'completed' as const,
-          capturedValue: option.label,
-          capturedScore: value * 2, // Simple scoring for demo
-          question: undefined,
-          responseOptions: undefined
-        };
+  //   setDimensions(prev => prev.map((d, index) => {
+  //     if (d.dimension === dimension) {
+  //       // Mark current as completed
+  //       const completed: ImmunityDimensionState = {
+  //         ...d,
+  //         status: 'completed' as const,
+  //         capturedValue: option.label,
+  //         capturedScore: value * 2, // Simple scoring for demo
+  //         question: undefined,
+  //         responseOptions: undefined
+  //       };
 
-        // Activate next dimension if exists
-        const nextIndex = index + 1;
-        if (nextIndex < prev.length && prev[nextIndex]?.status === 'upcoming') {
-          setTimeout(() => {
-            setDimensions(current => current.map((dim, i) => {
-              if (i === nextIndex) {
-                return {
-                  ...dim,
-                  status: 'active' as const,
-                  question: getQuestionForDimension(dim.dimension),
-                  responseOptions: responseOptions[dim.dimension]
-                };
-              }
-              return dim;
-            }));
-          }, 500);
-        }
+  //       // Activate next dimension if exists
+  //       const nextIndex = index + 1;
+  //       if (nextIndex < prev.length && prev[nextIndex]?.status === 'upcoming') {
+  //         setTimeout(() => {
+  //           setDimensions(current => current.map((dim, i) => {
+  //             if (i === nextIndex) {
+  //               return {
+  //                 ...dim,
+  //                 status: 'active' as const,
+  //                 question: getQuestionForDimension(dim.dimension),
+  //                 responseOptions: responseOptions[dim.dimension]
+  //               };
+  //             }
+  //             return dim;
+  //           }));
+  //         }, 500);
+  //       }
 
-        return completed;
-      }
-      return d;
-    }));
-  };
+  //       return completed;
+  //     }
+  //     return d;
+  //   }));
+  // };
 
   const getQuestionForDimension = (dimension: DIIDimension): string => {
     const questions = {
@@ -346,7 +347,6 @@ export function ImmunityTimelineDemo() {
           <ImmunityTimelineNavigation
             dimensions={dimensions}
             onDimensionSelect={handleDimensionSelect}
-            onResponseSelect={handleResponseSelect}
             className="w-full max-w-3xl"
           />
         </div>

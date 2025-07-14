@@ -9,7 +9,7 @@ export function ImmunityTimelinePage() {
   const navigate = useNavigate();
   const { 
     companySearch, 
-    addScenarioResponse,
+    // addScenarioResponse, // No longer needed as questions are shown in main area
     getScenarioResponse
   } = useAssessmentStore();
   
@@ -88,64 +88,65 @@ export function ImmunityTimelinePage() {
     }));
   };
 
-  const handleResponseSelect = (dimension: DIIDimension, responseValue: number) => {
-    const businessModelId = getBusinessModelId(businessModel);
-    
-    // Convert response to actual metric value
-    const metricValue = convertResponseToMetric(dimension, responseValue);
-    
-    // Store in assessment store
-    const question = getQuestionForDimension(dimension);
-    const metric = getMetricForDimension(dimension, metricValue);
-    addScenarioResponse(dimension, question, responseValue, metric);
-    
-    // Update dimensions state
-    setDimensions(prev => prev.map((d, index) => {
-      if (d.dimension === dimension) {
-        // Mark current as completed
-        const completed: ImmunityDimensionState = {
-          ...d,
-          status: 'completed' as const,
-          capturedValue: formatValue(dimension, metricValue),
-          capturedScore: convertToScore(dimension, metricValue, businessModelId),
-          question: undefined,
-          responseOptions: undefined
-        };
+  // Removed handleResponseSelect as questions are no longer shown in timeline
+  // const handleResponseSelect = (dimension: DIIDimension, responseValue: number) => {
+  //   const businessModelId = getBusinessModelId(businessModel);
+  //   
+  //   // Convert response to actual metric value
+  //   const metricValue = convertResponseToMetric(dimension, responseValue);
+  //   
+  //   // Store in assessment store
+  //   const question = getQuestionForDimension(dimension);
+  //   const metric = getMetricForDimension(dimension, metricValue);
+  //   addScenarioResponse(dimension, question, responseValue, metric);
+  //   
+  //   // Update dimensions state
+  //   setDimensions(prev => prev.map((d, index) => {
+  //     if (d.dimension === dimension) {
+  //       // Mark current as completed
+  //       const completed: ImmunityDimensionState = {
+  //         ...d,
+  //         status: 'completed' as const,
+  //         capturedValue: formatValue(dimension, metricValue),
+  //         capturedScore: convertToScore(dimension, metricValue, businessModelId),
+  //         question: undefined,
+  //         responseOptions: undefined
+  //       };
 
-        // Activate next dimension if exists and not already completed
-        const nextIndex = index + 1;
-        if (nextIndex < prev.length && prev[nextIndex]?.status === 'upcoming') {
-          setTimeout(() => {
-            setDimensions(current => current.map((dim, i) => {
-              if (i === nextIndex) {
-                return {
-                  ...dim,
-                  status: 'active' as const,
-                  question: getQuestionForDimension(dim.dimension),
-                  responseOptions: getOptionsForDimension(dim.dimension)
-                };
-              }
-              return dim;
-            }));
-          }, 500);
-        }
+  //       // Activate next dimension if exists and not already completed
+  //       const nextIndex = index + 1;
+  //       if (nextIndex < prev.length && prev[nextIndex]?.status === 'upcoming') {
+  //         setTimeout(() => {
+  //           setDimensions(current => current.map((dim, i) => {
+  //             if (i === nextIndex) {
+  //               return {
+  //                 ...dim,
+  //                 status: 'active' as const,
+  //                 question: getQuestionForDimension(dim.dimension),
+  //                 responseOptions: getOptionsForDimension(dim.dimension)
+  //               };
+  //             }
+  //             return dim;
+  //           }));
+  //         }, 500);
+  //       }
 
-        return completed;
-      }
-      return d;
-    }));
+  //       return completed;
+  //     }
+  //     return d;
+  //   }));
 
-    // Check if assessment is complete
-    const allCompleted = dimensions.every(d => 
-      d.dimension === dimension || getScenarioResponse(d.dimension) !== undefined
-    );
-    
-    if (allCompleted) {
-      setTimeout(() => {
-        navigate('/assessment/results');
-      }, 1500);
-    }
-  };
+  //   // Check if assessment is complete
+  //   const allCompleted = dimensions.every(d => 
+  //     d.dimension === dimension || getScenarioResponse(d.dimension) !== undefined
+  //   );
+  //   
+  //   if (allCompleted) {
+  //     setTimeout(() => {
+  //       navigate('/assessment/results');
+  //     }, 1500);
+  //   }
+  // };
 
   // Check if user has valid company/business model
   if (!companySearch.selectedCompany || !businessModel) {
@@ -158,7 +159,6 @@ export function ImmunityTimelinePage() {
       <ImmunityTimelineNavigation
         dimensions={dimensions}
         onDimensionSelect={handleDimensionSelect}
-        onResponseSelect={handleResponseSelect}
       />
     </div>
   );
@@ -185,35 +185,36 @@ function convertToScore(_dimension: DIIDimension, value: number, _businessModelI
   return baseScore;
 }
 
-function getMetricForDimension(dimension: DIIDimension, value: number) {
-  switch (dimension) {
-    case 'TRD':
-      return { hours: value };
-    case 'AER':
-      return { ratio: value };
-    case 'HFP':
-      return { percentage: value };
-    case 'BRI':
-      return { percentage: value };
-    case 'RRG':
-      return { multiplier: value };
-    default:
-      return {};
-  }
-}
+// Commented out unused functions since questions are no longer shown in timeline
+// function getMetricForDimension(dimension: DIIDimension, value: number) {
+//   switch (dimension) {
+//     case 'TRD':
+//       return { hours: value };
+//     case 'AER':
+//       return { ratio: value };
+//     case 'HFP':
+//       return { percentage: value };
+//     case 'BRI':
+//       return { percentage: value };
+//     case 'RRG':
+//       return { multiplier: value };
+//     default:
+//       return {};
+//   }
+// }
 
-function convertResponseToMetric(dimension: DIIDimension, responseValue: number): number {
-  // Convert 1-5 response to actual metric values
-  const conversionTables = {
-    TRD: [1, 4, 12, 48, 96], // hours
-    AER: [2000000, 500000, 150000, 40000, 8000], // dollars
-    HFP: [60, 35, 20, 10, 3], // percentage
-    BRI: [85, 65, 45, 25, 15], // percentage
-    RRG: [6, 3.5, 2.2, 1.6, 1.1] // multiplier
-  };
-  
-  return conversionTables[dimension][responseValue - 1] || 0;
-}
+// function convertResponseToMetric(dimension: DIIDimension, responseValue: number): number {
+//   // Convert 1-5 response to actual metric values
+//   const conversionTables = {
+//     TRD: [1, 4, 12, 48, 96], // hours
+//     AER: [2000000, 500000, 150000, 40000, 8000], // dollars
+//     HFP: [60, 35, 20, 10, 3], // percentage
+//     BRI: [85, 65, 45, 25, 15], // percentage
+//     RRG: [6, 3.5, 2.2, 1.6, 1.1] // multiplier
+//   };
+//   
+//   return conversionTables[dimension][responseValue - 1] || 0;
+// }
 
 function formatValue(dimension: DIIDimension, value: number): string {
   switch (dimension) {

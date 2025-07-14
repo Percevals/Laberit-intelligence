@@ -318,9 +318,6 @@ export function ImmunityBuildingPage() {
             <ImmunityTimelineNavigation
               dimensions={dimensionStates}
               onDimensionSelect={handleDimensionClick}
-              onResponseSelect={(_dim, _value) => {
-                // Handle response selection if needed
-              }}
             />
           </div>
 

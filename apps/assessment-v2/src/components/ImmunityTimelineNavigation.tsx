@@ -32,7 +32,6 @@ export interface ImmunityDimensionState {
 interface ImmunityTimelineNavigationProps {
   dimensions: ImmunityDimensionState[];
   onDimensionSelect: (dimension: DIIDimension) => void;
-  onResponseSelect: (dimension: DIIDimension, value: number) => void;
   className?: string;
 }
 
@@ -140,13 +139,11 @@ function ImmunityScore({ score }: { score: number }) {
 function DimensionCard({ 
   dimension, 
   config, 
-  onSelect, 
-  onResponseSelect 
+  onSelect
 }: {
   dimension: ImmunityDimensionState;
   config: typeof dimensionConfig[DIIDimension];
   onSelect: () => void;
-  onResponseSelect: (value: number) => void;
 }) {
   const Icon = config.icon;
   const isCompleted = dimension.status === 'completed';
@@ -274,9 +271,9 @@ function DimensionCard({
           </div>
         </div>
 
-        {/* Active State - Show Question */}
+        {/* Active State - Show Active Indicator */}
         <AnimatePresence>
-          {isActive && dimension.question && (
+          {isActive && (
             <motion.div
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
@@ -284,39 +281,11 @@ function DimensionCard({
               transition={{ duration: 0.3 }}
               className="border-t border-primary-600/20"
             >
-              <div className="p-4 space-y-4">
-                <div>
-                  <p className="text-sm text-dark-text mb-3">
-                    {dimension.question}
-                  </p>
-                </div>
-
-                {dimension.responseOptions && (
-                  <div className="space-y-2">
-                    {dimension.responseOptions.map((option) => (
-                      <motion.button
-                        key={option.value}
-                        whileHover={{ scale: 1.01 }}
-                        whileTap={{ scale: 0.99 }}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onResponseSelect(option.value);
-                        }}
-                        className="w-full p-3 text-left rounded-lg border border-dark-border hover:border-primary-600/50 hover:bg-primary-600/5 transition-all duration-200 group active:bg-primary-600/10"
-                      >
-                        <div className="flex items-start justify-between gap-2">
-                          <span className="font-medium text-dark-text text-sm sm:text-base">
-                            {option.label}
-                          </span>
-                          <ArrowRight className="w-4 h-4 text-primary-600 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 mt-0.5" />
-                        </div>
-                        <p className="text-xs sm:text-sm text-dark-text-secondary mt-1">
-                          {option.interpretation}
-                        </p>
-                      </motion.button>
-                    ))}
-                  </div>
-                )}
+              <div className="p-3 bg-primary-600/5">
+                <p className="text-xs text-primary-400 font-medium flex items-center gap-2">
+                  <Circle className="w-2 h-2 fill-current animate-pulse" />
+                  Answering now...
+                </p>
               </div>
             </motion.div>
           )}
@@ -329,7 +298,6 @@ function DimensionCard({
 export function ImmunityTimelineNavigation({
   dimensions,
   onDimensionSelect,
-  onResponseSelect,
   className
 }: ImmunityTimelineNavigationProps) {
   const completedCount = dimensions.filter(d => d.status === 'completed').length;
@@ -365,7 +333,6 @@ export function ImmunityTimelineNavigation({
               dimension={dimension}
               config={config}
               onSelect={() => onDimensionSelect(dimension.dimension)}
-              onResponseSelect={(value) => onResponseSelect(dimension.dimension, value)}
             />
           );
         })}
