@@ -357,7 +357,8 @@ export class IntelligenceEngine {
       return industryMatch || businessModelMatch || regionMatch;
     });
     
-    const regionalRisk = REGIONAL_RISKS[this.context.classification.region || 'LATAM'];
+    const region = this.context.classification.region || 'LATAM';
+    const regionalRisk = REGIONAL_RISKS[region] || REGIONAL_RISKS.LATAM;
     
     // Identify emerging threats based on weak dimensions
     const emergingThreats = this.identifyEmergingThreats();
@@ -369,7 +370,7 @@ export class IntelligenceEngine {
       relevantPatterns,
       emergingThreats,
       industryTrends,
-      regionalFactors: regionalRisk || REGIONAL_RISKS.LATAM
+      regionalFactors: regionalRisk
     };
   }
   
@@ -612,7 +613,7 @@ export class IntelligenceEngine {
         insights.push({
           id: `risk-${dimension}`,
           type: 'risk',
-          title: `Critical ${this.getDimensionName(dimension)} Vulnerability`,
+          title: `Critical ${this.getDimensionName(dimension as DIIDimension)} Vulnerability`,
           description: `Your ${dimension} score of ${response.normalizedScore.toFixed(1)} puts you at significant risk`,
           relevance: `Companies in ${this.context.classification.industry} with low ${dimension} scores experience 3x more incidents`,
           dataPoints: [

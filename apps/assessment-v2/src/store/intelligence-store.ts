@@ -93,7 +93,7 @@ export const useIntelligenceStore = create<IntelligenceState>()(
         try {
           // Get current context
           const { dimensions, currentDII } = useDIIDimensionsStore.getState();
-          const { classification } = useAssessmentStore.getState();
+          const { classification, companySearch } = useAssessmentStore.getState();
 
           if (!classification || !dimensions || !currentDII) {
             throw new Error('Assessment data not available');
@@ -109,7 +109,7 @@ export const useIntelligenceStore = create<IntelligenceState>()(
 
           // Create classification result from assessment data
           const classificationResult = {
-            company: classification.answers.businessName || 'Unknown',
+            company: companySearch.selectedCompany?.name || 'Unknown',
             industry: classification.industry || 'Unknown',
             businessModel: classification.businessModel || 'Unknown',
             companySize: classification.employees 
