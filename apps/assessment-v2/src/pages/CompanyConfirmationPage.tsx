@@ -314,21 +314,48 @@ function EditableField({
   }
 
   return (
-    <div className="flex items-center gap-3 p-4 hover:bg-dark-surface/50 rounded-lg transition-colors">
-      <div className="text-primary-600">{icon}</div>
-      <div className="flex-1">
-        <p className="text-sm text-dark-text-secondary">{label}</p>
-        <p className="font-medium flex items-center gap-2">
-          {displayValue}
-          {aiEnhanced && <CheckCircle2 className="w-4 h-4 text-green-500" />}
-        </p>
+    <div className="p-4 hover:bg-dark-surface/50 rounded-lg transition-colors">
+      <div className="flex items-center gap-3">
+        <div className="text-primary-600">{icon}</div>
+        <div className="flex-1">
+          <p className="text-sm text-dark-text-secondary">{label}</p>
+          <p className="font-medium flex items-center gap-2">
+            {displayValue}
+            {aiEnhanced && <CheckCircle2 className="w-4 h-4 text-green-500" />}
+          </p>
+        </div>
+        <button
+          onClick={onEdit}
+          className="p-2 text-dark-text-secondary hover:text-primary-600 transition-colors"
+        >
+          <Edit2 className="w-4 h-4" />
+        </button>
       </div>
-      <button
-        onClick={onEdit}
-        className="p-2 text-dark-text-secondary hover:text-primary-600 transition-colors"
-      >
-        <Edit2 className="w-4 h-4" />
-      </button>
+      
+      {/* AI Enhancement Notice */}
+      {aiEnhanced && (
+        <div className="mt-3 pt-3 border-t border-dark-border">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2 text-xs text-green-400">
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <span>Información verificada con IA</span>
+            </div>
+            <div className="flex gap-2 text-xs">
+              <span className="text-dark-text-secondary">¿Es correcto?</span>
+              <button className="text-green-500 hover:text-green-400 font-medium">
+                Sí, usar este dato
+              </button>
+              <span className="text-dark-text-secondary">•</span>
+              <button 
+                onClick={onEdit}
+                className="text-yellow-500 hover:text-yellow-400 font-medium"
+              >
+                Corregir manualmente
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

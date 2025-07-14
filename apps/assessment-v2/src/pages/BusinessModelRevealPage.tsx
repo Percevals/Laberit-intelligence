@@ -241,9 +241,26 @@ export function BusinessModelRevealPage() {
                 <h2 className="text-xl font-semibold">
                   {t(`businessModels.names.${suggestedModel.model}`)}
                 </h2>
-                <p className="text-sm text-dark-text-secondary">
-                  {t(`reveal.confidence`, 'Confianza')}: {suggestedModel.confidence.toFixed(0)}%
-                </p>
+                <div className="flex items-center gap-2">
+                  <p className="text-sm text-dark-text-secondary">
+                    Confianza de IA: {suggestedModel.confidence.toFixed(0)}%
+                  </p>
+                  {suggestedModel.confidence >= 80 && (
+                    <span className="text-xs bg-green-600/20 text-green-400 px-2 py-0.5 rounded">
+                      Alta precisión
+                    </span>
+                  )}
+                  {suggestedModel.confidence >= 60 && suggestedModel.confidence < 80 && (
+                    <span className="text-xs bg-yellow-600/20 text-yellow-400 px-2 py-0.5 rounded">
+                      Buena precisión
+                    </span>
+                  )}
+                  {suggestedModel.confidence < 60 && (
+                    <span className="text-xs bg-orange-600/20 text-orange-400 px-2 py-0.5 rounded">
+                      Revisar manualmente
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
 
@@ -282,8 +299,11 @@ export function BusinessModelRevealPage() {
               className="card p-6 mb-6"
             >
               <h3 className="text-lg font-semibold mb-4">
-                Choose Your Business Model
+                Seleccione su modelo de negocio
               </h3>
+              <p className="text-sm text-dark-text-secondary mb-4">
+                Si la sugerencia no es exacta, puede elegir manualmente el modelo que mejor describe su empresa:
+              </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {allModels.map((model) => {
                   const ModelIcon = getModelIcon(model.model);
@@ -332,9 +352,9 @@ export function BusinessModelRevealPage() {
             {!showAlternatives && (
               <button
                 onClick={() => setShowAlternatives(true)}
-                className="text-sm text-primary-600 hover:text-primary-500 transition-colors"
+                className="text-sm text-primary-600 hover:text-primary-500 transition-colors underline"
               >
-                ¿No está seguro? Elija manualmente
+                ¿No coincide con su empresa? Seleccione manualmente
               </button>
             )}
           </motion.div>

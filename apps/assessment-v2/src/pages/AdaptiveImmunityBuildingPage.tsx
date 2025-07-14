@@ -99,10 +99,10 @@ function SmartSkipModal({ recommendations, onApply, onCancel }: SmartSkipModalPr
         <div className="p-6 border-b border-dark-border">
           <h3 className="text-xl font-semibold text-dark-text flex items-center gap-2">
             <Brain className="w-6 h-6 text-primary-600" />
-            Smart Skip Recommendations
+            Recomendaciones inteligentes
           </h3>
           <p className="text-sm text-dark-text-secondary mt-1">
-            Based on your answers, we can estimate these dimensions with reasonable confidence
+            Basándonos en sus respuestas, podemos estimar estas dimensiones con confianza razonable
           </p>
         </div>
         
@@ -129,13 +129,13 @@ function SmartSkipModal({ recommendations, onApply, onCancel }: SmartSkipModalPr
                       rec.confidence >= 50 ? "bg-yellow-600/20 text-yellow-400" :
                       "bg-red-600/20 text-red-400"
                     )}>
-                      {rec.confidence}% confidence
+                      {rec.confidence}% confianza
                     </span>
                   </div>
                   <p className="text-sm text-dark-text-secondary mb-2">{rec.rationale}</p>
                   <div className="text-sm font-medium text-primary-400">
-                    Suggested value: {rec.suggestedMetric} 
-                    {rec.dimension === 'TRD' && ' hours'}
+                    Valor sugerido: {rec.suggestedMetric} 
+                    {rec.dimension === 'TRD' && ' horas'}
                     {rec.dimension === 'AER' && ` ($${rec.suggestedMetric >= 1000000 ? (rec.suggestedMetric/1000000).toFixed(1) + 'M' : Math.round(rec.suggestedMetric/1000) + 'K'})`}
                     {rec.dimension === 'HFP' && '%'}
                     {rec.dimension === 'BRI' && '%'}
@@ -159,7 +159,7 @@ function SmartSkipModal({ recommendations, onApply, onCancel }: SmartSkipModalPr
             onClick={onCancel}
             className="px-6 py-2 text-dark-text-secondary hover:text-dark-text transition-colors"
           >
-            Answer All Questions
+            Responder todas las preguntas
           </button>
           <button
             onClick={handleApply}
@@ -171,7 +171,7 @@ function SmartSkipModal({ recommendations, onApply, onCancel }: SmartSkipModalPr
                 : "bg-dark-surface text-dark-text-secondary cursor-not-allowed"
             )}
           >
-            Apply {selectedSkips.size} Skip{selectedSkips.size !== 1 ? 's' : ''}
+            Aplicar {selectedSkips.size} estimación{selectedSkips.size !== 1 ? 'es' : ''}
           </button>
         </div>
       </motion.div>
@@ -213,6 +213,7 @@ export function AdaptiveImmunityBuildingPage() {
   const [skipRecommendations, setSkipRecommendations] = useState<SkipRecommendation[]>([]);
   const [transitionMessage, setTransitionMessage] = useState<string | null>(null);
   const [adaptiveMessage, setAdaptiveMessage] = useState<string | null>(null);
+  const [loadingError, setLoadingError] = useState<string | null>(null);
 
   const answeredDimensions = Object.keys(dimensions) as DIIDimension[];
   const remainingDimensions = orchestration?.recommendedOrder.filter(d => !answeredDimensions.includes(d)) || [];
@@ -302,6 +303,8 @@ export function AdaptiveImmunityBuildingPage() {
     if (!companySearch.selectedCompany || !classification.businessModel) return;
 
     setLoading(true);
+    setLoadingError(null);
+    
     try {
       const modelMapping: Record<string, BusinessModelScenarioId> = {
         'COMERCIO_HIBRIDO': '1_comercio_hibrido',
@@ -316,6 +319,7 @@ export function AdaptiveImmunityBuildingPage() {
 
       const scenarioId = modelMapping[classification.businessModel] || '1_comercio_hibrido';
       const questionsMap = new Map<DIIDimension, LightAssessmentQuestion>();
+      let failedQuestions = 0;
 
       for (const dimension of ['TRD', 'AER', 'HFP', 'BRI', 'RRG'] as DIIDimension[]) {
         try {
@@ -328,12 +332,25 @@ export function AdaptiveImmunityBuildingPage() {
           questionsMap.set(dimension, question);
         } catch (error) {
           console.error(`Error loading question for ${dimension}:`, error);
+          failedQuestions++;
         }
+      }
+
+      // If all questions failed to load, show error
+      if (questionsMap.size === 0) {
+        setLoadingError('No pudimos cargar las preguntas de evaluación. Verifique su conexión a internet e intente nuevamente.');
+        return;
+      }
+
+      // If some questions failed, show partial error
+      if (failedQuestions > 0) {
+        setLoadingError(`Algunas preguntas no se pudieron cargar (${failedQuestions} de 5). La evaluación continuará con las preguntas disponibles.`);
       }
 
       setAllQuestions(questionsMap);
     } catch (error) {
       console.error('Error loading questions:', error);
+      setLoadingError('Error al cargar las preguntas de evaluación. Intente refrescar la página o contacte a soporte si el problema persiste.');
     }
   };
 
@@ -462,7 +479,7 @@ export function AdaptiveImmunityBuildingPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-dark-bg flex items-center justify-center">
-        <div className="space-y-4 text-center">
+        <div className="space-y-4 text-center max-w-md">
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
@@ -473,6 +490,41 @@ export function AdaptiveImmunityBuildingPage() {
           <p className="text-dark-text-secondary">
             {t('assessment.optimizingFlow', 'Optimizing assessment flow for')} {classification.businessModel}...
           </p>
+          
+          {/* Loading Error Display */}
+          {loadingError && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-6 p-4 bg-red-600/10 border border-red-600/30 rounded-lg text-left"
+            >
+              <div className="flex items-start gap-3">
+                <AlertTriangle className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="text-sm font-medium text-red-400 mb-2">
+                    Error al cargar evaluación
+                  </p>
+                  <p className="text-xs text-red-300 mb-3">
+                    {loadingError}
+                  </p>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => loadAllQuestions()}
+                      className="text-xs bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded transition-colors"
+                    >
+                      Reintentar carga
+                    </button>
+                    <button
+                      onClick={() => navigate('/assessment/company')}
+                      className="text-xs bg-dark-surface hover:bg-dark-border text-dark-text px-3 py-1 rounded transition-colors"
+                    >
+                      Volver al inicio
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
         </div>
       </div>
     );
@@ -504,7 +556,7 @@ export function AdaptiveImmunityBuildingPage() {
           <div className="flex items-center justify-between text-sm">
             <div className="flex items-center gap-2 text-dark-text-secondary">
               <Clock className="w-4 h-4" />
-              <span>~{timeEstimate.minutes} minutes remaining</span>
+              <span>~{timeEstimate.minutes} minutos restantes</span>
             </div>
             {skipRecommendations.length > 0 && answeredDimensions.length >= 2 && (
               <button
@@ -512,11 +564,39 @@ export function AdaptiveImmunityBuildingPage() {
                 className="flex items-center gap-2 text-primary-600 hover:text-primary-500 transition-colors"
               >
                 <SkipForward className="w-4 h-4" />
-                Smart Skip Available
+                Estimación inteligente disponible
               </button>
             )}
           </div>
         </div>
+
+        {/* Loading Error Banner */}
+        <AnimatePresence>
+          {loadingError && !loading && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="mb-6 p-4 bg-orange-600/10 border border-orange-600/20 rounded-lg flex items-start gap-3"
+            >
+              <AlertTriangle className="w-5 h-5 text-orange-500 mt-0.5" />
+              <div className="flex-1">
+                <p className="text-sm text-dark-text">{loadingError}</p>
+                {loadingError.includes('Algunas preguntas') && (
+                  <p className="text-xs text-dark-text-secondary mt-1">
+                    Puede continuar con la evaluación o intentar recargar todas las preguntas.
+                  </p>
+                )}
+              </div>
+              <button
+                onClick={() => loadAllQuestions()}
+                className="text-xs bg-orange-600 hover:bg-orange-700 text-white px-2 py-1 rounded transition-colors"
+              >
+                Reintentar
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Adaptive Message */}
         <AnimatePresence>
@@ -553,7 +633,7 @@ export function AdaptiveImmunityBuildingPage() {
           <div className="mb-6 p-4 bg-yellow-600/10 border border-yellow-600/20 rounded-lg">
             <h4 className="font-medium text-yellow-400 mb-2 flex items-center gap-2">
               <Info className="w-4 h-4" />
-              Pattern Detected
+              Patrón detectado
             </h4>
             <ul className="space-y-1">
               {correlationHints.map((hint, index) => (
@@ -570,7 +650,7 @@ export function AdaptiveImmunityBuildingPage() {
             <div className="mb-4">
               <h3 className="text-sm font-medium text-dark-text-secondary mb-2 flex items-center gap-2">
                 <Navigation className="w-4 h-4" />
-                Optimized for {classification.businessModel?.replace(/_/g, ' ')}
+                Optimizado para {classification.businessModel?.replace(/_/g, ' ')}
               </h3>
             </div>
             <AsyncErrorBoundary>
@@ -652,13 +732,13 @@ export function AdaptiveImmunityBuildingPage() {
                 className="bg-dark-surface rounded-lg p-6 text-center"
               >
                 <div className="text-sm text-dark-text-secondary mb-2">
-                  {t('assessment.currentDII', 'Current DII')}
+                  DII actual
                 </div>
                 <div className="text-4xl font-bold text-primary-600">
                   {currentDII.score}
                 </div>
                 <div className="text-xs text-dark-text-secondary mt-2">
-                  {t('assessment.confidence', 'Confidence')}: {currentDII.confidence}%
+                  Confianza: {currentDII.confidence}%
                 </div>
               </motion.div>
             )}

@@ -82,11 +82,11 @@ export class ErrorBoundary extends Component<Props, State> {
               <AlertTriangle className="w-12 h-12 text-red-500 mx-auto mb-4" />
               
               <h2 className="text-xl font-semibold text-dark-text mb-2">
-                Something went wrong
+                Algo salió mal
               </h2>
               
               <p className="text-dark-text-secondary mb-6">
-                We encountered an unexpected error. Please try refreshing the page or contact support if the problem persists.
+                Ocurrió un error inesperado en la aplicación. Intente refrescar la página o contacte a soporte si el problema persiste.
               </p>
 
               <div className="space-y-3">
@@ -95,7 +95,7 @@ export class ErrorBoundary extends Component<Props, State> {
                   className="w-full btn-primary flex items-center justify-center gap-2"
                 >
                   <RefreshCw className="w-4 h-4" />
-                  Try Again
+                  Intentar de nuevo
                 </button>
                 
                 <button
@@ -103,7 +103,7 @@ export class ErrorBoundary extends Component<Props, State> {
                   className="w-full btn-secondary flex items-center justify-center gap-2"
                 >
                   <RefreshCw className="w-4 h-4" />
-                  Refresh Page
+                  Refrescar página
                 </button>
               </div>
 
@@ -111,7 +111,7 @@ export class ErrorBoundary extends Component<Props, State> {
               {process.env.NODE_ENV === 'development' && this.state.error && (
                 <details className="mt-6 text-left">
                   <summary className="cursor-pointer text-sm text-dark-text-secondary hover:text-dark-text">
-                    Error Details (Development)
+                    Detalles del error (Desarrollo)
                   </summary>
                   <div className="mt-2 p-2 bg-dark-bg rounded text-xs font-mono text-red-400 overflow-auto max-h-32">
                     <div className="mb-2">
@@ -168,10 +168,10 @@ export function AsyncErrorBoundary({
         <div className="min-h-[200px] flex items-center justify-center">
           <div className="text-center">
             <AlertTriangle className="w-8 h-8 text-red-500 mx-auto mb-2" />
-            <p className="text-dark-text-secondary mb-4">Failed to load content</p>
+            <p className="text-dark-text-secondary mb-4">Error al cargar el contenido</p>
             {onRetry && (
               <button onClick={onRetry} className="btn-primary">
-                Try Again
+                Reintentar
               </button>
             )}
           </div>
