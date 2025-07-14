@@ -369,7 +369,7 @@ export function AdaptiveImmunityBuildingPage() {
     await setDimensionResponse(
       currentQuestion.dimension,
       value,
-      metric?.value || metric || value
+      metric?.hours ?? metric?.percentage ?? metric?.ratio ?? metric?.multiplier ?? value
     );
 
     // Generate insight
@@ -378,7 +378,7 @@ export function AdaptiveImmunityBuildingPage() {
       {
         dimension: currentQuestion.dimension,
         rawValue: value,
-        metricValue: metric?.value || metric || value,
+        metricValue: metric?.hours ?? metric?.percentage ?? metric?.ratio ?? metric?.multiplier ?? value,
         normalizedScore: value * 2,
         timestamp: new Date(),
         confidence: 90
