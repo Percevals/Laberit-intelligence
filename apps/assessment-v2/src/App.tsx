@@ -8,11 +8,12 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import { HomePage } from './pages/HomePage';
 import { CompanySearchPage } from './pages/CompanySearchPage';
 import { CompanyConfirmationPage } from './pages/CompanyConfirmationPage';
 import { BusinessModelRevealPage } from './pages/BusinessModelRevealPage';
-import { SmartClassificationPage } from './pages/SmartClassificationPage';
+// import { SmartClassificationPage } from './pages/SmartClassificationPage'; // Removed - unused duplicate
 import { ClassificationPage } from './pages/ClassificationPage';
 // import { QuestionsPage } from './pages/QuestionsPage'; // Replaced by ScenarioQuestionsPage
 // import { ScenarioQuestionsPage } from './pages/ScenarioQuestionsPage'; // Replaced by ImmunityBuildingPage
@@ -49,23 +50,27 @@ function LoadingScreen() {
 
 export default function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter basename="/Laberit-intelligence/apps/assessment-v2">
-        <Suspense fallback={<LoadingScreen />}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/assessment/company" element={<CompanySearchPage />} />
-            <Route path="/assessment/confirm" element={<CompanyConfirmationPage />} />
-            <Route path="/assessment/business-model" element={<BusinessModelRevealPage />} />
-            <Route path="/assessment/smart-classify" element={<SmartClassificationPage />} />
-            <Route path="/assessment/classify" element={<ClassificationPage />} />
-            <Route path="/assessment/questions" element={<AdaptiveImmunityBuildingPage />} />
-            <Route path="/assessment/results" element={<ImmunityResultsPage />} />
-            {/* Debug routes removed for production */}
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
-      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-    </QueryClientProvider>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter basename="/Laberit-intelligence/apps/assessment-v2">
+          <Suspense fallback={<LoadingScreen />}>
+            <ErrorBoundary>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/assessment/company" element={<CompanySearchPage />} />
+                <Route path="/assessment/confirm" element={<CompanyConfirmationPage />} />
+                <Route path="/assessment/business-model" element={<BusinessModelRevealPage />} />
+                {/* <Route path="/assessment/smart-classify" element={<SmartClassificationPage />} /> Removed - unused duplicate */}
+                <Route path="/assessment/classify" element={<ClassificationPage />} />
+                <Route path="/assessment/questions" element={<AdaptiveImmunityBuildingPage />} />
+                <Route path="/assessment/results" element={<ImmunityResultsPage />} />
+                {/* Debug routes removed for production */}
+              </Routes>
+            </ErrorBoundary>
+          </Suspense>
+        </BrowserRouter>
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 }

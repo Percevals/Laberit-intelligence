@@ -43,6 +43,7 @@ import {
 import type { BusinessModelScenarioId } from '@core/types/pain-scenario.types';
 import type { LightAssessmentQuestion } from '@services/question-adapter/light-assessment-adapter';
 import { cn } from '@shared/utils/cn';
+import { AsyncErrorBoundary } from '@/components/ErrorBoundary';
 
 // Map business model IDs to numeric IDs
 const BUSINESS_MODEL_ID_MAP: Record<string, number> = {
@@ -572,72 +573,76 @@ export function AdaptiveImmunityBuildingPage() {
                 Optimized for {classification.businessModel?.replace(/_/g, ' ')}
               </h3>
             </div>
-            <ImmunityTimelineNavigation
-              dimensions={dimensionStates}
-              onDimensionSelect={handleDimensionClick}
-            />
+            <AsyncErrorBoundary>
+              <ImmunityTimelineNavigation
+                dimensions={dimensionStates}
+                onDimensionSelect={handleDimensionClick}
+              />
+            </AsyncErrorBoundary>
           </div>
 
           {/* Question and Insights Area */}
           <div className="lg:col-span-3 space-y-6">
-            <AnimatePresence mode="wait">
-              {!showingInsight ? (
-                <motion.div
-                  key="question"
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                >
-                  {currentQuestion && (
-                    <ScenarioQuestionCard
-                      dimension={currentQuestion.dimension}
-                      dimensionName={currentQuestion.dimensionName}
-                      question={currentQuestion.adaptedQuestion.adapted}
-                      responseOptions={currentQuestion.responseOptions}
-                      contextForUser={currentQuestion.contextForUser}
-                      currentResponse={getScenarioResponse(currentQuestion.dimension)?.response}
-                      onResponse={handleResponse}
-                    />
-                  )}
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="insight"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                >
-                  {currentInsight && (
-                    <div className="space-y-6">
-                      <InsightRevelationCard
-                        insight={currentInsight}
-                        onNextDimension={() => handleNextDimension()}
+            <AsyncErrorBoundary>
+              <AnimatePresence mode="wait">
+                {!showingInsight ? (
+                  <motion.div
+                    key="question"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                  >
+                    {currentQuestion && (
+                      <ScenarioQuestionCard
+                        dimension={currentQuestion.dimension}
+                        dimensionName={currentQuestion.dimensionName}
+                        question={currentQuestion.adaptedQuestion.adapted}
+                        responseOptions={currentQuestion.responseOptions}
+                        contextForUser={currentQuestion.contextForUser}
+                        currentResponse={getScenarioResponse(currentQuestion.dimension)?.response}
+                        onResponse={handleResponse}
                       />
-                      
-                      <div className="flex justify-center">
-                        <button
-                          onClick={handleNextDimension}
-                          className="btn-primary flex items-center gap-2 px-8 py-3"
-                        >
-                          {remainingDimensions.length > 0 ? (
-                            <>
-                              {t('assessment.continue', 'Continue Assessment')}
-                              <ArrowRight className="w-5 h-5" />
-                            </>
-                          ) : (
-                            <>
-                              <Sparkles className="w-5 h-5" />
-                              {t('assessment.viewCompleteProfile', 'View Complete Profile')}
-                              <Shield className="w-5 h-5" />
-                            </>
-                          )}
-                        </button>
+                    )}
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="insight"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                  >
+                    {currentInsight && (
+                      <div className="space-y-6">
+                        <InsightRevelationCard
+                          insight={currentInsight}
+                          onNextDimension={() => handleNextDimension()}
+                        />
+                        
+                        <div className="flex justify-center">
+                          <button
+                            onClick={handleNextDimension}
+                            className="btn-primary flex items-center gap-2 px-8 py-3"
+                          >
+                            {remainingDimensions.length > 0 ? (
+                              <>
+                                {t('assessment.continue', 'Continue Assessment')}
+                                <ArrowRight className="w-5 h-5" />
+                              </>
+                            ) : (
+                              <>
+                                <Sparkles className="w-5 h-5" />
+                                {t('assessment.viewCompleteProfile', 'View Complete Profile')}
+                                <Shield className="w-5 h-5" />
+                              </>
+                            )}
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </motion.div>
-              )}
-            </AnimatePresence>
+                    )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </AsyncErrorBoundary>
 
             {/* Live DII Score */}
             {answeredDimensions.length >= 2 && currentDII && !showingInsight && (

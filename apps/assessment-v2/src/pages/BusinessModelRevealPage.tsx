@@ -52,6 +52,8 @@ export function BusinessModelRevealPage() {
     confidence: number;
     reasoning: string;
   } | null>(null);
+  
+  const [showAlternatives, setShowAlternatives] = useState(false);
 
   useEffect(() => {
     if (!companySearch.selectedCompany) {
@@ -59,16 +61,19 @@ export function BusinessModelRevealPage() {
       return;
     }
 
-    // Use classifier to determine business model
-    const result = DIIBusinessModelClassifier.classify({
-      revenueModel: 'recurring_subscriptions', 
-      operationalDependency: 'fully_digital'
-    });
+    // Use industry-based classification with real company data
+    const industry = classification.industry || companySearch.selectedCompany.industry || '';
+    const companyName = companySearch.selectedCompany.name;
+    
+    const result = DIIBusinessModelClassifier.classifyByIndustry(
+      industry,
+      companyName
+    );
 
     setSuggestedModel({
       model: result.model,
-      confidence: Math.min(result.confidence * 100, 95), // Cap at 95%
-      reasoning: `Basado en su industria: ${classification.industry || companySearch.selectedCompany.industry}`
+      confidence: result.confidence, // Use actual confidence from classifier
+      reasoning: result.reasoning || `Based on industry analysis: ${industry}`
     });
   }, [companySearch.selectedCompany, classification.industry, navigate]);
 
@@ -84,6 +89,55 @@ export function BusinessModelRevealPage() {
     setBusinessModel(suggestedModel.model);
     navigate('/assessment/questions');
   };
+
+  const handleModelSelect = (model: BusinessModel) => {
+    setBusinessModel(model);
+    navigate('/assessment/questions');
+  };
+
+  // All DII business models for manual selection
+  const allModels: Array<{model: BusinessModel, name: string, description: string}> = [
+    { 
+      model: 'COMERCIO_HIBRIDO', 
+      name: 'Comercio Híbrido', 
+      description: 'Canales físicos y digitales combinados' 
+    },
+    { 
+      model: 'SOFTWARE_CRITICO', 
+      name: 'Software Crítico', 
+      description: 'SaaS, plataformas en la nube, software empresarial' 
+    },
+    { 
+      model: 'SERVICIOS_DATOS', 
+      name: 'Servicios de Datos', 
+      description: 'Monetización de datos, analytics, insights' 
+    },
+    { 
+      model: 'ECOSISTEMA_DIGITAL', 
+      name: 'Ecosistema Digital', 
+      description: 'Plataformas multi-lado, marketplaces' 
+    },
+    { 
+      model: 'SERVICIOS_FINANCIEROS', 
+      name: 'Servicios Financieros', 
+      description: 'Procesamiento de transacciones, fintech' 
+    },
+    { 
+      model: 'INFRAESTRUCTURA_HEREDADA', 
+      name: 'Infraestructura Heredada', 
+      description: 'Sistemas legacy con capas digitales' 
+    },
+    { 
+      model: 'CADENA_SUMINISTRO', 
+      name: 'Cadena de Suministro', 
+      description: 'Logística con seguimiento digital' 
+    },
+    { 
+      model: 'INFORMACION_REGULADA', 
+      name: 'Información Regulada', 
+      description: 'Salud, datos sensibles, compliance' 
+    }
+  ];
 
   // Get model icon based on type
   const getModelIcon = (model: BusinessModel) => {
@@ -220,9 +274,49 @@ export function BusinessModelRevealPage() {
             </div>
           </motion.div>
 
+          {/* Alternative Models */}
+          {showAlternatives && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              className="card p-6 mb-6"
+            >
+              <h3 className="text-lg font-semibold mb-4">
+                Choose Your Business Model
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {allModels.map((model) => {
+                  const ModelIcon = getModelIcon(model.model);
+                  return (
+                    <button
+                      key={model.model}
+                      onClick={() => handleModelSelect(model.model)}
+                      className={cn(
+                        "p-4 text-left rounded-lg border-2 transition-all hover:border-primary-600/50",
+                        model.model === suggestedModel.model 
+                          ? "border-primary-600 bg-primary-600/10" 
+                          : "border-dark-border hover:bg-primary-600/5"
+                      )}
+                    >
+                      <div className="flex items-start gap-3">
+                        <ModelIcon className="w-5 h-5 text-primary-600 mt-0.5" />
+                        <div>
+                          <h4 className="font-medium text-sm">{model.name}</h4>
+                          <p className="text-xs text-dark-text-secondary mt-1">
+                            {model.description}
+                          </p>
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </motion.div>
+          )}
+
           {/* Call to Action */}
           <motion.div 
-            className="text-center"
+            className="text-center space-y-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
@@ -234,6 +328,15 @@ export function BusinessModelRevealPage() {
               {t('reveal.startAssessment', 'Iniciar evaluación')}
               <ArrowRight className="w-5 h-5" />
             </button>
+            
+            {!showAlternatives && (
+              <button
+                onClick={() => setShowAlternatives(true)}
+                className="text-sm text-primary-600 hover:text-primary-500 transition-colors"
+              >
+                ¿No está seguro? Elija manualmente
+              </button>
+            )}
           </motion.div>
         </motion.div>
       </div>

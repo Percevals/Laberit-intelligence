@@ -84,6 +84,8 @@ interface AssessmentState {
   setBusinessModel: (model: BusinessModel) => void;
   setClassificationAnswer: (key: keyof ClassificationAnswers, value: any) => void;
   updateClassificationFromCompany: (company: CompanyInfo) => void;
+  updateClassificationField: (field: string, value: any) => void;
+  setCriticalInfrastructure: (isCritical: boolean) => void;
   
   // Scenario Actions
   addScenarioResponse: (dimension: DIIDimension, question: string, response: number, metric?: any) => void;
@@ -186,6 +188,22 @@ export const useAssessmentStore = create<AssessmentState>()(
               geography: !!company.country,
               industry: !!company.industry
             }
+          }
+        })),
+
+        // Update individual classification fields
+        updateClassificationField: (field: string, value: any) => set((state) => ({
+          classification: {
+            ...state.classification,
+            [field]: value
+          }
+        })),
+
+        // Set critical infrastructure flag
+        setCriticalInfrastructure: (isCritical: boolean) => set((state) => ({
+          classification: {
+            ...state.classification,
+            criticalInfra: isCritical
           }
         })),
 

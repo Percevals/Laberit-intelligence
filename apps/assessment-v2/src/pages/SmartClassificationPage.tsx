@@ -1,3 +1,11 @@
+/**
+ * SmartClassificationPage - Currently unused in main navigation flow
+ * 
+ * NOTE: This page contains direct setState calls that bypass store methods.
+ * It was removed from the main routes in favor of the simpler CompanyConfirmationPage flow.
+ * TODO: Either remove this file or update it to use proper store methods.
+ */
+
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';

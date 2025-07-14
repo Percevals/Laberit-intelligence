@@ -25,7 +25,9 @@ export function CompanyConfirmationPage() {
   const navigate = useNavigate();
   const { 
     companySearch, 
-    classification
+    classification,
+    updateClassificationField,
+    setCriticalInfrastructure
   } = useAssessmentStore();
 
   const [editingField, setEditingField] = useState<string | null>(null);
@@ -52,12 +54,7 @@ export function CompanyConfirmationPage() {
   };
 
   const handleSave = (field: string) => {
-    useAssessmentStore.setState(state => ({
-      classification: {
-        ...state.classification,
-        [field]: editValues[field as keyof typeof editValues]
-      }
-    }));
+    updateClassificationField(field, editValues[field as keyof typeof editValues]);
     setEditingField(null);
   };
 
@@ -73,9 +70,7 @@ export function CompanyConfirmationPage() {
   };
 
   const handleCriticalInfra = (value: boolean) => {
-    useAssessmentStore.setState(state => ({
-      classification: { ...state.classification, criticalInfra: value }
-    }));
+    setCriticalInfrastructure(value);
   };
 
   const handleContinue = () => {
