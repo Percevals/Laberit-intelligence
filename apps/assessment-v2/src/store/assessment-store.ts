@@ -3,6 +3,7 @@ import { devtools, persist } from 'zustand/middleware';
 import type { CompanyInfo } from '@services/ai/types';
 import type { BusinessModel, ClassificationAnswers } from '@core/types/business-model.types';
 import type { Score, MaturityStage } from '@core/types/dii.types';
+import type { DIIDimension } from '@core/types/pain-scenario.types';
 
 interface CompanySearchState {
   query: string;
@@ -31,6 +32,13 @@ interface ClassificationState {
   };
 }
 
+interface ScenarioResponse {
+  dimension: DIIDimension;
+  question: string;
+  response: number; // 1-5 scale
+  timestamp: Date;
+}
+
 interface AssessmentProgress {
   currentStep: 'company-search' | 'classification' | 'questions' | 'results';
   startTime: Date | null;
@@ -53,6 +61,9 @@ interface AssessmentState {
   // Classification
   classification: ClassificationState;
   
+  // Scenario Responses
+  scenarioResponses: ScenarioResponse[];
+  
   // Assessment Progress
   progress: AssessmentProgress;
   
@@ -67,6 +78,10 @@ interface AssessmentState {
   setBusinessModel: (model: BusinessModel) => void;
   setClassificationAnswer: (key: keyof ClassificationAnswers, value: any) => void;
   updateClassificationFromCompany: (company: CompanyInfo) => void;
+  
+  // Scenario Actions
+  addScenarioResponse: (dimension: DIIDimension, question: string, response: number) => void;
+  getScenarioResponse: (dimension: DIIDimension) => ScenarioResponse | undefined;
   
   startAssessment: () => void;
   completeAssessment: (score: Score, stage: MaturityStage, percentile: number) => void;
@@ -101,6 +116,7 @@ const initialState = {
       industry: false
     }
   },
+  scenarioResponses: [],
   progress: {
     currentStep: 'company-search' as const,
     startTime: null,
@@ -167,6 +183,23 @@ export const useAssessmentStore = create<AssessmentState>()(
           }
         })),
 
+        // Scenario Actions
+        addScenarioResponse: (dimension, question, response) => set((state) => ({
+          scenarioResponses: [
+            ...state.scenarioResponses.filter(r => r.dimension !== dimension),
+            { dimension, question, response, timestamp: new Date() }
+          ],
+          progress: {
+            ...state.progress,
+            questionsAnswered: state.progress.questionsAnswered + 1
+          }
+        })),
+
+        getScenarioResponse: (dimension) => {
+          const { scenarioResponses } = get();
+          return scenarioResponses.find(r => r.dimension === dimension);
+        },
+
         // Progress Actions
         startAssessment: () => set({
           progress: {
@@ -231,6 +264,7 @@ export const useAssessmentStore = create<AssessmentState>()(
             isConfirmed: state.companySearch.isConfirmed
           },
           classification: state.classification,
+          scenarioResponses: state.scenarioResponses,
           progress: {
             currentStep: state.progress.currentStep,
             questionsAnswered: state.progress.questionsAnswered

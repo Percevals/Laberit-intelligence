@@ -14,7 +14,8 @@ import { CompanyConfirmationPage } from './pages/CompanyConfirmationPage';
 import { BusinessModelRevealPage } from './pages/BusinessModelRevealPage';
 import { SmartClassificationPage } from './pages/SmartClassificationPage';
 import { ClassificationPage } from './pages/ClassificationPage';
-import { QuestionsPage } from './pages/QuestionsPage';
+// import { QuestionsPage } from './pages/QuestionsPage'; // Replaced by ScenarioQuestionsPage
+import { ScenarioQuestionsPage } from './pages/ScenarioQuestionsPage';
 import { ResultsPage } from './pages/ResultsPage';
 import { ConfigDebugPage } from './pages/ConfigDebugPage';
 import { ScenarioTestPage } from './pages/ScenarioTestPage';
@@ -56,7 +57,7 @@ export default function App() {
             <Route path="/assessment/business-model" element={<BusinessModelRevealPage />} />
             <Route path="/assessment/smart-classify" element={<SmartClassificationPage />} />
             <Route path="/assessment/classify" element={<ClassificationPage />} />
-            <Route path="/assessment/questions" element={<QuestionsPage />} />
+            <Route path="/assessment/questions" element={<ScenarioQuestionsPage />} />
             <Route path="/assessment/results" element={<ResultsPage />} />
             <Route path="/debug" element={<ConfigDebugPage />} />
             <Route path="/test/scenarios" element={<ScenarioTestPage />} />

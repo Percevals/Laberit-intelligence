@@ -78,6 +78,22 @@
   },
   
   "assessment": {
+    "title": "Evaluación de Inmunidad Digital",
+    "subtitle": "Responda basándose en la situación actual de",
+    "selectResponse": "Seleccione su nivel actual:",
+    "responseRecorded": "Respuesta registrada",
+    "interpretation": "Interpretación",
+    "viewResults": "Ver resultados",
+    "lightVersion": "Versión ligera: 1 pregunta clave",
+    "premiumHint": "La versión premium incluye 5 dimensiones completas",
+    "dimension": "Dimensión",
+    "responses": {
+      "veryPoor": "Muy deficiente",
+      "poor": "Deficiente",
+      "average": "Regular",
+      "good": "Bueno",
+      "veryGood": "Muy bueno"
+    },
     "classification": {
       "title": "Primero, identifiquemos tu modelo de negocio",
       "subtitle": "Responde estas 2 preguntas para personalizar tu evaluación",
@@ -197,7 +213,17 @@
     "confirm": "Confirmar",
     "confirmDesc": "Verifica los datos",
     "discover": "Descubrir",
-    "discoverDesc": "Tu modelo de negocio"
+    "discoverDesc": "Tu modelo de negocio",
+    "evaluate": "Evaluar",
+    "evaluateDesc": "Mide tu inmunidad"
+  },
+  
+  "dimensions": {
+    "TRD": "Resiliencia ante Amenazas",
+    "AER": "Exposición de Activos",
+    "HFP": "Factor Humano",
+    "BRI": "Radio de Impacto",
+    "RRG": "Brecha de Recuperación"
   },
   
   "ai": {
