@@ -18,7 +18,6 @@ import {
   BarChart3
 } from 'lucide-react';
 import { useScenarioStore } from '@/store/scenario-store';
-import { useDIIDimensionsStore } from '@/store/dii-dimensions-store';
 import type { ScenarioAnalysis } from '@/services/scenario-engine';
 import { cn } from '@shared/utils/cn';
 

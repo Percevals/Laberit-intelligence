@@ -290,8 +290,11 @@ export const useScenarioStore = create<ScenarioState>()(
             
             if (csvData.length === 0) return;
             
+            const firstRow = csvData[0];
+            if (!firstRow) return;
+            
             const csvStr = [
-              Object.keys(csvData[0]).join(','),
+              Object.keys(firstRow).join(','),
               ...csvData.map(row => Object.values(row).join(','))
             ].join('\n');
             

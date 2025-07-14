@@ -30,12 +30,10 @@ import { cn } from '@shared/utils/cn';
 export function ScenarioDashboard() {
   const {
     scenarios,
-    activeScenarioId,
     quickWins,
     viewMode,
     showQuickWins,
     initializeEngine,
-    setViewMode,
     startScenarioBuilder,
     compareScenarios,
     generateRoadmapToTarget,
