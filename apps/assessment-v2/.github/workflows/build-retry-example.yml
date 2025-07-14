@@ -1,0 +1,43 @@
+name: Build with Retry Example
+# Example workflow with npm install retry logic
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies with retry
+      uses: nick-invision/retry@v2
+      with:
+        timeout_minutes: 10
+        max_attempts: 3
+        retry_wait_seconds: 30
+        command: npm ci --prefer-offline --no-audit
+        
+    # Alternative: Manual retry with npm config
+    - name: Install dependencies (alternative)
+      run: |
+        npm config set fetch-retries 3
+        npm config set fetch-retry-mintimeout 20000
+        npm config set fetch-retry-maxtimeout 120000
+        npm ci
+    
+    - name: Build
+      run: npm run build
+    
+    - name: Test
+      run: npm test

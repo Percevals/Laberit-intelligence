@@ -1,0 +1,26 @@
+# Example .npmrc configuration for better reliability
+# Copy to .npmrc if needed
+
+# Increase timeouts
+fetch-timeout=300000
+fetch-retry-mintimeout=20000
+fetch-retry-maxtimeout=120000
+
+# Increase retries
+fetch-retries=3
+
+# Use cache when possible
+prefer-offline=true
+
+# Registry configuration (if using custom registry)
+# registry=https://registry.npmjs.org/
+
+# Proxy configuration (if behind corporate proxy)
+# proxy=http://proxy.company.com:8080
+# https-proxy=http://proxy.company.com:8080
+
+# Strict SSL (set to false only if necessary for corporate environments)
+# strict-ssl=false
+
+# Log level for debugging
+# loglevel=verbose

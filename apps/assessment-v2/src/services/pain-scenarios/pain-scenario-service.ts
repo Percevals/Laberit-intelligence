@@ -17,8 +17,8 @@ export class PainScenarioService {
   private scenarioMatrix: ScenarioMatrix;
 
   constructor() {
-    // Type assertion since we know the JSON structure matches our types
-    this.scenarioMatrix = scenarioData as ScenarioMatrix;
+    // Type assertion with unknown first to handle structure differences
+    this.scenarioMatrix = scenarioData as unknown as ScenarioMatrix;
   }
 
   /**
