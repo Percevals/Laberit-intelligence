@@ -96,6 +96,27 @@
     "premiumHint": "La versión premium incluye 5 dimensiones completas",
     "dimension": "Dimensión",
     "formula": "Fórmula DII",
+    "complete": "Completado",
+    "answeringNow": "Respondiendo ahora...",
+    "next": "Siguiente",
+    "scoreLabel": {
+      "strong": "Fuerte",
+      "moderate": "Moderado",
+      "weak": "Débil",
+      "critical": "Crítico"
+    },
+    "assessed": "evaluado",
+    "immunityProfileComplete": "¡Perfil de Inmunidad Completo!",
+    "profileCompleteDesc": "Has construido una comprensión completa de tu inmunidad cibernética. ¿Listo para ver tu Índice de Inmunidad Digital?",
+    "calculateDIIScore": "Calcular Mi Puntuación DII",
+    "optimizingFlow": "Optimizando flujo de evaluación para",
+    "currentDII": "DII actual",
+    "confidence": "Confianza",
+    "smartSkipAvailable": "Estimación inteligente disponible",
+    "patternDetected": "Patrón detectado",
+    "minutesRemaining": "minutos restantes",
+    "continue": "Continuar evaluación",
+    "viewCompleteProfile": "Ver perfil completo",
     "responses": {
       "veryPoor": "Muy deficiente",
       "poor": "Deficiente",
@@ -238,7 +259,47 @@
     "AER": "Exposición de Activos",
     "HFP": "Factor Humano",
     "BRI": "Radio de Impacto",
-    "RRG": "Brecha de Recuperación"
+    "RRG": "Brecha de Recuperación",
+    "trd": {
+      "title": "Resiliencia ante Amenazas",
+      "subtitle": "Tiempo hasta Impacto en Ingresos",
+      "description": "¿Qué tan rápido pueden los ataques afectar tus resultados?",
+      "teaserText": "Descubre tu ventana de vulnerabilidad de ingresos",
+      "completedPrefix": "Impacto en ingresos en",
+      "immunityAspect": "Resiliencia Operacional"
+    },
+    "aer": {
+      "title": "Economía del Ataque",
+      "subtitle": "Atractivo como Objetivo",
+      "description": "¿Qué tan valioso eres para los atacantes?",
+      "teaserText": "Comprende tu atractivo para los cibercriminales",
+      "completedPrefix": "Potencial de valor de ataque",
+      "immunityAspect": "Perfil de Objetivo"
+    },
+    "hfp": {
+      "title": "Factor Humano",
+      "subtitle": "Vulnerabilidad de la Fuerza Laboral",
+      "description": "¿Qué tan probable es que tu gente caiga en ataques?",
+      "teaserText": "Evalúa tu capa de seguridad humana",
+      "completedPrefix": "Susceptibilidad del equipo",
+      "immunityAspect": "Firewall Humano"
+    },
+    "bri": {
+      "title": "Radio de Impacto",
+      "subtitle": "Capacidad de Contención",
+      "description": "¿Hasta dónde puede propagarse un ataque en tus sistemas?",
+      "teaserText": "Mapea tu capacidad de contención de brechas",
+      "completedPrefix": "Exposición potencial del sistema",
+      "immunityAspect": "Contención de Daños"
+    },
+    "rrg": {
+      "title": "Realidad de Recuperación",
+      "subtitle": "Capacidad de Restauración",
+      "description": "¿Qué tan bien puedes realmente recuperarte de los ataques?",
+      "teaserText": "Valida tus suposiciones de recuperación",
+      "completedPrefix": "Realidad del tiempo de recuperación",
+      "immunityAspect": "Capacidad Regenerativa"
+    }
   },
   
   "ai": {

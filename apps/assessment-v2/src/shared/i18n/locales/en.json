@@ -81,6 +81,37 @@
   },
   
   "assessment": {
+    "title": "Digital Immunity Assessment",
+    "subtitle": "Answer based on the current situation of",
+    "selectResponse": "Select your current level:",
+    "responseRecorded": "Response recorded",
+    "interpretation": "Interpretation",
+    "viewResults": "View results",
+    "lightVersion": "Light version: 1 key question",
+    "premiumHint": "Premium version includes all 5 dimensions",
+    "dimension": "Dimension",
+    "formula": "DII Formula",
+    "complete": "Complete",
+    "answeringNow": "Answering now...",
+    "next": "Next",
+    "scoreLabel": {
+      "strong": "Strong",
+      "moderate": "Moderate",
+      "weak": "Weak",
+      "critical": "Critical"
+    },
+    "assessed": "assessed",
+    "immunityProfileComplete": "Immunity Profile Complete!",
+    "profileCompleteDesc": "You've built a comprehensive understanding of your cyber immunity. Ready to see your Digital Immunity Index?",
+    "calculateDIIScore": "Calculate My DII Score",
+    "optimizingFlow": "Optimizing assessment flow for",
+    "currentDII": "Current DII",
+    "confidence": "Confidence",
+    "smartSkipAvailable": "Smart Skip Available",
+    "patternDetected": "Pattern Detected",
+    "minutesRemaining": "minutes remaining",
+    "continue": "Continue Assessment",
+    "viewCompleteProfile": "View Complete Profile",
     "classification": {
       "title": "First, let's identify your business model",
       "subtitle": "Answer these 2 questions to personalize your assessment",
@@ -150,5 +181,53 @@
     "privacy": "Privacy",
     "terms": "Terms",
     "contact": "Contact"
+  },
+  
+  "dimensions": {
+    "TRD": "Threat Resilience",
+    "AER": "Attack Economics",
+    "HFP": "Human Factor",
+    "BRI": "Blast Radius",
+    "RRG": "Recovery Reality Gap",
+    "trd": {
+      "title": "Threat Resilience",
+      "subtitle": "Time to Revenue Impact",
+      "description": "How quickly can attacks hurt your bottom line?",
+      "teaserText": "Discover your revenue vulnerability window",
+      "completedPrefix": "Revenue impact in",
+      "immunityAspect": "Operational Resilience"
+    },
+    "aer": {
+      "title": "Attack Economics",
+      "subtitle": "Target Attractiveness",
+      "description": "How valuable are you to attackers?",
+      "teaserText": "Understand your appeal to cybercriminals",
+      "completedPrefix": "Attack value potential",
+      "immunityAspect": "Target Profile"
+    },
+    "hfp": {
+      "title": "Human Factor",
+      "subtitle": "Workforce Vulnerability",
+      "description": "How likely are your people to fall for attacks?",
+      "teaserText": "Assess your human security layer",
+      "completedPrefix": "Team susceptibility",
+      "immunityAspect": "Human Firewall"
+    },
+    "bri": {
+      "title": "Blast Radius",
+      "subtitle": "Containment Capability",
+      "description": "How far can an attack spread in your systems?",
+      "teaserText": "Map your breach containment ability",
+      "completedPrefix": "Potential system exposure",
+      "immunityAspect": "Damage Containment"
+    },
+    "rrg": {
+      "title": "Recovery Reality",
+      "subtitle": "Restoration Capability",
+      "description": "How well can you actually recover from attacks?",
+      "teaserText": "Validate your recovery assumptions",
+      "completedPrefix": "Recovery time reality",
+      "immunityAspect": "Regenerative Capacity"
+    }
   }
 }

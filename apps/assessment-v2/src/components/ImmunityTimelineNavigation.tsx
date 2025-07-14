@@ -1,5 +1,6 @@
 // import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { 
   Clock, 
   Target, 
@@ -35,70 +36,17 @@ interface ImmunityTimelineNavigationProps {
   className?: string;
 }
 
-const dimensionConfig = {
-  TRD: {
-    icon: Clock,
-    title: 'Threat Resilience',
-    subtitle: 'Time to Revenue Impact',
-    description: 'How quickly can attacks hurt your bottom line?',
-    teaserText: 'Discover your revenue vulnerability window',
-    completedPrefix: 'Revenue impact in',
-    immunityAspect: 'Operational Resilience',
-    color: 'bg-red-500',
-    lightColor: 'bg-red-50',
-    darkColor: 'bg-red-900/20'
-  },
-  AER: {
-    icon: Target,
-    title: 'Attack Economics',
-    subtitle: 'Target Attractiveness',
-    description: 'How valuable are you to attackers?',
-    teaserText: 'Understand your appeal to cybercriminals',
-    completedPrefix: 'Attack value potential',
-    immunityAspect: 'Target Profile',
-    color: 'bg-orange-500',
-    lightColor: 'bg-orange-50',
-    darkColor: 'bg-orange-900/20'
-  },
-  HFP: {
-    icon: Users,
-    title: 'Human Factor',
-    subtitle: 'Workforce Vulnerability',
-    description: 'How likely are your people to fall for attacks?',
-    teaserText: 'Assess your human security layer',
-    completedPrefix: 'Team susceptibility',
-    immunityAspect: 'Human Firewall',
-    color: 'bg-yellow-500',
-    lightColor: 'bg-yellow-50',
-    darkColor: 'bg-yellow-900/20'
-  },
-  BRI: {
-    icon: Shield,
-    title: 'Blast Radius',
-    subtitle: 'Containment Capability',
-    description: 'How far can an attack spread in your systems?',
-    teaserText: 'Map your breach containment ability',
-    completedPrefix: 'Potential system exposure',
-    immunityAspect: 'Damage Containment',
-    color: 'bg-blue-500',
-    lightColor: 'bg-blue-50',
-    darkColor: 'bg-blue-900/20'
-  },
-  RRG: {
-    icon: RotateCcw,
-    title: 'Recovery Reality',
-    subtitle: 'Restoration Capability',
-    description: 'How well can you actually recover from attacks?',
-    teaserText: 'Validate your recovery assumptions',
-    completedPrefix: 'Recovery time reality',
-    immunityAspect: 'Regenerative Capacity',
-    color: 'bg-green-500',
-    lightColor: 'bg-green-50',
-    darkColor: 'bg-green-900/20'
-  }
+const dimensionIcons = {
+  TRD: Clock,
+  AER: Target,
+  HFP: Users,
+  BRI: Shield,
+  RRG: RotateCcw
 };
 
 function ImmunityScore({ score }: { score: number }) {
+  const { t } = useTranslation();
+  
   const getScoreColor = (score: number) => {
     if (score >= 8) return 'text-green-400';
     if (score >= 6) return 'text-yellow-400';
@@ -107,10 +55,10 @@ function ImmunityScore({ score }: { score: number }) {
   };
 
   const getScoreLabel = (score: number) => {
-    if (score >= 8) return 'Strong';
-    if (score >= 6) return 'Moderate';
-    if (score >= 4) return 'Weak';
-    return 'Critical';
+    if (score >= 8) return t('assessment.scoreLabel.strong');
+    if (score >= 6) return t('assessment.scoreLabel.moderate');
+    if (score >= 4) return t('assessment.scoreLabel.weak');
+    return t('assessment.scoreLabel.critical');
   };
 
   return (
@@ -138,17 +86,19 @@ function ImmunityScore({ score }: { score: number }) {
 
 function DimensionCard({ 
   dimension, 
-  config, 
   onSelect
 }: {
   dimension: ImmunityDimensionState;
-  config: typeof dimensionConfig[DIIDimension];
   onSelect: () => void;
 }) {
-  const Icon = config.icon;
+  const { t } = useTranslation();
+  const Icon = dimensionIcons[dimension.dimension];
   const isCompleted = dimension.status === 'completed';
   const isActive = dimension.status === 'active';
   const isUpcoming = dimension.status === 'upcoming';
+  
+  // Get dimension key for translations
+  const dimKey = dimension.dimension.toLowerCase();
 
   return (
     <motion.div
@@ -208,7 +158,7 @@ function DimensionCard({
                   isActive && 'text-primary-400',
                   isUpcoming && 'text-dark-text'
                 )}>
-                  {config.title}
+                  {t(`dimensions.${dimKey}.title`)}
                 </h3>
                 {isCompleted && (
                   <motion.div
@@ -218,7 +168,7 @@ function DimensionCard({
                   >
                     <Sparkles className="w-4 h-4 text-green-400" />
                     <span className="text-xs text-green-400 font-medium">
-                      Complete
+                      {t('assessment.complete')}
                     </span>
                   </motion.div>
                 )}
@@ -230,7 +180,7 @@ function DimensionCard({
                 isActive && 'text-primary-300',
                 isUpcoming && 'text-dark-text-secondary'
               )}>
-                {config.subtitle}
+                {t(`dimensions.${dimKey}.subtitle`)}
               </p>
 
               {/* Completed State - Show captured value */}
@@ -242,7 +192,7 @@ function DimensionCard({
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-sm text-green-300 font-medium">
-                      {config.completedPrefix}: {dimension.capturedValue}
+                      {t(`dimensions.${dimKey}.completedPrefix`)}: {dimension.capturedValue}
                     </span>
                   </div>
                   {dimension.capturedScore && (
@@ -250,7 +200,7 @@ function DimensionCard({
                   )}
                   <div className="flex items-center gap-1 text-xs text-green-400">
                     <TrendingUp className="w-3 h-3" />
-                    <span>{config.immunityAspect} assessed</span>
+                    <span>{t(`dimensions.${dimKey}.immunityAspect`)} {t('assessment.assessed')}</span>
                   </div>
                 </motion.div>
               )}
@@ -259,10 +209,10 @@ function DimensionCard({
               {isUpcoming && (
                 <div className="mt-2">
                   <p className="text-sm text-dark-text-secondary italic">
-                    {config.teaserText}
+                    {t(`dimensions.${dimKey}.teaserText`)}
                   </p>
                   <div className="flex items-center gap-1 mt-1 text-xs text-dark-text-secondary">
-                    <span>Next: {config.immunityAspect}</span>
+                    <span>{t('assessment.next')}: {t(`dimensions.${dimKey}.immunityAspect`)}</span>
                     <ArrowRight className="w-3 h-3" />
                   </div>
                 </div>
@@ -284,7 +234,7 @@ function DimensionCard({
               <div className="p-3 bg-primary-600/5">
                 <p className="text-xs text-primary-400 font-medium flex items-center gap-2">
                   <Circle className="w-2 h-2 fill-current animate-pulse" />
-                  Answering now...
+                  {t('assessment.answeringNow')}
                 </p>
               </div>
             </motion.div>
@@ -300,6 +250,7 @@ export function ImmunityTimelineNavigation({
   onDimensionSelect,
   className
 }: ImmunityTimelineNavigationProps) {
+  const { t } = useTranslation();
   const completedCount = dimensions.filter(d => d.status === 'completed').length;
   const progressPercentage = (completedCount / dimensions.length) * 100;
 
@@ -325,13 +276,10 @@ export function ImmunityTimelineNavigation({
       {/* Timeline */}
       <div className="relative">
         {dimensions.map((dimension) => {
-          const config = dimensionConfig[dimension.dimension];
-          
           return (
             <DimensionCard
               key={dimension.dimension}
               dimension={dimension}
-              config={config}
               onSelect={() => onDimensionSelect(dimension.dimension)}
             />
           );
@@ -349,13 +297,12 @@ export function ImmunityTimelineNavigation({
             <div className="flex items-center justify-center gap-2">
               <Sparkles className="w-6 h-6 text-green-400" />
               <h3 className="text-lg font-bold text-green-400">
-                Immunity Profile Complete!
+                {t('assessment.immunityProfileComplete')}
               </h3>
               <Sparkles className="w-6 h-6 text-green-400" />
             </div>
             <p className="text-green-300">
-              You've built a comprehensive understanding of your cyber immunity. 
-              Ready to see your Digital Immunity Index?
+              {t('assessment.profileCompleteDesc')}
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -363,7 +310,7 @@ export function ImmunityTimelineNavigation({
               className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors"
             >
               <TrendingUp className="w-5 h-5" />
-              Calculate My DII Score
+              {t('assessment.calculateDIIScore')}
               <ArrowRight className="w-5 h-5" />
             </motion.button>
           </div>
