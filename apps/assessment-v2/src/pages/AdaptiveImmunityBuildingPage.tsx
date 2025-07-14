@@ -92,15 +92,15 @@ function SmartSkipModal({ recommendations, onApply, onCancel }: SmartSkipModalPr
         initial={{ scale: 0.95 }}
         animate={{ scale: 1 }}
         exit={{ scale: 0.95 }}
-        className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-hidden"
+        className="bg-dark-surface border border-dark-border rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="p-6 border-b">
-          <h3 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
-            <Brain className="w-6 h-6 text-blue-600" />
+        <div className="p-6 border-b border-dark-border">
+          <h3 className="text-xl font-semibold text-dark-text flex items-center gap-2">
+            <Brain className="w-6 h-6 text-primary-600" />
             Smart Skip Recommendations
           </h3>
-          <p className="text-sm text-gray-600 mt-1">
+          <p className="text-sm text-dark-text-secondary mt-1">
             Based on your answers, we can estimate these dimensions with reasonable confidence
           </p>
         </div>
@@ -113,26 +113,26 @@ function SmartSkipModal({ recommendations, onApply, onCancel }: SmartSkipModalPr
               className={cn(
                 "p-4 rounded-lg border-2 cursor-pointer transition-all",
                 selectedSkips.has(rec.dimension)
-                  ? "border-blue-500 bg-blue-50"
-                  : "border-gray-200 hover:border-gray-300"
+                  ? "border-primary-600 bg-primary-600/10"
+                  : "border-dark-border hover:border-primary-600/50"
               )}
               onClick={() => handleToggle(rec.dimension)}
             >
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <h4 className="font-medium text-gray-900">{rec.dimension}</h4>
+                    <h4 className="font-medium text-dark-text">{rec.dimension}</h4>
                     <span className={cn(
                       "text-xs px-2 py-0.5 rounded-full",
-                      rec.confidence >= 70 ? "bg-green-100 text-green-700" :
-                      rec.confidence >= 50 ? "bg-yellow-100 text-yellow-700" :
-                      "bg-red-100 text-red-700"
+                      rec.confidence >= 70 ? "bg-green-600/20 text-green-400" :
+                      rec.confidence >= 50 ? "bg-yellow-600/20 text-yellow-400" :
+                      "bg-red-600/20 text-red-400"
                     )}>
                       {rec.confidence}% confidence
                     </span>
                   </div>
-                  <p className="text-sm text-gray-600 mb-2">{rec.rationale}</p>
-                  <div className="text-sm font-medium text-blue-600">
+                  <p className="text-sm text-dark-text-secondary mb-2">{rec.rationale}</p>
+                  <div className="text-sm font-medium text-primary-400">
                     Suggested value: {rec.suggestedMetric} 
                     {rec.dimension === 'TRD' && ' hours'}
                     {rec.dimension === 'AER' && ` ($${rec.suggestedMetric >= 1000000 ? (rec.suggestedMetric/1000000).toFixed(1) + 'M' : Math.round(rec.suggestedMetric/1000) + 'K'})`}
@@ -153,10 +153,10 @@ function SmartSkipModal({ recommendations, onApply, onCancel }: SmartSkipModalPr
           ))}
         </div>
         
-        <div className="p-6 border-t bg-gray-50 flex justify-between">
+        <div className="p-6 border-t border-dark-border bg-dark-bg flex justify-between">
           <button
             onClick={onCancel}
-            className="px-6 py-2 text-gray-700 hover:text-gray-900"
+            className="px-6 py-2 text-dark-text-secondary hover:text-dark-text transition-colors"
           >
             Answer All Questions
           </button>
@@ -166,8 +166,8 @@ function SmartSkipModal({ recommendations, onApply, onCancel }: SmartSkipModalPr
             className={cn(
               "px-6 py-2 rounded-lg font-medium transition-colors",
               selectedSkips.size > 0
-                ? "bg-blue-600 text-white hover:bg-blue-700"
-                : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                ? "bg-primary-600 text-white hover:bg-primary-700"
+                : "bg-dark-surface text-dark-text-secondary cursor-not-allowed"
             )}
           >
             Apply {selectedSkips.size} Skip{selectedSkips.size !== 1 ? 's' : ''}
@@ -508,7 +508,7 @@ export function AdaptiveImmunityBuildingPage() {
             {skipRecommendations.length > 0 && answeredDimensions.length >= 2 && (
               <button
                 onClick={() => setShowSmartSkip(true)}
-                className="flex items-center gap-2 text-blue-600 hover:text-blue-700"
+                className="flex items-center gap-2 text-primary-600 hover:text-primary-500 transition-colors"
               >
                 <SkipForward className="w-4 h-4" />
                 Smart Skip Available
@@ -524,10 +524,10 @@ export function AdaptiveImmunityBuildingPage() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="mb-6 p-4 bg-blue-50 rounded-lg flex items-start gap-3"
+              className="mb-6 p-4 bg-primary-600/10 border border-primary-600/20 rounded-lg flex items-start gap-3"
             >
-              <Brain className="w-5 h-5 text-blue-600 mt-0.5" />
-              <p className="text-sm text-blue-800">{adaptiveMessage}</p>
+              <Brain className="w-5 h-5 text-primary-600 mt-0.5" />
+              <p className="text-sm text-dark-text">{adaptiveMessage}</p>
             </motion.div>
           )}
         </AnimatePresence>
@@ -539,24 +539,24 @@ export function AdaptiveImmunityBuildingPage() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="mb-6 p-4 bg-purple-50 rounded-lg flex items-start gap-3"
+              className="mb-6 p-4 bg-purple-600/10 border border-purple-600/20 rounded-lg flex items-start gap-3"
             >
-              <Sparkles className="w-5 h-5 text-purple-600 mt-0.5" />
-              <p className="text-sm text-purple-800">{transitionMessage}</p>
+              <Sparkles className="w-5 h-5 text-purple-400 mt-0.5" />
+              <p className="text-sm text-dark-text">{transitionMessage}</p>
             </motion.div>
           )}
         </AnimatePresence>
 
         {/* Correlation Hints */}
         {correlationHints.length > 0 && (
-          <div className="mb-6 p-4 bg-yellow-50 rounded-lg">
-            <h4 className="font-medium text-yellow-900 mb-2 flex items-center gap-2">
+          <div className="mb-6 p-4 bg-yellow-600/10 border border-yellow-600/20 rounded-lg">
+            <h4 className="font-medium text-yellow-400 mb-2 flex items-center gap-2">
               <Info className="w-4 h-4" />
               Pattern Detected
             </h4>
             <ul className="space-y-1">
               {correlationHints.map((hint, index) => (
-                <li key={index} className="text-sm text-yellow-800">{hint}</li>
+                <li key={index} className="text-sm text-dark-text-secondary">{hint}</li>
               ))}
             </ul>
           </div>

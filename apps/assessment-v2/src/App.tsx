@@ -4,7 +4,7 @@
  */
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+// import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -21,9 +21,7 @@ import { AdaptiveImmunityBuildingPage } from './pages/AdaptiveImmunityBuildingPa
 // import { ResultsPage } from './pages/ResultsPage'; // Replaced by EnhancedResultsPage
 // import { EnhancedResultsPage } from './pages/EnhancedResultsPage'; // Replaced by ImmunityResultsPage
 import { ImmunityResultsPage } from './pages/ImmunityResultsPage';
-import { ConfigDebugPage } from './pages/ConfigDebugPage';
-import { ScenarioTestPage } from './pages/ScenarioTestPage';
-import { QuestionAdapterTestPage } from './pages/QuestionAdapterTestPage';
+// Debug pages removed for production
 
 // Core providers and setup
 const queryClient = new QueryClient({
@@ -63,13 +61,11 @@ export default function App() {
             <Route path="/assessment/classify" element={<ClassificationPage />} />
             <Route path="/assessment/questions" element={<AdaptiveImmunityBuildingPage />} />
             <Route path="/assessment/results" element={<ImmunityResultsPage />} />
-            <Route path="/debug" element={<ConfigDebugPage />} />
-            <Route path="/test/scenarios" element={<ScenarioTestPage />} />
-            <Route path="/test/adapter" element={<QuestionAdapterTestPage />} />
+            {/* Debug routes removed for production */}
           </Routes>
         </Suspense>
       </BrowserRouter>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   );
 }
