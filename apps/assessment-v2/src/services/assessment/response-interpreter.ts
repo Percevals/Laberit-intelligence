@@ -18,6 +18,12 @@ export interface InterpretationContext {
 export interface DimensionInterpretation {
   dimension: DIIDimension;
   rawResponse: number; // 1-5 from user
+  metric?: {
+    hours?: number;
+    percentage?: number;
+    ratio?: number;
+    multiplier?: number;
+  } | undefined;
   interpretedValue: number; // 1-10 for DII
   confidence: number; // 0-1
   reasoning: string;
@@ -26,19 +32,23 @@ export interface DimensionInterpretation {
 export class ResponseInterpreter {
   /**
    * Interpret a single response into DII dimension value
+   * Supports both legacy (1-5 scale only) and metric-based interpretation
    */
   static interpretResponse(
     dimension: DIIDimension,
     response: number, // 1-5 scale
-    context: InterpretationContext
+    context: InterpretationContext,
+    metric?: DimensionInterpretation['metric']
   ): DimensionInterpretation {
     // Validate response
     if (response < 1 || response > 5) {
       throw new Error(`Invalid response: ${response}. Must be 1-5.`);
     }
 
-    // Get base interpretation
-    const baseValue = this.getBaseInterpretation(dimension, response);
+    // Get base interpretation - use metric if available, otherwise fall back to generic mapping
+    const baseValue = metric 
+      ? this.getMetricBasedInterpretation(dimension, response, metric)
+      : this.getBaseInterpretation(dimension, response);
     
     // Apply business model adjustments
     const modelAdjusted = this.applyBusinessModelAdjustment(
@@ -78,6 +88,7 @@ export class ResponseInterpreter {
     return {
       dimension,
       rawResponse: response,
+      metric,
       interpretedValue,
       confidence,
       reasoning
@@ -113,6 +124,78 @@ export class ResponseInterpreter {
     if (!dimensionMapping) return 5; // Default to middle if unknown
     
     return dimensionMapping[response] || 5;
+  }
+
+  /**
+   * Metric-based interpretation (v2.0.0)
+   * Uses actual metric values to determine DII score
+   */
+  private static getMetricBasedInterpretation(
+    dimension: DIIDimension,
+    response: number,
+    metric: NonNullable<DimensionInterpretation['metric']>
+  ): number {
+    // Each dimension has different metric types and scales
+    switch (dimension) {
+      case 'TRD': {
+        // Time Resilience: hours until 10% revenue loss
+        const hours = metric.hours || 24;
+        // Map hours to 1-10 scale (lower hours = worse score)
+        if (hours <= 2) return 1.5;
+        if (hours <= 4) return 3.5;
+        if (hours <= 8) return 5.5;
+        if (hours <= 24) return 7.5;
+        return 9.5;
+      }
+      
+      case 'AER': {
+        // Asset Exposure: value extraction ratio
+        const ratio = metric.ratio || 5;
+        // Map ratio to 1-10 scale (higher ratio = worse score)
+        if (ratio >= 10) return 2;
+        if (ratio >= 5) return 4;
+        if (ratio >= 2) return 6;
+        if (ratio >= 1) return 8;
+        return 10;
+      }
+      
+      case 'HFP': {
+        // Human Factor: failure percentage
+        const percentage = metric.percentage || 50;
+        // Map percentage to 1-10 scale (higher % = worse score)
+        if (percentage >= 80) return 9;
+        if (percentage >= 60) return 7;
+        if (percentage >= 40) return 5;
+        if (percentage >= 20) return 3;
+        return 1;
+      }
+      
+      case 'BRI': {
+        // Blast Radius: impact percentage
+        const percentage = metric.percentage || 50;
+        // Map percentage to 1-10 scale (higher % = worse score)
+        if (percentage >= 80) return 8.5;
+        if (percentage >= 60) return 6.5;
+        if (percentage >= 40) return 4.5;
+        if (percentage >= 20) return 2.5;
+        return 1;
+      }
+      
+      case 'RRG': {
+        // Recovery Gap: recovery time multiplier
+        const multiplier = metric.multiplier || 3;
+        // Map multiplier to 1-10 scale (higher multiplier = worse score)
+        if (multiplier >= 10) return 8;
+        if (multiplier >= 5) return 6;
+        if (multiplier >= 3) return 4;
+        if (multiplier >= 2) return 2;
+        return 1;
+      }
+      
+      default:
+        // Fallback to response-based mapping
+        return this.getBaseInterpretation(dimension, response);
+    }
   }
 
   /**
@@ -271,7 +354,8 @@ export class ResponseInterpreter {
    */
   static interpretAllResponses(
     responses: Map<DIIDimension, number>,
-    context: InterpretationContext
+    context: InterpretationContext,
+    metrics?: Map<DIIDimension, DimensionInterpretation['metric']>
   ): Record<DIIDimension, DimensionInterpretation> {
     const dimensions: DIIDimension[] = ['TRD', 'AER', 'HFP', 'BRI', 'RRG'];
     const interpretations: Record<string, DimensionInterpretation> = {};
@@ -279,7 +363,8 @@ export class ResponseInterpreter {
     for (const dimension of dimensions) {
       const response = responses.get(dimension);
       if (response) {
-        interpretations[dimension] = this.interpretResponse(dimension, response, context);
+        const metric = metrics?.get(dimension);
+        interpretations[dimension] = this.interpretResponse(dimension, response, context, metric);
       }
     }
 

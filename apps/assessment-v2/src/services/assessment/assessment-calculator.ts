@@ -33,10 +33,14 @@ export class AssessmentCalculator {
     // Map business model to scenario ID
     const scenarioId = this.getScenarioId(context.businessModel);
     
-    // Create response map
+    // Create response and metric maps
     const responseMap = new Map<DIIDimension, number>();
+    const metricMap = new Map<DIIDimension, any>();
     context.responses.forEach(r => {
       responseMap.set(r.dimension, r.response);
+      if (r.metric) {
+        metricMap.set(r.dimension, r.metric);
+      }
     });
 
     // For light assessment with only TRD, use defaults for other dimensions
@@ -50,12 +54,16 @@ export class AssessmentCalculator {
     }
 
     // Interpret all responses
-    const interpretations = ResponseInterpreter.interpretAllResponses(responseMap, {
-      businessModel: context.businessModel,
-      scenarioId,
-      company: context.company,
-      criticalInfra: context.criticalInfra
-    });
+    const interpretations = ResponseInterpreter.interpretAllResponses(
+      responseMap, 
+      {
+        businessModel: context.businessModel,
+        scenarioId,
+        company: context.company,
+        criticalInfra: context.criticalInfra
+      },
+      metricMap
+    );
 
     // Extract dimension values for DII calculation
     const diiDimensions: DIIDimensions = {

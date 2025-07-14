@@ -4,23 +4,51 @@
  */
 
 /**
- * Individual pain scenario for a specific business model and dimension
+ * Response option for measurement questions (v2.0.0)
+ */
+export interface ResponseOption {
+  /** Numeric value (1-5) for DII calculation */
+  value: number;
+  
+  /** Display label for the option */
+  label: string;
+  
+  /** Actual metric values - directly on the response option */
+  hours?: number;
+  percentage?: number;
+  ratio?: number;
+  multiplier?: number;
+  
+  /** Interpretation of what this response means */
+  interpretation: string;
+}
+
+/**
+ * Individual pain scenario for a specific business model and dimension (v2.0.0)
  */
 export interface PainScenario {
+  /** Human-readable dimension name */
+  dimension_name: string;
+  
   /** The specific pain point this business model faces */
   pain_point: string;
   
   /** Root cause analysis of why this pain exists */
   root_cause: string;
   
-  /** Single impactful question for quick assessment */
-  light_question: string;
+  /** Quantifiable measurement question */
+  measurement_question: string;
   
-  /** Multiple deeper questions for comprehensive assessment */
-  premium_questions: string[];
+  /** Response options with metrics */
+  response_options: ResponseOption[];
   
-  /** How to interpret the answers to reveal understanding */
-  interpretation: string;
+  /** Context help text for this business model */
+  context_for_user: string;
+  
+  /** Legacy fields for backwards compatibility */
+  light_question?: string;
+  premium_questions?: string[] | undefined;
+  interpretation?: string;
 }
 
 /**

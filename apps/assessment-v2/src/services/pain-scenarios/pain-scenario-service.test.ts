@@ -18,7 +18,7 @@ function testSpecificScenario() {
     console.log(`✅ Successfully retrieved scenario for ${businessModelId} - ${dimension}`);
     console.log('Pain Point:', result.scenario.pain_point);
     console.log('Light Question:', result.scenario.light_question);
-    console.log('Premium Questions Count:', result.scenario.premium_questions.length);
+    console.log('Premium Questions Count:', result.scenario.premium_questions?.length || 0);
   } catch (error) {
     console.error('❌ Error:', error);
   }

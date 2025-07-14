@@ -36,6 +36,12 @@ export interface ScenarioResponse {
   dimension: DIIDimension;
   question: string;
   response: number; // 1-5 scale
+  metric?: {
+    hours?: number;
+    percentage?: number;
+    ratio?: number;
+    multiplier?: number;
+  };
   timestamp: Date;
 }
 
@@ -80,7 +86,7 @@ interface AssessmentState {
   updateClassificationFromCompany: (company: CompanyInfo) => void;
   
   // Scenario Actions
-  addScenarioResponse: (dimension: DIIDimension, question: string, response: number) => void;
+  addScenarioResponse: (dimension: DIIDimension, question: string, response: number, metric?: any) => void;
   getScenarioResponse: (dimension: DIIDimension) => ScenarioResponse | undefined;
   
   startAssessment: () => void;
@@ -184,10 +190,10 @@ export const useAssessmentStore = create<AssessmentState>()(
         })),
 
         // Scenario Actions
-        addScenarioResponse: (dimension, question, response) => set((state) => ({
+        addScenarioResponse: (dimension, question, response, metric) => set((state) => ({
           scenarioResponses: [
             ...state.scenarioResponses.filter(r => r.dimension !== dimension),
-            { dimension, question, response, timestamp: new Date() }
+            { dimension, question, response, metric, timestamp: new Date() }
           ],
           progress: {
             ...state.progress,

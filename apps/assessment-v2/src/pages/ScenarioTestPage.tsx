@@ -116,9 +116,9 @@ export function ScenarioTestPage() {
               </div>
               
               <div>
-                <h3 className="font-semibold text-primary-600 mb-2">Premium Questions ({scenario.scenario.premium_questions.length})</h3>
+                <h3 className="font-semibold text-primary-600 mb-2">Premium Questions ({scenario.scenario.premium_questions?.length || 0})</h3>
                 <ul className="list-disc list-inside space-y-1">
-                  {scenario.scenario.premium_questions.map((q, i) => (
+                  {(scenario.scenario.premium_questions || []).map((q, i) => (
                     <li key={i} className="text-dark-text-secondary">{q}</li>
                   ))}
                 </ul>

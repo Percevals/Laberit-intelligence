@@ -5,14 +5,17 @@
 
 import { painScenarioService } from '@services/pain-scenarios';
 import { questionAdapter } from './question-adapter';
-import type { BusinessModelScenarioId, DIIDimension } from '@core/types/pain-scenario.types';
+import type { BusinessModelScenarioId, DIIDimension, ResponseOption } from '@core/types/pain-scenario.types';
 import type { CompanyInfo } from '@services/ai/types';
 import type { AdaptedQuestion, QuestionContext } from './types';
 
 export interface LightAssessmentQuestion {
   dimension: DIIDimension;
+  dimensionName: string;
   adaptedQuestion: AdaptedQuestion;
-  interpretation: string;
+  responseOptions: ResponseOption[];
+  contextForUser: string;
+  interpretation: string; // Legacy field
 }
 
 export class LightAssessmentAdapter {
@@ -49,8 +52,11 @@ export class LightAssessmentAdapter {
         
         return {
           dimension,
+          dimensionName: scenario.dimension_name || dimension,
           adaptedQuestion,
-          interpretation: scenario.interpretation
+          responseOptions: scenario.response_options || [],
+          contextForUser: scenario.context_for_user || '',
+          interpretation: scenario.interpretation || ''
         };
       })
     );
@@ -84,8 +90,11 @@ export class LightAssessmentAdapter {
     
     return {
       dimension,
+      dimensionName: scenario.dimension_name || dimension,
       adaptedQuestion,
-      interpretation: scenario.interpretation
+      responseOptions: scenario.response_options || [],
+      contextForUser: scenario.context_for_user || '',
+      interpretation: scenario.interpretation || ''
     };
   }
 

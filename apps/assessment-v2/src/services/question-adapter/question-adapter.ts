@@ -86,9 +86,10 @@ export class QuestionAdapter {
     const { scenario, questionType, questionIndex = 0 } = request;
     
     if (questionType === 'light') {
-      return scenario.light_question;
+      // Use measurement_question for v2.0.0, fallback to light_question
+      return scenario.measurement_question || scenario.light_question || '';
     } else {
-      return scenario.premium_questions[questionIndex] || scenario.premium_questions[0] || '';
+      return scenario.premium_questions?.[questionIndex] || scenario.premium_questions?.[0] || '';
     }
   }
 

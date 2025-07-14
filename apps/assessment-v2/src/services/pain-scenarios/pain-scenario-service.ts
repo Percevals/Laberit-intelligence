@@ -104,7 +104,7 @@ export class PainScenarioService {
    */
   getPremiumQuestions(businessModelId: BusinessModelScenarioId, dimension: DIIDimension): string[] {
     const response = this.getScenario(businessModelId, dimension);
-    return response.scenario.premium_questions;
+    return response.scenario.premium_questions || [];
   }
 }
 

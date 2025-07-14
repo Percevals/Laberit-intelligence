@@ -78,13 +78,14 @@ export function ScenarioQuestionsPage() {
     setLoading(false);
   };
 
-  const handleResponse = (value: number) => {
+  const handleResponse = (value: number, metric: any) => {
     if (!currentQuestion) return;
 
     addScenarioResponse(
       currentQuestion.dimension,
       currentQuestion.adaptedQuestion.adapted,
-      value
+      value,
+      metric
     );
   };
 
@@ -153,8 +154,10 @@ export function ScenarioQuestionsPage() {
           {currentQuestion && (
             <ScenarioQuestionCard
               dimension={currentQuestion.dimension}
+              dimensionName={currentQuestion.dimensionName}
               question={currentQuestion.adaptedQuestion.adapted}
-              interpretation={currentQuestion.interpretation}
+              responseOptions={currentQuestion.responseOptions}
+              contextForUser={currentQuestion.contextForUser}
               currentResponse={getScenarioResponse(currentQuestion.dimension)?.response}
               onResponse={handleResponse}
             />
