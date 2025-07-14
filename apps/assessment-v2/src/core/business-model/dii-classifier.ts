@@ -414,6 +414,6 @@ export class DIIBusinessModelClassifier {
       'B2B_ENTERPRISE': '5_servicios_financieros'
     };
     
-    return mapping[model];
+    return mapping[model] || '1_comercio_hibrido'; // Default to comercio_hibrido if not found
   }
 }
