@@ -139,6 +139,8 @@
 - Fixed TypeScript error in dii-classifier.ts line 417
 - Added default return value for getScenarioMapping method
 - Build now compiles successfully with all strict type checks
+- Added missing DII business model translations to i18n files
+- Fixed UI displaying "businessModels.names.SOFTWARE_CRITICO" instead of actual names
 
 ### What Broke
 - Nothing - this was a simple TypeScript fix
@@ -150,6 +152,8 @@
 
 ### Key Files Modified
 - `/src/core/business-model/dii-classifier.ts` - Fixed undefined return value
+- `/src/shared/i18n/locales/es.json` - Added DII business model translations (Spanish)
+- `/src/shared/i18n/locales/en.json` - Added DII business model translations (English)
 
 ### Notes for Next Session
 - DII Business Models implementation is now complete and building
