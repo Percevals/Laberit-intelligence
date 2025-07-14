@@ -1,501 +1,585 @@
 {
-  "version": "1.0.0",
-  "description": "8x5 Business Model Pain Discovery Matrix - Maps specific vulnerabilities by model and dimension",
+  "version": "2.0.0",
+  "description": "DII Measurement Matrix - Quantifiable questions for each business model and dimension",
+  "response_scale_info": {
+    "description": "All questions use 1-5 scale that maps to DII dimension values",
+    "mapping_approach": "Response options designed to capture operational reality, not satisfaction"
+  },
   "matrix": {
     "1_comercio_hibrido": {
       "TRD": {
+        "dimension_name": "Time to Revenue Degradation",
         "pain_point": "Digital channel downtime forces customers to physical stores, creating operational chaos",
         "root_cause": "Hybrid operations create dependencies without redundancy planning",
-        "light_question": "Si tu e-commerce cae ahora mismo, ¿cuántas horas hasta que tus tiendas físicas colapsen por la demanda?",
-        "premium_questions": [
-          "¿Qué % de clientes digitales tienen las tiendas físicas capacidad de absorber?",
-          "¿Cuánto inventario se maneja exclusivamente online vs tiendas?",
-          "¿Pueden las tiendas operar sin acceso a sistemas centrales?",
-          "¿Cómo se comunican promociones digitales a equipos de tienda?"
+        "measurement_question": "Si sus sistemas principales (e-commerce, POS, inventario) fallan completamente, ¿en cuántas horas perdería el 10% de sus ingresos diarios?",
+        "response_options": [
+          {"value": 1, "label": "Menos de 2 horas", "hours": 2, "interpretation": "Altamente vulnerable"},
+          {"value": 2, "label": "2-6 horas", "hours": 6, "interpretation": "Vulnerable"},
+          {"value": 3, "label": "6-24 horas", "hours": 24, "interpretation": "Moderado"},
+          {"value": 4, "label": "24-72 horas", "hours": 48, "interpretation": "Resiliente"},
+          {"value": 5, "label": "Más de 72 horas", "hours": 72, "interpretation": "Muy resiliente"}
         ],
-        "interpretation": "Reveals if they understand cross-channel operational dependencies"
+        "context_for_user": "En comercio híbrido, la tolerancia típica es 24-48 horas por redundancia física"
       },
       "AER": {
+        "dimension_name": "Attack Economics Ratio",
         "pain_point": "Digital operations expose high-value data while generating fraction of revenue",
         "root_cause": "Security investment follows technology adoption, not revenue protection",
-        "light_question": "¿Qué % de tus ingresos viene del canal digital, pero qué % de tu presupuesto de seguridad lo protege?",
-        "premium_questions": [
-          "¿Cuál es el valor de la base de datos de clientes accesible online?",
-          "¿Qué costaría más: perder e-commerce 1 semana o data de clientes?",
-          "¿Los mismos sistemas protegen operaciones de $5K/hora y $50K/hora?",
-          "¿Cuánto pagarías para evitar que competidores accedan a tu data de precios?"
+        "measurement_question": "Si un atacante invierte $10,000 USD en comprometer sus sistemas, ¿cuánto valor podría extraer (datos de clientes, acceso a cuentas, disrupción)?",
+        "response_options": [
+          {"value": 1, "label": "Menos de $10K", "ratio": 1, "interpretation": "No vale la pena atacar"},
+          {"value": 2, "label": "$10K-$50K", "ratio": 5, "interpretation": "Objetivo marginal"},
+          {"value": 3, "label": "$50K-$200K", "ratio": 20, "interpretation": "Objetivo atractivo"},
+          {"value": 4, "label": "$200K-$1M", "ratio": 100, "interpretation": "Objetivo prioritario"},
+          {"value": 5, "label": "Más de $1M", "ratio": 100, "interpretation": "Objetivo crítico"}
         ],
-        "interpretation": "Exposes misalignment between digital risk and revenue contribution"
+        "context_for_user": "Considere: valor de base de datos de clientes, pérdidas por downtime, costo de recuperación"
       },
       "HFP": {
+        "dimension_name": "Human Failure Probability",
         "pain_point": "Store employees with system access become weakest security link",
         "root_cause": "High rotation staff with minimal training accessing critical systems",
-        "light_question": "¿Cuántos empleados de tienda pueden aprobar devoluciones mayores a $500, y cuándo fue su última capacitación de seguridad?",
-        "premium_questions": [
-          "¿Qué % de rotación anual tienen los empleados con acceso a sistemas?",
-          "¿Cuántos ex-empleados de los últimos 6 meses aún podrían tener accesos?",
-          "¿Un empleado de tienda puede acceder a data de otras sucursales?",
-          "¿Cómo detectarías si un empleado está filtrando data de clientes?"
+        "measurement_question": "En su última prueba de phishing o incidente real, ¿qué porcentaje de empleados con acceso a sistemas cayó en el engaño?",
+        "response_options": [
+          {"value": 1, "label": "0-5%", "percentage": 5, "interpretation": "Excelente cultura de seguridad"},
+          {"value": 2, "label": "5-15%", "percentage": 15, "interpretation": "Buena conciencia"},
+          {"value": 3, "label": "15-30%", "percentage": 30, "interpretation": "Promedio industria"},
+          {"value": 4, "label": "30-50%", "percentage": 50, "interpretation": "Alto riesgo"},
+          {"value": 5, "label": "Más de 50% o no hemos probado", "percentage": 70, "interpretation": "Crítico"}
         ],
-        "interpretation": "Shows if they grasp human risk in distributed operations"
+        "context_for_user": "Incluya personal de tiendas, oficinas y cualquiera con acceso a sistemas corporativos"
       },
       "BRI": {
+        "dimension_name": "Blast Radius Index",
         "pain_point": "Point-of-sale compromise can spread to entire inventory and financial systems",
         "root_cause": "Retail systems interconnected for efficiency, not isolation",
-        "light_question": "Si comprometen una caja registradora, ¿a qué % de tus sistemas críticos podría llegar un atacante?",
-        "premium_questions": [
-          "¿Las cajas tienen acceso directo a sistemas de inventario central?",
-          "¿Un malware en POS puede alcanzar sistemas contables?",
-          "¿Están segmentadas las redes de tiendas entre sí?",
-          "¿Qué sistemas comparten credenciales con los POS?"
+        "measurement_question": "Si comprometen un dispositivo típico (PC de tienda, laptop de empleado), ¿a qué porcentaje de sus sistemas críticos podría acceder un atacante?",
+        "response_options": [
+          {"value": 1, "label": "0-20%", "percentage": 20, "interpretation": "Bien segmentado"},
+          {"value": 2, "label": "20-40%", "percentage": 40, "interpretation": "Segmentación parcial"},
+          {"value": 3, "label": "40-60%", "percentage": 60, "interpretation": "Segmentación limitada"},
+          {"value": 4, "label": "60-80%", "percentage": 80, "interpretation": "Poca segmentación"},
+          {"value": 5, "label": "80-100%", "percentage": 90, "interpretation": "Red plana"}
         ],
-        "interpretation": "Reveals understanding of retail attack propagation paths"
+        "context_for_user": "Sistemas críticos incluyen: POS, inventario, finanzas, datos de clientes"
       },
       "RRG": {
+        "dimension_name": "Recovery Reality Gap",
         "pain_point": "Recovery plans assume both channels work, reality shows interdependencies",
         "root_cause": "DR plans tested in isolation, not considering business operations",
-        "light_question": "Tu plan dice recuperar en 4 horas, pero ¿cuándo fue la última vez que recuperaste operaciones con clientes reales comprando?",
-        "premium_questions": [
-          "¿Pueden las tiendas procesar ventas si el e-commerce está en recovery?",
-          "¿Cómo manejas inventory sync durante una recuperación parcial?",
-          "¿Qué pasa con órdenes en tránsito durante un failover?",
-          "¿Has probado recuperación en época de alta demanda?"
+        "measurement_question": "Su plan de recuperación indica X horas. En la realidad (basado en pruebas o incidentes), ¿cuánto más tarda?",
+        "response_options": [
+          {"value": 1, "label": "Igual o menos (probado)", "multiplier": 1, "interpretation": "DR maduro"},
+          {"value": 2, "label": "1.5-2x más", "multiplier": 2, "interpretation": "Gap manejable"},
+          {"value": 3, "label": "2-3x más", "multiplier": 3, "interpretation": "Gap significativo"},
+          {"value": 4, "label": "3-5x más", "multiplier": 5, "interpretation": "Gap crítico"},
+          {"value": 5, "label": "Más de 5x o no hemos probado", "multiplier": 8, "interpretation": "Sin preparación real"}
         ],
-        "interpretation": "Exposes gap between technical recovery and business continuity"
+        "context_for_user": "Considere su última prueba completa con sistemas reales, no simulaciones"
       }
     },
     "2_software_critico": {
       "TRD": {
-        "pain_point": "Customer churn accelerates exponentially after 2 hours of downtime",
+        "dimension_name": "Time to Revenue Degradation",
+        "pain_point": "Customer churn accelerates exponentially after brief downtime",
         "root_cause": "SaaS customers have zero tolerance for critical tool failures",
-        "light_question": "Si tu servicio falla ahora, ¿cuántos clientes empezarían a buscar alternativas después de 2 horas?",
-        "premium_questions": [
-          "¿Cuál es tu churn rate mensual normal vs durante incidentes?",
-          "¿Qué % de revenue está en riesgo por SLAs incumplidos?",
-          "¿Cuántos clientes pueden operar sin tu herramienta por 24h?",
-          "¿Tienes competidores esperando para capturar clientes frustrados?"
+        "measurement_question": "Si su servicio SaaS falla completamente, ¿en cuántas horas el 10% de sus clientes buscarían activamente alternativas?",
+        "response_options": [
+          {"value": 1, "label": "Menos de 1 hora", "hours": 1, "interpretation": "Crítico para operaciones"},
+          {"value": 2, "label": "1-4 horas", "hours": 4, "interpretation": "Alta dependencia"},
+          {"value": 3, "label": "4-12 horas", "hours": 12, "interpretation": "Dependencia moderada"},
+          {"value": 4, "label": "12-48 horas", "hours": 48, "interpretation": "Cierta tolerancia"},
+          {"value": 5, "label": "Más de 48 horas", "hours": 72, "interpretation": "No crítico"}
         ],
-        "interpretation": "Reveals if they understand customer patience limits"
+        "context_for_user": "Software crítico típicamente tiene tolerancia de 2-6 horas antes de churn masivo"
       },
       "AER": {
+        "dimension_name": "Attack Economics Ratio",
         "pain_point": "Multi-tenant architecture means one breach affects all customers",
         "root_cause": "Efficiency design makes attractive target for data harvesting",
-        "light_question": "Si un atacante compromete un tenant, ¿qué impide que acceda a datos de todos tus clientes?",
-        "premium_questions": [
-          "¿Cuál es el valor agregado de datos de todos tus clientes?",
-          "¿Qué costaría una demanda colectiva por breach de datos?",
-          "¿Los clientes enterprise tienen aislamiento real o lógico?",
-          "¿Cuánto vale tu propiedad intelectual del código fuente?"
+        "measurement_question": "Si comprometen su plataforma, ¿cuál es el valor total accesible (datos de todos los clientes, código fuente, propiedad intelectual)?",
+        "response_options": [
+          {"value": 1, "label": "Menos de $100K", "ratio": 10, "interpretation": "Valor limitado"},
+          {"value": 2, "label": "$100K-$500K", "ratio": 50, "interpretation": "Objetivo moderado"},
+          {"value": 3, "label": "$500K-$2M", "ratio": 200, "interpretation": "Objetivo valioso"},
+          {"value": 4, "label": "$2M-$10M", "ratio": 1000, "interpretation": "Objetivo premium"},
+          {"value": 5, "label": "Más de $10M", "ratio": 1000, "interpretation": "Objetivo máximo"}
         ],
-        "interpretation": "Shows grasp of multi-tenant risk amplification"
+        "context_for_user": "Incluya: datos agregados de clientes, secretos comerciales, costo de notificación de breach"
       },
       "HFP": {
+        "dimension_name": "Human Failure Probability",
         "pain_point": "Developers with production access are prime social engineering targets",
         "root_cause": "Speed of deployment vs security controls in CI/CD",
-        "light_question": "¿Cuántos developers pueden hacer deploy a producción, y cuántos han sido testeados contra phishing este año?",
-        "premium_questions": [
-          "¿Un developer comprometido puede insertar backdoors sin review?",
-          "¿Qué controles previenen commits maliciosos de cuentas válidas?",
-          "¿Los secrets de producción están en laptops de developers?",
-          "¿Ex-empleados técnicos mantienen acceso a repos o sistemas?"
+        "measurement_question": "¿Qué porcentaje de su equipo técnico (devs, DevOps, support) puede hacer cambios en producción sin revisión de otro humano?",
+        "response_options": [
+          {"value": 1, "label": "0-10%", "percentage": 10, "interpretation": "Controles fuertes"},
+          {"value": 2, "label": "10-25%", "percentage": 25, "interpretation": "Controles buenos"},
+          {"value": 3, "label": "25-50%", "percentage": 50, "interpretation": "Controles moderados"},
+          {"value": 4, "label": "50-75%", "percentage": 75, "interpretation": "Controles débiles"},
+          {"value": 5, "label": "Más de 75%", "percentage": 90, "interpretation": "Sin controles efectivos"}
         ],
-        "interpretation": "Exposes human vulnerabilities in development pipeline"
+        "context_for_user": "Incluya cualquier acceso que permita modificar código, configuración o datos en producción"
       },
       "BRI": {
+        "dimension_name": "Blast Radius Index",
         "pain_point": "API compromise grants access to entire customer ecosystem",
         "root_cause": "APIs designed for functionality, not zero-trust isolation",
-        "light_question": "Con una API key comprometida, ¿qué % de funcionalidades críticas puede ejecutar un atacante?",
-        "premium_questions": [
-          "¿Las API keys tienen granularidad por función o son full-access?",
-          "¿Cómo detectas uso anormal de APIs válidas?",
-          "¿Un cliente comprometido puede afectar a otros vía API?",
-          "¿Qué datos son accesibles vía API vs UI?"
+        "measurement_question": "Con credenciales válidas de un cliente comprometido, ¿a qué porcentaje de datos o funciones de OTROS clientes se puede acceder?",
+        "response_options": [
+          {"value": 1, "label": "0% - Aislamiento total", "percentage": 0, "interpretation": "Zero trust implementado"},
+          {"value": 2, "label": "1-10%", "percentage": 10, "interpretation": "Buena segregación"},
+          {"value": 3, "label": "10-30%", "percentage": 30, "interpretation": "Segregación parcial"},
+          {"value": 4, "label": "30-60%", "percentage": 60, "interpretation": "Segregación débil"},
+          {"value": 5, "label": "Más de 60%", "percentage": 80, "interpretation": "Sin segregación real"}
         ],
-        "interpretation": "Reveals API security maturity and blast containment"
+        "context_for_user": "Considere: APIs compartidas, bases de datos multi-tenant, servicios comunes"
       },
       "RRG": {
+        "dimension_name": "Recovery Reality Gap",
         "pain_point": "Rollback procedures break customer data and integrations",
         "root_cause": "Recovery focused on infrastructure, not application state",
-        "light_question": "Si necesitas hacer rollback a hace 24 horas, ¿cuántas transacciones de clientes se perderían?",
-        "premium_questions": [
-          "¿Cómo manejas data consistency en recovery parcial?",
-          "¿Los webhooks y integraciones se re-sincronizan automáticamente?",
-          "¿Clientes deben re-hacer trabajo perdido post-recovery?",
-          "¿Has probado recovery con clientes activamente usando el sistema?"
+        "measurement_question": "En su último incidente real o simulacro completo, ¿cuánto más tardó la recuperación vs. el RTO documentado?",
+        "response_options": [
+          {"value": 1, "label": "Cumplimos o mejoramos RTO", "multiplier": 1, "interpretation": "DR efectivo"},
+          {"value": 2, "label": "1.5-2x el RTO", "multiplier": 2, "interpretation": "Gap aceptable"},
+          {"value": 3, "label": "2-4x el RTO", "multiplier": 4, "interpretation": "Gap preocupante"},
+          {"value": 4, "label": "4-8x el RTO", "multiplier": 8, "interpretation": "Gap severo"},
+          {"value": 5, "label": "Más de 8x o nunca probado real", "multiplier": 10, "interpretation": "Sin DR real"}
         ],
-        "interpretation": "Shows understanding of application-level recovery complexity"
+        "context_for_user": "Base su respuesta en recuperación con clientes reales, no solo infraestructura"
       }
     },
     "3_servicios_datos": {
       "TRD": {
-        "pain_point": "Data freshness degrades value exponentially - stale data equals zero revenue",
+        "dimension_name": "Time to Revenue Degradation",
+        "pain_point": "Data freshness degrades value exponentially",
         "root_cause": "Business model depends on real-time information delivery",
-        "light_question": "Si tus sistemas de ingesta de datos fallan, ¿en cuántas horas tu información pierde 50% de su valor para clientes?",
-        "premium_questions": [
-          "¿Qué % de clientes pagan por data real-time vs histórica?",
-          "¿Cómo afecta 1 hora de retraso a decisiones de tus clientes?",
-          "¿Tienes SLAs de freshness con penalizaciones económicas?",
-          "¿Competidores pueden capitalizar tu downtime?"
+        "measurement_question": "Si su pipeline de datos falla, ¿en cuántas horas sus clientes considerarían su servicio 'sin valor' y buscarían alternativas?",
+        "response_options": [
+          {"value": 1, "label": "Menos de 2 horas", "hours": 2, "interpretation": "Datos real-time críticos"},
+          {"value": 2, "label": "2-6 horas", "hours": 6, "interpretation": "Alta sensibilidad temporal"},
+          {"value": 3, "label": "6-24 horas", "hours": 24, "interpretation": "Sensibilidad moderada"},
+          {"value": 4, "label": "1-3 días", "hours": 72, "interpretation": "Cierta tolerancia"},
+          {"value": 5, "label": "Más de 3 días", "hours": 96, "interpretation": "Datos históricos principalmente"}
         ],
-        "interpretation": "Reveals if they understand time-value degradation of data"
+        "context_for_user": "Servicios de datos pierden valor rápidamente - considere SLAs de freshness"
       },
       "AER": {
-        "pain_point": "Entire business value concentrated in datasets makes perfect ransom target",
+        "dimension_name": "Attack Economics Ratio",
+        "pain_point": "Entire business value concentrated in datasets",
         "root_cause": "Unlike other businesses, data IS the product",
-        "light_question": "Si un ransomware encripta tu data lake principal, ¿cuál sería el monto máximo de rescate que considerarías pagar?",
-        "premium_questions": [
-          "¿Cuál es el valor de reemplazo de tus datasets propietarios?",
-          "¿Qué % de tu data es irreemplazable o única?",
-          "¿Los respaldos incluyen todas las transformaciones y modelos?",
-          "¿Cuánto costaría reconstruir 5 años de datos históricos?"
+        "measurement_question": "¿Cuál es el costo de reemplazar o reconstruir todos sus datasets propietarios si fueran destruidos o robados?",
+        "response_options": [
+          {"value": 1, "label": "Menos de $250K", "ratio": 25, "interpretation": "Datos reemplazables"},
+          {"value": 2, "label": "$250K-$1M", "ratio": 100, "interpretation": "Datos valiosos"},
+          {"value": 3, "label": "$1M-$5M", "ratio": 500, "interpretation": "Datos críticos"},
+          {"value": 4, "label": "$5M-$20M", "ratio": 2000, "interpretation": "Datos únicos"},
+          {"value": 5, "label": "Más de $20M o irreemplazable", "ratio": 2000, "interpretation": "Core del negocio"}
         ],
-        "interpretation": "Exposes understanding of data as irreplaceable asset"
+        "context_for_user": "Incluya: costo de readquisición, valor de algoritmos, pérdida de ventaja competitiva"
       },
       "HFP": {
-        "pain_point": "Data analysts with query access can exfiltrate entire business value",
+        "dimension_name": "Human Failure Probability",
+        "pain_point": "Data analysts can exfiltrate entire business value",
         "root_cause": "Business requires broad data access for analysis",
-        "light_question": "¿Cuántos analistas pueden ejecutar queries que retornen más de 1 millón de registros sensitivos?",
-        "premium_questions": [
-          "¿Cómo detectas exfiltración vía queries legítimas?",
-          "¿Los analistas pueden ver data en crudo o solo agregada?",
-          "¿Trackeas qué empleado accedió qué datasets sensibles?",
-          "¿Un analista puede descargar tu ventaja competitiva completa?"
+        "measurement_question": "¿Qué porcentaje de sus empleados puede ejecutar queries que retornen datasets completos de clientes o datos sensibles sin restricción?",
+        "response_options": [
+          {"value": 1, "label": "Menos del 5%", "percentage": 5, "interpretation": "Acceso muy restringido"},
+          {"value": 2, "label": "5-15%", "percentage": 15, "interpretation": "Acceso controlado"},
+          {"value": 3, "label": "15-35%", "percentage": 35, "interpretation": "Acceso moderado"},
+          {"value": 4, "label": "35-60%", "percentage": 60, "interpretation": "Acceso amplio"},
+          {"value": 5, "label": "Más del 60%", "percentage": 80, "interpretation": "Acceso sin control"}
         ],
-        "interpretation": "Shows controls over legitimate access abuse"
+        "context_for_user": "Considere: analistas, científicos de datos, ingenieros, y cualquiera con acceso a data lakes"
       },
       "BRI": {
-        "pain_point": "One breach exposes all customer segments and data products",
+        "dimension_name": "Blast Radius Index",
+        "pain_point": "One breach exposes all data products and customers",
         "root_cause": "Data lakes optimize for analysis, not compartmentalization",
-        "light_question": "Si comprometen credenciales de tu data warehouse, ¿qué % de todos tus productos de datos quedan expuestos?",
-        "premium_questions": [
-          "¿Están segregados datasets por cliente o valor sensitivity?",
-          "¿Un breach puede exponer tanto data pública como premium?",
-          "¿Los modelos de ML y algoritmos están en el mismo ambiente?",
-          "¿Cómo limitas blast radius en arquitecturas de big data?"
+        "measurement_question": "Si comprometen su data warehouse principal, ¿qué porcentaje de TODOS sus productos y datasets quedaría expuesto?",
+        "response_options": [
+          {"value": 1, "label": "0-20%", "percentage": 20, "interpretation": "Bien compartimentado"},
+          {"value": 2, "label": "20-40%", "percentage": 40, "interpretation": "Segregación parcial"},
+          {"value": 3, "label": "40-65%", "percentage": 65, "interpretation": "Segregación limitada"},
+          {"value": 4, "label": "65-85%", "percentage": 85, "interpretation": "Poca segregación"},
+          {"value": 5, "label": "85-100%", "percentage": 95, "interpretation": "Todo en un lugar"}
         ],
-        "interpretation": "Reveals data architecture security maturity"
+        "context_for_user": "Incluya: datos raw, procesados, modelos, y metadatos"
       },
       "RRG": {
-        "pain_point": "Data pipeline recovery breaks all downstream analytics and products",
+        "dimension_name": "Recovery Reality Gap",
+        "pain_point": "Data pipeline recovery breaks all downstream products",
         "root_cause": "Complex ETL dependencies and data lineage",
-        "light_question": "Si debes recuperar de backup de hace 48h, ¿cuántos procesos de transformación y modelos debes re-ejecutar?",
-        "premium_questions": [
-          "¿Tienes mapeado el lineage completo de cada data product?",
-          "¿Cómo manejas inconsistencias temporales en recovery?",
-          "¿Los modelos de ML necesitan re-entrenamiento post-recovery?",
-          "¿Clientes notan gaps o inconsistencias en datos recuperados?"
+        "measurement_question": "Si debe recuperar de un backup de 24 horas atrás, ¿cuánto tiempo tomaría re-procesar todos los pipelines y validar consistencia?",
+        "response_options": [
+          {"value": 1, "label": "Menos de 4 horas", "multiplier": 1, "interpretation": "Pipelines automatizados"},
+          {"value": 2, "label": "4-12 horas", "multiplier": 2, "interpretation": "Recuperación eficiente"},
+          {"value": 3, "label": "12-48 horas", "multiplier": 3, "interpretation": "Recuperación compleja"},
+          {"value": 4, "label": "2-5 días", "multiplier": 5, "interpretation": "Alta complejidad"},
+          {"value": 5, "label": "Más de 5 días", "multiplier": 10, "interpretation": "Caos de dependencias"}
         ],
-        "interpretation": "Exposes complexity of data pipeline recovery"
+        "context_for_user": "Considere: re-ingesta, transformaciones, validación, y re-entrenamiento de modelos"
       }
     },
     "4_ecosistema_digital": {
       "TRD": {
-        "pain_point": "Platform downtime triggers cascade of partner business failures",
+        "dimension_name": "Time to Revenue Degradation",
+        "pain_point": "Platform downtime triggers cascade failures across ecosystem",
         "root_cause": "Ecosystem participants have no alternative channels",
-        "light_question": "Si tu plataforma falla ahora, ¿cuántos minutos hasta que tus partners empiecen a perder dinero?",
-        "premium_questions": [
-          "¿Qué % del revenue de partners depende de tu uptime?",
-          "¿Cuántos partners quebrarían con 48h de tu downtime?",
-          "¿Tienes liability por pérdidas de terceros en tu ecosistema?",
-          "¿Cómo priorizas recuperación entre diferentes tipos de partners?"
+        "measurement_question": "Si su plataforma falla, ¿en cuántas horas el 10% de sus partners/vendedores perderían ingresos críticos?",
+        "response_options": [
+          {"value": 1, "label": "Menos de 30 minutos", "hours": 0.5, "interpretation": "Dependencia extrema"},
+          {"value": 2, "label": "30 min - 2 horas", "hours": 2, "interpretation": "Alta dependencia"},
+          {"value": 3, "label": "2-8 horas", "hours": 8, "interpretation": "Dependencia moderada"},
+          {"value": 4, "label": "8-24 horas", "hours": 24, "interpretation": "Cierta resiliencia"},
+          {"value": 5, "label": "Más de 24 horas", "hours": 48, "interpretation": "Partners resilientes"}
         ],
-        "interpretation": "Reveals understanding of ecosystem economic dependencies"
+        "context_for_user": "Ecosistemas digitales tienen responsabilidad multiplicada por cada participante afectado"
       },
       "AER": {
-        "pain_point": "Attack surface multiplied by every participant in ecosystem",
-        "root_cause": "Security equals weakest partner, not platform controls",
-        "light_question": "¿Cuántos de tus partners han tenido un assessment de seguridad en el último año?",
-        "premium_questions": [
-          "¿Un partner comprometido puede afectar a otros partners?",
-          "¿Qué valor total es accesible vía el partner más débil?",
-          "¿Monitoreas security posture de partners críticos?",
-          "¿Cómo contienes breaches originados en terceros?"
+        "dimension_name": "Attack Economics Ratio",
+        "pain_point": "Attack surface multiplied by every ecosystem participant",
+        "root_cause": "Security equals weakest partner in the chain",
+        "measurement_question": "Considerando TODOS los partners con acceso a su plataforma, ¿cuál es el valor total que podría comprometerse a través del partner más débil?",
+        "response_options": [
+          {"value": 1, "label": "Menos de $100K", "ratio": 10, "interpretation": "Exposición limitada"},
+          {"value": 2, "label": "$100K-$1M", "ratio": 100, "interpretation": "Exposición moderada"},
+          {"value": 3, "label": "$1M-$10M", "ratio": 1000, "interpretation": "Exposición significativa"},
+          {"value": 4, "label": "$10M-$50M", "ratio": 5000, "interpretation": "Exposición crítica"},
+          {"value": 5, "label": "Más de $50M", "ratio": 5000, "interpretation": "Exposición masiva"}
         ],
-        "interpretation": "Shows grasp of third-party risk amplification"
+        "context_for_user": "Valore: transacciones totales, datos de todos los participantes, disrupción del ecosistema"
       },
       "HFP": {
-        "pain_point": "Thousands of external users with platform access beyond company control",
+        "dimension_name": "Human Failure Probability",
+        "pain_point": "Thousands of external users beyond company control",
         "root_cause": "Cannot enforce security training on ecosystem participants",
-        "light_question": "¿Qué % de usuarios con acceso a tu plataforma son empleados de partners sobre los que no tienes control directo?",
-        "premium_questions": [
-          "¿Cómo verificas identidad real de usuarios de partners?",
-          "¿Partners re-comparten accesos internamente sin tu conocimiento?",
-          "¿Detectas comportamientos anómalos por tipo de partner?",
-          "¿Un partner puede crear usuarios ilimitados?"
+        "measurement_question": "De todos los usuarios con acceso a su plataforma, ¿qué porcentaje son externos (partners, vendedores) sobre los que NO tiene control directo de seguridad?",
+        "response_options": [
+          {"value": 1, "label": "Menos del 20%", "percentage": 20, "interpretation": "Control mayoritario"},
+          {"value": 2, "label": "20-40%", "percentage": 40, "interpretation": "Control balanceado"},
+          {"value": 3, "label": "40-60%", "percentage": 60, "interpretation": "Control limitado"},
+          {"value": 4, "label": "60-80%", "percentage": 80, "interpretation": "Poco control"},
+          {"value": 5, "label": "Más del 80%", "percentage": 90, "interpretation": "Sin control efectivo"}
         ],
-        "interpretation": "Exposes human risk beyond organizational boundaries"
+        "context_for_user": "Mayor porcentaje externo = mayor probabilidad de compromiso fuera de su control"
       },
       "BRI": {
-        "pain_point": "Platform compromise grants access to entire ecosystem transactions",
-        "root_cause": "Central platform sees all ecosystem flows and data",
-        "light_question": "Desde tu plataforma comprometida, ¿a qué % del volumen transaccional total del ecosistema puede acceder un atacante?",
-        "premium_questions": [
-          "¿Toda la data transaccional pasa por tus sistemas centrales?",
-          "¿Partners pueden operar P2P sin tu intermediación?",
-          "¿Segregas data por verticales o geografías?",
-          "¿Un breach expondría estrategias de todos los participantes?"
+        "dimension_name": "Blast Radius Index",
+        "pain_point": "Platform compromise exposes entire ecosystem",
+        "root_cause": "Central platform processes all ecosystem flows",
+        "measurement_question": "Si su plataforma central es comprometida, ¿qué porcentaje del volumen transaccional TOTAL del ecosistema quedaría expuesto?",
+        "response_options": [
+          {"value": 1, "label": "0-20%", "percentage": 20, "interpretation": "Descentralizado"},
+          {"value": 2, "label": "20-45%", "percentage": 45, "interpretation": "Parcialmente centralizado"},
+          {"value": 3, "label": "45-70%", "percentage": 70, "interpretation": "Mayormente centralizado"},
+          {"value": 4, "label": "70-90%", "percentage": 90, "interpretation": "Altamente centralizado"},
+          {"value": 5, "label": "90-100%", "percentage": 100, "interpretation": "Totalmente centralizado"}
         ],
-        "interpretation": "Reveals platform centralization risks"
+        "context_for_user": "Incluya: pagos, datos de usuarios, inventarios, y comunicaciones del ecosistema"
       },
       "RRG": {
-        "pain_point": "Recovery requires coordinating hundreds of ecosystem participants",
+        "dimension_name": "Recovery Reality Gap",
+        "pain_point": "Recovery requires coordinating hundreds of participants",
         "root_cause": "No single party controls full recovery process",
-        "light_question": "En tu último incidente, ¿cuántas horas tomó solo notificar a todos los partners afectados?",
-        "premium_questions": [
-          "¿Tienes runbooks de recovery coordinada con partners tier 1?",
-          "¿Cómo sincronizas estado post-recovery entre participantes?",
-          "¿Partners tienen sus propios planes que conflictúan con el tuyo?",
-          "¿Has simulado recovery con partners activos simultáneamente?"
+        "measurement_question": "En caso de incidente mayor, ¿cuánto tiempo adicional agrega la coordinación con partners para recuperación completa del ecosistema?",
+        "response_options": [
+          {"value": 1, "label": "Menos de 2 horas", "multiplier": 1.5, "interpretation": "Coordinación automatizada"},
+          {"value": 2, "label": "2-8 horas", "multiplier": 2, "interpretation": "Buena coordinación"},
+          {"value": 3, "label": "8-24 horas", "multiplier": 3, "interpretation": "Coordinación compleja"},
+          {"value": 4, "label": "1-3 días", "multiplier": 5, "interpretation": "Caos de coordinación"},
+          {"value": 5, "label": "Más de 3 días", "multiplier": 8, "interpretation": "Sin plan conjunto"}
         ],
-        "interpretation": "Shows ecosystem coordination complexity"
+        "context_for_user": "Considere: notificaciones, sincronización de estados, y validación entre partners"
       }
     },
     "5_servicios_financieros": {
       "TRD": {
-        "pain_point": "Every second of downtime means lost transactions and regulatory scrutiny",
+        "dimension_name": "Time to Revenue Degradation",
+        "pain_point": "Every second of downtime means lost transactions and regulatory issues",
         "root_cause": "Zero tolerance for financial service interruption",
-        "light_question": "Si tus sistemas de pago fallan en este momento, ¿cuántos segundos hasta que empieces a incumplir regulaciones?",
-        "premium_questions": [
-          "¿Cuál es tu pérdida por minuto en hora pico?",
-          "¿Qué multas aplican por indisponibilidad de servicios críticos?",
-          "¿Tienes que compensar a clientes por downtime?",
-          "¿Cómo impacta el downtime tu licencia operativa?"
+        "measurement_question": "Si sus sistemas de procesamiento de pagos fallan, ¿en cuántas HORAS perdería el 10% de su volumen transaccional diario?",
+        "response_options": [
+          {"value": 1, "label": "Menos de 30 minutos", "hours": 0.5, "interpretation": "Ultra crítico"},
+          {"value": 2, "label": "30 min - 2 horas", "hours": 2, "interpretation": "Muy crítico"},
+          {"value": 3, "label": "2-6 horas", "hours": 6, "interpretation": "Crítico"},
+          {"value": 4, "label": "6-12 horas", "hours": 12, "interpretation": "Sensible"},
+          {"value": 5, "label": "Más de 12 horas", "hours": 24, "interpretation": "Con alternativas"}
         ],
-        "interpretation": "Reveals true cost of financial service interruption"
+        "context_for_user": "Servicios financieros típicamente pierden 10% en menos de 2 horas por abandono de usuarios"
       },
       "AER": {
-        "pain_point": "Direct access to money makes you prime target for organized crime",
-        "root_cause": "Unlike other data, financial access equals immediate monetization",
-        "light_question": "¿Cuál es el monto máximo que un atacante podría transferir con credenciales comprometidas de un solo empleado?",
-        "premium_questions": [
-          "¿Qué controles previenen transferencias masivas automatizadas?",
-          "¿Cuánto podrían robar antes de detección en fin de semana?",
-          "¿Están asegurados todos los tipos de fraude cibernético?",
-          "¿Qué % de transacciones requieren validación humana?"
+        "dimension_name": "Attack Economics Ratio",
+        "pain_point": "Direct access to money makes prime target",
+        "root_cause": "Financial access equals immediate monetization",
+        "measurement_question": "¿Cuál es el monto MÁXIMO que podría transferir un atacante con acceso completo antes de detección (considere fines de semana)?",
+        "response_options": [
+          {"value": 1, "label": "Menos de $50K", "ratio": 5, "interpretation": "Límites fuertes"},
+          {"value": 2, "label": "$50K-$500K", "ratio": 50, "interpretation": "Límites moderados"},
+          {"value": 3, "label": "$500K-$5M", "ratio": 500, "interpretation": "Límites altos"},
+          {"value": 4, "label": "$5M-$50M", "ratio": 5000, "interpretation": "Límites muy altos"},
+          {"value": 5, "label": "Más de $50M", "ratio": 5000, "interpretation": "Sin límites efectivos"}
         ],
-        "interpretation": "Exposes monetary controls and limits"
+        "context_for_user": "Considere: límites por transacción, límites diarios, y ventanas sin monitoreo humano"
       },
       "HFP": {
-        "pain_point": "Employees with money movement capabilities are worth fortunes to criminals",
-        "root_cause": "Financial authorization requires human judgment calls",
-        "light_question": "¿Cuántos empleados pueden aprobar transferencias superiores a $100K, y cuándo fue su último polígrafo o background check?",
-        "premium_questions": [
-          "¿Monitoreas situación financiera personal de empleados críticos?",
-          "¿Qué previene colusión entre empleados con dual control?",
-          "¿Detectas patrones de vida incompatibles con salarios?",
-          "¿Empleados en stress financiero mantienen accesos críticos?"
+        "dimension_name": "Human Failure Probability",
+        "pain_point": "Employees with money movement worth fortunes to criminals",
+        "root_cause": "Financial authorization requires human judgment",
+        "measurement_question": "¿Qué porcentaje de empleados puede autorizar o facilitar movimientos de más de $100,000 USD?",
+        "response_options": [
+          {"value": 1, "label": "Menos del 2%", "percentage": 2, "interpretation": "Muy restringido"},
+          {"value": 2, "label": "2-5%", "percentage": 5, "interpretation": "Restringido"},
+          {"value": 3, "label": "5-15%", "percentage": 15, "interpretation": "Control moderado"},
+          {"value": 4, "label": "15-30%", "percentage": 30, "interpretation": "Control débil"},
+          {"value": 5, "label": "Más del 30%", "percentage": 50, "interpretation": "Exposición alta"}
         ],
-        "interpretation": "Shows understanding of insider threat in financial context"
+        "context_for_user": "Incluya: aprobadores, operadores, administradores de sistemas con acceso a funciones críticas"
       },
       "BRI": {
-        "pain_point": "Core banking compromise can drain all customer accounts",
-        "root_cause": "Centralized systems for efficiency create single points of failure",
-        "light_question": "Si comprometen tu core banking, ¿qué % del total de depósitos de clientes queda expuesto?",
-        "premium_questions": [
-          "¿Hay límites sistémicos para movimientos masivos?",
-          "¿Cómo segregas cuentas retail vs corporate?",
-          "¿Un breach puede afectar sistemas de otros productos?",
-          "¿Están aislados ambientes de diferentes países/regulaciones?"
+        "dimension_name": "Blast Radius Index",
+        "pain_point": "Core banking compromise can drain all accounts",
+        "root_cause": "Centralized systems create catastrophic failure points",
+        "measurement_question": "Si comprometen su sistema core, ¿qué porcentaje del total de fondos de clientes quedaría accesible para manipulación?",
+        "response_options": [
+          {"value": 1, "label": "0-10%", "percentage": 10, "interpretation": "Excelente segregación"},
+          {"value": 2, "label": "10-30%", "percentage": 30, "interpretation": "Buena segregación"},
+          {"value": 3, "label": "30-60%", "percentage": 60, "interpretation": "Segregación parcial"},
+          {"value": 4, "label": "60-85%", "percentage": 85, "interpretation": "Poca segregación"},
+          {"value": 5, "label": "85-100%", "percentage": 95, "interpretation": "Sin segregación"}
         ],
-        "interpretation": "Reveals financial system compartmentalization"
+        "context_for_user": "Considere: separación entre tipos de cuenta, límites sistémicos, controles de movimiento masivo"
       },
       "RRG": {
-        "pain_point": "Recovery must be perfect - no transaction can be lost or duplicated",
-        "root_cause": "Financial reconciliation requirements and audit trails",
-        "light_question": "En tu última recuperación, ¿cuántas horas tomó reconciliar todas las transacciones para garantizar que no hubo duplicados ni pérdidas?",
-        "premium_questions": [
-          "¿Cómo garantizas atomicidad en recovery distribuido?",
-          "¿Qué pasa con transacciones en vuelo durante failover?",
-          "¿Tienes que re-procesar con contrapartes externas?",
-          "¿Regulador debe aprobar antes de volver a operar?"
+        "dimension_name": "Recovery Reality Gap",
+        "pain_point": "Recovery must be perfect - no transaction lost",
+        "root_cause": "Financial reconciliation and audit requirements",
+        "measurement_question": "Basado en su último incidente o prueba COMPLETA, ¿cuánto más tardó la recuperación real vs. el plan documentado?",
+        "response_options": [
+          {"value": 1, "label": "Igual o mejor que el plan", "multiplier": 1, "interpretation": "DR probado y efectivo"},
+          {"value": 2, "label": "1.5-2.5x más", "multiplier": 2.5, "interpretation": "Gap manejable"},
+          {"value": 3, "label": "2.5-4x más", "multiplier": 4, "interpretation": "Gap significativo"},
+          {"value": 4, "label": "4-6x más", "multiplier": 6, "interpretation": "Gap crítico"},
+          {"value": 5, "label": "Más de 6x o nunca probado completo", "multiplier": 10, "interpretation": "Sin DR real"}
         ],
-        "interpretation": "Exposes financial recovery complexity"
+        "context_for_user": "Incluya tiempo de: recuperación técnica + reconciliación + validación regulatoria"
       }
     },
     "6_infraestructura_heredada": {
       "TRD": {
-        "pain_point": "Legacy systems fail in cascade taking modern services with them",
-        "root_cause": "Hidden dependencies between old and new systems",
-        "light_question": "Si tu mainframe falla, ¿cuántos de tus servicios 'modernos' dejan de funcionar en minutos?",
-        "premium_questions": [
-          "¿Qué % de procesos críticos aún dependen de sistemas legacy?",
-          "¿Están documentadas todas las interfaces legacy-modernas?",
-          "¿Cuántos sistemas modernos son solo 'wrappers' del legacy?",
-          "¿Puedes operar servicios nuevos sin el mainframe?"
+        "dimension_name": "Time to Revenue Degradation",
+        "pain_point": "Legacy failures cascade to all dependent systems",
+        "root_cause": "Hidden dependencies between old and new",
+        "measurement_question": "Si su sistema legacy principal (mainframe, ERP antiguo) falla, ¿en cuántas horas el 10% de sus operaciones críticas se detendrían?",
+        "response_options": [
+          {"value": 1, "label": "Menos de 1 hora", "hours": 1, "interpretation": "Dependencia total"},
+          {"value": 2, "label": "1-4 horas", "hours": 4, "interpretation": "Alta dependencia"},
+          {"value": 3, "label": "4-12 horas", "hours": 12, "interpretation": "Dependencia significativa"},
+          {"value": 4, "label": "12-48 horas", "hours": 48, "interpretation": "Dependencia moderada"},
+          {"value": 5, "label": "Más de 48 horas", "hours": 72, "interpretation": "Baja dependencia"}
         ],
-        "interpretation": "Reveals true legacy dependencies"
+        "context_for_user": "Sistemas legacy suelen ser más críticos de lo que se documenta - considere dependencias ocultas"
       },
       "AER": {
-        "pain_point": "Unpatched vulnerabilities in legacy make easy entry points",
-        "root_cause": "Cannot update systems without breaking business operations",
-        "light_question": "¿Cuántas vulnerabilidades críticas conocidas tienes en sistemas que no puedes parchear por ser legacy?",
-        "premium_questions": [
-          "¿Qué % de sistemas corren versiones sin soporte?",
-          "¿Cuál es el costo de migrar vs riesgo de breach?",
-          "¿Hay exploits públicos para tus sistemas legacy?",
-          "¿Compensas con controles perimetrales solamente?"
+        "dimension_name": "Attack Economics Ratio",
+        "pain_point": "Unpatched vulnerabilities make easy targets",
+        "root_cause": "Cannot update without breaking operations",
+        "measurement_question": "¿Cuántas vulnerabilidades críticas CONOCIDAS (CVE score >7) existen en sistemas que NO puede parchear por ser legacy?",
+        "response_options": [
+          {"value": 1, "label": "0-2 vulnerabilidades", "ratio": 2, "interpretation": "Riesgo controlado"},
+          {"value": 2, "label": "3-10 vulnerabilidades", "ratio": 10, "interpretation": "Riesgo moderado"},
+          {"value": 3, "label": "11-25 vulnerabilidades", "ratio": 50, "interpretation": "Riesgo alto"},
+          {"value": 4, "label": "26-50 vulnerabilidades", "ratio": 100, "interpretation": "Riesgo crítico"},
+          {"value": 5, "label": "Más de 50 o no sabemos", "ratio": 200, "interpretation": "Bomba de tiempo"}
         ],
-        "interpretation": "Shows technical debt security impact"
+        "context_for_user": "Cada vulnerabilidad sin parchear es una puerta abierta con instrucciones públicas"
       },
       "HFP": {
-        "pain_point": "Only few veterans understand legacy, making them critical vulnerabilities",
+        "dimension_name": "Human Failure Probability",
+        "pain_point": "Few experts understand legacy systems",
         "root_cause": "Knowledge concentration in aging workforce",
-        "light_question": "¿Cuántas personas realmente entienden tus sistemas legacy, y cuál es su edad promedio?",
-        "premium_questions": [
-          "¿Qué pasa cuando el experto en COBOL se jubila?",
-          "¿Están documentados los procesos que 'solo Juan sabe'?",
-          "¿Un extorsión al experto legacy paralizaría operaciones?",
-          "¿Tienes sucesión planificada para conocimiento crítico?"
+        "measurement_question": "¿Cuántas personas en su organización REALMENTE entienden y pueden operar/recuperar sus sistemas legacy críticos?",
+        "response_options": [
+          {"value": 1, "label": "Más de 10 personas", "percentage": 10, "interpretation": "Conocimiento distribuido"},
+          {"value": 2, "label": "6-10 personas", "percentage": 20, "interpretation": "Grupo adecuado"},
+          {"value": 3, "label": "3-5 personas", "percentage": 40, "interpretation": "Grupo limitado"},
+          {"value": 4, "label": "1-2 personas", "percentage": 70, "interpretation": "Riesgo crítico"},
+          {"value": 5, "label": "1 persona o consultores externos", "percentage": 90, "interpretation": "Dependencia extrema"}
         ],
-        "interpretation": "Exposes human single points of failure in legacy"
+        "context_for_user": "Cada experto que se va es conocimiento irrecuperable - ¿qué pasa cuando se jubilen?"
       },
       "BRI": {
-        "pain_point": "Legacy compromise affects everything due to flat architectures",
-        "root_cause": "Built before security segmentation was standard",
-        "light_question": "Desde tu sistema legacy principal, ¿a cuántos otros sistemas se puede acceder sin autenticación adicional?",
-        "premium_questions": [
-          "¿El legacy tiene acceso directo a bases de datos modernas?",
-          "¿Compartes credenciales entre legacy y nuevos sistemas?",
-          "¿La red legacy está segmentada o es plana?",
-          "¿Un malware en legacy puede saltar a sistemas modernos?"
+        "dimension_name": "Blast Radius Index",
+        "pain_point": "Legacy compromise affects everything",
+        "root_cause": "Built before security segmentation existed",
+        "measurement_question": "Desde su sistema legacy, ¿a qué porcentaje de sistemas modernos y datos se puede acceder sin autenticación adicional?",
+        "response_options": [
+          {"value": 1, "label": "0-15%", "percentage": 15, "interpretation": "Bien aislado"},
+          {"value": 2, "label": "15-35%", "percentage": 35, "interpretation": "Aislamiento parcial"},
+          {"value": 3, "label": "35-60%", "percentage": 60, "interpretation": "Poca aislación"},
+          {"value": 4, "label": "60-80%", "percentage": 80, "interpretation": "Muy conectado"},
+          {"value": 5, "label": "80-100%", "percentage": 95, "interpretation": "Acceso total"}
         ],
-        "interpretation": "Reveals legacy architecture security gaps"
+        "context_for_user": "Legacy suele tener 'llaves del reino' por razones históricas - evalúe honestamente"
       },
       "RRG": {
-        "pain_point": "Recovery procedures assume technologies and skills that no longer exist",
-        "root_cause": "Documentation frozen in time while reality evolved",
-        "light_question": "Tu plan de recuperación menciona cintas y procedimientos de hace 10 años, ¿cuándo lo probaste completamente por última vez?",
-        "premium_questions": [
-          "¿Tienes hardware de respaldo para sistemas descontinuados?",
-          "¿Los manuales de recovery están en tecnologías actuales?",
-          "¿Puedes conseguir expertos en legacy en emergencia?",
-          "¿Has probado recovery sin el equipo original?"
+        "dimension_name": "Recovery Reality Gap",
+        "pain_point": "Recovery procedures assume obsolete technology",
+        "root_cause": "Documentation frozen while reality evolved",
+        "measurement_question": "¿Cuándo fue la última vez que probó recuperación COMPLETA de su sistema legacy crítico con datos reales?",
+        "response_options": [
+          {"value": 1, "label": "Últimos 6 meses", "multiplier": 1.5, "interpretation": "DR actualizado"},
+          {"value": 2, "label": "6-12 meses", "multiplier": 3, "interpretation": "DR reciente"},
+          {"value": 3, "label": "1-2 años", "multiplier": 5, "interpretation": "DR desactualizado"},
+          {"value": 4, "label": "2-5 años", "multiplier": 8, "interpretation": "DR obsoleto"},
+          {"value": 5, "label": "Más de 5 años o nunca", "multiplier": 15, "interpretation": "Sin DR real"}
         ],
-        "interpretation": "Shows gap between documented and executable recovery"
+        "context_for_user": "Pruebas parciales no cuentan - ¿cuándo recuperó TODO el sistema con datos de producción?"
       }
     },
     "7_cadena_suministro": {
       "TRD": {
-        "pain_point": "Digital tracking failure creates physical operation paralysis",
-        "root_cause": "Physical operations now depend on digital visibility",
-        "light_question": "Si tus sistemas de tracking fallan, ¿cuántas horas hasta que camiones y mercancía se 'pierdan' operacionalmente?",
-        "premium_questions": [
-          "¿Puedes despachar/recibir sin sistemas de tracking?",
-          "¿Qué % de operaciones requieren confirmación digital?",
-          "¿Los conductores pueden navegar sin sistemas?",
-          "¿Clientes aceptan entregas sin tracking digital?"
+        "dimension_name": "Time to Revenue Degradation",
+        "pain_point": "Digital tracking failure paralyzes physical operations",
+        "root_cause": "Physical operations now require digital visibility",
+        "measurement_question": "Si sus sistemas de tracking y logística fallan, ¿en cuántas horas perdería visibilidad del 10% de su inventario en tránsito?",
+        "response_options": [
+          {"value": 1, "label": "Menos de 2 horas", "hours": 2, "interpretation": "Dependencia total"},
+          {"value": 2, "label": "2-8 horas", "hours": 8, "interpretation": "Alta dependencia"},
+          {"value": 3, "label": "8-24 horas", "hours": 24, "interpretation": "Dependencia moderada"},
+          {"value": 4, "label": "1-3 días", "hours": 72, "interpretation": "Procesos alternos"},
+          {"value": 5, "label": "Más de 3 días", "hours": 96, "interpretation": "Baja dependencia digital"}
         ],
-        "interpretation": "Reveals digital dependency in physical operations"
+        "context_for_user": "Sin tracking digital, ¿puede despachar, recibir y facturar correctamente?"
       },
       "AER": {
-        "pain_point": "Shipment data reveals business patterns worth millions to competitors",
-        "root_cause": "Logistics data exposes customer relationships and volumes",
-        "light_question": "Si un competidor accediera a tu data de envíos de 6 meses, ¿cuántos de tus top 10 clientes podría robarte?",
-        "premium_questions": [
-          "¿Qué revela tu data sobre contratos y pricing de clientes?",
-          "¿Rutas y volúmenes exponen estrategias de negocio?",
-          "¿La data incluye info de productos de clientes?",
-          "¿Cuánto vale tu conocimiento de rutas optimizadas?"
+        "dimension_name": "Attack Economics Ratio",
+        "pain_point": "Shipment data reveals business intelligence",
+        "root_cause": "Logistics patterns expose strategic information",
+        "measurement_question": "Si un competidor accediera a 6 meses de su data de envíos (rutas, volúmenes, clientes), ¿cuánto valor de negocio podría extraer?",
+        "response_options": [
+          {"value": 1, "label": "Menos de $100K", "ratio": 10, "interpretation": "Información genérica"},
+          {"value": 2, "label": "$100K-$500K", "ratio": 50, "interpretation": "Algo sensible"},
+          {"value": 3, "label": "$500K-$2M", "ratio": 200, "interpretation": "Información valiosa"},
+          {"value": 4, "label": "$2M-$10M", "ratio": 1000, "interpretation": "Secretos comerciales"},
+          {"value": 5, "label": "Más de $10M", "ratio": 1000, "interpretation": "Ventaja competitiva"}
         ],
-        "interpretation": "Shows competitive value of logistics data"
+        "context_for_user": "Considere: relaciones con clientes clave, rutas optimizadas, precios, volúmenes"
       },
       "HFP": {
-        "pain_point": "Distributed workforce with mobile devices accessing critical systems",
-        "root_cause": "Field operations require broad access from insecure locations",
-        "light_question": "¿Cuántos dispositivos móviles en campo pueden aprobar entregas de alto valor, y cuántos se han perdido este año?",
-        "premium_questions": [
-          "¿Conductores comparten dispositivos o credenciales?",
-          "¿Qué pueden hacer con un dispositivo robado?",
-          "¿Detectas accesos desde ubicaciones inusuales?",
-          "¿BYOD tiene acceso a sistemas críticos?"
+        "dimension_name": "Human Failure Probability",
+        "pain_point": "Distributed workforce with system access",
+        "root_cause": "Field operations require broad mobile access",
+        "measurement_question": "¿Qué porcentaje de su fuerza laboral móvil (conductores, almacenistas) tiene dispositivos con acceso a sistemas que pueden aprobar entregas o movimientos?",
+        "response_options": [
+          {"value": 1, "label": "Menos del 10%", "percentage": 10, "interpretation": "Acceso muy limitado"},
+          {"value": 2, "label": "10-25%", "percentage": 25, "interpretation": "Acceso controlado"},
+          {"value": 3, "label": "25-50%", "percentage": 50, "interpretation": "Acceso amplio"},
+          {"value": 4, "label": "50-75%", "percentage": 75, "interpretation": "Acceso masivo"},
+          {"value": 5, "label": "Más del 75%", "percentage": 90, "interpretation": "Todos conectados"}
         ],
-        "interpretation": "Exposes mobile workforce security gaps"
+        "context_for_user": "Cada dispositivo móvil perdido o comprometido es un punto de entrada potencial"
       },
       "BRI": {
-        "pain_point": "Warehouse system compromise can manipulate entire inventory",
-        "root_cause": "Integrated systems for efficiency create manipulation risks",
-        "light_question": "Si comprometen tu WMS principal, ¿podrían redirigir embarques de alto valor sin detección?",
-        "premium_questions": [
-          "¿El WMS puede modificar destinos sin validación?",
-          "¿Están segregados sistemas por valor de mercancía?",
-          "¿Un malware puede propagar entre warehouses?",
-          "¿Cambios en inventario requieren validación física?"
+        "dimension_name": "Blast Radius Index",
+        "pain_point": "WMS compromise can redirect shipments",
+        "root_cause": "Integration enables efficiency and manipulation",
+        "measurement_question": "Si comprometen su sistema de gestión de almacén (WMS) principal, ¿qué porcentaje de su inventario total podrían manipular o redirigir?",
+        "response_options": [
+          {"value": 1, "label": "0-20%", "percentage": 20, "interpretation": "Warehouses aislados"},
+          {"value": 2, "label": "20-40%", "percentage": 40, "interpretation": "Parcialmente conectado"},
+          {"value": 3, "label": "40-65%", "percentage": 65, "interpretation": "Mayoría conectada"},
+          {"value": 4, "label": "65-85%", "percentage": 85, "interpretation": "Altamente integrado"},
+          {"value": 5, "label": "85-100%", "percentage": 95, "interpretation": "Sistema único central"}
         ],
-        "interpretation": "Reveals supply chain manipulation risks"
+        "context_for_user": "Incluya: todos los almacenes, inventario en tránsito, y sistemas de partners integrados"
       },
       "RRG": {
-        "pain_point": "Recovery desynchronizes physical and digital realities",
-        "root_cause": "Physical goods continue moving during digital recovery",
-        "light_question": "Si recuperas sistemas con 12 horas de atraso, ¿cómo reconcilias dónde está realmente cada envío?",
-        "premium_questions": [
-          "¿Cómo manejas envíos en tránsito durante recovery?",
-          "¿Entregas completadas se pierden en rollback?",
-          "¿Puedes re-sincronizar con sistemas de partners?",
-          "¿La recovery incluye dispositivos móviles en campo?"
+        "dimension_name": "Recovery Reality Gap",
+        "pain_point": "Recovery desynchronizes physical and digital",
+        "root_cause": "Physical goods keep moving during recovery",
+        "measurement_question": "En su última contingencia real, ¿cuánto tiempo adicional tomó reconciliar el inventario físico con los sistemas después de recuperación?",
+        "response_options": [
+          {"value": 1, "label": "Menos de 4 horas", "multiplier": 1, "interpretation": "Sincronización rápida"},
+          {"value": 2, "label": "4-24 horas", "multiplier": 2, "interpretation": "Día de reconciliación"},
+          {"value": 3, "label": "1-3 días", "multiplier": 4, "interpretation": "Proceso manual intenso"},
+          {"value": 4, "label": "3-7 días", "multiplier": 7, "interpretation": "Semana de caos"},
+          {"value": 5, "label": "Más de 7 días o nunca probado", "multiplier": 10, "interpretation": "Sin proceso real"}
         ],
-        "interpretation": "Shows physical-digital reconciliation complexity"
+        "context_for_user": "Mercancía sigue moviéndose mientras recupera sistemas - ¿cómo reconcilia?"
       }
     },
     "8_informacion_regulada": {
       "TRD": {
-        "pain_point": "Medical/regulated service interruption risks lives and licenses",
-        "root_cause": "Zero tolerance for unavailability in critical services",
-        "light_question": "Si tus sistemas de historia clínica fallan durante una emergencia, ¿en cuántos minutos podrías enfrentar demandas por negligencia?",
-        "premium_questions": [
-          "¿Qué procedimientos médicos no pueden realizarse sin sistemas?",
-          "¿Cuántas vidas dependen de tu uptime diario?",
-          "¿Tienes respaldo en papel actualizado?",
-          "¿Qué dice tu licencia sobre disponibilidad mínima?"
+        "dimension_name": "Time to Revenue Degradation",
+        "pain_point": "Medical service interruption risks lives and licenses",
+        "root_cause": "Zero tolerance for critical service unavailability",
+        "measurement_question": "Si sus sistemas de historias clínicas/registros regulados fallan, ¿en cuántas horas el 10% de sus servicios críticos serían inoperables?",
+        "response_options": [
+          {"value": 1, "label": "Menos de 30 minutos", "hours": 0.5, "interpretation": "Dependencia crítica"},
+          {"value": 2, "label": "30 min - 2 horas", "hours": 2, "interpretation": "Alta dependencia"},
+          {"value": 3, "label": "2-8 horas", "hours": 8, "interpretation": "Dependencia moderada"},
+          {"value": 4, "label": "8-24 horas", "hours": 24, "interpretation": "Procesos alternos"},
+          {"value": 5, "label": "Más de 24 horas", "hours": 48, "interpretation": "Respaldo manual"}
         ],
-        "interpretation": "Reveals life-critical system dependencies"
+        "context_for_user": "Considere: atención de emergencias, prescripciones, procedimientos críticos"
       },
       "AER": {
-        "pain_point": "Health/regulated data worth fortunes in black market",
-        "root_cause": "Immutable personal data with lifelong value",
-        "light_question": "¿Cuánto vale en el mercado negro el historial médico completo de tus pacientes, y cuántos tienes?",
-        "premium_questions": [
-          "¿Qué % de historiales incluyen data genética o mental?",
-          "¿Los seguros pagarían rescate por data de pacientes?",
-          "¿Cuántas celebridades o políticos son pacientes?",
-          "¿Data incluye información vergonzosa o chantajeable?"
+        "dimension_name": "Attack Economics Ratio",
+        "pain_point": "Regulated data worth fortunes in black market",
+        "root_cause": "Medical/personal data has lifelong value",
+        "measurement_question": "¿Cuál es el valor aproximado en el mercado negro de TODOS sus registros sensibles (considere multas regulatorias potenciales)?",
+        "response_options": [
+          {"value": 1, "label": "Menos de $500K", "ratio": 50, "interpretation": "Registros limitados"},
+          {"value": 2, "label": "$500K-$2M", "ratio": 200, "interpretation": "Base moderada"},
+          {"value": 3, "label": "$2M-$10M", "ratio": 1000, "interpretation": "Base significativa"},
+          {"value": 4, "label": "$10M-$50M", "ratio": 5000, "interpretation": "Base grande"},
+          {"value": 5, "label": "Más de $50M", "ratio": 5000, "interpretation": "Tesoro de datos"}
         ],
-        "interpretation": "Exposes regulated data monetary value"
+        "context_for_user": "Historiales médicos valen $250-$1000 c/u en mercado negro + multas GDPR/HIPAA"
       },
       "HFP": {
+        "dimension_name": "Human Failure Probability",
         "pain_point": "Healthcare workers bypass security for patient care",
-        "root_cause": "Life-saving priorities override security protocols",
-        "light_question": "¿Cuántas veces al mes el personal médico comparte credenciales porque 'es una emergencia'?",
-        "premium_questions": [
-          "¿Médicos comparten logins en quirófanos?",
-          "¿Enfermeras anotan passwords para turnos nocturnos?",
-          "¿'Emergencia' justifica bypass de cualquier control?",
-          "¿Cómo balanceas seguridad vs atención inmediata?"
+        "root_cause": "Life-saving priorities override protocols",
+        "measurement_question": "¿Con qué frecuencia el personal comparte credenciales o bypasea controles 'porque es una emergencia'?",
+        "response_options": [
+          {"value": 1, "label": "Nunca o muy raro", "percentage": 5, "interpretation": "Cultura fuerte"},
+          {"value": 2, "label": "Ocasionalmente (mensual)", "percentage": 20, "interpretation": "Bajo control"},
+          {"value": 3, "label": "Regularmente (semanal)", "percentage": 40, "interpretation": "Práctica común"},
+          {"value": 4, "label": "Frecuentemente (diario)", "percentage": 70, "interpretation": "Cultura débil"},
+          {"value": 5, "label": "Constantemente o no sabemos", "percentage": 90, "interpretation": "Sin control"}
         ],
-        "interpretation": "Shows healthcare security culture reality"
+        "context_for_user": "La presión por atender rápido hace que seguridad sea vista como obstáculo"
       },
       "BRI": {
-        "pain_point": "Medical systems interconnection means total hospital paralysis",
-        "root_cause": "Integration for patient care creates total dependency",
-        "light_question": "Si ransomware infecta tu PACS de radiología, ¿qué % del hospital deja de funcionar?",
-        "premium_questions": [
-          "¿Lab, farmacia y quirófanos dependen del mismo sistema?",
-          "¿Un malware puede saltar entre departamentos?",
-          "¿Están aislados sistemas de diferentes hospitales?",
-          "¿Equipos médicos IoT están en la red principal?"
+        "dimension_name": "Blast Radius Index",
+        "pain_point": "Medical systems interconnection paralyzes operations",
+        "root_cause": "Integration for patient care creates dependencies",
+        "measurement_question": "Si ransomware infecta un sistema departamental (ej: radiología), ¿qué porcentaje de la operación total se vería afectada?",
+        "response_options": [
+          {"value": 1, "label": "0-10%", "percentage": 10, "interpretation": "Bien aislado"},
+          {"value": 2, "label": "10-25%", "percentage": 25, "interpretation": "Aislamiento parcial"},
+          {"value": 3, "label": "25-50%", "percentage": 50, "interpretation": "Interconectado"},
+          {"value": 4, "label": "50-75%", "percentage": 75, "interpretation": "Muy integrado"},
+          {"value": 5, "label": "75-100%", "percentage": 90, "interpretation": "Falla total"}
         ],
-        "interpretation": "Reveals healthcare system interdependencies"
+        "context_for_user": "Sistemas médicos suelen estar más conectados de lo documentado por conveniencia clínica"
       },
       "RRG": {
-        "pain_point": "Recovery cannot lose any patient data or face litigation",
+        "dimension_name": "Recovery Reality Gap",
+        "pain_point": "Recovery cannot lose any patient data",
         "root_cause": "Medical record integrity is legally mandated",
-        "light_question": "En tu última recuperación, ¿cuántas horas tomó verificar que ningún dato de paciente se corrompió o perdió?",
-        "premium_questions": [
-          "¿Cómo garantizas integridad de prescripciones en recovery?",
-          "¿Resultados de lab se pueden re-asociar correctamente?",
-          "¿Auditorías regulatorias post-recovery qué requieren?",
-          "¿Pacientes deben re-hacer estudios por data perdida?"
+        "measurement_question": "En recuperación de sistemas, ¿cuánto tiempo adicional requiere validar que NINGÚN registro de paciente se perdió o corrompió?",
+        "response_options": [
+          {"value": 1, "label": "Menos de 2 horas", "multiplier": 1, "interpretation": "Validación automatizada"},
+          {"value": 2, "label": "2-8 horas", "multiplier": 2, "interpretation": "Proceso eficiente"},
+          {"value": 3, "label": "8-24 horas", "multiplier": 3, "interpretation": "Validación manual"},
+          {"value": 4, "label": "1-3 días", "multiplier": 5, "interpretation": "Proceso complejo"},
+          {"value": 5, "label": "Más de 3 días o no validamos", "multiplier": 10, "interpretation": "Riesgo regulatorio"}
         ],
-        "interpretation": "Exposes healthcare data integrity requirements"
+        "context_for_user": "Pérdida de datos médicos = demandas + pérdida de licencia. Validación es crítica"
       }
     }
   }

@@ -1,4 +1,5 @@
-# Business Archetype Reference Guide - Framework v3.0
+# Business Archetype Reference Guide - Framework v3.0 
+# DEPRECATED migrated to v4.0 (See DII V4.0)
 
 ## Quick Reference Table
 

@@ -49,9 +49,9 @@ A **Cyber Reality Check Platform** that:
 
 ---
 
-## 🚀 6-Month Product Roadmap
+## 🚀 6-Week Product Roadmap
 
-### Month 1: The Breach Reality MVP
+### Week 1: The Breach Reality MVP
 **"Here's What Hit Companies Like Yours"**
 
 **Core Features:**
@@ -74,7 +74,7 @@ A **Cyber Reality Check Platform** that:
 
 ---
 
-### Month 2: Questions That Matter
+### Week 2: Questions That Matter
 **"Let's Find What Will Actually Get You"**
 
 **Core Features:**
@@ -100,7 +100,7 @@ A **Cyber Reality Check Platform** that:
 
 ---
 
-### Month 3: The Blast Radius Calculator
+### Week 3: The Blast Radius Calculator
 **"When You're Hit, How Bad Is It?"**
 
 **Core Features:**
@@ -127,7 +127,7 @@ A **Cyber Reality Check Platform** that:
 
 ---
 
-### Month 4: The BS Detector
+### Week 4: The BS Detector
 **"Stop Buying Shit That Doesn't Work"**
 
 **Core Features:**
@@ -153,7 +153,7 @@ A **Cyber Reality Check Platform** that:
 
 ---
 
-### Month 5: Actionable Roadmaps
+### Week 5: Actionable Roadmaps
 **"Here's Exactly What to Fix First"**
 
 **Core Features:**
@@ -180,7 +180,7 @@ A **Cyber Reality Check Platform** that:
 
 ---
 
-### Month 6: Continuous Reality Checks
+### Week 6: Continuous Reality Checks
 **"Stay Ahead of What's Actually Happening"**
 
 **Core Features:**
