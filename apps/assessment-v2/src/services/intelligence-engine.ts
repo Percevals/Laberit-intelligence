@@ -253,30 +253,33 @@ const THREAT_PATTERNS: ThreatPattern[] = [
   }
 ];
 
+// Default regional risk profile (LATAM)
+const DEFAULT_REGIONAL_RISK: RegionalRisk = {
+  region: 'LATAM',
+  factors: {
+    regulatoryMaturity: 6,
+    cybercrimePrevalnce: 8,
+    infrastructureResilience: 5,
+    skillsAvailability: 4,
+    economicStability: 5
+  },
+  specificThreats: [
+    'Banking trojans targeting Latin American banks',
+    'Social engineering exploiting cultural factors',
+    'Weak regulatory enforcement',
+    'Limited incident response capabilities'
+  ],
+  emergingRisks: [
+    'AI-powered phishing in local languages',
+    'Cryptocurrency-related attacks',
+    'Critical infrastructure targeting',
+    'Supply chain compromises'
+  ]
+};
+
 // Regional risk profiles
 const REGIONAL_RISKS: Record<string, RegionalRisk> = {
-  LATAM: {
-    region: 'LATAM',
-    factors: {
-      regulatoryMaturity: 6,
-      cybercrimePrevalnce: 8,
-      infrastructureResilience: 5,
-      skillsAvailability: 4,
-      economicStability: 5
-    },
-    specificThreats: [
-      'Banking trojans targeting Latin American banks',
-      'Social engineering exploiting cultural factors',
-      'Weak regulatory enforcement',
-      'Limited incident response capabilities'
-    ],
-    emergingRisks: [
-      'AI-powered phishing in local languages',
-      'Cryptocurrency-related attacks',
-      'Critical infrastructure targeting',
-      'Supply chain compromises'
-    ]
-  },
+  LATAM: DEFAULT_REGIONAL_RISK,
   NA: {
     region: 'NA',
     factors: {
@@ -1078,7 +1081,7 @@ export class IntelligenceEngine {
     // Check if the region exists in our profiles
     const risk = REGIONAL_RISKS[region];
     
-    // If found, return it; otherwise return LATAM as default
-    return risk || REGIONAL_RISKS.LATAM;
+    // If found, return it; otherwise return the default (LATAM)
+    return risk ?? DEFAULT_REGIONAL_RISK;
   }
 }
