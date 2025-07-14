@@ -62,7 +62,17 @@ export class DIICalculator {
     }
     
     // Model-specific normalization ranges
-    const modelRanges = {
+    const modelRanges: Record<string, { min: number; max: number }> = {
+      // DII-specific models
+      COMERCIO_HIBRIDO: { min: 0.01, max: 9 },
+      SOFTWARE_CRITICO: { min: 0.02, max: 12 },
+      SERVICIOS_DATOS: { min: 0.01, max: 8 },
+      ECOSISTEMA_DIGITAL: { min: 0.02, max: 11 },
+      SERVICIOS_FINANCIEROS: { min: 0.03, max: 15 },
+      INFRAESTRUCTURA_HEREDADA: { min: 0.01, max: 7 },
+      CADENA_SUMINISTRO: { min: 0.02, max: 10 },
+      INFORMACION_REGULADA: { min: 0.02, max: 12 },
+      // Legacy models (kept for backwards compatibility)
       SUBSCRIPTION_BASED: { min: 0.01, max: 10 },
       TRANSACTION_BASED: { min: 0.02, max: 12 },
       ASSET_LIGHT: { min: 0.005, max: 8 },
@@ -74,6 +84,13 @@ export class DIICalculator {
     };
     
     const range = modelRanges[businessModel];
+    
+    if (!range) {
+      // Default range for unknown models
+      const defaultRange = { min: 0.01, max: 10 };
+      const normalized = ((raw.value - defaultRange.min) / (defaultRange.max - defaultRange.min)) * 100;
+      return Score(Math.max(0, Math.min(100, Math.round(normalized))));
+    }
     
     // Normalize to 0-100
     const normalized = ((raw.value - range.min) / (range.max - range.min)) * 100;
@@ -307,14 +324,24 @@ export class DIICalculator {
    */
   private static getModelId(model: BusinessModel): BusinessModelId {
     const mapping: Record<BusinessModel, BusinessModelId> = {
-      'SUBSCRIPTION_BASED': 1,
-      'TRANSACTION_BASED': 2,
-      'ASSET_LIGHT': 3,
-      'ASSET_HEAVY': 4,
-      'DATA_DRIVEN': 5,
-      'PLATFORM_ECOSYSTEM': 6,
-      'DIRECT_TO_CONSUMER': 7,
-      'B2B_ENTERPRISE': 8
+      // DII-specific models
+      'COMERCIO_HIBRIDO': 1,
+      'SOFTWARE_CRITICO': 2,
+      'SERVICIOS_DATOS': 3,
+      'ECOSISTEMA_DIGITAL': 4,
+      'SERVICIOS_FINANCIEROS': 5,
+      'INFRAESTRUCTURA_HEREDADA': 6,
+      'CADENA_SUMINISTRO': 7,
+      'INFORMACION_REGULADA': 8,
+      // Legacy models (backwards compatibility)
+      'SUBSCRIPTION_BASED': 2,      // maps to SOFTWARE_CRITICO
+      'TRANSACTION_BASED': 5,       // maps to SERVICIOS_FINANCIEROS
+      'ASSET_LIGHT': 2,            // maps to SOFTWARE_CRITICO
+      'ASSET_HEAVY': 6,            // maps to INFRAESTRUCTURA_HEREDADA
+      'DATA_DRIVEN': 3,            // maps to SERVICIOS_DATOS
+      'PLATFORM_ECOSYSTEM': 4,      // maps to ECOSISTEMA_DIGITAL
+      'DIRECT_TO_CONSUMER': 1,      // maps to COMERCIO_HIBRIDO
+      'B2B_ENTERPRISE': 6          // maps to INFRAESTRUCTURA_HEREDADA
     };
     
     return mapping[model];

@@ -206,32 +206,74 @@ export class ResponseInterpreter {
     baseValue: number,
     businessModel: BusinessModel
   ): number {
-    // Model-specific adjustments based on inherent vulnerabilities
+    // DII model-specific adjustments based on inherent cyber vulnerabilities
     const adjustments: Partial<Record<BusinessModel, Partial<Record<DIIDimension, number>>>> = {
+      // DII-specific models
+      COMERCIO_HIBRIDO: {
+        TRD: -0.5,  // Omnichannel complexity reduces resilience
+        BRI: -0.5,  // Physical+digital = wider blast radius
+        HFP: -0.5   // More touchpoints = more human risk
+      },
+      SOFTWARE_CRITICO: {
+        TRD: -1,    // Zero tolerance for downtime
+        AER: -0.5,  // High concentration of customer data
+        HFP: +0.5   // Better automation and controls
+      },
+      SERVICIOS_DATOS: {
+        AER: -1.5,  // Data IS the product - extreme exposure
+        HFP: -0.5,  // Insider threat is catastrophic
+        RRG: -0.5   // Data breach = permanent damage
+      },
+      ECOSISTEMA_DIGITAL: {
+        HFP: -1,    // Third-party users multiply risk
+        BRI: -1.5,  // Platform effects cascade failures
+        AER: -1     // Ecosystem = bigger target
+      },
+      SERVICIOS_FINANCIEROS: {
+        TRD: -1.5,  // Real-time ops = no downtime tolerance
+        AER: -1,    // Financial data = prime target
+        RRG: +0.5   // Regulatory requirements = better DR
+      },
+      INFRAESTRUCTURA_HEREDADA: {
+        TRD: +1,    // Manual fallbacks provide buffer
+        HFP: -1,    // Legacy = poor access controls
+        RRG: -1.5   // Legacy recovery is complex/slow
+      },
+      CADENA_SUMINISTRO: {
+        BRI: -1,    // Supply chain = cascading failures
+        HFP: -0.5,  // Partner access multiplies risk
+        AER: +0.5   // Distributed assets = less concentration
+      },
+      INFORMACION_REGULADA: {
+        AER: -1.5,  // Regulated data = high-value target
+        TRD: -0.5,  // Healthcare/gov can't have downtime
+        HFP: -0.5   // Compliance theater vs real security
+      },
+      // Legacy models (kept for backwards compatibility)
       SUBSCRIPTION_BASED: {
-        TRD: -0.5, // More sensitive to downtime
-        AER: -0.5, // High value concentration
-        HFP: +0.5  // Often better automation
+        TRD: -0.5,
+        AER: -0.5,
+        HFP: +0.5
       },
       TRANSACTION_BASED: {
-        TRD: -1,   // Extreme downtime sensitivity
-        BRI: +0.5, // Often better transaction isolation
-        RRG: -0.5  // Complex recovery
+        TRD: -1,
+        BRI: +0.5,
+        RRG: -0.5
       },
       ASSET_HEAVY: {
-        TRD: +0.5, // More resilient to short outages
-        BRI: +1,   // Physical separation helps
-        RRG: -1    // Harder to recover physical assets
+        TRD: +0.5,
+        BRI: +1,
+        RRG: -1
       },
       DATA_DRIVEN: {
-        AER: -1,   // Data is the product
-        HFP: +0.5, // Usually good access controls
-        RRG: -0.5  // Data recovery complexity
+        AER: -1,
+        HFP: +0.5,
+        RRG: -0.5
       },
       PLATFORM_ECOSYSTEM: {
-        HFP: -1,   // Many external users
-        BRI: -1,   // Network effects amplify damage
-        AER: -0.5  // Attractive target
+        HFP: -1,
+        BRI: -1,
+        AER: -0.5
       }
     };
 

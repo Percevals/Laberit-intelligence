@@ -1,11 +1,21 @@
 # DII Platform - Business Logic Documentation
 *Last Updated: 2025-01-14*
 
-## 🎯 Business Model Detection
+## 🎯 Business Model Detection (Updated: DII-Specific)
+
+### 8 DII-Specific Business Models
+1. **COMERCIO_HIBRIDO** - Hybrid Commerce (physical + digital channels)
+2. **SOFTWARE_CRITICO** - Critical Software (SaaS/cloud solutions)
+3. **SERVICIOS_DATOS** - Data Services (data monetization)
+4. **ECOSISTEMA_DIGITAL** - Digital Ecosystem (multi-sided platforms)
+5. **SERVICIOS_FINANCIEROS** - Financial Services (transaction processing)
+6. **INFRAESTRUCTURA_HEREDADA** - Legacy Infrastructure (old systems + digital)
+7. **CADENA_SUMINISTRO** - Supply Chain (logistics + digital tracking)
+8. **INFORMACION_REGULADA** - Regulated Information (healthcare, sensitive data)
 
 ### Classification Flow
 ```mermaid
-Company Data → Classification Questions → Business Model → DII Assessment
+Company Data → Classification Questions → DII Business Model → Cyber Risk Assessment
 ```
 
 ### Classification Logic (`/src/core/business-model/classifier.ts`)

@@ -112,6 +112,12 @@ Example: "recurring_subscriptions" + "purely_digital" → SUBSCRIPTION_BASED (95
   - Added proper type assertions for JSON data
   - Made premium_questions optional
 
+- **DII-Specific Business Models**
+  - Replaced generic models with 8 DII-specific models
+  - Added industry-based classification shortcuts
+  - Updated all mappings and adjustments
+  - Maintained backwards compatibility
+
 ### Key Behavioral Changes
 - Questions now ask for measurable values (hours, percentages)
 - Responses directly map to operational metrics

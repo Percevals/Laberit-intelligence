@@ -157,37 +157,71 @@ export class AssessmentCalculator {
     businessModel: BusinessModel
   ): Partial<Record<DIIDimension, number>> {
     const adjustments: Record<BusinessModel, Partial<Record<DIIDimension, number>>> = {
-      SUBSCRIPTION_BASED: {
-        AER: +1,  // Usually better at protecting recurring revenue
+      // DII-specific models
+      COMERCIO_HIBRIDO: {
+        BRI: -1,  // Omnichannel = complex blast radius
+        HFP: -1   // Multiple touchpoints
+      },
+      SOFTWARE_CRITICO: {
+        AER: +1,  // Security is existential
         HFP: +1   // Better automation
       },
+      SERVICIOS_DATOS: {
+        AER: -2,  // Data concentration risk
+        HFP: -1   // Insider threat critical
+      },
+      ECOSISTEMA_DIGITAL: {
+        HFP: -1,  // Third-party access
+        BRI: -2   // Ecosystem amplification
+      },
+      SERVICIOS_FINANCIEROS: {
+        AER: +1,  // Regulatory compliance
+        RRG: +1   // Mandated DR capabilities
+      },
+      INFRAESTRUCTURA_HEREDADA: {
+        BRI: -1,  // Complex legacy systems
+        RRG: -2   // Difficult recovery
+      },
+      CADENA_SUMINISTRO: {
+        BRI: -1,  // Supply chain cascades
+        AER: +1   // Distributed assets
+      },
+      INFORMACION_REGULADA: {
+        AER: -1,  // High-value target
+        HFP: +1   // Compliance processes
+      },
+      // Legacy models (kept for backwards compatibility)
+      SUBSCRIPTION_BASED: {
+        AER: +1,
+        HFP: +1
+      },
       TRANSACTION_BASED: {
-        BRI: -1,  // Transaction systems have wide impact
-        RRG: -1   // Complex recovery
+        BRI: -1,
+        RRG: -1
       },
       ASSET_LIGHT: {
-        BRI: +1,  // Simpler systems
-        RRG: +1   // Easier recovery
+        BRI: +1,
+        RRG: +1
       },
       ASSET_HEAVY: {
-        BRI: -1,  // Physical + digital complexity
-        RRG: -1   // Harder recovery
+        BRI: -1,
+        RRG: -1
       },
       DATA_DRIVEN: {
-        AER: -1,  // Data is attractive target
-        HFP: -1   // Many data access points
+        AER: -1,
+        HFP: -1
       },
       PLATFORM_ECOSYSTEM: {
-        HFP: -1,  // Many external users
-        BRI: -1   // Wide ecosystem impact
+        HFP: -1,
+        BRI: -1
       },
       DIRECT_TO_CONSUMER: {
-        AER: 0,   // Average
-        HFP: 0    // Average
+        AER: 0,
+        HFP: 0
       },
       B2B_ENTERPRISE: {
-        AER: +1,  // Better enterprise security
-        RRG: +1   // Better DR planning
+        AER: +1,
+        RRG: +1
       }
     };
 
@@ -199,6 +233,16 @@ export class AssessmentCalculator {
    */
   private static getScenarioId(businessModel: BusinessModel): BusinessModelScenarioId {
     const mapping: Record<BusinessModel, BusinessModelScenarioId> = {
+      // DII-specific models
+      'COMERCIO_HIBRIDO': '1_comercio_hibrido',
+      'SOFTWARE_CRITICO': '2_software_critico',
+      'SERVICIOS_DATOS': '3_servicios_datos',
+      'ECOSISTEMA_DIGITAL': '4_ecosistema_digital',
+      'SERVICIOS_FINANCIEROS': '5_servicios_financieros',
+      'INFRAESTRUCTURA_HEREDADA': '6_infraestructura_heredada',
+      'CADENA_SUMINISTRO': '7_cadena_suministro',
+      'INFORMACION_REGULADA': '8_informacion_regulada',
+      // Legacy mappings (kept for backwards compatibility)
       'SUBSCRIPTION_BASED': '2_software_critico',
       'TRANSACTION_BASED': '5_servicios_financieros',
       'ASSET_LIGHT': '2_software_critico',

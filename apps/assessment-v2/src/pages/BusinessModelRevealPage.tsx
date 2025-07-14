@@ -12,20 +12,30 @@ import {
 } from 'lucide-react';
 import { useAssessmentStore } from '@/store/assessment-store';
 import { ProgressIndicator } from '@/components/ProgressIndicator';
-import { BusinessModelClassifier } from '@core/business-model/classifier';
+import { DIIBusinessModelClassifier } from '@core/business-model/dii-classifier';
 import type { BusinessModel } from '@core/types/business-model.types';
 import { cn } from '@shared/utils/cn';
 
-// Simplified model data
-const modelDescriptions: Record<BusinessModel, string> = {
-  SUBSCRIPTION_BASED: 'Ingresos recurrentes. Alta predictibilidad, vulnerable a cancelaciones masivas.',
-  TRANSACTION_BASED: 'Ingresos por transacción. Escalable pero sensible a interrupciones.',
-  ASSET_LIGHT: 'Mínimos activos físicos. Ágil pero dependiente de terceros.',
-  ASSET_HEAVY: 'Infraestructura física significativa. Resiliente con alto costo de recuperación.',
-  DATA_DRIVEN: 'Datos como valor principal. Alto valor, objetivo atractivo para atacantes.',
-  PLATFORM_ECOSYSTEM: 'Plataforma multi-sided. Efectos de red, complejidad en seguridad.',
-  DIRECT_TO_CONSUMER: 'Ventas directas. Control total, toda la responsabilidad.',
-  B2B_ENTERPRISE: 'Ventas empresariales. Contratos estables, alto impacto por cliente.'
+// DII-specific model descriptions (with legacy support)
+const modelDescriptions: Partial<Record<BusinessModel, string>> = {
+  // DII models
+  COMERCIO_HIBRIDO: 'Comercio híbrido. Canales físicos y digitales, múltiples vectores de ataque.',
+  SOFTWARE_CRITICO: 'Software crítico. Alta disponibilidad requerida, downtime = pérdida inmediata.',
+  SERVICIOS_DATOS: 'Servicios de datos. Concentración de valor, objetivo de alto perfil.',
+  ECOSISTEMA_DIGITAL: 'Ecosistema digital. Vulnerabilidades de terceros se vuelven propias.',
+  SERVICIOS_FINANCIEROS: 'Servicios financieros. Cero tolerancia a errores, regulación estricta.',
+  INFRAESTRUCTURA_HEREDADA: 'Infraestructura heredada. Sistemas legacy difíciles de proteger.',
+  CADENA_SUMINISTRO: 'Cadena de suministro. Integración de partners multiplica riesgos.',
+  INFORMACION_REGULADA: 'Información regulada. Datos sensibles, objetivo de actores sofisticados.',
+  // Legacy models (map to DII equivalents)
+  SUBSCRIPTION_BASED: 'Software crítico. Alta disponibilidad requerida, downtime = pérdida inmediata.',
+  TRANSACTION_BASED: 'Servicios financieros. Cero tolerancia a errores, regulación estricta.',
+  ASSET_LIGHT: 'Software crítico. Alta disponibilidad requerida, downtime = pérdida inmediata.',
+  ASSET_HEAVY: 'Infraestructura heredada. Sistemas legacy difíciles de proteger.',
+  DATA_DRIVEN: 'Servicios de datos. Concentración de valor, objetivo de alto perfil.',
+  PLATFORM_ECOSYSTEM: 'Ecosistema digital. Vulnerabilidades de terceros se vuelven propias.',
+  DIRECT_TO_CONSUMER: 'Comercio híbrido. Canales físicos y digitales, múltiples vectores de ataque.',
+  B2B_ENTERPRISE: 'Infraestructura heredada. Sistemas legacy difíciles de proteger.'
 };
 
 export function BusinessModelRevealPage() {
@@ -50,7 +60,7 @@ export function BusinessModelRevealPage() {
     }
 
     // Use classifier to determine business model
-    const result = BusinessModelClassifier.classify({
+    const result = DIIBusinessModelClassifier.classify({
       revenueModel: 'recurring_subscriptions', 
       operationalDependency: 'fully_digital'
     });
@@ -77,7 +87,17 @@ export function BusinessModelRevealPage() {
 
   // Get model icon based on type
   const getModelIcon = (model: BusinessModel) => {
-    const icons: Record<BusinessModel, any> = {
+    const icons: Partial<Record<BusinessModel, any>> = {
+      // DII models
+      COMERCIO_HIBRIDO: Zap,
+      SOFTWARE_CRITICO: TrendingUp,
+      SERVICIOS_DATOS: AlertTriangle,
+      ECOSISTEMA_DIGITAL: Target,
+      SERVICIOS_FINANCIEROS: Shield,
+      INFRAESTRUCTURA_HEREDADA: Shield,
+      CADENA_SUMINISTRO: Target,
+      INFORMACION_REGULADA: AlertTriangle,
+      // Legacy models
       SUBSCRIPTION_BASED: TrendingUp,
       TRANSACTION_BASED: Zap,
       ASSET_LIGHT: Target,
@@ -93,38 +113,38 @@ export function BusinessModelRevealPage() {
   const ModelIcon = getModelIcon(suggestedModel.model);
 
   // Top 2 key risks for each model
-  const keyRisks: Record<BusinessModel, Array<{name: string, level: 'high' | 'medium' | 'low'}>> = {
-    SUBSCRIPTION_BASED: [
-      { name: 'Credential Stuffing', level: 'high' },
-      { name: 'API Abuse', level: 'medium' }
+  const keyRisks: Partial<Record<BusinessModel, Array<{name: string, level: 'high' | 'medium' | 'low'}>>> = {
+    COMERCIO_HIBRIDO: [
+      { name: 'POS Malware', level: 'high' },
+      { name: 'E-commerce Skimming', level: 'high' }
     ],
-    TRANSACTION_BASED: [
-      { name: 'DDoS Attacks', level: 'high' },
-      { name: 'Payment Fraud', level: 'high' }
+    SOFTWARE_CRITICO: [
+      { name: 'API Exploitation', level: 'high' },
+      { name: 'Supply Chain Attack', level: 'medium' }
     ],
-    ASSET_LIGHT: [
-      { name: 'Third-party Risk', level: 'high' },
-      { name: 'Cloud Misconfiguration', level: 'medium' }
-    ],
-    ASSET_HEAVY: [
-      { name: 'Ransomware', level: 'high' },
-      { name: 'Physical Security', level: 'medium' }
-    ],
-    DATA_DRIVEN: [
+    SERVICIOS_DATOS: [
       { name: 'Data Exfiltration', level: 'high' },
-      { name: 'Privacy Violations', level: 'high' }
+      { name: 'Insider Threat', level: 'high' }
     ],
-    PLATFORM_ECOSYSTEM: [
-      { name: 'Third-party Apps', level: 'medium' },
-      { name: 'API Abuse', level: 'high' }
+    ECOSISTEMA_DIGITAL: [
+      { name: 'Third-party Vulnerabilities', level: 'high' },
+      { name: 'OAuth Abuse', level: 'medium' }
     ],
-    DIRECT_TO_CONSUMER: [
-      { name: 'E-commerce Fraud', level: 'high' },
-      { name: 'Customer Data Breach', level: 'medium' }
+    SERVICIOS_FINANCIEROS: [
+      { name: 'Transaction Fraud', level: 'high' },
+      { name: 'DDoS Attack', level: 'high' }
     ],
-    B2B_ENTERPRISE: [
-      { name: 'Targeted Attacks', level: 'high' },
-      { name: 'IP Theft', level: 'medium' }
+    INFRAESTRUCTURA_HEREDADA: [
+      { name: 'Ransomware', level: 'high' },
+      { name: 'Unpatched Systems', level: 'high' }
+    ],
+    CADENA_SUMINISTRO: [
+      { name: 'Supply Chain Attack', level: 'high' },
+      { name: 'GPS Manipulation', level: 'medium' }
+    ],
+    INFORMACION_REGULADA: [
+      { name: 'Ransomware', level: 'high' },
+      { name: 'Nation-state APT', level: 'medium' }
     ]
   };
 

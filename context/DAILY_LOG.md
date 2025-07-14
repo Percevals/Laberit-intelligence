@@ -97,6 +97,41 @@
 
 ---
 
+## 2025-01-14 - DII Business Models Implementation
+
+### What Changed
+- Replaced generic business models with 8 DII-specific models
+- Created DIIBusinessModelClassifier with industry shortcuts
+- Updated all model mappings throughout the codebase
+- Maintained backwards compatibility with legacy models
+- Airlines now correctly map to ECOSISTEMA_DIGITAL
+
+### What Broke
+- Initial TypeScript errors due to incomplete model replacements
+- Fixed by adding union types for legacy support
+- Some Record types needed to be Partial
+
+### What Needs Decision
+- Should we fully deprecate legacy models or keep permanent support?
+- How to handle edge cases in industry classification?
+- Need more specific industry mappings for Latin American context
+
+### Key Files Modified
+- `/src/core/types/business-model.types.ts` - Added DIIBusinessModel and LegacyBusinessModel types
+- `/src/core/business-model/dii-classifier.ts` - New DII-specific classifier
+- `/src/core/business-model/model-profiles-dii.ts` - DII model profiles
+- `/src/pages/ClassificationPage.tsx` - Updated to use DIIBusinessModelClassifier
+- `/src/pages/SmartClassificationPage.tsx` - Uses industry-based classification
+- All response interpreters and calculators updated
+
+### Notes for Next Session
+- Industry classification now smarter (e.g., airlines → ecosystems)
+- Each DII model has specific cyber risk characteristics
+- Response adjustments are model-specific
+- Still only TRD dimension implemented
+
+---
+
 ## Example Entry
 
 ```markdown

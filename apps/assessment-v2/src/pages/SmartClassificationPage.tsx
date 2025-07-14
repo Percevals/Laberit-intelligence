@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { useAssessmentStore } from '@/store/assessment-store';
 import type { BusinessModel } from '@core/types/business-model.types';
+import { DIIBusinessModelClassifier } from '@core/business-model/dii-classifier';
 import { cn } from '@shared/utils/cn';
 
 export function SmartClassificationPage() {
@@ -50,35 +51,21 @@ export function SmartClassificationPage() {
     const allFieldsComplete = fieldsToShow.length === 0 && 
       classification.criticalInfra !== null;
     
-    if (allFieldsComplete && companySearch.selectedCompany && classification.industry) {
-      // Simple heuristic for demo - in production, use AI
-      const suggestions: Record<string, BusinessModel> = {
-        'Financial Services': 'TRANSACTION_BASED',
-        'Banking': 'TRANSACTION_BASED',
-        'E-commerce': 'PLATFORM_ECOSYSTEM',
-        'Software': 'SUBSCRIPTION_BASED',
-        'SaaS': 'SUBSCRIPTION_BASED',
-        'Manufacturing': 'ASSET_HEAVY',
-        'Logistics': 'ASSET_HEAVY',
-        'Data Analytics': 'DATA_DRIVEN',
-        'Advertising': 'DATA_DRIVEN',
-        'Retail': 'DIRECT_TO_CONSUMER',
-        'Healthcare': 'B2B_ENTERPRISE',
-        'Consulting': 'ASSET_LIGHT'
-      };
-
+    if (allFieldsComplete && companySearch.selectedCompany) {
+      // Use DII-specific industry classification
       const industry = classification.industry || companySearch.selectedCompany.industry || '';
-      const matchedModel = Object.entries(suggestions).find(([key]) => 
-        industry.toLowerCase().includes(key.toLowerCase())
+      const companyName = companySearch.selectedCompany.name || '';
+      
+      const diiClassification = DIIBusinessModelClassifier.classifyByIndustry(
+        industry,
+        companyName
       );
 
-      if (matchedModel) {
-        setSuggestedModel({
-          model: matchedModel[1],
-          confidence: 0.85,
-          reasoning: `Basado en su industria: ${industry}`
-        });
-      }
+      setSuggestedModel({
+        model: diiClassification.model,
+        confidence: diiClassification.confidence as any / 100,
+        reasoning: diiClassification.reasoning
+      });
     }
   }, [companySearch.selectedCompany, classification.industry, classification.criticalInfra, fieldsToShow.length]);
 

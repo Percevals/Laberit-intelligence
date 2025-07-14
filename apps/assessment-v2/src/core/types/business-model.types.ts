@@ -7,15 +7,30 @@ import type { Hours, Percentage } from './brand.types';
 
 export type BusinessModelId = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 
-export type BusinessModel = 
-  | 'SUBSCRIPTION_BASED'      // Model 1: Recurring revenue (SaaS, streaming)
-  | 'TRANSACTION_BASED'       // Model 2: Per-transaction fees (payments, marketplaces)
-  | 'ASSET_LIGHT'            // Model 3: Minimal physical assets (consulting, software)
-  | 'ASSET_HEAVY'            // Model 4: Significant physical infrastructure (manufacturing)
-  | 'DATA_DRIVEN'            // Model 5: Data as primary value (analytics, advertising)
-  | 'PLATFORM_ECOSYSTEM'      // Model 6: Multi-sided platforms (app stores, social)
-  | 'DIRECT_TO_CONSUMER'      // Model 7: Direct sales to end users (e-commerce, retail)
-  | 'B2B_ENTERPRISE';         // Model 8: Complex enterprise sales
+// DII-specific business models
+export type DIIBusinessModel = 
+  | 'COMERCIO_HIBRIDO'        // Model 1: Hybrid Commerce - Physical + digital channels
+  | 'SOFTWARE_CRITICO'        // Model 2: Critical Software - SaaS/cloud solutions
+  | 'SERVICIOS_DATOS'         // Model 3: Data Services - Data monetization
+  | 'ECOSISTEMA_DIGITAL'      // Model 4: Digital Ecosystem - Multi-sided platforms
+  | 'SERVICIOS_FINANCIEROS'   // Model 5: Financial Services - Transaction processing
+  | 'INFRAESTRUCTURA_HEREDADA' // Model 6: Legacy Infrastructure - Old systems with digital layers
+  | 'CADENA_SUMINISTRO'       // Model 7: Supply Chain - Logistics with digital tracking
+  | 'INFORMACION_REGULADA';   // Model 8: Regulated Information - Healthcare, sensitive data
+
+// Legacy business models (kept for backwards compatibility)
+export type LegacyBusinessModel = 
+  | 'SUBSCRIPTION_BASED'      // Legacy: Recurring revenue
+  | 'TRANSACTION_BASED'       // Legacy: Per-transaction fees
+  | 'ASSET_LIGHT'            // Legacy: Minimal physical assets
+  | 'ASSET_HEAVY'            // Legacy: Significant physical infrastructure
+  | 'DATA_DRIVEN'            // Legacy: Data as primary value
+  | 'PLATFORM_ECOSYSTEM'      // Legacy: Multi-sided platforms
+  | 'DIRECT_TO_CONSUMER'      // Legacy: Direct sales
+  | 'B2B_ENTERPRISE';         // Legacy: Complex enterprise sales
+
+// Combined type for all business models
+export type BusinessModel = DIIBusinessModel | LegacyBusinessModel;
 
 export interface ModelProfile {
   id: BusinessModelId;

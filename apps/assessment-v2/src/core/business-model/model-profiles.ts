@@ -6,7 +6,8 @@
 import type { ModelProfile, BusinessModelId } from '@core/types/business-model.types';
 import { Hours } from '@core/types/brand.types';
 
-export const MODEL_PROFILES: Record<BusinessModelId, ModelProfile> = {
+// Legacy profiles - kept for backwards compatibility
+export const LEGACY_MODEL_PROFILES: Record<BusinessModelId, ModelProfile> = {
   1: {
     id: 1,
     name: 'SUBSCRIPTION_BASED',
@@ -606,3 +607,6 @@ export const MODEL_PROFILES: Record<BusinessModelId, ModelProfile> = {
     ]
   }
 };
+
+// Export DII-specific profiles as the default
+export { DII_MODEL_PROFILES as MODEL_PROFILES } from './model-profiles-dii';

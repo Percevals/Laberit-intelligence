@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Building2, Cpu } from 'lucide-react';
-import { BusinessModelClassifier } from '@core/business-model/classifier';
+import { DIIBusinessModelClassifier } from '@core/business-model/dii-classifier';
 import type { ClassificationAnswers } from '@core/types/business-model.types';
 import { useAssessmentStore } from '@/store/assessment-store';
 import { cn } from '@shared/utils/cn';
@@ -43,8 +43,8 @@ export function ClassificationPage() {
       operationalDependency: value,
     };
     
-    // Classify the business model
-    const classification = BusinessModelClassifier.classify(completeAnswers);
+    // Classify the business model using DII-specific classifier
+    const classification = DIIBusinessModelClassifier.classify(completeAnswers);
     
     // Store in state
     setBusinessModel(classification.model);

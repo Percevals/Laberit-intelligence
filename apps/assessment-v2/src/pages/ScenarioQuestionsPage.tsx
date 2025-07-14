@@ -51,6 +51,16 @@ export function ScenarioQuestionsPage() {
     try {
       // Map business model to scenario ID
       const modelMapping: Record<string, BusinessModelScenarioId> = {
+        // DII-specific models
+        'COMERCIO_HIBRIDO': '1_comercio_hibrido',
+        'SOFTWARE_CRITICO': '2_software_critico',
+        'SERVICIOS_DATOS': '3_servicios_datos',
+        'ECOSISTEMA_DIGITAL': '4_ecosistema_digital',
+        'SERVICIOS_FINANCIEROS': '5_servicios_financieros',
+        'INFRAESTRUCTURA_HEREDADA': '6_infraestructura_heredada',
+        'CADENA_SUMINISTRO': '7_cadena_suministro',
+        'INFORMACION_REGULADA': '8_informacion_regulada',
+        // Legacy mappings (kept for backwards compatibility)
         'SUBSCRIPTION_BASED': '2_software_critico',
         'TRANSACTION_BASED': '5_servicios_financieros',
         'ASSET_LIGHT': '2_software_critico',
