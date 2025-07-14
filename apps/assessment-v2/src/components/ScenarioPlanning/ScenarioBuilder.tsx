@@ -40,7 +40,7 @@ function ActionSelector({ dimension, actions, selectedActions, onToggleAction }:
     .filter(action => selectedActions.includes(action.id))
     .reduce((sum, action) => sum + action.scoreImprovement, 0);
 
-  const getDimensionInfo = (dim: DIIDimension) => {
+  const getDimensionInfo = (dim: DIIDimension): { name: string; color: string } => {
     const info: Record<DIIDimension, { name: string; color: string }> = {
       TRD: { name: 'Time to Revenue Damage', color: 'text-red-400 bg-red-400/10' },
       AER: { name: 'Attack Economic Reward', color: 'text-green-400 bg-green-400/10' },

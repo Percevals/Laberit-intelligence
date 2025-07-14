@@ -5,7 +5,6 @@
 
 import { motion } from 'framer-motion';
 import {
-  BarChart3,
   TrendingUp,
   Trophy,
   Target,

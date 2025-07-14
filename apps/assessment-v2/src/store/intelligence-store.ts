@@ -7,10 +7,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 import type { 
-  IntelligenceReport, 
-  PersonalizedInsight,
-  VulnerabilityWindow,
-  ImmunityPrescription
+  IntelligenceReport
 } from '@/services/intelligence-engine';
 import { IntelligenceEngine } from '@/services/intelligence-engine';
 import { useDIIDimensionsStore } from './dii-dimensions-store';
@@ -102,10 +99,31 @@ export const useIntelligenceStore = create<IntelligenceState>()(
             throw new Error('Assessment data not available');
           }
 
+          // Check if all dimensions are present
+          const requiredDimensions: Array<keyof typeof dimensions> = ['TRD', 'AER', 'HFP', 'BRI', 'RRG'];
+          const hasAllDimensions = requiredDimensions.every(dim => dim in dimensions);
+          
+          if (!hasAllDimensions) {
+            throw new Error('All dimensions must be assessed before generating intelligence report');
+          }
+
+          // Create classification result from assessment data
+          const classificationResult = {
+            company: classification.answers.businessName || 'Unknown',
+            industry: classification.industry || 'Unknown',
+            businessModel: classification.businessModel || 'Unknown',
+            companySize: classification.employees 
+              ? classification.employees < 50 ? 'Small'
+              : classification.employees < 250 ? 'Medium'
+              : 'Large'
+              : 'Unknown',
+            region: classification.geography || 'LATAM'
+          };
+
           // Create intelligence engine
           const engine = new IntelligenceEngine({
-            classification,
-            dimensions,
+            classification: classificationResult,
+            dimensions: dimensions as Record<string, any>,
             currentDII: currentDII.score,
             assessmentDate: new Date()
           });

@@ -12,7 +12,6 @@ import {
   TrendingUp,
   Target,
   Clock,
-  Bookmark,
   Filter,
   Download,
   RefreshCw,
@@ -179,7 +178,9 @@ export function IntelligenceDashboard() {
           icon={Shield}
           label="Current DII"
           value={currentDII?.score || 0}
-          subValue={currentDII?.level || 'Unknown'}
+          subValue={(currentDII?.score || 0) >= 76 ? 'ADAPTATIVO' :
+                   (currentDII?.score || 0) >= 51 ? 'RESILIENTE' :
+                   (currentDII?.score || 0) >= 26 ? 'ROBUSTO' : 'FRAGIL'}
           color="text-primary-600"
         />
         

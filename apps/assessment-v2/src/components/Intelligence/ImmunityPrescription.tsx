@@ -13,10 +13,7 @@ import {
   Clock,
   DollarSign,
   TrendingUp,
-  CheckCircle2,
-  ChevronRight,
-  Calendar,
-  Users
+  ChevronRight
 } from 'lucide-react';
 import type { ImmunityPrescription as PrescriptionType, PrescriptionAction } from '@/services/intelligence-engine';
 import { useIntelligenceStore } from '@/store/intelligence-store';

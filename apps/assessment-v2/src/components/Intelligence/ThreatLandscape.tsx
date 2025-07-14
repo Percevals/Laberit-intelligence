@@ -8,13 +8,10 @@ import { motion } from 'framer-motion';
 import {
   AlertTriangle,
   TrendingUp,
-  Globe,
   Shield,
   Info,
-  ChevronRight,
   MapPin,
   Activity,
-  Users,
   Zap
 } from 'lucide-react';
 import type { IntelligenceReport, ThreatPattern } from '@/services/intelligence-engine';

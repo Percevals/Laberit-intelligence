@@ -6,8 +6,7 @@
 import type { 
   BusinessModelId, 
   DIIDimension, 
-  DimensionResponse,
-  ClassificationResult 
+  DimensionResponse
 } from '@/store/dii-dimensions-store';
 
 // Threat intelligence data structures
@@ -135,6 +134,14 @@ export interface PersonalizedInsight {
   suggestedActions?: string[];
   relatedDimensions: DIIDimension[];
   timeHorizon: 'Immediate' | 'Short-term' | 'Medium-term' | 'Long-term';
+}
+
+export interface ClassificationResult {
+  company: string;
+  industry: string;
+  businessModel: string;
+  companySize: string;
+  region?: string;
 }
 
 export interface IntelligenceContext {
@@ -272,21 +279,21 @@ const REGIONAL_RISKS: Record<string, RegionalRisk> = {
   }
 };
 
-// Industry-specific contexts
-const INDUSTRY_CONTEXTS: Record<string, Partial<IndustryContext>> = {
-  'Retail': {
-    regulatoryRequirements: ['PCI-DSS', 'Consumer Data Protection'],
-    commonAttackVectors: ['POS malware', 'E-skimming', 'Supply chain attacks'],
-    criticalAssets: ['Payment systems', 'Customer databases', 'Inventory systems'],
-    supplyChainRisks: ['Third-party vendors', 'Logistics providers', 'Payment processors']
-  },
-  'Financial Services': {
-    regulatoryRequirements: ['SOX', 'PCI-DSS', 'Local banking regulations'],
-    commonAttackVectors: ['Banking trojans', 'APT groups', 'Insider threats'],
-    criticalAssets: ['Core banking systems', 'Customer data', 'Transaction systems'],
-    supplyChainRisks: ['Technology vendors', 'Data processors', 'Cloud providers']
-  }
-};
+// Industry-specific contexts (would be used for more detailed analysis)
+// const INDUSTRY_CONTEXTS: Record<string, Partial<IndustryContext>> = {
+//   'Retail': {
+//     regulatoryRequirements: ['PCI-DSS', 'Consumer Data Protection'],
+//     commonAttackVectors: ['POS malware', 'E-skimming', 'Supply chain attacks'],
+//     criticalAssets: ['Payment systems', 'Customer databases', 'Inventory systems'],
+//     supplyChainRisks: ['Third-party vendors', 'Logistics providers', 'Payment processors']
+//   },
+//   'Financial Services': {
+//     regulatoryRequirements: ['SOX', 'PCI-DSS', 'Local banking regulations'],
+//     commonAttackVectors: ['Banking trojans', 'APT groups', 'Insider threats'],
+//     criticalAssets: ['Core banking systems', 'Customer data', 'Transaction systems'],
+//     supplyChainRisks: ['Technology vendors', 'Data processors', 'Cloud providers']
+//   }
+// };
 
 export class IntelligenceEngine {
   private context: IntelligenceContext;
@@ -362,7 +369,7 @@ export class IntelligenceEngine {
       relevantPatterns,
       emergingThreats,
       industryTrends,
-      regionalFactors: regionalRisk
+      regionalFactors: regionalRisk || REGIONAL_RISKS.LATAM
     };
   }
   
