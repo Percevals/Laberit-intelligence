@@ -18,6 +18,7 @@ import { QuestionsPage } from './pages/QuestionsPage';
 import { ResultsPage } from './pages/ResultsPage';
 import { ConfigDebugPage } from './pages/ConfigDebugPage';
 import { ScenarioTestPage } from './pages/ScenarioTestPage';
+import { QuestionAdapterTestPage } from './pages/QuestionAdapterTestPage';
 
 // Core providers and setup
 const queryClient = new QueryClient({
@@ -59,6 +60,7 @@ export default function App() {
             <Route path="/assessment/results" element={<ResultsPage />} />
             <Route path="/debug" element={<ConfigDebugPage />} />
             <Route path="/test/scenarios" element={<ScenarioTestPage />} />
+            <Route path="/test/adapter" element={<QuestionAdapterTestPage />} />
           </Routes>
         </Suspense>
       </BrowserRouter>
