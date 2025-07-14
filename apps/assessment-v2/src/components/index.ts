@@ -18,3 +18,6 @@ export { InsightRevelationDemo } from './InsightRevelationDemo';
 export { AssessmentCompletion } from './AssessmentCompletion';
 export { AssessmentCompletionFlow } from './AssessmentCompletionFlow';
 export { AssessmentCompletionMobile, ShareableImmunityCard } from './AssessmentCompletionMobile';
+
+// Dimension Orchestration Components
+export { DimensionOrchestrationDemo } from './DimensionOrchestrationDemo';
