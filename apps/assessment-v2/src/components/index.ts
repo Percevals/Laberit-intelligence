@@ -13,3 +13,8 @@ export { DIIWhatIfScenarios } from './DIIWhatIfScenarios';
 // Insight Revelation Components
 export { InsightRevelationCard, InsightProgressBar, InsightSummary } from './InsightRevelation';
 export { InsightRevelationDemo } from './InsightRevelationDemo';
+
+// Assessment Completion Components
+export { AssessmentCompletion } from './AssessmentCompletion';
+export { AssessmentCompletionFlow } from './AssessmentCompletionFlow';
+export { AssessmentCompletionMobile, ShareableImmunityCard } from './AssessmentCompletionMobile';
