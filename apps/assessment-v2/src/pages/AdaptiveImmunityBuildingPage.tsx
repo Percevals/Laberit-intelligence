@@ -15,7 +15,8 @@ import {
   Brain,
   Info,
   SkipForward,
-  Navigation
+  Navigation,
+  AlertTriangle
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAssessmentStore } from '@/store/assessment-store';
