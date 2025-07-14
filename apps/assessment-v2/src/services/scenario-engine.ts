@@ -5,6 +5,8 @@
 
 import type { DIIDimension, DimensionResponse, BusinessModelId } from '@/store/dii-dimensions-store';
 
+export type { DIIDimension } from '@/store/dii-dimensions-store';
+
 export interface ImprovementAction {
   id: string;
   dimension: DIIDimension;

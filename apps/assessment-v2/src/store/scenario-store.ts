@@ -9,8 +9,7 @@ import { immer } from 'zustand/middleware/immer';
 import type { 
   ScenarioAnalysis, 
   ImprovementAction, 
-  ScenarioComparison,
-  ImplementationPhase 
+  ScenarioComparison
 } from '@/services/scenario-engine';
 import { ScenarioEngine } from '@/services/scenario-engine';
 import type { DIIDimension, BusinessModelId, DimensionResponse } from './dii-dimensions-store';
@@ -288,6 +287,8 @@ export const useScenarioStore = create<ScenarioState>()(
               'Effort Level': action.effortLevel,
               'Strategic Value': action.strategicValue
             }));
+            
+            if (csvData.length === 0) return;
             
             const csvStr = [
               Object.keys(csvData[0]).join(','),

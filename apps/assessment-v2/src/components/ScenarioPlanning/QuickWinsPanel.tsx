@@ -3,7 +3,6 @@
  * Display high-impact, low-effort improvements
  */
 
-import React from 'react';
 import { motion } from 'framer-motion';
 import {
   Zap,

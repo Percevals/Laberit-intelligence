@@ -3,7 +3,7 @@
  * Side-by-side analysis of multiple scenarios
  */
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   ArrowLeft,
@@ -15,12 +15,7 @@ import {
   Trophy,
   Medal,
   Star,
-  CheckCircle2,
-  AlertCircle,
-  BarChart3,
-  PieChart,
-  Users,
-  Calendar
+  BarChart3
 } from 'lucide-react';
 import { useScenarioStore } from '@/store/scenario-store';
 import { useDIIDimensionsStore } from '@/store/dii-dimensions-store';
@@ -31,7 +26,7 @@ interface MetricComparisonProps {
   scenarios: ScenarioAnalysis[];
   metric: 'improvement' | 'cost' | 'roi' | 'time';
   title: string;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: React.ComponentType<{ className?: string | undefined }>;
   formatter: (value: number) => string;
   colorClass: string;
 }
@@ -232,7 +227,6 @@ function ScenarioDetails({ scenario, rank }: ScenarioDetailsProps) {
 
 export function ScenarioComparison() {
   const { comparisonResult, setViewMode } = useScenarioStore();
-  const { currentDII } = useDIIDimensionsStore();
   
   if (!comparisonResult) {
     return (

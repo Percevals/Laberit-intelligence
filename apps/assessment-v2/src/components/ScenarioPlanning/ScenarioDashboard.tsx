@@ -3,23 +3,19 @@
  * Main interface for what-if scenario exploration
  */
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Brain,
   Target,
-  TrendingUp,
   Plus,
   BarChart3,
-  Map,
   Lightbulb,
-  Compare,
   Download,
   Settings,
   Star,
-  Clock,
-  DollarSign,
-  Shield
+  Shield,
+  Columns
 } from 'lucide-react';
 import { useScenarioStore } from '@/store/scenario-store';
 import { useDIIDimensionsStore } from '@/store/dii-dimensions-store';
@@ -35,7 +31,6 @@ export function ScenarioDashboard() {
   const {
     scenarios,
     activeScenarioId,
-    availableImprovements,
     quickWins,
     viewMode,
     showQuickWins,
@@ -49,8 +44,7 @@ export function ScenarioDashboard() {
 
   const { 
     dimensions, 
-    currentDII, 
-    businessModel 
+    currentDII
   } = useDIIDimensionsStore();
 
   const { classification } = useAssessmentStore();
@@ -60,12 +54,26 @@ export function ScenarioDashboard() {
 
   // Initialize scenario engine when component mounts
   useEffect(() => {
-    if (businessModel && dimensions && currentDII) {
-      initializeEngine(businessModel, dimensions, currentDII.score);
+    if (classification?.businessModel && dimensions && currentDII) {
+      // Map business model string to numeric ID
+      const businessModelMap: Record<string, number> = {
+        'COMERCIO_HIBRIDO': 1,
+        'SOFTWARE_CRITICO': 2,
+        'SERVICIOS_DATOS': 3,
+        'ECOSISTEMA_DIGITAL': 4,
+        'SERVICIOS_FINANCIEROS': 5,
+        'INFRAESTRUCTURA_HEREDADA': 6,
+        'CADENA_SUMINISTRO': 7,
+        'INFORMACION_REGULADA': 8
+      };
+      
+      const businessModelId = businessModelMap[classification.businessModel];
+      if (businessModelId && Object.keys(dimensions).length === 5) {
+        initializeEngine(businessModelId as any, dimensions as any, currentDII.score);
+      }
     }
-  }, [businessModel, dimensions, currentDII, initializeEngine]);
+  }, [classification?.businessModel, dimensions, currentDII, initializeEngine]);
 
-  const activeScenario = scenarios.find(s => s.id === activeScenarioId);
   const bookmarkedScenarios = scenarios.filter(s => s.isBookmarked);
   const hasScenarios = scenarios.length > 0;
 
@@ -147,7 +155,9 @@ export function ScenarioDashboard() {
             {currentDII?.score || 0}
           </div>
           <div className="text-xs text-dark-text-secondary mt-1">
-            {currentDII?.stage || 'Unknown'} Level
+            {(currentDII?.score || 0) >= 76 ? 'ADAPTATIVO' :
+             (currentDII?.score || 0) >= 51 ? 'RESILIENTE' :
+             (currentDII?.score || 0) >= 26 ? 'ROBUSTO' : 'FRAGIL'} Level
           </div>
         </div>
 
@@ -227,7 +237,7 @@ export function ScenarioDashboard() {
                 onClick={handleCompareSelected}
                 className="flex items-center gap-2 px-3 py-1 bg-primary-600 text-white rounded text-sm hover:bg-primary-700 transition-colors"
               >
-                <Compare className="w-4 h-4" />
+                <Columns className="w-4 h-4" />
                 Compare
               </button>
             )}

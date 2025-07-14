@@ -3,7 +3,7 @@
  * Interactive tool for creating what-if scenarios
  */
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft,
@@ -41,7 +41,7 @@ function ActionSelector({ dimension, actions, selectedActions, onToggleAction }:
     .reduce((sum, action) => sum + action.scoreImprovement, 0);
 
   const getDimensionInfo = (dim: DIIDimension) => {
-    const info = {
+    const info: Record<DIIDimension, { name: string; color: string }> = {
       TRD: { name: 'Time to Revenue Damage', color: 'text-red-400 bg-red-400/10' },
       AER: { name: 'Attack Economic Reward', color: 'text-green-400 bg-green-400/10' },
       HFP: { name: 'Human Failure Probability', color: 'text-blue-400 bg-blue-400/10' },

@@ -3,7 +3,7 @@
  * Timeline-based planning for achieving target DII scores
  */
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   ArrowLeft,
@@ -15,7 +15,6 @@ import {
   CheckCircle2,
   AlertTriangle,
   Users,
-  MapPin,
   Flag,
   ChevronRight,
   Download,
@@ -342,7 +341,7 @@ export function RoadmapPlanner() {
           </div>
           <div className="text-2xl font-bold text-dark-text">
             {roadmapAnalysis.recommendedActions.length > 0 
-              ? Math.round(roadmapAnalysis.recommendedActions.reduce((sum, action) => sum + (action.annualRiskCost / action.implementationCost) * 100, 0) / roadmapAnalysis.recommendedActions.length)
+              ? Math.round(roadmapAnalysis.recommendedActions.reduce((sum: number, action: ImprovementAction) => sum + (action.annualRiskCost / action.implementationCost) * 100, 0) / roadmapAnalysis.recommendedActions.length)
               : 0}%
           </div>
           <div className="text-sm text-dark-text-secondary">
@@ -378,7 +377,7 @@ export function RoadmapPlanner() {
         </div>
 
         <div className="space-y-4">
-          {roadmapAnalysis.phases.map((phase) => (
+          {roadmapAnalysis.phases.map((phase: ImplementationPhase) => (
             <PhaseCard
               key={phase.phase}
               phase={phase}
@@ -416,10 +415,10 @@ export function RoadmapPlanner() {
               </div>
 
               {/* Phase Milestones */}
-              {roadmapAnalysis.phases.map((phase, index) => {
+              {roadmapAnalysis.phases.map((phase: ImplementationPhase, index: number) => {
                 const cumulativeMonths = roadmapAnalysis.phases
                   .slice(0, index + 1)
-                  .reduce((sum, p) => sum + p.duration, 0);
+                  .reduce((sum: number, p: ImplementationPhase) => sum + p.duration, 0);
                 
                 return (
                   <div key={phase.phase} className="flex items-center gap-6">
