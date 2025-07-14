@@ -9,3 +9,7 @@ export type { DIIDimension, ImmunityDimensionState } from './ImmunityTimelineNav
 // DII State Management Components
 export { DIIProgressiveDemo } from './DIIProgressiveDemo';
 export { DIIWhatIfScenarios } from './DIIWhatIfScenarios';
+
+// Insight Revelation Components
+export { InsightRevelationCard, InsightProgressBar, InsightSummary } from './InsightRevelation';
+export { InsightRevelationDemo } from './InsightRevelationDemo';
