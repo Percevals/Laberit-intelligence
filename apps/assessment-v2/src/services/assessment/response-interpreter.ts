@@ -1,0 +1,288 @@
+/**
+ * Response Interpreter Service
+ * Maps scenario question responses (1-5 scale) to DII dimension values (1-10 scale)
+ * Considers business model context and company characteristics
+ */
+
+import type { DIIDimension, BusinessModelScenarioId } from '@core/types/pain-scenario.types';
+import type { BusinessModel } from '@core/types/business-model.types';
+import type { CompanyInfo } from '@services/ai/types';
+
+export interface InterpretationContext {
+  businessModel: BusinessModel;
+  scenarioId: BusinessModelScenarioId;
+  company: CompanyInfo;
+  criticalInfra: boolean;
+}
+
+export interface DimensionInterpretation {
+  dimension: DIIDimension;
+  rawResponse: number; // 1-5 from user
+  interpretedValue: number; // 1-10 for DII
+  confidence: number; // 0-1
+  reasoning: string;
+}
+
+export class ResponseInterpreter {
+  /**
+   * Interpret a single response into DII dimension value
+   */
+  static interpretResponse(
+    dimension: DIIDimension,
+    response: number, // 1-5 scale
+    context: InterpretationContext
+  ): DimensionInterpretation {
+    // Validate response
+    if (response < 1 || response > 5) {
+      throw new Error(`Invalid response: ${response}. Must be 1-5.`);
+    }
+
+    // Get base interpretation
+    const baseValue = this.getBaseInterpretation(dimension, response);
+    
+    // Apply business model adjustments
+    const modelAdjusted = this.applyBusinessModelAdjustment(
+      dimension,
+      baseValue,
+      context.businessModel
+    );
+    
+    // Apply company size adjustments
+    const sizeAdjusted = this.applyCompanySizeAdjustment(
+      dimension,
+      modelAdjusted,
+      context.company
+    );
+    
+    // Apply critical infrastructure penalty if applicable
+    const finalValue = this.applyCriticalInfraAdjustment(
+      dimension,
+      sizeAdjusted,
+      context.criticalInfra
+    );
+
+    // Ensure value is within bounds
+    const interpretedValue = Math.max(1, Math.min(10, Math.round(finalValue)));
+    
+    // Calculate confidence based on data completeness
+    const confidence = this.calculateConfidence(context);
+    
+    // Generate reasoning
+    const reasoning = this.generateReasoning(
+      dimension,
+      response,
+      interpretedValue,
+      context
+    );
+
+    return {
+      dimension,
+      rawResponse: response,
+      interpretedValue,
+      confidence,
+      reasoning
+    };
+  }
+
+  /**
+   * Base interpretation mapping (1-5 to 1-10)
+   * Different mapping per dimension based on their nature
+   */
+  private static getBaseInterpretation(dimension: DIIDimension, response: number): number {
+    // Mapping arrays: index 0 is unused, 1-5 map to response values
+    const mappings: Record<DIIDimension, number[]> = {
+      // TRD: Time resilience (higher is better)
+      // 1=very poor (1-2), 2=poor (3-4), 3=average (5-6), 4=good (7-8), 5=excellent (9-10)
+      TRD: [0, 1.5, 3.5, 5.5, 7.5, 9.5],
+      
+      // AER: Asset exposure control (higher is better)
+      AER: [0, 2, 4, 6, 8, 10],
+      
+      // HFP: Human failure probability (lower is better, so invert)
+      // 1=very poor (9-10), 2=poor (7-8), 3=average (5-6), 4=good (3-4), 5=excellent (1-2)
+      HFP: [0, 9, 7, 5, 3, 1],
+      
+      // BRI: Blast radius (lower is better, so invert)
+      BRI: [0, 8.5, 6.5, 4.5, 2.5, 1],
+      
+      // RRG: Recovery gap (lower is better, so invert)
+      RRG: [0, 8, 6, 4, 2, 1]
+    };
+
+    const dimensionMapping = mappings[dimension];
+    if (!dimensionMapping) return 5; // Default to middle if unknown
+    
+    return dimensionMapping[response] || 5;
+  }
+
+  /**
+   * Adjust based on business model characteristics
+   */
+  private static applyBusinessModelAdjustment(
+    dimension: DIIDimension,
+    baseValue: number,
+    businessModel: BusinessModel
+  ): number {
+    // Model-specific adjustments based on inherent vulnerabilities
+    const adjustments: Partial<Record<BusinessModel, Partial<Record<DIIDimension, number>>>> = {
+      SUBSCRIPTION_BASED: {
+        TRD: -0.5, // More sensitive to downtime
+        AER: -0.5, // High value concentration
+        HFP: +0.5  // Often better automation
+      },
+      TRANSACTION_BASED: {
+        TRD: -1,   // Extreme downtime sensitivity
+        BRI: +0.5, // Often better transaction isolation
+        RRG: -0.5  // Complex recovery
+      },
+      ASSET_HEAVY: {
+        TRD: +0.5, // More resilient to short outages
+        BRI: +1,   // Physical separation helps
+        RRG: -1    // Harder to recover physical assets
+      },
+      DATA_DRIVEN: {
+        AER: -1,   // Data is the product
+        HFP: +0.5, // Usually good access controls
+        RRG: -0.5  // Data recovery complexity
+      },
+      PLATFORM_ECOSYSTEM: {
+        HFP: -1,   // Many external users
+        BRI: -1,   // Network effects amplify damage
+        AER: -0.5  // Attractive target
+      }
+    };
+
+    const modelAdjustment = adjustments[businessModel]?.[dimension] || 0;
+    return baseValue + modelAdjustment;
+  }
+
+  /**
+   * Adjust based on company size and resources
+   */
+  private static applyCompanySizeAdjustment(
+    dimension: DIIDimension,
+    currentValue: number,
+    company: CompanyInfo
+  ): number {
+    const employees = company.employees || 100;
+    const revenue = company.revenue || 10000000; // $10M default
+
+    // Size categories
+    let sizeCategory: 'small' | 'medium' | 'large';
+    if (employees < 100 || revenue < 10000000) {
+      sizeCategory = 'small';
+    } else if (employees < 1000 || revenue < 100000000) {
+      sizeCategory = 'medium';
+    } else {
+      sizeCategory = 'large';
+    }
+
+    // Size adjustments per dimension
+    const sizeAdjustments: Record<typeof sizeCategory, Partial<Record<DIIDimension, number>>> = {
+      small: {
+        TRD: -0.5, // Less resources for redundancy
+        AER: +0.5, // Smaller attack surface
+        HFP: -0.5, // Less security training
+        BRI: +0.5, // Simpler systems
+        RRG: -0.5  // Less DR capability
+      },
+      medium: {
+        // Balanced, no adjustments
+      },
+      large: {
+        TRD: +0.5, // Better resources
+        AER: -0.5, // Bigger target
+        HFP: +0.5, // Better processes
+        BRI: -0.5, // Complex systems
+        RRG: +0.5  // Better DR capability
+      }
+    };
+
+    const adjustment = sizeAdjustments[sizeCategory][dimension] || 0;
+    return currentValue + adjustment;
+  }
+
+  /**
+   * Apply critical infrastructure penalty
+   */
+  private static applyCriticalInfraAdjustment(
+    dimension: DIIDimension,
+    currentValue: number,
+    isCritical: boolean
+  ): number {
+    if (!isCritical) return currentValue;
+
+    // Critical infrastructure faces higher standards
+    const criticalPenalties: Partial<Record<DIIDimension, number>> = {
+      TRD: -0.5, // Zero tolerance for downtime
+      AER: -1,   // Prime target
+      HFP: -0.5, // Higher insider threat risk
+      BRI: -1,   // Cascading effects
+      RRG: -0.5  // Regulatory requirements
+    };
+
+    const penalty = criticalPenalties[dimension] || 0;
+    return currentValue + penalty;
+  }
+
+  /**
+   * Calculate confidence in interpretation
+   */
+  private static calculateConfidence(context: InterpretationContext): number {
+    let confidence = 0.7; // Base confidence
+
+    // Increase confidence with more company data
+    if (context.company.employees) confidence += 0.1;
+    if (context.company.revenue) confidence += 0.1;
+    if (context.company.industry) confidence += 0.05;
+    if (context.company.dataSource === 'ai') confidence += 0.05;
+
+    return Math.min(1, confidence);
+  }
+
+  /**
+   * Generate human-readable reasoning
+   */
+  private static generateReasoning(
+    dimension: DIIDimension,
+    response: number,
+    interpreted: number,
+    context: InterpretationContext
+  ): string {
+    const responseLabels = ['muy deficiente', 'deficiente', 'regular', 'bueno', 'muy bueno'];
+    const responseLabel = responseLabels[response - 1];
+
+    const sizeLabel = context.company.employees 
+      ? context.company.employees > 1000 ? 'gran empresa' 
+      : context.company.employees > 100 ? 'empresa mediana'
+      : 'empresa pequeña'
+      : 'empresa';
+
+    const criticalNote = context.criticalInfra 
+      ? ' Como infraestructura crítica, se aplican estándares más estrictos.'
+      : '';
+
+    return `Respuesta "${responseLabel}" interpretada como ${interpreted}/10 para ${dimension}. ` +
+           `Ajustado para ${sizeLabel} en sector ${context.businessModel}.${criticalNote}`;
+  }
+
+  /**
+   * Interpret all responses for complete DII calculation
+   */
+  static interpretAllResponses(
+    responses: Map<DIIDimension, number>,
+    context: InterpretationContext
+  ): Record<DIIDimension, DimensionInterpretation> {
+    const dimensions: DIIDimension[] = ['TRD', 'AER', 'HFP', 'BRI', 'RRG'];
+    const interpretations: Record<string, DimensionInterpretation> = {};
+
+    for (const dimension of dimensions) {
+      const response = responses.get(dimension);
+      if (response) {
+        interpretations[dimension] = this.interpretResponse(dimension, response, context);
+      }
+    }
+
+    return interpretations as Record<DIIDimension, DimensionInterpretation>;
+  }
+}

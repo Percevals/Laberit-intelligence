@@ -11,10 +11,10 @@ import { useAssessmentStore } from '@/store/assessment-store';
 import { ProgressIndicator } from '@/components/ProgressIndicator';
 import { ScenarioQuestionCard } from '@features/assessment/ScenarioQuestionCard';
 import { lightAssessmentAdapter } from '@services/question-adapter';
-// import { DIICalculator } from '@core/dii-engine/calculator'; // Will be used when implementing full calculation
+import { AssessmentCalculator } from '@services/assessment';
 import type { BusinessModelScenarioId } from '@core/types/pain-scenario.types';
 import type { LightAssessmentQuestion } from '@services/question-adapter/light-assessment-adapter';
-import type { Score, MaturityStage } from '@core/types/dii.types';
+// import type { Score, MaturityStage } from '@core/types/dii.types'; // Not needed after refactor
 
 export function ScenarioQuestionsPage() {
   const { t } = useTranslation();
@@ -89,22 +89,28 @@ export function ScenarioQuestionsPage() {
   };
 
   const handleComplete = () => {
-    // Calculate preliminary score based on single TRD response
+    if (!companySearch.selectedCompany || !classification.businessModel) return;
+
+    // Get all scenario responses (for now just TRD)
+    const responses = [];
     const trdResponse = getScenarioResponse('TRD');
-    if (!trdResponse) return;
+    if (trdResponse) {
+      responses.push(trdResponse);
+    }
 
-    // Simple calculation for demo (will be expanded with all 5 dimensions)
-    const baseScore = trdResponse.response * 20; // 1-5 scale to 20-100
-    const score = Math.min(Math.max(baseScore, 0), 100) as Score;
-    
-    // Determine maturity stage
-    let stage: MaturityStage = 'FRAGIL';
-    if (score >= 76) stage = 'ADAPTATIVO';
-    else if (score >= 51) stage = 'RESILIENTE';
-    else if (score >= 26) stage = 'ROBUSTO';
+    // Calculate DII using the proper engine
+    const result = AssessmentCalculator.calculateFromResponses({
+      company: companySearch.selectedCompany,
+      businessModel: classification.businessModel,
+      criticalInfra: classification.criticalInfra || false,
+      responses
+    });
 
-    // Calculate percentile (simplified)
-    const percentile = Math.round(score * 0.8);
+    // Extract values for assessment completion
+    const { diiScore } = result;
+    const score = diiScore.normalized;
+    const stage = diiScore.interpretation.stage;
+    const percentile = diiScore.percentile;
 
     completeAssessment(score, stage, percentile);
     navigate('/assessment/results');

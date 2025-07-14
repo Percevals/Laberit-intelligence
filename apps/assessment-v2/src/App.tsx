@@ -16,7 +16,8 @@ import { SmartClassificationPage } from './pages/SmartClassificationPage';
 import { ClassificationPage } from './pages/ClassificationPage';
 // import { QuestionsPage } from './pages/QuestionsPage'; // Replaced by ScenarioQuestionsPage
 import { ScenarioQuestionsPage } from './pages/ScenarioQuestionsPage';
-import { ResultsPage } from './pages/ResultsPage';
+// import { ResultsPage } from './pages/ResultsPage'; // Replaced by EnhancedResultsPage
+import { EnhancedResultsPage } from './pages/EnhancedResultsPage';
 import { ConfigDebugPage } from './pages/ConfigDebugPage';
 import { ScenarioTestPage } from './pages/ScenarioTestPage';
 import { QuestionAdapterTestPage } from './pages/QuestionAdapterTestPage';
@@ -58,7 +59,7 @@ export default function App() {
             <Route path="/assessment/smart-classify" element={<SmartClassificationPage />} />
             <Route path="/assessment/classify" element={<ClassificationPage />} />
             <Route path="/assessment/questions" element={<ScenarioQuestionsPage />} />
-            <Route path="/assessment/results" element={<ResultsPage />} />
+            <Route path="/assessment/results" element={<EnhancedResultsPage />} />
             <Route path="/debug" element={<ConfigDebugPage />} />
             <Route path="/test/scenarios" element={<ScenarioTestPage />} />
             <Route path="/test/adapter" element={<QuestionAdapterTestPage />} />

@@ -87,6 +87,7 @@
     "lightVersion": "Versión ligera: 1 pregunta clave",
     "premiumHint": "La versión premium incluye 5 dimensiones completas",
     "dimension": "Dimensión",
+    "formula": "Fórmula DII",
     "responses": {
       "veryPoor": "Muy deficiente",
       "poor": "Deficiente",
@@ -149,7 +150,13 @@
       "betterThan": "Mejor que el {{percentage}}% de empresas similares",
       "operationalRisk": "Riesgo Operacional",
       "estimatedDowntime": "Tiempo de inactividad estimado",
-      "revenueAtRisk": "Ingresos en riesgo"
+      "revenueAtRisk": "Ingresos en riesgo",
+      "dimensionBreakdown": "Análisis por Dimensión",
+      "context": "Contexto de su Modelo de Negocio",
+      "newAssessment": "Nueva Evaluación",
+      "fullReport": "Ver Informe Completo",
+      "lightNotice": "Evaluación ligera basada en pregunta TRD.",
+      "premiumCTA": "La versión premium incluye las 5 dimensiones completas."
     }
   },
   

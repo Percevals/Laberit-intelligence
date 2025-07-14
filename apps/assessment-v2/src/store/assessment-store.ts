@@ -32,7 +32,7 @@ interface ClassificationState {
   };
 }
 
-interface ScenarioResponse {
+export interface ScenarioResponse {
   dimension: DIIDimension;
   question: string;
   response: number; // 1-5 scale
