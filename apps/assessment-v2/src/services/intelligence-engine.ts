@@ -430,9 +430,7 @@ export class IntelligenceEngine {
     
     const region = this.context.classification.region || 'LATAM';
     // Ensure we always have a valid RegionalRisk, defaulting to LATAM if region not found
-    const regionalRisk: RegionalRisk = (region in REGIONAL_RISKS) 
-      ? REGIONAL_RISKS[region] 
-      : REGIONAL_RISKS.LATAM;
+    const regionalRisk: RegionalRisk = this.getRegionalRisk(region);
     
     // Identify emerging threats based on weak dimensions
     const emergingThreats = this.identifyEmergingThreats();
@@ -1071,5 +1069,16 @@ export class IntelligenceEngine {
         RRG: 7.9
       }
     };
+  }
+  
+  /**
+   * Get regional risk profile with guaranteed fallback
+   */
+  private getRegionalRisk(region: string): RegionalRisk {
+    // Check if the region exists in our profiles
+    const risk = REGIONAL_RISKS[region];
+    
+    // If found, return it; otherwise return LATAM as default
+    return risk || REGIONAL_RISKS.LATAM;
   }
 }
