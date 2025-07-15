@@ -1,14 +1,13 @@
 /**
- * Company Database Service - Browser Safe Version
- * Mock implementation for browser environments
- * Maintains exact same API as original CompanyDatabaseService
+ * Mock Database Service for Browser Environments
+ * Simple in-memory implementation that works without Node.js dependencies
  */
 
 import type { 
   Company, 
   Assessment, 
   DimensionScore, 
-  DIIModelProfile,
+  // DIIModelProfile,
   BenchmarkData,
   BusinessModelClassificationInput,
   BusinessModelClassificationResult,
@@ -19,25 +18,36 @@ import type {
   DiiDimension
 } from './types';
 
-export class CompanyDatabaseService implements ICompanyDatabaseService {
-  private mockCompanies: Company[] = [];
-  private mockAssessments: Assessment[] = [];
+export class MockDatabaseService implements ICompanyDatabaseService {
+  private companies: Company[] = [];
+  private assessments: Assessment[] = [];
   
   constructor() {
-    console.log('🌐 Using browser-safe mock database service');
+    console.log('🌐 Using mock database service (browser mode)');
     this.initializeMockData();
   }
 
   private initializeMockData() {
     // Add some default mock companies
-    this.mockCompanies = [
+    this.companies = [
       {
         id: '1',
-        name: 'Demo Company',
+        name: 'Demo Technology Corp',
         industry_traditional: 'Technology',
         dii_business_model: 'SOFTWARE_CRITICO',
         confidence_score: 0.9,
         classification_reasoning: 'SaaS platform requiring 24/7 availability',
+        region: 'LATAM',
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        id: '2',
+        name: 'Digital Banking Solutions',
+        industry_traditional: 'Financial Services',
+        dii_business_model: 'SERVICIOS_FINANCIEROS',
+        confidence_score: 0.95,
+        classification_reasoning: 'Digital banking platform with real-time transactions',
         region: 'LATAM',
         created_at: new Date(),
         updated_at: new Date()
@@ -57,36 +67,37 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
       updated_at: new Date()
     };
     
-    this.mockCompanies.push(company);
+    this.companies.push(company);
     return company;
   }
 
   async getCompany(id: string): Promise<Company | null> {
-    return this.mockCompanies.find(c => c.id === id) || null;
+    return this.companies.find(c => c.id === id) || null;
   }
 
   async getCompanyByDomain(domain: string): Promise<Company | null> {
-    return this.mockCompanies.find(c => c.domain === domain) || null;
+    return this.companies.find(c => c.domain === domain) || null;
   }
 
   async updateCompany(id: string, data: Partial<Company>): Promise<Company> {
-    const index = this.mockCompanies.findIndex(c => c.id === id);
+    const index = this.companies.findIndex(c => c.id === id);
     if (index === -1) {
       throw new Error('Company not found');
     }
     
-    this.mockCompanies[index] = {
-      ...this.mockCompanies[index],
+    this.companies[index] = {
+      ...this.companies[index],
       ...data,
+      id: this.companies[index].id,
       updated_at: new Date()
     };
     
-    return this.mockCompanies[index];
+    return this.companies[index];
   }
 
   async searchCompanies(query: string): Promise<Company[]> {
     const lowerQuery = query.toLowerCase();
-    return this.mockCompanies.filter(c => 
+    return this.companies.filter(c => 
       c.name.toLowerCase().includes(lowerQuery) ||
       (c.domain && c.domain.toLowerCase().includes(lowerQuery))
     );
@@ -102,7 +113,11 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
       { pattern: /banking|banco|bank/i, model: 'SERVICIOS_FINANCIEROS' as DIIBusinessModel },
       { pattern: /software|saas|cloud/i, model: 'SOFTWARE_CRITICO' as DIIBusinessModel },
       { pattern: /retail|comercio|store/i, model: 'COMERCIO_HIBRIDO' as DIIBusinessModel },
-      { pattern: /health|salud|hospital/i, model: 'INFORMACION_REGULADA' as DIIBusinessModel }
+      { pattern: /health|salud|hospital/i, model: 'INFORMACION_REGULADA' as DIIBusinessModel },
+      { pattern: /logistics|shipping|delivery/i, model: 'CADENA_SUMINISTRO' as DIIBusinessModel },
+      { pattern: /energy|oil|mining|manufacturing/i, model: 'INFRAESTRUCTURA_HEREDADA' as DIIBusinessModel },
+      { pattern: /marketplace|platform|ecosystem/i, model: 'ECOSISTEMA_DIGITAL' as DIIBusinessModel },
+      { pattern: /analytics|data|research/i, model: 'SERVICIOS_DATOS' as DIIBusinessModel }
     ];
 
     for (const { pattern, model } of patterns) {
@@ -111,7 +126,7 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
           dii_business_model: model,
           confidence_score: 0.85,
           reasoning: 'Pattern matched from industry/name',
-          method: 'pattern_matching'
+          method: 'industry_pattern'
         };
       }
     }
@@ -119,8 +134,8 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
     return {
       dii_business_model: 'COMERCIO_HIBRIDO',
       confidence_score: 0.6,
-      reasoning: 'Default classification',
-      method: 'default'
+      reasoning: 'Default classification for unmatched patterns',
+      method: 'default_fallback'
     };
   }
 
@@ -143,27 +158,27 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
       created_at: new Date()
     };
     
-    this.mockAssessments.push(assessment);
+    this.assessments.push(assessment);
     return assessment;
   }
 
   async getAssessment(id: string): Promise<Assessment | null> {
-    return this.mockAssessments.find(a => a.id === id) || null;
+    return this.assessments.find(a => a.id === id) || null;
   }
 
   async getCompanyAssessments(companyId: string): Promise<Assessment[]> {
-    return this.mockAssessments.filter(a => a.company_id === companyId);
+    return this.assessments.filter(a => a.company_id === companyId);
   }
 
   // ===================================================================
   // DIMENSION SCORES
   // ===================================================================
 
-  async saveDimensionScores(assessmentId: string, scores: DIICalculationInput): Promise<DimensionScore[]> {
-    // Mock implementation
+  async saveDimensionScores(_assessmentId: string, scores: DIICalculationInput): Promise<DimensionScore[]> {
+    // Mock implementation - return dimension scores based on input
     return Object.entries(scores).map(([dimension, scoreData]) => ({
       id: this.generateUUID(),
-      assessment_id: assessmentId,
+      assessment_id: _assessmentId,
       dimension: dimension as DiiDimension,
       raw_value: scoreData.value,
       confidence_score: scoreData.confidence,
@@ -174,7 +189,7 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
     }));
   }
 
-  async getAssessmentDimensions(assessmentId: string): Promise<DimensionScore[]> {
+  async getAssessmentDimensions(_assessmentId: string): Promise<DimensionScore[]> {
     // Return empty array in mock
     return [];
   }
@@ -183,10 +198,10 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
   // DII CALCULATION
   // ===================================================================
 
-  async calculateDII(companyId: string, input: DIICalculationInput): Promise<DIICalculationResult> {
+  async calculateDII(_companyId: string, input: DIICalculationInput): Promise<DIICalculationResult> {
     const { TRD, AER, HFP, BRI, RRG } = input;
     const dii_raw_score = (TRD.value * AER.value) / (HFP.value * BRI.value * RRG.value);
-    const dii_final_score = Math.min(dii_raw_score / 10, 999.99999);
+    const dii_final_score = Math.min(dii_raw_score / 10, 99.999);
     const confidence_level = Math.min(
       (TRD.confidence + AER.confidence + HFP.confidence + BRI.confidence + RRG.confidence) / 5 * 100,
       100
@@ -201,7 +216,7 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
     };
   }
 
-  async validateDimensionScores(input: DIICalculationInput): Promise<Array<{
+  async validateDimensionScores(_input: DIICalculationInput): Promise<Array<{
     dimension?: DiiDimension;
     rule: string;
     severity: 'error' | 'warning' | 'info';
@@ -210,7 +225,7 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
     return [];
   }
 
-  async getBenchmarkData(businessModel: DIIBusinessModel, region?: string): Promise<BenchmarkData | null> {
+  async getBenchmarkData(_businessModel: DIIBusinessModel, _region?: string): Promise<BenchmarkData | null> {
     return null;
   }
 
@@ -232,6 +247,6 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
 }
 
 // Factory function
-export function createCompanyDatabaseService(): CompanyDatabaseService {
-  return new CompanyDatabaseService();
+export function createMockDatabaseService(): MockDatabaseService {
+  return new MockDatabaseService();
 }

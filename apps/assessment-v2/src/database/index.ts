@@ -5,7 +5,7 @@
  */
 
 import type { CompanyDatabaseService } from './types';
-import { createBrowserDatabaseService } from './browser-database.service';
+import { createMockDatabaseService } from './mock-database.service';
 
 // Singleton database service instance
 let serviceInstance: CompanyDatabaseService | null = null;
@@ -18,7 +18,7 @@ export async function getDatabaseService(): Promise<CompanyDatabaseService> {
   if (!serviceInstance) {
     // Always use browser-compatible service for now
     // This ensures the app works on GitHub Pages
-    serviceInstance = createBrowserDatabaseService();
+    serviceInstance = createMockDatabaseService();
     console.log('🌐 Using browser database service (mock mode)');
   }
 

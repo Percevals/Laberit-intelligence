@@ -718,25 +718,7 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
   }
 
   // Map database entities
-  private _mapCompanyFromDB(row: any): Company {
-    return {
-      id: row.id,
-      name: row.name,
-      legal_name: row.legal_name,
-      domain: row.domain,
-      industry_traditional: row.industry_traditional,
-      dii_business_model: row.dii_business_model as DIIBusinessModel,
-      confidence_score: row.confidence_score,
-      classification_reasoning: row.classification_reasoning,
-      headquarters: row.headquarters,
-      country: row.country,
-      region: row.region,
-      employees: row.employees,
-      revenue: row.revenue,
-      created_at: new Date(row.created_at),
-      updated_at: new Date(row.updated_at)
-    };
-  }
+  // Removed _mapCompanyFromDB - unused method
 
   public mapAssessmentFromDB(row: any): Assessment {
     return {
