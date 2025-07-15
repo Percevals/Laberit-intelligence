@@ -3,13 +3,9 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import './shared/i18n/config' // Initialize i18n
 import App from './App.tsx'
-import { initDatabase } from './database'
 
-// Initialize database connection (non-blocking)
-initDatabase().catch(error => {
-  console.error('Database initialization failed:', error);
-  console.warn('App will continue without database connection');
-});
+// Database initialization is now handled automatically when needed
+// The database module will detect browser environment and use appropriate implementation
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

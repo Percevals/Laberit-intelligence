@@ -1,11 +1,11 @@
 /**
  * Database Module Entry Point
  * Provides configured database service instance
+ * Always uses browser-compatible implementation for GitHub Pages deployment
  */
 
-// Use PostgreSQL version
-import { createCompanyDatabaseService } from './company-database.service.v2';
 import type { CompanyDatabaseService } from './types';
+import { createBrowserDatabaseService } from './browser-database.service';
 
 // Singleton database service instance
 let serviceInstance: CompanyDatabaseService | null = null;
@@ -16,10 +16,10 @@ let serviceInstance: CompanyDatabaseService | null = null;
  */
 export async function getDatabaseService(): Promise<CompanyDatabaseService> {
   if (!serviceInstance) {
-    // Create service instance (it handles its own initialization)
-    serviceInstance = createCompanyDatabaseService();
-    
-    console.log('✅ Database service initialized');
+    // Always use browser-compatible service for now
+    // This ensures the app works on GitHub Pages
+    serviceInstance = createBrowserDatabaseService();
+    console.log('🌐 Using browser database service (mock mode)');
   }
 
   return serviceInstance!;
@@ -44,4 +44,4 @@ export function resetDatabaseService(): void {
 export type { CompanyDatabaseService } from './types';
 
 // Re-export the service for direct usage
-export { createCompanyDatabaseService } from './company-database.service.v2';
+// Note: Removed v2 export to prevent Node.js modules from being bundled

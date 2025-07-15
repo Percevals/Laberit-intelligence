@@ -1,14 +1,12 @@
 /**
  * Company Database Service V2
- * PostgreSQL implementation using the new abstraction layer
- * Maintains exact same API as original CompanyDatabaseService
+ * PostgreSQL implementation - DO NOT USE IN BROWSER BUILDS
+ * This file imports Node.js modules and will break browser deployments
+ * Use browser-database.service.ts for browser-compatible implementation
  */
 
-import { 
-  CompanyRepository,
-  AssessmentRepository,
-  initializeDatabase
-} from '@dii/core';
+// This service should only be used in Node.js environments
+// Browser builds should use browser-database.service.ts instead
 
 import type { 
   Company, 
@@ -26,8 +24,8 @@ import type {
 } from './types';
 
 export class CompanyDatabaseService implements ICompanyDatabaseService {
-  private companyRepo?: CompanyRepository;
-  private assessmentRepo?: AssessmentRepository;
+  private companyRepo?: any; // CompanyRepository from @dii/core
+  private assessmentRepo?: any; // AssessmentRepository from @dii/core
   private isInitialized = false;
   private initPromise?: Promise<void>;
 
@@ -54,11 +52,14 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
   private async initialize(): Promise<void> {
     try {
       // Initialize database connection
-      const db = await initializeDatabase();
+      // const db = await initializeDatabase();
       
       // Create repositories
-      this.companyRepo = new CompanyRepository(db);
-      this.assessmentRepo = new AssessmentRepository(db);
+      // this.companyRepo = new CompanyRepository(db);
+      // this.assessmentRepo = new AssessmentRepository(db);
+      
+      // Placeholder - this service should not be used in browser builds
+      throw new Error('PostgreSQL service cannot be used in browser builds');
       
       this.isInitialized = true;
       console.log('✅ CompanyDatabaseService initialized with PostgreSQL');
@@ -714,7 +715,6 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
   }
 
   // Map database entities
-  // @ts-ignore - Unused method kept for future reference
   private _mapCompanyFromDB(row: any): Company {
     return {
       id: row.id,
