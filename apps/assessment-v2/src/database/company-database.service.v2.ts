@@ -8,6 +8,12 @@
 // This service should only be used in Node.js environments
 // Browser builds should use browser-database.service.ts instead
 
+import { 
+  CompanyRepository,
+  AssessmentRepository,
+  initializeDatabase
+} from '@dii/core';
+
 import type { 
   Company, 
   Assessment, 
@@ -24,8 +30,8 @@ import type {
 } from './types';
 
 export class CompanyDatabaseService implements ICompanyDatabaseService {
-  private companyRepo?: any; // CompanyRepository from @dii/core
-  private assessmentRepo?: any; // AssessmentRepository from @dii/core
+  private companyRepo?: CompanyRepository;
+  private assessmentRepo?: AssessmentRepository;
   private isInitialized = false;
   private initPromise?: Promise<void>;
 
@@ -52,14 +58,11 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
   private async initialize(): Promise<void> {
     try {
       // Initialize database connection
-      // const db = await initializeDatabase();
+      const db = await initializeDatabase();
       
       // Create repositories
-      // this.companyRepo = new CompanyRepository(db);
-      // this.assessmentRepo = new AssessmentRepository(db);
-      
-      // Placeholder - this service should not be used in browser builds
-      throw new Error('PostgreSQL service cannot be used in browser builds');
+      this.companyRepo = new CompanyRepository(db);
+      this.assessmentRepo = new AssessmentRepository(db);
       
       this.isInitialized = true;
       console.log('✅ CompanyDatabaseService initialized with PostgreSQL');

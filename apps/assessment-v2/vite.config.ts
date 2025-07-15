@@ -1,12 +1,11 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import path from 'path';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import path from 'path'
 
 // https://vite.dev/config/
 export default defineConfig({
-  // Base path for GitHub Pages deployment
+  plugins: [react()],
   base: '/Laberit-intelligence/apps/assessment-v2/',
-  plugins: [react()] as any,
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -16,26 +15,29 @@ export default defineConfig({
       '@ui': path.resolve(__dirname, './src/ui'),
       '@services': path.resolve(__dirname, './src/services'),
       '@data': path.resolve(__dirname, '../../data'),
-    },
-  },
-  server: {
-    port: 3000,
-    open: true,
+      // Prevent @dii/core from being bundled
+      '@dii/core': path.resolve(__dirname, './src/database/dummy-core.ts')
+    }
   },
   build: {
-    // Output to standard dist directory
-    outDir: 'dist',
-    // Generate source maps for debugging
-    sourcemap: true,
-    // Optimize chunks
     rollupOptions: {
-      output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom'],
-          'query-vendor': ['@tanstack/react-query'],
-          'ui-vendor': ['framer-motion', 'lucide-react'],
-        },
-      },
-    },
+      external: [
+        // Externalize Node.js modules that shouldn't be in browser
+        'pg',
+        'pg-pool',
+        'fs',
+        'path',
+        'net',
+        'tls',
+        'crypto',
+        'stream',
+        'util',
+        'events',
+        'dns'
+      ]
+    }
   },
-});
+  optimizeDeps: {
+    exclude: ['@dii/core']
+  }
+})
