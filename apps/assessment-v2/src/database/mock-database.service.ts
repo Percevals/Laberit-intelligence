@@ -17,6 +17,7 @@ import type {
   DIIBusinessModel,
   DiiDimension
 } from './types';
+import { classifyBusinessModel, type ClassificationInput } from '@/core/business-model/enhanced-classifier';
 
 export class MockDatabaseService implements ICompanyDatabaseService {
   private companies: Company[] = [];
@@ -258,34 +259,35 @@ export class MockDatabaseService implements ICompanyDatabaseService {
   // ===================================================================
 
   async classifyBusinessModel(input: BusinessModelClassificationInput): Promise<BusinessModelClassificationResult> {
-    // Simple pattern matching for demo
-    const patterns = [
-      { pattern: /banking|banco|bank/i, model: 'SERVICIOS_FINANCIEROS' as DIIBusinessModel },
-      { pattern: /software|saas|cloud/i, model: 'SOFTWARE_CRITICO' as DIIBusinessModel },
-      { pattern: /retail|comercio|store/i, model: 'COMERCIO_HIBRIDO' as DIIBusinessModel },
-      { pattern: /health|salud|hospital/i, model: 'INFORMACION_REGULADA' as DIIBusinessModel },
-      { pattern: /logistics|shipping|delivery/i, model: 'CADENA_SUMINISTRO' as DIIBusinessModel },
-      { pattern: /energy|oil|mining|manufacturing/i, model: 'INFRAESTRUCTURA_HEREDADA' as DIIBusinessModel },
-      { pattern: /marketplace|platform|ecosystem/i, model: 'ECOSISTEMA_DIGITAL' as DIIBusinessModel },
-      { pattern: /analytics|data|research/i, model: 'SERVICIOS_DATOS' as DIIBusinessModel }
-    ];
+    // Use the enhanced classifier
+    const classificationInput: ClassificationInput = {
+      name: input.company_name,
+      industry: input.industry_traditional,
+      // Add any additional available data
+      description: input.company_description,
+      employees: input.employee_count,
+      revenue: input.annual_revenue,
+      domain: input.domain,
+      hasPhysicalStores: input.has_physical_stores,
+      hasEcommerce: input.has_ecommerce,
+      isB2B: input.is_b2b,
+      isSaaS: input.is_saas,
+      isRegulated: input.is_regulated,
+      operatesCriticalInfrastructure: input.operates_critical_infrastructure
+    };
 
-    for (const { pattern, model } of patterns) {
-      if (pattern.test(input.industry_traditional) || pattern.test(input.company_name)) {
-        return {
-          dii_business_model: model,
-          confidence_score: 0.85,
-          reasoning: 'Pattern matched from industry/name',
-          method: 'industry_pattern'
-        };
-      }
-    }
+    const result = classifyBusinessModel(classificationInput);
 
+    // Convert to the expected format
     return {
-      dii_business_model: 'COMERCIO_HIBRIDO',
-      confidence_score: 0.6,
-      reasoning: 'Default classification for unmatched patterns',
-      method: 'default_fallback'
+      dii_business_model: result.model,
+      confidence_score: result.confidence,
+      reasoning: result.reasoning,
+      method: result.confidence > 0.8 ? 'enhanced_classification' : 'signal_analysis',
+      // Include additional metadata
+      signals_matched: result.signals.matched,
+      alternative_models: result.alternativeModels,
+      risk_profile: result.riskProfile
     };
   }
 

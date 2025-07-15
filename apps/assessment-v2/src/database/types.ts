@@ -241,6 +241,21 @@ export interface BusinessModelClassificationInput {
   company_name: string;
   industry_traditional: string;
   
+  // Optional Enhanced Data
+  company_description?: string;
+  domain?: string;
+  employee_count?: number;
+  annual_revenue?: number;
+  headquarters?: string;
+  
+  // Business Signals
+  has_physical_stores?: boolean;
+  has_ecommerce?: boolean;
+  is_b2b?: boolean;
+  is_saas?: boolean;
+  is_regulated?: boolean;
+  operates_critical_infrastructure?: boolean;
+  
   // Optional Classification Questions
   revenue_model?: RevenueModel;
   operational_dependency?: OperationalDependency;
@@ -253,8 +268,21 @@ export interface BusinessModelClassificationResult {
   alternative_model?: DIIBusinessModel;
   
   // Classification Method Used
-  method: 'industry_pattern' | 'two_question_matrix' | 'default_fallback';
+  method: 'industry_pattern' | 'two_question_matrix' | 'default_fallback' | 'enhanced_classification' | 'signal_analysis';
   rule_used?: string;
+  
+  // Enhanced Classification Data
+  signals_matched?: string[];
+  alternative_models?: Array<{
+    model: DIIBusinessModel;
+    confidence: number;
+  }>;
+  risk_profile?: {
+    digitalDependency: number;
+    interruptionToleranceHours: number;
+    estimatedImpactPerHour: number;
+    primaryRisks: string[];
+  };
 }
 
 export interface DIICalculationInput {

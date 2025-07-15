@@ -27,6 +27,7 @@ import { CompanySearchInput } from '@/features/company-search';
 import { createMockDatabaseService } from '@/database/mock-database.service';
 import type { Company, DIIBusinessModel, VerificationSource } from '@/database/types';
 import type { CompanyInfo } from '@/services/ai/types';
+import { BusinessModelInfo } from './BusinessModelInfo';
 
 // Business model display names
 const BUSINESS_MODEL_NAMES: Record<DIIBusinessModel, string> = {
@@ -234,6 +235,8 @@ function AddCompanyModal({ companyInfo, isOpen, onClose, onConfirm }: AddCompany
   const [isProspect, setIsProspect] = useState(true);
   const [dataFreshnessDays, setDataFreshnessDays] = useState(90);
   const [isClassifying, setIsClassifying] = useState(false);
+  const [classificationConfidence, setClassificationConfidence] = useState<number>(0);
+  const [showModelDetails, setShowModelDetails] = useState(false);
   const dbService = useMemo(() => createMockDatabaseService(), []);
 
   useEffect(() => {
@@ -249,9 +252,28 @@ function AddCompanyModal({ companyInfo, isOpen, onClose, onConfirm }: AddCompany
     try {
       const classification = await dbService.classifyBusinessModel({
         company_name: companyInfo.name,
-        industry_traditional: companyInfo.industry || 'Unknown'
+        industry_traditional: companyInfo.industry || 'Unknown',
+        company_description: companyInfo.description,
+        domain: companyInfo.domain,
+        employee_count: companyInfo.employees,
+        annual_revenue: companyInfo.revenue,
+        headquarters: companyInfo.headquarters,
+        // Add any known signals
+        is_b2b: companyInfo.description?.toLowerCase().includes('b2b') || 
+                companyInfo.description?.toLowerCase().includes('enterprise'),
+        is_saas: companyInfo.description?.toLowerCase().includes('saas') || 
+                 companyInfo.description?.toLowerCase().includes('software as a service'),
+        is_regulated: companyInfo.certifications && companyInfo.certifications.length > 0
       });
+      
       setBusinessModel(classification.dii_business_model);
+      setClassificationConfidence(classification.confidence_score);
+      
+      // Auto-show details for low confidence
+      if (classification.confidence_score < 0.7) {
+        setShowModelDetails(true);
+        console.log('Low confidence classification:', classification.reasoning);
+      }
     } catch (error) {
       console.error('Failed to classify company:', error);
     } finally {
@@ -328,26 +350,48 @@ function AddCompanyModal({ companyInfo, isOpen, onClose, onConfirm }: AddCompany
 
             {/* Business Model Selection */}
             <div>
-              <label className="block text-sm font-medium text-dark-text-secondary mb-2">
-                Business Model Classification
-              </label>
+              <div className="flex items-center justify-between mb-2">
+                <label className="block text-sm font-medium text-dark-text-secondary">
+                  Business Model Classification
+                </label>
+                <button
+                  type="button"
+                  onClick={() => setShowModelDetails(!showModelDetails)}
+                  className="text-xs text-primary-600 hover:text-primary-700 transition-colors"
+                >
+                  {showModelDetails ? 'Hide Details' : 'Show Details'}
+                </button>
+              </div>
+              
               {isClassifying ? (
-                <div className="flex items-center gap-2 text-primary-600">
+                <div className="flex items-center gap-2 text-primary-600 p-4 bg-dark-bg rounded-lg border border-dark-border">
                   <Loader2 className="w-4 h-4 animate-spin" />
-                  <span className="text-sm">Classifying business model...</span>
+                  <span className="text-sm">Analyzing company and classifying business model...</span>
                 </div>
               ) : (
-                <select
-                  value={businessModel}
-                  onChange={(e) => setBusinessModel(e.target.value as DIIBusinessModel)}
-                  className="w-full px-4 py-2 bg-dark-bg border border-dark-border rounded-lg
-                           text-dark-text-primary focus:outline-none focus:border-primary-600
-                           transition-colors"
-                >
-                  {Object.entries(BUSINESS_MODEL_NAMES).map(([value, label]) => (
-                    <option key={value} value={value}>{label}</option>
-                  ))}
-                </select>
+                <div className="space-y-3">
+                  <select
+                    value={businessModel}
+                    onChange={(e) => setBusinessModel(e.target.value as DIIBusinessModel)}
+                    className="w-full px-4 py-2 bg-dark-bg border border-dark-border rounded-lg
+                             text-dark-text-primary focus:outline-none focus:border-primary-600
+                             transition-colors"
+                  >
+                    {Object.entries(BUSINESS_MODEL_NAMES).map(([value, label]) => (
+                      <option key={value} value={value}>{label}</option>
+                    ))}
+                  </select>
+                  
+                  {showModelDetails && (
+                    <div className="p-4 bg-dark-bg rounded-lg border border-dark-border">
+                      <BusinessModelInfo 
+                        model={businessModel}
+                        confidence={classificationConfidence}
+                        showDetails={true}
+                      />
+                    </div>
+                  )}
+                </div>
               )}
             </div>
 
