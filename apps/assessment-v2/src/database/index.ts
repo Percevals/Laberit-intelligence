@@ -1,14 +1,20 @@
 /**
  * Database Module Entry Point
  * Provides configured database service instance
- * Always uses browser-compatible implementation for GitHub Pages deployment
+ * Uses API service when backend is available, falls back to mock for GitHub Pages
  */
 
 import type { CompanyDatabaseService } from './types';
 import { createMockDatabaseService } from './mock-database.service';
+import { createAPIDatabaseService } from './api-database.service';
 
 // Singleton database service instance
 let serviceInstance: CompanyDatabaseService | null = null;
+
+// Check if backend API is available
+const USE_API = import.meta.env.VITE_USE_API === 'true' || 
+                import.meta.env.VITE_API_URL || 
+                import.meta.env.PROD;
 
 /**
  * Get the database service instance (singleton)
@@ -16,10 +22,19 @@ let serviceInstance: CompanyDatabaseService | null = null;
  */
 export async function getDatabaseService(): Promise<CompanyDatabaseService> {
   if (!serviceInstance) {
-    // Always use browser-compatible service for now
-    // This ensures the app works on GitHub Pages
-    serviceInstance = createMockDatabaseService();
-    console.log('🌐 Using browser database service (mock mode)');
+    if (USE_API) {
+      try {
+        serviceInstance = createAPIDatabaseService();
+        console.log('🐘 Using PostgreSQL database service (API mode)');
+      } catch (error) {
+        console.warn('Failed to create API database service, falling back to mock:', error);
+        serviceInstance = createMockDatabaseService();
+        console.log('🌐 Using browser database service (mock mode)');
+      }
+    } else {
+      serviceInstance = createMockDatabaseService();
+      console.log('🌐 Using browser database service (mock mode)');
+    }
   }
 
   return serviceInstance!;
