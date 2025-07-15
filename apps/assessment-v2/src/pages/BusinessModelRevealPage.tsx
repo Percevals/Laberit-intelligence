@@ -243,21 +243,21 @@ export function BusinessModelRevealPage() {
                 </h2>
                 <div className="flex items-center gap-2">
                   <p className="text-sm text-dark-text-secondary">
-                    Confianza de IA: {suggestedModel.confidence.toFixed(0)}%
+                    Clasificación automática: {suggestedModel.confidence.toFixed(0)}%
                   </p>
                   {suggestedModel.confidence >= 80 && (
                     <span className="text-xs bg-green-600/20 text-green-400 px-2 py-0.5 rounded">
-                      Alta precisión
+                      Coincidencia exacta
                     </span>
                   )}
                   {suggestedModel.confidence >= 60 && suggestedModel.confidence < 80 && (
                     <span className="text-xs bg-yellow-600/20 text-yellow-400 px-2 py-0.5 rounded">
-                      Buena precisión
+                      Buena coincidencia
                     </span>
                   )}
                   {suggestedModel.confidence < 60 && (
                     <span className="text-xs bg-orange-600/20 text-orange-400 px-2 py-0.5 rounded">
-                      Revisar manualmente
+                      Verificar manualmente
                     </span>
                   )}
                 </div>

@@ -617,12 +617,12 @@ export class EnhancedMockProvider extends BaseAIProvider {
       return scoreB - scoreA;
     });
 
-    // If no good matches, generate a generic company with low confidence
+    // If no good matches, create a minimal company profile with user's input
     if (results.length === 0 || results[0].score < 0.5) {
-      const genericCompany = this.generateGenericCompany(query);
+      const unknownCompany = this.createUnknownCompanyProfile(query);
       results.push({
-        company: { ...genericCompany, confidence: 0.3 },
-        score: 0.3
+        company: { ...unknownCompany, confidence: 0.2 },
+        score: 0.2
       });
     }
 
@@ -681,28 +681,51 @@ export class EnhancedMockProvider extends BaseAIProvider {
     await new Promise(resolve => setTimeout(resolve, delay));
   }
 
-  private generateGenericCompany(name: string): CompanyInfo {
-    const industry = this.guessIndustry(name);
-    const country = this.guessCountry(name);
-    const employees = this.estimateEmployees(industry);
-    const revenue = this.estimateRevenue(industry, employees);
+  /**
+   * Create a minimal profile for unknown companies without fake data
+   */
+  private createUnknownCompanyProfile(name: string): CompanyInfo {
+    // Only guess industry if there are clear indicators in the name
+    let industry = 'Other';
+    const possibleIndustry = this.guessIndustryConservative(name);
+    if (possibleIndustry) {
+      industry = possibleIndustry;
+    }
 
     return this.validateCompanyInfo({
-      name: name,
-      employees: employees,
-      employeeRange: this.getEmployeeRange(employees),
-      revenue: revenue,
-      revenueRange: this.getRevenueRange(revenue),
-      headquarters: this.generateHeadquarters(country),
-      country: country,
-      region: 'LATAM',
+      name: name.trim(),
       industry: industry,
-      description: this.generateDescription(name, industry),
-      website: this.generateWebsite(name),
+      description: `Company information for "${name}" is not available in our database. Please verify and update company details manually.`,
       dataSource: 'ai',
-      confidence: 0.4,
-      lastUpdated: new Date()
+      confidence: 0.2,
+      lastUpdated: new Date(),
+      // Don't include fake revenue, employees, location, etc.
+      // Let the user fill these in manually
     });
+  }
+
+  /**
+   * Conservative industry guessing - only for very obvious cases
+   */
+  private guessIndustryConservative(name: string): string | null {
+    const nameLower = name.toLowerCase();
+    
+    // Only guess if there are very clear indicators
+    const obviousPatterns = {
+      'Software': ['software', 'tech', 'digital', 'saas', 'app'],
+      'Financial Services': ['bank', 'banco', 'financial', 'fintech'],
+      'Healthcare': ['hospital', 'clinic', 'health', 'medical', 'pharma'],
+      'Energy': ['energy', 'energia', 'electric', 'power', 'oil', 'gas'],
+      'Logistics': ['logistics', 'transport', 'delivery', 'shipping'],
+    };
+
+    for (const [industry, patterns] of Object.entries(obviousPatterns)) {
+      if (patterns.some(pattern => nameLower.includes(pattern))) {
+        return industry;
+      }
+    }
+
+    return null; // Don't guess if not obvious
   }
 
   private guessIndustry(name: string): string {

@@ -169,9 +169,9 @@ export abstract class BaseAIProvider implements AIProvider {
       lastUpdated: new Date()
     };
 
-    // Add optional fields if they exist
-    if (info.employees && info.employees > 0) validated.employees = info.employees;
-    if (info.revenue && info.revenue > 0) validated.revenue = info.revenue;
+    // Add optional fields if they exist (ensure integers for counts)
+    if (info.employees && info.employees > 0) validated.employees = Math.round(info.employees);
+    if (info.revenue && info.revenue > 0) validated.revenue = Math.round(info.revenue);
     if (info.headquarters?.trim()) validated.headquarters = info.headquarters.trim();
     if (info.country?.trim()) validated.country = info.country.trim();
     if (info.industry?.trim()) validated.industry = info.industry.trim();

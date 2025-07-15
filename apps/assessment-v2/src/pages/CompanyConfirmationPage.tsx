@@ -28,11 +28,13 @@ export function CompanyConfirmationPage() {
     companySearch, 
     classification,
     updateClassificationField,
-    setCriticalInfrastructure
+    setCriticalInfrastructure,
+    selectCompany
   } = useAssessmentStore();
 
   const [editingField, setEditingField] = useState<string | null>(null);
   const [editValues, setEditValues] = useState({
+    name: companySearch.selectedCompany?.name || '',
     employees: classification.employees || companySearch.selectedCompany?.employees || 0,
     revenue: classification.revenue || companySearch.selectedCompany?.revenue || 0,
     geography: classification.geography || companySearch.selectedCompany?.country || '',
@@ -55,7 +57,17 @@ export function CompanyConfirmationPage() {
   };
 
   const handleSave = (field: string) => {
-    updateClassificationField(field, editValues[field as keyof typeof editValues]);
+    if (field === 'name') {
+      // Update the company name by updating the selected company
+      if (companySearch.selectedCompany) {
+        selectCompany({
+          ...companySearch.selectedCompany,
+          name: editValues.name
+        });
+      }
+    } else {
+      updateClassificationField(field, editValues[field as keyof typeof editValues]);
+    }
     setEditingField(null);
   };
 
@@ -63,6 +75,7 @@ export function CompanyConfirmationPage() {
     setEditingField(null);
     // Reset to original values
     setEditValues({
+      name: companySearch.selectedCompany?.name || '',
       employees: classification.employees || companySearch.selectedCompany?.employees || 0,
       revenue: classification.revenue || companySearch.selectedCompany?.revenue || 0,
       geography: classification.geography || companySearch.selectedCompany?.country || '',
@@ -109,11 +122,21 @@ export function CompanyConfirmationPage() {
             <div className="absolute top-4 right-4">
               <AIHealthIndicator status={aiStatus} />
             </div>
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-semibold">{companySearch.selectedCompany.name}</h2>
-            </div>
-
             <div className="space-y-4">
+              {/* Company Name Field */}
+              <EditableField
+                icon={<Building2 className="w-5 h-5" />}
+                label={t('company.name', 'Nombre de la empresa')}
+                value={editValues.name}
+                displayValue={editValues.name}
+                isEditing={editingField === 'name'}
+                onEdit={() => handleEdit('name')}
+                onSave={() => handleSave('name')}
+                onCancel={handleCancel}
+                onChange={(value) => setEditValues({ ...editValues, name: value })}
+                type="text"
+                aiEnhanced={false}
+              />
               {/* Employees Field */}
               <EditableField
                 icon={<Users className="w-5 h-5" />}
@@ -342,7 +365,7 @@ function EditableField({
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 text-xs text-green-400">
               <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-              <span>Información verificada con IA</span>
+              <span>Información obtenida automáticamente</span>
             </div>
             <div className="flex gap-2 text-xs">
               <span className="text-dark-text-secondary">¿Es correcto?</span>

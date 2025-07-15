@@ -306,6 +306,12 @@ export function AdaptiveImmunityBuildingPage() {
     setLoading(true);
     setLoadingError(null);
     
+    // Add a timeout to prevent infinite loading
+    const timeoutId = setTimeout(() => {
+      setLoadingError('La carga de preguntas está tomando más tiempo del esperado. Verifique su conexión e intente nuevamente.');
+      setLoading(false);
+    }, 10000); // 10 second timeout
+    
     try {
       const modelMapping: Record<string, BusinessModelScenarioId> = {
         'COMERCIO_HIBRIDO': '1_comercio_hibrido',
@@ -337,9 +343,10 @@ export function AdaptiveImmunityBuildingPage() {
         }
       }
 
-      // If all questions failed to load, show error
+      // If all questions failed to load, show error and continue with loading
       if (questionsMap.size === 0) {
         setLoadingError('No pudimos cargar las preguntas de evaluación. Verifique su conexión a internet e intente nuevamente.');
+        setLoading(false); // Important: Stop loading even if questions failed
         return;
       }
 
@@ -349,9 +356,12 @@ export function AdaptiveImmunityBuildingPage() {
       }
 
       setAllQuestions(questionsMap);
+      clearTimeout(timeoutId); // Clear timeout on success
     } catch (error) {
       console.error('Error loading questions:', error);
       setLoadingError('Error al cargar las preguntas de evaluación. Intente refrescar la página o contacte a soporte si el problema persiste.');
+      setLoading(false); // Stop loading on error
+      clearTimeout(timeoutId); // Clear timeout on error
     }
   };
 
