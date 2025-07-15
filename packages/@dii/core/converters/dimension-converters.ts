@@ -305,13 +305,13 @@ export class RRGConverter implements DimensionConverter {
  * Factory for accessing dimension converters
  */
 export class DimensionConverterFactory {
-  private static converters: Map<DIIDimension, DimensionConverter> = new Map([
+  private static converters: Map<DIIDimension, DimensionConverter> = new Map<DIIDimension, DimensionConverter>([
     ['TRD', new TRDConverter()],
     ['AER', new AERConverter()],
     ['HFP', new HFPConverter()],
     ['BRI', new BRIConverter()],
     ['RRG', new RRGConverter()]
-  ]);
+  ] as [DIIDimension, DimensionConverter][]);
 
   static get(dimension: DIIDimension): DimensionConverter {
     const converter = this.converters.get(dimension);

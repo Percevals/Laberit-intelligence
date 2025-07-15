@@ -3,8 +3,8 @@
  * Provides configured database service instance
  */
 
-import { getDatabaseConnection, initializeDatabase } from './connection';
-import { createCompanyDatabaseService } from './company-database.service';
+// Use PostgreSQL version
+import { createCompanyDatabaseService } from './company-database.service.v2';
 import type { CompanyDatabaseService } from './types';
 
 // Singleton database service instance
@@ -16,12 +16,8 @@ let serviceInstance: CompanyDatabaseService | null = null;
  */
 export async function getDatabaseService(): Promise<CompanyDatabaseService> {
   if (!serviceInstance) {
-    // Initialize database if needed
-    await initializeDatabase();
-    
-    // Create service instance
-    const connection = getDatabaseConnection();
-    serviceInstance = createCompanyDatabaseService(connection);
+    // Create service instance (it handles its own initialization)
+    serviceInstance = createCompanyDatabaseService();
     
     console.log('✅ Database service initialized');
   }
@@ -33,7 +29,8 @@ export async function getDatabaseService(): Promise<CompanyDatabaseService> {
  * Initialize database manually (useful for setup/testing)
  */
 export async function initDatabase(): Promise<void> {
-  await initializeDatabase();
+  // Database initialization happens automatically on first use
+  await getDatabaseService();
 }
 
 /**
@@ -43,10 +40,8 @@ export function resetDatabaseService(): void {
   serviceInstance = null;
 }
 
-// Re-export types and utilities
+// Re-export types
 export type { CompanyDatabaseService } from './types';
-export type { DatabaseConnection } from './connection';
-export { getDatabaseConnection, closeDatabaseConnection } from './connection';
 
 // Re-export the service for direct usage
-export { createCompanyDatabaseService } from './company-database.service';
+export { createCompanyDatabaseService } from './company-database.service.v2';

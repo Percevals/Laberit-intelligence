@@ -9,6 +9,8 @@ import { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { DatabaseConnectionProvider } from './contexts/DatabaseConnectionContext';
+import { DatabaseConnectionIndicator } from './components/DatabaseConnectionIndicator';
 import { HomePage } from './pages/HomePage';
 import { CompanySearchPage } from './pages/CompanySearchPage';
 import { CompanyConfirmationPage } from './pages/CompanyConfirmationPage';
@@ -52,24 +54,27 @@ export default function App() {
   return (
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter basename="/Laberit-intelligence/apps/assessment-v2">
-          <Suspense fallback={<LoadingScreen />}>
-            <ErrorBoundary>
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/assessment/company" element={<CompanySearchPage />} />
-                <Route path="/assessment/confirm" element={<CompanyConfirmationPage />} />
-                <Route path="/assessment/business-model" element={<BusinessModelRevealPage />} />
-                {/* <Route path="/assessment/smart-classify" element={<SmartClassificationPage />} /> Removed - unused duplicate */}
-                <Route path="/assessment/classify" element={<ClassificationPage />} />
-                <Route path="/assessment/questions" element={<AdaptiveImmunityBuildingPage />} />
-                <Route path="/assessment/results" element={<ImmunityResultsPage />} />
-                {/* Debug routes removed for production */}
-              </Routes>
-            </ErrorBoundary>
-          </Suspense>
-        </BrowserRouter>
-        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+        <DatabaseConnectionProvider>
+          <BrowserRouter basename="/Laberit-intelligence/apps/assessment-v2">
+            <Suspense fallback={<LoadingScreen />}>
+              <ErrorBoundary>
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/assessment/company" element={<CompanySearchPage />} />
+                  <Route path="/assessment/confirm" element={<CompanyConfirmationPage />} />
+                  <Route path="/assessment/business-model" element={<BusinessModelRevealPage />} />
+                  {/* <Route path="/assessment/smart-classify" element={<SmartClassificationPage />} /> Removed - unused duplicate */}
+                  <Route path="/assessment/classify" element={<ClassificationPage />} />
+                  <Route path="/assessment/questions" element={<AdaptiveImmunityBuildingPage />} />
+                  <Route path="/assessment/results" element={<ImmunityResultsPage />} />
+                  {/* Debug routes removed for production */}
+                </Routes>
+              </ErrorBoundary>
+            </Suspense>
+            <DatabaseConnectionIndicator />
+          </BrowserRouter>
+          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+        </DatabaseConnectionProvider>
       </QueryClientProvider>
     </ErrorBoundary>
   );
