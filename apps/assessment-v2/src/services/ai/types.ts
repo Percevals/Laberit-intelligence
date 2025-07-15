@@ -37,6 +37,9 @@ export interface CompanyInfo {
   recentNews?: string[];
   certifications?: string[]; // ISO, SOC2, etc.
   
+  // Online presence
+  domain?: string;
+  
   // Metadata
   dataSource: 'ai' | 'manual' | 'mixed';
   confidence?: number; // 0-1 confidence score

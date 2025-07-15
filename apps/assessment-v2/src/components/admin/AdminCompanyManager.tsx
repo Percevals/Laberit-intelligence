@@ -66,6 +66,13 @@ interface EditModalProps {
   onSave: (updatedCompany: Partial<Company>) => void;
 }
 
+interface AddCompanyModalProps {
+  companyInfo: CompanyInfo | null;
+  isOpen: boolean;
+  onClose: () => void;
+  onConfirm: (companyData: Partial<Company>) => void;
+}
+
 function EditModal({ company, isOpen, onClose, onSave }: EditModalProps) {
   const [editedCompany, setEditedCompany] = useState<Partial<Company>>({
     name: company.name,
@@ -222,6 +229,181 @@ function EditModal({ company, isOpen, onClose, onSave }: EditModalProps) {
   );
 }
 
+function AddCompanyModal({ companyInfo, isOpen, onClose, onConfirm }: AddCompanyModalProps) {
+  const [businessModel, setBusinessModel] = useState<DIIBusinessModel>('COMERCIO_HIBRIDO');
+  const [isProspect, setIsProspect] = useState(true);
+  const [dataFreshnessDays, setDataFreshnessDays] = useState(90);
+  const [isClassifying, setIsClassifying] = useState(false);
+  const dbService = useMemo(() => createMockDatabaseService(), []);
+
+  useEffect(() => {
+    if (companyInfo && isOpen) {
+      classifyCompany();
+    }
+  }, [companyInfo, isOpen]);
+
+  const classifyCompany = async () => {
+    if (!companyInfo) return;
+    
+    setIsClassifying(true);
+    try {
+      const classification = await dbService.classifyBusinessModel({
+        company_name: companyInfo.name,
+        industry_traditional: companyInfo.industry || 'Unknown'
+      });
+      setBusinessModel(classification.dii_business_model);
+    } catch (error) {
+      console.error('Failed to classify company:', error);
+    } finally {
+      setIsClassifying(false);
+    }
+  };
+
+  const handleConfirm = () => {
+    if (!companyInfo) return;
+    
+    onConfirm({
+      name: companyInfo.name,
+      legal_name: companyInfo.name,
+      domain: companyInfo.domain,
+      industry_traditional: companyInfo.industry || 'Unknown',
+      dii_business_model: businessModel,
+      headquarters: companyInfo.headquarters,
+      country: companyInfo.country,
+      region: 'LATAM',
+      employees: companyInfo.employees,
+      revenue: companyInfo.revenue,
+      data_freshness_days: dataFreshnessDays,
+      is_prospect: isProspect
+    });
+  };
+
+  if (!isOpen || !companyInfo) return null;
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+        onClick={onClose}
+      >
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.9, opacity: 0 }}
+          className="bg-dark-surface border border-dark-border rounded-xl p-6 max-w-lg w-full"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-xl font-semibold text-dark-text-primary">
+              Add New Company
+            </h3>
+            <button
+              onClick={onClose}
+              className="p-2 hover:bg-dark-border/50 rounded-lg transition-colors"
+            >
+              <X className="w-5 h-5 text-dark-text-secondary" />
+            </button>
+          </div>
+
+          <div className="space-y-4">
+            {/* Company Info Display */}
+            <div className="bg-dark-bg p-4 rounded-lg space-y-2">
+              <h4 className="font-semibold text-dark-text-primary">{companyInfo.name}</h4>
+              {companyInfo.industry && (
+                <p className="text-sm text-dark-text-secondary">Industry: {companyInfo.industry}</p>
+              )}
+              {companyInfo.headquarters && (
+                <p className="text-sm text-dark-text-secondary">Location: {companyInfo.headquarters}</p>
+              )}
+              {companyInfo.employees && (
+                <p className="text-sm text-dark-text-secondary">Employees: {companyInfo.employees.toLocaleString()}</p>
+              )}
+              {companyInfo.revenue && (
+                <p className="text-sm text-dark-text-secondary">Revenue: ${(companyInfo.revenue / 1000000).toFixed(0)}M</p>
+              )}
+            </div>
+
+            {/* Business Model Selection */}
+            <div>
+              <label className="block text-sm font-medium text-dark-text-secondary mb-2">
+                Business Model Classification
+              </label>
+              {isClassifying ? (
+                <div className="flex items-center gap-2 text-primary-600">
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <span className="text-sm">Classifying business model...</span>
+                </div>
+              ) : (
+                <select
+                  value={businessModel}
+                  onChange={(e) => setBusinessModel(e.target.value as DIIBusinessModel)}
+                  className="w-full px-4 py-2 bg-dark-bg border border-dark-border rounded-lg
+                           text-dark-text-primary focus:outline-none focus:border-primary-600
+                           transition-colors"
+                >
+                  {Object.entries(BUSINESS_MODEL_NAMES).map(([value, label]) => (
+                    <option key={value} value={value}>{label}</option>
+                  ))}
+                </select>
+              )}
+            </div>
+
+            {/* Data Freshness */}
+            <div>
+              <label className="block text-sm font-medium text-dark-text-secondary mb-2">
+                Data Freshness Period (days)
+              </label>
+              <input
+                type="number"
+                min="1"
+                max="365"
+                value={dataFreshnessDays}
+                onChange={(e) => setDataFreshnessDays(parseInt(e.target.value))}
+                className="w-full px-4 py-2 bg-dark-bg border border-dark-border rounded-lg
+                         text-dark-text-primary focus:outline-none focus:border-primary-600
+                         transition-colors"
+              />
+            </div>
+
+            {/* Prospect Checkbox */}
+            <div className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                id="add-is-prospect"
+                checked={isProspect}
+                onChange={(e) => setIsProspect(e.target.checked)}
+                className="w-4 h-4 bg-dark-bg border-dark-border rounded text-primary-600
+                         focus:ring-primary-600 focus:ring-offset-0"
+              />
+              <label htmlFor="add-is-prospect" className="text-sm text-dark-text-secondary">
+                Mark as Prospect
+              </label>
+            </div>
+          </div>
+
+          <div className="flex gap-3 mt-6">
+            <button
+              onClick={handleConfirm}
+              className="flex-1 btn-primary"
+            >
+              Add Company
+            </button>
+            <button
+              onClick={onClose}
+              className="flex-1 btn-secondary"
+            >
+              Cancel
+            </button>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
 export function AdminCompanyManager() {
   const [companies, setCompanies] = useState<Company[]>([]);
   const [loading, setLoading] = useState(true);
@@ -233,6 +415,7 @@ export function AdminCompanyManager() {
   });
   const [showFilters, setShowFilters] = useState(false);
   const [editingCompany, setEditingCompany] = useState<Company | null>(null);
+  const [addingCompany, setAddingCompany] = useState<CompanyInfo | null>(null);
   const [verifyingCompanies, setVerifyingCompanies] = useState<Set<string>>(new Set());
   
   const dbService = useMemo(() => createMockDatabaseService(), []);
@@ -342,33 +525,28 @@ export function AdminCompanyManager() {
   };
 
   // Handle new company from search
-  const handleNewCompany = async (companyInfo: CompanyInfo) => {
+  const handleNewCompany = (companyInfo: CompanyInfo) => {
+    setAddingCompany(companyInfo);
+  };
+
+  // Handle confirming new company
+  const handleConfirmNewCompany = async (companyData: Partial<Company>) => {
     try {
       const classification = await dbService.classifyBusinessModel({
-        company_name: companyInfo.name,
-        industry_traditional: companyInfo.industry || 'Unknown'
+        company_name: companyData.name || '',
+        industry_traditional: companyData.industry_traditional || 'Unknown'
       });
 
       await dbService.createCompany({
-        name: companyInfo.name,
-        legal_name: companyInfo.name,
-        domain: companyInfo.domain,
-        industry_traditional: companyInfo.industry || 'Unknown',
-        dii_business_model: classification.dii_business_model,
+        ...companyData,
         confidence_score: classification.confidence_score,
         classification_reasoning: classification.reasoning,
-        headquarters: companyInfo.headquarters,
-        country: companyInfo.country,
-        region: 'LATAM',
-        employees: companyInfo.employees,
-        revenue: companyInfo.revenue,
         last_verified: new Date(),
-        verification_source: 'ai_search',
-        data_freshness_days: 90,
-        is_prospect: true
-      });
+        verification_source: 'ai_search'
+      } as Company);
 
       await loadCompanies();
+      setAddingCompany(null);
     } catch (error) {
       console.error('Failed to add new company:', error);
     }
@@ -742,6 +920,14 @@ export function AdminCompanyManager() {
           onSave={handleEditSave}
         />
       )}
+
+      {/* Add Company Modal */}
+      <AddCompanyModal
+        companyInfo={addingCompany}
+        isOpen={!!addingCompany}
+        onClose={() => setAddingCompany(null)}
+        onConfirm={handleConfirmNewCompany}
+      />
     </div>
   );
 }
