@@ -24,6 +24,7 @@ import { AdaptiveImmunityBuildingPage } from './pages/AdaptiveImmunityBuildingPa
 // import { ResultsPage } from './pages/ResultsPage'; // Replaced by EnhancedResultsPage
 // import { EnhancedResultsPage } from './pages/EnhancedResultsPage'; // Replaced by ImmunityResultsPage
 import { ImmunityResultsPage } from './pages/ImmunityResultsPage';
+import { AdminPage } from './pages/AdminPage';
 // Debug pages removed for production
 
 // Core providers and setup
@@ -67,6 +68,7 @@ export default function App() {
                   <Route path="/assessment/classify" element={<ClassificationPage />} />
                   <Route path="/assessment/questions" element={<AdaptiveImmunityBuildingPage />} />
                   <Route path="/assessment/results" element={<ImmunityResultsPage />} />
+                  <Route path="/admin" element={<AdminPage />} />
                   {/* Debug routes removed for production */}
                 </Routes>
               </ErrorBoundary>

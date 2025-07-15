@@ -69,6 +69,12 @@ export function HomePage() {
               <a href="#" className="text-dark-text-secondary hover:text-dark-text-primary transition-colors">
                 {t('nav.intelligence')}
               </a>
+              <button
+                onClick={() => navigate('/admin')}
+                className="text-dark-text-secondary hover:text-primary-600 transition-colors"
+              >
+                Admin
+              </button>
               <LanguageSwitcher />
               <button onClick={startAssessment} className="btn-primary">
                 {t('nav.startAssessment')}

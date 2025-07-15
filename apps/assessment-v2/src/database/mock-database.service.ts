@@ -48,10 +48,6 @@ export class MockDatabaseService implements ICompanyDatabaseService {
         verification_source: 'manual',
         data_freshness_days: 90,
         is_prospect: false,
-        last_verified: new Date(),
-        verification_source: 'manual',
-        data_freshness_days: 90,
-        is_prospect: false,
         created_at: new Date(),
         updated_at: new Date()
       },
@@ -90,7 +86,7 @@ export class MockDatabaseService implements ICompanyDatabaseService {
         region: 'LATAM',
         employees: 150,
         revenue: 12000000,
-        last_verified: new Date(),
+        last_verified: new Date(Date.now() - 120 * 24 * 60 * 60 * 1000), // 120 days ago (stale)
         verification_source: 'manual',
         data_freshness_days: 90,
         is_prospect: false,
@@ -132,10 +128,10 @@ export class MockDatabaseService implements ICompanyDatabaseService {
         region: 'LATAM',
         employees: 80,
         revenue: 8000000,
-        last_verified: new Date(),
+        last_verified: new Date(Date.now() - 200 * 24 * 60 * 60 * 1000), // 200 days ago (critical)
         verification_source: 'manual',
         data_freshness_days: 90,
-        is_prospect: false,
+        is_prospect: true,
         created_at: new Date(),
         updated_at: new Date()
       },
@@ -174,10 +170,10 @@ export class MockDatabaseService implements ICompanyDatabaseService {
         region: 'LATAM',
         employees: 45,
         revenue: 5000000,
-        last_verified: new Date(),
-        verification_source: 'manual',
+        last_verified: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000), // 30 days ago (fresh)
+        verification_source: 'ai_search',
         data_freshness_days: 90,
-        is_prospect: false,
+        is_prospect: true,
         created_at: new Date(),
         updated_at: new Date()
       },
@@ -194,6 +190,10 @@ export class MockDatabaseService implements ICompanyDatabaseService {
         region: 'LATAM',
         employees: 120,
         revenue: 15000000,
+        last_verified: null, // Never verified (critical)
+        verification_source: null,
+        data_freshness_days: 90,
+        is_prospect: true,
         created_at: new Date(),
         updated_at: new Date()
       }

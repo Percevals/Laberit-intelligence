@@ -21,3 +21,6 @@ export { AssessmentCompletionMobile, ShareableImmunityCard } from './AssessmentC
 
 // Dimension Orchestration Components
 export { DimensionOrchestrationDemo } from './DimensionOrchestrationDemo';
+
+// Admin Components
+export { AdminCompanyManager } from './admin/AdminCompanyManager';
