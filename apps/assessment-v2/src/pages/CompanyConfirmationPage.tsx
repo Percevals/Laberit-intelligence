@@ -19,6 +19,7 @@ import { ProgressIndicator } from '@/components/ProgressIndicator';
 import { AIHealthIndicator } from '@/components/AIHealthIndicator';
 import { cn } from '@shared/utils/cn';
 import { INDUSTRY_OPTIONS } from '@/constants/industries';
+// import { getDatabaseService } from '@/database'; // TODO: Move to server-side API
 
 export function CompanyConfirmationPage() {
   const { t } = useTranslation();
@@ -73,7 +74,10 @@ export function CompanyConfirmationPage() {
     setCriticalInfrastructure(value);
   };
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
+    // TODO: Integrate with server-side API to create company in database
+    // For now, continue with in-memory flow
+    console.log('Company confirmation completed, proceeding to business model classification');
     navigate('/assessment/business-model');
   };
 

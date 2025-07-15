@@ -17,11 +17,12 @@ import type {
   DIIBusinessModel,
   DiiDimension
 } from './types';
+import type { DatabaseConnection } from './connection';
 
 export class CompanyDatabaseService implements ICompanyDatabaseService {
-  private db: any; // Database connection - implement with your preferred DB client
+  private db: DatabaseConnection;
   
-  constructor(databaseConnection: any) {
+  constructor(databaseConnection: DatabaseConnection) {
     this.db = databaseConnection;
   }
 
@@ -42,52 +43,67 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
       data.classification_reasoning = classification.reasoning;
     }
 
-    const company = await this.db.companies.create({
-      data: {
-        ...data,
-        id: this.generateUUID(),
-        created_at: new Date(),
-        updated_at: new Date()
-      }
-    });
+    const id = this.generateUUID();
+    const now = new Date().toISOString();
 
-    return company;
+    this.db.execute(`
+      INSERT INTO companies (
+        id, name, legal_name, domain, industry_traditional, dii_business_model,
+        confidence_score, classification_reasoning, headquarters, country, region,
+        employees, revenue, created_at, updated_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `, [
+      id, data.name, data.legal_name || null, data.domain || null,
+      data.industry_traditional, data.dii_business_model,
+      data.confidence_score || null, data.classification_reasoning || null,
+      data.headquarters || null, data.country || null, data.region || 'LATAM',
+      data.employees || null, data.revenue || null, now, now
+    ]);
+
+    const company = this.db.queryOne('SELECT * FROM companies WHERE id = ?', [id]);
+    return this.mapCompanyFromDB(company);
   }
 
   async getCompany(id: string): Promise<Company | null> {
-    return await this.db.companies.findUnique({
-      where: { id }
-    });
+    const result = this.db.queryOne('SELECT * FROM companies WHERE id = ?', [id]);
+    return result ? this.mapCompanyFromDB(result) : null;
   }
 
   async getCompanyByDomain(domain: string): Promise<Company | null> {
-    return await this.db.companies.findUnique({
-      where: { domain }
-    });
+    const result = this.db.queryOne('SELECT * FROM companies WHERE domain = ?', [domain]);
+    return result ? this.mapCompanyFromDB(result) : null;
   }
 
   async updateCompany(id: string, data: Partial<Company>): Promise<Company> {
-    return await this.db.companies.update({
-      where: { id },
-      data: {
-        ...data,
-        updated_at: new Date()
-      }
-    });
+    const now = new Date().toISOString();
+    
+    // Build dynamic update query
+    const updateFields = Object.keys(data).filter(key => key !== 'id' && key !== 'created_at');
+    const setClause = updateFields.map(field => `${field} = ?`).join(', ');
+    const values = updateFields.map(field => (data as any)[field]);
+    
+    this.db.execute(`
+      UPDATE companies 
+      SET ${setClause}, updated_at = ?
+      WHERE id = ?
+    `, [...values, now, id]);
+
+    const updated = this.db.queryOne('SELECT * FROM companies WHERE id = ?', [id]);
+    return this.mapCompanyFromDB(updated);
   }
 
   async searchCompanies(query: string): Promise<Company[]> {
-    return await this.db.companies.findMany({
-      where: {
-        OR: [
-          { name: { contains: query, mode: 'insensitive' } },
-          { legal_name: { contains: query, mode: 'insensitive' } },
-          { domain: { contains: query, mode: 'insensitive' } }
-        ]
-      },
-      orderBy: { name: 'asc' },
-      take: 50
-    });
+    const searchQuery = `%${query.toLowerCase()}%`;
+    const results = this.db.query(`
+      SELECT * FROM companies 
+      WHERE LOWER(name) LIKE ? 
+         OR LOWER(legal_name) LIKE ? 
+         OR LOWER(domain) LIKE ?
+      ORDER BY name ASC 
+      LIMIT 50
+    `, [searchQuery, searchQuery, searchQuery]);
+
+    return results.map(row => this.mapCompanyFromDB(row));
   }
 
   // ===================================================================
@@ -119,13 +135,11 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
   }
 
   private async classifyByIndustryPattern(input: BusinessModelClassificationInput): Promise<BusinessModelClassificationResult | null> {
-    const rules = await this.db.classification_rules.findMany({
-      where: {
-        active: true,
-        industry_pattern: { not: null }
-      },
-      orderBy: { rule_priority: 'asc' }
-    });
+    const rules = this.db.query(`
+      SELECT * FROM classification_rules 
+      WHERE active = 1 AND industry_pattern IS NOT NULL
+      ORDER BY rule_priority ASC
+    `);
 
     const industryLower = input.industry_traditional.toLowerCase();
     const nameLower = input.company_name.toLowerCase();
@@ -140,7 +154,7 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
 
         if (matches) {
           return {
-            dii_business_model: rule.target_dii_model,
+            dii_business_model: rule.target_dii_model as DIIBusinessModel,
             confidence_score: rule.confidence_level,
             reasoning: rule.reasoning_template,
             method: 'industry_pattern',
@@ -158,17 +172,17 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
       return null;
     }
 
-    const rule = await this.db.classification_rules.findFirst({
-      where: {
-        active: true,
-        revenue_model: input.revenue_model,
-        operational_dependency: input.operational_dependency
-      }
-    });
+    const rule = this.db.queryOne(`
+      SELECT * FROM classification_rules 
+      WHERE active = 1 
+        AND revenue_model = ? 
+        AND operational_dependency = ?
+      LIMIT 1
+    `, [input.revenue_model, input.operational_dependency]);
 
     if (rule) {
       return {
-        dii_business_model: rule.target_dii_model,
+        dii_business_model: rule.target_dii_model as DIIBusinessModel,
         confidence_score: rule.confidence_level,
         reasoning: rule.reasoning_template,
         method: 'two_question_matrix',
@@ -180,15 +194,22 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
   }
 
   async updateBusinessModelClassification(companyId: string, classification: BusinessModelClassificationResult): Promise<void> {
-    await this.db.companies.update({
-      where: { id: companyId },
-      data: {
-        dii_business_model: classification.dii_business_model,
-        confidence_score: classification.confidence_score,
-        classification_reasoning: classification.reasoning,
-        updated_at: new Date()
-      }
-    });
+    const now = new Date().toISOString();
+    
+    this.db.execute(`
+      UPDATE companies 
+      SET dii_business_model = ?, 
+          confidence_score = ?, 
+          classification_reasoning = ?,
+          updated_at = ?
+      WHERE id = ?
+    `, [
+      classification.dii_business_model,
+      classification.confidence_score,
+      classification.reasoning,
+      now,
+      companyId
+    ]);
   }
 
   // ===================================================================
@@ -196,30 +217,41 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
   // ===================================================================
 
   async createAssessment(data: Omit<Assessment, 'id' | 'created_at'>): Promise<Assessment> {
-    return await this.db.assessments.create({
-      data: {
-        ...data,
-        id: this.generateUUID(),
-        created_at: new Date()
-      }
-    });
+    const id = this.generateUUID();
+    const now = new Date().toISOString();
+
+    this.db.execute(`
+      INSERT INTO assessments (
+        id, company_id, assessment_type, dii_raw_score, dii_final_score,
+        confidence_level, assessed_at, assessed_by_user_id, framework_version,
+        calculation_inputs, created_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `, [
+      id, data.company_id, data.assessment_type, data.dii_raw_score || null,
+      data.dii_final_score || null, data.confidence_level || null,
+      data.assessed_at ? data.assessed_at.toISOString() : now,
+      data.assessed_by_user_id || null, data.framework_version || 'v4.0',
+      data.calculation_inputs ? JSON.stringify(data.calculation_inputs) : null,
+      now
+    ]);
+
+    const assessment = this.db.queryOne('SELECT * FROM assessments WHERE id = ?', [id]);
+    return this.mapAssessmentFromDB(assessment);
   }
 
   async getAssessment(id: string): Promise<Assessment | null> {
-    return await this.db.assessments.findUnique({
-      where: { id },
-      include: {
-        company: true,
-        dimension_scores: true
-      }
-    });
+    const result = this.db.queryOne('SELECT * FROM assessments WHERE id = ?', [id]);
+    return result ? this.mapAssessmentFromDB(result) : null;
   }
 
   async getCompanyAssessments(companyId: string): Promise<Assessment[]> {
-    return await this.db.assessments.findMany({
-      where: { company_id: companyId },
-      orderBy: { assessed_at: 'desc' }
-    });
+    const results = this.db.query(`
+      SELECT * FROM assessments 
+      WHERE company_id = ? 
+      ORDER BY assessed_at DESC
+    `, [companyId]);
+
+    return results.map(row => this.mapAssessmentFromDB(row));
   }
 
   // ===================================================================
@@ -228,32 +260,38 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
 
   async saveDimensionScores(assessmentId: string, scores: DIICalculationInput): Promise<DimensionScore[]> {
     const dimensionScores: DimensionScore[] = [];
+    const now = new Date().toISOString();
 
     for (const [dimension, scoreData] of Object.entries(scores)) {
-      const dimensionScore = await this.db.dimension_scores.create({
-        data: {
-          id: this.generateUUID(),
-          assessment_id: assessmentId,
-          dimension: dimension as DiiDimension,
-          raw_value: scoreData.value,
-          confidence_score: scoreData.confidence,
-          data_source: scoreData.data_source,
-          validation_status: 'valid', // Will be updated by validation
-          supporting_evidence: scoreData.evidence || {},
-          created_at: new Date()
-        }
-      });
-      dimensionScores.push(dimensionScore);
+      const id = this.generateUUID();
+      
+      this.db.execute(`
+        INSERT INTO dimension_scores (
+          id, assessment_id, dimension, raw_value, confidence_score,
+          data_source, validation_status, supporting_evidence, created_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `, [
+        id, assessmentId, dimension, scoreData.value, scoreData.confidence,
+        scoreData.data_source, 'valid', 
+        scoreData.evidence ? JSON.stringify(scoreData.evidence) : null,
+        now
+      ]);
+
+      const saved = this.db.queryOne('SELECT * FROM dimension_scores WHERE id = ?', [id]);
+      dimensionScores.push(this.mapDimensionScoreFromDB(saved));
     }
 
     return dimensionScores;
   }
 
   async getAssessmentDimensions(assessmentId: string): Promise<DimensionScore[]> {
-    return await this.db.dimension_scores.findMany({
-      where: { assessment_id: assessmentId },
-      orderBy: { dimension: 'asc' }
-    });
+    const results = this.db.query(`
+      SELECT * FROM dimension_scores 
+      WHERE assessment_id = ? 
+      ORDER BY dimension ASC
+    `, [assessmentId]);
+
+    return results.map(row => this.mapDimensionScoreFromDB(row));
   }
 
   // ===================================================================
@@ -337,9 +375,7 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
       message: string;
     }> = [];
 
-    const rules = await this.db.validation_rules.findMany({
-      where: { active: true }
-    });
+    const rules = this.db.query('SELECT * FROM validation_rules WHERE active = 1');
 
     for (const rule of rules) {
       // Check each dimension against applicable rules
@@ -391,13 +427,32 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
   // ===================================================================
 
   async getBenchmarkData(businessModel: DIIBusinessModel, region: string = 'LATAM'): Promise<BenchmarkData | null> {
-    return await this.db.benchmark_data.findFirst({
-      where: {
-        business_model: businessModel,
-        region: region
-      },
-      orderBy: { calculation_date: 'desc' }
-    });
+    const result = this.db.queryOne(`
+      SELECT * FROM benchmark_data 
+      WHERE business_model = ? AND region = ?
+      ORDER BY calculation_date DESC 
+      LIMIT 1
+    `, [businessModel, region]);
+
+    if (!result) return null;
+
+    const benchmark: BenchmarkData = {
+      id: result.id,
+      business_model: result.business_model as DIIBusinessModel,
+      region: result.region,
+      sector: result.sector,
+      calculation_date: new Date(result.calculation_date),
+      sample_size: result.sample_size,
+      dii_percentiles: JSON.parse(result.dii_percentiles),
+      dimension_medians: result.dimension_medians ? JSON.parse(result.dimension_medians) : undefined,
+      created_at: new Date(result.created_at)
+    };
+
+    if (result.next_recalculation_due) {
+      benchmark.next_recalculation_due = new Date(result.next_recalculation_due);
+    }
+
+    return benchmark;
   }
 
   async updateBenchmarks(): Promise<void> {
@@ -411,18 +466,14 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
 
     for (const businessModel of businessModels) {
       // Get recent assessments for this business model
-      const recentScores = await this.db.assessments.findMany({
-        where: {
-          company: {
-            dii_business_model: businessModel
-          },
-          dii_final_score: { not: null },
-          assessed_at: {
-            gte: new Date(Date.now() - 365 * 24 * 60 * 60 * 1000) // Last 12 months
-          }
-        },
-        select: { dii_final_score: true }
-      });
+      const recentScores = this.db.query(`
+        SELECT a.dii_final_score 
+        FROM assessments a
+        JOIN companies c ON a.company_id = c.id
+        WHERE c.dii_business_model = ?
+          AND a.dii_final_score IS NOT NULL
+          AND a.assessed_at >= datetime('now', '-12 months')
+      `, [businessModel]);
 
       if (recentScores.length >= 5) { // Minimum sample size
         const scores = recentScores.map((s: any) => s.dii_final_score).sort((a: number, b: number) => a - b);
@@ -435,32 +486,34 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
           p95: this.calculatePercentile(scores, 95)
         };
 
-        // Upsert benchmark data
-        await this.db.benchmark_data.upsert({
-          where: {
-            business_model_region_sector_calculation_date: {
-              business_model: businessModel,
-              region: 'LATAM',
-              sector: null,
-              calculation_date: new Date()
-            }
-          },
-          update: {
-            sample_size: scores.length,
-            dii_percentiles: percentiles,
-            next_recalculation_due: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) // 30 days
-          },
-          create: {
-            id: this.generateUUID(),
-            business_model: businessModel,
-            region: 'LATAM',
-            calculation_date: new Date(),
-            sample_size: scores.length,
-            dii_percentiles: percentiles,
-            next_recalculation_due: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-            created_at: new Date()
-          }
-        });
+        // Upsert benchmark data (insert or update)
+        const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+        const nextRecalc = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+        
+        const existing = this.db.queryOne(`
+          SELECT id FROM benchmark_data 
+          WHERE business_model = ? AND region = ? AND calculation_date = ?
+        `, [businessModel, 'LATAM', today]);
+
+        if (existing) {
+          // Update existing record
+          this.db.execute(`
+            UPDATE benchmark_data 
+            SET sample_size = ?, dii_percentiles = ?, next_recalculation_due = ?
+            WHERE id = ?
+          `, [scores.length, JSON.stringify(percentiles), nextRecalc, existing.id]);
+        } else {
+          // Insert new record
+          this.db.execute(`
+            INSERT INTO benchmark_data (
+              id, business_model, region, calculation_date, sample_size,
+              dii_percentiles, next_recalculation_due, created_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+          `, [
+            this.generateUUID(), businessModel, 'LATAM', today, scores.length,
+            JSON.stringify(percentiles), nextRecalc, new Date().toISOString()
+          ]);
+        }
       }
     }
   }
@@ -470,9 +523,30 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
   // ===================================================================
 
   private async getModelProfile(businessModel: DIIBusinessModel): Promise<DIIModelProfile | null> {
-    return await this.db.dii_model_profiles.findUnique({
-      where: { model_name: businessModel }
-    });
+    const result = this.db.queryOne(`
+      SELECT * FROM dii_model_profiles 
+      WHERE model_name = ?
+    `, [businessModel]);
+
+    if (!result) return null;
+
+    return {
+      model_id: result.model_id,
+      model_name: result.model_name as DIIBusinessModel,
+      dii_base_min: result.dii_base_min,
+      dii_base_max: result.dii_base_max,
+      dii_base_avg: result.dii_base_avg,
+      risk_multiplier: result.risk_multiplier,
+      digital_dependency_min: result.digital_dependency_min,
+      digital_dependency_max: result.digital_dependency_max,
+      typical_trd_hours_min: result.typical_trd_hours_min,
+      typical_trd_hours_max: result.typical_trd_hours_max,
+      vulnerability_patterns: result.vulnerability_patterns ? JSON.parse(result.vulnerability_patterns) : undefined,
+      example_companies: result.example_companies ? JSON.parse(result.example_companies) : undefined,
+      cyber_risk_explanation: result.cyber_risk_explanation,
+      active_from: new Date(result.active_from),
+      ...(result.active_to && { active_to: new Date(result.active_to) })
+    };
   }
 
   private generateRecommendations(input: DIICalculationInput, modelProfile: DIIModelProfile): Array<{
@@ -564,12 +638,68 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
       return v.toString(16);
     });
   }
+
+  // ===================================================================
+  // DATABASE MAPPING UTILITIES
+  // ===================================================================
+
+  private mapCompanyFromDB(row: any): Company {
+    return {
+      id: row.id,
+      name: row.name,
+      legal_name: row.legal_name,
+      domain: row.domain,
+      industry_traditional: row.industry_traditional,
+      dii_business_model: row.dii_business_model as DIIBusinessModel,
+      confidence_score: row.confidence_score,
+      classification_reasoning: row.classification_reasoning,
+      headquarters: row.headquarters,
+      country: row.country,
+      region: row.region,
+      employees: row.employees,
+      revenue: row.revenue,
+      created_at: new Date(row.created_at),
+      updated_at: new Date(row.updated_at)
+    };
+  }
+
+  public mapAssessmentFromDB(row: any): Assessment {
+    return {
+      id: row.id,
+      company_id: row.company_id,
+      assessment_type: row.assessment_type,
+      dii_raw_score: row.dii_raw_score,
+      dii_final_score: row.dii_final_score,
+      confidence_level: row.confidence_level,
+      assessed_at: new Date(row.assessed_at),
+      assessed_by_user_id: row.assessed_by_user_id,
+      framework_version: row.framework_version,
+      calculation_inputs: row.calculation_inputs ? JSON.parse(row.calculation_inputs) : undefined,
+      created_at: new Date(row.created_at)
+    };
+  }
+
+  public mapDimensionScoreFromDB(row: any): DimensionScore {
+    return {
+      id: row.id,
+      assessment_id: row.assessment_id,
+      dimension: row.dimension as DiiDimension,
+      raw_value: row.raw_value,
+      normalized_value: row.normalized_value,
+      confidence_score: row.confidence_score,
+      data_source: row.data_source,
+      validation_status: row.validation_status,
+      calculation_method: row.calculation_method,
+      supporting_evidence: row.supporting_evidence ? JSON.parse(row.supporting_evidence) : undefined,
+      created_at: new Date(row.created_at)
+    };
+  }
 }
 
 // ===================================================================
 // FACTORY FUNCTION
 // ===================================================================
 
-export function createCompanyDatabaseService(databaseConnection: any): CompanyDatabaseService {
+export function createCompanyDatabaseService(databaseConnection: DatabaseConnection): CompanyDatabaseService {
   return new CompanyDatabaseService(databaseConnection);
 }

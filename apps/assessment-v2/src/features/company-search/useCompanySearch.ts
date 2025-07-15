@@ -1,6 +1,7 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { AIService } from '@services/ai/ai-service';
 import { getAIConfig, getConfigDebugInfo } from '@/config/ai-config';
+// import { getDatabaseService } from '@/database'; // TODO: Move to server-side API
 import type { CompanySearchResult } from '@services/ai/types';
 
 // Initialize AI service with robust configuration
@@ -51,17 +52,18 @@ export function useCompanySearch() {
     setError(null);
 
     try {
-      const searchResults = await aiService.searchCompany(query);
+      // First try AI service search
+      const aiResults = await aiService.searchCompany(query);
       
       // Check if request was aborted
       if (abortControllerRef.current?.signal.aborted) {
         return;
       }
 
-      setResults(searchResults);
-      
-      // Log provider used (for debugging)
-      console.log(`Company search completed using ${searchResults.provider} in ${searchResults.searchTime}ms`);
+      // TODO: Add database search integration via server-side API
+      // For now, use only AI results
+      setResults(aiResults);
+      console.log(`Company search completed using ${aiResults.provider} in ${aiResults.searchTime}ms`);
     } catch (err) {
       // Ignore aborted requests
       if (err instanceof Error && err.name === 'AbortError') {
