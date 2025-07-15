@@ -52,14 +52,35 @@ export function BulkImportExport({ onImport, companies, onClose }: BulkImportExp
 
   // Parse CSV content
   const parseCSV = (content: string): { headers: string[]; rows: string[][] } => {
-    const lines = content.trim().split('\n');
-    const headers = lines[0].split(',').map(h => h.trim().toLowerCase().replace(/['"]/g, ''));
+    // Handle different line endings (Windows, Mac, Unix)
+    const lines = content.trim().replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
+    
+    // Parse headers - handle both semicolon and comma separators
+    const firstLine = lines[0];
+    const separator = firstLine.includes(';') ? ';' : ',';
+    
+    // More robust header parsing
+    const headers = firstLine
+      .split(separator)
+      .map(h => h.trim()
+        .toLowerCase()
+        .replace(/['"]/g, '')
+        .replace(/^\uFEFF/, '') // Remove BOM if present
+        .replace(/\s+/g, '_') // Replace spaces with underscores
+      );
+    
+    console.log('Parsed headers:', headers); // Debug log
+    
     const rows = lines.slice(1).map(line => {
-      // Handle quoted values with commas
-      const matches = line.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g);
+      if (!line.trim()) return []; // Skip empty lines
+      
+      // Handle quoted values with the detected separator
+      const regex = new RegExp(`(".*?"|[^"${separator}]+)(?=${separator}|$)`, 'g');
+      const matches = line.match(regex);
       return matches ? matches.map(m => m.replace(/^"|"$/g, '').trim()) : [];
     });
-    return { headers, rows };
+    
+    return { headers, rows: rows.filter(row => row.length > 0) };
   };
 
   // Validate CSV structure
@@ -91,7 +112,7 @@ export function BulkImportExport({ onImport, companies, onClose }: BulkImportExp
             row: 0,
             company: 'CSV Structure',
             status: 'error',
-            message: `Missing required columns: ${validation.missingColumns.join(', ')}`
+            message: `Missing required columns: ${validation.missingColumns.join(', ')}. Found headers: ${headers.join(', ')}`
           }]
         });
         setImporting(false);
