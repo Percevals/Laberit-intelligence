@@ -25,7 +25,12 @@ const MIGRATIONS_DIR = path.join(__dirname, '..', 'database', 'migrations');
 
 class MigrationRunner {
   constructor() {
-    this.client = new Client({ connectionString });
+    const isAzure = connectionString.includes('azure.com');
+    const config = {
+      connectionString,
+      ...(isAzure && { ssl: { rejectUnauthorized: false } })
+    };
+    this.client = new Client(config);
   }
 
   async connect() {

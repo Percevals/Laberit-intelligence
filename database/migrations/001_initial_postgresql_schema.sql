@@ -4,8 +4,9 @@
 -- =============================================================================
 
 -- Enable required extensions
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-CREATE EXTENSION IF NOT EXISTS "pg_trgm"; -- For improved text search
+-- Note: Azure PostgreSQL doesn't allow extensions, use built-in functions instead
+-- CREATE EXTENSION IF NOT EXISTS "uuid-ossp"; -- Use gen_random_uuid() instead
+-- CREATE EXTENSION IF NOT EXISTS "pg_trgm"; -- Use LIKE for text search instead
 
 -- =============================================================================
 -- CUSTOM TYPES AND ENUMS
@@ -82,7 +83,7 @@ CREATE TYPE rule_type AS ENUM (
 
 -- Companies Table
 CREATE TABLE companies (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name VARCHAR(255) NOT NULL,
     legal_name VARCHAR(255),
     domain VARCHAR(255) UNIQUE,
@@ -109,7 +110,7 @@ CREATE TABLE companies (
 
 -- Assessments Table
 CREATE TABLE assessments (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     company_id UUID NOT NULL REFERENCES companies(id) ON DELETE CASCADE,
     
     -- Assessment Details
@@ -134,7 +135,7 @@ CREATE TABLE assessments (
 
 -- Dimension Scores Table
 CREATE TABLE dimension_scores (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     assessment_id UUID NOT NULL REFERENCES assessments(id) ON DELETE CASCADE,
     
     -- The 5 DII Dimensions
@@ -191,7 +192,7 @@ CREATE TABLE dii_model_profiles (
 
 -- Classification Rules Table
 CREATE TABLE classification_rules (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     
     -- Rule Conditions
     industry_pattern TEXT, -- Keyword patterns for industry matching (pipe-separated)
@@ -211,7 +212,7 @@ CREATE TABLE classification_rules (
 
 -- Benchmark Data Table
 CREATE TABLE benchmark_data (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     
     -- Benchmark Scope
     business_model dii_business_model NOT NULL,
@@ -238,7 +239,7 @@ CREATE TABLE benchmark_data (
 
 -- Validation Rules Table
 CREATE TABLE validation_rules (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     
     -- Rule Definition
     rule_name VARCHAR(255) NOT NULL UNIQUE,
@@ -265,7 +266,8 @@ CREATE INDEX idx_companies_dii_model ON companies(dii_business_model);
 CREATE INDEX idx_companies_country ON companies(country);
 CREATE INDEX idx_companies_region ON companies(region);
 CREATE INDEX idx_companies_created_at ON companies(created_at);
-CREATE INDEX idx_companies_name_trgm ON companies USING GIN (name gin_trgm_ops); -- For fuzzy search
+-- CREATE INDEX idx_companies_name_trgm ON companies USING GIN (name gin_trgm_ops); -- Disabled: Azure doesn't support pg_trgm
+-- Use LIKE queries with idx_companies_name instead
 CREATE INDEX idx_companies_domain ON companies(domain) WHERE domain IS NOT NULL;
 
 -- Assessments indexes

@@ -18,7 +18,11 @@
     "dev:v2": "turbo run dev --filter=assessment-v2",
     "build:light": "turbo run build --filter=assessment-light",
     "build:v2": "turbo run build --filter=assessment-v2",
-    "install:all": "npm install --workspaces --if-present"
+    "install:all": "npm install --workspaces --if-present",
+    "db:test": "node scripts/test-db-connection.js",
+    "db:migrate": "node scripts/run-migrations.js",
+    "db:seed": "node scripts/db-seed.js",
+    "db:clear": "node scripts/db-clear.js"
   },
   "devDependencies": {
     "turbo": "^2.3.3"

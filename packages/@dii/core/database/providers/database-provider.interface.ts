@@ -68,7 +68,12 @@ export interface DatabaseConfig {
   database: string;
   username: string;
   password: string;
-  ssl?: boolean;
+  ssl?: boolean | {
+    rejectUnauthorized?: boolean;
+    ca?: string;
+    cert?: string;
+    key?: string;
+  };
   maxConnections?: number;
   idleTimeoutMillis?: number;
   connectionTimeoutMillis?: number;

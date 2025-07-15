@@ -20,14 +20,40 @@ const dbConfig = {
 const connectionString = process.env.DATABASE_URL || 
   `postgresql://${dbConfig.user}:${dbConfig.password}@${dbConfig.host}:${dbConfig.port}/${dbConfig.database}`;
 
+// Parse connection details from connection string for display
+function parseConnectionString(connStr) {
+  try {
+    const url = new URL(connStr);
+    return {
+      host: url.hostname,
+      port: url.port || 5432,
+      database: url.pathname.slice(1),
+      user: url.username,
+      ssl: url.searchParams.get('sslmode') === 'require'
+    };
+  } catch (e) {
+    return dbConfig;
+  }
+}
+
 async function testConnection() {
-  const client = new Client({ connectionString });
+  const isAzure = connectionString.includes('azure.com');
+  const config = {
+    connectionString,
+    ...(isAzure && { ssl: { rejectUnauthorized: false } })
+  };
+  
+  const client = new Client(config);
+  const connDetails = parseConnectionString(connectionString);
   
   try {
     console.log('🔌 Attempting to connect to PostgreSQL...');
-    console.log(`   Host: ${dbConfig.host}:${dbConfig.port}`);
-    console.log(`   Database: ${dbConfig.database}`);
-    console.log(`   User: ${dbConfig.user}`);
+    console.log(`   Host: ${connDetails.host}:${connDetails.port}`);
+    console.log(`   Database: ${connDetails.database}`);
+    console.log(`   User: ${connDetails.user}`);
+    if (connDetails.ssl || isAzure) {
+      console.log('   SSL: Enabled (Azure PostgreSQL)');
+    }
     console.log('');
     
     await client.connect();

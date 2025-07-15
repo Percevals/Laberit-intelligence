@@ -16,6 +16,32 @@ export interface DatabaseConfigWithEnvironment extends DatabaseConfig {
 }
 
 /**
+ * Helper function to get SSL configuration
+ */
+function getSSLConfig(environment: Environment): boolean | { rejectUnauthorized: boolean } {
+  // Check if SSL is disabled via environment variable
+  if (env.get('DB_SSL') === 'false') {
+    return false;
+  }
+
+  // For Azure PostgreSQL or when SSL is explicitly enabled
+  if (env.get('DB_SSL') === 'true' || env.get('DB_HOST')?.includes('azure.com')) {
+    return {
+      rejectUnauthorized: false // Required for Azure self-signed certificates
+    };
+  }
+
+  // Default SSL settings per environment
+  if (environment === 'production' || environment === 'staging') {
+    return {
+      rejectUnauthorized: false
+    };
+  }
+
+  return false;
+}
+
+/**
  * Database configurations per environment
  */
 const configs: Record<Environment, DatabaseConfigWithEnvironment> = {
@@ -26,7 +52,7 @@ const configs: Record<Environment, DatabaseConfigWithEnvironment> = {
     database: env.get('DB_NAME', 'dii_dev') || 'dii_dev',
     username: env.get('DB_USER', 'dii_user') || 'dii_user',
     password: env.get('DB_PASSWORD', 'dii_dev_password') || 'dii_dev_password',
-    ssl: false,
+    ssl: getSSLConfig('development'),
     maxConnections: 10,
     idleTimeoutMillis: 30000,
     connectionTimeoutMillis: 2000,
@@ -44,7 +70,7 @@ const configs: Record<Environment, DatabaseConfigWithEnvironment> = {
     database: env.getRequired('DB_NAME'),
     username: env.getRequired('DB_USER'),
     password: env.getRequired('DB_PASSWORD'),
-    ssl: true,
+    ssl: getSSLConfig('staging'),
     maxConnections: 20,
     idleTimeoutMillis: 60000,
     connectionTimeoutMillis: 5000,
@@ -62,7 +88,7 @@ const configs: Record<Environment, DatabaseConfigWithEnvironment> = {
     database: env.getRequired('DB_NAME'),
     username: env.getRequired('DB_USER'),
     password: env.getRequired('DB_PASSWORD'),
-    ssl: true,
+    ssl: getSSLConfig('production'),
     maxConnections: 50,
     idleTimeoutMillis: 300000,
     connectionTimeoutMillis: 10000,
@@ -106,6 +132,17 @@ export function getDatabaseConfig(): DatabaseConfigWithEnvironment {
     try {
       const url = new URL(databaseUrl);
       
+      // Determine SSL configuration based on URL parameters and host
+      let sslConfig: boolean | { rejectUnauthorized: boolean } = false;
+      
+      if (url.searchParams.get('sslmode') === 'require' || 
+          url.searchParams.get('ssl') === 'true' ||
+          url.hostname.includes('azure.com')) {
+        sslConfig = {
+          rejectUnauthorized: false // Required for Azure self-signed certificates
+        };
+      }
+      
       return {
         ...config,
         host: url.hostname,
@@ -113,7 +150,7 @@ export function getDatabaseConfig(): DatabaseConfigWithEnvironment {
         database: url.pathname.slice(1),
         username: url.username,
         password: url.password,
-        ssl: url.searchParams.get('sslmode') === 'require'
+        ssl: sslConfig
       };
     } catch (error) {
       console.warn('Invalid DATABASE_URL format, using default config');
@@ -157,7 +194,8 @@ export function validateDatabaseConfig(config: DatabaseConfig): void {
 export function logDatabaseConfig(config: DatabaseConfigWithEnvironment): void {
   const safeConfig = {
     ...config,
-    password: '***hidden***'
+    password: '***hidden***',
+    ssl: typeof config.ssl === 'object' ? { ...config.ssl } : config.ssl
   };
 
   console.log('Database Configuration:');
