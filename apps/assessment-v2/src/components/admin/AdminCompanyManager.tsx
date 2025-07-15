@@ -3,7 +3,7 @@
  * Interface for managing companies with filters, re-verification, and editing capabilities
  */
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Building2,
@@ -27,7 +27,7 @@ import {
 } from 'lucide-react';
 import { cn } from '@shared/utils/cn';
 import { CompanySearchInput } from '@/features/company-search';
-import { createMockDatabaseService } from '@/database/mock-database.service';
+import { getDatabaseService } from '@/database';
 import type { Company, DIIBusinessModel, VerificationSource } from '@/database/types';
 import type { CompanyInfo } from '@/services/ai/types';
 import { BusinessModelInfo } from './BusinessModelInfo';
@@ -242,16 +242,22 @@ function AddCompanyModal({ companyInfo, isOpen, onClose, onConfirm }: AddCompany
   const [isClassifying, setIsClassifying] = useState(false);
   const [classificationConfidence, setClassificationConfidence] = useState<number>(0);
   const [showModelDetails, setShowModelDetails] = useState(false);
-  const dbService = useMemo(() => createMockDatabaseService(), []);
+  const [dbService, setDbService] = useState<any>(null);
+
+  useEffect(() => {
+    getDatabaseService().then(service => {
+      setDbService(service);
+    });
+  }, []);
 
   useEffect(() => {
     if (companyInfo && isOpen) {
       classifyCompany();
     }
-  }, [companyInfo, isOpen]);
+  }, [companyInfo, isOpen, dbService]);
 
   const classifyCompany = async () => {
-    if (!companyInfo) return;
+    if (!companyInfo || !dbService) return;
     
     setIsClassifying(true);
     try {
@@ -468,13 +474,21 @@ export function AdminCompanyManager() {
   const [verifyingCompanies, setVerifyingCompanies] = useState<Set<string>>(new Set());
   const [showImportExport, setShowImportExport] = useState(false);
   const [showMetrics, setShowMetrics] = useState(false);
-  
-  const dbService = useMemo(() => createMockDatabaseService(), []);
+  const [dbService, setDbService] = useState<any>(null);
+
+  // Initialize database service
+  useEffect(() => {
+    getDatabaseService().then(service => {
+      setDbService(service);
+    });
+  }, []);
 
   // Load companies
   useEffect(() => {
-    loadCompanies();
-  }, []);
+    if (dbService) {
+      loadCompanies();
+    }
+  }, [dbService]);
 
   const loadCompanies = async () => {
     setLoading(true);
