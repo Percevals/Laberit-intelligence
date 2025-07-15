@@ -21,11 +21,11 @@ export interface DatabaseConfigWithEnvironment extends DatabaseConfig {
 const configs: Record<Environment, DatabaseConfigWithEnvironment> = {
   development: {
     environment: 'development',
-    host: env.get('DB_HOST', 'localhost'),
+    host: env.get('DB_HOST', 'localhost') || 'localhost',
     port: env.getNumber('DB_PORT', 5432) || 5432,
-    database: env.get('DB_NAME', 'dii_dev'),
-    username: env.get('DB_USER', 'dii_user'),
-    password: env.get('DB_PASSWORD', 'dii_dev_password'),
+    database: env.get('DB_NAME', 'dii_dev') || 'dii_dev',
+    username: env.get('DB_USER', 'dii_user') || 'dii_user',
+    password: env.get('DB_PASSWORD', 'dii_dev_password') || 'dii_dev_password',
     ssl: false,
     maxConnections: 10,
     idleTimeoutMillis: 30000,
@@ -75,11 +75,11 @@ const configs: Record<Environment, DatabaseConfigWithEnvironment> = {
 
   test: {
     environment: 'test',
-    host: env.get('TEST_DB_HOST', 'localhost'),
+    host: env.get('TEST_DB_HOST', 'localhost') || 'localhost',
     port: env.getNumber('TEST_DB_PORT', 5432) || 5432,
-    database: env.get('TEST_DB_NAME', 'dii_test'),
-    username: env.get('TEST_DB_USER', 'dii_user'),
-    password: env.get('TEST_DB_PASSWORD', 'dii_test_password'),
+    database: env.get('TEST_DB_NAME', 'dii_test') || 'dii_test',
+    username: env.get('TEST_DB_USER', 'dii_user') || 'dii_user',
+    password: env.get('TEST_DB_PASSWORD', 'dii_test_password') || 'dii_test_password',
     ssl: false,
     maxConnections: 5,
     idleTimeoutMillis: 10000,

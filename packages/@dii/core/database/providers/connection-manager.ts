@@ -12,7 +12,7 @@ export type DatabaseType = 'postgresql' | 'mysql' | 'sqlite';
 export class ConnectionManager {
   private static instance: ConnectionManager;
   private providers: Map<string, DatabaseProvider> = new Map();
-  private defaultConnectionName = 'default';
+  private readonly defaultConnectionName = 'default';
 
   private constructor() {}
 
@@ -28,7 +28,7 @@ export class ConnectionManager {
    */
   async createConnection(
     config: DatabaseConfig & { type?: DatabaseType },
-    name: string = 'default'
+    name: string = this.defaultConnectionName
   ): Promise<DatabaseProvider> {
     if (this.providers.has(name)) {
       throw new DatabaseError(
@@ -47,7 +47,7 @@ export class ConnectionManager {
   /**
    * Get a connection by name
    */
-  getConnection(name: string = 'default'): DatabaseProvider {
+  getConnection(name: string = this.defaultConnectionName): DatabaseProvider {
     const provider = this.providers.get(name);
     
     if (!provider) {
@@ -63,7 +63,7 @@ export class ConnectionManager {
   /**
    * Close a connection
    */
-  async closeConnection(name: string = 'default'): Promise<void> {
+  async closeConnection(name: string = this.defaultConnectionName): Promise<void> {
     const provider = this.providers.get(name);
     
     if (provider) {

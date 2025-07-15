@@ -24,7 +24,13 @@
     "allowSyntheticDefaultImports": true
   },
   "include": [
-    "converters/**/*"
+    "index.ts",
+    "converters/**/*",
+    "database/**/*",
+    "config/**/*",
+    "repositories/**/*",
+    "types/**/*",
+    "errors/**/*"
   ],
   "exclude": [
     "node_modules",

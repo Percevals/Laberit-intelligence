@@ -5,7 +5,8 @@
   "description": "DII Assessment Platform - Dual System for Light and Premium Assessments",
   "workspaces": [
     "apps/*",
-    "packages/*"
+    "packages/*",
+    "packages/@dii/*"
   ],
   "scripts": {
     "dev": "turbo run dev",

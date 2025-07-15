@@ -1,5 +1,5 @@
 {
-  "name": "@dii/core",
+  "name": "@dii/core-legacy",
   "version": "1.0.0",
   "description": "Core DII calculation engine and business logic",
   "type": "module",

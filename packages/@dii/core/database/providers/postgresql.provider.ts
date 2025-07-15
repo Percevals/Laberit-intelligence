@@ -3,7 +3,7 @@
  * Implements DatabaseProvider interface for PostgreSQL
  */
 
-import { Pool, PoolClient, QueryResult as PgQueryResult } from 'pg';
+import { Pool, PoolClient } from 'pg';
 import { 
   DatabaseProvider, 
   DatabaseConfig, 

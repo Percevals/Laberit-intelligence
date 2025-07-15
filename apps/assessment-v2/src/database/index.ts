@@ -22,7 +22,7 @@ export async function getDatabaseService(): Promise<CompanyDatabaseService> {
     console.log('✅ Database service initialized');
   }
 
-  return serviceInstance;
+  return serviceInstance!;
 }
 
 /**

@@ -3,7 +3,7 @@
  * Abstract base class for all repositories
  */
 
-import { DatabaseProvider } from '../database/providers/database-provider.interface';
+import { DatabaseProvider, DatabaseTransaction } from '../database/providers/database-provider.interface';
 import { connectionManager } from '../database/providers/connection-manager';
 import { DatabaseError } from '../errors/database.error';
 
@@ -340,7 +340,7 @@ export abstract class BaseRepository<T> {
    * Execute a query in a transaction
    */
   protected async transaction<R>(
-    callback: (trx: any) => Promise<R>
+    callback: (trx: DatabaseTransaction) => Promise<R>
   ): Promise<R> {
     return this.db.transaction(callback);
   }
