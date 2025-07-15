@@ -20,7 +20,10 @@ import {
   Globe,
   Users,
   DollarSign,
-  Loader2
+  Loader2,
+  Upload,
+  Download,
+  BarChart
 } from 'lucide-react';
 import { cn } from '@shared/utils/cn';
 import { CompanySearchInput } from '@/features/company-search';
@@ -28,6 +31,8 @@ import { createMockDatabaseService } from '@/database/mock-database.service';
 import type { Company, DIIBusinessModel, VerificationSource } from '@/database/types';
 import type { CompanyInfo } from '@/services/ai/types';
 import { BusinessModelInfo } from './BusinessModelInfo';
+import { BulkImportExport } from './BulkImportExport';
+import { ClassificationMetrics } from './ClassificationMetrics';
 
 // Business model display names
 const BUSINESS_MODEL_NAMES: Record<DIIBusinessModel, string> = {
@@ -461,6 +466,8 @@ export function AdminCompanyManager() {
   const [editingCompany, setEditingCompany] = useState<Company | null>(null);
   const [addingCompany, setAddingCompany] = useState<CompanyInfo | null>(null);
   const [verifyingCompanies, setVerifyingCompanies] = useState<Set<string>>(new Set());
+  const [showImportExport, setShowImportExport] = useState(false);
+  const [showMetrics, setShowMetrics] = useState(false);
   
   const dbService = useMemo(() => createMockDatabaseService(), []);
 
@@ -596,6 +603,19 @@ export function AdminCompanyManager() {
     }
   };
 
+  // Handle bulk import
+  const handleBulkImport = async (importedCompanies: Partial<Company>[]) => {
+    try {
+      for (const company of importedCompanies) {
+        await dbService.createCompany(company as Company);
+      }
+      await loadCompanies();
+      setShowImportExport(false);
+    } catch (error) {
+      console.error('Failed to import companies:', error);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-dark-bg p-6">
       <div className="max-w-7xl mx-auto space-y-6">
@@ -615,6 +635,30 @@ export function AdminCompanyManager() {
               className="w-64"
             />
             <button
+              onClick={() => setShowImportExport(!showImportExport)}
+              className={cn(
+                "p-3 rounded-lg border transition-all",
+                showImportExport
+                  ? "bg-primary-600/20 border-primary-600 text-primary-600"
+                  : "bg-dark-surface border-dark-border text-dark-text-secondary hover:text-dark-text-primary"
+              )}
+              title="Import/Export CSV"
+            >
+              <Upload className="w-5 h-5" />
+            </button>
+            <button
+              onClick={() => setShowMetrics(!showMetrics)}
+              className={cn(
+                "p-3 rounded-lg border transition-all",
+                showMetrics
+                  ? "bg-primary-600/20 border-primary-600 text-primary-600"
+                  : "bg-dark-surface border-dark-border text-dark-text-secondary hover:text-dark-text-primary"
+              )}
+              title="Classification Metrics"
+            >
+              <BarChart className="w-5 h-5" />
+            </button>
+            <button
               onClick={() => setShowFilters(!showFilters)}
               className={cn(
                 "p-3 rounded-lg border transition-all",
@@ -622,6 +666,7 @@ export function AdminCompanyManager() {
                   ? "bg-primary-600/20 border-primary-600 text-primary-600"
                   : "bg-dark-surface border-dark-border text-dark-text-secondary hover:text-dark-text-primary"
               )}
+              title="Filters"
             >
               <Filter className="w-5 h-5" />
             </button>
@@ -743,6 +788,40 @@ export function AdminCompanyManager() {
                   </button>
                 </div>
               </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Import/Export Section */}
+        <AnimatePresence>
+          {showImportExport && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="overflow-hidden"
+            >
+              <BulkImportExport
+                onImport={handleBulkImport}
+                companies={filteredCompanies}
+                onClose={() => setShowImportExport(false)}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Metrics Section */}
+        <AnimatePresence>
+          {showMetrics && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="overflow-hidden"
+            >
+              <ClassificationMetrics companies={companies} />
             </motion.div>
           )}
         </AnimatePresence>
