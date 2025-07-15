@@ -71,9 +71,9 @@ export function HomePage() {
               </a>
               <button
                 onClick={() => navigate('/admin')}
-                className="text-dark-text-secondary hover:text-primary-600 transition-colors"
+                className="px-4 py-2 bg-primary-600/20 hover:bg-primary-600/30 text-primary-600 rounded-lg transition-all font-medium"
               >
-                Admin
+                Admin Panel
               </button>
               <LanguageSwitcher />
               <button onClick={startAssessment} className="btn-primary">
@@ -150,6 +150,26 @@ export function HomePage() {
                 <p className="text-sm">{t(`businessModels.${model.key}`)}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Admin Access Section */}
+      <section className="border-t border-dark-border py-12 bg-dark-surface/50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-2xl mx-auto text-center">
+            <h3 className="text-2xl font-light mb-4 text-dark-text-primary">
+              Company Management
+            </h3>
+            <p className="text-dark-text-secondary mb-6">
+              Access the admin panel to manage companies, verify data freshness, and maintain your business intelligence database.
+            </p>
+            <button
+              onClick={() => navigate('/admin')}
+              className="btn-primary px-8 py-3"
+            >
+              Open Admin Panel
+            </button>
           </div>
         </div>
       </section>
