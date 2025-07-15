@@ -148,7 +148,7 @@ export function CompanyConfirmationPage() {
                 onSave={() => handleSave('employees')}
                 onCancel={handleCancel}
                 onChange={(value) => setEditValues({ ...editValues, employees: parseInt(value) || 0 })}
-                type="number"
+                type="employees"
                 aiEnhanced={classification.aiEnhanced.employees}
               />
 
@@ -271,7 +271,7 @@ interface EditableFieldProps {
   onSave: () => void;
   onCancel: () => void;
   onChange: (value: string) => void;
-  type: 'text' | 'number';
+  type: 'text' | 'number' | 'employees';
   placeholder?: string;
   aiEnhanced?: boolean;
 }
@@ -311,6 +311,43 @@ function EditableField({
                 </option>
               ))}
             </select>
+          ) : type === 'employees' ? (
+            <div className="space-y-2">
+              <select
+                value={value > 0 ? 'custom' : ''}
+                onChange={(e) => {
+                  const presetValue = e.target.value;
+                  if (presetValue && presetValue !== 'custom') {
+                    onChange(presetValue);
+                  }
+                }}
+                className="w-full px-2 py-1 bg-dark-bg border border-dark-border rounded focus:outline-none focus:border-primary-600 text-sm"
+              >
+                <option value="">Seleccione rango...</option>
+                <option value="200">200-500 empleados</option>
+                <option value="500">500-1,000 empleados</option>
+                <option value="1000">1,000-2,500 empleados</option>
+                <option value="2500">2,500-5,000 empleados</option>
+                <option value="5000">5,000-10,000 empleados</option>
+                <option value="10000">10,000-25,000 empleados</option>
+                <option value="25000">25,000-50,000 empleados</option>
+                <option value="custom">Valor específico...</option>
+              </select>
+              <input
+                type="number"
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+                placeholder="200"
+                min="200"
+                max="50000"
+                step="50"
+                className="w-full px-2 py-1 bg-dark-bg border border-dark-border rounded focus:outline-none focus:border-primary-600"
+                autoFocus
+              />
+              <p className="text-xs text-dark-text-secondary">
+                Rango objetivo: 200 - 50,000 empleados
+              </p>
+            </div>
           ) : (
             <input
               type={type}
