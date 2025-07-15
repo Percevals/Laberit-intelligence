@@ -18,8 +18,8 @@
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
     "paths": {
-      "@dii/core": ["./packages/core/src"],
-      "@dii/core/*": ["./packages/core/src/*"],
+      "@dii/core": ["./packages/@dii/core/index.ts"],
+      "@dii/core/*": ["./packages/@dii/core/*"],
       "@dii/types": ["./packages/types/src"],
       "@dii/types/*": ["./packages/types/src/*"],
       "@dii/ui-kit": ["./packages/ui-kit/src"],

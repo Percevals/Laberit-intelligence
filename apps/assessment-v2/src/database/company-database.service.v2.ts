@@ -203,7 +203,7 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
       }
 
       const companies = await this.companyRepo.searchByName(query, 50);
-      return companies.map(company => ({
+      return companies.map((company: any) => ({
         ...company,
         confidence_score: company.confidence_score || 0.6
       } as Company));
