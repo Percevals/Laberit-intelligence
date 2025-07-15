@@ -40,22 +40,22 @@ interface CompoundEffect {
 }
 
 const DIMENSION_METADATA = {
-  TRD: { label: 'Revenue Protection', icon: '⏱️', color: 'text-red-500' },
-  AER: { label: 'Target Value', icon: '💰', color: 'text-green-500' },
-  HFP: { label: 'Human Defense', icon: '👥', color: 'text-blue-500' },
-  BRI: { label: 'Damage Control', icon: '🛡️', color: 'text-purple-500' },
-  RRG: { label: 'Recovery Speed', icon: '🔄', color: 'text-orange-500' }
+  TRD: { label: 'Protección de Ingresos', icon: '⏱️', color: 'text-red-500' },
+  AER: { label: 'Valor como Objetivo', icon: '💰', color: 'text-green-500' },
+  HFP: { label: 'Defensa Humana', icon: '👥', color: 'text-blue-500' },
+  BRI: { label: 'Control de Daños', icon: '🛡️', color: 'text-purple-500' },
+  RRG: { label: 'Velocidad de Recuperación', icon: '🔄', color: 'text-orange-500' }
 };
 
 const BUSINESS_MODEL_NAMES: Record<BusinessModelId, string> = {
-  1: 'Hybrid Commerce',
-  2: 'Critical Software',
-  3: 'Data Services',
-  4: 'Digital Ecosystem',
-  5: 'Financial Services',
-  6: 'Legacy Infrastructure',
-  7: 'Supply Chain',
-  8: 'Regulated Information'
+  1: 'Comercio Híbrido',
+  2: 'Software Crítico',
+  3: 'Servicios de Datos',
+  4: 'Ecosistema Digital',
+  5: 'Servicios Financieros',
+  6: 'Infraestructura Heredada',
+  7: 'Cadena de Suministro',
+  8: 'Información Regulada'
 };
 
 interface AssessmentCompletionProps {
@@ -82,7 +82,7 @@ export function AssessmentCompletion({
   if (!currentDII || Object.keys(dimensions).length < 5) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-500">Complete all 5 dimensions to see your immunity profile</p>
+        <p className="text-gray-500">Complete las 5 dimensiones para ver su perfil de inmunidad</p>
       </div>
     );
   }
@@ -128,8 +128,8 @@ export function AssessmentCompletion({
 
   const handleShare = async () => {
     const shareData = {
-      title: 'My Digital Immunity Score',
-      text: `I scored ${currentDII.score} on the Digital Immunity Index. How immune is your organization?`,
+      title: 'Mi Puntuación de Inmunidad Digital',
+      text: `Obtuve ${currentDII.score} en el Índice de Inmunidad Digital. ¿Qué tan inmune es su organización?`,
       url: window.location.href
     };
 
@@ -176,7 +176,7 @@ export function AssessmentCompletion({
             className="mb-6"
           >
             <div className="text-7xl font-bold mb-2">{currentDII.score}</div>
-            <div className="text-xl opacity-90">Digital Immunity Index</div>
+            <div className="text-xl opacity-90">Índice de Inmunidad Digital</div>
           </motion.div>
 
           <motion.div
@@ -192,12 +192,12 @@ export function AssessmentCompletion({
               {immunityLevel.label}
             </div>
             <div className="text-lg opacity-80">
-              {BUSINESS_MODEL_NAMES[businessModelId]} Organization
+              Organización {BUSINESS_MODEL_NAMES[businessModelId]}
             </div>
             <div className="flex items-center justify-center gap-4 text-sm opacity-70">
-              <span>Top {100 - (currentDII.percentile || 50)}% in your industry</span>
+              <span>Top {100 - (currentDII.percentile || 50)}% en su industria</span>
               <span>•</span>
-              <span>{calculateConfidence()}% confidence</span>
+              <span>{calculateConfidence()}% confianza</span>
             </div>
           </motion.div>
         </div>
@@ -207,14 +207,14 @@ export function AssessmentCompletion({
           <button
             onClick={handleShare}
             className="p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors"
-            title="Share results"
+            title="Compartir resultados"
           >
             <Share2 className="w-5 h-5" />
           </button>
           <button
             onClick={handleCopyLink}
             className="p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors"
-            title="Copy link"
+            title="Copiar enlace"
           >
             {copied ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
           </button>
@@ -232,7 +232,7 @@ export function AssessmentCompletion({
         >
           <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
             <CheckCircle2 className="w-5 h-5 text-green-500" />
-            Your Immunity Strengths
+            Sus Fortalezas de Inmunidad
           </h3>
           <div className="space-y-3">
             {topStrengths.map((strength, index) => (
@@ -248,7 +248,7 @@ export function AssessmentCompletion({
                   <div>
                     <div className="font-medium text-gray-900">{strength.label}</div>
                     <div className="text-sm text-gray-600">
-                      Top {100 - strength.percentile}% performance
+                      Top {100 - strength.percentile}% rendimiento
                     </div>
                   </div>
                 </div>
@@ -267,7 +267,7 @@ export function AssessmentCompletion({
         >
           <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
             <AlertTriangle className="w-5 h-5 text-red-500" />
-            Critical Immunity Gaps
+            Brechas Críticas de Inmunidad
           </h3>
           <div className="space-y-3">
             {criticalGaps.map((gap, index) => (
@@ -283,7 +283,7 @@ export function AssessmentCompletion({
                   <div>
                     <div className="font-medium text-gray-900">{gap.label}</div>
                     <div className="text-sm text-gray-600">
-                      Bottom {gap.percentile}% in industry
+                      Último {gap.percentile}% en la industria
                     </div>
                   </div>
                 </div>
@@ -303,7 +303,7 @@ export function AssessmentCompletion({
       >
         <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
           <Layers className="w-5 h-5 text-purple-600" />
-          How Your Dimensions Interact
+          Cómo Interactúan Sus Dimensiones
         </h3>
         <div className="space-y-3">
           {compoundEffects.map((effect, index) => (
@@ -343,7 +343,7 @@ export function AssessmentCompletion({
       >
         <h3 className="font-semibold text-gray-900 mb-6 flex items-center gap-2">
           <BarChart3 className="w-5 h-5 text-blue-600" />
-          Complete Immunity Profile
+          Perfil Completo de Inmunidad
         </h3>
         <div className="space-y-4">
           {dimensionStrengths.map((dim, index) => (
@@ -359,14 +359,14 @@ export function AssessmentCompletion({
                   <span className="font-medium text-gray-700">{dim.label}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-sm text-gray-500">Score: {dim.score.toFixed(1)}</span>
+                  <span className="text-sm text-gray-500">Puntuación: {dim.score.toFixed(1)}</span>
                   <span className={cn(
                     "text-sm font-medium px-2 py-0.5 rounded",
                     dim.percentile >= 70 ? 'bg-green-100 text-green-700' :
                     dim.percentile <= 30 ? 'bg-red-100 text-red-700' :
                     'bg-yellow-100 text-yellow-700'
                   )}>
-                    {dim.percentile}th percentile
+                    Percentil {dim.percentile}
                   </span>
                 </div>
               </div>
@@ -397,7 +397,7 @@ export function AssessmentCompletion({
       >
         <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
           <Target className="w-5 h-5 text-blue-600" />
-          Your Immunity Action Plan
+          Su Plan de Acción de Inmunidad
         </h3>
         <div className="space-y-3">
           {recommendations.map((rec, index) => (
@@ -445,11 +445,11 @@ export function AssessmentCompletion({
       >
         <div className="text-center space-y-4">
           <h3 className="text-2xl font-bold">
-            See How to Improve Your Immunity
+            Vea Cómo Mejorar Su Inmunidad
           </h3>
           <p className="text-lg opacity-90 max-w-2xl mx-auto">
-            Your immunity profile reveals specific opportunities to strengthen your organization's 
-            cyber resilience. Explore what-if scenarios or get detailed analysis to plan your next moves.
+            Su perfil de inmunidad revela oportunidades específicas para fortalecer la resiliencia 
+            cibernética de su organización. Explore escenarios hipotéticos u obtenga análisis detallado para planificar sus próximos movimientos.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <button
@@ -458,7 +458,7 @@ export function AssessmentCompletion({
                        hover:bg-blue-50 transition-colors flex items-center justify-center gap-2"
             >
               <Brain className="w-5 h-5" />
-              Explore Scenarios
+              Explorar Escenarios
             </button>
             <button
               onClick={onGetDetailedAnalysis}
@@ -466,7 +466,7 @@ export function AssessmentCompletion({
                        hover:bg-blue-800 transition-colors flex items-center justify-center gap-2"
             >
               <Lock className="w-5 h-5" />
-              Get Detailed Analysis
+              Obtener Análisis Detallado
               <ExternalLink className="w-4 h-4" />
             </button>
           </div>
@@ -478,11 +478,11 @@ export function AssessmentCompletion({
 
 // Helper functions
 function getImmunityLevel(score: number): { label: string; color: string } {
-  if (score >= 80) return { label: 'Excellent Immunity', color: 'text-green-400' };
-  if (score >= 60) return { label: 'Good Immunity', color: 'text-blue-400' };
-  if (score >= 40) return { label: 'Moderate Immunity', color: 'text-yellow-400' };
+  if (score >= 80) return { label: 'Inmunidad Excelente', color: 'text-green-400' };
+  if (score >= 60) return { label: 'Buena Inmunidad', color: 'text-blue-400' };
+  if (score >= 40) return { label: 'Inmunidad Moderada', color: 'text-yellow-400' };
   if (score >= 20) return { label: 'Vulnerable', color: 'text-orange-400' };
-  return { label: 'Critical Risk', color: 'text-red-400' };
+  return { label: 'Riesgo Crítico', color: 'text-red-400' };
 }
 
 function identifyCompoundEffects(
@@ -495,7 +495,7 @@ function identifyCompoundEffects(
     effects.push({
       dimensions: ['TRD', 'RRG'],
       effect: 'amplifies',
-      message: 'Fast revenue loss combined with slow recovery creates existential business risk',
+      message: 'La pérdida rápida de ingresos combinada con recuperación lenta crea riesgo existencial para el negocio',
       severity: 'critical'
     });
   }
@@ -504,7 +504,7 @@ function identifyCompoundEffects(
     effects.push({
       dimensions: ['HFP', 'AER'],
       effect: 'compounds',
-      message: 'Vulnerable humans protecting valuable assets attracts sophisticated social engineering',
+      message: 'Humanos vulnerables protegiendo activos valiosos atraen ingeniería social sofisticada',
       severity: 'critical'
     });
   }
@@ -513,7 +513,7 @@ function identifyCompoundEffects(
     effects.push({
       dimensions: ['BRI', 'TRD'],
       effect: 'amplifies',
-      message: 'Wide blast radius means revenue impacts cascade across your entire operation',
+      message: 'Radio de impacto amplio significa que los impactos en ingresos se propagan por toda su operación',
       severity: 'warning'
     });
   }
@@ -523,7 +523,7 @@ function identifyCompoundEffects(
     effects.push({
       dimensions: ['RRG', 'HFP'],
       effect: 'mitigates',
-      message: 'Strong human defenses and fast recovery create resilience even under attack',
+      message: 'Defensas humanas fuertes y recuperación rápida crean resiliencia incluso bajo ataque',
       severity: 'info'
     });
   }
@@ -557,7 +557,7 @@ function generateRecommendations(
     recommendations.push({
       ...rec,
       priority: 'critical',
-      impact: `Could improve immunity score by ${Math.round(10 / criticalGaps.length)}+ points`
+      impact: `Podría mejorar la puntuación de inmunidad en ${Math.round(10 / criticalGaps.length)}+ puntos`
     });
   });
   
@@ -565,26 +565,26 @@ function generateRecommendations(
   const criticalEffects = compoundEffects.filter(e => e.severity === 'critical');
   if (criticalEffects.length > 0) {
     recommendations.push({
-      title: 'Break Critical Risk Combinations',
-      action: 'Your weakest dimensions are amplifying each other. Focus on improving at least one dimension in each critical pair.',
+      title: 'Romper Combinaciones de Riesgo Crítico',
+      action: 'Sus dimensiones más débiles se están amplificando entre sí. Enfoque en mejorar al menos una dimensión en cada par crítico.',
       priority: 'critical',
       icon: <Layers className="w-5 h-5" />,
-      impact: 'Reduce cascading failure risk by 60%+'
+      impact: 'Reducir riesgo de fallas en cascada en 60%+'
     });
   }
   
   // General recommendations based on score
   if (score < 40) {
     recommendations.push({
-      title: 'Implement Security Fundamentals',
-      action: 'Your immunity needs immediate attention. Start with basic security hygiene and quick wins.',
+      title: 'Implementar Fundamentos de Seguridad',
+      action: 'Su inmunidad necesita atención inmediata. Comience con higiene de seguridad básica y victorias rápidas.',
       priority: 'high',
       icon: <Shield className="w-5 h-5" />
     });
   } else if (score < 70) {
     recommendations.push({
-      title: 'Mature Security Practices',
-      action: 'Build on your foundation with advanced threat detection and response capabilities.',
+      title: 'Madurar Prácticas de Seguridad',
+      action: 'Construya sobre su base con capacidades avanzadas de detección y respuesta a amenazas.',
       priority: 'medium',
       icon: <Target className="w-5 h-5" />
     });
@@ -600,36 +600,36 @@ function getDimensionRecommendation(
   const recs = {
     TRD: {
       low: {
-        title: 'Protect Revenue Streams',
-        action: 'Implement redundant systems and offline fallbacks for critical revenue operations',
+        title: 'Proteger Flujos de Ingresos',
+        action: 'Implemente sistemas redundantes y respaldos fuera de línea para operaciones críticas de ingresos',
         icon: <Shield className="w-5 h-5" />
       }
     },
     AER: {
       low: {
-        title: 'Reduce Attack Value',
-        action: 'Implement data minimization and limit access to high-value assets',
+        title: 'Reducir Valor de Ataque',
+        action: 'Implemente minimización de datos y limite el acceso a activos de alto valor',
         icon: <Lock className="w-5 h-5" />
       }
     },
     HFP: {
       low: {
-        title: 'Strengthen Human Defenses',
-        action: 'Launch comprehensive security awareness training with phishing simulations',
+        title: 'Fortalecer Defensas Humanas',
+        action: 'Lance entrenamiento integral de concienciación de seguridad con simulaciones de phishing',
         icon: <Users className="w-5 h-5" />
       }
     },
     BRI: {
       low: {
-        title: 'Contain Blast Radius',
-        action: 'Implement network segmentation and zero-trust architecture principles',
+        title: 'Contener Radio de Impacto',
+        action: 'Implemente segmentación de red y principios de arquitectura de confianza cero',
         icon: <Layers className="w-5 h-5" />
       }
     },
     RRG: {
       low: {
-        title: 'Accelerate Recovery',
-        action: 'Test and automate recovery procedures with regular disaster recovery drills',
+        title: 'Acelerar Recuperación',
+        action: 'Pruebe y automatice procedimientos de recuperación con simulacros regulares de recuperación ante desastres',
         icon: <Zap className="w-5 h-5" />
       }
     }

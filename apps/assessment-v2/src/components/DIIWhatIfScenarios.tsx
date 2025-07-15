@@ -39,31 +39,31 @@ function ScenarioEditor({ scenarioId, onClose }: ScenarioEditorProps) {
 
   const dimensionInfo = {
     TRD: { 
-      label: 'Time to Revenue Impact', 
+      label: 'Tiempo al Impacto en Ingresos', 
       unit: 'hours',
       min: 1, max: 168, step: 1,
       format: (v: number) => `${v}h`
     },
     AER: { 
-      label: 'Attack Value Potential', 
+      label: 'Valor Potencial de Ataque', 
       unit: 'USD',
       min: 1000, max: 5000000, step: 10000,
       format: (v: number) => `$${v >= 1000000 ? `${(v/1000000).toFixed(1)}M` : `${Math.round(v/1000)}K`}`
     },
     HFP: { 
-      label: 'Human Failure Rate', 
+      label: 'Tasa de Falla Humana', 
       unit: '%',
       min: 0, max: 100, step: 5,
       format: (v: number) => `${v}%`
     },
     BRI: { 
-      label: 'Blast Radius', 
+      label: 'Radio de Impacto', 
       unit: '%',
       min: 0, max: 100, step: 5,
       format: (v: number) => `${v}%`
     },
     RRG: { 
-      label: 'Recovery Gap', 
+      label: 'Brecha de Recuperación', 
       unit: 'x',
       min: 1, max: 10, step: 0.5,
       format: (v: number) => `${v}x`
@@ -115,13 +115,13 @@ function ScenarioEditor({ scenarioId, onClose }: ScenarioEditorProps) {
           {/* Current vs Projected */}
           <div className="grid grid-cols-2 gap-4">
             <div className="text-center p-4 bg-gray-50 rounded-lg">
-              <div className="text-sm text-gray-600 mb-1">Current DII</div>
+              <div className="text-sm text-gray-600 mb-1">DII Actual</div>
               <div className="text-3xl font-bold text-gray-900">
                 {useDIIDimensionsStore.getState().currentDII?.score || 0}
               </div>
             </div>
             <div className="text-center p-4 bg-blue-50 rounded-lg">
-              <div className="text-sm text-blue-600 mb-1">Projected DII</div>
+              <div className="text-sm text-blue-600 mb-1">DII Proyectado</div>
               <div className="text-3xl font-bold text-blue-900">
                 {scenario.projectedDII.score}
               </div>
@@ -146,7 +146,7 @@ function ScenarioEditor({ scenarioId, onClose }: ScenarioEditorProps) {
 
           {/* Dimension Adjustments */}
           <div className="space-y-3">
-            <h4 className="font-medium text-gray-900">Adjust Dimensions</h4>
+            <h4 className="font-medium text-gray-900">Ajustar Dimensiones</h4>
             {(Object.keys(dimensionInfo) as DIIDimension[]).map(dimension => {
               const info = dimensionInfo[dimension];
               const currentValue = dimensions[dimension]?.metricValue;
@@ -161,7 +161,7 @@ function ScenarioEditor({ scenarioId, onClose }: ScenarioEditorProps) {
                     <div className="flex items-center gap-2">
                       {currentValue !== undefined && (
                         <span className="text-xs text-gray-500">
-                          Current: {info.format(currentValue)}
+                          Actual: {info.format(currentValue)}
                         </span>
                       )}
                       <span className={cn(
@@ -215,13 +215,13 @@ function ScenarioEditor({ scenarioId, onClose }: ScenarioEditorProps) {
             className="px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors flex items-center gap-2"
           >
             <Trash2 className="w-4 h-4" />
-            Delete Scenario
+            Eliminar Escenario
           </button>
           <button
             onClick={onClose}
             className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
           >
-            Done
+            Listo
           </button>
         </div>
       </motion.div>
@@ -246,7 +246,7 @@ export function DIIWhatIfScenarios() {
     if (newScenarioName.trim()) {
       createScenario(
         newScenarioName,
-        newScenarioDescription || 'Custom what-if scenario'
+        newScenarioDescription || 'Escenario hipotético personalizado'
       );
       setNewScenarioName('');
       setNewScenarioDescription('');
@@ -256,20 +256,20 @@ export function DIIWhatIfScenarios() {
 
   const scenarioTemplates = [
     {
-      name: 'Security Investment',
-      description: 'What if we improve our weakest dimensions?',
+      name: 'Inversión en Seguridad',
+      description: '¿Qué pasaría si mejoramos nuestras dimensiones más débiles?',
       icon: Shield,
       color: 'blue'
     },
     {
-      name: 'Budget Cuts',
-      description: 'Impact of reducing security resources',
+      name: 'Recortes Presupuestarios',
+      description: 'Impacto de reducir recursos de seguridad',
       icon: TrendingDown,
       color: 'red'
     },
     {
-      name: 'Best Case',
-      description: 'Achieving industry-leading metrics',
+      name: 'Mejor Caso',
+      description: 'Alcanzar métricas líderes en la industria',
       icon: Target,
       color: 'green'
     }
@@ -279,9 +279,9 @@ export function DIIWhatIfScenarios() {
     <div className="bg-white rounded-lg border p-6">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h3 className="text-lg font-semibold text-gray-900">What-If Scenarios</h3>
+          <h3 className="text-lg font-semibold text-gray-900">Escenarios Hipotéticos</h3>
           <p className="text-sm text-gray-600">
-            Explore how changes would impact your Digital Immunity
+            Explore cómo los cambios impactarían su Inmunidad Digital
           </p>
         </div>
         <button
@@ -289,7 +289,7 @@ export function DIIWhatIfScenarios() {
           className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
         >
           <Plus className="w-4 h-4" />
-          New Scenario
+          Nuevo Escenario
         </button>
       </div>
 
@@ -298,11 +298,11 @@ export function DIIWhatIfScenarios() {
         <div className="mb-6 p-4 bg-gray-50 rounded-lg">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-sm text-gray-600">Current DII Score</div>
+              <div className="text-sm text-gray-600">Puntuación DII Actual</div>
               <div className="text-2xl font-bold text-gray-900">{currentDII.score}</div>
             </div>
             <div className="text-right">
-              <div className="text-sm text-gray-600">Confidence</div>
+              <div className="text-sm text-gray-600">Confianza</div>
               <div className="text-lg font-medium text-gray-700">{currentDII.confidence}%</div>
             </div>
           </div>
@@ -367,7 +367,7 @@ export function DIIWhatIfScenarios() {
                   </div>
                   <div className="flex items-center gap-4">
                     <div className="text-right">
-                      <div className="text-sm text-gray-600">Projected DII</div>
+                      <div className="text-sm text-gray-600">DII Proyectado</div>
                       <div className="text-xl font-bold text-gray-900">
                         {scenario.projectedDII.score}
                       </div>
@@ -409,31 +409,31 @@ export function DIIWhatIfScenarios() {
               onClick={(e) => e.stopPropagation()}
             >
               <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                Create What-If Scenario
+                Crear Escenario Hipotético
               </h3>
               
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Scenario Name
+                    Nombre del Escenario
                   </label>
                   <input
                     type="text"
                     value={newScenarioName}
                     onChange={(e) => setNewScenarioName(e.target.value)}
-                    placeholder="e.g., Security Investment Plan"
+                    placeholder="ej., Plan de Inversión en Seguridad"
                     className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Description
+                    Descripción
                   </label>
                   <textarea
                     value={newScenarioDescription}
                     onChange={(e) => setNewScenarioDescription(e.target.value)}
-                    placeholder="What are you testing with this scenario?"
+                    placeholder="¿Qué está probando con este escenario?"
                     rows={3}
                     className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
@@ -449,14 +449,14 @@ export function DIIWhatIfScenarios() {
                   }}
                   className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
                 >
-                  Cancel
+                  Cancelar
                 </button>
                 <button
                   onClick={handleCreateScenario}
                   disabled={!newScenarioName.trim()}
                   className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
                 >
-                  Create Scenario
+                  Crear Escenario
                 </button>
               </div>
             </motion.div>

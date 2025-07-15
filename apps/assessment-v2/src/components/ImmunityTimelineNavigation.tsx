@@ -1,6 +1,7 @@
 // import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { 
   Clock, 
   Target, 
@@ -251,6 +252,7 @@ export function ImmunityTimelineNavigation({
   className
 }: ImmunityTimelineNavigationProps) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const completedCount = dimensions.filter(d => d.status === 'completed').length;
   const progressPercentage = (completedCount / dimensions.length) * 100;
 
@@ -307,6 +309,7 @@ export function ImmunityTimelineNavigation({
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => navigate('/assessment/results')}
               className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors"
             >
               <TrendingUp className="w-5 h-5" />

@@ -25,6 +25,7 @@ export function InsightRevelationCard({
   onNextDimension,
   className 
 }: InsightRevelationProps) {
+  const { t } = useTranslation();
   const {
     headline,
     businessImpact,
@@ -108,7 +109,7 @@ export function InsightRevelationCard({
           >
             <div className="flex items-center gap-2 text-sm font-medium text-dark-text mb-2">
               <Link className="w-4 h-4" />
-              <span>Connections Revealed</span>
+              <span>{t('assessment.connectionsRevealed', 'Conexiones Reveladas')}</span>
             </div>
             {correlations.map((correlation, index) => (
               <motion.div
@@ -142,7 +143,7 @@ export function InsightRevelationCard({
               <Lightbulb className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" />
               <div>
                 <p className="text-sm font-medium text-dark-text">
-                  Next Insight: {nextDimensionHint.dimension}
+                  {t('assessment.nextInsight', 'Siguiente Insight')}: {nextDimensionHint.dimension}
                 </p>
                 <p className="text-sm text-dark-text-secondary mt-0.5">
                   {nextDimensionHint.teaser}
@@ -215,7 +216,7 @@ export function InsightSummary({ insights, currentDII }: InsightSummaryProps) {
     >
       <h3 className="text-lg font-semibold text-dark-text mb-4 flex items-center gap-2">
         <Shield className="w-5 h-5 text-primary-600" />
-        Immunity Profile Summary
+        Resumen del Perfil de Inmunidad
       </h3>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -223,7 +224,7 @@ export function InsightSummary({ insights, currentDII }: InsightSummaryProps) {
         <div className="bg-dark-bg rounded-lg p-4 border border-dark-border">
           <h4 className="font-medium text-green-400 mb-2 flex items-center gap-2">
             <TrendingUp className="w-4 h-4" />
-            Your Strengths ({strongDimensions.length})
+            Sus Fortalezas ({strongDimensions.length})
           </h4>
           {strongDimensions.length > 0 ? (
             <ul className="space-y-1">
@@ -235,7 +236,7 @@ export function InsightSummary({ insights, currentDII }: InsightSummaryProps) {
               ))}
             </ul>
           ) : (
-            <p className="text-sm text-dark-text-secondary italic">No standout strengths yet</p>
+            <p className="text-sm text-dark-text-secondary italic">No hay fortalezas destacadas aún</p>
           )}
         </div>
         
@@ -243,7 +244,7 @@ export function InsightSummary({ insights, currentDII }: InsightSummaryProps) {
         <div className="bg-dark-bg rounded-lg p-4 border border-dark-border">
           <h4 className="font-medium text-red-400 mb-2 flex items-center gap-2">
             <TrendingDown className="w-4 h-4" />
-            Critical Gaps ({weakDimensions.length})
+            Brechas Críticas ({weakDimensions.length})
           </h4>
           {weakDimensions.length > 0 ? (
             <ul className="space-y-1">
@@ -255,14 +256,14 @@ export function InsightSummary({ insights, currentDII }: InsightSummaryProps) {
               ))}
             </ul>
           ) : (
-            <p className="text-sm text-dark-text-secondary italic">No critical weaknesses identified</p>
+            <p className="text-sm text-dark-text-secondary italic">No se identificaron debilidades críticas</p>
           )}
         </div>
       </div>
       
       {currentDII !== undefined && (
         <div className="text-center pt-4 border-t border-dark-border">
-          <div className="text-sm text-dark-text-secondary mb-1">Current Immunity Score</div>
+          <div className="text-sm text-dark-text-secondary mb-1">Puntuación de Inmunidad Actual</div>
           <div className={cn(
             "text-3xl font-bold",
             currentDII >= 70 ? "text-green-400" :
