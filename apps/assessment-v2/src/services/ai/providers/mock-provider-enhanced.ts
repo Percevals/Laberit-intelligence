@@ -44,7 +44,7 @@ const LATAM_COMPANIES: Record<string, CompanyInfo> = {
     country: 'Colombia',
     region: 'LATAM',
     operatingCountries: ['Colombia', 'Mexico', 'Brazil', 'Argentina', 'Chile', 'Peru'],
-    industry: 'Platform Ecosystem',
+    industry: 'Software',
     description: 'On-demand delivery platform connecting users with couriers for food, groceries, and more.',
     website: 'https://www.rappi.com',
     yearFounded: 2015,
@@ -65,7 +65,7 @@ const LATAM_COMPANIES: Record<string, CompanyInfo> = {
     country: 'Argentina',
     region: 'LATAM',
     operatingCountries: ['Argentina', 'Brazil', 'Mexico', 'Colombia', 'Chile', 'Uruguay'],
-    industry: 'E-commerce Platform',
+    industry: 'Retail',
     description: 'Leading e-commerce and fintech platform in Latin America.',
     website: 'https://www.mercadolibre.com',
     yearFounded: 1999,
@@ -88,7 +88,7 @@ const LATAM_COMPANIES: Record<string, CompanyInfo> = {
     country: 'Argentina',
     region: 'LATAM',
     operatingCountries: ['Argentina', 'Colombia', 'Mexico', 'Brazil', 'USA', 'Spain'],
-    industry: 'Software Development',
+    industry: 'Software',
     description: 'Digital transformation and software development company.',
     website: 'https://www.globant.com',
     yearFounded: 2003,
@@ -131,7 +131,7 @@ const LATAM_COMPANIES: Record<string, CompanyInfo> = {
     country: 'Mexico',
     region: 'LATAM',
     operatingCountries: ['Mexico', 'USA', 'Canada', 'Spain', 'Brazil', 'Argentina'],
-    industry: 'Food Manufacturing',
+    industry: 'Logistics',
     description: 'Largest bakery company in the world.',
     website: 'https://www.grupobimbo.com',
     yearFounded: 1945,
@@ -148,7 +148,7 @@ const LATAM_COMPANIES: Record<string, CompanyInfo> = {
     headquarters: 'Mexico City, Mexico',
     country: 'Mexico',
     region: 'LATAM',
-    industry: 'Airlines',
+    industry: 'Logistics',
     description: 'Flag carrier airline of Mexico.',
     website: 'https://www.aeromexico.com',
     yearFounded: 1934,
@@ -184,7 +184,7 @@ const LATAM_COMPANIES: Record<string, CompanyInfo> = {
     headquarters: 'Rio de Janeiro, Brazil',
     country: 'Brazil',
     region: 'LATAM',
-    industry: 'Oil & Gas',
+    industry: 'Manufacturing',
     description: 'Brazilian multinational petroleum corporation.',
     website: 'https://www.petrobras.com.br',
     yearFounded: 1953,
@@ -203,7 +203,7 @@ const LATAM_COMPANIES: Record<string, CompanyInfo> = {
     headquarters: 'Rio de Janeiro, Brazil',
     country: 'Brazil',
     region: 'LATAM',
-    industry: 'Mining',
+    industry: 'Manufacturing',
     description: 'One of the largest mining companies in the world.',
     website: 'https://www.vale.com',
     yearFounded: 1942,
@@ -223,7 +223,7 @@ const LATAM_COMPANIES: Record<string, CompanyInfo> = {
     country: 'Brazil',
     region: 'LATAM',
     operatingCountries: ['Brazil', 'Mexico', 'Colombia'],
-    industry: 'Digital Banking',
+    industry: 'Financial Services',
     description: 'Largest digital bank in Latin America.',
     website: 'https://www.nubank.com.br',
     yearFounded: 2013,
@@ -243,7 +243,7 @@ const LATAM_COMPANIES: Record<string, CompanyInfo> = {
     headquarters: 'São Paulo, Brazil',
     country: 'Brazil',
     region: 'LATAM',
-    industry: 'Food Delivery Platform',
+    industry: 'Software',
     description: 'Leading food delivery platform in Brazil.',
     website: 'https://www.ifood.com.br',
     yearFounded: 2011,
@@ -282,7 +282,7 @@ const LATAM_COMPANIES: Record<string, CompanyInfo> = {
     headquarters: 'Santiago, Chile',
     country: 'Chile',
     region: 'LATAM',
-    industry: 'Airlines',
+    industry: 'Logistics',
     description: 'Largest airline in Latin America.',
     website: 'https://www.latam.com',
     yearFounded: 1929,
@@ -321,7 +321,7 @@ const LATAM_COMPANIES: Record<string, CompanyInfo> = {
     headquarters: 'Bogotá, Colombia',
     country: 'Colombia',
     region: 'LATAM',
-    industry: 'Oil & Gas',
+    industry: 'Manufacturing',
     description: 'National oil company of Colombia.',
     website: 'https://www.ecopetrol.com.co',
     yearFounded: 1951,
@@ -340,7 +340,7 @@ const LATAM_COMPANIES: Record<string, CompanyInfo> = {
     headquarters: 'Bogotá, Colombia',
     country: 'Colombia',
     region: 'LATAM',
-    industry: 'Airlines',
+    industry: 'Logistics',
     description: 'Second largest airline in Latin America.',
     website: 'https://www.avianca.com',
     yearFounded: 1919,
@@ -359,7 +359,7 @@ const LATAM_COMPANIES: Record<string, CompanyInfo> = {
     headquarters: 'Lima, Peru',
     country: 'Peru',
     region: 'LATAM',
-    industry: 'Beverages',
+    industry: 'Logistics',
     description: 'Largest brewery in Peru.',
     website: 'https://www.backus.pe',
     yearFounded: 1876,
@@ -397,7 +397,7 @@ const LATAM_COMPANIES: Record<string, CompanyInfo> = {
     country: 'Mexico',
     region: 'LATAM',
     operatingCountries: ['Mexico', 'Brazil', 'Argentina'],
-    industry: 'E-commerce',
+    industry: 'Retail',
     description: 'Online platform for buying and selling used cars.',
     website: 'https://www.kavak.com',
     yearFounded: 2016,
@@ -416,7 +416,7 @@ const LATAM_COMPANIES: Record<string, CompanyInfo> = {
     country: 'Chile',
     region: 'LATAM',
     operatingCountries: ['Chile', 'Mexico', 'Brazil', 'Peru', 'Colombia'],
-    industry: 'Grocery Delivery',
+    industry: 'Software',
     description: 'On-demand grocery delivery service acquired by Uber.',
     website: 'https://www.cornershopapp.com',
     yearFounded: 2015,
@@ -433,7 +433,7 @@ const LATAM_COMPANIES: Record<string, CompanyInfo> = {
     headquarters: 'Bogotá, Colombia',
     country: 'Colombia',
     region: 'LATAM',
-    industry: 'EdTech',
+    industry: 'Software',
     description: 'Online education platform for technology professionals.',
     website: 'https://www.platzi.com',
     yearFounded: 2011,
@@ -452,7 +452,7 @@ const LATAM_COMPANIES: Record<string, CompanyInfo> = {
     country: 'Brazil',
     region: 'LATAM',
     operatingCountries: ['Brazil', 'USA', 'Mexico', 'Argentina', 'Chile'],
-    industry: 'E-commerce Platform',
+    industry: 'Retail',
     description: 'Commerce platform for enterprise brands and retailers.',
     website: 'https://www.vtex.com',
     yearFounded: 2000,
@@ -654,13 +654,13 @@ export class EnhancedMockProvider extends BaseAIProvider {
     // Generate enhanced data for unknown company
     return this.validateCompanyInfo({
       ...partial,
-      employees: partial.employees || this.estimateEmployees(partial.industry || 'General Business'),
-      revenue: partial.revenue || this.estimateRevenue(partial.industry || 'General Business', partial.employees || 100),
+      employees: partial.employees || this.estimateEmployees(partial.industry || 'Other'),
+      revenue: partial.revenue || this.estimateRevenue(partial.industry || 'Other', partial.employees || 100),
       headquarters: partial.headquarters || this.generateHeadquarters(),
       country: partial.country || this.extractCountry(partial.headquarters),
       region: partial.region || 'LATAM',
-      industry: partial.industry || 'General Business',
-      description: partial.description || this.generateDescription(partial.name || 'Company', partial.industry || 'General Business'),
+      industry: partial.industry || 'Other',
+      description: partial.description || this.generateDescription(partial.name || 'Company', partial.industry || 'Other'),
       website: partial.website || this.generateWebsite(partial.name || 'company'),
       dataSource: 'ai',
       confidence: 0.5,
@@ -708,18 +708,21 @@ export class EnhancedMockProvider extends BaseAIProvider {
   private guessIndustry(name: string): string {
     const nameLower = name.toLowerCase();
     
-    // Industry keywords mapping
+    // Traditional industry keywords mapping (aligned with industries.ts)
     const industryPatterns = {
-      'Technology': ['tech', 'soft', 'digital', 'cyber', 'data', 'cloud', 'ai'],
-      'Financial Services': ['bank', 'banco', 'financ', 'credit', 'segur', 'capital'],
-      'Retail': ['store', 'shop', 'market', 'mercado', 'tienda', 'comercio'],
-      'Manufacturing': ['fabric', 'produc', 'industr', 'manufact'],
+      'Software': ['tech', 'soft', 'digital', 'cyber', 'cloud', 'ai', 'saas', 'platform', 'app'],
+      'Financial Services': ['bank', 'banco', 'financ', 'credit', 'segur', 'capital', 'payment'],
+      'Fintech': ['fintech', 'payment', 'digital bank', 'crypto'],
+      'Retail': ['store', 'shop', 'market', 'mercado', 'tienda', 'comercio', 'retail'],
+      'E-commerce': ['ecommerce', 'online', 'marketplace', 'delivery'],
+      'Manufacturing': ['fabric', 'produc', 'industr', 'manufact', 'factory'],
       'Healthcare': ['salud', 'health', 'medic', 'clinic', 'hospital', 'pharma'],
-      'Food & Beverage': ['food', 'comida', 'restaurant', 'cafe', 'bebida'],
-      'Logistics': ['logist', 'transport', 'delivery', 'shipping', 'cargo'],
-      'Energy': ['energy', 'energia', 'power', 'electric', 'solar', 'petrol'],
+      'Logistics': ['logist', 'transport', 'delivery', 'shipping', 'cargo', 'supply'],
+      'Energy': ['energy', 'energia', 'power', 'electric', 'solar', 'petrol', 'oil', 'gas'],
       'Telecommunications': ['telecom', 'mobile', 'internet', 'fibra', 'connect'],
-      'Education': ['edu', 'school', 'university', 'escuela', 'college', 'curso']
+      'Food & Beverage': ['food', 'comida', 'restaurant', 'cafe', 'bebida', 'brewery'],
+      'Education': ['edu', 'school', 'university', 'escuela', 'college', 'curso'],
+      'Professional Services': ['data', 'analytics', 'research', 'insight', 'intelligence', 'consult']
     };
 
     for (const [industry, patterns] of Object.entries(industryPatterns)) {
@@ -728,7 +731,7 @@ export class EnhancedMockProvider extends BaseAIProvider {
       }
     }
 
-    return 'General Business';
+    return 'Other'; // Default fallback
   }
 
   private guessCountry(name: string): string {
@@ -749,37 +752,47 @@ export class EnhancedMockProvider extends BaseAIProvider {
 
   private estimateEmployees(industry: string): number {
     const industryRanges = {
-      'Technology': [50, 5000],
+      'Software': [50, 5000],
+      'SaaS': [50, 2000],
       'Financial Services': [100, 10000],
+      'Fintech': [50, 2000],
+      'Banking': [1000, 50000],
       'Retail': [200, 20000],
+      'E-commerce': [100, 5000],
       'Manufacturing': [500, 50000],
       'Healthcare': [100, 5000],
-      'Food & Beverage': [50, 2000],
       'Logistics': [100, 10000],
       'Energy': [200, 20000],
       'Telecommunications': [500, 30000],
+      'Food & Beverage': [50, 2000],
       'Education': [50, 2000],
-      'General Business': [50, 1000]
+      'Professional Services': [50, 1000],
+      'Other': [50, 1000]
     };
 
-    const range = industryRanges[industry as keyof typeof industryRanges] || industryRanges['General Business'];
+    const range = industryRanges[industry as keyof typeof industryRanges] || industryRanges['Other'];
     return Math.floor(Math.random() * (range[1] - range[0]) + range[0]);
   }
 
   private estimateRevenue(industry: string, employees: number): number {
-    // Revenue per employee estimates by industry (USD)
+    // Revenue per employee estimates by traditional industry (USD)
     const revenuePerEmployee = {
-      'Technology': 300000,
+      'Software': 300000,
+      'SaaS': 350000,
       'Financial Services': 500000,
+      'Fintech': 400000,
+      'Banking': 600000,
       'Retail': 150000,
+      'E-commerce': 200000,
       'Manufacturing': 250000,
       'Healthcare': 200000,
-      'Food & Beverage': 100000,
       'Logistics': 180000,
       'Energy': 800000,
       'Telecommunications': 400000,
+      'Food & Beverage': 100000,
       'Education': 80000,
-      'General Business': 150000
+      'Professional Services': 150000,
+      'Other': 150000
     };
 
     const rpe = revenuePerEmployee[industry as keyof typeof revenuePerEmployee] || 150000;
