@@ -22,10 +22,15 @@ import { classifyBusinessModel, type ClassificationInput } from '@/core/business
 export class MockDatabaseService implements ICompanyDatabaseService {
   private companies: Company[] = [];
   private assessments: Assessment[] = [];
+  private readonly STORAGE_KEY = 'dii_mock_database';
   
   constructor() {
     console.log('🌐 Using mock database service (browser mode)');
-    this.initializeMockData();
+    this.loadFromStorage();
+    if (this.companies.length === 0) {
+      this.initializeMockData();
+      this.saveToStorage();
+    }
   }
 
   private initializeMockData() {
@@ -219,6 +224,7 @@ export class MockDatabaseService implements ICompanyDatabaseService {
     };
     
     this.companies.push(company);
+    this.saveToStorage();
     return company;
   }
 
@@ -243,6 +249,7 @@ export class MockDatabaseService implements ICompanyDatabaseService {
       updated_at: new Date()
     };
     
+    this.saveToStorage();
     return this.companies[index];
   }
 
@@ -444,6 +451,51 @@ export class MockDatabaseService implements ICompanyDatabaseService {
       const v = c === 'x' ? r : (r & 0x3 | 0x8);
       return v.toString(16);
     });
+  }
+
+  // ===================================================================
+  // STORAGE PERSISTENCE
+  // ===================================================================
+
+  private saveToStorage(): void {
+    try {
+      const data = {
+        companies: this.companies,
+        assessments: this.assessments,
+        version: 1
+      };
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
+      console.log('💾 Saved to localStorage:', this.companies.length, 'companies');
+    } catch (error) {
+      console.error('Failed to save to localStorage:', error);
+    }
+  }
+
+  private loadFromStorage(): void {
+    try {
+      const stored = localStorage.getItem(this.STORAGE_KEY);
+      if (stored) {
+        const data = JSON.parse(stored);
+        // Convert date strings back to Date objects
+        this.companies = (data.companies || []).map((c: any) => ({
+          ...c,
+          created_at: new Date(c.created_at),
+          updated_at: new Date(c.updated_at),
+          last_verified: c.last_verified ? new Date(c.last_verified) : null
+        }));
+        this.assessments = (data.assessments || []).map((a: any) => ({
+          ...a,
+          created_at: new Date(a.created_at),
+          updated_at: new Date(a.updated_at),
+          completed_at: a.completed_at ? new Date(a.completed_at) : null
+        }));
+        console.log('📂 Loaded from localStorage:', this.companies.length, 'companies');
+      }
+    } catch (error) {
+      console.error('Failed to load from localStorage:', error);
+      this.companies = [];
+      this.assessments = [];
+    }
   }
 }
 
