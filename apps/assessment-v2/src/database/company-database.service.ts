@@ -8,19 +8,17 @@ import type {
   Assessment, 
   DimensionScore, 
   DIIModelProfile,
-  ClassificationRule,
   BenchmarkData,
   BusinessModelClassificationInput,
   BusinessModelClassificationResult,
   DIICalculationInput,
   DIICalculationResult,
-  CompanyDatabaseService,
+  CompanyDatabaseService as ICompanyDatabaseService,
   DIIBusinessModel,
-  DiiDimension,
-  ValidationRule
+  DiiDimension
 } from './types';
 
-export class CompanyDatabaseService implements CompanyDatabaseService {
+export class CompanyDatabaseService implements ICompanyDatabaseService {
   private db: any; // Database connection - implement with your preferred DB client
   
   constructor(databaseConnection: any) {
@@ -135,7 +133,7 @@ export class CompanyDatabaseService implements CompanyDatabaseService {
     for (const rule of rules) {
       if (rule.industry_pattern) {
         const patterns = rule.industry_pattern.split('|');
-        const matches = patterns.some(pattern => 
+        const matches = patterns.some((pattern: string) => 
           industryLower.includes(pattern.trim()) || 
           nameLower.includes(pattern.trim())
         );
@@ -315,9 +313,9 @@ export class CompanyDatabaseService implements CompanyDatabaseService {
       dii_raw_score,
       dii_final_score,
       confidence_level,
-      validation_errors,
-      benchmark_percentile,
-      industry_median,
+      validation_errors: validationErrors,
+      ...(benchmark_percentile !== undefined && { benchmark_percentile }),
+      ...(industry_median !== undefined && { industry_median }),
       recommendations
     };
   }
@@ -427,7 +425,7 @@ export class CompanyDatabaseService implements CompanyDatabaseService {
       });
 
       if (recentScores.length >= 5) { // Minimum sample size
-        const scores = recentScores.map(s => s.dii_final_score).sort((a, b) => a - b);
+        const scores = recentScores.map((s: any) => s.dii_final_score).sort((a: number, b: number) => a - b);
         
         const percentiles = {
           p25: this.calculatePercentile(scores, 25),
@@ -508,7 +506,7 @@ export class CompanyDatabaseService implements CompanyDatabaseService {
     return recommendations;
   }
 
-  private getImprovementActions(dimension: DiiDimension, businessModel: DIIBusinessModel): string[] {
+  private getImprovementActions(dimension: DiiDimension, _businessModel: DIIBusinessModel): string[] {
     const actions: Record<DiiDimension, string[]> = {
       TRD: [
         'Implement automated failover systems',
@@ -540,7 +538,7 @@ export class CompanyDatabaseService implements CompanyDatabaseService {
     return actions[dimension] || [];
   }
 
-  private getTargetScore(dimension: DiiDimension, modelProfile: DIIModelProfile): number {
+  private getTargetScore(_dimension: DiiDimension, _modelProfile: DIIModelProfile): number {
     // Return industry best practice targets based on business model
     // This would be configured based on DII framework requirements
     return 5.0; // Simplified target
@@ -553,10 +551,10 @@ export class CompanyDatabaseService implements CompanyDatabaseService {
     const weight = index % 1;
     
     if (lower === upper) {
-      return sortedArray[lower];
+      return sortedArray[lower] || 0;
     }
     
-    return sortedArray[lower] * (1 - weight) + sortedArray[upper] * weight;
+    return (sortedArray[lower] || 0) * (1 - weight) + (sortedArray[upper] || 0) * weight;
   }
 
   private generateUUID(): string {
