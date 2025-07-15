@@ -16,6 +16,10 @@ export interface HybridCompanyInfo extends CompanyInfo {
   databaseId?: string;
   matchScore: number;
   matchType: 'exact' | 'fuzzy' | 'ai';
+  lastVerified?: Date;
+  verificationSource?: 'ai_search' | 'manual' | 'import';
+  isDataStale?: boolean;
+  isProspect?: boolean;
 }
 
 /**
@@ -37,6 +41,8 @@ export interface HybridSearchOptions {
   fuzzyThreshold?: number;
   useAIFallback?: boolean;
   combineResults?: boolean;
+  checkDataFreshness?: boolean;
+  refreshStaleData?: boolean;
 }
 
 export class HybridSearchService {
@@ -57,7 +63,9 @@ export class HybridSearchService {
       maxAIResults = 10,
       fuzzyThreshold = 0.4,
       useAIFallback = true,
-      combineResults = true
+      combineResults = true,
+      checkDataFreshness = true,
+      refreshStaleData = true
     } = options;
 
     const startTime = Date.now();
@@ -68,15 +76,25 @@ export class HybridSearchService {
       fuzzyThreshold
     });
 
-    // Step 2: Determine if we need AI search
-    const hasGoodDatabaseMatches = databaseResults.some(r => r.matchScore > 0.7);
-    const shouldUseAI = useAIFallback && (!hasGoodDatabaseMatches || combineResults);
+    // Step 2: Check data freshness if enabled
+    if (checkDataFreshness) {
+      for (const result of databaseResults) {
+        if (result.databaseId) {
+          result.isDataStale = await this.databaseService.isCompanyDataStale(result.databaseId);
+        }
+      }
+    }
+
+    // Step 3: Determine if we need AI search
+    const hasGoodDatabaseMatches = databaseResults.some(r => r.matchScore > 0.7 && !r.isDataStale);
+    const hasStaleData = refreshStaleData && databaseResults.some(r => r.isDataStale);
+    const shouldUseAI = useAIFallback && (!hasGoodDatabaseMatches || combineResults || hasStaleData);
 
     let aiResults: HybridCompanyInfo[] = [];
     let aiSearchTime = 0;
 
     if (shouldUseAI) {
-      // Step 3: Perform AI search
+      // Step 4: Perform AI search
       const aiStartTime = Date.now();
       try {
         const aiSearchResult = await this.aiService.searchCompany(query);
@@ -88,18 +106,22 @@ export class HybridSearchService {
           source: 'ai' as const,
           matchScore: 0.6, // Default score for AI results
           matchType: 'ai' as const,
-          dataSource: 'ai' as const
+          dataSource: 'ai' as const,
+          lastVerified: new Date(),
+          verificationSource: 'ai_search' as const,
+          isDataStale: false
         }));
       } catch (error) {
         console.error('AI search failed, using database results only:', error);
       }
     }
 
-    // Step 4: Combine and rank results
-    const combinedResults = this.combineAndRankResults(
+    // Step 5: Combine and rank results
+    const combinedResults = await this.combineAndRankResults(
       databaseResults,
       aiResults,
-      query
+      query,
+      refreshStaleData
     );
 
     const totalTime = Date.now() - startTime;
@@ -204,18 +226,22 @@ export class HybridSearchService {
       source: 'database',
       databaseId: company.id,
       matchScore,
-      matchType
+      matchType,
+      lastVerified: company.last_verified,
+      verificationSource: company.verification_source,
+      isProspect: company.is_prospect
     };
   }
 
   /**
    * Combine and rank results from different sources
    */
-  private combineAndRankResults(
+  private async combineAndRankResults(
     databaseResults: HybridCompanyInfo[],
     aiResults: HybridCompanyInfo[],
-    query: string
-  ): HybridCompanyInfo[] {
+    query: string,
+    refreshStaleData: boolean
+  ): Promise<HybridCompanyInfo[]> {
     const allResults = [...databaseResults];
     const seen = new Set<string>();
 
@@ -241,7 +267,7 @@ export class HybridSearchService {
         
         if (dbMatch) {
           // Enhance database entry with AI data
-          this.enhanceWithAIData(dbMatch, aiResult);
+          await this.enhanceWithAIData(dbMatch, aiResult, refreshStaleData);
         }
       }
     }
@@ -295,10 +321,11 @@ export class HybridSearchService {
   /**
    * Enhance database company info with AI data
    */
-  private enhanceWithAIData(
+  private async enhanceWithAIData(
     dbCompany: HybridCompanyInfo,
-    aiCompany: HybridCompanyInfo
-  ): void {
+    aiCompany: HybridCompanyInfo,
+    refreshStaleData: boolean
+  ): Promise<void> {
     // Mark as combined source
     dbCompany.source = 'combined';
     
@@ -325,6 +352,23 @@ export class HybridSearchService {
         dbCompany.confidence || 0,
         aiCompany.confidence
       );
+    }
+
+    // Update verification timestamp if data was stale and we're refreshing
+    if (refreshStaleData && dbCompany.isDataStale && dbCompany.databaseId) {
+      try {
+        await this.databaseService.updateCompanyVerification(
+          dbCompany.databaseId,
+          'ai_search'
+        );
+        
+        // Update the local object as well
+        dbCompany.lastVerified = new Date();
+        dbCompany.verificationSource = 'ai_search';
+        dbCompany.isDataStale = false;
+      } catch (error) {
+        console.error('Failed to update company verification timestamp:', error);
+      }
     }
   }
 }

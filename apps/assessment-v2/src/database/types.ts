@@ -53,6 +53,8 @@ export type RuleType =
   | 'business_model_validation'
   | 'data_quality_check';
 
+export type VerificationSource = 'ai_search' | 'manual' | 'import';
+
 // ===================================================================
 // DATABASE ENTITY INTERFACES
 // ===================================================================
@@ -75,6 +77,12 @@ export interface Company {
   region: string;
   employees?: number;
   revenue?: number;
+  
+  // Data Management
+  last_verified?: Date;
+  verification_source?: VerificationSource;
+  data_freshness_days: number;
+  is_prospect: boolean;
   
   // Metadata
   created_at: Date;
@@ -320,6 +328,11 @@ export interface CompanyDatabaseService {
   getCompanyByDomain(domain: string): Promise<Company | null>;
   updateCompany(id: string, data: Partial<Company>): Promise<Company>;
   searchCompanies(query: string): Promise<Company[]>;
+  
+  // Data Freshness Management
+  isCompanyDataStale(companyId: string): Promise<boolean>;
+  updateCompanyVerification(companyId: string, source: VerificationSource): Promise<void>;
+  getCompaniesNeedingVerification(limit?: number): Promise<Company[]>;
   
   // Business Model Classification
   classifyBusinessModel(input: BusinessModelClassificationInput): Promise<BusinessModelClassificationResult>;

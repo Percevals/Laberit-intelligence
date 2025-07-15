@@ -32,7 +32,12 @@ companies (
     dii_business_model,            -- One of 8 DII models (assessment-focused)
     confidence_score,              -- Classification confidence
     classification_reasoning,      -- Why this model was chosen
-    headquarters, country, employees, revenue
+    headquarters, country, employees, revenue,
+    -- Data Management Fields
+    last_verified,                 -- When data was last verified
+    verification_source,           -- 'ai_search', 'manual', 'import'
+    data_freshness_days,           -- Days before data is considered stale (default: 90)
+    is_prospect                    -- Whether company is a prospect (default: false)
 )
 
 -- Assessment results over time
@@ -150,6 +155,11 @@ interface CompanyDatabaseService {
   getCompany(id) → Company
   searchCompanies(query) → Company[]
   
+  // Data Freshness Management
+  isCompanyDataStale(companyId) → boolean
+  updateCompanyVerification(companyId, source) → void
+  getCompaniesNeedingVerification(limit?) → Company[]
+  
   // Business Model Classification
   classifyBusinessModel(input) → BusinessModelClassificationResult
   updateBusinessModelClassification(companyId, classification)
@@ -205,6 +215,22 @@ const benchmark = await db.getBenchmarkData('SERVICIOS_FINANCIEROS', 'LATAM');
 // Returns regional percentiles for financial services companies
 ```
 
+### 4. **Data Freshness Management**
+```typescript
+// Check if company data is stale
+const isStale = await db.isCompanyDataStale(companyId);
+if (isStale) {
+  // Trigger AI search to refresh data
+  const freshData = await aiService.searchCompany(companyName);
+  // Update verification timestamp
+  await db.updateCompanyVerification(companyId, 'ai_search');
+}
+
+// Get companies needing verification
+const staleCompanies = await db.getCompaniesNeedingVerification(10);
+// Returns up to 10 companies with stale or unverified data
+```
+
 ## Files Structure
 
 ```
@@ -212,11 +238,12 @@ src/database/
 ├── schema.sql                     # Complete database schema
 ├── types.ts                       # TypeScript interfaces  
 ├── company-database.service.ts    # Main service implementation
+├── mock-database.service.ts       # Mock implementation for browser
 ├── README.md                      # This documentation
-└── migrations/                    # Database migrations (future)
-    ├── 001_initial_schema.sql
-    ├── 002_add_validation_rules.sql
-    └── 003_populate_model_profiles.sql
+└── migrations/                    # Database migrations
+    ├── 001_add_timestamp_data_management_fields.sql
+    ├── 001_rollback_timestamp_data_management_fields.sql
+    └── README.md                  # Migration documentation
 ```
 
 ## Migration Path
@@ -247,6 +274,8 @@ src/database/
 3. **Industry bridge approach** - Traditional industries → DII models
 4. **Embedded validation rules** - SQL-based business logic
 5. **Real-time benchmarking** - Automatic percentile updates
+6. **Data freshness tracking** - Automatic stale data detection with configurable thresholds
+7. **Hybrid search integration** - AI-powered data refresh for stale company information
 
 ### 🔄 **Future Considerations (20%)**
 1. **Advanced ML classification** - Beyond pattern matching

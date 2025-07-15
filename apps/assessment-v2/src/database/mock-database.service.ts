@@ -44,6 +44,14 @@ export class MockDatabaseService implements ICompanyDatabaseService {
         region: 'LATAM',
         employees: 500,
         revenue: 50000000,
+        last_verified: new Date(),
+        verification_source: 'manual',
+        data_freshness_days: 90,
+        is_prospect: false,
+        last_verified: new Date(),
+        verification_source: 'manual',
+        data_freshness_days: 90,
+        is_prospect: false,
         created_at: new Date(),
         updated_at: new Date()
       },
@@ -61,6 +69,10 @@ export class MockDatabaseService implements ICompanyDatabaseService {
         region: 'LATAM',
         employees: 1200,
         revenue: 120000000,
+        last_verified: new Date(),
+        verification_source: 'manual',
+        data_freshness_days: 90,
+        is_prospect: false,
         created_at: new Date(),
         updated_at: new Date()
       },
@@ -78,6 +90,10 @@ export class MockDatabaseService implements ICompanyDatabaseService {
         region: 'LATAM',
         employees: 150,
         revenue: 12000000,
+        last_verified: new Date(),
+        verification_source: 'manual',
+        data_freshness_days: 90,
+        is_prospect: false,
         created_at: new Date(),
         updated_at: new Date()
       },
@@ -95,6 +111,10 @@ export class MockDatabaseService implements ICompanyDatabaseService {
         region: 'LATAM',
         employees: 300,
         revenue: 25000000,
+        last_verified: new Date(),
+        verification_source: 'manual',
+        data_freshness_days: 90,
+        is_prospect: false,
         created_at: new Date(),
         updated_at: new Date()
       },
@@ -112,12 +132,17 @@ export class MockDatabaseService implements ICompanyDatabaseService {
         region: 'LATAM',
         employees: 80,
         revenue: 8000000,
+        last_verified: new Date(),
+        verification_source: 'manual',
+        data_freshness_days: 90,
+        is_prospect: false,
         created_at: new Date(),
         updated_at: new Date()
       },
       {
         id: '6',
         name: 'QuickDelivery Express',
+        legal_name: 'QuickDelivery Express S.A.C.',
         domain: 'quickdelivery.pe',
         industry_traditional: 'Logistics',
         dii_business_model: 'CADENA_SUMINISTRO',
@@ -128,6 +153,10 @@ export class MockDatabaseService implements ICompanyDatabaseService {
         region: 'LATAM',
         employees: 2000,
         revenue: 45000000,
+        last_verified: new Date(),
+        verification_source: 'manual',
+        data_freshness_days: 90,
+        is_prospect: false,
         created_at: new Date(),
         updated_at: new Date()
       },
@@ -145,6 +174,10 @@ export class MockDatabaseService implements ICompanyDatabaseService {
         region: 'LATAM',
         employees: 45,
         revenue: 5000000,
+        last_verified: new Date(),
+        verification_source: 'manual',
+        data_freshness_days: 90,
+        is_prospect: false,
         created_at: new Date(),
         updated_at: new Date()
       },
@@ -175,6 +208,11 @@ export class MockDatabaseService implements ICompanyDatabaseService {
     const company: Company = {
       ...data,
       id: this.generateUUID(),
+      // Set default values for data management fields if not provided
+      data_freshness_days: data.data_freshness_days ?? 90,
+      is_prospect: data.is_prospect ?? false,
+      last_verified: data.last_verified ?? new Date(),
+      verification_source: data.verification_source ?? 'manual',
       created_at: new Date(),
       updated_at: new Date()
     };
@@ -343,6 +381,55 @@ export class MockDatabaseService implements ICompanyDatabaseService {
 
   async updateBenchmarks(): Promise<void> {
     console.log('Benchmark update not available in browser');
+  }
+
+  // ===================================================================
+  // DATA FRESHNESS MANAGEMENT
+  // ===================================================================
+
+  /**
+   * Check if company data is stale based on data_freshness_days
+   */
+  async isCompanyDataStale(companyId: string): Promise<boolean> {
+    const company = await this.getCompany(companyId);
+    if (!company || !company.last_verified) {
+      return true;
+    }
+
+    const daysSinceVerified = Math.floor(
+      (Date.now() - company.last_verified.getTime()) / (1000 * 60 * 60 * 24)
+    );
+
+    return daysSinceVerified > company.data_freshness_days;
+  }
+
+  /**
+   * Update company verification timestamp
+   */
+  async updateCompanyVerification(
+    companyId: string, 
+    source: 'ai_search' | 'manual' | 'import'
+  ): Promise<void> {
+    await this.updateCompany(companyId, {
+      last_verified: new Date(),
+      verification_source: source
+    });
+  }
+
+  /**
+   * Get companies that need verification
+   */
+  async getCompaniesNeedingVerification(limit: number = 10): Promise<Company[]> {
+    const staleCompanies: Company[] = [];
+    
+    for (const company of this.companies) {
+      if (await this.isCompanyDataStale(company.id)) {
+        staleCompanies.push(company);
+        if (staleCompanies.length >= limit) break;
+      }
+    }
+    
+    return staleCompanies;
   }
 
   // ===================================================================

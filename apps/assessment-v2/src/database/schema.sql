@@ -35,6 +35,12 @@ CREATE TABLE companies (
     employees INTEGER,
     revenue BIGINT, -- Annual revenue in USD
     
+    -- Data Management
+    last_verified TIMESTAMP WITH TIME ZONE,
+    verification_source VARCHAR(50) CHECK (verification_source IN ('ai_search', 'manual', 'import')),
+    data_freshness_days INTEGER DEFAULT 90,
+    is_prospect BOOLEAN DEFAULT false,
+    
     -- Metadata
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
@@ -43,7 +49,9 @@ CREATE TABLE companies (
     UNIQUE(domain),
     INDEX idx_companies_industry (industry_traditional),
     INDEX idx_companies_dii_model (dii_business_model),
-    INDEX idx_companies_country (country)
+    INDEX idx_companies_country (country),
+    INDEX idx_companies_last_verified (last_verified),
+    INDEX idx_companies_is_prospect (is_prospect)
 );
 
 -- ===================================================================

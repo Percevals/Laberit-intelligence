@@ -50,14 +50,18 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
       INSERT INTO companies (
         id, name, legal_name, domain, industry_traditional, dii_business_model,
         confidence_score, classification_reasoning, headquarters, country, region,
-        employees, revenue, created_at, updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        employees, revenue, last_verified, verification_source, data_freshness_days,
+        is_prospect, created_at, updated_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `, [
       id, data.name, data.legal_name || null, data.domain || null,
       data.industry_traditional, data.dii_business_model,
       data.confidence_score || null, data.classification_reasoning || null,
       data.headquarters || null, data.country || null, data.region || 'LATAM',
-      data.employees || null, data.revenue || null, now, now
+      data.employees || null, data.revenue || null,
+      data.last_verified || now, data.verification_source || 'manual',
+      data.data_freshness_days || 90, data.is_prospect || false,
+      now, now
     ]);
 
     const company = this.db.queryOne('SELECT * FROM companies WHERE id = ?', [id]);
@@ -102,6 +106,54 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
       ORDER BY name ASC 
       LIMIT 50
     `, [searchQuery, searchQuery, searchQuery]);
+
+    return results.map(row => this.mapCompanyFromDB(row));
+  }
+
+  // ===================================================================
+  // DATA FRESHNESS MANAGEMENT
+  // ===================================================================
+
+  async isCompanyDataStale(companyId: string): Promise<boolean> {
+    const result = this.db.queryOne(`
+      SELECT last_verified, data_freshness_days 
+      FROM companies 
+      WHERE id = ?
+    `, [companyId]);
+
+    if (!result || !result.last_verified) {
+      return true;
+    }
+
+    const lastVerified = new Date(result.last_verified);
+    const daysSinceVerified = Math.floor(
+      (Date.now() - lastVerified.getTime()) / (1000 * 60 * 60 * 24)
+    );
+
+    return daysSinceVerified > (result.data_freshness_days || 90);
+  }
+
+  async updateCompanyVerification(
+    companyId: string, 
+    source: 'ai_search' | 'manual' | 'import'
+  ): Promise<void> {
+    const now = new Date().toISOString();
+    
+    this.db.execute(`
+      UPDATE companies 
+      SET last_verified = ?, verification_source = ?, updated_at = ?
+      WHERE id = ?
+    `, [now, source, now, companyId]);
+  }
+
+  async getCompaniesNeedingVerification(limit: number = 10): Promise<Company[]> {
+    const results = this.db.query(`
+      SELECT * FROM companies 
+      WHERE last_verified IS NULL 
+         OR julianday('now') - julianday(last_verified) > data_freshness_days
+      ORDER BY last_verified ASC NULLS FIRST
+      LIMIT ?
+    `, [limit]);
 
     return results.map(row => this.mapCompanyFromDB(row));
   }
@@ -658,6 +710,10 @@ export class CompanyDatabaseService implements ICompanyDatabaseService {
       region: row.region,
       employees: row.employees,
       revenue: row.revenue,
+      last_verified: row.last_verified ? new Date(row.last_verified) : undefined,
+      verification_source: row.verification_source,
+      data_freshness_days: row.data_freshness_days ?? 90,
+      is_prospect: row.is_prospect ?? false,
       created_at: new Date(row.created_at),
       updated_at: new Date(row.updated_at)
     };
