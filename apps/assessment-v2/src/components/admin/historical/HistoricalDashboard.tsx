@@ -48,11 +48,34 @@ export function HistoricalDashboard() {
   const loadHistoricalData = async () => {
     setLoading(true);
     try {
-      const dbService = await getDatabaseService();
-      const allCompanies = await dbService.searchCompanies('');
+      // Fetch historical data directly from company-history API which joins with companies
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3001/api'}/company-history`);
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      const historyData = await response.json();
       
-      // Filter for companies with historical data
-      const historicalCompanies = allCompanies.filter(c => c.legacy_dii_id != null);
+      // Extract unique companies from history data
+      const companyMap = new Map();
+      historyData.forEach((record: any) => {
+        if (!companyMap.has(record.company_id)) {
+          companyMap.set(record.company_id, {
+            id: record.company_id,
+            name: record.company_name,
+            legacy_dii_id: record.legacy_dii_id,
+            original_dii_score: parseFloat(record.original_dii_score),
+            migration_confidence: record.migration_confidence,
+            has_zt_maturity: record.has_zt_maturity,
+            country: record.country,
+            industry_traditional: record.industry_traditional,
+            dii_business_model: record.dii_business_model,
+            data_completeness: 1.0, // Assume complete for now
+            needs_reassessment: record.migration_confidence !== 'HIGH'
+          });
+        }
+      });
+      
+      const historicalCompanies = Array.from(companyMap.values());
       setCompanies(historicalCompanies);
       
       // Calculate metrics

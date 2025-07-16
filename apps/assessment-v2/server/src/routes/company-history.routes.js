@@ -47,6 +47,33 @@ router.post('/', async (req, res) => {
 });
 
 /**
+ * Get all historical data for dashboard
+ */
+router.get('/', async (req, res) => {
+  try {
+    const result = await pool.query(`
+      SELECT 
+        ch.*,
+        c.name as company_name,
+        c.legacy_dii_id,
+        c.original_dii_score,
+        c.migration_confidence,
+        c.has_zt_maturity,
+        c.country,
+        c.industry_traditional,
+        c.dii_business_model
+      FROM company_history ch
+      JOIN companies c ON ch.company_id = c.id
+      ORDER BY ch.recorded_at DESC
+    `);
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error fetching all history:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+/**
  * Get company history
  */
 router.get('/company/:companyId', async (req, res) => {
