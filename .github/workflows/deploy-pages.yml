@@ -27,7 +27,7 @@ jobs:
       - name: Run security audit
         run: |
           # Go to app directory
-          cd apps/assessment-light
+          cd apps/assessment-v2
           # Install dependencies
           npm install --legacy-peer-deps || true
           # Then run audit
@@ -86,15 +86,11 @@ jobs:
             fi
           done
           
-          # Copy Quick Assessment build to BOTH paths for backward compatibility
-          echo "📦 Copying Quick Assessment build..."
-          # Old path (for compatibility)
+          # Copy Assessment v2 build to quick-assessment path for backward compatibility
+          echo "📦 Copying Assessment v2 build for backward compatibility..."
+          # Old path (for compatibility) - now points to assessment-v2
           mkdir -p _site/quick-assessment
-          cp -r apps/assessment-light/dist/* _site/quick-assessment/
-          
-          # New path (proper monorepo structure)
-          mkdir -p _site/apps/assessment-light
-          cp -r apps/assessment-light/dist/* _site/apps/assessment-light/
+          cp -r apps/assessment-v2/dist/* _site/quick-assessment/
           
           # Copy Assessment v2 build
           echo "📦 Copying Assessment v2 build..."
@@ -113,11 +109,8 @@ jobs:
           echo "Main index.html (first 3 lines):"
           head -3 _site/index.html
           echo ""
-          echo "Quick Assessment (old path for compatibility):"
+          echo "Quick Assessment (old path for compatibility - now v2):"
           ls -la _site/quick-assessment/
-          echo ""
-          echo "Quick Assessment (new monorepo path):"
-          ls -la _site/apps/assessment-light/
           echo ""
           echo "Assessment v2:"
           ls -la _site/apps/assessment-v2/

@@ -41,24 +41,6 @@ updates:
       - dependency-type: "direct"
       - dependency-type: "indirect"
       
-  # Enable version updates for npm (Assessment Light app)
-  - package-ecosystem: "npm"
-    directory: "/apps/assessment-light"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "09:00"
-    open-pull-requests-limit: 5
-    labels:
-      - "dependencies"
-      - "javascript"
-      - "assessment-light"
-    commit-message:
-      prefix: "deps"
-      include: "scope"
-    allow:
-      - dependency-type: "direct"
-      - dependency-type: "indirect"
     
   # Enable version updates for GitHub Actions
   - package-ecosystem: "github-actions"
