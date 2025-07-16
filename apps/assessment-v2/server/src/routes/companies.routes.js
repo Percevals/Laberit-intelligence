@@ -8,7 +8,13 @@ const companyRepo = new CompanyRepository();
 // Get all companies with filters
 router.get('/', async (req, res) => {
   try {
-    const { search, businessModel, isProspect } = req.query;
+    const { search, businessModel, isProspect, legacy_dii_id } = req.query;
+    
+    // Handle legacy_dii_id query
+    if (legacy_dii_id) {
+      const companies = await companyRepo.findByLegacyId(legacy_dii_id);
+      return res.json(companies);
+    }
     
     const filters = {
       search,

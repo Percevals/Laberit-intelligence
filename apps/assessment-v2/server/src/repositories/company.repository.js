@@ -46,6 +46,14 @@ export class CompanyRepository {
     return result.rows[0] || null;
   }
 
+  async findByLegacyId(legacyId) {
+    const result = await pool.query(
+      'SELECT * FROM companies WHERE legacy_dii_id = $1',
+      [parseInt(legacyId)]
+    );
+    return result.rows;
+  }
+
   async create(companyData) {
     const {
       name,
@@ -63,7 +71,16 @@ export class CompanyRepository {
       last_verified,
       verification_source,
       data_freshness_days,
-      is_prospect
+      is_prospect,
+      // Historical tracking fields
+      legacy_dii_id,
+      original_dii_score,
+      migration_confidence,
+      framework_version,
+      migration_date,
+      needs_reassessment,
+      data_completeness,
+      has_zt_maturity
     } = companyData;
 
     const result = await pool.query(
@@ -71,14 +88,18 @@ export class CompanyRepository {
         name, legal_name, domain, industry_traditional, dii_business_model,
         confidence_score, classification_reasoning, headquarters, country, region,
         employees, revenue, last_verified, verification_source, 
-        data_freshness_days, is_prospect
-      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
+        data_freshness_days, is_prospect, legacy_dii_id, original_dii_score,
+        migration_confidence, framework_version, migration_date, needs_reassessment,
+        data_completeness, has_zt_maturity
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24)
       RETURNING *`,
       [
         name, legal_name, domain, industry_traditional, dii_business_model,
         confidence_score, classification_reasoning, headquarters, country, region,
         employees, revenue, last_verified || new Date(), verification_source || 'manual',
-        data_freshness_days || 90, is_prospect || false
+        data_freshness_days || 90, is_prospect || false,
+        legacy_dii_id, original_dii_score, migration_confidence, framework_version,
+        migration_date, needs_reassessment, data_completeness, has_zt_maturity
       ]
     );
 
