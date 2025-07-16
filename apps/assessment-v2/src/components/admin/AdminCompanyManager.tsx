@@ -3,7 +3,7 @@
  * Interface for managing companies with filters, re-verification, and editing capabilities
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Building2,
