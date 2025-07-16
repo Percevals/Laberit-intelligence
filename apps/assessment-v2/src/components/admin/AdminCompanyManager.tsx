@@ -619,14 +619,73 @@ export function AdminCompanyManager() {
 
   // Handle bulk import
   const handleBulkImport = async (importedCompanies: Partial<Company>[]) => {
+    console.log('handleBulkImport called with', importedCompanies.length, 'companies');
+    
+    if (!dbService) {
+      console.error('Database service not initialized');
+      alert('Database service not initialized. Please refresh the page.');
+      return;
+    }
+    
     try {
-      for (const company of importedCompanies) {
-        await dbService.createCompany(company as Company);
+      // Import companies in batches to avoid overwhelming the database
+      const batchSize = 10;
+      let successCount = 0;
+      let failedCompanies: string[] = [];
+      
+      for (let i = 0; i < importedCompanies.length; i += batchSize) {
+        const batch = importedCompanies.slice(i, i + batchSize);
+        const results = await Promise.allSettled(
+          batch.map(async (company) => {
+            try {
+              // Ensure all required fields are present
+              const companyData = {
+                name: company.name || '',
+                legal_name: company.legal_name || company.name || '',
+                domain: company.domain,
+                industry_traditional: company.industry_traditional || 'Unknown',
+                dii_business_model: company.dii_business_model || 'COMERCIO_HIBRIDO',
+                confidence_score: company.confidence_score ?? 0.5,
+                classification_reasoning: company.classification_reasoning,
+                headquarters: company.headquarters,
+                country: company.country || 'Unknown',
+                region: company.region || 'LATAM',
+                employees: company.employees,
+                revenue: company.revenue,
+                data_freshness_days: company.data_freshness_days ?? 90,
+                is_prospect: company.is_prospect ?? true,
+                last_verified: company.last_verified || new Date(),
+                verification_source: 'import' as const
+              };
+              
+              console.log('Creating company:', companyData);
+              const created = await dbService.createCompany(companyData as Company);
+              console.log('Successfully created:', created);
+              successCount++;
+            } catch (error) {
+              console.error(`Failed to import company ${company.name}:`, error);
+              failedCompanies.push(company.name || 'Unknown');
+              throw error;
+            }
+          })
+        );
+        
+        // Check for failures
+        const failures = results.filter(r => r.status === 'rejected');
+        if (failures.length > 0) {
+          console.warn(`${failures.length} companies failed to import in this batch`);
+        }
+      }
+      
+      console.log(`Import completed: ${successCount} successful, ${failedCompanies.length} failed`);
+      if (failedCompanies.length > 0) {
+        alert(`Import partially completed. ${successCount} companies imported successfully, but ${failedCompanies.length} failed: ${failedCompanies.join(', ')}`);
       }
       await loadCompanies();
       setShowImportExport(false);
     } catch (error) {
       console.error('Failed to import companies:', error);
+      alert('Error importing companies. Please check the console for details.');
     }
   };
 

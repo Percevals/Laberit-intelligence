@@ -73,7 +73,7 @@ export class APIDatabaseService implements ICompanyDatabaseService {
 
     return {
       dii_business_model: classification.model,
-      confidence_score: classification.confidence / 100,
+      confidence_score: classification.confidence,
       reasoning: classification.reasoning || 'Classified based on industry and company characteristics'
     };
   }

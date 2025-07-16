@@ -207,7 +207,7 @@ export function BulkImportExport({ onImport, companies, onClose }: BulkImportExp
           legal_name: companyName,
           industry_traditional: industry,
           dii_business_model: classification.model,
-          confidence_score: classification.confidence / 100,
+          confidence_score: classification.confidence,
           classification_reasoning: classification.reasoning,
           employees: employees ? parseInt(employees) : undefined,
           revenue: revenue ? parseFloat(revenue) : undefined,
@@ -217,13 +217,13 @@ export function BulkImportExport({ onImport, companies, onClose }: BulkImportExp
           is_prospect: true,
           data_freshness_days: 90,
           last_verified: new Date(),
-          verification_source: 'csv_import'
+          verification_source: 'import' as const
         };
 
         companiesToImport.push(companyData);
 
         // Track results
-        const status = classification.confidence >= 70 ? 'success' : 'warning';
+        const status = classification.confidence >= 0.7 ? 'success' : 'warning';
         if (status === 'success') {
           result.success++;
         } else {
@@ -234,7 +234,7 @@ export function BulkImportExport({ onImport, companies, onClose }: BulkImportExp
           row: rowNum,
           company: companyName,
           status,
-          message: `${BUSINESS_MODEL_DEFINITIONS[classification.model].name} (${classification.confidence}% confianza)`,
+          message: `${BUSINESS_MODEL_DEFINITIONS[classification.model].name} (${Math.round(classification.confidence * 100)}% confianza)`,
           businessModel: classification.model,
           confidence: classification.confidence,
           data: companyData
@@ -673,6 +673,7 @@ export function BulkImportExport({ onImport, companies, onClose }: BulkImportExp
                   onClick={async () => {
                     setImporting(true);
                     try {
+                      console.log('Starting import of', reviewCompanies.length, 'companies');
                       await onImport(reviewCompanies);
                       setReviewMode(false);
                       setReviewCompanies([]);
@@ -689,6 +690,17 @@ export function BulkImportExport({ onImport, companies, onClose }: BulkImportExp
                       });
                     } catch (error) {
                       console.error('Import error:', error);
+                      setImportResult({
+                        success: 0,
+                        errors: reviewCompanies.length,
+                        warnings: 0,
+                        details: [{
+                          row: 0,
+                          company: 'Error de importación',
+                          status: 'error',
+                          message: error instanceof Error ? error.message : 'Error desconocido al importar'
+                        }]
+                      });
                     } finally {
                       setImporting(false);
                     }

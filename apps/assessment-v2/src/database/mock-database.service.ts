@@ -211,10 +211,22 @@ export class MockDatabaseService implements ICompanyDatabaseService {
   // ===================================================================
 
   async createCompany(data: Omit<Company, 'id' | 'created_at' | 'updated_at'>): Promise<Company> {
+    // Validate required fields
+    if (!data.name) {
+      throw new Error('Company name is required');
+    }
+    if (!data.dii_business_model) {
+      throw new Error('Business model is required');
+    }
+    
     const company: Company = {
       ...data,
       id: this.generateUUID(),
       // Set default values for data management fields if not provided
+      legal_name: data.legal_name || data.name,
+      country: data.country || 'Unknown',
+      region: data.region || 'LATAM',
+      confidence_score: data.confidence_score ?? 0.5,
       data_freshness_days: data.data_freshness_days ?? 90,
       is_prospect: data.is_prospect ?? false,
       last_verified: data.last_verified ?? new Date(),
@@ -225,6 +237,7 @@ export class MockDatabaseService implements ICompanyDatabaseService {
     
     this.companies.push(company);
     this.saveToStorage();
+    console.log('Created company:', company.name, 'with ID:', company.id);
     return company;
   }
 
