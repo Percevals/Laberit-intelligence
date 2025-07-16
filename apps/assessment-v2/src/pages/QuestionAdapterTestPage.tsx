@@ -4,10 +4,10 @@
  */
 
 import { useState, useEffect } from 'react';
-import { lightAssessmentAdapter } from '@services/question-adapter';
+import { assessmentAdapter } from '@services/question-adapter';
 import type { BusinessModelScenarioId, DIIDimension } from '@core/types/pain-scenario.types';
 import type { CompanyInfo } from '@services/ai/types';
-import type { LightAssessmentQuestion } from '@services/question-adapter/light-assessment-adapter';
+import type { AssessmentQuestion } from '@services/question-adapter/assessment-adapter';
 
 // Sample companies for testing
 const sampleCompanies: CompanyInfo[] = [
@@ -46,7 +46,7 @@ const sampleCompanies: CompanyInfo[] = [
 export function QuestionAdapterTestPage() {
   const [selectedCompany, setSelectedCompany] = useState<CompanyInfo>(sampleCompanies[0]!);
   const [selectedModel, setSelectedModel] = useState<BusinessModelScenarioId>('2_software_critico');
-  const [questions, setQuestions] = useState<LightAssessmentQuestion[]>([]);
+  const [questions, setQuestions] = useState<AssessmentQuestion[]>([]);
   const [loading, setLoading] = useState(false);
   const [selectedDimension, setSelectedDimension] = useState<DIIDimension | 'all'>('all');
 
@@ -67,14 +67,14 @@ export function QuestionAdapterTestPage() {
     setLoading(true);
     try {
       if (selectedDimension === 'all') {
-        const adaptedQuestions = await lightAssessmentAdapter.getPersonalizedQuestions(
+        const adaptedQuestions = await assessmentAdapter.getPersonalizedQuestions(
           selectedModel,
           selectedCompany,
           true
         );
         setQuestions(adaptedQuestions);
       } else {
-        const adaptedQuestion = await lightAssessmentAdapter.getPersonalizedQuestion(
+        const adaptedQuestion = await assessmentAdapter.getPersonalizedQuestion(
           selectedModel,
           selectedDimension,
           selectedCompany,
@@ -157,7 +157,7 @@ export function QuestionAdapterTestPage() {
         <div className="card p-6 mb-8">
           <h3 className="font-semibold mb-4">Adaptation Examples</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-            {Object.entries(lightAssessmentAdapter.getExampleAdaptations()).map(([key, example]) => (
+            {Object.entries(assessmentAdapter.getExampleAdaptations()).map(([key, example]) => (
               <div key={key} className="space-y-2">
                 <div>
                   <span className="text-dark-text-secondary">Original:</span>

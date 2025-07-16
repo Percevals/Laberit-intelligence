@@ -92,7 +92,7 @@ def check_service_status():
             "requires_auth": False
         },
         "Assessment App": {
-            "url": "https://percevals.github.io/Laberit-intelligence/apps/assessment-light/",
+            "url": "https://percevals.github.io/Laberit-intelligence/apps/assessment-v2/",
             "requires_auth": False
         }
     }

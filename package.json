@@ -2,7 +2,7 @@
   "name": "dii-assessment-platform",
   "version": "1.0.0",
   "private": true,
-  "description": "DII Assessment Platform - Dual System for Light and Premium Assessments",
+  "description": "DII Assessment Platform - Premium Digital Immunity Assessment",
   "workspaces": [
     "apps/*",
     "packages/*",
@@ -14,9 +14,7 @@
     "test": "turbo run test",
     "lint": "turbo run lint",
     "type-check": "turbo run type-check",
-    "dev:light": "turbo run dev --filter=assessment-light",
     "dev:v2": "turbo run dev --filter=assessment-v2",
-    "build:light": "turbo run build --filter=assessment-light",
     "build:v2": "turbo run build --filter=assessment-v2",
     "install:all": "npm install --workspaces --if-present",
     "db:test": "node scripts/test-db-connection.js",

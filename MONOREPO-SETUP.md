@@ -33,7 +33,7 @@ cd packages/core && npm link
 cd ../types && npm link  
 cd ../ui-kit && npm link
 
-cd ../../apps/assessment-light
+cd ../../apps/assessment-v2
 npm link @dii/core @dii/types @dii/ui-kit
 ```
 
@@ -49,7 +49,7 @@ import { calculateDII, businessModels } from '@dii/core';
 
 4. **Ejecutar con Turborepo**:
 ```bash
-npm run dev:light
+npm run dev:v2
 ```
 
 ## 📦 Para Deployment en Producción
@@ -81,8 +81,8 @@ Mantener los imports locales hasta tener una solución de CI/CD más robusta.
 ```bash
 # Desarrollo con monorepo
 npm run dev                 # Todos los apps
-npm run dev:light          # Solo assessment-light
-npm run build:light        # Build assessment-light
+npm run dev:v2          # Solo assessment-v2
+npm run build:v2        # Build assessment-v2
 
 # Testing
 npm run test               # Todos los tests

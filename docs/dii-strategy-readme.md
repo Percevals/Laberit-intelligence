@@ -2,7 +2,7 @@
 
 ## 🎯 Project Overview
 
-The **Digital Immunity Index (DII) Assessment Platform** is a dual-system application that measures organizations' ability to maintain operations during cyberattacks. It provides both quick assessments and comprehensive consultancy services for LATAM/Spain markets (200-5000 employees).
+The **Digital Immunity Index (DII) Assessment Platform** is a comprehensive application that measures organizations' ability to maintain operations during cyberattacks. It provides intelligent assessments and consultancy services for LATAM/Spain markets (200-5000 employees).
 
 ### Core Philosophy
 > "We assume you're compromised and focus on making it work"
@@ -10,7 +10,7 @@ The **Digital Immunity Index (DII) Assessment Platform** is a dual-system applic
 ## 🎨 Strategic Vision
 
 ### The Journey
-We're building a dual-system platform that transforms cybersecurity from a technical checkbox into a business resilience metric. The platform evolves from a simple assessment tool to a comprehensive cyber resilience ecosystem.
+We're building a comprehensive platform that transforms cybersecurity from a technical checkbox into a business resilience metric. The platform evolves from an assessment tool to a complete cyber resilience ecosystem.
 
 ### End State Vision
 ```
@@ -56,7 +56,7 @@ We're building a dual-system platform that transforms cybersecurity from a techn
 ```
 Laberit-intelligence/               # Main repository (this is the monorepo root)
 ├── apps/
-│   ├── assessment-light/          # Current Quick Assessment (30 min, free)
+│   ├── assessment-v2/             # Main Assessment Platform (comprehensive)
 │   └── assessment-premium/        # [PLANNED] Consultancy Platform (2-5 days, paid)
 ├── packages/
 │   ├── @dii/core/                # [PENDING] DII calculations & business logic
@@ -111,7 +111,7 @@ Laberit-intelligence/               # Main repository (this is the monorepo root
 - **Styling**: Tailwind CSS
 - **State**: Zustand
 - **Build**: Vite + Turborepo
-- **Deployment**: GitHub Pages (assessment-light)
+- **Deployment**: GitHub Pages (assessment-v2)
 - **Package Manager**: npm workspaces
 
 ### Planned Additions

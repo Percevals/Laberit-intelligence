@@ -19,14 +19,14 @@ import {
   type ImmunityDimensionState
 } from '@/components';
 import { ScenarioQuestionCard } from '@features/assessment/ScenarioQuestionCard';
-import { lightAssessmentAdapter } from '@services/question-adapter';
+import { assessmentAdapter } from '@services/question-adapter';
 import { 
   generateInsightRevelation, 
   generateCuriosityHook,
   type InsightRevelation 
 } from '@/services';
 import type { BusinessModelScenarioId } from '@core/types/pain-scenario.types';
-import type { LightAssessmentQuestion } from '@services/question-adapter/light-assessment-adapter';
+import type { AssessmentQuestion } from '@services/question-adapter/assessment-adapter';
 
 const DIMENSION_ORDER: DIIDimension[] = ['TRD', 'AER', 'HFP', 'BRI', 'RRG'];
 
@@ -66,11 +66,11 @@ export function ImmunityBuildingPage() {
   } = useDIIDimensionsStore();
 
   const [currentDimensionIndex, setCurrentDimensionIndex] = useState(0);
-  const [currentQuestion, setCurrentQuestion] = useState<LightAssessmentQuestion | null>(null);
+  const [currentQuestion, setCurrentQuestion] = useState<AssessmentQuestion | null>(null);
   const [loading, setLoading] = useState(true);
   const [showingInsight, setShowingInsight] = useState(false);
   const [currentInsight, setCurrentInsight] = useState<InsightRevelation | null>(null);
-  const [allQuestions, setAllQuestions] = useState<Map<DIIDimension, LightAssessmentQuestion>>(new Map());
+  const [allQuestions, setAllQuestions] = useState<Map<DIIDimension, AssessmentQuestion>>(new Map());
 
   const currentDimension = DIMENSION_ORDER[currentDimensionIndex];
   const answeredDimensions = Object.keys(dimensions) as DIIDimension[];
@@ -129,12 +129,12 @@ export function ImmunityBuildingPage() {
       };
 
       const scenarioId = modelMapping[classification.businessModel] || '1_comercio_hibrido';
-      const questionsMap = new Map<DIIDimension, LightAssessmentQuestion>();
+      const questionsMap = new Map<DIIDimension, AssessmentQuestion>();
 
       // Load all dimension questions
       for (const dimension of DIMENSION_ORDER) {
         try {
-          const question = await lightAssessmentAdapter.getPersonalizedQuestion(
+          const question = await assessmentAdapter.getPersonalizedQuestion(
             scenarioId,
             dimension,
             companySearch.selectedCompany,

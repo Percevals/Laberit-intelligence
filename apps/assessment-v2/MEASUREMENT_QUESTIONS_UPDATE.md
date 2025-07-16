@@ -47,6 +47,7 @@ Successfully updated the DII Assessment from satisfaction-style questions to qua
 - Supports new `measurement_question` field
 - Falls back to `light_question` for backwards compatibility
 - Maintains company context personalization
+- Renamed from `lightAssessmentAdapter` to `assessmentAdapter` for clarity
 
 ---
 
@@ -77,7 +78,7 @@ Options:
 1. `/src/core/types/pain-scenario.types.ts` - New interfaces
 2. `/src/features/assessment/ScenarioQuestionCard.tsx` - Enhanced UI
 3. `/src/services/question-adapter/question-adapter.ts` - Field mapping
-4. `/src/services/question-adapter/light-assessment-adapter.ts` - Data flow
+4. `/src/services/question-adapter/assessment-adapter.ts` - Data flow
 5. `/src/services/assessment/response-interpreter.ts` - Metric interpretation
 6. `/src/services/assessment/assessment-calculator.ts` - Metric passing
 7. `/src/store/assessment-store.ts` - Metric storage

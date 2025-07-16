@@ -28,17 +28,17 @@ Uses available company data:
 ## Usage
 
 ```typescript
-import { lightAssessmentAdapter } from '@services/question-adapter';
+import { assessmentAdapter } from '@services/question-adapter';
 
 // Get personalized questions for all 5 dimensions
-const questions = await lightAssessmentAdapter.getPersonalizedQuestions(
+const questions = await assessmentAdapter.getPersonalizedQuestions(
   '2_software_critico',  // Business model ID
   companyInfo,           // Company data from AI search
   true                   // Critical infrastructure
 );
 
 // Get single personalized question
-const question = await lightAssessmentAdapter.getPersonalizedQuestion(
+const question = await assessmentAdapter.getPersonalizedQuestion(
   '5_servicios_financieros',
   'TRD',  // Specific dimension
   companyInfo,

@@ -23,7 +23,7 @@ import { ModelSelector, QuestionSlider, AIStatusBadge } from '@dii/ui-kit';
 
 ### 5. **TypeScript Preparado**
 - tsconfig.base.json creado
-- tsconfig.json para assessment-light
+- tsconfig.json para assessment-v2
 - Dependencias de tipos agregadas
 
 ### 6. **Script de Build**
@@ -37,7 +37,7 @@ import { ModelSelector, QuestionSlider, AIStatusBadge } from '@dii/ui-kit';
 
 # Opción 2: Comandos manuales
 npm install --workspaces --if-present
-cd apps/assessment-light
+cd apps/assessment-v2
 npm run dev
 ```
 

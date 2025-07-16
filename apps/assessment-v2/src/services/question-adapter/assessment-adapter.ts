@@ -1,6 +1,6 @@
 /**
- * Light Assessment Question Adapter
- * Provides personalized light questions for each DII dimension
+ * Assessment Question Adapter
+ * Provides personalized assessment questions for each DII dimension
  */
 
 import { painScenarioService } from '@services/pain-scenarios';
@@ -11,7 +11,7 @@ import type { AdaptedQuestion, QuestionContext } from './types';
 import { getDimensionQuestions } from '@/core/dii-engine/dimensions-v4';
 import type { BusinessModelId } from '@core/types/business-model.types';
 
-export interface LightAssessmentQuestion {
+export interface AssessmentQuestion {
   dimension: DIIDimension;
   dimensionName: string;
   adaptedQuestion: AdaptedQuestion;
@@ -21,16 +21,16 @@ export interface LightAssessmentQuestion {
   archetypeQuestions?: string[]; // Additional archetype-specific questions
 }
 
-export class LightAssessmentAdapter {
+export class AssessmentAdapter {
   /**
-   * Get all 5 personalized light questions for a company
+   * Get all 5 personalized assessment questions for a company
    */
   async getPersonalizedQuestions(
     businessModelId: BusinessModelScenarioId,
     company: CompanyInfo,
     criticalInfra?: boolean
-  ): Promise<LightAssessmentQuestion[]> {
-    // Get all light questions for this business model
+  ): Promise<AssessmentQuestion[]> {
+    // Get all assessment questions for this business model
     const scenarios = painScenarioService.getBusinessModelScenarios(businessModelId);
     const dimensions: DIIDimension[] = ['TRD', 'AER', 'HFP', 'BRI', 'RRG'];
     
@@ -81,7 +81,7 @@ export class LightAssessmentAdapter {
     dimension: DIIDimension,
     company: CompanyInfo,
     criticalInfra?: boolean
-  ): Promise<LightAssessmentQuestion> {
+  ): Promise<AssessmentQuestion> {
     const scenario = painScenarioService.getScenario(businessModelId, dimension).scenario;
     
     const context: QuestionContext = {
@@ -171,4 +171,4 @@ export class LightAssessmentAdapter {
 }
 
 // Export singleton instance
-export const lightAssessmentAdapter = new LightAssessmentAdapter();
+export const assessmentAdapter = new AssessmentAdapter();

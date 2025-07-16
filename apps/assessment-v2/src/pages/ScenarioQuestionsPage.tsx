@@ -10,10 +10,10 @@ import { ArrowRight, ChevronLeft } from 'lucide-react';
 import { useAssessmentStore } from '@/store/assessment-store';
 import { ProgressIndicator } from '@/components/ProgressIndicator';
 import { ScenarioQuestionCard } from '@features/assessment/ScenarioQuestionCard';
-import { lightAssessmentAdapter } from '@services/question-adapter';
+import { assessmentAdapter } from '@services/question-adapter';
 import { AssessmentCalculator } from '@services/assessment';
 import type { BusinessModelScenarioId } from '@core/types/pain-scenario.types';
-import type { LightAssessmentQuestion } from '@services/question-adapter/light-assessment-adapter';
+import type { AssessmentQuestion } from '@services/question-adapter/assessment-adapter';
 // import type { Score, MaturityStage } from '@core/types/dii.types'; // Not needed after refactor
 
 export function ScenarioQuestionsPage() {
@@ -28,7 +28,7 @@ export function ScenarioQuestionsPage() {
     updateProgress
   } = useAssessmentStore();
 
-  const [currentQuestion, setCurrentQuestion] = useState<LightAssessmentQuestion | null>(null);
+  const [currentQuestion, setCurrentQuestion] = useState<AssessmentQuestion | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -74,7 +74,7 @@ export function ScenarioQuestionsPage() {
       const scenarioId = modelMapping[classification.businessModel] || '1_comercio_hibrido';
 
       // For now, get only the TRD question
-      const question = await lightAssessmentAdapter.getPersonalizedQuestion(
+      const question = await assessmentAdapter.getPersonalizedQuestion(
         scenarioId,
         'TRD',
         companySearch.selectedCompany,

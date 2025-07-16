@@ -2,7 +2,7 @@
 
 ## Current State Overview
 
-The Assessment App is located at `/apps/assessment-light/` and is built with:
+The Assessment App is located at `/apps/assessment-v2/` and is built with:
 - **React** (older version - needs evaluation)
 - **Vite** as build tool
 - **GitHub Pages** deployment
@@ -21,7 +21,7 @@ Current issues identified:
 **Action Items:**
 ```bash
 # Run comprehensive audit
-cd apps/assessment-light
+cd apps/assessment-v2
 npm audit
 npm outdated
 
@@ -89,7 +89,7 @@ The intelligence service now provides:
 
 ### Code Organization
 ```
-apps/assessment-light/
+apps/assessment-v2/
 ├── src/
 │   ├── modules/           # New: Modular architecture
 │   │   ├── assessment/    # Assessment engine
@@ -203,7 +203,7 @@ apps/assessment-light/
 
 ```bash
 # Navigate to assessment app
-cd apps/assessment-light
+cd apps/assessment-v2
 
 # Check current state
 npm list --depth=0
@@ -222,7 +222,7 @@ ls ../../intelligence/weekly-reports/
 
 - Intelligence Service Docs: `/intelligence/README.md`
 - Business Model Mapper: `/docs/business-model-mapper-implementation.md`
-- Current Assessment App: `https://percevals.github.io/Laberit-intelligence/apps/assessment-light/`
+- Current Assessment App: `https://percevals.github.io/Laberit-intelligence/apps/assessment-v2/`
 - Intelligence Hub: `https://percevals.github.io/Laberit-intelligence/intelligence/`
 
 ---

@@ -22,13 +22,13 @@ fi
 echo -e "${YELLOW}🏗️  Building packages...${NC}"
 npm run build --workspaces --if-present || true
 
-# Step 3: Build assessment-light
-echo -e "${YELLOW}🎯 Building assessment-light...${NC}"
-cd apps/assessment-light
+# Step 3: Build assessment-v2
+echo -e "${YELLOW}🎯 Building assessment-v2...${NC}"
+cd apps/assessment-v2
 npm run build
 
 if [ $? -ne 0 ]; then
-    echo -e "${RED}❌ Failed to build assessment-light${NC}"
+    echo -e "${RED}❌ Failed to build assessment-v2${NC}"
     exit 1
 fi
 

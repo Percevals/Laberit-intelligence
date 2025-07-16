@@ -3,8 +3,8 @@
 ## Overview
 
 This monorepo contains the DII Assessment Platform ecosystem, which includes:
-- **Assessment Light**: Quick assessment tool (30 min, free/freemium)
-- **Assessment Premium**: Comprehensive consultancy platform (2-5 days, paid)
+- **Assessment V2**: Comprehensive assessment platform with intelligent features
+- **Intelligence Services**: AI-powered threat analysis and business intelligence
 - **Shared Packages**: Reusable components and utilities
 
 ## Structure
@@ -12,8 +12,8 @@ This monorepo contains the DII Assessment Platform ecosystem, which includes:
 ```
 dii-assessment-platform/
 ├── apps/
-│   ├── assessment-light/        # Current Quick Assessment
-│   └── assessment-premium/      # Premium Platform (coming soon)
+│   └── assessment-v2/           # Main Assessment Platform
+├── intelligence/                # AI & Threat Intelligence Services
 ├── packages/                    # Shared packages (coming soon)
 │   ├── @dii/core               # Core DII calculations
 │   ├── @dii/types              # TypeScript types

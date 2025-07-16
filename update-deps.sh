@@ -3,9 +3,9 @@
 echo "🔄 Actualizando dependencias de forma segura..."
 echo "============================================"
 
-# Actualizar assessment-light
-echo "📦 Actualizando Assessment Light..."
-cd apps/assessment-light
+# Actualizar assessment-v2
+echo "📦 Actualizando Assessment V2..."
+cd apps/assessment-v2
 
 # Limpiar cache
 rm -rf node_modules package-lock.json

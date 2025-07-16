@@ -30,7 +30,7 @@ import {
   type ImmunityDimensionState
 } from '@/components';
 import { ScenarioQuestionCard } from '@features/assessment/ScenarioQuestionCard';
-import { lightAssessmentAdapter } from '@services/question-adapter';
+import { assessmentAdapter } from '@services/question-adapter';
 import { 
   generateInsightRevelation, 
   generateCuriosityHook,
@@ -42,7 +42,7 @@ import {
   type SkipRecommendation 
 } from '@/services/dimension-orchestrator';
 import type { BusinessModelScenarioId } from '@core/types/pain-scenario.types';
-import type { LightAssessmentQuestion } from '@services/question-adapter/light-assessment-adapter';
+import type { AssessmentQuestion } from '@services/question-adapter/assessment-adapter';
 import { cn } from '@shared/utils/cn';
 import { AsyncErrorBoundary } from '@/components/ErrorBoundary';
 import { DII_V4_DIMENSIONS } from '@/core/dii-engine/dimensions-v4';
@@ -208,11 +208,11 @@ export function AdaptiveImmunityBuildingPage() {
   // State
   const [orchestration, setOrchestration] = useState<OrchestrationResult | null>(null);
   const [currentDimension, setCurrentDimension] = useState<DIIDimension | null>(null);
-  const [currentQuestion, setCurrentQuestion] = useState<LightAssessmentQuestion | null>(null);
+  const [currentQuestion, setCurrentQuestion] = useState<AssessmentQuestion | null>(null);
   const [loading, setLoading] = useState(true);
   const [showingInsight, setShowingInsight] = useState(false);
   const [currentInsight, setCurrentInsight] = useState<InsightRevelation | null>(null);
-  const [allQuestions, setAllQuestions] = useState<Map<DIIDimension, LightAssessmentQuestion>>(new Map());
+  const [allQuestions, setAllQuestions] = useState<Map<DIIDimension, AssessmentQuestion>>(new Map());
   const [showSmartSkip, setShowSmartSkip] = useState(false);
   const [skipRecommendations, setSkipRecommendations] = useState<SkipRecommendation[]>([]);
   const [transitionMessage, setTransitionMessage] = useState<string | null>(null);
@@ -328,12 +328,12 @@ export function AdaptiveImmunityBuildingPage() {
       };
 
       const scenarioId = modelMapping[classification.businessModel] || '1_comercio_hibrido';
-      const questionsMap = new Map<DIIDimension, LightAssessmentQuestion>();
+      const questionsMap = new Map<DIIDimension, AssessmentQuestion>();
       let failedQuestions = 0;
 
       for (const dimension of ['TRD', 'AER', 'HFP', 'BRI', 'RRG'] as DIIDimension[]) {
         try {
-          const question = await lightAssessmentAdapter.getPersonalizedQuestion(
+          const question = await assessmentAdapter.getPersonalizedQuestion(
             scenarioId,
             dimension,
             companySearch.selectedCompany,

@@ -5,7 +5,7 @@
 
 import { DIICalculator } from '@core/dii-engine/calculator';
 import { ResponseInterpreter } from './response-interpreter';
-// import { lightAssessmentAdapter } from '@services/question-adapter'; // Reserved for future use
+// import { assessmentAdapter } from '@services/question-adapter'; // Reserved for future use
 import type { BusinessModel } from '@core/types/business-model.types';
 import type { BusinessModelScenarioId, DIIDimension } from '@core/types/pain-scenario.types';
 import type { DIIDimensions, DIIScore } from '@core/types/dii.types';

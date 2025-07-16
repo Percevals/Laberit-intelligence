@@ -69,7 +69,7 @@ This document summarizes the integration of the immunity building components int
 3. **Question Loading**:
    - All 5 dimension questions loaded upfront
    - Personalized based on company and business model
-   - Uses existing `lightAssessmentAdapter`
+   - Uses existing `assessmentAdapter`
 
 4. **Progressive Experience**:
    - After each answer, insight is shown
