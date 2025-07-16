@@ -13,7 +13,8 @@ import {
   FileSpreadsheet,
   X,
   Loader2,
-  AlertTriangle
+  AlertTriangle,
+  Edit
 } from 'lucide-react';
 import { cn } from '@shared/utils/cn';
 import type { Company, DIIBusinessModel } from '@/database/types';
@@ -23,6 +24,18 @@ import { BUSINESS_MODEL_DEFINITIONS } from '@/core/business-model/business-model
 // Required CSV columns
 const REQUIRED_COLUMNS = ['company_name', 'industry'] as const;
 const OPTIONAL_COLUMNS = ['employees', 'revenue', 'headquarters', 'country', 'website', 'description'] as const;
+
+// Business model colors
+const BUSINESS_MODEL_COLORS: Record<DIIBusinessModel, string> = {
+  COMERCIO_HIBRIDO: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
+  SOFTWARE_CRITICO: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
+  SERVICIOS_DATOS: 'bg-green-500/20 text-green-400 border-green-500/30',
+  ECOSISTEMA_DIGITAL: 'bg-indigo-500/20 text-indigo-400 border-indigo-500/30',
+  SERVICIOS_FINANCIEROS: 'bg-amber-500/20 text-amber-400 border-amber-500/30',
+  INFRAESTRUCTURA_HEREDADA: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
+  CADENA_SUMINISTRO: 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30',
+  INFORMACION_REGULADA: 'bg-rose-500/20 text-rose-400 border-rose-500/30'
+};
 
 interface ImportResult {
   success: number;
@@ -35,7 +48,9 @@ interface ImportResult {
     message: string;
     businessModel?: DIIBusinessModel;
     confidence?: number;
+    data?: Partial<Company>;
   }>;
+  pendingCompanies?: Array<Partial<Company>>;
 }
 
 interface BulkImportExportProps {
@@ -44,11 +59,20 @@ interface BulkImportExportProps {
   onClose?: () => void;
 }
 
+interface ReviewCompany extends Partial<Company> {
+  originalIndex: number;
+  originalModel: DIIBusinessModel;
+  originalConfidence: number;
+}
+
 export function BulkImportExport({ onImport, companies, onClose }: BulkImportExportProps) {
   const [importing, setImporting] = useState(false);
   const [importResult, setImportResult] = useState<ImportResult | null>(null);
   const [dragActive, setDragActive] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [reviewMode, setReviewMode] = useState(false);
+  const [reviewCompanies, setReviewCompanies] = useState<ReviewCompany[]>([]);
+  const [editingIndex, setEditingIndex] = useState<number | null>(null);
 
   // Parse CSV content
   const parseCSV = (content: string): { headers: string[]; rows: string[][] } => {
@@ -199,34 +223,26 @@ export function BulkImportExport({ onImport, companies, onClose }: BulkImportExp
         companiesToImport.push(companyData);
 
         // Track results
-        if (classification.confidence >= 70) {
+        const status = classification.confidence >= 70 ? 'success' : 'warning';
+        if (status === 'success') {
           result.success++;
-          result.details.push({
-            row: rowNum,
-            company: companyName,
-            status: 'success',
-            message: `Classified as ${BUSINESS_MODEL_DEFINITIONS[classification.model].name}`,
-            businessModel: classification.model,
-            confidence: classification.confidence
-          });
         } else {
           result.warnings++;
-          result.details.push({
-            row: rowNum,
-            company: companyName,
-            status: 'warning',
-            message: `Low confidence (${classification.confidence}%). Review classification`,
-            businessModel: classification.model,
-            confidence: classification.confidence
-          });
         }
+        
+        result.details.push({
+          row: rowNum,
+          company: companyName,
+          status,
+          message: `${BUSINESS_MODEL_DEFINITIONS[classification.model].name} (${classification.confidence}% confianza)`,
+          businessModel: classification.model,
+          confidence: classification.confidence,
+          data: companyData
+        });
       }
 
-      // Import companies
-      if (companiesToImport.length > 0) {
-        await onImport(companiesToImport);
-      }
-
+      // Store pending companies for review instead of auto-importing
+      result.pendingCompanies = companiesToImport;
       setImportResult(result);
     } catch (error) {
       setImportResult({
@@ -401,7 +417,7 @@ export function BulkImportExport({ onImport, companies, onClose }: BulkImportExp
         )}
 
         {/* Import Results */}
-        {importResult && (
+        {importResult && !reviewMode && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -469,6 +485,230 @@ export function BulkImportExport({ onImport, companies, onClose }: BulkImportExp
                   ))}
                 </tbody>
               </table>
+            </div>
+
+            {/* Review Button */}
+            {importResult.pendingCompanies && importResult.pendingCompanies.length > 0 && (
+              <div className="mt-4 flex justify-end">
+                <button
+                  onClick={() => {
+                    const companiesForReview = importResult.pendingCompanies!.map((company, index) => ({
+                      ...company,
+                      originalIndex: index,
+                      originalModel: company.dii_business_model!,
+                      originalConfidence: company.confidence_score!
+                    }));
+                    setReviewCompanies(companiesForReview);
+                    setReviewMode(true);
+                  }}
+                  className="btn-primary flex items-center gap-2"
+                >
+                  <Edit className="w-4 h-4" />
+                  Revisar y Editar Clasificaciones
+                </button>
+              </div>
+            )}
+          </motion.div>
+        )}
+
+        {/* Review Mode */}
+        {reviewMode && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="mt-6"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <h4 className="text-lg font-semibold text-dark-text-primary">Revisar Clasificaciones</h4>
+              <button
+                onClick={() => {
+                  setReviewMode(false);
+                  setEditingIndex(null);
+                }}
+                className="text-dark-text-secondary hover:text-dark-text-primary"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="space-y-3 max-h-96 overflow-y-auto">
+              {reviewCompanies.map((company, index) => (
+                <div key={index} className="bg-dark-bg border border-dark-border rounded-lg p-4">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <h5 className="font-medium text-dark-text-primary">{company.name}</h5>
+                      <p className="text-sm text-dark-text-secondary mt-1">
+                        {company.industry_traditional} • {company.employees ? `${company.employees} empleados` : 'Sin datos de empleados'}
+                      </p>
+                      
+                      {editingIndex === index ? (
+                        <div className="mt-3 space-y-3">
+                          <div>
+                            <label className="block text-sm font-medium text-dark-text-secondary mb-1">
+                              Modelo de Negocio
+                            </label>
+                            <select
+                              value={company.dii_business_model}
+                              onChange={(e) => {
+                                const updated = [...reviewCompanies];
+                                updated[index] = {
+                                  ...updated[index],
+                                  dii_business_model: e.target.value as DIIBusinessModel
+                                };
+                                setReviewCompanies(updated);
+                              }}
+                              className="w-full bg-dark-surface border border-dark-border rounded-lg px-3 py-2 text-dark-text-primary"
+                            >
+                              {Object.entries(BUSINESS_MODEL_DEFINITIONS).map(([key, def]) => (
+                                <option key={key} value={key}>
+                                  {def.name}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-dark-text-secondary mb-1">
+                              Confianza (%)
+                            </label>
+                            <input
+                              type="number"
+                              min="0"
+                              max="100"
+                              value={Math.round((company.confidence_score || 0) * 100)}
+                              onChange={(e) => {
+                                const updated = [...reviewCompanies];
+                                updated[index] = {
+                                  ...updated[index],
+                                  confidence_score: parseInt(e.target.value) / 100
+                                };
+                                setReviewCompanies(updated);
+                              }}
+                              className="w-full bg-dark-surface border border-dark-border rounded-lg px-3 py-2 text-dark-text-primary"
+                            />
+                          </div>
+                          <div className="flex gap-2">
+                            <button
+                              onClick={() => setEditingIndex(null)}
+                              className="btn-secondary text-sm px-3 py-1"
+                            >
+                              Guardar
+                            </button>
+                            <button
+                              onClick={() => {
+                                const updated = [...reviewCompanies];
+                                updated[index] = {
+                                  ...updated[index],
+                                  dii_business_model: company.originalModel,
+                                  confidence_score: company.originalConfidence
+                                };
+                                setReviewCompanies(updated);
+                                setEditingIndex(null);
+                              }}
+                              className="text-sm text-dark-text-secondary hover:text-dark-text-primary px-3 py-1"
+                            >
+                              Cancelar
+                            </button>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="mt-3">
+                          <div className="flex items-center gap-4">
+                            <span className={cn(
+                              "px-3 py-1 rounded-full text-sm border",
+                              BUSINESS_MODEL_COLORS[company.dii_business_model!]
+                            )}>
+                              {BUSINESS_MODEL_DEFINITIONS[company.dii_business_model!].name}
+                            </span>
+                            <span className="text-sm text-dark-text-secondary">
+                              {Math.round((company.confidence_score || 0) * 100)}% confianza
+                            </span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                    
+                    <div className="flex items-center gap-2 ml-4">
+                      {editingIndex !== index && (
+                        <button
+                          onClick={() => setEditingIndex(index)}
+                          className="p-2 text-primary-600 hover:bg-primary-600/10 rounded-lg transition-colors"
+                          title="Editar clasificación"
+                        >
+                          <Edit className="w-4 h-4" />
+                        </button>
+                      )}
+                      <button
+                        onClick={() => {
+                          const updated = reviewCompanies.filter((_, i) => i !== index);
+                          setReviewCompanies(updated);
+                        }}
+                        className="p-2 text-red-400 hover:bg-red-600/10 rounded-lg transition-colors"
+                        title="Eliminar de la importación"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Import Actions */}
+            <div className="mt-6 flex justify-between">
+              <div className="text-sm text-dark-text-secondary">
+                {reviewCompanies.length} empresas listas para importar
+              </div>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => {
+                    setReviewMode(false);
+                    setReviewCompanies([]);
+                    setImportResult(null);
+                  }}
+                  className="btn-secondary"
+                >
+                  Cancelar
+                </button>
+                <button
+                  onClick={async () => {
+                    setImporting(true);
+                    try {
+                      await onImport(reviewCompanies);
+                      setReviewMode(false);
+                      setReviewCompanies([]);
+                      setImportResult({
+                        success: reviewCompanies.length,
+                        errors: 0,
+                        warnings: 0,
+                        details: [{
+                          row: 0,
+                          company: 'Importación completada',
+                          status: 'success',
+                          message: `${reviewCompanies.length} empresas importadas exitosamente`
+                        }]
+                      });
+                    } catch (error) {
+                      console.error('Import error:', error);
+                    } finally {
+                      setImporting(false);
+                    }
+                  }}
+                  disabled={importing || reviewCompanies.length === 0}
+                  className="btn-primary flex items-center gap-2"
+                >
+                  {importing ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      Importando...
+                    </>
+                  ) : (
+                    <>
+                      <CheckCircle2 className="w-4 h-4" />
+                      Confirmar Importación
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
           </motion.div>
         )}
