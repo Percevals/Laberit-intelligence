@@ -26,7 +26,7 @@ async function runMigrations() {
     const executed = new Set(executedMigrations.map(row => row.filename));
 
     // Read migration files
-    const migrationsDir = path.join(__dirname, '..', '..', '..', 'src', 'database', 'migrations');
+    const migrationsDir = path.join(__dirname, 'migrations');
     const files = fs.readdirSync(migrationsDir)
       .filter(f => f.endsWith('.sql') && !f.includes('rollback'))
       .sort();

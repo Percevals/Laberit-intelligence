@@ -3,7 +3,7 @@
 /**
  * Import DII v4.0 historical data into PostgreSQL database
  * 
- * Usage: node scripts/import-historical-data.mjs [--dry-run] [--batch-size=10]
+ * Usage: node scripts/import-historical-data.mjs [--dry-run] [--batch-size=10] [--skip=33]
  */
 
 import { promises as fs } from 'fs';
@@ -19,12 +19,15 @@ const __dirname = path.dirname(__filename);
 const API_BASE_URL = process.env.API_URL || 'http://localhost:3001/api';
 const HISTORICAL_DATA_PATH = path.join(__dirname, '../../../data/dii_v4_historical_data.json');
 const DEFAULT_BATCH_SIZE = 10;
+const DELAY_BETWEEN_REQUESTS = 10000; // 10 second delay between requests to respect rate limits
 
 // Parse command line arguments
 const args = process.argv.slice(2);
 const isDryRun = args.includes('--dry-run');
 const batchSizeArg = args.find(arg => arg.startsWith('--batch-size='));
 const batchSize = batchSizeArg ? parseInt(batchSizeArg.split('=')[1]) : DEFAULT_BATCH_SIZE;
+const skipArg = args.find(arg => arg.startsWith('--skip='));
+const skipCount = skipArg ? parseInt(skipArg.split('=')[1]) : 0;
 
 // Import statistics
 const stats = {
@@ -151,6 +154,13 @@ async function loadHistoricalData() {
 }
 
 /**
+ * Delay helper function
+ */
+async function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+/**
  * Check if company already exists
  */
 async function checkExistingCompany(legacyId) {
@@ -246,8 +256,10 @@ async function processBatch(companies, startIndex) {
   for (let i = 0; i < batch.length; i++) {
     await processCompany(batch[i], startIndex + i);
     
-    // Small delay to avoid overwhelming the API
-    await new Promise(resolve => setTimeout(resolve, 100));
+    // Delay to respect rate limits (100 requests per 15 minutes = ~10 seconds between requests)
+    if (i < batch.length - 1) { // Don't delay after the last item in batch
+      await delay(DELAY_BETWEEN_REQUESTS);
+    }
   }
 }
 
@@ -281,9 +293,19 @@ async function importHistoricalData() {
     console.log(`📈 Business Models: ${models.length}`);
     console.log('');
     
+    // Apply skip if specified
+    const companiesToProcess = companies.slice(skipCount);
+    console.log(`🔄 ${skipCount > 0 ? `Skipping first ${skipCount} companies, ` : ''}Processing ${companiesToProcess.length} companies`);
+    
     // Process in batches
-    for (let i = 0; i < companies.length; i += batchSize) {
-      await processBatch(companies, i);
+    for (let i = 0; i < companiesToProcess.length; i += batchSize) {
+      await processBatch(companiesToProcess, i);
+      
+      // Add a longer delay between batches to respect rate limits
+      if (i + batchSize < companiesToProcess.length) {
+        console.log(`\n⏳ Waiting 15 seconds before next batch to respect rate limits...`);
+        await delay(15000);
+      }
     }
     
     // Print summary
