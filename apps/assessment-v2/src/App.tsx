@@ -23,8 +23,9 @@ import { ClassificationPageV4 } from './pages/ClassificationPageV4';
 // import { ImmunityBuildingPage } from './pages/ImmunityBuildingPage'; // Replaced by AdaptiveImmunityBuildingPage
 import { AdaptiveImmunityBuildingPage } from './pages/AdaptiveImmunityBuildingPage';
 // import { ResultsPage } from './pages/ResultsPage'; // Replaced by EnhancedResultsPage
-// import { EnhancedResultsPage } from './pages/EnhancedResultsPage'; // Replaced by ImmunityResultsPage
-import { ImmunityResultsPage } from './pages/ImmunityResultsPage';
+// import { EnhancedResultsPage } from './pages/EnhancedResultsPage'; // Replaced by ImmunityResultsPage  
+// import { ImmunityResultsPage } from './pages/ImmunityResultsPage'; // Replaced by BusinessValueResultsPage
+import { BusinessValueResultsPage } from './pages/BusinessValueResultsPage';
 import { AdminPage } from './pages/AdminPage';
 // Debug pages removed for production
 
@@ -68,7 +69,7 @@ export default function App() {
                   {/* <Route path="/assessment/smart-classify" element={<SmartClassificationPage />} /> Removed - unused duplicate */}
                   <Route path="/assessment/classify" element={<ClassificationPageV4 />} />
                   <Route path="/assessment/questions" element={<AdaptiveImmunityBuildingPage />} />
-                  <Route path="/assessment/results" element={<ImmunityResultsPage />} />
+                  <Route path="/assessment/results" element={<BusinessValueResultsPage />} />
                   <Route path="/admin" element={<AdminPage />} />
                   {/* Debug routes removed for production */}
                 </Routes>
