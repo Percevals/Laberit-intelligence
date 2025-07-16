@@ -48,11 +48,20 @@ jobs:
           
       - name: Install dependencies
         run: |
-          # Install root dependencies (includes turbo)
-          npm install
+          # Clean npm cache and install to avoid optional dependency issues
+          npm cache clean --force
+          rm -rf node_modules package-lock.json
+          npm install --legacy-peer-deps
           
       - name: Build with Turbo
         run: |
+          # Clean assessment-v2 dependencies and reinstall to fix rollup issue
+          cd apps/assessment-v2
+          npm cache clean --force
+          rm -rf node_modules package-lock.json
+          npm install --legacy-peer-deps
+          cd ../..
+          
           # Build all packages and apps using Turbo
           npm run build
           # Note: The packages use source files directly (no compilation needed)
