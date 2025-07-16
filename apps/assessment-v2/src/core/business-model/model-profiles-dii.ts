@@ -18,6 +18,13 @@ export const DII_MODEL_PROFILES: Record<BusinessModelId, ModelProfile> = {
       avg: 45
     },
     
+    valueLoss: {
+      primaryImpact: 'operations',
+      typicalLossPerHour: '$5-20K',
+      recoveryDifficulty: 'low',
+      worstNightmare: 'Ineficiencia prolongada que erosiona márgenes'
+    },
+    
     inherentStrengths: [
       'Physical channel provides fallback during digital outages',
       'Diverse revenue streams reduce single point failures',

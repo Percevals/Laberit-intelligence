@@ -15,7 +15,7 @@ import type {
 import type { BusinessModel, BusinessModelId } from '@core/types/business-model.types';
 import { Score, Percentage } from '@core/types/brand.types';
 import { validateDimension } from '@core/types/dii.types';
-import { MODEL_PROFILES } from '@core/business-model/model-profiles';
+import { DII_V4_MODEL_PROFILES } from '@core/business-model/model-profiles-dii-v4';
 
 export class DIICalculator {
   /**
@@ -55,7 +55,7 @@ export class DIICalculator {
   ): Score {
     // Get model profile
     const modelId = this.getModelId(businessModel);
-    const profile = MODEL_PROFILES[modelId];
+    const profile = DII_V4_MODEL_PROFILES[modelId];
     
     if (!profile) {
       throw new Error(`Unknown business model: ${businessModel}`);
@@ -138,7 +138,7 @@ export class DIICalculator {
     
     // Otherwise use statistical approximation based on our data
     const modelId = this.getModelId(businessModel);
-    const profile = MODEL_PROFILES[modelId];
+    const profile = DII_V4_MODEL_PROFILES[modelId];
     
     if (!profile) {
       return Percentage(50); // Default to median

@@ -44,6 +44,14 @@ export interface ModelProfile {
     avg: number;
   };
   
+  // Value loss patterns (new in v4.0)
+  valueLoss: {
+    primaryImpact: 'operations' | 'trust' | 'compliance' | 'competitive';
+    typicalLossPerHour: string; // e.g., "$5-20K", "$100K+"
+    recoveryDifficulty: 'low' | 'medium' | 'high' | 'terminal';
+    worstNightmare: string; // What keeps executives up at night
+  };
+  
   // Inherent characteristics
   inherentStrengths: string[];
   fatalFlaws: string[];

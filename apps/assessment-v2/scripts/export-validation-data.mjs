@@ -8,7 +8,7 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import csv from 'csv-parse/sync';
+import { parse } from 'csv-parse/sync';
 import pg from 'pg';
 
 const { Client } = pg;
@@ -29,7 +29,7 @@ async function exportValidationData() {
     console.log('📂 Loading real company names...');
     const csvPath = path.join(__dirname, '../../../data/plantilla_historicalv1.csv');
     const csvContent = await fs.readFile(csvPath, 'utf8');
-    const realCompanies = csv.parse(csvContent, {
+    const realCompanies = parse(csvContent, {
       columns: true,
       skip_empty_lines: true
     });

@@ -17,6 +17,7 @@ import { CompanyConfirmationPage } from './pages/CompanyConfirmationPage';
 import { BusinessModelRevealPage } from './pages/BusinessModelRevealPage';
 // import { SmartClassificationPage } from './pages/SmartClassificationPage'; // Removed - unused duplicate
 import { ClassificationPage } from './pages/ClassificationPage';
+import { ClassificationPageV4 } from './pages/ClassificationPageV4';
 // import { QuestionsPage } from './pages/QuestionsPage'; // Replaced by ScenarioQuestionsPage
 // import { ScenarioQuestionsPage } from './pages/ScenarioQuestionsPage'; // Replaced by ImmunityBuildingPage
 // import { ImmunityBuildingPage } from './pages/ImmunityBuildingPage'; // Replaced by AdaptiveImmunityBuildingPage
@@ -65,7 +66,7 @@ export default function App() {
                   <Route path="/assessment/confirm" element={<CompanyConfirmationPage />} />
                   <Route path="/assessment/business-model" element={<BusinessModelRevealPage />} />
                   {/* <Route path="/assessment/smart-classify" element={<SmartClassificationPage />} /> Removed - unused duplicate */}
-                  <Route path="/assessment/classify" element={<ClassificationPage />} />
+                  <Route path="/assessment/classify" element={<ClassificationPageV4 />} />
                   <Route path="/assessment/questions" element={<AdaptiveImmunityBuildingPage />} />
                   <Route path="/assessment/results" element={<ImmunityResultsPage />} />
                   <Route path="/admin" element={<AdminPage />} />

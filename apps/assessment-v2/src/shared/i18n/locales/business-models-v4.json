@@ -1,0 +1,162 @@
+{
+  "es": {
+    "archetypes": {
+      "custodios": {
+        "name": "Custodios",
+        "description": "Guardianes de activos críticos ajenos",
+        "lossPattern": "Licencia para operar",
+        "typicalLoss": "$100K+/hora"
+      },
+      "conectores": {
+        "name": "Conectores",
+        "description": "Facilitadores de transacciones entre desconocidos",
+        "lossPattern": "Usuarios del ecosistema",
+        "typicalLoss": "$50-100K/hora"
+      },
+      "procesadores": {
+        "name": "Procesadores",
+        "description": "Transformadores de información en decisiones",
+        "lossPattern": "Ventaja competitiva",
+        "typicalLoss": "$20-50K/hora"
+      },
+      "redundantes": {
+        "name": "Redundantes",
+        "description": "Operadores con múltiples caminos al valor",
+        "lossPattern": "Eficiencia operacional",
+        "typicalLoss": "$5-20K/hora"
+      }
+    },
+    "questions": {
+      "systemFailure": "¿Qué pasa si sus sistemas fallan completamente?",
+      "worstNightmare": "¿Cuál es su peor pesadilla?"
+    },
+    "impacts": {
+      "operations": "Operacional",
+      "trust": "Confianza",
+      "compliance": "Cumplimiento",
+      "competitive": "Competitivo"
+    },
+    "models": {
+      "COMERCIO_HIBRIDO": {
+        "name": "Comercio Híbrido",
+        "description": "Retailers con tiendas físicas y canales digitales",
+        "worstNightmare": "Ineficiencia prolongada que erosiona márgenes"
+      },
+      "SOFTWARE_CRITICO": {
+        "name": "Software Crítico",
+        "description": "ERPs, CRMs y sistemas de gestión empresarial",
+        "worstNightmare": "Competidor copia nuestro algoritmo/proceso diferenciador"
+      },
+      "SERVICIOS_DATOS": {
+        "name": "Servicios de Datos",
+        "description": "Analytics, scoring crediticio e inteligencia de mercado",
+        "worstNightmare": "Data poisoning destruye confiabilidad del modelo"
+      },
+      "ECOSISTEMA_DIGITAL": {
+        "name": "Ecosistema Digital",
+        "description": "Marketplaces y plataformas multi-sided",
+        "worstNightmare": "Fraude viral causa éxodo masivo de usuarios"
+      },
+      "SERVICIOS_FINANCIEROS": {
+        "name": "Servicios Financieros",
+        "description": "Bancos, aseguradoras y administradoras de fondos",
+        "worstNightmare": "Breach masivo pierde licencia bancaria"
+      },
+      "INFRAESTRUCTURA_HEREDADA": {
+        "name": "Infraestructura Heredada",
+        "description": "Utilities, gobierno y sistemas industriales",
+        "worstNightmare": "Apagón masivo por semanas"
+      },
+      "CADENA_SUMINISTRO": {
+        "name": "Cadena de Suministro",
+        "description": "Operadores logísticos con tracking digital",
+        "worstNightmare": "Pérdida masiva de mercancía sin trazabilidad"
+      },
+      "INFORMACION_REGULADA": {
+        "name": "Información Regulada",
+        "description": "Healthcare, educación y datos sensibles",
+        "worstNightmare": "Filtración masiva de datos médicos/personales"
+      }
+    }
+  },
+  "en": {
+    "archetypes": {
+      "custodios": {
+        "name": "Custodians",
+        "description": "Guardians of critical third-party assets",
+        "lossPattern": "License to operate",
+        "typicalLoss": "$100K+/hour"
+      },
+      "conectores": {
+        "name": "Connectors",
+        "description": "Facilitators of transactions between strangers",
+        "lossPattern": "Ecosystem users",
+        "typicalLoss": "$50-100K/hour"
+      },
+      "procesadores": {
+        "name": "Processors",
+        "description": "Transformers of information into decisions",
+        "lossPattern": "Competitive advantage",
+        "typicalLoss": "$20-50K/hour"
+      },
+      "redundantes": {
+        "name": "Redundants",
+        "description": "Operators with multiple paths to value",
+        "lossPattern": "Operational efficiency",
+        "typicalLoss": "$5-20K/hour"
+      }
+    },
+    "questions": {
+      "systemFailure": "What happens if your systems fail completely?",
+      "worstNightmare": "What is your worst nightmare?"
+    },
+    "impacts": {
+      "operations": "Operational",
+      "trust": "Trust",
+      "compliance": "Compliance",
+      "competitive": "Competitive"
+    },
+    "models": {
+      "COMERCIO_HIBRIDO": {
+        "name": "Hybrid Commerce",
+        "description": "Retailers with physical stores and digital channels",
+        "worstNightmare": "Prolonged inefficiency eroding margins"
+      },
+      "SOFTWARE_CRITICO": {
+        "name": "Critical Software",
+        "description": "ERPs, CRMs, and business management systems",
+        "worstNightmare": "Competitor copies our differentiating algorithm/process"
+      },
+      "SERVICIOS_DATOS": {
+        "name": "Data Services",
+        "description": "Analytics, credit scoring, and market intelligence",
+        "worstNightmare": "Data poisoning destroys model reliability"
+      },
+      "ECOSISTEMA_DIGITAL": {
+        "name": "Digital Ecosystem",
+        "description": "Marketplaces and multi-sided platforms",
+        "worstNightmare": "Viral fraud causes massive user exodus"
+      },
+      "SERVICIOS_FINANCIEROS": {
+        "name": "Financial Services",
+        "description": "Banks, insurers, and fund administrators",
+        "worstNightmare": "Massive breach loses banking license"
+      },
+      "INFRAESTRUCTURA_HEREDADA": {
+        "name": "Legacy Infrastructure",
+        "description": "Utilities, government, and industrial systems",
+        "worstNightmare": "Massive blackout for weeks"
+      },
+      "CADENA_SUMINISTRO": {
+        "name": "Supply Chain",
+        "description": "Logistics operators with digital tracking",
+        "worstNightmare": "Massive merchandise loss without traceability"
+      },
+      "INFORMACION_REGULADA": {
+        "name": "Regulated Information",
+        "description": "Healthcare, education, and sensitive data",
+        "worstNightmare": "Massive leak of medical/personal data"
+      }
+    }
+  }
+}
