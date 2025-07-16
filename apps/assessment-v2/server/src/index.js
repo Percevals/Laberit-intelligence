@@ -8,6 +8,7 @@ import dotenv from 'dotenv';
 import { verifyConnection } from './database/connection.js';
 import runMigrations from './database/migrate.js';
 import companiesRoutes from './routes/companies.routes.js';
+import companyHistoryRoutes from './routes/company-history.routes.js';
 
 // Load environment variables
 dotenv.config();
@@ -51,6 +52,7 @@ app.get('/health', (req, res) => {
 
 // API routes
 app.use('/api/companies', companiesRoutes);
+app.use('/api/company-history', companyHistoryRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
