@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { cn } from '@shared/utils/cn';
 import type { InsightRevelation } from '@/services/insight-revelation-service';
+import { DII_V4_DIMENSIONS } from '@/core/dii-engine/dimensions-v4';
 
 interface InsightRevelationProps {
   insight: InsightRevelation;
@@ -143,7 +144,7 @@ export function InsightRevelationCard({
               <Lightbulb className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" />
               <div>
                 <p className="text-sm font-medium text-dark-text">
-                  {t('assessment.nextInsight', 'Siguiente Insight')}: {nextDimensionHint.dimension}
+                  {t('assessment.nextInsight', 'Siguiente Insight')}: {nextDimensionHint.dimension} - {DII_V4_DIMENSIONS[nextDimensionHint.dimension as keyof typeof DII_V4_DIMENSIONS]?.nameES || nextDimensionHint.dimension}
                 </p>
                 <p className="text-sm text-dark-text-secondary mt-0.5">
                   {nextDimensionHint.teaser}
@@ -231,7 +232,7 @@ export function InsightSummary({ insights, currentDII }: InsightSummaryProps) {
               {strongDimensions.map(insight => (
                 <li key={insight.dimension} className="text-sm text-dark-text-secondary flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-green-500 rounded-full" />
-                  {insight.dimension}: Top {100 - insight.peerComparison.percentile}%
+                  {DII_V4_DIMENSIONS[insight.dimension as keyof typeof DII_V4_DIMENSIONS]?.nameES || insight.dimension}: Top {100 - insight.peerComparison.percentile}%
                 </li>
               ))}
             </ul>
@@ -251,7 +252,7 @@ export function InsightSummary({ insights, currentDII }: InsightSummaryProps) {
               {weakDimensions.map(insight => (
                 <li key={insight.dimension} className="text-sm text-dark-text-secondary flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-red-500 rounded-full" />
-                  {insight.dimension}: Bottom {insight.peerComparison.percentile}%
+                  {DII_V4_DIMENSIONS[insight.dimension as keyof typeof DII_V4_DIMENSIONS]?.nameES || insight.dimension}: Bottom {insight.peerComparison.percentile}%
                 </li>
               ))}
             </ul>

@@ -6,9 +6,10 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { AlertCircle, CheckCircle } from 'lucide-react';
+import { AlertCircle, CheckCircle, Target, AlertTriangle, Shield, Clock, Zap } from 'lucide-react';
 import { cn } from '@shared/utils/cn';
 import type { DIIDimension, ResponseOption } from '@core/types/pain-scenario.types';
+import { DII_V4_DIMENSIONS } from '@/core/dii-engine/dimensions-v4';
 
 interface ScenarioQuestionCardProps {
   dimension: DIIDimension;
@@ -18,6 +19,7 @@ interface ScenarioQuestionCardProps {
   contextForUser: string;
   currentResponse?: number | undefined;
   onResponse: (value: number, metric: { hours?: number; percentage?: number; ratio?: number; multiplier?: number }) => void;
+  archetypeQuestions?: string[];
 }
 
 export function ScenarioQuestionCard({
@@ -27,7 +29,8 @@ export function ScenarioQuestionCard({
   responseOptions,
   contextForUser,
   currentResponse,
-  onResponse
+  onResponse,
+  archetypeQuestions
 }: ScenarioQuestionCardProps) {
   const { t } = useTranslation();
   const [selectedValue, setSelectedValue] = useState(currentResponse || 0);
@@ -56,16 +59,26 @@ export function ScenarioQuestionCard({
     }
   };
 
-  // Dimension descriptions
-  const dimensionInfo: Record<DIIDimension, { name: string; icon: typeof AlertCircle }> = {
-    TRD: { name: t('dimensions.TRD', 'Resiliencia ante Amenazas'), icon: AlertCircle },
-    AER: { name: t('dimensions.AER', 'Exposición de Activos'), icon: AlertCircle },
-    HFP: { name: t('dimensions.HFP', 'Factor Humano'), icon: AlertCircle },
-    BRI: { name: t('dimensions.BRI', 'Radio de Impacto'), icon: AlertCircle },
-    RRG: { name: t('dimensions.RRG', 'Brecha de Recuperación'), icon: AlertCircle }
+  // Get dimension icon based on type
+  const getIcon = () => {
+    switch (dimension) {
+      case 'AER':
+        return Target;
+      case 'HFP':
+        return AlertTriangle;
+      case 'BRI':
+        return Shield;
+      case 'TRD':
+        return Clock;
+      case 'RRG':
+        return Zap;
+      default:
+        return AlertCircle;
+    }
   };
 
-  const dimensionDetails = dimensionInfo[dimension];
+  const Icon = getIcon();
+  const dimInfo = DII_V4_DIMENSIONS[dimension];
 
   return (
     <motion.div
@@ -76,10 +89,10 @@ export function ScenarioQuestionCard({
       {/* Header */}
       <div className="flex items-center gap-3 mb-6">
         <div className="w-12 h-12 bg-primary-600/10 rounded-lg flex items-center justify-center">
-          <dimensionDetails.icon className="w-6 h-6 text-primary-600" />
+          <Icon className="w-6 h-6 text-primary-600" />
         </div>
         <div>
-          <h3 className="text-lg font-semibold">{dimensionName}</h3>
+          <h3 className="text-lg font-semibold">{dimInfo.nameES}</h3>
           <p className="text-sm text-dark-text-secondary">
             {t('assessment.dimension', 'Dimensión')}: {dimension}
           </p>
@@ -92,10 +105,36 @@ export function ScenarioQuestionCard({
       </div>
 
       {/* Context Help */}
-      <div className="mb-8 p-4 bg-primary-600/5 border border-primary-600/20 rounded-lg">
-        <p className="text-sm text-dark-text-secondary leading-relaxed">
-          <span className="font-medium text-primary-600">¿Por qué es importante?</span> {contextForUser}
-        </p>
+      <div className="mb-8 space-y-3">
+        <div className="p-4 bg-primary-600/5 border border-primary-600/20 rounded-lg">
+          <p className="text-sm text-dark-text-secondary leading-relaxed">
+            <span className="font-medium text-primary-600">¿Por qué es importante?</span> {contextForUser}
+          </p>
+        </div>
+        
+        {/* Holistic Impact Explanation */}
+        <div className="p-4 bg-purple-600/5 border border-purple-600/20 rounded-lg">
+          <p className="text-sm text-dark-text-secondary leading-relaxed">
+            <span className="font-medium text-purple-400">Impacto holístico:</span> {dimInfo.description.es}
+          </p>
+        </div>
+        
+        {/* Archetype-Specific Questions */}
+        {archetypeQuestions && archetypeQuestions.length > 0 && (
+          <div className="p-4 bg-blue-600/5 border border-blue-600/20 rounded-lg">
+            <p className="text-sm font-medium text-blue-400 mb-2">
+              Preguntas específicas para su arquetipo:
+            </p>
+            <ul className="space-y-1">
+              {archetypeQuestions.map((q, idx) => (
+                <li key={idx} className="text-sm text-dark-text-secondary flex items-start gap-2">
+                  <span className="text-blue-400 mt-0.5">•</span>
+                  <span>{q}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
 
       {/* Response Scale */}

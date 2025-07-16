@@ -8,6 +8,8 @@ import { questionAdapter } from './question-adapter';
 import type { BusinessModelScenarioId, DIIDimension, ResponseOption } from '@core/types/pain-scenario.types';
 import type { CompanyInfo } from '@services/ai/types';
 import type { AdaptedQuestion, QuestionContext } from './types';
+import { getDimensionQuestions } from '@/core/dii-engine/dimensions-v4';
+import type { BusinessModelId } from '@core/types/business-model.types';
 
 export interface LightAssessmentQuestion {
   dimension: DIIDimension;
@@ -16,6 +18,7 @@ export interface LightAssessmentQuestion {
   responseOptions: ResponseOption[];
   contextForUser: string;
   interpretation: string; // Legacy field
+  archetypeQuestions?: string[]; // Additional archetype-specific questions
 }
 
 export class LightAssessmentAdapter {
@@ -39,6 +42,8 @@ export class LightAssessmentAdapter {
     };
     
     // Adapt each dimension's question
+    const numericModelId = this.getNumericBusinessModelId(businessModelId);
+    
     const adaptedQuestions = await Promise.all(
       dimensions.map(async (dimension) => {
         const scenario = scenarios[dimension];
@@ -50,13 +55,17 @@ export class LightAssessmentAdapter {
           questionType: 'light'
         });
         
+        // Get archetype-specific questions
+        const archetypeQuestions = getDimensionQuestions(dimension, numericModelId as BusinessModelId, 'es');
+        
         return {
           dimension,
           dimensionName: scenario.dimension_name || dimension,
           adaptedQuestion,
           responseOptions: scenario.response_options || [],
           contextForUser: scenario.context_for_user || '',
-          interpretation: scenario.interpretation || ''
+          interpretation: scenario.interpretation || '',
+          archetypeQuestions
         };
       })
     );
@@ -88,13 +97,19 @@ export class LightAssessmentAdapter {
       questionType: 'light'
     });
     
+    // Get archetype-specific questions for additional context
+    const numericModelId = this.getNumericBusinessModelId(businessModelId);
+    const archetypeQuestions = getDimensionQuestions(dimension, numericModelId as BusinessModelId, 'es');
+    
     return {
       dimension,
       dimensionName: scenario.dimension_name || dimension,
       adaptedQuestion,
       responseOptions: scenario.response_options || [],
       contextForUser: scenario.context_for_user || '',
-      interpretation: scenario.interpretation || ''
+      interpretation: scenario.interpretation || '',
+      // Add archetype questions as additional context
+      archetypeQuestions
     };
   }
 
@@ -114,6 +129,24 @@ export class LightAssessmentAdapter {
     };
     
     return mapping[modelId] || '1_comercio_hibrido';
+  }
+
+  /**
+   * Get numeric business model ID from scenario ID
+   */
+  getNumericBusinessModelId(scenarioId: BusinessModelScenarioId): number {
+    const mapping: Record<BusinessModelScenarioId, number> = {
+      '1_comercio_hibrido': 1,
+      '2_software_critico': 2,
+      '3_servicios_datos': 3,
+      '4_ecosistema_digital': 4,
+      '5_servicios_financieros': 5,
+      '6_infraestructura_heredada': 6,
+      '7_cadena_suministro': 7,
+      '8_informacion_regulada': 8
+    };
+    
+    return mapping[scenarioId] || 1;
   }
 
   /**

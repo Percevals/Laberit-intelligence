@@ -45,6 +45,7 @@ import type { BusinessModelScenarioId } from '@core/types/pain-scenario.types';
 import type { LightAssessmentQuestion } from '@services/question-adapter/light-assessment-adapter';
 import { cn } from '@shared/utils/cn';
 import { AsyncErrorBoundary } from '@/components/ErrorBoundary';
+import { DII_V4_DIMENSIONS } from '@/core/dii-engine/dimensions-v4';
 
 // Map business model IDs to numeric IDs
 const BUSINESS_MODEL_ID_MAP: Record<string, number> = {
@@ -123,7 +124,9 @@ function SmartSkipModal({ recommendations, onApply, onCancel }: SmartSkipModalPr
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <h4 className="font-medium text-dark-text">{rec.dimension}</h4>
+                    <h4 className="font-medium text-dark-text">
+                      {rec.dimension} - {DII_V4_DIMENSIONS[rec.dimension].nameES}
+                    </h4>
                     <span className={cn(
                       "text-xs px-2 py-0.5 rounded-full",
                       rec.confidence >= 70 ? "bg-green-600/20 text-green-400" :
@@ -693,6 +696,7 @@ export function AdaptiveImmunityBuildingPage() {
                         contextForUser={currentQuestion.contextForUser}
                         currentResponse={getScenarioResponse(currentQuestion.dimension)?.response}
                         onResponse={handleResponse}
+                        archetypeQuestions={currentQuestion.archetypeQuestions}
                       />
                     )}
                   </motion.div>

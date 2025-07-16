@@ -12,9 +12,12 @@ import {
   Circle,
   ArrowRight,
   Sparkles,
-  TrendingUp
+  TrendingUp,
+  AlertTriangle,
+  Zap
 } from 'lucide-react';
 import { cn } from '@shared/utils/cn';
+import { DII_V4_DIMENSIONS } from '@/core/dii-engine/dimensions-v4';
 
 export type DIIDimension = 'TRD' | 'AER' | 'HFP' | 'BRI' | 'RRG';
 
@@ -40,9 +43,9 @@ interface ImmunityTimelineNavigationProps {
 const dimensionIcons = {
   TRD: Clock,
   AER: Target,
-  HFP: Users,
+  HFP: AlertTriangle,
   BRI: Shield,
-  RRG: RotateCcw
+  RRG: Zap
 };
 
 function ImmunityScore({ score }: { score: number }) {
@@ -97,6 +100,9 @@ function DimensionCard({
   const isCompleted = dimension.status === 'completed';
   const isActive = dimension.status === 'active';
   const isUpcoming = dimension.status === 'upcoming';
+  
+  // Get dimension info from v4 definitions
+  const dimInfo = DII_V4_DIMENSIONS[dimension.dimension];
   
   // Get dimension key for translations
   const dimKey = dimension.dimension.toLowerCase();
@@ -159,7 +165,7 @@ function DimensionCard({
                   isActive && 'text-primary-400',
                   isUpcoming && 'text-dark-text'
                 )}>
-                  {t(`dimensions.${dimKey}.title`)}
+                  {dimInfo.nameES}
                 </h3>
                 {isCompleted && (
                   <motion.div
@@ -181,7 +187,7 @@ function DimensionCard({
                 isActive && 'text-primary-300',
                 isUpcoming && 'text-dark-text-secondary'
               )}>
-                {t(`dimensions.${dimKey}.subtitle`)}
+                {dimension.dimension}
               </p>
 
               {/* Completed State - Show captured value */}
