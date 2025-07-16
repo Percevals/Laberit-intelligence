@@ -268,6 +268,18 @@ El Digital Immunity Index 4.0 reconoce tres verdades fundamentales:
 *Basado en 150+ evaluaciones reales en LATAM*  
 *"Asumimos que está comprometido y nos enfocamos en que funcione"*
 
+## Componentes de la Plataforma
+
+### Herramientas Implementadas
+
+1. **Framework DII 4.0** - Metodología completa para medir resiliencia operacional
+2. **Plataforma de Assessment v2** - Aplicación web con búsqueda IA y clasificación automática
+3. **Dashboard de Inteligencia Semanal** - Pipeline automatizado de amenazas LATAM
+4. **Consola de Administración** - Gestión empresarial con importación/exportación CSV
+5. **Infraestructura Técnica** - React + Node.js + PostgreSQL + Mistral AI
+
+Estas herramientas trabajan en conjunto para proporcionar una solución integral de medición y mejora de inmunidad digital, adaptada a diferentes modelos de negocio y con capacidades desde evaluaciones rápidas hasta gestión de datos empresariales.
+
 ## Aprenda Más
 
 - [Detalles del Framework v4.0](immunity-framework.html)
