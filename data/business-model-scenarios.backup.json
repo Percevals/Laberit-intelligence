@@ -25,15 +25,15 @@
         "dimension_name": "Attack Economics Ratio",
         "pain_point": "Digital operations expose high-value data while generating fraction of revenue",
         "root_cause": "Security investment follows technology adoption, not revenue protection",
-        "measurement_question": "Si un grupo criminal invirtiera $10,000 USD atacando su comercio híbrido (herramientas + tiempo), considerando rescates por sus sistemas POS/e-commerce, datos de clientes que podrían vender, y pérdidas operacionales en ambos canales, ¿cuál es el MÁXIMO que podrían potencialmente ganar?",
+        "measurement_question": "Si un atacante invierte $10,000 USD en comprometer sus sistemas, ¿cuánto valor podría extraer (datos de clientes, acceso a cuentas, disrupción)?",
         "response_options": [
-          {"value": 1, "label": "Más de $2 millones USD", "metric": 200, "interpretation": "Sistemas críticos caídos por días, robo masivo de datos posible"},
-          {"value": 3, "label": "$500K - $2 millones USD", "metric": 100, "interpretation": "Interrupción significativa, datos valiosos expuestos"},
-          {"value": 5, "label": "$100K - $500K USD", "metric": 30, "interpretation": "Impacto moderado, algo de valor en datos, potencial de rescate"},
-          {"value": 7, "label": "$50K - $100K USD", "metric": 7, "interpretation": "Impacto limitado, recuperación rápida, bajo valor de datos"},
-          {"value": 9, "label": "Menos de $50K USD", "metric": 3, "interpretation": "Impacto mínimo, no vale la pena un ataque sofisticado"}
+          {"value": 1, "label": "Menos de $10K", "ratio": 1, "interpretation": "No vale la pena atacar"},
+          {"value": 2, "label": "$10K-$50K", "ratio": 5, "interpretation": "Objetivo marginal"},
+          {"value": 3, "label": "$50K-$200K", "ratio": 20, "interpretation": "Objetivo atractivo"},
+          {"value": 4, "label": "$200K-$1M", "ratio": 100, "interpretation": "Objetivo prioritario"},
+          {"value": 5, "label": "Más de $1M", "ratio": 100, "interpretation": "Objetivo crítico"}
         ],
-        "context_for_user": "Considere: rescate que realmente pagaría, valor de sus datos de clientes en mercado negro, costo del tiempo muerto en tiendas y online, multas regulatorias potenciales"
+        "context_for_user": "Considere: valor de base de datos de clientes, pérdidas por downtime, costo de recuperación"
       },
       "HFP": {
         "dimension_name": "Human Failure Probability",
@@ -97,15 +97,15 @@
         "dimension_name": "Attack Economics Ratio",
         "pain_point": "Multi-tenant architecture means one breach affects all customers",
         "root_cause": "Efficiency design makes attractive target for data harvesting",
-        "measurement_question": "Si un grupo criminal invirtiera $10,000 USD atacando su plataforma SaaS (herramientas + tiempo), considerando rescates por recuperar el servicio, datos de todos sus clientes, código fuente/IP, y el impacto de downtime masivo, ¿cuál es el MÁXIMO que podrían potencialmente ganar?",
+        "measurement_question": "Si comprometen su plataforma, ¿cuál es el valor total accesible (datos de todos los clientes, código fuente, propiedad intelectual)?",
         "response_options": [
-          {"value": 1, "label": "Más de $2 millones USD", "metric": 200, "interpretation": "Plataforma crítica con miles de clientes, IP valiosa"},
-          {"value": 3, "label": "$500K - $2 millones USD", "metric": 100, "interpretation": "Base significativa de clientes, datos sensibles"},
-          {"value": 5, "label": "$100K - $500K USD", "metric": 30, "interpretation": "Clientes moderados, cierto valor en código/datos"},
-          {"value": 7, "label": "$50K - $100K USD", "metric": 7, "interpretation": "Pocos clientes críticos, valor limitado"},
-          {"value": 9, "label": "Menos de $50K USD", "metric": 3, "interpretation": "Nicho pequeño, bajo impacto potencial"}
+          {"value": 1, "label": "Menos de $100K", "ratio": 10, "interpretation": "Valor limitado"},
+          {"value": 2, "label": "$100K-$500K", "ratio": 50, "interpretation": "Objetivo moderado"},
+          {"value": 3, "label": "$500K-$2M", "ratio": 200, "interpretation": "Objetivo valioso"},
+          {"value": 4, "label": "$2M-$10M", "ratio": 1000, "interpretation": "Objetivo premium"},
+          {"value": 5, "label": "Más de $10M", "ratio": 1000, "interpretation": "Objetivo máximo"}
         ],
-        "context_for_user": "Considere: rescate por evitar fuga masiva de datos, valor de su código propietario, costo de perder clientes enterprise, daño reputacional"
+        "context_for_user": "Incluya: datos agregados de clientes, secretos comerciales, costo de notificación de breach"
       },
       "HFP": {
         "dimension_name": "Human Failure Probability",
@@ -169,15 +169,15 @@
         "dimension_name": "Attack Economics Ratio",
         "pain_point": "Entire business value concentrated in datasets",
         "root_cause": "Unlike other businesses, data IS the product",
-        "measurement_question": "Si un grupo criminal invirtiera $10,000 USD atacando sus servicios de datos (herramientas + tiempo), considerando el valor de sus datasets propietarios, algoritmos de análisis, modelos entrenados, y la pérdida de exclusividad competitiva, ¿cuál es el MÁXIMO que podrían potencialmente ganar?",
+        "measurement_question": "¿Cuál es el costo de reemplazar o reconstruir todos sus datasets propietarios si fueran destruidos o robados?",
         "response_options": [
-          {"value": 1, "label": "Más de $2 millones USD", "metric": 200, "interpretation": "Datasets únicos, algoritmos propietarios críticos"},
-          {"value": 3, "label": "$500K - $2 millones USD", "metric": 100, "interpretation": "Datos valiosos, ventaja competitiva significativa"},
-          {"value": 5, "label": "$100K - $500K USD", "metric": 30, "interpretation": "Datos útiles pero no exclusivos, cierta IP"},
-          {"value": 7, "label": "$50K - $100K USD", "metric": 7, "interpretation": "Datos mayormente públicos, procesamiento básico"},
-          {"value": 9, "label": "Menos de $50K USD", "metric": 3, "interpretation": "Datos commodity, sin diferenciación real"}
+          {"value": 1, "label": "Menos de $250K", "ratio": 25, "interpretation": "Datos reemplazables"},
+          {"value": 2, "label": "$250K-$1M", "ratio": 100, "interpretation": "Datos valiosos"},
+          {"value": 3, "label": "$1M-$5M", "ratio": 500, "interpretation": "Datos críticos"},
+          {"value": 4, "label": "$5M-$20M", "ratio": 2000, "interpretation": "Datos únicos"},
+          {"value": 5, "label": "Más de $20M o irreemplazable", "ratio": 2000, "interpretation": "Core del negocio"}
         ],
-        "context_for_user": "Considere: valor de venta de sus datasets en mercado negro, costo de que competidores obtengan sus algoritmos, pérdida de contratos exclusivos"
+        "context_for_user": "Incluya: costo de readquisición, valor de algoritmos, pérdida de ventaja competitiva"
       },
       "HFP": {
         "dimension_name": "Human Failure Probability",
@@ -241,15 +241,15 @@
         "dimension_name": "Attack Economics Ratio",
         "pain_point": "Attack surface multiplied by every ecosystem participant",
         "root_cause": "Security equals weakest partner in the chain",
-        "measurement_question": "Si un grupo criminal invirtiera $10,000 USD atacando su ecosistema digital (herramientas + tiempo), considerando el daño a todo el marketplace, fraudes masivos a vendedores/compradores, y pérdida de confianza del ecosistema, ¿cuál es el MÁXIMO que podrían potencialmente ganar?",
+        "measurement_question": "Considerando TODOS los partners con acceso a su plataforma, ¿cuál es el valor total que podría comprometerse a través del partner más débil?",
         "response_options": [
-          {"value": 1, "label": "Más de $2 millones USD", "metric": 200, "interpretation": "Plataforma central de un ecosistema grande"},
-          {"value": 3, "label": "$500K - $2 millones USD", "metric": 100, "interpretation": "Ecosistema significativo, mucha confianza en juego"},
-          {"value": 5, "label": "$100K - $500K USD", "metric": 30, "interpretation": "Plataforma mediana, daño contenido"},
-          {"value": 7, "label": "$50K - $100K USD", "metric": 7, "interpretation": "Ecosistema pequeño, impacto limitado"},
-          {"value": 9, "label": "Menos de $50K USD", "metric": 3, "interpretation": "Plataforma nicho, pocos participantes"}
+          {"value": 1, "label": "Menos de $100K", "ratio": 10, "interpretation": "Exposición limitada"},
+          {"value": 2, "label": "$100K-$1M", "ratio": 100, "interpretation": "Exposición moderada"},
+          {"value": 3, "label": "$1M-$10M", "ratio": 1000, "interpretation": "Exposición significativa"},
+          {"value": 4, "label": "$10M-$50M", "ratio": 5000, "interpretation": "Exposición crítica"},
+          {"value": 5, "label": "Más de $50M", "ratio": 5000, "interpretation": "Exposición masiva"}
         ],
-        "context_for_user": "Considere: fraudes a múltiples vendedores/compradores simultáneos, robo de credenciales bancarias del ecosistema, pérdida masiva de confianza"
+        "context_for_user": "Valore: transacciones totales, datos de todos los participantes, disrupción del ecosistema"
       },
       "HFP": {
         "dimension_name": "Human Failure Probability",
@@ -313,15 +313,15 @@
         "dimension_name": "Attack Economics Ratio",
         "pain_point": "Direct access to money makes prime target",
         "root_cause": "Financial access equals immediate monetization",
-        "measurement_question": "Si un grupo criminal invirtiera $10,000 USD atacando sus servicios financieros (herramientas + tiempo), considerando transferencias fraudulentas directas, venta de accesos a cuentas, y extorsión por recuperar el servicio, ¿cuál es el MÁXIMO que podrían potencialmente ganar?",
+        "measurement_question": "¿Cuál es el monto MÁXIMO que podría transferir un atacante con acceso completo antes de detección (considere fines de semana)?",
         "response_options": [
-          {"value": 1, "label": "Más de $2 millones USD", "metric": 200, "interpretation": "Acceso a fondos masivos, límites débiles"},
-          {"value": 3, "label": "$500K - $2 millones USD", "metric": 100, "interpretation": "Fondos significativos accesibles"},
-          {"value": 5, "label": "$100K - $500K USD", "metric": 30, "interpretation": "Límites razonables, detección moderada"},
-          {"value": 7, "label": "$50K - $100K USD", "metric": 7, "interpretation": "Controles fuertes, detección rápida"},
-          {"value": 9, "label": "Menos de $50K USD", "metric": 3, "interpretation": "Límites estrictos, monitoreo continuo"}
+          {"value": 1, "label": "Menos de $50K", "ratio": 5, "interpretation": "Límites fuertes"},
+          {"value": 2, "label": "$50K-$500K", "ratio": 50, "interpretation": "Límites moderados"},
+          {"value": 3, "label": "$500K-$5M", "ratio": 500, "interpretation": "Límites altos"},
+          {"value": 4, "label": "$5M-$50M", "ratio": 5000, "interpretation": "Límites muy altos"},
+          {"value": 5, "label": "Más de $50M", "ratio": 5000, "interpretation": "Sin límites efectivos"}
         ],
-        "context_for_user": "Considere: transferencias antes de detección en fin de semana largo, venta de accesos a cuentas premium, costo de detener operaciones"
+        "context_for_user": "Considere: límites por transacción, límites diarios, y ventanas sin monitoreo humano"
       },
       "HFP": {
         "dimension_name": "Human Failure Probability",
@@ -385,15 +385,15 @@
         "dimension_name": "Attack Economics Ratio",
         "pain_point": "Unpatched vulnerabilities make easy targets",
         "root_cause": "Cannot update without breaking operations",
-        "measurement_question": "Si un grupo criminal invirtiera $10,000 USD atacando su infraestructura heredada (herramientas + tiempo), considerando ransomware sobre sistemas críticos sin backup, venta de datos legacy acumulados por años, y parálisis operacional total, ¿cuál es el MÁXIMO que podrían potencialmente ganar?",
+        "measurement_question": "¿Cuántas vulnerabilidades críticas CONOCIDAS (CVE score >7) existen en sistemas que NO puede parchear por ser legacy?",
         "response_options": [
-          {"value": 1, "label": "Más de $2 millones USD", "metric": 200, "interpretation": "Sistemas core del negocio, datos históricos masivos"},
-          {"value": 3, "label": "$500K - $2 millones USD", "metric": 100, "interpretation": "Sistemas críticos, operación paralizable"},
-          {"value": 5, "label": "$100K - $500K USD", "metric": 30, "interpretation": "Sistemas importantes pero con alternativas"},
-          {"value": 7, "label": "$50K - $100K USD", "metric": 7, "interpretation": "Legacy con impacto limitado"},
-          {"value": 9, "label": "Menos de $50K USD", "metric": 3, "interpretation": "Legacy no crítico, datos sin valor"}
+          {"value": 1, "label": "0-2 vulnerabilidades", "ratio": 2, "interpretation": "Riesgo controlado"},
+          {"value": 2, "label": "3-10 vulnerabilidades", "ratio": 10, "interpretation": "Riesgo moderado"},
+          {"value": 3, "label": "11-25 vulnerabilidades", "ratio": 50, "interpretation": "Riesgo alto"},
+          {"value": 4, "label": "26-50 vulnerabilidades", "ratio": 100, "interpretation": "Riesgo crítico"},
+          {"value": 5, "label": "Más de 50 o no sabemos", "ratio": 200, "interpretation": "Bomba de tiempo"}
         ],
-        "context_for_user": "Considere: costo de reconstruir desde cero si no hay backups, valor de décadas de datos, tiempo de parálisis total"
+        "context_for_user": "Cada vulnerabilidad sin parchear es una puerta abierta con instrucciones públicas"
       },
       "HFP": {
         "dimension_name": "Human Failure Probability",
@@ -457,15 +457,15 @@
         "dimension_name": "Attack Economics Ratio",
         "pain_point": "Shipment data reveals business intelligence",
         "root_cause": "Logistics patterns expose strategic information",
-        "measurement_question": "Si un grupo criminal invirtiera $10,000 USD atacando su cadena de suministro (herramientas + tiempo), considerando desvío de mercancía de alto valor, venta de inteligencia logística a competidores, y sabotaje de entregas críticas, ¿cuál es el MÁXIMO que podrían potencialmente ganar?",
+        "measurement_question": "Si un competidor accediera a 6 meses de su data de envíos (rutas, volúmenes, clientes), ¿cuánto valor de negocio podría extraer?",
         "response_options": [
-          {"value": 1, "label": "Más de $2 millones USD", "metric": 200, "interpretation": "Mercancía de alto valor, rutas estratégicas"},
-          {"value": 3, "label": "$500K - $2 millones USD", "metric": 100, "interpretation": "Carga valiosa, información competitiva útil"},
-          {"value": 5, "label": "$100K - $500K USD", "metric": 30, "interpretation": "Valor moderado en carga e información"},
-          {"value": 7, "label": "$50K - $100K USD", "metric": 7, "interpretation": "Carga común, rutas conocidas"},
-          {"value": 9, "label": "Menos de $50K USD", "metric": 3, "interpretation": "Mercancía de bajo valor, sin secretos"}
+          {"value": 1, "label": "Menos de $100K", "ratio": 10, "interpretation": "Información genérica"},
+          {"value": 2, "label": "$100K-$500K", "ratio": 50, "interpretation": "Algo sensible"},
+          {"value": 3, "label": "$500K-$2M", "ratio": 200, "interpretation": "Información valiosa"},
+          {"value": 4, "label": "$2M-$10M", "ratio": 1000, "interpretation": "Secretos comerciales"},
+          {"value": 5, "label": "Más de $10M", "ratio": 1000, "interpretation": "Ventaja competitiva"}
         ],
-        "context_for_user": "Considere: valor de carga desviable, inteligencia de rutas/clientes vendible a competencia, costo de perder entregas just-in-time"
+        "context_for_user": "Considere: relaciones con clientes clave, rutas optimizadas, precios, volúmenes"
       },
       "HFP": {
         "dimension_name": "Human Failure Probability",
@@ -529,15 +529,15 @@
         "dimension_name": "Attack Economics Ratio",
         "pain_point": "Regulated data worth fortunes in black market",
         "root_cause": "Medical/personal data has lifelong value",
-        "measurement_question": "Si un grupo criminal invirtiera $10,000 USD atacando sus sistemas de información regulada (herramientas + tiempo), considerando venta de historiales médicos/datos sensibles, extorsión por no publicar brechas, y multas regulatorias que enfrentaría, ¿cuál es el MÁXIMO que podrían potencialmente ganar?",
+        "measurement_question": "¿Cuál es el valor aproximado en el mercado negro de TODOS sus registros sensibles (considere multas regulatorias potenciales)?",
         "response_options": [
-          {"value": 1, "label": "Más de $2 millones USD", "metric": 200, "interpretation": "Miles de registros médicos/sensibles valiosos"},
-          {"value": 3, "label": "$500K - $2 millones USD", "metric": 100, "interpretation": "Base significativa de datos regulados"},
-          {"value": 5, "label": "$100K - $500K USD", "metric": 30, "interpretation": "Datos moderados, cierta exposición regulatoria"},
-          {"value": 7, "label": "$50K - $100K USD", "metric": 7, "interpretation": "Pocos registros sensibles"},
-          {"value": 9, "label": "Menos de $50K USD", "metric": 3, "interpretation": "Mínima información regulada"}
+          {"value": 1, "label": "Menos de $500K", "ratio": 50, "interpretation": "Registros limitados"},
+          {"value": 2, "label": "$500K-$2M", "ratio": 200, "interpretation": "Base moderada"},
+          {"value": 3, "label": "$2M-$10M", "ratio": 1000, "interpretation": "Base significativa"},
+          {"value": 4, "label": "$10M-$50M", "ratio": 5000, "interpretation": "Base grande"},
+          {"value": 5, "label": "Más de $50M", "ratio": 5000, "interpretation": "Tesoro de datos"}
         ],
-        "context_for_user": "Considere: historiales médicos valen $250-$1000 c/u en mercado negro, extorsión por no reportar brecha, multas GDPR/HIPAA masivas"
+        "context_for_user": "Historiales médicos valen $250-$1000 c/u en mercado negro + multas GDPR/HIPAA"
       },
       "HFP": {
         "dimension_name": "Human Failure Probability",
