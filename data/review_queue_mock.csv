@@ -1,0 +1,18 @@
+id,name,model,confidence,reason
+89,MINTIC Colombia,SERVICIOS_DATOS,0.6000000000000001,Low confidence score
+90,MINVIVIENDA Colombia,SERVICIOS_DATOS,0.6000000000000001,Low confidence score
+92,Ministerio de Obras Publicas y Comunicaciones Paraguay,SERVICIOS_DATOS,0.6000000000000001,Low confidence score
+93,Ministerio de Transportes y Comunicaciones Peru,SERVICIOS_DATOS,0.6000000000000001,Low confidence score
+97,OGTIC Republica Dominicana,SERVICIOS_DATOS,0.6000000000000001,Low confidence score
+98,Oldelval,INFRAESTRUCTURA_HEREDADA,0.68,Low confidence score
+101,Pampa Energ’a,INFRAESTRUCTURA_HEREDADA,0.68,Low confidence score
+102,PetroPeru,INFRAESTRUCTURA_HEREDADA,0.68,Low confidence score
+106,Procolombia,SERVICIOS_DATOS,0.6000000000000001,Low confidence score
+110,Resia,SOFTWARE_CRITICO,0.6400000000000001,Low confidence score
+114,Sierracol,INFRAESTRUCTURA_HEREDADA,0.68,Low confidence score
+119,Tempo Assist,SOFTWARE_CRITICO,0.6400000000000001,Low confidence score
+123,Tribunal Electoral Panama,SERVICIOS_DATOS,0.6000000000000001,Low confidence score
+130,XM,INFRAESTRUCTURA_HEREDADA,0.68,Low confidence score
+138,Aviomar,ECOSISTEMA_DIGITAL,0.68,Low confidence score
+143,INM,SERVICIOS_DATOS,0.6000000000000001,Low confidence score
+147,NBC,SOFTWARE_CRITICO,0.6400000000000001,Low confidence score

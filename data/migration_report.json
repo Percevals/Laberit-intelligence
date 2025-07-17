@@ -1,0 +1,141 @@
+{
+  "timestamp": "2025-07-17T12:50:19.768Z",
+  "duration": "0.29s",
+  "totalCompanies": 150,
+  "successCount": 150,
+  "errorCount": 0,
+  "warningCount": 17,
+  "modelDistribution": {
+    "SOFTWARE_CRITICO": 10,
+    "COMERCIO_HIBRIDO": 46,
+    "ECOSISTEMA_DIGITAL": 15,
+    "SERVICIOS_FINANCIEROS": 37,
+    "SERVICIOS_DATOS": 23,
+    "INFORMACION_REGULADA": 6,
+    "INFRAESTRUCTURA_HEREDADA": 13
+  },
+  "averageConfidence": 0.8332000000000008,
+  "reviewQueueCount": 17,
+  "reviewQueue": [
+    {
+      "id": "89",
+      "name": "MINTIC Colombia",
+      "model": "SERVICIOS_DATOS",
+      "confidence": 0.6000000000000001,
+      "reason": "Low confidence score"
+    },
+    {
+      "id": "90",
+      "name": "MINVIVIENDA Colombia",
+      "model": "SERVICIOS_DATOS",
+      "confidence": 0.6000000000000001,
+      "reason": "Low confidence score"
+    },
+    {
+      "id": "92",
+      "name": "Ministerio de Obras Publicas y Comunicaciones Paraguay",
+      "model": "SERVICIOS_DATOS",
+      "confidence": 0.6000000000000001,
+      "reason": "Low confidence score"
+    },
+    {
+      "id": "93",
+      "name": "Ministerio de Transportes y Comunicaciones Peru",
+      "model": "SERVICIOS_DATOS",
+      "confidence": 0.6000000000000001,
+      "reason": "Low confidence score"
+    },
+    {
+      "id": "97",
+      "name": "OGTIC Republica Dominicana",
+      "model": "SERVICIOS_DATOS",
+      "confidence": 0.6000000000000001,
+      "reason": "Low confidence score"
+    },
+    {
+      "id": "98",
+      "name": "Oldelval",
+      "model": "INFRAESTRUCTURA_HEREDADA",
+      "confidence": 0.68,
+      "reason": "Low confidence score"
+    },
+    {
+      "id": "101",
+      "name": "Pampa Energ’a",
+      "model": "INFRAESTRUCTURA_HEREDADA",
+      "confidence": 0.68,
+      "reason": "Low confidence score"
+    },
+    {
+      "id": "102",
+      "name": "PetroPeru",
+      "model": "INFRAESTRUCTURA_HEREDADA",
+      "confidence": 0.68,
+      "reason": "Low confidence score"
+    },
+    {
+      "id": "106",
+      "name": "Procolombia",
+      "model": "SERVICIOS_DATOS",
+      "confidence": 0.6000000000000001,
+      "reason": "Low confidence score"
+    },
+    {
+      "id": "110",
+      "name": "Resia",
+      "model": "SOFTWARE_CRITICO",
+      "confidence": 0.6400000000000001,
+      "reason": "Low confidence score"
+    },
+    {
+      "id": "114",
+      "name": "Sierracol",
+      "model": "INFRAESTRUCTURA_HEREDADA",
+      "confidence": 0.68,
+      "reason": "Low confidence score"
+    },
+    {
+      "id": "119",
+      "name": "Tempo Assist",
+      "model": "SOFTWARE_CRITICO",
+      "confidence": 0.6400000000000001,
+      "reason": "Low confidence score"
+    },
+    {
+      "id": "123",
+      "name": "Tribunal Electoral Panama",
+      "model": "SERVICIOS_DATOS",
+      "confidence": 0.6000000000000001,
+      "reason": "Low confidence score"
+    },
+    {
+      "id": "130",
+      "name": "XM",
+      "model": "INFRAESTRUCTURA_HEREDADA",
+      "confidence": 0.68,
+      "reason": "Low confidence score"
+    },
+    {
+      "id": "138",
+      "name": "Aviomar",
+      "model": "ECOSISTEMA_DIGITAL",
+      "confidence": 0.68,
+      "reason": "Low confidence score"
+    },
+    {
+      "id": "143",
+      "name": "INM",
+      "model": "SERVICIOS_DATOS",
+      "confidence": 0.6000000000000001,
+      "reason": "Low confidence score"
+    },
+    {
+      "id": "147",
+      "name": "NBC",
+      "model": "SOFTWARE_CRITICO",
+      "confidence": 0.6400000000000001,
+      "reason": "Low confidence score"
+    }
+  ],
+  "errors": []
+}

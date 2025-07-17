@@ -166,13 +166,49 @@ class HistoricalDataMigrator {
         WHERE table_schema = 'public' 
         AND table_name = 'companies'
         AND column_name IN (
-          'id', 'name', 'dii_business_model', 'confidence_score',
-          'legacy_dii_id', 'migration_confidence', 'framework_version'
+          'id', 'name', 'dii_business_model', 'confidence_score'
         );
       `);
 
-      if (columnCheck.rows.length < 7) {
+      if (columnCheck.rows.length < 4) {
         throw new Error('Missing required columns. Check schema alignment.');
+      }
+      
+      // Check if historical fields exist
+      const historicalCheck = await this.client.query(`
+        SELECT column_name 
+        FROM information_schema.columns 
+        WHERE table_schema = 'public' 
+        AND table_name = 'companies'
+        AND column_name IN (
+          'legacy_dii_id', 'migration_confidence', 'framework_version',
+          'last_verified', 'verification_source', 'data_freshness_days',
+          'is_prospect', 'original_dii_score', 'migration_date',
+          'needs_reassessment', 'data_completeness', 'has_zt_maturity'
+        );
+      `);
+      
+      if (historicalCheck.rows.length === 0) {
+        console.log('⚠️  Historical tracking fields not found. Adding them now...');
+        
+        // Add missing fields
+        await this.client.query(`
+          ALTER TABLE companies 
+          ADD COLUMN IF NOT EXISTS last_verified TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+          ADD COLUMN IF NOT EXISTS verification_source VARCHAR(50),
+          ADD COLUMN IF NOT EXISTS data_freshness_days INTEGER DEFAULT 0,
+          ADD COLUMN IF NOT EXISTS is_prospect BOOLEAN DEFAULT FALSE,
+          ADD COLUMN IF NOT EXISTS legacy_dii_id INTEGER,
+          ADD COLUMN IF NOT EXISTS original_dii_score DECIMAL(3,1),
+          ADD COLUMN IF NOT EXISTS migration_confidence DECIMAL(3,2),
+          ADD COLUMN IF NOT EXISTS framework_version VARCHAR(10) DEFAULT 'v4.0',
+          ADD COLUMN IF NOT EXISTS migration_date TIMESTAMP WITH TIME ZONE,
+          ADD COLUMN IF NOT EXISTS needs_reassessment BOOLEAN DEFAULT FALSE,
+          ADD COLUMN IF NOT EXISTS data_completeness DECIMAL(3,2) DEFAULT 1.0,
+          ADD COLUMN IF NOT EXISTS has_zt_maturity BOOLEAN DEFAULT FALSE;
+        `);
+        
+        console.log('✅ Historical tracking fields added');
       }
 
       console.log('✅ Schema validation passed\n');
@@ -240,7 +276,7 @@ class HistoricalDataMigrator {
     const domain = this.inferDomain(company.Real_Company_Name);
 
     return {
-      id: company.Company_ID,
+      id: null, // Let PostgreSQL generate UUID
       name: company.Real_Company_Name,
       domain: domain,
       industry_traditional: company.Real_Industry,
@@ -323,10 +359,10 @@ class HistoricalDataMigrator {
           // Prepare data
           const data = this.prepareCompanyData(company, classification);
           
-          // Insert into database
+          // Insert into database (without id - let PostgreSQL generate it)
           const query = `
             INSERT INTO companies (
-              id, name, domain, industry_traditional, dii_business_model,
+              name, domain, industry_traditional, dii_business_model,
               confidence_score, classification_reasoning, headquarters,
               country, region, employees, revenue, last_verified,
               verification_source, data_freshness_days, is_prospect,
@@ -334,13 +370,13 @@ class HistoricalDataMigrator {
               framework_version, migration_date, needs_reassessment,
               data_completeness, has_zt_maturity
             ) VALUES (
-              $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13,
-              $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24
+              $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12,
+              $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23
             )
           `;
           
           const values = [
-            data.id, data.name, data.domain, data.industry_traditional,
+            data.name, data.domain, data.industry_traditional,
             data.dii_business_model, data.confidence_score,
             data.classification_reasoning, data.headquarters,
             data.country, data.region, data.employees, data.revenue,
