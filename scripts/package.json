@@ -8,7 +8,8 @@
     "migrate:status": "node run-migrations.js --status",
     "validate": "node validate-historical-data.js",
     "test-migration": "node test-migration-v3-to-v4.js",
-    "test-migration-enhanced": "node test-migration-v3-to-v4-with-classifier.js"
+    "test-migration-enhanced": "node test-migration-v3-to-v4-with-classifier.js",
+    "migrate-historical-data": "node migrate-historical-data.js"
   },
   "dependencies": {
     "pg": "^8.11.3",
