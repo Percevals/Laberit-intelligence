@@ -1,6 +1,6 @@
 # Scripts Directory
 
-This directory contains utility scripts for data analysis, migration, and maintenance tasks.
+This directory contains utility scripts for data analysis, migration, database management, and maintenance tasks.
 
 ## Structure
 
@@ -8,7 +8,8 @@ This directory contains utility scripts for data analysis, migration, and mainte
 scripts/
 ├── analysis/      # Data analysis and exploration scripts
 ├── migration/     # Framework migration tools (v3.0 → v4.0)
-└── utils/         # General utility scripts
+├── utils/         # General utility scripts
+└── database/      # Database validation and migration scripts
 ```
 
 ## Usage
@@ -39,11 +40,38 @@ Example:
 python scripts/migration/calculate_dii_migration_demo.py
 ```
 
+### Database Scripts
+
+Located in root `scripts/` directory:
+
+- `test-db-connection.js` - Tests PostgreSQL database connection
+- `run-migrations.js` - Manages database schema migrations
+- `validate-historical-data.js` - Validates historical company CSV data before migration
+
+#### Historical Data Validation
+
+```bash
+npm run validate
+```
+
+Validates `/data/historical_DB_report.csv` with comprehensive checks:
+- Encoding validation (cp1252)
+- Data completeness analysis
+- Duplicate detection
+- Business model v3 to v4 migration analysis
+- Identifies SERVICIOS_DATOS and INFRAESTRUCTURA_HEREDADA candidates
+- Generates detailed report in `/data/validation_report.md`
+
 ### Dependencies
 
-Some scripts require additional packages:
+Python scripts require:
 ```bash
 pip install pandas openpyxl
+```
+
+Node.js scripts require:
+```bash
+npm install
 ```
 
 Scripts with `_simple` or `_demo` suffix work without external dependencies.

@@ -5,10 +5,15 @@
   "scripts": {
     "test-connection": "node test-db-connection.js",
     "migrate": "node run-migrations.js",
-    "migrate:status": "node run-migrations.js --status"
+    "migrate:status": "node run-migrations.js --status",
+    "validate": "node validate-historical-data.js",
+    "test-migration": "node test-migration-v3-to-v4.js",
+    "test-migration-enhanced": "node test-migration-v3-to-v4-with-classifier.js"
   },
   "dependencies": {
-    "pg": "^8.11.3"
+    "pg": "^8.11.3",
+    "papaparse": "^5.4.1",
+    "iconv-lite": "^0.6.3"
   },
   "engines": {
     "node": ">=16.0.0"

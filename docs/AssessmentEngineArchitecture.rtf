@@ -1,0 +1,188 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Bold;\f1\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red153\green153\blue153;\red171\green216\blue255;
+\red46\green174\blue187;\red180\green36\blue25;\red47\green180\blue29;}
+{\*\expandedcolortbl;;\csgray\c0;\csgenericrgb\c60000\c60000\c60000;\cssrgb\c72102\c87821\c100000;
+\cssrgb\c20199\c73241\c78251;\cssrgb\c76411\c21697\c12527;\cssrgb\c20241\c73898\c14950;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\b\fs22 \cf2 \CocoaLigature0 Assessment Engine Architecture - 5 Dimensions Modularity
+\f1\b0 \
+\
+  I've analyzed the assessment engine and can explain the modularity and architecture. The system is\
+  highly modular and data-driven, making it easy to modify how each dimension is measured.\
+\
+  \cf3 \uc0\u55357 \u56522  
+\f0\b Current Architecture Overview
+\f1\b0 \cf2 \
+\
+  The assessment engine uses a 
+\f0\b matrix-based approach
+\f1\b0  where:\
+  - 
+\f0\b 8 Business Models
+\f1\b0  \'d7 
+\f0\b 5 Dimensions
+\f1\b0  = 
+\f0\b 40 unique measurement scenarios
+\f1\b0 \
+  - Each scenario has tailored questions specific to that business model's pain points\
+  - Questions are stored as data (JSON), not code, making them easy to modify\
+\
+  \cf3 \uc0\u55356 \u57263  
+\f0\b The 5 DII Dimensions
+\f1\b0 \cf2 \
+\
+  1. 
+\f0\b TRD
+\f1\b0  - Time to Revenue Disruption (hours until 10% revenue loss)\
+  2. 
+\f0\b AER
+\f1\b0  - Attack Economics Ratio (attacker ROI: $invested vs $damage)\
+  3. 
+\f0\b HFP
+\f1\b0  - Human Failure Probability (% employees failing security)\
+  4. 
+\f0\b BRI
+\f1\b0  - Blast Radius Index (% business value exposed from single point)\
+  5. 
+\f0\b RRG
+\f1\b0  - Recovery Reality Gap (actual recovery time vs planned)\
+\
+  
+\f0\b Formula
+\f1\b0 : \cf4 DII = (TRD \'d7 AER) / (HFP \'d7 BRI \'d7 RRG)\cf2 \
+\
+  \cf3 \uc0\u55357 \u56538  
+\f0\b Knowledge Base Structure
+\f1\b0 \cf2 \
+\
+  The questions are stored in \cf4 /data/business-model-scenarios.json\cf2 :\
+\
+  \{\
+    \cf5 "matrix"\cf2 : \{\
+      \cf5 "1_comercio_hibrido"\cf2 : \{\
+        \cf5 "TRD"\cf2 : \{\
+          \cf5 "measurement_question"\cf2 : \cf6 "Si sus sistemas principales fallan..."\cf2 ,\
+          \cf5 "response_options"\cf2 : [\
+            \{\cf5 "value"\cf2 : \cf7 1\cf2 , \cf5 "label"\cf2 : \cf6 "Menos de 2 horas"\cf2 , \cf5 "hours"\cf2 : \cf7 2\cf2 \},\
+            \{\cf5 "value"\cf2 : \cf7 2\cf2 , \cf5 "label"\cf2 : \cf6 "2-6 horas"\cf2 , \cf5 "hours"\cf2 : \cf7 6\cf2 \},\
+            \cf7 // ... more options\cf2 \
+          ],\
+          \cf5 "premium_questions"\cf2 : [] \cf7 // For future premium version\cf2 \
+        \}\
+      \}\
+    \}\
+  \}\
+\
+  \cf3 \uc0\u55357 \u56580  
+\f0\b Light vs Premium Assessment
+\f1\b0 \cf2 \
+\
+  
+\f0\b Light Assessment
+\f1\b0  (Current):\
+  - 1 
+\f0\b measurement question
+\f1\b0  per dimension\
+  - Quick 5-10 minute assessment\
+  - Quantifiable, operational metrics\
+  - Example: "How many hours until 10% revenue loss?"\
+\
+  
+\f0\b Premium Assessment
+\f1\b0  (Infrastructure ready, not active):\
+  - Multiple questions per dimension (5-7 each)\
+  - Deeper 30-45 minute assessment\
+  - Would include qualitative aspects\
+  - Currently has empty \cf4 premium_questions\cf2  arrays\
+\
+  \cf3 \uc0\u55356 \u57303 \u65039  
+\f0\b Modularity Features
+\f1\b0 \cf2 \
+\
+  1. 
+\f0\b Independent Dimensions
+\f1\b0 : Each can be assessed separately\
+  2. 
+\f0\b Pluggable Questions
+\f1\b0 : JSON-based, easy to modify\
+  3. 
+\f0\b Business Model Adaptation
+\f1\b0 : Questions personalized by model\
+  4. 
+\f0\b Archetype Grouping
+\f1\b0 : Additional layer of customization\
+  5. 
+\f0\b Language Support
+\f1\b0 : Questions can be in any language\
+\
+  \cf3 \uc0\u55357 \u56615  
+\f0\b How to Modify Dimensions
+\f1\b0 \cf2 \
+\
+  To change how a dimension is measured:\
+\
+  1. 
+\f0\b Update the JSON
+\f1\b0 : Modify \cf4 /data/business-model-scenarios.json\cf2 \
+  2. 
+\f0\b Change the Question
+\f1\b0 : Edit \cf4 measurement_question\cf2  field\
+  3. 
+\f0\b Adjust Response Options
+\f1\b0 : Modify the 5 response choices\
+  4. 
+\f0\b Update Metrics
+\f1\b0 : Change the numeric values associated\
+\
+  Example for improving HFP measurement:\
+  "HFP": \{\
+    "measurement_question": "What % of employees completed advanced security training?",\
+    "response_options": [\
+      \{"value": 5, "label": "90-100%", "percentage": 5\},\
+      \{"value": 4, "label": "70-90%", "percentage": 15\},\
+      \{"value": 3, "label": "50-70%", "percentage": 30\},\
+      \{"value": 2, "label": "30-50%", "percentage": 50\},\
+      \{"value": 1, "label": "Less than 30%", "percentage": 70\}\
+    ]\
+  \}\
+\
+  \cf3 \uc0\u55356 \u57256  
+\f0\b Architecture Diagram Created
+\f1\b0 \cf2 \
+\
+  I've created a comprehensive Mermaid diagram at \cf4 /apps/assessment-v2/docs/assessment-architecture.md\cf2 \
+  that shows:\
+  - Data flow from JSON knowledge base to DII score\
+  - How business models map to questions\
+  - The separation between light and premium assessments\
+  - The 5 dimensions feeding into the DII formula\
+\
+  \cf3 \uc0\u55357 \u56481  
+\f0\b Alternative Measurement Approaches
+\f1\b0 \cf2 \
+\
+  Based on the architecture, here are some ways you could enhance dimension measurements:\
+\
+  1. 
+\f0\b Multi-Factor Dimensions
+\f1\b0 : Add sub-questions that aggregate into dimension scores\
+  2. 
+\f0\b AI-Enhanced Scoring
+\f1\b0 : Use AI to interpret free-text responses\
+  3. 
+\f0\b Industry Benchmarking
+\f1\b0 : Compare responses to industry averages\
+  4. 
+\f0\b Time-Series Tracking
+\f1\b0 : Measure dimension changes over time\
+  5. 
+\f0\b Correlation Analysis
+\f1\b0 : Weight dimensions based on actual breach data\
+\
+  The architecture is very flexible - you can modify questions, add new dimensions, or change the\
+  calculation formula without major code changes. The key is that everything is data-driven through the\
+  JSON knowledge base.\
+}

@@ -1,0 +1,79 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\csgray\c0;}
+\margl1440\margr1440\vieww18640\viewh15660\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs22 \cf2 \CocoaLigature0 graph TB\
+      %% User Interface Layer\
+      UI[CompanySearchPage] --> CSI[CompanySearchInput<br/>Debounced Search 500ms]\
+      CSI --> UCH[useCompanySearch Hook]\
+\
+      %% State Management\
+      UCH --> AS[AssessmentStore<br/>Zustand + Persist]\
+      AS --> UI\
+\
+      %% Search Service Layer\
+      UCH --> HSS[HybridSearchService<br/>Combines DB + AI]\
+\
+      %% Database Layer\
+      HSS --> CDS[CompanyDatabaseService.v2<br/>PostgreSQL + Mock]\
+      CDS --> CR[CompanyRepository<br/>CRUD Operations]\
+      CR --> HD[(Historical Database<br/>150+ Companies)]\
+\
+      %% AI Service Layer\
+      HSS --> AIS[AIService Manager<br/>Multi-provider + Cache]\
+      AIS --> OAI[OpenAI Provider<br/>GPT-4o]\
+      AIS --> MIS[Mistral Provider<br/>Large 2407]\
+      AIS --> MOCK[Mock Provider<br/>Fallback]\
+\
+      %% Business Model Classification\
+      HSS --> BMC[DIIBusinessModelClassifier<br/>Industry Patterns + Matrix]\
+      BMC --> IPM[Industry Pattern Matching<br/>45 Industry Categories]\
+      BMC --> TQM[Two-Question Matrix<br/>Revenue Model + Dependency]\
+\
+      %% Data Flow Control\
+      HSS --> DFC\{Data Freshness Check\}\
+      DFC -->|Fresh| DBR[Database Result<br/>Fuzzy Match Score]\
+      DFC -->|Stale| AIE[AI Enhancement<br/>Company Data Update]\
+\
+      %% Result Processing\
+      DBR --> RR[Result Ranking<br/>Score + Source Priority]\
+      AIE --> RR\
+      RR --> DD[Deduplication<br/>Merge Similar Results]\
+      DD --> CSI\
+\
+      %% Business Model Assignment\
+      BMC --> BMA[Business Model Assignment<br/>8 DII v4 Models]\
+      BMA --> CS[Confidence Score<br/>0.0 - 1.0]\
+      CS --> BMRP[BusinessModelRevealPage<br/>Auto-suggestion + Manual]\
+\
+      %% Assessment Flow\
+      BMRP --> CCP[CompanyConfirmationPage<br/>Data Verification]\
+      CCP --> ASS[Assessment Engine<br/>Scenario Questions]\
+\
+      %% Database Connection & Health\
+      DCC[DatabaseConnectionContext<br/>Health Monitoring] --> CDS\
+      DCC --> DCI[DatabaseConnectionIndicator<br/>UI Status]\
+\
+      %% AI Health Monitoring\
+      AHI[AIHealthIndicator<br/>Provider Status] --> AIS\
+      AHI --> CSI\
+\
+      %% Production vs Demo Mode\
+      ENV\{Environment Mode\} --> |Production| AIS\
+      ENV --> |Demo/Browser| MOCK\
+\
+      %% Styling for better readability\
+      classDef uiLayer fill:#e1f5fe,stroke:#0277bd,stroke-width:2px\
+      classDef serviceLayer fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px\
+      classDef dataLayer fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px\
+      classDef aiLayer fill:#fff3e0,stroke:#f57c00,stroke-width:2px\
+      classDef businessLayer fill:#fce4ec,stroke:#c2185b,stroke-width:2px\
+\
+      class UI,CSI,CCP,BMRP,DCI,AHI uiLayer\
+      class UCH,HSS,CDS,BMC,DFC,RR,DD,BMA,CS serviceLayer\
+      class CR,HD,AS dataLayer\
+      class AIS,OAI,MIS,MOCK,AIE aiLayer\
+      class IPM,TQM,ASS businessLayer}

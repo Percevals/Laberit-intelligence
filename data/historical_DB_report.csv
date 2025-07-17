@@ -1,0 +1,151 @@
+Real_Company_Name;Real_Country;Real_Industry;Employee_Count;Anonymized_Name;Company_ID;Business_Model_v3;Business_Model_Confidence;AER;HFP;BRI;TRD;RRG;CLOUD_ADOPTION_LEVEL
+Chama;Brazil;Technology;70;El茅ctrica SA 1;35;Marketplace;0.5;3;3;7;4.2;1.25;Hybrid
+CIMED;Brazil;Pharma;2457;Producci贸n Solutions 2;36;Manufacturing;0.5;2;3;5;3.5;1.25;Hybrid
+Cocamar;Brazil;Industrial;2492;Seguros Regional 3;39;Manufacturing;0.5;3;3;5;3.5;4.178571429;Hybrid
+Fondo Social para la Vivienda;El Salvador;Public;547;Software Regional 4;58;Financial Services;0.5;3;3;5;2.8;4.178571429;Hybrid
+Grupo Auto F嘽il;El Salvador;Financial;504;Seguros Corp 5;62;Financial Services;1;4;6;5;2.8;6.571428571;Hybrid
+Grupo Q;El Salvador;Retail;2395;Retail Group 6;68;Traditional Retail;0.5;4.6;3;5;3.3;2.857142857;Minimal
+Grupo Sur;Costa Rica;Industrial;917;Software Group 7;69;Manufacturing;0.5;2;3;5;3.5;2.142857143;Hybrid
+HDI Seguros;Brazil;Financial;4241;Planta Solutions 8;72;Financial Services;1;2.5;6;3;2.8;3.642857143;Hybrid
+Lavoro;Brazil;Industrial;2265;Petr贸leo Nacional 9;80;Traditional Retail;0.5;5;3;5;3.3;5.625;Minimal
+Meco;Costa Rica;Industrial;927;Inversiones Nacional 10;81;Manufacturing;0.5;2.75;3;5;3.5;3.642857143;Hybrid
+Prodam;Brazil;Public;6583;Ministerio SA 11;107;Platform;0.5;1.4;3;5;4.5;2.142857143;Hybrid
+Siqueira Castro;Brazil;Services;905;Salud Regional 12;113;SaaS;0.5;2;3;3;2.3;2.678571429;Hybrid
+Tesouro Nacional;Brazil;Public;798;Seguros Internacional 13;120;Platform;0.5;2;3;5;4.5;2.678571429;Hybrid
+Corporaci梟 Multi Inversiones;Guatemala;Industrial;8038;Cl铆nica Corp 14;38;Hybrid;0.5;2;3;5;4;2.678571429;Hybrid
+Oficina Nacional de Defensa P渂lica Rep渂lica Dominicana;Dominican Republic;Public;317;Gas Regional 15;45;Platform;0.5;2.5;3;5;4.5;2.142857143;Hybrid
+Pinnacle;United States;Entertainment;897;Industrias Regional 16;103;Platform;0.5;4;3;7;4.5;2.678571429;Cloud-First
+Farmaenlace;Ecuador;Retail;6216;Instituto Partners 17;57;Traditional Retail;0.5;2.5;3;5;3.3;2.678571429;Minimal
+Ministerio de Educacion Publica Costa Rica;Costa Rica;Education;101807;Farmac茅utica Nacional 18;84;Platform;0.5;1;3;7;4.5;1.375;Hybrid
+Abank;El Salvador;Financial;702;Ministerio Regional 19;1;Financial Services;1;3.4;6;3;2.8;4.5;Hybrid
+Asociacion Cibao de Ahorros y Prestamos;Dominican Republic;Financial;905;Academia Regional 20;2;Financial Services;1;5.2;6;5;2.8;5.089285714;Hybrid
+Asociacion Chilena de Seguridad;Chile;Healthcare;8264;Supermercados Group 21;3;Healthcare;0.5;4;3;5;3;6.571428571;Hybrid
+ADIUM;Uruguay;Pharma;4998;Industrias Corp 22;4;Manufacturing;0.5;4;3;5;3.5;4.178571429;Hybrid
+Agrex;Brazil;Industrial;737;Financiera Partners 23;5;Manufacturing;0.5;2.5;3;5;3.5;2.321428571;Hybrid
+Agrosuper;Chile;Industrial;4769;El茅ctrica Solutions 24;6;Manufacturing;0.5;4;3;5;3.5;4.410714286;Hybrid
+Aleatica;Mexico;Transportation;2302;Producci贸n SA 25;7;Platform;0.5;5.2;3;7;4.5;3.642857143;Cloud-First
+Alimentos Diana;El Salvador;Industrial;1085;Universidad Solutions 26;8;Manufacturing;0.5;3;3;5;3.5;3.642857143;Hybrid
+Ancine;Brazil;Public;627;Seguros Corp 27;9;Platform;0.5;2;3;5;4.5;2.321428571;Hybrid
+Apoyo Integral;Colombia;Financial;541;Capital Holdings 28;10;Financial Services;1;2;6;3;2.8;3.642857143;Hybrid
+ARCOR;Argentina;Industrial;11800;Producci贸n Partners 29;11;Manufacturing;0.5;5.2;3;5;3.5;5.625;Hybrid
+ARS SENASA;Dominican Republic;Healthcare;1965;Banco Nacional 30;12;Healthcare;0.5;4;3;3;3;2.678571429;Hybrid
+Aseguradora General;Guatemala;Financial;466;Manufactura Solutions 31;13;Financial Services;1;2;6;5;2.8;2.321428571;Hybrid
+Asopagos;Colombia;Financial;158;Retail LATAM 32;14;Financial Services;1;1;6;3;2.8;3;Hybrid
+Administradora de Subsidios Sociales;Dominican Republic;Public;316;Planta Corp 33;15;Platform;0.5;3.4;3;7;4.5;3.642857143;Hybrid
+Banco Aliado;Panama;Financial;618;Servicio Nacional 34;16;Financial Services;1;3.4;6;5;2.8;5.089285714;Hybrid
+Banco Atlantida;Honduras;Financial;731;Direcci贸n LATAM 35;17;Financial Services;1;3.4;6;5;2.8;5.714285714;Hybrid
+Banco Galicia;Argentina;Financial;9388;Pharma SA 36;18;Financial Services;1;5.5;6;5;2.8;5.089285714;Hybrid
+Banco Hipotecario;Argentina;Financial;2747;Inversiones Partners 37;19;Financial Services;1;3;6;5;2.8;2.5;Hybrid
+Banco M渓tiple;Panama;Financial;7062;Tech Corp 38;20;Financial Services;1;4.6;6;5;2.8;7.714285714;Hybrid
+Banco BCT Costa Rica;Costa Rica;Financial;483;Seguros Corp 39;21;Financial Services;1;5;6;5;2.8;7.714285714;Hybrid
+Banco BCT Panama;Panama;Financial;276;Manufactura Regional 40;22;Financial Services;1;5.2;6;5;2.8;5.625;Hybrid
+Bercomat;Argentina;Retail;1144;Digital Solutions 41;23;Traditional Retail;0.5;2.75;3;5;3.3;4.178571429;Minimal
+Banco General Ruminahui;Ecuador;Financial;907;Tech Partners 42;24;Financial Services;1;4;6;5;2.8;6.285714286;Hybrid
+Bioritmo;Brazil;Services;15360;Capital SA 43;25;XaaS;0.5;3;3;5;2.5;5.625;Hybrid
+Bolsa Nacional de Valores;Costa Rica;Financial;123;F谩brica Corp 44;26;Platform;0.5;3;6;7;4.5;4.5;Cloud-First
+Banco Tierra del Fuego;Argentina;Financial;425;Capital Solutions 45;27;Financial Services;1;3;6;5;2.8;5.714285714;Hybrid
+Municipio de Caguas;Puerto Rico;Public;843;Producci贸n Partners 46;28;Platform;0.5;2.5;3;7;4.5;5;Hybrid
+Caja de Valores;Argentina;Financial;876;Consultor铆a Nacional 47;29;Platform;0.5;2.75;6;7;4.5;5.625;Cloud-First
+Compa枓a de Acero del Pac抐ico;Chile;Industrial;252;Soluciones Holdings 48;30;Manufacturing;0.5;3.4;3;5;3.5;2.678571429;Hybrid
+CAPEX;Argentina;Energy;736;F谩brica Internacional 49;31;Platform;0.5;4;3;7;4.5;3.642857143;Hybrid
+Carozzi;Chile;Industrial;3571;Inversiones Regional 50;32;Manufacturing;0.5;5.2;3;5;3.5;5;Hybrid
+Casa Toro;Colombia;Retail;1856;Partners Nacional 51;33;Traditional Retail;0.5;4;3;5;3.3;2.678571429;Minimal
+Cepel;Brazil;Energy;524;Inversiones Corp 52;34;Platform;0.5;3;3;7;4.5;2.142857143;Hybrid
+Clinica Biblica;Costa Rica;Healthcare;1936;Centro M茅dico Group 53;37;Healthcare;0.5;2.5;3;5;3;3.642857143;Hybrid
+Construmart;Chile;Retail;829;F谩brica Partners 54;40;Traditional Retail;0.5;1;3;3;3.3;1.125;Minimal
+Coopcentral;Colombia;Financial;705;Instituto Solutions 55;41;Financial Services;1;3.4;6;5;2.8;2.857142857;Hybrid
+Correos de Costa Rica;Costa Rica;Public;892;Seguros Corp 56;42;Platform;0.5;4;3;5;4.5;2.857142857;Hybrid
+Cuestamoras;Costa Rica;Industrial;142;Seguros LATAM 57;43;Manufacturing;0.5;5;3;5;3.5;4.410714286;Hybrid
+Cuestamoras Salud;Costa Rica;Retail;1279;Renovables Regional 58;44;Traditional Retail;0.5;3.4;3;5;3.3;2.678571429;Minimal
+Defensoria Penal Publica;Chile;Public;2242;Instituto Holdings 59;46;Platform;0.5;3;3;5;4.5;2.5;Hybrid
+Derco;Chile;Retail;5629;Instituto Group 60;47;Traditional Retail;0.5;3.4;3;5;3.3;4.410714286;Minimal
+Dichter & Neira;Costa Rica;Services;583;Seguros Nacional 61;48;SaaS;0.5;2.75;3;3;2.3;4.178571429;Hybrid
+Diners Club;Ecuador;Financial;1826;Sistemas Group 62;49;Financial Services;1;6;6;5;2.8;5.625;Hybrid
+Distriluz;Peru;Energy;3312;Agencia Partners 63;50;Platform;0.5;1.4;3;7;4.5;2.857142857;Hybrid
+DUOC;Chile;Education;6661;Direcci贸n Corp 64;51;Platform;0.5;2;3;5;4.5;2.678571429;Hybrid
+Edenor;Argentina;Energy;6187;Capital SA 65;52;Platform;0.5;4.6;3;7;4.5;2.857142857;Hybrid
+Edenorte;Dominican Republic;Energy;2038;Medical Holdings 66;53;Platform;0.5;2;3;7;4.5;4.178571429;Hybrid
+EGEHAINA;Dominican Republic;Energy;454;Inversiones Partners 67;54;Platform;0.5;5.5;3;7;4.5;7.714285714;Hybrid
+EGEHID;Dominican Republic;Public;751;Seguros Group 68;55;Platform;0.5;1.4;3;5;4.5;2.5;Hybrid
+Elcatex;Honduras;Industrial;1611;Seguros Holdings 69;56;Manufacturing;0.5;4.6;3;5;3.5;5;Hybrid
+Galaxy;Venezuela;Entertainment;162;Soluciones LATAM 70;59;Platform;0.5;1.4;3;7;4.5;2.678571429;Cloud-First
+Garantizar;Argentina;Financial;449;Almacenes Partners 71;60;Financial Services;1;4.6;6;3;2.8;3.642857143;Hybrid
+Gloria;Peru;Industrial;7325;Manufactura Regional 72;61;Manufacturing;0.5;4;3;5;3.5;4.410714286;Hybrid
+Grupo Corripio;Dominican Republic;Retail;2341;Supermercados Holdings 73;63;Traditional Retail;0.5;3.4;3;5;3.3;4.410714286;Minimal
+Grupo Diesco;Dominican Republic;Industrial;380;Seguros Partners 74;64;Manufacturing;0.5;3.4;3;5;3.5;2.678571429;Hybrid
+Grupo Express;Colombia;Transportation;1487;Seguros Internacional 75;65;Platform;0.5;1.4;3;5;4.5;2.5;Cloud-First
+Grupo Jacto;Brazil;Industrial;1847;Financiera Solutions 76;66;Manufacturing;0.5;4.6;3;5;3.5;2.321428571;Hybrid
+Grupo Purdy;Costa Rica;Industrial;1275;Banco Corp 77;67;Manufacturing;0.5;3;3;5;3.5;2.5;Hybrid
+GT Transmeridian;Peru;Services;673;Colegio Nacional 78;70;SaaS;0.5;3;3;3;2.3;4.178571429;Hybrid
+Municipio de Guaynabo;Puerto Rico;Public;881;Manufactura Solutions 79;71;Platform;0.5;1.4;3;5;4.5;2.678571429;Hybrid
+Hospital General de la Plaza de la Salud;Dominican Republic;Healthcare;1990;Servicio Corp 80;73;Healthcare;0.5;3.4;3;5;3;4.178571429;Hybrid
+INMO Grupo Gibraltar;Panama;Industrial;873;Direcci贸n Internacional 81;74;Manufacturing;0.5;5;3;5;3.5;2.5;Hybrid
+ISA;Colombia;Energy;1808;Lab Nacional 82;75;Platform;0.5;5.2;3;7;4.5;5;Hybrid
+It Regency;Panama;Retail;989;Direcci贸n Nacional 83;76;Traditional Retail;0.5;3.4;3;5;3.3;3.642857143;Minimal
+Information Technology and Suport CR;Costa Rica;Technology;281;Medicamentos Group 84;77;SaaS;0.5;5.2;3;3;2.3;4.178571429;Hybrid
+Lima Airport Partners;Peru;Transportation;1017;Capital Internacional 85;78;Platform;0.5;4;3;5;4.5;2.857142857;Cloud-First
+Municipalidad Las Condes;Chile;Public;1788;Academia Group 86;79;Platform;0.5;2;3;5;4.5;2.5;Hybrid
+Megalabs;Uruguay;Pharma;6602;Direcci贸n Partners 87;82;Manufacturing;0.5;2;3;5;3.5;4.178571429;Minimal
+Ministerio de Energia y Minas Republica Dominicana;Dominican Republic;Public;382;Planta Corp 88;83;Platform;0.5;2.5;3;5;4.5;2.5;Hybrid
+Mercasid;Dominican Republic;Industrial;1290;Industrias Solutions 89;85;Manufacturing;0.5;4;3;5;3.5;2.857142857;Hybrid
+Ministerio de Agricultura;Colombia;Public;657;F谩brica Partners 90;86;Platform;0.5;3.4;3;5;4.5;2.678571429;Hybrid
+Ministerio de Interior y Polic抋 Republica Dominicana;Dominican Republic;Public;611;Universidad Corp 91;87;Platform;0.5;1.4;3;5;4.5;2.142857143;Hybrid
+MINSA Costa Rica;Costa Rica;Public;2385;Energ铆a Group 92;88;Platform;0.5;4;3;5;4.5;2.5;Hybrid
+MINTIC Colombia;Colombia;Public;1455;;89;Platform;;3.4;3;5;4.5;2.678571429;Hybrid
+MINVIVIENDA Colombia;Colombia;Public;1257;;90;Platform;;3;3;5;4.5;2.678571429;Hybrid
+Multinational Life Insurance;Puerto Rico;Financial;643;;91;Financial Services;1;4;6;3;2.8;3.642857143;Hybrid
+Ministerio de Obras Publicas y Comunicaciones Paraguay;Paraguay;Public;1498;;92;Platform;;2;3;7;4.5;1.25;Hybrid
+Ministerio de Transportes y Comunicaciones Peru;Peru;Public;2500;;93;Platform;;2.5;3;5;4.5;2.5;Hybrid
+Multiquimica;Dominican Republic;Industrial;275;;94;Manufacturing;;2;3;5;3.5;2.678571429;Hybrid
+Novacero;Ecuador;Industrial;692;;95;Manufacturing;;2.75;3;5;3.5;2.678571429;Hybrid
+Numar;Costa Rica;Industrial;1147;;96;Manufacturing;;2.75;3;5;3.5;2.5;Hybrid
+OGTIC Republica Dominicana;Dominican Republic;Public;480;;97;Platform;;4;3;7;4.5;4.178571429;Hybrid
+Oldelval;Argentina;Energy;345;;98;Platform;;4;3;7;4.5;2.142857143;Hybrid
+Onyx;Guatemala;Industrial;823;;99;Manufacturing;;3.4;3;5;3.5;5;Hybrid
+Orizon;Brazil;Healthcare;1930;;100;Healthcare;;3.4;3;5;3;6.285714286;Hybrid
+Pampa Energ抋;Argentina;Energy;3125;;101;Platform;;5;3;7;4.5;3.642857143;Hybrid
+PetroPeru;Peru;Energy;2916;;102;Platform;;4;3;7;4.5;4.178571429;Hybrid
+Plaenge;Brazil;Industrial;2027;;104;Platform;;5.5;3;7;4.5;6.571428571;Hybrid
+Procaps;Colombia;Pharma;3363;;105;Manufacturing;;5;3;5;3.5;4.410714286;Hybrid
+Procolombia;Colombia;Public;626;;106;Platform;;3.4;3;7;4.5;1.25;Hybrid
+Provincia Seguros;Argentina;Financial;1019;;108;Financial Services;1;4;6;5;2.8;2.321428571;Hybrid
+RAMO;Colombia;Industrial;770;;109;Manufacturing;;1;3;5;3.5;2.5;Hybrid
+Resia;United States;Services;410;;110;SaaS;;7;3;3;2.3;7.428571429;Hybrid
+SEDAPAL;Peru;Services;2976;;111;Platform;;2;3;5;4.5;2.857142857;Cloud-First
+Seguros Universal;Dominican Republic;Financial;1906;;112;Financial Services;1;5.2;6;5;2.8;5.089285714;Hybrid
+Sierracol;Colombia;Energy;1669;;114;Platform;;4.6;3;7;4.5;5;Hybrid
+Sistecredito;Colombia;Financial;946;;115;Financial Services;1;4;6;5;2.8;5.089285714;Hybrid
+Sociedad Seguros de Vida del Magisterio Nacional;Costa Rica;Financial;296;;116;Financial Services;1;4;6;3;2.8;3.642857143;Hybrid
+Superintendencia Bancos Panama;Panama;Public;501;;117;Platform;;3.4;3;5;4.5;2.857142857;Hybrid
+Tecniseguros;Ecuador;Financial;783;;118;Financial Services;1;2.75;6;5;2.8;2.142857143;Hybrid
+Tempo Assist;Brazil;Services;2367;;119;XaaS;;2;3;3;2.5;2.678571429;Hybrid
+Ticel;Chile;Industrial;3013;;121;Manufacturing;;3;3;5;3.5;4.178571429;Hybrid
+Transacciones y Transferencia;Guatemala;Financial;248;;122;Financial Services;1;5.2;6;5;2.8;7.142857143;Hybrid
+Tribunal Electoral Panama;Panama;Public;480;;123;Platform;;3.4;3;7;4.5;3.642857143;Hybrid
+Universidad Autonoma de Chile;Chile;Education;2407;;124;Platform;;1.4;3;5;4.5;2.857142857;Hybrid
+UADE;Argentina;Education;486;;125;Platform;;3;3;5;4.5;2.678571429;Hybrid
+UNED Palmares;Costa Rica;Education;4206;;126;Platform;;3;3;7;4.5;4.178571429;Hybrid
+Unibank;Panama;Financial;121;;127;Financial Services;1;2.5;6;5;2.8;5.089285714;Hybrid
+V Suarez&CO;Puerto Rico;Retail;109;;128;Traditional Retail;;4.6;3;5;3.3;4.410714286;Minimal
+Vipal;Brazil;Industrial;1795;;129;Manufacturing;;2;3;5;3.5;2.321428571;Hybrid
+XM;Colombia;Energy;1920;;130;Platform;;4;3;7;4.5;5;Hybrid
+APAP;Dominican Republic;Financial;2508;;131;Financial Services;1;5.5;6;3;2.8;5.25625;Hybrid
+Banreservas;Dominican Republic;Financial;12715;;132;Financial Services;1;5;6;5;2.8;3.30625;Hybrid
+KMA;Colombia;Industrial;316;;133;Manufacturing;;3;3;5;3.5;2.5;Hybrid
+La Colonial;Dominican Republic;Financial;573;;134;Financial Services;1;5.5;6;3;2.8;5.25625;Hybrid
+Nello;United States;Industrial;119;;135;Manufacturing;;2.5;3;5;3.5;4.513888889;Hybrid
+UTESA;Dominican Republic;Education;1256;;136;Platform;;1;3;5;4.5;0.75625;Hybrid
+Valid;Colombia;Technology;304;;137;SaaS;;5;3;3;2.3;4.225;Hybrid
+Aviomar;Colombia;Transportation;596;;138;Platform;;3.4;3;7;4.5;4.225;Cloud-First
+Caja los Heroes;Chile;Financial;2762;;139;Financial Services;1;4.6;6;5;2.8;5.625;Hybrid
+Coopealianza;Costa Rica;Financial;738;;140;Financial Services;1;7;6;5;2.8;7.225;Hybrid
+CYS;Colombia;Industrial;159;;141;Manufacturing;;1.4;3;5;3.5;1.225;Hybrid
+Grupo A;Colombia;Industrial;1597;;142;Manufacturing;;4;3;5;3.5;2.5;Hybrid
+INM;Colombia;Public;288;;143;Platform;;2.5;3;5;4.5;3.025;Hybrid
+Investta;Colombia;Financial;31;;144;Financial Services;1;2;6;5;2.8;1.5;Hybrid
+Mario Hernandez;Colombia;Industrial;319;;145;Manufacturing;;1.4;3;5;3.5;1.6;Hybrid
+Movich;Colombia;Hospitality;478;;146;XaaS;;2;3;3;2.5;1.2;Hybrid
+NBC;Colombia;Services;75;;147;SaaS;;1;3;3;2.3;0.9;Hybrid
+OTACC;Colombia;Industrial;358;;148;Manufacturing;;2;3;5;3.5;0.625;Hybrid
+Shrader Camargo;Colombia;Industrial;199;;149;Manufacturing;;2.5;3;5;3.5;2.025;Hybrid
+UIB;Colombia;Financial;100;;150;Financial Services;1;2.5;6;5;2.8;1.5625;Hybrid

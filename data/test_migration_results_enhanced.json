@@ -1,0 +1,261 @@
+{
+  "timestamp": "2025-07-17T11:09:21.990Z",
+  "totalCompanies": 15,
+  "successCount": 15,
+  "warningCount": 0,
+  "errorCount": 0,
+  "results": [
+    {
+      "companyId": "58",
+      "companyName": "Fondo Social para la Vivienda",
+      "originalModel": "Financial Services",
+      "proposedModel": "ECOSISTEMA_DIGITAL",
+      "confidence": 0.7,
+      "reasoning": [
+        "Public sector digital platform for citizen services"
+      ],
+      "requiresReview": false,
+      "migrationStatus": "success",
+      "validationErrors": [],
+      "classificationMethod": "industry",
+      "sqlInsert": "INSERT INTO companies (id, name, country, industry, employee_count, business_model_v4, aer_score, hfp_score, bri_score, trd_score, rrg_score, cloud_adoption) VALUES ('58', 'Fondo Social para la Vivienda', 'El Salvador', 'Public', 547, 'ECOSISTEMA_DIGITAL', '3', '3', '5', '2.8', '4.178571429', 'Hybrid');"
+    },
+    {
+      "companyId": "62",
+      "companyName": "Grupo Auto F‡cil",
+      "originalModel": "Financial Services",
+      "proposedModel": "SERVICIOS_FINANCIEROS",
+      "confidence": 0.95,
+      "reasoning": [
+        "Banking operations require real-time transaction processing with zero downtime tolerance"
+      ],
+      "requiresReview": false,
+      "migrationStatus": "success",
+      "validationErrors": [],
+      "classificationMethod": "industry",
+      "sqlInsert": "INSERT INTO companies (id, name, country, industry, employee_count, business_model_v4, aer_score, hfp_score, bri_score, trd_score, rrg_score, cloud_adoption) VALUES ('62', 'Grupo Auto F‡cil', 'El Salvador', 'Financial', 504, 'SERVICIOS_FINANCIEROS', '4', '6', '5', '2.8', '6.571428571', 'Hybrid');"
+    },
+    {
+      "companyId": "72",
+      "companyName": "HDI Seguros",
+      "originalModel": "Financial Services",
+      "proposedModel": "SERVICIOS_FINANCIEROS",
+      "confidence": 0.95,
+      "reasoning": [
+        "Banking operations require real-time transaction processing with zero downtime tolerance"
+      ],
+      "requiresReview": false,
+      "migrationStatus": "success",
+      "validationErrors": [],
+      "classificationMethod": "industry",
+      "sqlInsert": "INSERT INTO companies (id, name, country, industry, employee_count, business_model_v4, aer_score, hfp_score, bri_score, trd_score, rrg_score, cloud_adoption) VALUES ('72', 'HDI Seguros', 'Brazil', 'Financial', 4241, 'SERVICIOS_FINANCIEROS', '2.5', '6', '3', '2.8', '3.642857143', 'Hybrid');"
+    },
+    {
+      "companyId": "107",
+      "companyName": "Prodam",
+      "originalModel": "Platform",
+      "proposedModel": "SERVICIOS_DATOS",
+      "confidence": 0.75,
+      "reasoning": [
+        "Public sector digital platform for citizen services",
+        "Public sector platform likely focuses on data services"
+      ],
+      "requiresReview": false,
+      "migrationStatus": "success",
+      "validationErrors": [],
+      "classificationMethod": "industry",
+      "sqlInsert": "INSERT INTO companies (id, name, country, industry, employee_count, business_model_v4, aer_score, hfp_score, bri_score, trd_score, rrg_score, cloud_adoption) VALUES ('107', 'Prodam', 'Brazil', 'Public', 6583, 'SERVICIOS_DATOS', '1.4', '3', '5', '4.5', '2.142857143', 'Hybrid');"
+    },
+    {
+      "companyId": "120",
+      "companyName": "Tesouro Nacional",
+      "originalModel": "Platform",
+      "proposedModel": "SERVICIOS_DATOS",
+      "confidence": 0.75,
+      "reasoning": [
+        "Public sector digital platform for citizen services",
+        "Public sector platform likely focuses on data services"
+      ],
+      "requiresReview": false,
+      "migrationStatus": "success",
+      "validationErrors": [],
+      "classificationMethod": "industry",
+      "sqlInsert": "INSERT INTO companies (id, name, country, industry, employee_count, business_model_v4, aer_score, hfp_score, bri_score, trd_score, rrg_score, cloud_adoption) VALUES ('120', 'Tesouro Nacional', 'Brazil', 'Public', 798, 'SERVICIOS_DATOS', '2', '3', '5', '4.5', '2.678571429', 'Hybrid');"
+    },
+    {
+      "companyId": "45",
+      "companyName": "Oficina Nacional de Defensa Pœblica Repœblica Dominicana",
+      "originalModel": "Platform",
+      "proposedModel": "SERVICIOS_DATOS",
+      "confidence": 0.75,
+      "reasoning": [
+        "Public sector digital platform for citizen services",
+        "Public sector platform likely focuses on data services"
+      ],
+      "requiresReview": false,
+      "migrationStatus": "success",
+      "validationErrors": [],
+      "classificationMethod": "industry",
+      "sqlInsert": "INSERT INTO companies (id, name, country, industry, employee_count, business_model_v4, aer_score, hfp_score, bri_score, trd_score, rrg_score, cloud_adoption) VALUES ('45', 'Oficina Nacional de Defensa Pœblica Repœblica Dominicana', 'Dominican Republic', 'Public', 317, 'SERVICIOS_DATOS', '2.5', '3', '5', '4.5', '2.142857143', 'Hybrid');"
+    },
+    {
+      "companyId": "11",
+      "companyName": "ARCOR",
+      "originalModel": "Manufacturing",
+      "proposedModel": "COMERCIO_HIBRIDO",
+      "confidence": 0.9,
+      "reasoning": [
+        "Omnichannel retail combining physical and digital sales channels",
+        "Matrix classification: product_sales + hybrid_model"
+      ],
+      "requiresReview": false,
+      "migrationStatus": "success",
+      "validationErrors": [],
+      "classificationMethod": "matrix",
+      "sqlInsert": "INSERT INTO companies (id, name, country, industry, employee_count, business_model_v4, aer_score, hfp_score, bri_score, trd_score, rrg_score, cloud_adoption) VALUES ('11', 'ARCOR', 'Argentina', 'Industrial', 11800, 'COMERCIO_HIBRIDO', '5.2', '3', '5', '3.5', '5.625', 'Hybrid');"
+    },
+    {
+      "companyId": "61",
+      "companyName": "Gloria",
+      "originalModel": "Manufacturing",
+      "proposedModel": "COMERCIO_HIBRIDO",
+      "confidence": 0.9,
+      "reasoning": [
+        "Omnichannel retail combining physical and digital sales channels",
+        "Matrix classification: product_sales + hybrid_model"
+      ],
+      "requiresReview": false,
+      "migrationStatus": "success",
+      "validationErrors": [],
+      "classificationMethod": "matrix",
+      "sqlInsert": "INSERT INTO companies (id, name, country, industry, employee_count, business_model_v4, aer_score, hfp_score, bri_score, trd_score, rrg_score, cloud_adoption) VALUES ('61', 'Gloria', 'Peru', 'Industrial', 7325, 'COMERCIO_HIBRIDO', '4', '3', '5', '3.5', '4.410714286', 'Hybrid');"
+    },
+    {
+      "companyId": "82",
+      "companyName": "Megalabs",
+      "originalModel": "Manufacturing",
+      "proposedModel": "INFRAESTRUCTURA_HEREDADA",
+      "confidence": 0.8,
+      "reasoning": [
+        "Physical product distribution requiring supply chain coordination",
+        "Matrix classification: product_sales + physical_critical",
+        "Large manufacturer (6602 employees) likely has legacy infrastructure"
+      ],
+      "requiresReview": false,
+      "migrationStatus": "success",
+      "validationErrors": [],
+      "classificationMethod": "matrix",
+      "sqlInsert": "INSERT INTO companies (id, name, country, industry, employee_count, business_model_v4, aer_score, hfp_score, bri_score, trd_score, rrg_score, cloud_adoption) VALUES ('82', 'Megalabs', 'Uruguay', 'Pharma', 6602, 'INFRAESTRUCTURA_HEREDADA', '2', '3', '5', '3.5', '4.178571429', 'Minimal');"
+    },
+    {
+      "companyId": "35",
+      "companyName": "Chama",
+      "originalModel": "Marketplace",
+      "proposedModel": "SOFTWARE_CRITICO",
+      "confidence": 0.9,
+      "reasoning": [
+        "Software platforms require 24/7 availability with customer data protection"
+      ],
+      "requiresReview": false,
+      "migrationStatus": "success",
+      "validationErrors": [],
+      "classificationMethod": "industry",
+      "sqlInsert": "INSERT INTO companies (id, name, country, industry, employee_count, business_model_v4, aer_score, hfp_score, bri_score, trd_score, rrg_score, cloud_adoption) VALUES ('35', 'Chama', 'Brazil', 'Technology', 70, 'SOFTWARE_CRITICO', '3', '3', '7', '4.2', '1.25', 'Hybrid');"
+    },
+    {
+      "companyId": "36",
+      "companyName": "CIMED",
+      "originalModel": "Manufacturing",
+      "proposedModel": "COMERCIO_HIBRIDO",
+      "confidence": 0.9,
+      "reasoning": [
+        "Omnichannel retail combining physical and digital sales channels",
+        "Matrix classification: product_sales + hybrid_model"
+      ],
+      "requiresReview": false,
+      "migrationStatus": "success",
+      "validationErrors": [],
+      "classificationMethod": "matrix",
+      "sqlInsert": "INSERT INTO companies (id, name, country, industry, employee_count, business_model_v4, aer_score, hfp_score, bri_score, trd_score, rrg_score, cloud_adoption) VALUES ('36', 'CIMED', 'Brazil', 'Pharma', 2457, 'COMERCIO_HIBRIDO', '2', '3', '5', '3.5', '1.25', 'Hybrid');"
+    },
+    {
+      "companyId": "39",
+      "companyName": "Cocamar",
+      "originalModel": "Manufacturing",
+      "proposedModel": "COMERCIO_HIBRIDO",
+      "confidence": 0.9,
+      "reasoning": [
+        "Omnichannel retail combining physical and digital sales channels",
+        "Matrix classification: product_sales + hybrid_model"
+      ],
+      "requiresReview": false,
+      "migrationStatus": "success",
+      "validationErrors": [],
+      "classificationMethod": "matrix",
+      "sqlInsert": "INSERT INTO companies (id, name, country, industry, employee_count, business_model_v4, aer_score, hfp_score, bri_score, trd_score, rrg_score, cloud_adoption) VALUES ('39', 'Cocamar', 'Brazil', 'Industrial', 2492, 'COMERCIO_HIBRIDO', '3', '3', '5', '3.5', '4.178571429', 'Hybrid');"
+    },
+    {
+      "companyId": "113",
+      "companyName": "Siqueira Castro",
+      "originalModel": "SaaS",
+      "proposedModel": "SOFTWARE_CRITICO",
+      "confidence": 0.8,
+      "reasoning": [
+        "Software service with some physical touchpoints but primarily digital delivery",
+        "Matrix classification: recurring_subscriptions + hybrid_model"
+      ],
+      "requiresReview": false,
+      "migrationStatus": "success",
+      "validationErrors": [],
+      "classificationMethod": "matrix",
+      "sqlInsert": "INSERT INTO companies (id, name, country, industry, employee_count, business_model_v4, aer_score, hfp_score, bri_score, trd_score, rrg_score, cloud_adoption) VALUES ('113', 'Siqueira Castro', 'Brazil', 'Services', 905, 'SOFTWARE_CRITICO', '2', '3', '3', '2.3', '2.678571429', 'Hybrid');"
+    },
+    {
+      "companyId": "3",
+      "companyName": "Asociacion Chilena de Seguridad",
+      "originalModel": "Healthcare",
+      "proposedModel": "INFORMACION_REGULADA",
+      "confidence": 0.95,
+      "reasoning": [
+        "Healthcare data requires strict compliance with patient privacy regulations"
+      ],
+      "requiresReview": false,
+      "migrationStatus": "success",
+      "validationErrors": [],
+      "classificationMethod": "industry",
+      "sqlInsert": "INSERT INTO companies (id, name, country, industry, employee_count, business_model_v4, aer_score, hfp_score, bri_score, trd_score, rrg_score, cloud_adoption) VALUES ('3', 'Asociacion Chilena de Seguridad', 'Chile', 'Healthcare', 8264, 'INFORMACION_REGULADA', '4', '3', '5', '3', '6.571428571', 'Hybrid');"
+    },
+    {
+      "companyId": "68",
+      "companyName": "Grupo Q",
+      "originalModel": "Traditional Retail",
+      "proposedModel": "COMERCIO_HIBRIDO",
+      "confidence": 0.9,
+      "reasoning": [
+        "Retail operations span physical stores and digital channels requiring omnichannel security"
+      ],
+      "requiresReview": false,
+      "migrationStatus": "success",
+      "validationErrors": [],
+      "classificationMethod": "industry",
+      "sqlInsert": "INSERT INTO companies (id, name, country, industry, employee_count, business_model_v4, aer_score, hfp_score, bri_score, trd_score, rrg_score, cloud_adoption) VALUES ('68', 'Grupo Q', 'El Salvador', 'Retail', 2395, 'COMERCIO_HIBRIDO', '4.6', '3', '5', '3.3', '2.857142857', 'Minimal');"
+    }
+  ],
+  "summary": {
+    "byModel": {
+      "ECOSISTEMA_DIGITAL": 1,
+      "SERVICIOS_FINANCIEROS": 2,
+      "SERVICIOS_DATOS": 3,
+      "COMERCIO_HIBRIDO": 5,
+      "INFRAESTRUCTURA_HEREDADA": 1,
+      "SOFTWARE_CRITICO": 2,
+      "INFORMACION_REGULADA": 1
+    },
+    "byMethod": {
+      "industry": 9,
+      "matrix": 6
+    },
+    "avgConfidence": 0.8533333333333334,
+    "requiresReviewCount": 0
+  }
+}

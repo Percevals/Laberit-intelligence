@@ -1,0 +1,379 @@
+{
+  "version": "1.0.0",
+  "description": "Enhanced HFP (Human Failure Probability) measurements for DII 4.0 assessment engine",
+  "changelog": "Improved HFP questions to capture composite security behaviors beyond just phishing",
+  "dimensions": {
+    "HFP": {
+      "dimension_name": "Human Failure Probability",
+      "dimension_description": "Probability that human error will compromise security within a month",
+      "measurement_approach": "Composite score based on multiple security behavior indicators",
+      "business_models": {
+        "COMERCIO_HIBRIDO": {
+          "measurement_question": "En los últimos 3 meses, ¿qué porcentaje de sus empleados ha demostrado comportamientos de seguridad riesgosos (caer en phishing simulado, compartir contraseñas, enviar datos a destinatarios incorrectos, pérdida de dispositivos)?",
+          "response_options": [
+            {"value": 5, "label": "Menos del 10%", "probability": 0.10, "metric": 10},
+            {"value": 4, "label": "10-25%", "probability": 0.25, "metric": 25},
+            {"value": 3, "label": "25-40%", "probability": 0.40, "metric": 40},
+            {"value": 2, "label": "40-60%", "probability": 0.60, "metric": 60},
+            {"value": 1, "label": "Más del 60%", "probability": 0.80, "metric": 80}
+          ],
+          "context_help": "Incluya: clicks en phishing, reportes de pérdida de dispositivos en tiendas, compartir accesos a sistemas POS, envíos erróneos de información de clientes",
+          "risk_multiplier": 0.9,
+          "premium_questions": [
+            {
+              "id": "hfp_ch_1",
+              "question": "¿Qué porcentaje de empleados en tienda física y online falló la última simulación de phishing?",
+              "weight": 0.25,
+              "response_type": "percentage"
+            },
+            {
+              "id": "hfp_ch_2",
+              "question": "¿Cuántos empleados reportaron activamente intentos de phishing o fraude?",
+              "weight": 0.20,
+              "response_type": "percentage",
+              "inverse": true
+            },
+            {
+              "id": "hfp_ch_3",
+              "question": "¿Cuántos casos de compartir contraseñas o accesos entre turnos se han detectado?",
+              "weight": 0.20,
+              "response_type": "count_per_month"
+            },
+            {
+              "id": "hfp_ch_4",
+              "question": "¿Qué porcentaje de empleados maneja tanto sistemas físicos como digitales sin segregación de accesos?",
+              "weight": 0.20,
+              "response_type": "percentage"
+            },
+            {
+              "id": "hfp_ch_5",
+              "question": "¿Cuántos dispositivos móviles con acceso a sistemas se han perdido o robado en el último trimestre?",
+              "weight": 0.15,
+              "response_type": "count"
+            }
+          ]
+        },
+        "SOFTWARE_CRITICO": {
+          "measurement_question": "Considerando su equipo de desarrollo y soporte, ¿qué porcentaje ha demostrado prácticas inseguras (credenciales en código, phishing, compartir accesos, bypass de seguridad)?",
+          "response_options": [
+            {"value": 5, "label": "Menos del 5%", "probability": 0.05, "metric": 5},
+            {"value": 4, "label": "5-15%", "probability": 0.15, "metric": 15},
+            {"value": 3, "label": "15-30%", "probability": 0.30, "metric": 30},
+            {"value": 2, "label": "30-50%", "probability": 0.50, "metric": 50},
+            {"value": 1, "label": "Más del 50%", "probability": 0.70, "metric": 70}
+          ],
+          "context_help": "Incluya: hardcoded credentials, tokens expuestos en repositorios, clicks en phishing dirigido, compartir cuentas de servicio, deshabilitar controles de seguridad",
+          "risk_multiplier": 1.1,
+          "premium_questions": [
+            {
+              "id": "hfp_sc_1",
+              "question": "¿Cuántos desarrolladores han expuesto accidentalmente credenciales en código o repositorios?",
+              "weight": 0.30,
+              "response_type": "percentage"
+            },
+            {
+              "id": "hfp_sc_2",
+              "question": "¿Qué porcentaje del equipo técnico falló simulaciones de spear phishing?",
+              "weight": 0.25,
+              "response_type": "percentage"
+            },
+            {
+              "id": "hfp_sc_3",
+              "question": "¿Cuántas veces se han compartido credenciales de producción fuera de los canales seguros?",
+              "weight": 0.20,
+              "response_type": "count_per_quarter"
+            },
+            {
+              "id": "hfp_sc_4",
+              "question": "¿Qué porcentaje de desarrolladores ha completado entrenamiento en secure coding en el último año?",
+              "weight": 0.15,
+              "response_type": "percentage",
+              "inverse": true
+            },
+            {
+              "id": "hfp_sc_5",
+              "question": "¿Cuántos incidentes de 'shadow IT' o herramientas no autorizadas se han detectado?",
+              "weight": 0.10,
+              "response_type": "count_per_month"
+            }
+          ]
+        },
+        "SERVICIOS_DATOS": {
+          "measurement_question": "En su organización orientada a datos, ¿qué porcentaje de empleados ha cometido errores de seguridad (exposición de datos, phishing, mal manejo de información sensible)?",
+          "response_options": [
+            {"value": 5, "label": "Menos del 8%", "probability": 0.08, "metric": 8},
+            {"value": 4, "label": "8-20%", "probability": 0.20, "metric": 20},
+            {"value": 3, "label": "20-35%", "probability": 0.35, "metric": 35},
+            {"value": 2, "label": "35-55%", "probability": 0.55, "metric": 55},
+            {"value": 1, "label": "Más del 55%", "probability": 0.75, "metric": 75}
+          ],
+          "context_help": "Incluya: queries sin autorización, exportación indebida de datos, compartir datasets sin anonimizar, clicks en phishing, pérdida de dispositivos con datos",
+          "risk_multiplier": 1.2,
+          "premium_questions": [
+            {
+              "id": "hfp_sd_1",
+              "question": "¿Qué porcentaje de analistas ha exportado o compartido datos sensibles sin seguir protocolos?",
+              "weight": 0.30,
+              "response_type": "percentage"
+            },
+            {
+              "id": "hfp_sd_2",
+              "question": "¿Cuántos empleados con acceso a datos fallaron en phishing dirigido?",
+              "weight": 0.25,
+              "response_type": "percentage"
+            },
+            {
+              "id": "hfp_sd_3",
+              "question": "¿Cuántas veces se han detectado queries o accesos no autorizados a bases de datos?",
+              "weight": 0.20,
+              "response_type": "count_per_month"
+            },
+            {
+              "id": "hfp_sd_4",
+              "question": "¿Qué porcentaje de empleados maneja datos de clientes sin completar certificación en privacidad?",
+              "weight": 0.15,
+              "response_type": "percentage"
+            },
+            {
+              "id": "hfp_sd_5",
+              "question": "¿Cuántos incidentes de 'data leakage' accidental (email, cloud shares) han ocurrido?",
+              "weight": 0.10,
+              "response_type": "count_per_quarter"
+            }
+          ]
+        },
+        "ECOSISTEMA_DIGITAL": {
+          "measurement_question": "En su plataforma digital, ¿qué porcentaje de empleados y partners clave ha mostrado comportamientos riesgosos (phishing, compartir accesos, errores en configuración)?",
+          "response_options": [
+            {"value": 5, "label": "Menos del 12%", "probability": 0.12, "metric": 12},
+            {"value": 4, "label": "12-28%", "probability": 0.28, "metric": 28},
+            {"value": 3, "label": "28-45%", "probability": 0.45, "metric": 45},
+            {"value": 2, "label": "45-65%", "probability": 0.65, "metric": 65},
+            {"value": 1, "label": "Más del 65%", "probability": 0.85, "metric": 85}
+          ],
+          "context_help": "Incluya: empleados propios, vendors críticos, partners con acceso a APIs, clicks en phishing, mal uso de tokens API, configuraciones inseguras",
+          "risk_multiplier": 1.3,
+          "premium_questions": [
+            {
+              "id": "hfp_ed_1",
+              "question": "¿Qué porcentaje de empleados y partners críticos falló simulaciones de phishing?",
+              "weight": 0.25,
+              "response_type": "percentage"
+            },
+            {
+              "id": "hfp_ed_2",
+              "question": "¿Cuántos casos de compartir tokens API o credenciales entre partners se han detectado?",
+              "weight": 0.25,
+              "response_type": "count_per_month"
+            },
+            {
+              "id": "hfp_ed_3",
+              "question": "¿Qué porcentaje de vendedores/partners maneja accesos sin MFA habilitado?",
+              "weight": 0.20,
+              "response_type": "percentage"
+            },
+            {
+              "id": "hfp_ed_4",
+              "question": "¿Cuántos incidentes de configuración incorrecta por parte de usuarios se han registrado?",
+              "weight": 0.15,
+              "response_type": "count_per_quarter"
+            },
+            {
+              "id": "hfp_ed_5",
+              "question": "¿Qué porcentaje del ecosistema (empleados + partners) reporta activamente incidentes?",
+              "weight": 0.15,
+              "response_type": "percentage",
+              "inverse": true
+            }
+          ]
+        },
+        "SERVICIOS_FINANCIEROS": {
+          "measurement_question": "Considerando las estrictas regulaciones financieras, ¿qué porcentaje de su personal ha violado protocolos de seguridad (phishing, mal manejo de datos PII/PCI, compartir accesos)?",
+          "response_options": [
+            {"value": 5, "label": "Menos del 3%", "probability": 0.03, "metric": 3},
+            {"value": 4, "label": "3-10%", "probability": 0.10, "metric": 10},
+            {"value": 3, "label": "10-25%", "probability": 0.25, "metric": 25},
+            {"value": 2, "label": "25-45%", "probability": 0.45, "metric": 45},
+            {"value": 1, "label": "Más del 45%", "probability": 0.65, "metric": 65}
+          ],
+          "context_help": "Incluya: violaciones PCI-DSS, manejo indebido de datos financieros, clicks en phishing bancario, compartir credenciales de sistemas core, incumplimiento de dual control",
+          "risk_multiplier": 1.4,
+          "premium_questions": [
+            {
+              "id": "hfp_sf_1",
+              "question": "¿Qué porcentaje de empleados con acceso a sistemas financieros falló phishing simulado avanzado?",
+              "weight": 0.30,
+              "response_type": "percentage"
+            },
+            {
+              "id": "hfp_sf_2",
+              "question": "¿Cuántas violaciones a protocolos de dual control o segregación de funciones se han detectado?",
+              "weight": 0.25,
+              "response_type": "count_per_month"
+            },
+            {
+              "id": "hfp_sf_3",
+              "question": "¿Qué porcentaje del personal maneja datos PCI/PII sin certificación vigente?",
+              "weight": 0.20,
+              "response_type": "percentage"
+            },
+            {
+              "id": "hfp_sf_4",
+              "question": "¿Cuántos casos de 'tailgating' o ingreso no autorizado a áreas seguras se han registrado?",
+              "weight": 0.15,
+              "response_type": "count_per_quarter"
+            },
+            {
+              "id": "hfp_sf_5",
+              "question": "¿Qué porcentaje de transacciones sensibles se ejecutan sin seguir el protocolo completo por presión de tiempo?",
+              "weight": 0.10,
+              "response_type": "percentage"
+            }
+          ]
+        },
+        "INFRAESTRUCTURA_HEREDADA": {
+          "measurement_question": "Con sistemas legacy y nuevos, ¿qué porcentaje de su personal ha cometido errores de seguridad (passwords débiles, phishing, mal uso de privilegios, compartir accesos)?",
+          "response_options": [
+            {"value": 5, "label": "Menos del 15%", "probability": 0.15, "metric": 15},
+            {"value": 4, "label": "15-35%", "probability": 0.35, "metric": 35},
+            {"value": 3, "label": "35-55%", "probability": 0.55, "metric": 55},
+            {"value": 2, "label": "55-75%", "probability": 0.75, "metric": 75},
+            {"value": 1, "label": "Más del 75%", "probability": 0.90, "metric": 90}
+          ],
+          "context_help": "Incluya: uso de passwords por defecto, compartir cuentas genéricas, escribir passwords, clicks en phishing, bypass de controles legacy, uso de USB no autorizados",
+          "risk_multiplier": 1.5,
+          "premium_questions": [
+            {
+              "id": "hfp_ih_1",
+              "question": "¿Qué porcentaje de usuarios de sistemas legacy comparte credenciales o usa passwords por defecto?",
+              "weight": 0.30,
+              "response_type": "percentage"
+            },
+            {
+              "id": "hfp_ih_2",
+              "question": "¿Cuántos empleados han intentado bypass o workarounds en sistemas legacy por conveniencia?",
+              "weight": 0.25,
+              "response_type": "percentage"
+            },
+            {
+              "id": "hfp_ih_3",
+              "question": "¿Qué porcentaje del personal ha recibido entrenamiento específico en seguridad de sistemas legacy?",
+              "weight": 0.20,
+              "response_type": "percentage",
+              "inverse": true
+            },
+            {
+              "id": "hfp_ih_4",
+              "question": "¿Cuántos incidentes por uso de dispositivos USB no autorizados o software no aprobado han ocurrido?",
+              "weight": 0.15,
+              "response_type": "count_per_month"
+            },
+            {
+              "id": "hfp_ih_5",
+              "question": "¿Qué porcentaje de accesos administrativos legacy se audita regularmente?",
+              "weight": 0.10,
+              "response_type": "percentage",
+              "inverse": true
+            }
+          ]
+        },
+        "CADENA_SUMINISTRO": {
+          "measurement_question": "En su operación logística, ¿qué porcentaje de empleados y transportistas ha mostrado comportamientos inseguros (phishing, compartir accesos, pérdida de dispositivos, mal manejo de datos)?",
+          "response_options": [
+            {"value": 5, "label": "Menos del 10%", "probability": 0.10, "metric": 10},
+            {"value": 4, "label": "10-25%", "probability": 0.25, "metric": 25},
+            {"value": 3, "label": "25-40%", "probability": 0.40, "metric": 40},
+            {"value": 2, "label": "40-60%", "probability": 0.60, "metric": 60},
+            {"value": 1, "label": "Más del 60%", "probability": 0.80, "metric": 80}
+          ],
+          "context_help": "Incluya: conductores, personal de bodega, administrativos, clicks en phishing, compartir dispositivos de tracking, pérdida de handhelds, accesos compartidos a sistemas WMS/TMS",
+          "risk_multiplier": 1.2,
+          "premium_questions": [
+            {
+              "id": "hfp_cs_1",
+              "question": "¿Qué porcentaje de conductores y personal de campo comparte credenciales de dispositivos móviles?",
+              "weight": 0.25,
+              "response_type": "percentage"
+            },
+            {
+              "id": "hfp_cs_2",
+              "question": "¿Cuántos dispositivos de tracking o handhelds se han perdido o dañado con datos sin encriptar?",
+              "weight": 0.25,
+              "response_type": "count_per_quarter"
+            },
+            {
+              "id": "hfp_cs_3",
+              "question": "¿Qué porcentaje del personal administrativo y operativo falló simulaciones de phishing?",
+              "weight": 0.20,
+              "response_type": "percentage"
+            },
+            {
+              "id": "hfp_cs_4",
+              "question": "¿Cuántos casos de compartir información de rutas o clientes por canales no seguros (WhatsApp, etc.) se han detectado?",
+              "weight": 0.15,
+              "response_type": "count_per_month"
+            },
+            {
+              "id": "hfp_cs_5",
+              "question": "¿Qué porcentaje de terceros (transportistas independientes) cumple con sus políticas de seguridad?",
+              "weight": 0.15,
+              "response_type": "percentage",
+              "inverse": true
+            }
+          ]
+        },
+        "INFORMACION_REGULADA": {
+          "measurement_question": "Manejando información altamente sensible, ¿qué porcentaje de su personal ha violado protocolos (phishing, mal manejo de expedientes, accesos indebidos, dispositivos perdidos)?",
+          "response_options": [
+            {"value": 5, "label": "Menos del 5%", "probability": 0.05, "metric": 5},
+            {"value": 4, "label": "5-15%", "probability": 0.15, "metric": 15},
+            {"value": 3, "label": "15-30%", "probability": 0.30, "metric": 30},
+            {"value": 2, "label": "30-50%", "probability": 0.50, "metric": 50},
+            {"value": 1, "label": "Más del 50%", "probability": 0.70, "metric": 70}
+          ],
+          "context_help": "Incluya: acceso indebido a expedientes médicos/académicos, clicks en phishing, compartir credenciales, pérdida de dispositivos con ePHI, violaciones HIPAA/FERPA",
+          "risk_multiplier": 1.4,
+          "premium_questions": [
+            {
+              "id": "hfp_ir_1",
+              "question": "¿Qué porcentaje de personal con acceso a información regulada ha violado el principio de 'necesidad de conocer'?",
+              "weight": 0.30,
+              "response_type": "percentage"
+            },
+            {
+              "id": "hfp_ir_2",
+              "question": "¿Cuántos casos de phishing dirigido resultaron en compromiso de credenciales con acceso a datos sensibles?",
+              "weight": 0.25,
+              "response_type": "count_per_quarter"
+            },
+            {
+              "id": "hfp_ir_3",
+              "question": "¿Qué porcentaje del personal clínico/educativo comparte credenciales por conveniencia operativa?",
+              "weight": 0.20,
+              "response_type": "percentage"
+            },
+            {
+              "id": "hfp_ir_4",
+              "question": "¿Cuántos dispositivos con información de pacientes/estudiantes se han reportado perdidos o robados?",
+              "weight": 0.15,
+              "response_type": "count_per_year"
+            },
+            {
+              "id": "hfp_ir_5",
+              "question": "¿Qué porcentaje del personal completa entrenamiento anual en privacidad y manejo de datos sensibles?",
+              "weight": 0.10,
+              "response_type": "percentage",
+              "inverse": true
+            }
+          ]
+        }
+      },
+      "calculation_notes": {
+        "light_assessment": "Single question captures composite security behaviors relevant to each business model",
+        "premium_assessment": "Weighted average of 5 sub-dimensions, each targeting specific risk areas",
+        "risk_multipliers": "Applied based on business model inherent risk profile",
+        "probability_mapping": "Percentage of employees failing security → Monthly probability of significant breach"
+      }
+    }
+  }
+}
