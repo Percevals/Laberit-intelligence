@@ -112,7 +112,9 @@ export function CompanySearchInput({ onSelect, className }: CompanySearchInputPr
                       {t('companySearch.searchError.title', 'No pudimos buscar su empresa')}
                     </p>
                     <p className="text-xs text-red-300 mb-3">
-                      {error.includes('fetch') || error.includes('network') 
+                      {import.meta.env.PROD && !import.meta.env.VITE_API_URL
+                        ? 'La búsqueda automática no está disponible en esta versión demo. Por favor use la opción de ingreso manual.'
+                        : error.includes('fetch') || error.includes('network') 
                         ? t('companySearch.searchError.networkError', 'Verifique su conexión a internet e intente nuevamente.')
                         : error.includes('timeout') 
                         ? t('companySearch.searchError.timeoutError', 'La búsqueda está tardando más de lo normal. Intente con un término más específico.')

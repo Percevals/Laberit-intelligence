@@ -12,9 +12,9 @@ import { createAPIDatabaseService } from './api-database.service';
 let serviceInstance: CompanyDatabaseService | null = null;
 
 // Check if backend API is available
+// For GitHub Pages deployment, we need to use mock service since there's no backend
 const USE_API = import.meta.env.VITE_USE_API === 'true' || 
-                import.meta.env.VITE_API_URL || 
-                import.meta.env.PROD;
+                (import.meta.env.VITE_API_URL && import.meta.env.VITE_API_URL !== '');
 
 /**
  * Get the database service instance (singleton)

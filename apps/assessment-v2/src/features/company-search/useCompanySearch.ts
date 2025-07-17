@@ -72,21 +72,31 @@ export function useCompanySearch() {
     setError(null);
 
     try {
-      let searchResults: HybridSearchResult;
+      let searchResults: HybridSearchResult | undefined;
       
-      if (searchMode === 'hybrid') {
-        // Initialize hybrid search service if needed
-        const service = await initializeServices();
-        
-        // Perform hybrid search
-        searchResults = await service.search(query, {
-          maxDatabaseResults: 20,
-          maxAIResults: 10,
-          fuzzyThreshold: 0.3,
-          useAIFallback: true,
-          combineResults: true
-        });
-      } else {
+      // In production without API URL, skip database search
+      const isProductionWithoutAPI = import.meta.env.PROD && !import.meta.env.VITE_API_URL;
+      
+      if (searchMode === 'hybrid' && !isProductionWithoutAPI) {
+        try {
+          // Initialize hybrid search service if needed
+          const service = await initializeServices();
+          
+          // Perform hybrid search
+          searchResults = await service.search(query, {
+            maxDatabaseResults: 20,
+            maxAIResults: 10,
+            fuzzyThreshold: 0.3,
+            useAIFallback: true,
+            combineResults: true
+          });
+        } catch (dbError) {
+          console.warn('Database search failed, falling back to AI-only mode:', dbError);
+          // Fall through to AI-only mode
+        }
+      }
+      
+      if (!searchResults) {
         // AI-only mode (fallback)
         const aiResults = await aiService.searchCompany(query);
         searchResults = {
