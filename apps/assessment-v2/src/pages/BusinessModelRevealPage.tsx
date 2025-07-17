@@ -16,27 +16,7 @@ import { DIIBusinessModelClassifier } from '@core/business-model/dii-classifier'
 import type { BusinessModel } from '@core/types/business-model.types';
 import { cn } from '@shared/utils/cn';
 
-// DII-specific model descriptions (with legacy support)
-const modelDescriptions: Partial<Record<BusinessModel, string>> = {
-  // DII models
-  COMERCIO_HIBRIDO: 'Comercio híbrido. Canales físicos y digitales, múltiples vectores de ataque.',
-  SOFTWARE_CRITICO: 'Software crítico. Alta disponibilidad requerida, downtime = pérdida inmediata.',
-  SERVICIOS_DATOS: 'Servicios de datos. Concentración de valor, objetivo de alto perfil.',
-  ECOSISTEMA_DIGITAL: 'Ecosistema digital. Vulnerabilidades de terceros se vuelven propias.',
-  SERVICIOS_FINANCIEROS: 'Servicios financieros. Cero tolerancia a errores, regulación estricta.',
-  INFRAESTRUCTURA_HEREDADA: 'Infraestructura heredada. Sistemas legacy difíciles de proteger.',
-  CADENA_SUMINISTRO: 'Cadena de suministro. Integración de partners multiplica riesgos.',
-  INFORMACION_REGULADA: 'Información regulada. Datos sensibles, objetivo de actores sofisticados.',
-  // Legacy models (map to DII equivalents)
-  SUBSCRIPTION_BASED: 'Software crítico. Alta disponibilidad requerida, downtime = pérdida inmediata.',
-  TRANSACTION_BASED: 'Servicios financieros. Cero tolerancia a errores, regulación estricta.',
-  ASSET_LIGHT: 'Software crítico. Alta disponibilidad requerida, downtime = pérdida inmediata.',
-  ASSET_HEAVY: 'Infraestructura heredada. Sistemas legacy difíciles de proteger.',
-  DATA_DRIVEN: 'Servicios de datos. Concentración de valor, objetivo de alto perfil.',
-  PLATFORM_ECOSYSTEM: 'Ecosistema digital. Vulnerabilidades de terceros se vuelven propias.',
-  DIRECT_TO_CONSUMER: 'Comercio híbrido. Canales físicos y digitales, múltiples vectores de ataque.',
-  B2B_ENTERPRISE: 'Infraestructura heredada. Sistemas legacy difíciles de proteger.'
-};
+// This will be replaced with translation keys
 
 export function BusinessModelRevealPage() {
   const { t } = useTranslation();
@@ -96,47 +76,15 @@ export function BusinessModelRevealPage() {
   };
 
   // All DII business models for manual selection
-  const allModels: Array<{model: BusinessModel, name: string, description: string}> = [
-    { 
-      model: 'COMERCIO_HIBRIDO', 
-      name: 'Comercio Híbrido', 
-      description: 'Canales físicos y digitales combinados' 
-    },
-    { 
-      model: 'SOFTWARE_CRITICO', 
-      name: 'Software Crítico', 
-      description: 'SaaS, plataformas en la nube, software empresarial' 
-    },
-    { 
-      model: 'SERVICIOS_DATOS', 
-      name: 'Servicios de Datos', 
-      description: 'Monetización de datos, analytics, insights' 
-    },
-    { 
-      model: 'ECOSISTEMA_DIGITAL', 
-      name: 'Ecosistema Digital', 
-      description: 'Plataformas multi-lado, marketplaces' 
-    },
-    { 
-      model: 'SERVICIOS_FINANCIEROS', 
-      name: 'Servicios Financieros', 
-      description: 'Procesamiento de transacciones, fintech' 
-    },
-    { 
-      model: 'INFRAESTRUCTURA_HEREDADA', 
-      name: 'Infraestructura Heredada', 
-      description: 'Sistemas legacy con capas digitales' 
-    },
-    { 
-      model: 'CADENA_SUMINISTRO', 
-      name: 'Cadena de Suministro', 
-      description: 'Logística con seguimiento digital' 
-    },
-    { 
-      model: 'INFORMACION_REGULADA', 
-      name: 'Información Regulada', 
-      description: 'Salud, datos sensibles, compliance' 
-    }
+  const allModels: Array<{model: BusinessModel}> = [
+    { model: 'COMERCIO_HIBRIDO' },
+    { model: 'SOFTWARE_CRITICO' },
+    { model: 'SERVICIOS_DATOS' },
+    { model: 'ECOSISTEMA_DIGITAL' },
+    { model: 'SERVICIOS_FINANCIEROS' },
+    { model: 'INFRAESTRUCTURA_HEREDADA' },
+    { model: 'CADENA_SUMINISTRO' },
+    { model: 'INFORMACION_REGULADA' }
   ];
 
   // Get model icon based on type
@@ -243,21 +191,21 @@ export function BusinessModelRevealPage() {
                 </h2>
                 <div className="flex items-center gap-2">
                   <p className="text-sm text-dark-text-secondary">
-                    Clasificación automática: {suggestedModel.confidence.toFixed(0)}%
+                    {t('reveal.automaticClassification', 'Clasificación automática')}: {suggestedModel.confidence.toFixed(0)}%
                   </p>
                   {suggestedModel.confidence >= 80 && (
                     <span className="text-xs bg-green-600/20 text-green-400 px-2 py-0.5 rounded">
-                      Coincidencia exacta
+                      {t('reveal.exactMatch', 'Coincidencia exacta')}
                     </span>
                   )}
                   {suggestedModel.confidence >= 60 && suggestedModel.confidence < 80 && (
                     <span className="text-xs bg-yellow-600/20 text-yellow-400 px-2 py-0.5 rounded">
-                      Buena coincidencia
+                      {t('reveal.goodMatch', 'Buena coincidencia')}
                     </span>
                   )}
                   {suggestedModel.confidence < 60 && (
                     <span className="text-xs bg-orange-600/20 text-orange-400 px-2 py-0.5 rounded">
-                      Verificar manualmente
+                      {t('reveal.verifyManually', 'Verificar manualmente')}
                     </span>
                   )}
                 </div>
@@ -265,7 +213,7 @@ export function BusinessModelRevealPage() {
             </div>
 
             <p className="text-sm text-dark-text-secondary mb-6">
-              {modelDescriptions[suggestedModel.model]}
+              {t(`businessModels.descriptions.${suggestedModel.model}`)}
             </p>
 
             {/* Minimalist Risk Display */}
@@ -299,10 +247,10 @@ export function BusinessModelRevealPage() {
               className="card p-6 mb-6"
             >
               <h3 className="text-lg font-semibold mb-4">
-                Seleccione su modelo de negocio
+                {t('reveal.selectBusinessModel', 'Seleccione su modelo de negocio')}
               </h3>
               <p className="text-sm text-dark-text-secondary mb-4">
-                Si la sugerencia no es exacta, puede elegir manualmente el modelo que mejor describe su empresa:
+                {t('reveal.suggestionNotExact', 'Si la sugerencia no es exacta, puede elegir manualmente el modelo que mejor describe su empresa:')}
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {allModels.map((model) => {
@@ -321,9 +269,9 @@ export function BusinessModelRevealPage() {
                       <div className="flex items-start gap-3">
                         <ModelIcon className="w-5 h-5 text-primary-600 mt-0.5" />
                         <div>
-                          <h4 className="font-medium text-sm">{model.name}</h4>
+                          <h4 className="font-medium text-sm">{t(`businessModels.names.${model.model}`)}</h4>
                           <p className="text-xs text-dark-text-secondary mt-1">
-                            {model.description}
+                            {t(`businessModels.shortDescriptions.${model.model}`)}
                           </p>
                         </div>
                       </div>
@@ -354,7 +302,7 @@ export function BusinessModelRevealPage() {
                 onClick={() => setShowAlternatives(true)}
                 className="text-sm text-primary-600 hover:text-primary-500 transition-colors underline"
               >
-                ¿No coincide con su empresa? Seleccione manualmente
+                {t('reveal.doesNotMatch', '¿No coincide con su empresa? Seleccione manualmente')}
               </button>
             )}
           </motion.div>

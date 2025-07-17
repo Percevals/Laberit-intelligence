@@ -55,7 +55,7 @@ export function BusinessModelSelector({
       {/* Classification Questions */}
       <div className="bg-dark-surface/50 rounded-lg p-6 border border-dark-border">
         <h3 className="text-lg font-semibold text-dark-text-primary mb-4">
-          Preguntas clave para clasificación
+          {language === 'es' ? 'Preguntas clave para clasificación' : 'Key Classification Questions'}
         </h3>
         <div className="space-y-3">
           <div className="flex items-start gap-3">
@@ -111,7 +111,7 @@ export function BusinessModelSelector({
                   {archetype.typicalLoss}
                 </p>
                 <p className="text-xs text-dark-text-tertiary">
-                  pérdida típica
+                  {language === 'es' ? 'pérdida típica' : 'typical loss'}
                 </p>
               </div>
             </div>
@@ -119,7 +119,7 @@ export function BusinessModelSelector({
             {/* Loss Pattern */}
             <div className="bg-dark-bg/50 rounded p-3 mb-4">
               <p className="text-xs text-dark-text-tertiary mb-1">
-                Qué pierden primero:
+                {language === 'es' ? 'Qué pierden primero:' : 'What they lose first:'}
               </p>
               <p className="text-sm font-medium text-dark-text-primary">
                 {archetype.lossPattern}
@@ -176,7 +176,7 @@ export function BusinessModelSelector({
                         className="absolute bottom-full left-0 right-0 mb-2 p-3 bg-dark-surface rounded-lg shadow-lg border border-dark-border z-10"
                       >
                         <p className="text-xs text-dark-text-tertiary mb-1">
-                          Peor pesadilla:
+                          {language === 'es' ? 'Peor pesadilla:' : 'Worst nightmare:'}
                         </p>
                         <p className="text-sm text-dark-text-primary">
                           "{model.valueLoss.worstNightmare}"
@@ -206,23 +206,23 @@ export function BusinessModelSelector({
           className="bg-primary-500/5 border border-primary-500/20 rounded-lg p-6"
         >
           <h4 className="text-lg font-semibold text-dark-text-primary mb-4">
-            Perfil de pérdida de valor - {getModelName(currentModel)}
+            {language === 'es' ? 'Perfil de pérdida de valor' : 'Value Loss Profile'} - {getModelName(currentModel)}
           </h4>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <p className="text-sm text-dark-text-tertiary mb-1">Pérdida por hora</p>
+              <p className="text-sm text-dark-text-tertiary mb-1">{language === 'es' ? 'Pérdida por hora' : 'Loss per hour'}</p>
               <p className="text-xl font-bold text-primary-500">
                 {DII_V4_MODEL_PROFILES[currentModel].valueLoss.typicalLossPerHour}
               </p>
             </div>
             <div>
-              <p className="text-sm text-dark-text-tertiary mb-1">Impacto principal</p>
+              <p className="text-sm text-dark-text-tertiary mb-1">{language === 'es' ? 'Impacto principal' : 'Primary impact'}</p>
               <p className="text-lg font-medium text-dark-text-primary capitalize">
                 {DII_V4_MODEL_PROFILES[currentModel].valueLoss.primaryImpact}
               </p>
             </div>
             <div>
-              <p className="text-sm text-dark-text-tertiary mb-1">Dificultad de recuperación</p>
+              <p className="text-sm text-dark-text-tertiary mb-1">{language === 'es' ? 'Dificultad de recuperación' : 'Recovery difficulty'}</p>
               <p className="text-lg font-medium text-dark-text-primary capitalize">
                 {DII_V4_MODEL_PROFILES[currentModel].valueLoss.recoveryDifficulty}
               </p>

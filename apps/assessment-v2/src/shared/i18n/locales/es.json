@@ -63,6 +63,34 @@
       "PLATFORM_ECOSYSTEM": "Ecosistema de Plataforma",
       "DIRECT_TO_CONSUMER": "Directo al Consumidor",
       "B2B_ENTERPRISE": "B2B Empresarial"
+    },
+    "descriptions": {
+      "COMERCIO_HIBRIDO": "Comercio híbrido. Canales físicos y digitales, múltiples vectores de ataque.",
+      "SOFTWARE_CRITICO": "Software crítico. Alta disponibilidad requerida, downtime = pérdida inmediata.",
+      "SERVICIOS_DATOS": "Servicios de datos. Concentración de valor, objetivo de alto perfil.",
+      "ECOSISTEMA_DIGITAL": "Ecosistema digital. Vulnerabilidades de terceros se vuelven propias.",
+      "SERVICIOS_FINANCIEROS": "Servicios financieros. Cero tolerancia a errores, regulación estricta.",
+      "INFRAESTRUCTURA_HEREDADA": "Infraestructura heredada. Sistemas legacy difíciles de proteger.",
+      "CADENA_SUMINISTRO": "Cadena de suministro. Integración de partners multiplica riesgos.",
+      "INFORMACION_REGULADA": "Información regulada. Datos sensibles, objetivo de actores sofisticados.",
+      "SUBSCRIPTION_BASED": "Software crítico. Alta disponibilidad requerida, downtime = pérdida inmediata.",
+      "TRANSACTION_BASED": "Servicios financieros. Cero tolerancia a errores, regulación estricta.",
+      "ASSET_LIGHT": "Software crítico. Alta disponibilidad requerida, downtime = pérdida inmediata.",
+      "ASSET_HEAVY": "Infraestructura heredada. Sistemas legacy difíciles de proteger.",
+      "DATA_DRIVEN": "Servicios de datos. Concentración de valor, objetivo de alto perfil.",
+      "PLATFORM_ECOSYSTEM": "Ecosistema digital. Vulnerabilidades de terceros se vuelven propias.",
+      "DIRECT_TO_CONSUMER": "Comercio híbrido. Canales físicos y digitales, múltiples vectores de ataque.",
+      "B2B_ENTERPRISE": "Infraestructura heredada. Sistemas legacy difíciles de proteger."
+    },
+    "shortDescriptions": {
+      "COMERCIO_HIBRIDO": "Canales físicos y digitales combinados",
+      "SOFTWARE_CRITICO": "SaaS, plataformas en la nube, software empresarial",
+      "SERVICIOS_DATOS": "Monetización de datos, analytics, insights",
+      "ECOSISTEMA_DIGITAL": "Plataformas multi-lado, marketplaces",
+      "SERVICIOS_FINANCIEROS": "Procesamiento de transacciones, fintech",
+      "INFRAESTRUCTURA_HEREDADA": "Sistemas legacy con capas digitales",
+      "CADENA_SUMINISTRO": "Logística con seguimiento digital",
+      "INFORMACION_REGULADA": "Salud, datos sensibles, compliance"
     }
   },
   
@@ -150,6 +178,14 @@
       "modelSuggestion": "Modelo de negocio sugerido",
       "acceptSuggestion": "Aceptar sugerencia",
       "chooseDifferent": "Elegir otro",
+      "keyQuestions": "Preguntas clave para clasificación",
+      "valueLossProfile": "Perfil de pérdida de valor",
+      "lossPerHour": "Pérdida por hora",
+      "primaryImpact": "Impacto principal",
+      "recoveryDifficulty": "Dificultad de recuperación",
+      "whatLoseFirst": "Qué pierden primero:",
+      "typicalLoss": "pérdida típica",
+      "worstNightmare": "Peor pesadilla:",
       "q1": {
         "label": "¿Cómo generas ingresos principalmente?",
         "options": {
@@ -181,13 +217,16 @@
     
     "results": {
       "title": "Tu Índice de Inmunidad Digital",
+      "valueProtectionTitle": "Capacidad de Protección de Valor",
       "score": "Puntuación",
       "stage": "Etapa de Madurez",
+      "maturityStage": "Estadio de Inmunidad Digital",
       "betterThan": "Mejor que el {{percentage}}% de empresas similares",
       "operationalRisk": "Riesgo Operacional",
       "estimatedDowntime": "Tiempo de inactividad estimado",
       "revenueAtRisk": "Ingresos en riesgo",
       "dimensionBreakdown": "Análisis por Dimensión",
+      "strengthsVulnerabilities": "Fortalezas y Vulnerabilidades por Dimensión",
       "context": "Contexto de su Modelo de Negocio",
       "newAssessment": "Nueva Evaluación",
       "fullReport": "Ver Informe Completo",
@@ -196,7 +235,36 @@
       "immunityProfile": "Perfil de Inmunidad Digital",
       "sharePrompt": "Comparte estos resultados con tu equipo para comenzar a mejorar tu inmunidad digital",
       "print": "Imprimir Reporte",
-      "getFullAnalysis": "Obtener Análisis Completo"
+      "getFullAnalysis": "Obtener Análisis Completo",
+      "position": "Su Posición",
+      "modelAverage": "Promedio del Modelo",
+      "competitiveContext": "Contexto Competitivo",
+      "industryAverage": "Su industria promedia",
+      "aboveAverage": "Sobre promedio",
+      "belowAverage": "Bajo promedio",
+      "maturityEvolution": "Evolución hacia Siguiente Estadio",
+      "currentStage": "Actual",
+      "organizations": "de orgs",
+      "nextFocus": "Para alcanzar el siguiente estadio, enfoque en:",
+      "hideDetails": "Ocultar detalles",
+      "showDetails": "Ver detalles",
+      "capturedValue": "Valor capturado:",
+      "businessValueRecommendations": "Recomendaciones para Proteger Valor de Negocio",
+      "impactDistribution": "Distribución de Impacto de Valor",
+      "impactDistributionDescription": "Cómo se distribuyen las pérdidas para",
+      "operationalImpact": "Impacto Operacional",
+      "trustImpact": "Impacto en Confianza",
+      "complianceImpact": "Impacto de Compliance",
+      "strategicImpact": "Impacto Estratégico",
+      "primaryImpact": "Impacto principal",
+      "businessModelInsight": "Insight para su modelo de negocio",
+      "strength": "Fortaleza",
+      "vulnerable": "Vulnerable",
+      "averagePerformance": "Rendimiento promedio",
+      "priorityImprovement": "Área de mejora prioritaria",
+      "identifiedStrength": "Fortaleza identificada",
+      "downloadReportPDF": "Descargar Reporte PDF",
+      "viewImprovementPlan": "Ver Plan de Mejora"
     }
   },
   
@@ -241,10 +309,39 @@
     "confidence": "Confianza",
     "confirmTitle": "¿Es esta su empresa?",
     "confirmed": "¡Perfecto!",
-    "nextStep": "Ahora identifiquemos su modelo de negocio"
+    "nextStep": "Ahora identifiquemos su modelo de negocio",
+    "searchError": {
+      "title": "No pudimos buscar su empresa",
+      "networkError": "Verifique su conexión a internet e intente nuevamente.",
+      "timeoutError": "La búsqueda está tardando más de lo normal. Intente con un término más específico.",
+      "apiError": "Nuestro servicio de búsqueda está temporalmente no disponible.",
+      "genericError": "Ocurrió un error inesperado durante la búsqueda.",
+      "retry": "Reintentar",
+      "manualEntry": "Ingresar manualmente"
+    },
+    "editableFields": {
+      "selectRange": "Seleccione rango...",
+      "employeeRanges": {
+        "small": "200-500 empleados",
+        "medium": "500-1,000 empleados",
+        "large": "1,000-2,500 empleados",
+        "xlarge": "2,500-5,000 empleados",
+        "xxlarge": "5,000-10,000 empleados",
+        "xxxlarge": "10,000-25,000 empleados",
+        "enterprise": "25,000-50,000 empleados",
+        "custom": "Valor específico..."
+      },
+      "targetRange": "Rango objetivo: 200 - 50,000 empleados",
+      "autoObtained": "Información obtenida automáticamente",
+      "isCorrect": "¿Es correcto?",
+      "useThisData": "Sí, usar este dato",
+      "correctManually": "Corregir manualmente",
+      "selectIndustry": "Seleccione..."
+    }
   },
   
   "company": {
+    "name": "Nombre de la empresa",
     "employees": "Empleados",
     "revenue": "Ingresos anuales",
     "headquarters": "Sede principal",
@@ -339,7 +436,14 @@
     "similarCompanies": "Empresas similares que sufrieron brechas",
     "readyToAssess": "¿Listo para evaluar su inmunidad digital?",
     "startAssessment": "Iniciar evaluación",
-    "keyRisks": "Riesgos principales para su modelo"
+    "keyRisks": "Riesgos principales para su modelo",
+    "automaticClassification": "Clasificación automática:",
+    "exactMatch": "Coincidencia exacta",
+    "goodMatch": "Buena coincidencia",
+    "verifyManually": "Verificar manualmente",
+    "selectBusinessModel": "Seleccione su modelo de negocio",
+    "suggestionNotExact": "Si la sugerencia no es exacta, puede elegir manualmente el modelo que mejor describe su empresa:",
+    "doesNotMatch": "¿No coincide con su empresa? Seleccione manualmente"
   },
   
   "frequency": {

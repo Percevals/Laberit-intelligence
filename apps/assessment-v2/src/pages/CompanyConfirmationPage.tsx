@@ -304,7 +304,7 @@ function EditableField({
               className="w-full px-2 py-1 bg-dark-bg border border-dark-border rounded focus:outline-none focus:border-primary-600"
               autoFocus
             >
-              <option value="">Seleccione...</option>
+              <option value="">{t('companySearch.editableFields.selectIndustry', 'Seleccione...')}</option>
               {INDUSTRY_OPTIONS.map(option => (
                 <option key={option.value} value={option.value}>
                   {option.label}
@@ -323,15 +323,15 @@ function EditableField({
                 }}
                 className="w-full px-2 py-1 bg-dark-bg border border-dark-border rounded focus:outline-none focus:border-primary-600 text-sm"
               >
-                <option value="">Seleccione rango...</option>
-                <option value="200">200-500 empleados</option>
-                <option value="500">500-1,000 empleados</option>
-                <option value="1000">1,000-2,500 empleados</option>
-                <option value="2500">2,500-5,000 empleados</option>
-                <option value="5000">5,000-10,000 empleados</option>
-                <option value="10000">10,000-25,000 empleados</option>
-                <option value="25000">25,000-50,000 empleados</option>
-                <option value="custom">Valor específico...</option>
+                <option value="">{t('companySearch.editableFields.selectRange', 'Seleccione rango...')}</option>
+                <option value="200">{t('companySearch.editableFields.employeeRanges.small', '200-500 empleados')}</option>
+                <option value="500">{t('companySearch.editableFields.employeeRanges.medium', '500-1,000 empleados')}</option>
+                <option value="1000">{t('companySearch.editableFields.employeeRanges.large', '1,000-2,500 empleados')}</option>
+                <option value="2500">{t('companySearch.editableFields.employeeRanges.xlarge', '2,500-5,000 empleados')}</option>
+                <option value="5000">{t('companySearch.editableFields.employeeRanges.xxlarge', '5,000-10,000 empleados')}</option>
+                <option value="10000">{t('companySearch.editableFields.employeeRanges.xxxlarge', '10,000-25,000 empleados')}</option>
+                <option value="25000">{t('companySearch.editableFields.employeeRanges.enterprise', '25,000-50,000 empleados')}</option>
+                <option value="custom">{t('companySearch.editableFields.employeeRanges.custom', 'Valor específico...')}</option>
               </select>
               <input
                 type="number"
@@ -345,7 +345,7 @@ function EditableField({
                 autoFocus
               />
               <p className="text-xs text-dark-text-secondary">
-                Rango objetivo: 200 - 50,000 empleados
+                {t('companySearch.editableFields.targetRange', 'Rango objetivo: 200 - 50,000 empleados')}
               </p>
             </div>
           ) : (
@@ -402,19 +402,19 @@ function EditableField({
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 text-xs text-green-400">
               <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-              <span>Información obtenida automáticamente</span>
+              <span>{t('companySearch.editableFields.autoObtained', 'Información obtenida automáticamente')}</span>
             </div>
             <div className="flex gap-2 text-xs">
-              <span className="text-dark-text-secondary">¿Es correcto?</span>
+              <span className="text-dark-text-secondary">{t('companySearch.editableFields.isCorrect', '¿Es correcto?')}</span>
               <button className="text-green-500 hover:text-green-400 font-medium">
-                Sí, usar este dato
+                {t('companySearch.editableFields.useThisData', 'Sí, usar este dato')}
               </button>
               <span className="text-dark-text-secondary">•</span>
               <button 
                 onClick={onEdit}
                 className="text-yellow-500 hover:text-yellow-400 font-medium"
               >
-                Corregir manualmente
+                {t('companySearch.editableFields.correctManually', 'Corregir manualmente')}
               </button>
             </div>
           </div>

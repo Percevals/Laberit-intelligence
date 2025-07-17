@@ -102,29 +102,29 @@ export function CompanySearchInput({ onSelect, className }: CompanySearchInputPr
                   <AlertCircle className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
                   <div>
                     <p className="text-sm font-medium text-red-400 mb-1">
-                      No pudimos buscar su empresa
+                      {t('companySearch.searchError.title', 'No pudimos buscar su empresa')}
                     </p>
                     <p className="text-xs text-red-300 mb-3">
                       {error.includes('fetch') || error.includes('network') 
-                        ? 'Verifique su conexión a internet e intente nuevamente.'
+                        ? t('companySearch.searchError.networkError', 'Verifique su conexión a internet e intente nuevamente.')
                         : error.includes('timeout') 
-                        ? 'La búsqueda está tardando más de lo normal. Intente con un término más específico.'
+                        ? t('companySearch.searchError.timeoutError', 'La búsqueda está tardando más de lo normal. Intente con un término más específico.')
                         : error.includes('API') || error.includes('500')
-                        ? 'Nuestro servicio de búsqueda está temporalmente no disponible.'
-                        : 'Ocurrió un error inesperado durante la búsqueda.'}
+                        ? t('companySearch.searchError.apiError', 'Nuestro servicio de búsqueda está temporalmente no disponible.')
+                        : t('companySearch.searchError.genericError', 'Ocurrió un error inesperado durante la búsqueda.')}
                     </p>
                     <div className="flex gap-2">
                       <button
                         onClick={() => search(query)}
                         className="text-xs bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded transition-colors"
                       >
-                        Reintentar
+                        {t('companySearch.searchError.retry', 'Reintentar')}
                       </button>
                       <button
                         onClick={handleManualEntry}
                         className="text-xs bg-dark-surface hover:bg-dark-border text-dark-text px-3 py-1 rounded transition-colors"
                       >
-                        Ingresar manualmente
+                        {t('companySearch.searchError.manualEntry', 'Ingresar manualmente')}
                       </button>
                     </div>
                   </div>
