@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard de Inmunidad Digital: LATAM & España | 2025-07-17</title>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+background-color: #091F2C;
+color: #ffffff;
+line-height: 1.6;
+padding-bottom: 60px;
+}
+
+.container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 20px;
+}
+
+/* Executive Summary Card - Simplified */
+.executive-summary {
+background: linear-gradient(135deg, rgba(180, 181, 223, 0.2), rgba(26, 43, 61, 0.6));
+padding: 30px;
+border-radius: 12px;
+margin-bottom: 30px;
+border: 2px solid rgba(180, 181, 223, 0.3);
+}
+
+.executive-summary h2 {
+font-size: 24px;
+color: #B4B5DF;
+margin-bottom: 20px;
+}
+
+.summary-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 20px;
+}
+
+.summary-item {
+text-align: center;
+}
+
+.summary-number {
+font-size: 42px;
+font-weight: 700;
+margin-bottom: 5px;
+}
+
+.summary-label {
+font-size: 14px;
+color: #A6BBC8;
+}
+
+.summary-action {
+background: rgba(180, 181, 223, 0.2);
+padding: 15px 20px;
+border-radius: 8px;
+margin-top: 20px;
+font-size: 16px;
+text-align: center;
+}
+
+/* Framework Context Box */
+.framework-context {
+background: rgba(180, 181, 223, 0.1);
+padding: 25px;
+border-radius: 12px;
+margin-bottom: 30px;
+border: 1px solid rgba(180, 181, 223, 0.3);
+text-align: center;
+}
+
+.framework-context h4 {
+font-size: 20px;
+color: #B4B5DF;
+margin-bottom: 15px;
+font-weight: 500;
+}
+
+.framework-context p {
+font-size: 15px;
+color: #A6BBC8;
+margin-bottom: 8px;
+}
+
+.framework-context a {
+display: inline-block;
+margin-top: 10px;
+color: #B4B5DF;
+text-decoration: none;
+font-size: 16px;
+padding: 8px 16px;
+background: rgba(180, 181, 223, 0.2);
+border-radius: 6px;
+transition: all 0.3s;
+}
+
+.framework-context a:hover {
+background: rgba(180, 181, 223, 0.3);
+transform: translateY(-1px);
+}
+
+/* Header */
+.header {
+text-align: center;
+padding: 30px;
+background: rgba(26, 43, 61, 0.5);
+border-radius: 12px;
+margin-bottom: 30px;
+}
+
+.header h1 {
+font-size: 32px;
+font-weight: 400;
+margin-bottom: 10px;
+}
+
+.header-date {
+color: #A6BBC8;
+font-size: 15px;
+}
+
+/* Key Metrics */
+.metrics-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 20px;
+margin-bottom: 30px;
+}
+
+.metric-card {
+background: rgba(26, 43, 61, 0.5);
+padding: 25px;
+border-radius: 8px;
+text-align: center;
+border: 1px solid rgba(180, 181, 223, 0.2);
+position: relative;
+}
+
+.metric-number {
+font-size: 36px;
+font-weight: 600;
+color: #B4B5DF;
+display: block;
+margin-bottom: 5px;
+}
+
+.metric-label {
+font-size: 13px;
+color: #A6BBC8;
+text-transform: uppercase;
+}
+
+.metric-context {
+font-size: 12px;
+color: #7A99AC;
+margin-top: 8px;
+}
+
+/* Traffic Light Indicator */
+.traffic-light {
+position: absolute;
+top: 10px;
+right: 10px;
+width: 20px;
+height: 20px;
+border-radius: 50%;
+}
+
+.traffic-light.red { background: #C10016; }
+.traffic-light.yellow { background: #FFB84D; }
+.traffic-light.green { background: #4CAF50; }
+
+/* Chart Container - Simplified */
+.chart-container {
+background: rgba(26, 43, 61, 0.5);
+padding: 30px;
+border-radius: 8px;
+margin-bottom: 40px;
+}
+
+.chart-title {
+text-align: center;
+font-size: 24px;
+font-weight: 600;
+color: #B4B5DF;
+margin-bottom: 20px;
+}
+
+.chart-wrapper {
+position: relative;
+width: 100%;
+max-width: 800px;
+margin: 0 auto;
+}
+
+.y-axis-label {
+position: absolute;
+left: -80px;
+top: 50%;
+transform: translateY(-50%) rotate(180deg);
+writing-mode: vertical-rl;
+text-orientation: mixed;
+color: #B4B5DF;
+font-size: 14px;
+font-weight: 600;
+}
+
+.scatter-chart {
+width: 100%;
+height: 500px;
+position: relative;
+background: rgba(0, 0, 0, 0.1);
+border: 1px solid rgba(180, 181, 223, 0.2);
+overflow: hidden;
+}
+
+.x-axis-label {
+text-align: center;
+color: #B4B5DF;
+font-size: 14px;
+font-weight: 600;
+margin-top: 20px;
+}
+
+.chart-quadrant {
+position: absolute;
+width: 50%;
+height: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+text-align: center;
+padding: 20px;
+font-size: 13px;
+color: #A6BBC8;
+z-index: 1;
+}
+
+.chart-quadrant-title {
+font-size: 16px;
+font-weight: 700;
+color: #B4B5DF;
+margin-bottom: 8px;
+}
+
+.chart-point {
+position: absolute;
+width: 70px;
+height: 70px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: 600;
+font-size: 11px;
+cursor: pointer;
+transition: all 0.3s;
+box-shadow: 0 4px 15px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.2);
+text-align: center;
+flex-direction: column;
+z-index: 10;
+line-height: 1.2;
+transform: translate(-50%, -50%);
+}
+
+.chart-point:hover {
+transform: translate(-50%, -50%) scale(1.1);
+z-index: 20;
+}
+
+/* Threat Grid - Simplified */
+.threat-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+gap: 20px;
+margin-bottom: 40px;
+}
+
+.threat-card {
+background: rgba(26, 43, 61, 0.5);
+padding: 20px;
+border-radius: 8px;
+border: 1px solid rgba(180, 181, 223, 0.2);
+}
+
+.threat-header {
+display: flex;
+align-items: center;
+gap: 12px;
+margin-bottom: 15px;
+padding-bottom: 15px;
+border-bottom: 1px solid rgba(180, 181, 223, 0.1);
+}
+
+.threat-title {
+font-size: 18px;
+font-weight: 500;
+}
+
+.threat-list {
+list-style: none;
+}
+
+.threat-list li {
+background: rgba(255, 255, 255, 0.03);
+padding: 12px;
+margin-bottom: 8px;
+border-radius: 6px;
+}
+
+.threat-name {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 4px;
+}
+
+.threat-value {
+font-weight: 600;
+color: #B4B5DF;
+}
+
+/* Actions Grid */
+.actions-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 20px;
+margin-bottom: 40px;
+}
+
+.action-card {
+background: rgba(26, 43, 61, 0.6);
+padding: 25px;
+border-radius: 8px;
+border-top: 3px solid #B4B5DF;
+}
+
+.action-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 20px;
+}
+
+.action-title {
+font-size: 18px;
+color: #B4B5DF;
+}
+
+.action-score {
+background: rgba(180, 181, 223, 0.2);
+padding: 5px 12px;
+border-radius: 15px;
+font-size: 12px;
+color: #B4B5DF;
+}
+
+.action-list {
+list-style: none;
+}
+
+.action-list li {
+padding: 10px 0;
+font-size: 14px;
+color: #ffffff;
+padding-left: 20px;
+position: relative;
+}
+
+.action-list li:before {
+content: '→';
+position: absolute;
+left: 0;
+color: #7A99AC;
+}
+
+/* Footer */
+.footer {
+text-align: center;
+padding: 40px 20px;
+color: #A6BBC8;
+}
+
+.footer-quote {
+font-size: 18px;
+font-style: italic;
+color: #B4B5DF;
+margin-bottom: 8px;
+}
+
+.report-meta {
+margin-top: 20px;
+padding-top: 15px;
+border-top: 1px solid rgba(166, 187, 200, 0.2);
+font-size: 13px;
+color: #7A8B9A;
+}
+
+.report-meta a {
+color: #A6BBC8;
+text-decoration: none;
+transition: color 0.3s;
+}
+
+.report-meta a:hover {
+color: #B4B5DF;
+text-decoration: underline;
+}
+
+/* Interactive hover effects */
+.metric-card:hover {
+transform: translateY(-2px);
+border-color: rgba(180, 181, 223, 0.4);
+cursor: pointer;
+}
+
+.threat-list li:hover {
+background: rgba(255, 255, 255, 0.06);
+transform: translateX(3px);
+cursor: pointer;
+}
+
+.action-card:hover {
+transform: translateY(-2px);
+border-color: rgba(180, 181, 223, 0.4);
+}
+
+/* Detail panel for interactions */
+.detail-panel {
+position: fixed;
+bottom: -100%;
+left: 0;
+right: 0;
+background: linear-gradient(to top, #091F2C, rgba(26, 43, 61, 0.95));
+padding: 30px;
+border-top: 2px solid #B4B5DF;
+transition: all 0.3s ease;
+z-index: 1000;
+max-height: 50vh;
+overflow-y: auto;
+}
+
+.detail-panel.show {
+bottom: 60px;
+}
+
+.detail-close {
+position: absolute;
+top: 15px;
+right: 20px;
+background: rgba(180, 181, 223, 0.2);
+border: none;
+color: #B4B5DF;
+padding: 8px 16px;
+border-radius: 6px;
+cursor: pointer;
+}
+
+#detailContent {
+margin-top: 20px;
+}
+
+/* News ticker */
+.news-ticker {
+background: linear-gradient(90deg, #C10016, #091F2C);
+color: white;
+padding: 15px;
+position: fixed;
+bottom: 0;
+left: 0;
+right: 0;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 20px;
+z-index: 999;
+}
+
+.ticker-content {
+flex: 1;
+overflow: hidden;
+}
+
+.ticker-source {
+color: #FFB84D;
+font-size: 14px;
+}
+
+.ticker-action {
+color: #B4B5DF;
+cursor: pointer;
+text-decoration: underline;
+}
+
+/* Tooltip for chart points */
+.chart-point::after {
+content: attr(data-info);
+position: absolute;
+bottom: 100%;
+left: 50%;
+transform: translateX(-50%);
+background: rgba(26, 43, 61, 0.95);
+color: white;
+padding: 8px 12px;
+border-radius: 6px;
+font-size: 12px;
+white-space: nowrap;
+opacity: 0;
+pointer-events: none;
+transition: opacity 0.3s;
+margin-bottom: 5px;
+border: 1px solid rgba(180, 181, 223, 0.3);
+}
+
+.chart-point:hover::after {
+opacity: 1;
+}
+
+/* Source styling for threat cards */
+.threat-source {
+font-size: 12px;
+color: #FFB84D;
+margin-top: 5px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+.container {
+padding: 10px;
+}
+.header h1 {
+font-size: 24px;
+}
+.summary-grid {
+grid-template-columns: 1fr;
+}
+.threat-grid {
+grid-template-columns: 1fr;
+}
+.actions-grid {
+grid-template-columns: 1fr;
+}
+.news-ticker {
+font-size: 14px;
+padding: 10px;
+}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<!-- Executive Summary Card -->
+<div class="executive-summary">
+<h2>Resumen Ejecutivo - Su Empresa en 30 Segundos</h2>
+<div class="summary-grid">
+<div class="summary-item">
+<div class="summary-number" style="color: #FFB84D;">3.6</div>
+<div class="summary-label">Inmunidad Promedio Regional</div>
+</div>
+<div class="summary-item">
+<div class="summary-number" style="color: #4CAF50;">3,142</div>
+<div class="summary-label">Ataques/Semana LATAM</div>
+</div>
+<div class="summary-item">
+<div class="summary-number" style="color: #C10016;">58%</div>
+<div class="summary-label">Ransomware y Supply Chain Attacks</div>
+</div>
+<div class="summary-item">
+<div class="summary-number" style="color: #FFB84D;">72%</div>
+<div class="summary-label">Víctimas con inmunidad < 4</div>
+</div>
+</div>
+<div class="summary-action">
+<strong>Incremento del 23% en ataques a la cadena de suministro digital en LATAM. Los sectores financiero y gubernamental muestran mejoras en inmunidad, mientras que el retail y la manufactura permanecen vulnerables.</strong>
+</div>
+</div>
+
+<!-- Header -->
+<div class="header">
+<h1>Dashboard de Inmunidad Digital: LATAM & España</h1>
+<div class="header-date">Análisis Semanal: 2025-07-17 | Framework 3.0</div>
+</div>
+
+<!-- Framework Context -->
+<div class="framework-context">
+<h4>🔍 Sobre el Framework de Inmunidad</h4>
+<p>Basado en 150+ evaluaciones reales en LATAM</p>
+<p>Correlación probada: Mayor inmunidad = Menor incidencia</p>
+<a href="https://percevals.github.io/Laberit-intelligence/immunity-framework.html" target="_blank">
+Ver metodología completa →
+</a>
+</div>
+
+<!-- Key Metrics -->
+<h2 style="text-align: center; margin-bottom: 20px; color: #B4B5DF;">Métricas Clave</h2>
+
+<div class="metrics-grid">
+<div class="metric-card">
+<div class="traffic-light red"></div>
+<span class="metric-number">3.6/10</span>
+<span class="metric-label">Inmunidad Digital v3.0</span>
+<span class="metric-context">0 amenazas detectadas</span>
+</div>
+<div class="metric-card">
+<div class="traffic-light red"></div>
+<span class="metric-number">40%</span>
+<span class="metric-label">Más Ataques que Global</span>
+<span class="metric-context">3,142 vs 1,848/semana</span>
+</div>
+<div class="metric-card">
+<div class="traffic-light red"></div>
+<span class="metric-number">1.5</span>
+<span class="metric-label">Inmunidad Gobierno</span>
+<span class="metric-context">Modelo más vulnerable</span>
+</div>
+<div class="metric-card">
+<div class="traffic-light red"></div>
+<span class="metric-number">64%</span>
+<span class="metric-label">Ataques via Web/Email</span>
+<span class="metric-context">Vector principal LATAM</span>
+</div>
+</div>
+
+<!-- Chart Section -->
+<div class="chart-container">
+<h3 class="chart-title">¿Dónde está su sector? Posición de Riesgo vs. Preparación</h3>
+<div class="chart-wrapper">
+<div class="y-axis-label">↓ Menor Capacidad de Defensa | Mayor Capacidad de Defensa ↑</div>
+<div class="scatter-chart">
+<!-- Quadrants -->
+<div class="chart-quadrant" style="top: 0; left: 0; background: linear-gradient(135deg, rgba(76, 175, 80, 0.15), rgba(76, 175, 80, 0.1));">
+<div>
+<div class="chart-quadrant-title">BIEN PROTEGIDOS</div>
+Baja exposición<br>Alta capacidad<br><small style="font-size: 11px; opacity: 0.7;">Raramente comprometidos</small>
+</div>
+</div>
+<div class="chart-quadrant" style="top: 0; right: 0; background: linear-gradient(135deg, rgba(255, 152, 0, 0.1), rgba(255, 152, 0, 0.15));">
+<div>
+<div class="chart-quadrant-title">MONITOREAR</div>
+Alta exposición<br>Alta capacidad<br><small style="font-size: 11px; opacity: 0.7;">Necesita vigilancia continua</small>
+</div>
+</div>
+<div class="chart-quadrant" style="bottom: 0; left: 0; background: linear-gradient(135deg, rgba(255, 184, 77, 0.15), rgba(255, 184, 77, 0.1));">
+<div>
+<div class="chart-quadrant-title">NECESITAN INVERSIÓN</div>
+Baja exposición<br>Baja capacidad<br><small style="font-size: 11px; opacity: 0.7;">Riesgo moderado-alto</small>
+</div>
+</div>
+<div class="chart-quadrant" style="bottom: 0; right: 0; background: linear-gradient(135deg, rgba(193, 0, 22, 0.1), rgba(193, 0, 22, 0.2));">
+<div>
+<div class="chart-quadrant-title">ALTO RIESGO</div>
+Alta exposición<br>Baja capacidad<br><small style="font-size: 11px; opacity: 0.7;">Mayor frecuencia de incidentes</small>
+</div>
+</div>
+
+            <div class="chart-point" style="bottom: 15%; right: 10%; background: #C10016; opacity: 1; color: white;"
+                 data-info="Gobierno: Inmunidad 1.5/10. ⚠️ Incidentes esta semana">
+                <span>Gobierno</span>
+                <span style="font-size: 16px; font-weight: 700;">1.5 ↓<br>
+                <small style='font-size: 10px; opacity: 0.8; color: #C10016;'>vs. 3.6</small></span>
+            </div>
+            
+            <div class="chart-point" style="bottom: 30%; right: 25%; background: #C10016; opacity: 1; color: white;"
+                 data-info="Salud: Inmunidad 2.0/10. ⚠️ Incidentes esta semana">
+                <span>Salud</span>
+                <span style="font-size: 16px; font-weight: 700;">2.0 ↓<br>
+                <small style='font-size: 10px; opacity: 0.8; color: #C10016;'>vs. 3.6</small></span>
+            </div>
+            
+            <div class="chart-point" style="bottom: 45%; right: 15%; background: #C10016; opacity: 0.7; color: white;"
+                 data-info="Fintech: Inmunidad 2.5/10. Sin incidentes recientes">
+                <span>Fintech</span>
+                <span style="font-size: 16px; font-weight: 700;">2.5 →<br>
+                <small style='font-size: 10px; opacity: 0.8; color: #7A99AC;'>vs. 3.6</small></span>
+            </div>
+            
+            <div class="chart-point" style="bottom: 30%; left: 30%; background: #C10016; opacity: 0.7; color: white;"
+                 data-info="B2B Ind: Inmunidad 2.5/10. Sin incidentes recientes">
+                <span>B2B Ind</span>
+                <span style="font-size: 16px; font-weight: 700;">2.5 →<br>
+                <small style='font-size: 10px; opacity: 0.8; color: #7A99AC;'>vs. 3.6</small></span>
+            </div>
+            
+            <div class="chart-point" style="top: 20%; left: 35%; background: #FFB84D; opacity: 0.7; color: white;"
+                 data-info="Platform: Inmunidad 3.5/10. Sin incidentes recientes">
+                <span>Platform</span>
+                <span style="font-size: 16px; font-weight: 700;">3.5 →<br>
+                <small style='font-size: 10px; opacity: 0.8; color: #7A99AC;'>vs. 3.6</small></span>
+            </div>
+            
+            <div class="chart-point" style="top: 35%; left: 20%; background: #FFB84D; opacity: 0.7; color: white;"
+                 data-info="B2C Digital: Inmunidad 4.2/10. Sin incidentes recientes">
+                <span>B2C Digital</span>
+                <span style="font-size: 16px; font-weight: 700;">4.2 ↑<br>
+                <small style='font-size: 10px; opacity: 0.8; color: #4CAF50;'>vs. 3.6</small></span>
+            </div>
+            
+</div>
+<div class="x-axis-label">← Menor Riesgo de Ataque | Mayor Riesgo de Ataque →</div>
+</div>
+</div>
+
+<!-- Weekly Threats -->
+<h2 style="text-align: center; margin: 40px 0 20px 0; color: #B4B5DF;">Amenazas Activas - Semana 14-20 de July</h2>
+
+<div class="threat-grid">
+
+        <div class="threat-card">
+            <div class="threat-header">
+                <div class="threat-title">Grupos Más Activos</div>
+            </div>
+            <ul class="threat-list">
+        
+                <li>
+                    <div class="threat-name">
+                        <span>FIN7 LATAM Division</span>
+                        <span class="threat-value">15+ ataques/sem</span>
+                    </div>
+                    <div class="threat-source">Preferencia: Inmunidad < ?</div>
+                </li>
+            
+                <li>
+                    <div class="threat-name">
+                        <span>Lapsus$ Affiliates</span>
+                        <span class="threat-value">15+ ataques/sem</span>
+                    </div>
+                    <div class="threat-source">Preferencia: Inmunidad < ?</div>
+                </li>
+            
+                <li>
+                    <div class="threat-name">
+                        <span>Vice Society</span>
+                        <span class="threat-value">15+ ataques/sem</span>
+                    </div>
+                    <div class="threat-source">Preferencia: Inmunidad < ?</div>
+                </li>
+            </ul></div>
+
+        <div class="threat-card">
+            <div class="threat-header">
+                <div class="threat-title">Sectores Impactados</div>
+            </div>
+            <ul class="threat-list">
+        
+                <li>
+                    <div class="threat-name">
+                        <span>Gobierno</span>
+                        <span class="threat-value">Inmunidad: ?</span>
+                    </div>
+                    <div class="threat-source">Alto</div>
+                </li>
+            
+                <li>
+                    <div class="threat-name">
+                        <span>Financiero</span>
+                        <span class="threat-value">Inmunidad: ?</span>
+                    </div>
+                    <div class="threat-source">Medio</div>
+                </li>
+            
+                <li>
+                    <div class="threat-name">
+                        <span>Retail</span>
+                        <span class="threat-value">Inmunidad: ?</span>
+                    </div>
+                    <div class="threat-source">Alto</div>
+                </li>
+            </ul></div>
+
+        <div class="threat-card">
+            <div class="threat-header">
+                <div class="threat-title">Vectores de Ataque</div>
+            </div>
+            <ul class="threat-list">
+                <li>
+                    <div class="threat-name">
+                        <span>Phishing/Ingeniería Social</span>
+                        <span class="threat-value">90% en < 3</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="threat-name">
+                        <span>Vulnerabilidades API</span>
+                        <span class="threat-value">85% en < 3.5</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="threat-name">
+                        <span>Infiltración Terceros</span>
+                        <span class="threat-value">75% en < 4</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        
+</div>
+
+<!-- Action Plan -->
+<h2 style="text-align: center; margin: 40px 0 20px 0; color: #B4B5DF;">Plan de Acción según Nivel de Inmunidad</h2>
+
+<div class="actions-grid">
+
+            <div class="action-card">
+                <div class="action-header">
+                    <div class="action-title">Inmunidad Crítica</div>
+                    <div class="action-score">Score < 4</div>
+                </div>
+                <ul class="action-list">
+            <li>Active respaldo offline inmediato</li><li>Implemente MFA resistente a phishing</li><li>Presupueste 3-5% ingresos en ciberseguridad</li><li>Teste recuperación mensualmente</li></ul></div>
+            <div class="action-card">
+                <div class="action-header">
+                    <div class="action-title">Inmunidad Media</div>
+                    <div class="action-score">Score 4-7</div>
+                </div>
+                <ul class="action-list">
+            <li>Audite APIs continuamente</li><li>Diversifique proveedores críticos</li><li>Entrene contra ingeniería social mensualmente</li><li>Monitoree anomalías en tiempo real</li></ul></div>
+            <div class="action-card">
+                <div class="action-header">
+                    <div class="action-title">Inmunidad Resiliente</div>
+                    <div class="action-score">Score > 7</div>
+                </div>
+                <ul class="action-list">
+            <li>Comparta inteligencia sectorial</li><li>Implemente AI para detección predictiva</li><li>Negocie seguros cyber preferenciales</li><li>Desarrolle capacidad de threat hunting</li></ul></div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+<div class="footer-quote">"Su modelo de negocio define su inmunidad digital más que cualquier tecnología"</div>
+<div>Business Fortress: La nueva dimensión de la ciberseguridad ejecutiva | Lãberit</div>
+<div class="report-meta">
+Reporte #3 | Fuentes: 12 feeds de inteligencia + análisis propietario | <a href="https://percevals.github.io/Laberit-intelligence/" target="_blank">Reportes anteriores →</a>
+</div>
+</div>
+</div>
+
+<!-- Detail Panel -->
+<div class="detail-panel" id="detailPanel">
+<button class="detail-close" onclick="closeDetail()">✕ Cerrar</button>
+<div id="detailContent"></div>
+</div>
+
+<!-- News Ticker -->
+<div class="news-ticker">
+<div class="ticker-content">
+<strong>ALERTA CONTINUA:</strong>
+<span id="tickerVictim">Gobierno: Incidente crítico reportado</span>
+</div>
+<div>
+<span class="ticker-source" id="tickerSource">Fuente: Threat Intel</span> |
+<span class="ticker-action" onclick="showVictimDetail()">Ver análisis</span>
+</div>
+</div>
+
+<script>
+// Incident data with sources
+const incidents = [{"name": "Gobierno: Incidente crítico reportado", "source": "Fuente: Threat Intel", "details": " Inmunidad de víctima: N/A"}, {"name": "Financiero: Incidente crítico reportado", "source": "Fuente: Threat Intel", "details": " Inmunidad de víctima: N/A"}, {"name": "Retail: Incidente crítico reportado", "source": "Fuente: Threat Intel", "details": " Inmunidad de víctima: N/A"}, {"name": "Ransomware y Supply Chain Attacks concentra 58% de ataques regionales", "source": "Fuente: OTX AlienVault", "details": "Los ataques se concentran en organizaciones con inmunidad < 4. Incremento del 23% en ataques a la cadena de suministro digital en LATAM. Los sectores financiero y gubernamental muestran mejoras en inmunidad, mientras que el retail y la manufactura permanecen vulnerables."}, {"name": "Brasil lidera con 31% menciones dark web y mayor volumen de ataques", "source": "Fuente: SocRadar", "details": "La combinación de alta digitalización y baja inversión en seguridad crea vulnerabilidades críticas."}];
+
+let currentIncident = 0;
+
+// Detail content database
+const detailContent = {
+metric: {
+immunity: '<h4>Inmunidad Digital: 3.6/10</h4><p>El Incremento del 23% en ataques a la cadena de suministro digital en LATAM. Los sectores financiero y gubernamental muestran mejoras en inmunidad, mientras que el retail y la manufactura permanecen vulnerables. La región muestra una tendencia preocupante con la mayoría de organizaciones en zona crítica.</p>',
+attacks: '<h4>LATAM: 40% Más Ataques que Promedio Global</h4><p>3,142 ataques semanales en la región. Ransomware y Supply Chain Attacks representa el 58% de los incidentes.</p>',
+government: '<h4>Gobierno: Modelo Más Vulnerable</h4><p>Con inmunidad de 1.5/10, los gobiernos son el modelo de negocio más vulnerable. Sistemas obsoletos y presupuesto limitado crean una tormenta perfecta.</p>'
+},
+threat: {
+lockbit: '<h4>LockBit 3.0: El Más Activo</h4><p>Responsable de múltiples ataques en gobierno y salud. Utiliza doble extorsión y publica datos en menos de 24 horas si no hay pago.</p>',
+blackcat: '<h4>BlackCat/ALPHV: Sofisticación Creciente</h4><p>Grupo RaaS que evoluciona constantemente. Prefiere targets con inmunidad media-baja y sectores con datos sensibles.</p>',
+medusa: '<h4>Medusa: Emergente en LATAM</h4><p>Nuevo grupo enfocado en la región. Especializado en empresas medianas con poca inversión en ciberseguridad.</p>'
+},
+vector: {
+phishing: '<h4>Phishing: 64% de Ataques</h4><p>El vector más efectivo en LATAM. La ingeniería social explota la falta de capacitación y awareness en las organizaciones.</p>',
+api: '<h4>APIs Vulnerables: Nuevo Perímetro</h4><p>Con la digitalización acelerada, las APIs mal configuradas son el nuevo punto débil. 85% de víctimas tenían inmunidad < 3.5.</p>',
+supply: '<h4>Supply Chain: Efecto Cascada</h4><p>Un solo proveedor comprometido puede afectar docenas de empresas. La interdependencia digital multiplica el riesgo.</p>'
+}
+};
+
+// Show detail panel
+function showDetail(type, subtype) {
+const content = detailContent[type]?.[subtype] || '<p>Información adicional no disponible.</p>';
+document.getElementById('detailContent').innerHTML = content;
+document.getElementById('detailPanel').classList.add('show');
+}
+
+// Close detail panel
+function closeDetail() {
+document.getElementById('detailPanel').classList.remove('show');
+}
+
+// Update ticker
+function updateTicker() {
+if (incidents && incidents.length > 0) {
+currentIncident = (currentIncident + 1) % incidents.length;
+document.getElementById('tickerVictim').textContent = incidents[currentIncident].name;
+document.getElementById('tickerSource').textContent = incidents[currentIncident].source;
+}
+}
+
+// Show victim detail
+function showVictimDetail() {
+if (incidents && incidents.length > 0) {
+const incident = incidents[currentIncident];
+document.getElementById('detailContent').innerHTML = `
+<h4 style="color: #B4B5DF; margin-bottom: 15px;">Análisis del Incidente</h4>
+<p style="line-height: 1.6;">${incident.details}</p>
+`;
+document.getElementById('detailPanel').classList.add('show');
+}
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+// Add click handlers to metric cards
+document.querySelectorAll('.metric-card').forEach((card, index) => {
+const types = ['immunity', 'attacks', 'government'];
+card.addEventListener('click', () => showDetail('metric', types[index]));
+});
+
+// Add click handlers to threat list items
+document.querySelectorAll('.threat-list li').forEach(item => {
+item.addEventListener('click', function() {
+const threatType = this.closest('.threat-card').querySelector('.threat-title').textContent;
+if (threatType.includes('Activos')) {
+showDetail('threat', 'lockbit');
+} else if (threatType.includes('Impactados')) {
+showDetail('threat', 'blackcat');
+} else if (threatType.includes('Vectores')) {
+showDetail('vector', 'phishing');
+}
+});
+});
+
+// Start ticker rotation
+if (incidents && incidents.length > 0) {
+setInterval(updateTicker, 8000);
+}
+});
+</script>
+</body>
+</html>
