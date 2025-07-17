@@ -63,6 +63,12 @@ export function getAIConfig(): AIConfig {
   if (import.meta.env.PROD && (mistralKey || openaiKey)) {
     config.useMockInDev = false;
   }
+  
+  // If no API keys are available in production, force mock mode
+  if (import.meta.env.PROD && !mistralKey && !openaiKey) {
+    config.useMockInDev = true;
+    console.warn('No API keys found in production, using mock mode');
+  }
 
   return config;
 }

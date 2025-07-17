@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loading...</title>
+    <script>
+      // Single Page Apps for GitHub Pages
+      // https://github.com/rafgraph/spa-github-pages
+      // This script redirects the 404 to the index.html with the path in a query string
+      const path = window.location.pathname;
+      const base = '/Laberit-intelligence/apps/assessment-v2/';
+      if (path.startsWith(base)) {
+        const route = path.substring(base.length);
+        window.location.replace(base + '?redirect=/' + route);
+      } else {
+        window.location.replace(base);
+      }
+    </script>
+  </head>
+  <body>
+    <noscript>
+      <meta http-equiv="refresh" content="0; url=/Laberit-intelligence/apps/assessment-v2/">
+    </noscript>
+  </body>
+</html>

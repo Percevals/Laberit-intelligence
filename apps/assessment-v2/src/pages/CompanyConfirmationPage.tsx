@@ -290,6 +290,7 @@ function EditableField({
   placeholder,
   aiEnhanced
 }: EditableFieldProps) {
+  const { t } = useTranslation();
 
   if (isEditing) {
     return (

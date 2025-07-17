@@ -49,7 +49,14 @@ export function CompanySearchInput({ onSelect, className }: CompanySearchInputPr
     onSelect({
       name: query,
       dataSource: 'manual',
-      confidence: 0
+      confidence: 0,
+      // Initialize with empty/default values to prevent undefined errors
+      employees: 0,
+      revenue: 0,
+      country: '',
+      industry: '',
+      description: '',
+      headquarters: ''
     } as CompanyInfo);
   };
 
