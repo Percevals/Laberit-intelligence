@@ -1,0 +1,161 @@
+{
+  "major_cyber_incidents": [
+    {
+      "date": "July 1-17, 2025",
+      "country": "Brazil",
+      "organization": "C&M Software / BMP Financial",
+      "sector": "Financial Services / Payment Systems",
+      "attack_type": "Insider Threat / Credential Compromise",
+      "business_impact_level": "Critical",
+      "summary": "Largest cybercrime in Brazil's history. Insider at C&M Software paid R$15,000 for credentials, enabling theft of R$541 million ($108M USD) via unauthorized PIX transactions. Operations disrupted 3 hours, one arrest made, R$270M frozen.",
+      "business_model_affected": "SERVICIOS_FINANCIEROS"
+    },
+    {
+      "date": "July 15, 2025",
+      "country": "Brazil",
+      "organization": "Metalfrio",
+      "sector": "Manufacturing",
+      "attack_type": "Ransomware",
+      "business_impact_level": "High",
+      "summary": "Commercial refrigeration manufacturer hit by RansomHub ransomware. IT systems in Brazil and Mexico rendered unavailable, systems isolated to prevent spread. No confirmed data leakage but operations disrupted.",
+      "business_model_affected": "CADENA_SUMINISTRO"
+    }
+  ],
+  "incidents_note": "Limited major incidents reported during July 11-17, 2025. Many incidents from this period may not yet be publicly disclosed due to typical reporting delays of 204-220 days in LATAM.",
+  
+  "regional_threat_trends": [
+    {
+      "trend": "Ransomware Surge",
+      "description": "15% year-over-year increase in ransomware attacks across LATAM. RansomHub leading with 14.3% of attacks, followed by Akira (9.65%). 291 LATAM victims documented, up from 254 in 2023.",
+      "percentage_increase": "15%"
+    },
+    {
+      "trend": "Infostealer Malware Explosion",
+      "description": "58% surge in infostealer attacks. Over 2.68 million compromised credentials and 48,000 stolen credit cards in LATAM. SnakeStealer became most detected infostealer in H1 2025.",
+      "percentage_increase": "58%"
+    },
+    {
+      "trend": "ClickFix Attack Vector",
+      "description": "500% increase compared to H2 2024. Now second most common attack vector after phishing. Manipulates users into executing malicious commands under fake error messages.",
+      "percentage_increase": "500%"
+    },
+    {
+      "trend": "AI-Powered Cyber Attacks",
+      "description": "Emergence of AI-generated phishing campaigns and deepfakes. 1,265% increase in AI-generated phishing since ChatGPT launch. Automated reconnaissance and attack planning by APT groups.",
+      "percentage_increase": "1265%"
+    },
+    {
+      "trend": "Most Targeted Sectors",
+      "description": "Government/Military (25%), Healthcare (3,000-4,000 weekly attacks), Financial Services (9% with 4-point increase), Communications/Telecom targeted by nation-state actors.",
+      "percentage_increase": "39% above global average"
+    }
+  ],
+  
+  "active_threat_actors": [
+    {
+      "group_name": "RansomHub",
+      "activity_level": "High",
+      "target_sectors": "Healthcare, Manufacturing, Education, Critical Infrastructure",
+      "recent_campaigns": "Leading ransomware group with 14.3% of LATAM attacks, 59% increase in July 2025. MetLife Latin America attacked Dec 31, 2024. Uses double-extortion, custom variants, exploits VPN vulnerabilities."
+    },
+    {
+      "group_name": "LockBit 3.0",
+      "activity_level": "High",
+      "target_sectors": "Government, Manufacturing, Technology, Financial Services",
+      "recent_campaigns": "236% increase in July 2025, 18 attacks against Spain H1 2024. Announced LockBit 4.0 for Feb 2025. Targets government entities in Brazil, Mexico, Colombia using RaaS model."
+    },
+    {
+      "group_name": "Akira",
+      "activity_level": "High",
+      "target_sectors": "Business Services, Construction, Critical Infrastructure, Education",
+      "recent_campaigns": "45% increase in July 2025, 9.65% of LATAM attacks. Uses Rust-based Megazord ransomware with intermittent encryption. Targets Spanish-speaking financial institutions."
+    },
+    {
+      "group_name": "SAMBA SPIDER",
+      "activity_level": "Medium-High",
+      "target_sectors": "Banking, Financial Services, Government",
+      "recent_campaigns": "Brazil-based group deploying Mispadu trojan. Active phishing campaign impersonating Mexico's CFDI system. Targets FIs across LATAM using regional financial themes."
+    }
+  ],
+  
+  "statistical_overview": {
+    "total_incidents": "2,569 attacks per organization per week in LATAM (39% above global average)",
+    "most_affected_sectors": {
+      "government_military": "28%",
+      "healthcare": "25%",
+      "communications": "22%",
+      "financial_services": "17%",
+      "manufacturing": "15%",
+      "retail": "10%",
+      "education": "8%"
+    },
+    "average_detection_time": "204-220 days to identify, 70-75 days to contain in LATAM",
+    "primary_attack_vectors": {
+      "web_based_attacks": "64%",
+      "phishing": "41%",
+      "remote_desktop_protocol": "52%",
+      "stolen_credentials": "16%",
+      "software_vulnerabilities": "33%",
+      "social_engineering": "14%"
+    }
+  },
+  
+  "business_impact_analysis": [
+    {
+      "model": "SERVICIOS_FINANCIEROS",
+      "immunity_level": 4,
+      "trend": "Declining",
+      "key_vulnerabilities": "233-day breach lifecycle, high-value credential theft target, $4.45M average breach cost",
+      "recommendation": "Implement enhanced MFA, real-time transaction monitoring, and AI-driven fraud detection"
+    },
+    {
+      "model": "INFORMACION_REGULADA",
+      "immunity_level": 3,
+      "trend": "Declining",
+      "key_vulnerabilities": "28% of government incidents, 74% face information disclosure attacks, nation-state targeting",
+      "recommendation": "Deploy data classification systems, strengthen access controls, implement regulatory compliance frameworks"
+    },
+    {
+      "model": "ECOSISTEMA_DIGITAL",
+      "immunity_level": 2,
+      "trend": "Critical",
+      "key_vulnerabilities": "64% web-based attack exposure, cloud misconfigurations, API security gaps",
+      "recommendation": "Adopt zero-trust architecture, implement comprehensive API security, deploy cloud security posture management"
+    },
+    {
+      "model": "CADENA_SUMINISTRO",
+      "immunity_level": 2,
+      "trend": "Critical",
+      "key_vulnerabilities": "40% threats via supply chain, 98% have compromised vendors, active access broker networks",
+      "recommendation": "Establish vendor risk assessment program, implement continuous monitoring, deploy supply chain security frameworks"
+    },
+    {
+      "model": "SOFTWARE_CRITICO",
+      "immunity_level": 3,
+      "trend": "Declining",
+      "key_vulnerabilities": "33% incidents involve vulnerabilities, legacy systems prevalent, patch management challenges",
+      "recommendation": "Implement automated vulnerability management, establish emergency patching protocols, conduct software composition analysis"
+    },
+    {
+      "model": "SERVICIOS_DATOS",
+      "immunity_level": 2,
+      "trend": "Critical",
+      "key_vulnerabilities": "58% infostealer increase, 1 billion exposed credentials, privacy regulation gaps",
+      "recommendation": "Deploy data loss prevention, implement encryption everywhere, adopt privacy by design principles"
+    },
+    {
+      "model": "COMERCIO_HIBRIDO",
+      "immunity_level": 5,
+      "trend": "Stable",
+      "key_vulnerabilities": "58% attacks via phishing, 92% use brute force, POS/e-commerce integration risks",
+      "recommendation": "Ensure PCI compliance, implement advanced fraud detection, secure payment processing systems"
+    },
+    {
+      "model": "INFRAESTRUCTURA_HEREDADA",
+      "immunity_level": 1,
+      "trend": "Critical",
+      "key_vulnerabilities": "Highest risk due to outdated controls, limited visibility, difficult to secure",
+      "recommendation": "Urgent network segmentation, create modernization roadmap, implement enhanced monitoring, air-gap critical systems"
+    }
+  ]
+}

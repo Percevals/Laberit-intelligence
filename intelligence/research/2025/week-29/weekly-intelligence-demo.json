@@ -1,0 +1,227 @@
+{
+  "week_date": "2025-07-17",
+  "week_summary": {
+    "immunity_avg": "3.6",
+    "attacks_week": "3,142",
+    "top_threat_pct": "58%",
+    "top_threat_type": "Ransomware y Supply Chain Attacks",
+    "victims_low_immunity_pct": "72%",
+    "key_insight": "Incremento del 23% en ataques a la cadena de suministro digital en LATAM. Los sectores financiero y gubernamental muestran mejoras en inmunidad, mientras que el retail y la manufactura permanecen vulnerables."
+  },
+  "business_model_insights": {
+    "SERVICIOS_FINANCIEROS": {
+      "immunity_score": 4.2,
+      "trend": "improving",
+      "key_threats": ["Ransomware dirigido", "Fraude con IA", "Ataques a APIs"],
+      "recommendations": ["Implementar Zero Trust", "Reforzar autenticación biométrica", "Monitoreo continuo de APIs"]
+    },
+    "COMERCIO_HIBRIDO": {
+      "immunity_score": 2.8,
+      "trend": "stable",
+      "key_threats": ["Magecart", "Credential stuffing", "Supply chain compromise"],
+      "recommendations": ["Segmentación de red", "WAF avanzado", "Vendor risk management"]
+    },
+    "SOFTWARE_CRITICO": {
+      "immunity_score": 3.9,
+      "trend": "improving",
+      "key_threats": ["Zero-day exploits", "Supply chain poisoning", "State-sponsored attacks"],
+      "recommendations": ["SBOM implementation", "DevSecOps maturity", "Incident response drills"]
+    },
+    "SERVICIOS_DATOS": {
+      "immunity_score": 3.1,
+      "trend": "declining",
+      "key_threats": ["Data exfiltration", "Ransomware", "Insider threats"],
+      "recommendations": ["DLP enhancement", "Encryption at rest", "Access governance"]
+    },
+    "ECOSISTEMA_DIGITAL": {
+      "immunity_score": 3.4,
+      "trend": "stable",
+      "key_threats": ["API abuse", "Bot attacks", "Platform vulnerabilities"],
+      "recommendations": ["API security gateway", "Bot management", "Continuous pen testing"]
+    },
+    "INFRAESTRUCTURA_HEREDADA": {
+      "immunity_score": 2.2,
+      "trend": "declining",
+      "key_threats": ["Legacy system exploits", "Ransomware", "Physical security gaps"],
+      "recommendations": ["OT/IT convergence", "Network segmentation", "Legacy system hardening"]
+    },
+    "INFORMACION_REGULADA": {
+      "immunity_score": 4.5,
+      "trend": "stable",
+      "key_threats": ["Compliance gaps", "Data sovereignty", "Advanced persistent threats"],
+      "recommendations": ["Continuous compliance", "Data classification", "Threat hunting"]
+    },
+    "CADENA_SUMINISTRO": {
+      "immunity_score": 2.9,
+      "trend": "declining",
+      "key_threats": ["Third-party breaches", "Software supply chain", "Vendor compromise"],
+      "recommendations": ["TPRM program", "Vendor assessments", "Supply chain visibility"]
+    }
+  },
+  "incidents": [
+    {
+      "date": "2025-07-16",
+      "country": "Colombia",
+      "sector": "Gobierno",
+      "org_name": "Ministerio de Tecnologías",
+      "attack_type": "Ransomware",
+      "dii_score": 3.2,
+      "business_model": "SERVICIOS_DATOS",
+      "impact": "Alto",
+      "summary": "Ataque de ransomware afectó sistemas críticos del MinTIC. Los servicios de ciudadanía digital estuvieron interrumpidos por 48 horas."
+    },
+    {
+      "date": "2025-07-15",
+      "country": "Brasil",
+      "sector": "Financiero",
+      "org_name": "Banco regional (no divulgado)",
+      "attack_type": "Fraude con IA",
+      "dii_score": 4.1,
+      "business_model": "SERVICIOS_FINANCIEROS",
+      "impact": "Medio",
+      "summary": "Deepfakes utilizados para bypass de autenticación biométrica. El banco detectó y bloqueó el ataque en 12 minutos."
+    },
+    {
+      "date": "2025-07-14",
+      "country": "México",
+      "sector": "Retail",
+      "org_name": "Cadena de tiendas departamentales",
+      "attack_type": "Magecart",
+      "dii_score": 2.5,
+      "business_model": "COMERCIO_HIBRIDO",
+      "impact": "Alto",
+      "summary": "Código malicioso inyectado en plataforma de pagos online. Más de 50,000 tarjetas comprometidas durante el Hot Sale."
+    },
+    {
+      "date": "2025-07-13",
+      "country": "Argentina",
+      "sector": "Energía",
+      "org_name": "Empresa distribuidora eléctrica",
+      "attack_type": "Supply Chain Attack",
+      "dii_score": 2.3,
+      "business_model": "INFRAESTRUCTURA_HEREDADA",
+      "impact": "Crítico",
+      "summary": "Compromiso de proveedor de software SCADA resultó en acceso no autorizado a sistemas de control industrial."
+    },
+    {
+      "date": "2025-07-12",
+      "country": "Chile",
+      "sector": "Salud",
+      "org_name": "Red de clínicas privadas",
+      "attack_type": "Data Breach",
+      "dii_score": 3.8,
+      "business_model": "INFORMACION_REGULADA",
+      "impact": "Alto",
+      "summary": "Exfiltración de 200,000 registros médicos. La organización activó protocolo de respuesta y notificó en 24 horas."
+    },
+    {
+      "date": "2025-07-11",
+      "country": "Perú",
+      "sector": "Tecnología",
+      "org_name": "Startup fintech",
+      "attack_type": "API Abuse",
+      "dii_score": 3.5,
+      "business_model": "ECOSISTEMA_DIGITAL",
+      "impact": "Medio",
+      "summary": "Ataque automatizado a APIs de servicios financieros. Rate limiting inadecuado permitió 2M de requests maliciosos."
+    }
+  ],
+  "threat_actors": [
+    {
+      "name": "FIN7 LATAM Division",
+      "activity": "Muy Alta",
+      "targets": ["Retail", "Hospitalidad", "Financiero"],
+      "ttps": ["Phishing avanzado", "Malware POS", "Supply chain compromise"],
+      "recent_campaigns": "Operación 'Verano Caliente' dirigida a retailers durante temporada de ventas"
+    },
+    {
+      "name": "Lapsus$ Affiliates",
+      "activity": "Alta",
+      "targets": ["Tecnología", "Telecomunicaciones", "Gobierno"],
+      "ttps": ["Social engineering", "Insider recruitment", "Data extortion"],
+      "recent_campaigns": "Targeting de empresas tech en Brasil y México con técnicas de ingeniería social"
+    },
+    {
+      "name": "Vice Society",
+      "activity": "Media",
+      "targets": ["Educación", "Salud", "Gobierno local"],
+      "ttps": ["Ransomware", "Double extortion", "Living off the land"],
+      "recent_campaigns": "Ataques a universidades en Colombia y Argentina explotando VPNs sin parchear"
+    }
+  ],
+  "regional_trends": [
+    {
+      "trend": "Aumento de ataques a APIs",
+      "growth": "+34%",
+      "affected_countries": ["Brasil", "México", "Colombia"],
+      "business_impact": "Interrupción de servicios digitales y pérdida de confianza del cliente"
+    },
+    {
+      "trend": "Ransomware as a Service (RaaS) en español",
+      "growth": "+28%",
+      "affected_countries": ["Todos los países LATAM"],
+      "business_impact": "Democratización del cibercrimen aumenta frecuencia de ataques"
+    },
+    {
+      "trend": "Compromiso de cadena de suministro",
+      "growth": "+23%",
+      "affected_countries": ["Argentina", "Chile", "Perú"],
+      "business_impact": "Efecto cascada afectando múltiples organizaciones simultáneamente"
+    }
+  ],
+  "statistics": {
+    "total_incidents_tracked": 847,
+    "incidents_with_public_disclosure": 142,
+    "average_detection_time_days": 21,
+    "average_recovery_time_days": 14,
+    "sectors_most_affected": {
+      "Financiero": "28%",
+      "Gobierno": "22%",
+      "Retail": "18%",
+      "Salud": "15%",
+      "Otros": "17%"
+    },
+    "attack_vectors": {
+      "Phishing/Social Engineering": "31%",
+      "Vulnerability Exploitation": "24%",
+      "Supply Chain": "19%",
+      "Ransomware": "16%",
+      "Insider Threat": "10%"
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "CRÍTICA",
+      "recommendation": "Implementar programa formal de gestión de riesgos de terceros",
+      "business_models": ["CADENA_SUMINISTRO", "COMERCIO_HIBRIDO", "INFRAESTRUCTURA_HEREDADA"],
+      "expected_impact": "Reducción del 40% en incidentes de supply chain"
+    },
+    {
+      "priority": "ALTA",
+      "recommendation": "Adoptar arquitectura Zero Trust con foco en identidad",
+      "business_models": ["SERVICIOS_FINANCIEROS", "SERVICIOS_DATOS", "INFORMACION_REGULADA"],
+      "expected_impact": "Mejora de 25% en prevención de movimiento lateral"
+    },
+    {
+      "priority": "ALTA",
+      "recommendation": "Fortalecer seguridad de APIs con gateway especializado",
+      "business_models": ["ECOSISTEMA_DIGITAL", "SOFTWARE_CRITICO", "SERVICIOS_FINANCIEROS"],
+      "expected_impact": "Reducción del 60% en ataques automatizados"
+    },
+    {
+      "priority": "MEDIA",
+      "recommendation": "Programa de concientización anti-phishing con IA",
+      "business_models": ["Todos"],
+      "expected_impact": "Disminución del 50% en clicks en phishing"
+    }
+  ],
+  "immunity_chart_data": {
+    "description": "Posicionamiento de modelos de negocio en matriz de Inmunidad vs Exposición",
+    "quadrants": {
+      "high_immunity_low_exposure": ["INFORMACION_REGULADA"],
+      "high_immunity_high_exposure": ["SERVICIOS_FINANCIEROS", "SOFTWARE_CRITICO"],
+      "low_immunity_low_exposure": ["CADENA_SUMINISTRO"],
+      "low_immunity_high_exposure": ["INFRAESTRUCTURA_HEREDADA", "COMERCIO_HIBRIDO", "SERVICIOS_DATOS", "ECOSISTEMA_DIGITAL"]
+    }
+  }
+}

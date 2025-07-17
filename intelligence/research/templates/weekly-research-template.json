@@ -1,0 +1,173 @@
+{
+  "metadata": {
+    "week_number": "XX",
+    "date_range": "YYYY-MM-DD to YYYY-MM-DD",
+    "researcher": "Claude/Manual",
+    "sources_consulted": [],
+    "research_timestamp": "ISO-8601"
+  },
+  "week_summary": {
+    "immunity_avg": "0.0",
+    "attacks_week": "0",
+    "top_threat_pct": "0%",
+    "top_threat_type": "TBD",
+    "victims_low_immunity_pct": "0%",
+    "key_insight": "One paragraph summary of the week's key finding"
+  },
+  "dii_dimensions": {
+    "TRD": {"value": "24", "trend": "stable", "notes": "Time to Revenue Disruption observations"},
+    "AER": {"value": "50", "trend": "stable", "notes": "Attack Economics Ratio observations"},
+    "HFP": {"value": "65", "trend": "stable", "notes": "Human Failure Probability observations"},
+    "BRI": {"value": "45", "trend": "stable", "notes": "Blast Radius Index observations"},
+    "RRG": {"value": "3.2", "trend": "stable", "notes": "Recovery Reality Gap observations"}
+  },
+  "business_model_insights": {
+    "SERVICIOS_FINANCIEROS": {
+      "immunity_score": 0.0,
+      "trend": "stable",
+      "incidents_count": 0,
+      "key_threats": [],
+      "recommendations": [],
+      "notable_incidents": []
+    },
+    "INFORMACION_REGULADA": {
+      "immunity_score": 0.0,
+      "trend": "stable",
+      "incidents_count": 0,
+      "key_threats": [],
+      "recommendations": [],
+      "notable_incidents": []
+    },
+    "ECOSISTEMA_DIGITAL": {
+      "immunity_score": 0.0,
+      "trend": "stable",
+      "incidents_count": 0,
+      "key_threats": [],
+      "recommendations": [],
+      "notable_incidents": []
+    },
+    "CADENA_SUMINISTRO": {
+      "immunity_score": 0.0,
+      "trend": "stable",
+      "incidents_count": 0,
+      "key_threats": [],
+      "recommendations": [],
+      "notable_incidents": []
+    },
+    "SOFTWARE_CRITICO": {
+      "immunity_score": 0.0,
+      "trend": "stable",
+      "incidents_count": 0,
+      "key_threats": [],
+      "recommendations": [],
+      "notable_incidents": []
+    },
+    "SERVICIOS_DATOS": {
+      "immunity_score": 0.0,
+      "trend": "stable",
+      "incidents_count": 0,
+      "key_threats": [],
+      "recommendations": [],
+      "notable_incidents": []
+    },
+    "COMERCIO_HIBRIDO": {
+      "immunity_score": 0.0,
+      "trend": "stable",
+      "incidents_count": 0,
+      "key_threats": [],
+      "recommendations": [],
+      "notable_incidents": []
+    },
+    "INFRAESTRUCTURA_HEREDADA": {
+      "immunity_score": 0.0,
+      "trend": "stable",
+      "incidents_count": 0,
+      "key_threats": [],
+      "recommendations": [],
+      "notable_incidents": []
+    }
+  },
+  "incidents": [
+    {
+      "date": "YYYY-MM-DD",
+      "country": "",
+      "sector": "",
+      "org_name": "",
+      "attack_type": "",
+      "dii_score": 0.0,
+      "business_model": "",
+      "impact": "Critical/High/Medium/Low",
+      "summary": "",
+      "source": "",
+      "lessons_learned": ""
+    }
+  ],
+  "threat_actors": [
+    {
+      "name": "",
+      "activity": "Very High/High/Medium/Low",
+      "targets": [],
+      "ttps": [],
+      "recent_campaigns": "",
+      "attribution_confidence": "High/Medium/Low"
+    }
+  ],
+  "regional_trends": [
+    {
+      "trend": "",
+      "growth": "",
+      "affected_countries": [],
+      "business_impact": "",
+      "timeline": "Immediate/Short-term/Long-term"
+    }
+  ],
+  "statistics": {
+    "total_incidents_tracked": 0,
+    "incidents_with_public_disclosure": 0,
+    "average_detection_time_days": 0,
+    "average_recovery_time_days": 0,
+    "sectors_most_affected": {},
+    "attack_vectors": {},
+    "geographic_distribution": {}
+  },
+  "benchmarking_stats": {
+    "percentile_ranges": {
+      "p90": {"min_dii": 0, "companies_count": 0},
+      "p75": {"min_dii": 0, "companies_count": 0},
+      "p50": {"min_dii": 0, "companies_count": 0},
+      "p25": {"min_dii": 0, "companies_count": 0}
+    },
+    "improvement_velocity": {
+      "fastest_improving_model": "",
+      "average_improvement_rate": 0
+    }
+  },
+  "immunity_chart_data": {
+    "description": "Business model positioning in Immunity vs Exposure matrix",
+    "quadrants": {
+      "high_immunity_low_exposure": [],
+      "high_immunity_high_exposure": [],
+      "low_immunity_low_exposure": [],
+      "low_immunity_high_exposure": []
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "CRÍTICA/ALTA/MEDIA",
+      "recommendation": "",
+      "business_models": [],
+      "expected_impact": "",
+      "implementation_timeline": "",
+      "effort_level": "Low/Medium/High"
+    }
+  ],
+  "executive_briefing": {
+    "top_3_risks": [],
+    "top_3_opportunities": [],
+    "board_level_metrics": {
+      "risk_exposure_change": "0%",
+      "peer_comparison": "",
+      "roi_on_security_spend": ""
+    }
+  }
+}

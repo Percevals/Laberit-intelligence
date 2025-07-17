@@ -1,0 +1,249 @@
+{
+  "week_date": "2025-07-17",
+  "week_summary": {
+    "immunity_avg": "3.8",
+    "attacks_week": "2,847",
+    "top_threat_pct": "52%",
+    "top_threat_type": "Ransomware & API Attacks",
+    "victims_low_immunity_pct": "68%",
+    "key_insight": "QA Test: Significant increase in API-based attacks targeting financial services. Organizations with DII < 4.0 experiencing 3x higher breach rates than resilient peers."
+  },
+  "dii_dimensions": {
+    "TRD": {"value": "18", "trend": "declining"},
+    "AER": {"value": "75", "trend": "declining"},
+    "HFP": {"value": "72", "trend": "stable"},
+    "BRI": {"value": "55", "trend": "improving"},
+    "RRG": {"value": "3.8", "trend": "stable"}
+  },
+  "business_model_insights": {
+    "SERVICIOS_FINANCIEROS": {
+      "immunity_score": 4.5,
+      "trend": "improving",
+      "key_threats": ["API fraud", "Deepfake attacks", "Insider threats"],
+      "recommendations": ["Deploy API behavior analytics", "Implement biometric verification", "Zero Trust architecture"]
+    },
+    "INFORMACION_REGULADA": {
+      "immunity_score": 4.3,
+      "trend": "stable",
+      "key_threats": ["Ransomware", "Data exfiltration", "Compliance gaps"],
+      "recommendations": ["Immutable backups", "DLP enhancement", "Continuous compliance monitoring"]
+    },
+    "ECOSISTEMA_DIGITAL": {
+      "immunity_score": 3.2,
+      "trend": "declining",
+      "key_threats": ["Platform abuse", "Bot attacks", "Third-party risks"],
+      "recommendations": ["Bot management solution", "Vendor risk assessment", "Rate limiting"]
+    },
+    "CADENA_SUMINISTRO": {
+      "immunity_score": 2.9,
+      "trend": "declining",
+      "key_threats": ["Supply chain compromise", "Vendor breaches", "API vulnerabilities"],
+      "recommendations": ["SBOM implementation", "Vendor monitoring", "API gateway"]
+    },
+    "SOFTWARE_CRITICO": {
+      "immunity_score": 4.1,
+      "trend": "improving",
+      "key_threats": ["Zero-days", "Supply chain attacks", "Code injection"],
+      "recommendations": ["DevSecOps maturity", "Dependency scanning", "Security champions"]
+    },
+    "SERVICIOS_DATOS": {
+      "immunity_score": 3.5,
+      "trend": "stable",
+      "key_threats": ["Data breaches", "Ransomware", "Misconfigurations"],
+      "recommendations": ["Cloud security posture", "Encryption everywhere", "Access reviews"]
+    },
+    "COMERCIO_HIBRIDO": {
+      "immunity_score": 3.0,
+      "trend": "improving",
+      "key_threats": ["E-skimming", "POS malware", "Inventory manipulation"],
+      "recommendations": ["PCI DSS compliance", "Network segmentation", "Fraud detection"]
+    },
+    "INFRAESTRUCTURA_HEREDADA": {
+      "immunity_score": 2.4,
+      "trend": "declining",
+      "key_threats": ["Legacy exploits", "OT attacks", "Physical breaches"],
+      "recommendations": ["OT/IT convergence", "Air-gapping critical systems", "Compensating controls"]
+    }
+  },
+  "incidents": [
+    {
+      "date": "2025-07-16",
+      "country": "España",
+      "sector": "Financiero",
+      "org_name": "Banco español (no divulgado)",
+      "attack_type": "Ransomware",
+      "dii_score": 5.2,
+      "business_model": "SERVICIOS_FINANCIEROS",
+      "impact": "Alto",
+      "summary": "Grupo de ransomware LockBit intentó cifrar sistemas core bancarios. Los controles de segmentación y backups inmutables permitieron recuperación en 4 horas sin pago de rescate.",
+      "business_lesson": "La inversión en arquitectura Zero Trust y backups inmutables demostró ROI directo al evitar pérdidas de €5M y daño reputacional"
+    },
+    {
+      "date": "2025-07-16",
+      "country": "México",
+      "sector": "Financial",
+      "org_name": "Major Mexican Bank (undisclosed)",
+      "attack_type": "API Fraud",
+      "dii_score": 4.2,
+      "business_model": "SERVICIOS_FINANCIEROS",
+      "impact": "High",
+      "summary": "Sophisticated API attack attempted to bypass transaction limits. Bank's behavioral analytics detected anomaly within 3 minutes, preventing $2.5M in fraudulent transfers.",
+      "business_lesson": "Real-time API monitoring with ML-based anomaly detection is essential for digital banking operations"
+    },
+    {
+      "date": "2025-07-15",
+      "country": "España",
+      "sector": "Energía",
+      "org_name": "Compañía eléctrica española",
+      "attack_type": "Supply Chain Attack",
+      "dii_score": 3.1,
+      "business_model": "INFRAESTRUCTURA_HEREDADA",
+      "impact": "Crítico",
+      "summary": "Compromiso de proveedor de software SCADA afectó sistemas de distribución. Detección en 6 horas evitó apagón masivo.",
+      "business_lesson": "La visibilidad de terceros y el monitoreo de la cadena de suministro son críticos para infraestructura esencial"
+    },
+    {
+      "date": "2025-07-15",
+      "country": "Colombia",
+      "sector": "Government",
+      "org_name": "Municipal Government System",
+      "attack_type": "Ransomware",
+      "dii_score": 2.8,
+      "business_model": "SERVICIOS_DATOS",
+      "impact": "Critical",
+      "summary": "LockBit variant encrypted citizen services database. Recovery took 96 hours due to outdated backups. Services for 500,000 citizens affected.",
+      "business_lesson": "Government entities must prioritize backup modernization and testing to maintain citizen services"
+    },
+    {
+      "date": "2025-07-14",
+      "country": "Brazil",
+      "sector": "E-commerce",
+      "org_name": "Leading Fashion Marketplace",
+      "attack_type": "Platform Abuse",
+      "dii_score": 3.0,
+      "business_model": "ECOSISTEMA_DIGITAL",
+      "impact": "Medium",
+      "summary": "Coordinated bot attack created 50,000 fake vendor accounts. Platform's trust score algorithm compromised, requiring manual review of all new accounts."
+    },
+    {
+      "date": "2025-07-13",
+      "country": "Argentina",
+      "sector": "Healthcare",
+      "org_name": "Private Hospital Chain",
+      "attack_type": "Data Breach",
+      "dii_score": 4.0,
+      "business_model": "INFORMACION_REGULADA",
+      "impact": "High",
+      "summary": "Misconfigured cloud storage exposed 100,000 patient records. Discovered by security researcher, fixed within 4 hours. Regulatory investigation pending."
+    },
+    {
+      "date": "2025-07-12",
+      "country": "Chile",
+      "sector": "Logistics",
+      "org_name": "International Shipping Platform",
+      "attack_type": "Supply Chain Attack",
+      "dii_score": 2.5,
+      "business_model": "CADENA_SUMINISTRO",
+      "impact": "Critical",
+      "summary": "Compromised software update from logistics vendor contained backdoor. Affected tracking systems for 200+ companies. Industry-wide alert issued."
+    }
+  ],
+  "threat_actors": [
+    {
+      "name": "APT-LATAM-7 (Tropical Storm)",
+      "activity": "Very High",
+      "targets": ["Financial Services", "Government", "Critical Infrastructure"],
+      "ttps": ["Living off the land", "API abuse", "Supply chain compromise"],
+      "recent_campaigns": "Operation 'Temporada Alta' targeting financial APIs during peak transaction periods"
+    },
+    {
+      "name": "FIN-X Collective",
+      "activity": "High",
+      "targets": ["E-commerce", "Retail", "Payment Processors"],
+      "ttps": ["Web skimming", "POS malware", "Magecart variants"],
+      "recent_campaigns": "Targeting Latin American e-commerce platforms with advanced skimmers"
+    },
+    {
+      "name": "Ransomware Cartel 'Sombra'",
+      "activity": "High",
+      "targets": ["Healthcare", "Manufacturing", "Local Government"],
+      "ttps": ["Double extortion", "Data auction", "DDoS amplification"],
+      "recent_campaigns": "Focus on organizations with cyber insurance in Mexico and Colombia"
+    }
+  ],
+  "regional_trends": [
+    {
+      "trend": "API Security Crisis",
+      "growth": "+45%",
+      "affected_countries": ["Mexico", "Brazil", "Colombia"],
+      "business_impact": "Financial losses averaging $500K per incident"
+    },
+    {
+      "trend": "Supply Chain Targeting",
+      "growth": "+38%",
+      "affected_countries": ["All LATAM countries"],
+      "business_impact": "Cascade effects impacting 10-50 organizations per incident"
+    },
+    {
+      "trend": "Ransomware Industrialization",
+      "growth": "+28%",
+      "affected_countries": ["Mexico", "Argentina", "Chile"],
+      "business_impact": "Average downtime increased to 21 days"
+    }
+  ],
+  "statistics": {
+    "total_incidents_tracked": 726,
+    "incidents_with_public_disclosure": 89,
+    "average_detection_time_days": 18,
+    "average_recovery_time_days": 12,
+    "sectors_most_affected": {
+      "Financial": "32%",
+      "Government": "24%",
+      "Healthcare": "18%",
+      "Retail": "15%",
+      "Other": "11%"
+    },
+    "attack_vectors": {
+      "API/Application": "35%",
+      "Phishing/Social": "28%",
+      "Supply Chain": "20%",
+      "Ransomware": "12%",
+      "Other": "5%"
+    }
+  },
+  "immunity_chart_data": {
+    "description": "Business model positioning for Week 29",
+    "quadrants": {
+      "high_immunity_low_exposure": ["INFORMACION_REGULADA"],
+      "high_immunity_high_exposure": ["SERVICIOS_FINANCIEROS", "SOFTWARE_CRITICO"],
+      "low_immunity_low_exposure": ["CADENA_SUMINISTRO"],
+      "low_immunity_high_exposure": ["INFRAESTRUCTURA_HEREDADA", "COMERCIO_HIBRIDO", "SERVICIOS_DATOS", "ECOSISTEMA_DIGITAL"]
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "CRÍTICA",
+      "recommendation": "Implement API security testing and rate limiting immediately",
+      "business_models": ["SERVICIOS_FINANCIEROS", "ECOSISTEMA_DIGITAL", "SERVICIOS_DATOS"],
+      "expected_impact": "Reduce API-based attacks by 60% within 30 days"
+    },
+    {
+      "priority": "CRÍTICA",
+      "recommendation": "Deploy supply chain security monitoring and SBOM",
+      "business_models": ["CADENA_SUMINISTRO", "SOFTWARE_CRITICO", "INFRAESTRUCTURA_HEREDADA"],
+      "expected_impact": "Detect compromised dependencies 85% faster"
+    },
+    {
+      "priority": "ALTA",
+      "recommendation": "Upgrade backup systems to immutable architecture",
+      "business_models": ["TODOS"],
+      "expected_impact": "Reduce ransomware recovery time from 21 to 3 days"
+    },
+    {
+      "priority": "ALTA",
+      "recommendation": "Implement Zero Trust network architecture",
+      "business_models": ["SERVICIOS_FINANCIEROS", "INFORMACION_REGULADA", "SERVICIOS_DATOS"],
+      "expected_impact": "Limit lateral movement in 90% of breach scenarios"
+    }
+  ]
+}
