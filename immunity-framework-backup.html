@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Immunity Index 4.0 | Framework de Referencia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Professional Header */
+        .header {
+            background: linear-gradient(135deg, #1a2332 0%, #2c3e50 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 42px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+        
+        .header .subtitle {
+            font-size: 22px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .header .methodology-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            margin-top: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Navigation */
+        .nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            margin-bottom: 40px;
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .nav-links a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #3498db;
+        }
+        
+        /* Section Styling */
+        .section {
+            margin: 60px 0;
+            padding: 40px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .section-title {
+            font-size: 28px;
+            color: #1a2332;
+            margin-bottom: 30px;
+            font-weight: 400;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 15px;
+        }
+        
+        /* Professional Insight Box */
+        .insight-box {
+            background: #f8f9fa;
+            padding: 25px 30px;
+            border-radius: 6px;
+            margin: 30px 0;
+            border-left: 4px solid #3498db;
+        }
+        
+        .insight-box h3 {
+            color: #1a2332;
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .warning-box {
+            background: #ffeee9;
+            padding: 25px 30px;
+            border-radius: 6px;
+            margin: 30px 0;
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .warning-box h3 {
+            color: #e74c3c;
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        /* Formula Display */
+        .formula-display {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border: 1px solid #e9ecef;
+            text-align: center;
+        }
+        
+        .formula-main {
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .formula-explanation {
+            font-size: 16px;
+            color: #7f8c8d;
+            margin-top: 20px;
+        }
+        
+        /* Dimensions Grid */
+        .dimensions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .dimension-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 25px;
+            transition: all 0.3s;
+        }
+        
+        .dimension-card:hover {
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .dimension-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .dimension-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+        }
+        
+        .prevention-icon {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        }
+        
+        .resilience-icon {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+        }
+        
+        .dimension-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a2332;
+        }
+        
+        .dimension-abbr {
+            font-size: 14px;
+            color: #7f8c8d;
+            font-weight: 400;
+        }
+        
+        /* Business Models Table */
+        .models-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 30px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .models-table th {
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            color: white;
+            padding: 18px;
+            text-align: left;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .models-table td {
+            padding: 18px;
+            border-bottom: 1px solid #ecf0f1;
+            background: white;
+            font-size: 14px;
+        }
+        
+        .models-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .models-table tr:hover td {
+            background: #f8f9fa;
+        }
+        
+        .dii-base {
+            font-weight: bold;
+            font-size: 16px;
+            color: #2c3e50;
+        }
+        
+        .multiplier {
+            background: #e74c3c;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        /* Risk Matrix Visualization */
+        .risk-matrix {
+            position: relative;
+            height: 400px;
+            background: white;
+            border: 2px solid #34495e;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        
+        .matrix-label {
+            position: absolute;
+            font-size: 14px;
+            font-weight: 500;
+            color: #34495e;
+        }
+        
+        .x-label {
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .y-label {
+            left: -100px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+        }
+        
+        .matrix-item {
+            position: absolute;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .matrix-item:hover {
+            transform: scale(1.1);
+            z-index: 10;
+        }
+        
+        /* Maturity Stages */
+        .maturity-stages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .stage-card {
+            padding: 25px;
+            border-radius: 8px;
+            border: 2px solid;
+            transition: all 0.3s;
+        }
+        
+        .stage-fragil {
+            background: #ffeee9;
+            border-color: #e74c3c;
+        }
+        
+        .stage-robusto {
+            background: #fff4e5;
+            border-color: #f39c12;
+        }
+        
+        .stage-resiliente {
+            background: #e8f8f5;
+            border-color: #2ecc71;
+        }
+        
+        .stage-adaptativo {
+            background: #ebf5fb;
+            border-color: #3498db;
+        }
+        
+        .stage-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .stage-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a2332;
+        }
+        
+        .stage-range {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .stage-distribution {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        /* Use Cases */
+        .use-case {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .use-case h4 {
+            color: #1a2332;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .before-after {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .before, .after {
+            padding: 15px;
+            border-radius: 6px;
+        }
+        
+        .before {
+            background: #ffeee9;
+            border: 1px solid #e74c3c;
+        }
+        
+        .after {
+            background: #e8f8f5;
+            border: 1px solid #2ecc71;
+        }
+        
+        /* Benchmark Table */
+        .benchmark-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            font-size: 14px;
+        }
+        
+        .benchmark-table th {
+            background: #34495e;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 500;
+        }
+        
+        .benchmark-table td {
+            padding: 12px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .benchmark-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: #f8f9fa;
+            margin-top: 80px;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .footer p {
+            color: #7f8c8d;
+            margin: 10px 0;
+        }
+        
+        .footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 32px;
+            }
+            
+            .formula-main {
+                font-size: 18px;
+            }
+            
+            .before-after {
+                grid-template-columns: 1fr;
+            }
+            
+            .models-table {
+                font-size: 12px;
+            }
+            
+            .models-table th,
+            .models-table td {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Professional Header -->
+    <div class="header">
+        <h1>Digital Immunity Index 4.0</h1>
+        <p class="subtitle">Un Modelo de Resiliencia Operacional para la Era Digital</p>
+        <span class="methodology-badge">Basado en 150+ evaluaciones reales en LATAM</span>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container nav-content">
+            <div class="nav-links">
+                <a href="#definicion">Definición</a>
+                <a href="#formula">Fórmula</a>
+                <a href="#dimensiones">5 Dimensiones</a>
+                <a href="#modelos">8 Modelos</a>
+                <a href="#estadios">4 Estadios</a>
+                <a href="#aplicacion">Aplicación</a>
+                <a href="#casos">Casos de Uso</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Definition Section -->
+        <div class="section" id="definicion">
+            <h2 class="section-title">Definición Central</h2>
+            
+            <div class="insight-box">
+                <h3>¿Qué es el Digital Immunity Index?</h3>
+                <p>El <strong>Digital Immunity Index (DII) 4.0</strong> mide la capacidad de una organización para mantener sus operaciones críticas de negocio mientras opera bajo ataque cibernético activo.</p>
+            </div>
+
+            <p><strong>Principio fundamental</strong>: Asumimos que su modelo de negocio está comprometido y nos enfocamos en que funcione. En los sistemas biológicos, la inmunidad no previene infecciones - permite al organismo funcionar mientras está infectado. En el contexto empresarial, la inmunidad digital determina qué tan bien una organización mantiene sus operaciones durante incidentes de seguridad.</p>
+
+            <div class="warning-box">
+                <h3>Filosofía operacional</h3>
+                <p>"¿Qué tan bien funciona mientras está bajo ataque?"</p>
+            </div>
+        </div>
+
+        <!-- Formula Section -->
+        <div class="section" id="formula">
+            <h2 class="section-title">La Ecuación de Inmunidad Digital</h2>
+            
+            <div class="formula-display">
+                <div class="formula-main">
+                    DII Raw = (TRD × AER) / (HFP × BRI × RRG)
+                </div>
+                <div style="margin: 20px 0; font-size: 20px;">
+                    DII Score = (DII Raw / DII Base del Modelo) × 10
+                </div>
+                <p class="formula-explanation">
+                    Resultado: Una puntuación de 1-10 que refleja la capacidad operacional real bajo ataque
+                </p>
+            </div>
+
+            <div class="insight-box">
+                <h3>Interpretación del DII Score (escala 1-10)</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li><strong>DII < 4.0</strong>: Frágil - Función severamente comprometida bajo ataque</li>
+                    <li><strong>DII 4.0-6.0</strong>: Robusto - Función parcialmente mantenida</li>
+                    <li><strong>DII 6.0-8.0</strong>: Resiliente - Función competitiva mantenida</li>
+                    <li><strong>DII > 8.0</strong>: Adaptativo - Función superior mantenida</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Dimensions Section -->
+        <div class="section" id="dimensiones">
+            <h2 class="section-title">Las Dos Categorías de Dimensiones</h2>
+            
+            <h3 style="margin: 30px 0 20px; color: #3498db;">CATEGORÍA A: PREVENCIÓN (Reduce la frecuencia e impacto inicial)</h3>
+            
+            <div class="dimensions-grid">
+                <div class="dimension-card">
+                    <div class="dimension-header">
+                        <div class="dimension-icon prevention-icon">💰</div>
+                        <div>
+                            <div class="dimension-title">AER - Attack Economics Ratio</div>
+                            <div class="dimension-abbr">Ratio de Economía del Ataque</div>
+                        </div>
+                    </div>
+                    <p><strong>Definición</strong>: Relación entre costo del ataque y beneficio potencial para el atacante</p>
+                    <p><strong>Función</strong>: Hace "costoso" atacar su negocio específico</p>
+                    <p><strong>Rango típico</strong>: 1:20 (muy rentable atacar) hasta 20:1 (muy costoso atacar)</p>
+                    <p><strong>Cálculo</strong>: (Costo ataque en $USD) / (Valor accesible en $USD)</p>
+                </div>
+
+                <div class="dimension-card">
+                    <div class="dimension-header">
+                        <div class="dimension-icon prevention-icon">👥</div>
+                        <div>
+                            <div class="dimension-title">HFP - Human Failure Probability</div>
+                            <div class="dimension-abbr">Probabilidad de Fallo Humano</div>
+                        </div>
+                    </div>
+                    <p><strong>Definición</strong>: Probabilidad mensual de que al menos un empleado comprometa la seguridad</p>
+                    <p><strong>Función</strong>: Barrera primaria con "porosidad" inherente</p>
+                    <p><strong>Cálculo</strong>: 1 - (1 - tasa_individual_diaria)^(empleados × 30)</p>
+                    <p><strong>Realidad</strong>: Con 1000 empleados y 0.1% fallo diario = 95% probabilidad mensual</p>
+                </div>
+
+                <div class="dimension-card">
+                    <div class="dimension-header">
+                        <div class="dimension-icon prevention-icon">💥</div>
+                        <div>
+                            <div class="dimension-title">BRI - Blast Radius Index</div>
+                            <div class="dimension-abbr">Índice de Radio de Explosión</div>
+                        </div>
+                    </div>
+                    <p><strong>Definición</strong>: Porcentaje de operaciones críticas afectadas desde punto de compromiso promedio</p>
+                    <p><strong>Función</strong>: Contiene y aísla el impacto operacional</p>
+                    <p><strong>Rango típico</strong>: 80%+ (arquitectura plana) hasta <20% (Zero Trust)</p>
+                    <p><strong>Medición</strong>: % de operaciones críticas alcanzables desde compromiso típico</p>
+                </div>
+            </div>
+
+            <h3 style="margin: 40px 0 20px; color: #2ecc71;">CATEGORÍA B: RESILIENCIA (Mantiene operaciones durante el ataque)</h3>
+            
+            <div class="dimensions-grid">
+                <div class="dimension-card">
+                    <div class="dimension-header">
+                        <div class="dimension-icon resilience-icon">⏱️</div>
+                        <div>
+                            <div class="dimension-title">TRD - Time to Revenue Degradation</div>
+                            <div class="dimension-abbr">Tiempo hasta Degradación de Ingresos</div>
+                        </div>
+                    </div>
+                    <p><strong>Definición</strong>: Horas desde el inicio del incidente hasta pérdida del 10% de capacidad operacional</p>
+                    <p><strong>Función</strong>: Velocidad de impacto en función crítica del negocio</p>
+                    <p><strong>Rango típico</strong>: 2 horas (fintech) hasta 168 horas (manufactura tradicional)</p>
+                    <p><strong>Medición</strong>: Análisis de dependencias críticas × velocidad de propagación</p>
+                </div>
+
+                <div class="dimension-card">
+                    <div class="dimension-header">
+                        <div class="dimension-icon resilience-icon">📊</div>
+                        <div>
+                            <div class="dimension-title">RRG - Recovery Reality Gap</div>
+                            <div class="dimension-abbr">Brecha de Realidad en Recuperación</div>
+                        </div>
+                    </div>
+                    <p><strong>Definición</strong>: Factor multiplicador entre tiempo planeado y tiempo real de recuperación operacional</p>
+                    <p><strong>Función</strong>: Capacidad real de restaurar función normal</p>
+                    <p><strong>Promedio industria</strong>: 3.2x (recuperación real toma 3.2 veces más que lo documentado)</p>
+                    <p><strong>Medición</strong>: Promedio histórico de (Tiempo real / Tiempo documentado)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Business Models Section -->
+        <div class="section" id="modelos">
+            <h2 class="section-title">Los 8 Modelos de Negocio Digital</h2>
+            
+            <table class="models-table">
+                <thead>
+                    <tr>
+                        <th>MODELO</th>
+                        <th>DESCRIPCIÓN</th>
+                        <th>DII BASE</th>
+                        <th>EJEMPLOS LATAM</th>
+                        <th>FACTOR CRÍTICO</th>
+                        <th>MULTIPLICADOR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1. Comercio Híbrido</strong></td>
+                        <td>Operaciones físicas + canal digital complementario</td>
+                        <td class="dii-base">1.5-2.0</td>
+                        <td>Falabella, Liverpool, Cencosud</td>
+                        <td>Redundancia natural</td>
+                        <td><span class="multiplier">1.0x</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>2. Software Crítico</strong></td>
+                        <td>Soluciones cloud esenciales para operación empresarial</td>
+                        <td class="dii-base">0.8-1.2</td>
+                        <td>Siigo, ContPAQi, Aspel</td>
+                        <td>Dependencia de terceros</td>
+                        <td><span class="multiplier">1.5x</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>3. Servicios de Datos</strong></td>
+                        <td>Monetización mediante análisis y gestión de información</td>
+                        <td class="dii-base">0.5-0.9</td>
+                        <td>Experian, Serasa, DataCRM</td>
+                        <td>Valor en información</td>
+                        <td><span class="multiplier">2.0x</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>4. Ecosistema Digital</strong></td>
+                        <td>Plataformas multi-actor con efectos de red</td>
+                        <td class="dii-base">0.4-0.8</td>
+                        <td>MercadoLibre, Rappi, Didi</td>
+                        <td>Complejidad de actores</td>
+                        <td><span class="multiplier">2.5x</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>5. Servicios Financieros</strong></td>
+                        <td>Core del negocio en transacciones monetarias</td>
+                        <td class="dii-base">0.2-0.6</td>
+                        <td>Nubank, Clip, Ualá</td>
+                        <td>Regulación + dinero</td>
+                        <td><span class="multiplier">3.5x</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>6. Infraestructura Heredada</strong></td>
+                        <td>Sistemas legacy con capas digitales agregadas</td>
+                        <td class="dii-base">0.2-0.5</td>
+                        <td>CFE, Pemex, Gobierno</td>
+                        <td>Deuda técnica crítica</td>
+                        <td><span class="multiplier">2.8x</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>7. Cadena de Suministro</strong></td>
+                        <td>Logística física con trazabilidad digital crítica</td>
+                        <td class="dii-base">0.4-0.8</td>
+                        <td>DHL, Estafeta, TCC</td>
+                        <td>Continuidad operacional</td>
+                        <td><span class="multiplier">1.8x</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>8. Información Regulada</strong></td>
+                        <td>Manejo de datos sensibles bajo normativa estricta</td>
+                        <td class="dii-base">0.4-0.7</td>
+                        <td>Hospitales, Aseguradoras</td>
+                        <td>Cumplimiento + datos</td>
+                        <td><span class="multiplier">3.0x</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin: 40px 0 20px;">Matriz de Riesgo por Modelo de Negocio</h3>
+            
+            <div class="risk-matrix">
+                <span class="matrix-label x-label">← Superficie de Ataque Digital →</span>
+                <span class="matrix-label y-label">Severidad del Impacto</span>
+                
+                <!-- Matrix Items positioned based on risk -->
+                <div class="matrix-item" style="bottom: 15%; left: 20%; background: #2ecc71;">Comercio Híbrido</div>
+                <div class="matrix-item" style="bottom: 35%; left: 50%; background: #f39c12;">Software Crítico</div>
+                <div class="matrix-item" style="bottom: 20%; left: 70%; background: #f39c12;">Servicios de Datos</div>
+                <div class="matrix-item" style="bottom: 60%; left: 65%; background: #e74c3c;">Ecosistema Digital</div>
+                <div class="matrix-item" style="bottom: 85%; left: 80%; background: #c0392b;">Servicios Financieros</div>
+                <div class="matrix-item" style="bottom: 65%; left: 55%; background: #e74c3c;">Infraestructura Heredada</div>
+                <div class="matrix-item" style="bottom: 40%; left: 45%; background: #f39c12;">Cadena de Suministro</div>
+                <div class="matrix-item" style="bottom: 75%; left: 70%; background: #e74c3c;">Información Regulada</div>
+            </div>
+        </div>
+
+        <!-- Maturity Stages Section -->
+        <div class="section" id="estadios">
+            <h2 class="section-title">Los Cuatro Estadios de Inmunidad Digital</h2>
+            
+            <div class="maturity-stages">
+                <div class="stage-card stage-fragil">
+                    <div class="stage-header">
+                        <span class="stage-name">FRÁGIL</span>
+                        <span class="stage-range" style="color: #e74c3c;">DII < 4.0</span>
+                    </div>
+                    <p><strong>Realidad operacional</strong>:</p>
+                    <ul>
+                        <li>Pérdida operacional: 70%+ durante incidentes</li>
+                        <li>Recuperación: 5-10x más lenta que planificado</li>
+                        <li>Contexto: "Apagamos incendios, cumplir es garantía"</li>
+                    </ul>
+                    <div class="stage-distribution" style="color: #e74c3c;">59%</div>
+                    <p>de organizaciones LATAM</p>
+                    <p style="margin-top: 10px; font-size: 14px;"><strong>Características</strong>: Sin visibilidad real, backup sin probar >12M</p>
+                </div>
+
+                <div class="stage-card stage-robusto">
+                    <div class="stage-header">
+                        <span class="stage-name">ROBUSTO</span>
+                        <span class="stage-range" style="color: #f39c12;">DII 4.0-6.0</span>
+                    </div>
+                    <p><strong>Realidad operacional</strong>:</p>
+                    <ul>
+                        <li>Pérdida operacional: 40-70% durante incidentes</li>
+                        <li>Recuperación: 2-3x más lenta que planificado</li>
+                        <li>Contexto: "Controles parciales, cambios difíciles"</li>
+                    </ul>
+                    <div class="stage-distribution" style="color: #f39c12;">30%</div>
+                    <p>de organizaciones LATAM</p>
+                    <p style="margin-top: 10px; font-size: 14px;"><strong>Características</strong>: Cumplimiento ISO básico, DR vigente sin pruebas</p>
+                </div>
+
+                <div class="stage-card stage-resiliente">
+                    <div class="stage-header">
+                        <span class="stage-name">RESILIENTE</span>
+                        <span class="stage-range" style="color: #2ecc71;">DII 6.0-8.0</span>
+                    </div>
+                    <p><strong>Realidad operacional</strong>:</p>
+                    <ul>
+                        <li>Pérdida operacional: 15-40% durante incidentes</li>
+                        <li>Recuperación: ±20% del tiempo planificado</li>
+                        <li>Contexto: "Inversión alineada a exposición"</li>
+                    </ul>
+                    <div class="stage-distribution" style="color: #2ecc71;">10%</div>
+                    <p>de organizaciones LATAM</p>
+                    <p style="margin-top: 10px; font-size: 14px;"><strong>Características</strong>: Transformación en marcha, equipos empoderados</p>
+                </div>
+
+                <div class="stage-card stage-adaptativo">
+                    <div class="stage-header">
+                        <span class="stage-name">ADAPTATIVO</span>
+                        <span class="stage-range" style="color: #3498db;">DII > 8.0</span>
+                    </div>
+                    <p><strong>Realidad operacional</strong>:</p>
+                    <ul>
+                        <li>Pérdida operacional: <15% durante incidentes</li>
+                        <li>Recuperación: Más rápida que competidores</li>
+                        <li>Contexto: "Las crisis fortalecen"</li>
+                    </ul>
+                    <div class="stage-distribution" style="color: #3498db;"><1%</div>
+                    <p>de organizaciones LATAM</p>
+                    <p style="margin-top: 10px; font-size: 14px;"><strong>Características</strong>: Innovación continua, convierte ataques en inteligencia</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Practical Application Section -->
+        <div class="section" id="aplicacion">
+            <h2 class="section-title">Aplicación Práctica del DII</h2>
+            
+            <h3>Como Herramienta de Planificación</h3>
+            
+            <div class="use-case">
+                <h4>Escenario: Migración de aplicación crítica a cloud</h4>
+                <div class="formula-display" style="text-align: left; background: white;">
+                    <p>Estado Actual: App on-premise (DII = 4.5)</p>
+                    <p>Opción A: Migración lift-and-shift (DII = 3.8) - Mayor exposición, misma recuperación</p>
+                    <p>Opción B: Migración + Zero Trust (DII = 6.2) - Mayor exposición, mejor aislamiento</p>
+                </div>
+                <p style="margin-top: 20px;"><strong>Decisión C-Level</strong>: "Opción B cuesta 40% más pero mejora inmunidad 38% - ROI claro"</p>
+            </div>
+
+            <h3 style="margin-top: 40px;">Benchmark por Modelo y Región</h3>
+            
+            <table class="benchmark-table">
+                <thead>
+                    <tr>
+                        <th>MODELO</th>
+                        <th>PROMEDIO LATAM</th>
+                        <th>TOP 25%</th>
+                        <th>TOP 10%</th>
+                        <th>LÍDERES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Comercio Híbrido</td>
+                        <td>5.5</td>
+                        <td>6.8</td>
+                        <td>7.5</td>
+                        <td>8.2</td>
+                    </tr>
+                    <tr>
+                        <td>Software Crítico</td>
+                        <td>4.8</td>
+                        <td>6.0</td>
+                        <td>7.0</td>
+                        <td>8.0</td>
+                    </tr>
+                    <tr>
+                        <td>Servicios de Datos</td>
+                        <td>4.2</td>
+                        <td>5.5</td>
+                        <td>6.5</td>
+                        <td>7.8</td>
+                    </tr>
+                    <tr>
+                        <td>Ecosistema Digital</td>
+                        <td>3.8</td>
+                        <td>5.0</td>
+                        <td>6.2</td>
+                        <td>7.5</td>
+                    </tr>
+                    <tr>
+                        <td>Servicios Financieros</td>
+                        <td>3.5</td>
+                        <td>4.8</td>
+                        <td>6.0</td>
+                        <td>7.2</td>
+                    </tr>
+                    <tr>
+                        <td>Infraestructura Heredada</td>
+                        <td>2.8</td>
+                        <td>4.0</td>
+                        <td>5.2</td>
+                        <td>6.5</td>
+                    </tr>
+                    <tr>
+                        <td>Cadena de Suministro</td>
+                        <td>4.0</td>
+                        <td>5.2</td>
+                        <td>6.5</td>
+                        <td>7.8</td>
+                    </tr>
+                    <tr>
+                        <td>Información Regulada</td>
+                        <td>3.7</td>
+                        <td>5.0</td>
+                        <td>6.3</td>
+                        <td>7.5</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin-top: 40px;">Interpretación Ejecutiva</h3>
+            
+            <div class="insight-box">
+                <h3>Para CFO</h3>
+                <ul>
+                    <li>"DII 5.0 = Funciona al 50% durante crisis vs competidores"</li>
+                    <li>"Cada punto de mejora = $X menos en pérdidas anuales"</li>
+                </ul>
+            </div>
+
+            <div class="insight-box">
+                <h3>Para CEO</h3>
+                <ul>
+                    <li>"DII bajo = Ventaja competitiva en riesgo"</li>
+                    <li>"DII alto = Crisis fortalece posición de mercado"</li>
+                </ul>
+            </div>
+
+            <div class="insight-box">
+                <h3>Para CTO</h3>
+                <ul>
+                    <li>"DII guía priorización de inversiones"</li>
+                    <li>"Foco en dimensión más débil maximiza ROI"</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Use Cases Section -->
+        <div class="section" id="casos">
+            <h2 class="section-title">Casos de Uso Estratégicos</h2>
+            
+            <div class="use-case">
+                <h4>1. Modernización Inteligente</h4>
+                <div class="before-after">
+                    <div class="before">
+                        <strong>Antes</strong>: "Migremos a cloud para ser más modernos"
+                    </div>
+                    <div class="after">
+                        <strong>Con DII</strong>: "Esta migración cloud con Zero Trust mejora nuestro DII de 4.2 a 6.8, reduciendo pérdidas potenciales 62%"
+                    </div>
+                </div>
+            </div>
+
+            <div class="use-case">
+                <h4>2. Justificación de Inversión</h4>
+                <div class="before-after">
+                    <div class="before">
+                        <strong>Antes</strong>: "Necesitamos SIEM para cumplir normativa"
+                    </div>
+                    <div class="after">
+                        <strong>Con DII</strong>: "SIEM + SOAR mejora TRD de 24h a 6h, elevando DII 1.5 puntos = ROI en 8 meses"
+                    </div>
+                </div>
+            </div>
+
+            <div class="use-case">
+                <h4>3. Decisiones de Negocio</h4>
+                <div class="before-after">
+                    <div class="before">
+                        <strong>Antes</strong>: "¿Lanzamos marketplace digital?"
+                    </div>
+                    <div class="after">
+                        <strong>Con DII</strong>: "Modelo Ecosistema Digital tiene DII base 0.6 - necesitamos $2M adicionales en resiliencia"
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Methodology Section -->
+        <div class="section">
+            <h2 class="section-title">Metodología de Evaluación</h2>
+            
+            <div class="dimensions-grid">
+                <div class="dimension-card">
+                    <h3 style="color: #3498db; margin-bottom: 15px;">Quick Assessment (30 minutos)</h3>
+                    <ul>
+                        <li>5 preguntas clave (1 por dimensión)</li>
+                        <li>Clasificación de modelo de negocio</li>
+                        <li>DII estimado ±15% precisión</li>
+                        <li>3 recomendaciones automáticas</li>
+                    </ul>
+                </div>
+
+                <div class="dimension-card">
+                    <h3 style="color: #2ecc71; margin-bottom: 15px;">Assessment Formal (2-5 días)</h3>
+                    <ul>
+                        <li>Análisis completo de 5 dimensiones</li>
+                        <li>Validación con data histórica</li>
+                        <li>Benchmark sectorial detallado</li>
+                        <li>Roadmap de mejora priorizado</li>
+                    </ul>
+                </div>
+
+                <div class="dimension-card">
+                    <h3 style="color: #e74c3c; margin-bottom: 15px;">Evolución Continua</h3>
+                    <ul>
+                        <li>Re-evaluación trimestral</li>
+                        <li>Tracking de mejoras</li>
+                        <li>Ajuste por cambios del negocio</li>
+                        <li>Inteligencia de amenazas contextualizada</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Differentiation Section -->
+        <div class="section">
+            <h2 class="section-title">Diferenciación Competitiva</h2>
+            
+            <h3>Vs. Frameworks Tradicionales</h3>
+            
+            <table class="models-table">
+                <thead>
+                    <tr>
+                        <th>ASPECTO</th>
+                        <th>FRAMEWORKS TRADICIONALES</th>
+                        <th>DII 4.0</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Enfoque</strong></td>
+                        <td>"Qué tan seguros estamos"</td>
+                        <td>"Qué tan bien funcionamos bajo ataque"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Métricas</strong></td>
+                        <td>Técnicas y complejas</td>
+                        <td>Una métrica ejecutiva clara</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Contexto</strong></td>
+                        <td>Genérico para todos</td>
+                        <td>Específico por modelo de negocio</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Resultado</strong></td>
+                        <td>Lista de vulnerabilidades</td>
+                        <td>Capacidad operacional cuantificada</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="warning-box" style="margin-top: 30px;">
+                <h3>Propuesta de Valor Única</h3>
+                <p><strong>No vendemos miedo</strong>: Vendemos claridad operacional</p>
+                <p><strong>No prometemos invulnerabilidad</strong>: Garantizamos mejor función bajo ataque</p>
+                <p><strong>No cobramos por cumplimiento</strong>: Invertimos en continuidad real</p>
+            </div>
+        </div>
+
+        <!-- Conclusion Section -->
+        <div class="section">
+            <h2 class="section-title">Conclusión</h2>
+            
+            <p>El Digital Immunity Index 4.0 reconoce tres verdades fundamentales:</p>
+            
+            <ol style="margin: 20px 0; padding-left: 30px;">
+                <li><strong>Todos están comprometidos</strong> - La pregunta es qué tan bien funcionan</li>
+                <li><strong>El modelo de negocio importa</strong> - No todas las organizaciones enfrentan el mismo riesgo</li>
+                <li><strong>La resiliencia vence a la prevención</strong> - Mejor recuperarse rápido que pretender ser impenetrable</li>
+            </ol>
+
+            <p>Este framework proporciona:</p>
+            <ul style="margin: 20px 0; padding-left: 30px;">
+                <li><strong>Claridad</strong>: Un número que todos entienden</li>
+                <li><strong>Contexto</strong>: Específico para su modelo de negocio</li>
+                <li><strong>Acción</strong>: Inversiones priorizadas por impacto real</li>
+                <li><strong>Ventaja</strong>: Competir mejor durante las crisis inevitables</li>
+            </ul>
+
+            <div class="insight-box" style="margin-top: 40px;">
+                <h3 style="text-align: center; font-size: 24px;">
+                    "La inmunidad digital no es la ausencia de ataques - es la capacidad de prosperar durante ellos."
+                </h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Professional Footer -->
+    <div class="footer">
+        <p><strong>Digital Immunity Index 4.0 - Framework de Referencia</strong></p>
+        <p>Basado en 150+ evaluaciones reales en LATAM</p>
+        <p>"Asumimos que está comprometido y nos enfocamos en que funcione"</p>
+        <p style="margin-top: 20px;">Desarrollado por <a href="https://laberit.com" target="_blank">Lãberit Intelligence</a></p>
+    </div>
+</body>
+</html>

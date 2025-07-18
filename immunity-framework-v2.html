@@ -1,0 +1,1977 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Immunity Index 4.0 | Framework de Referencia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* CSS Variables for easy theme management */
+        :root {
+            --primary-dark: #1a2332;
+            --primary-light: #2c3e50;
+            --accent-blue: #3498db;
+            --accent-green: #2ecc71;
+            --accent-orange: #f39c12;
+            --accent-red: #e74c3c;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --border-light: #e9ecef;
+            --shadow-light: rgba(0, 0, 0, 0.05);
+            --shadow-hover: rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Enhanced Header with gradient matching dashboard style */
+        .header {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f8f9fa 100%);
+            color: var(--text-dark);
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid var(--accent-blue);
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(52, 152, 219, 0.05) 0%, transparent 70%);
+            animation: pulse 20s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(180deg); }
+        }
+        
+        .header h1 {
+            font-size: 42px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(45deg, var(--primary-dark), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header .subtitle {
+            font-size: 22px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header .methodology-badge {
+            display: inline-block;
+            background: rgba(52, 152, 219, 0.1);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            margin-top: 20px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+        
+        .header .methodology-badge:hover {
+            background: rgba(52, 152, 219, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        /* Enhanced Navigation with Floating Effect */
+        .nav {
+            background: var(--bg-white);
+            box-shadow: 0 2px 10px var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav.scrolled {
+            box-shadow: 0 4px 20px var(--shadow-hover);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-blue);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent-blue);
+        }
+        
+        /* Back to Dashboard Button */
+        .back-to-dashboard {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--accent-blue);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 2px 10px rgba(52, 152, 219, 0.3);
+            transition: all 0.3s ease;
+            z-index: 101;
+        }
+        
+        .back-to-dashboard:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(52, 152, 219, 0.4);
+        }
+        
+        /* Enhanced Section Styling */
+        .section {
+            margin: 60px 0;
+            padding: 40px;
+            background: var(--bg-white);
+            border-radius: 16px;
+            box-shadow: 0 2px 10px var(--shadow-light);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .section:hover {
+            box-shadow: 0 4px 20px var(--shadow-hover);
+        }
+        
+        .section-title {
+            font-size: 28px;
+            color: var(--primary-dark);
+            margin-bottom: 30px;
+            font-weight: 400;
+            border-bottom: 2px solid var(--border-light);
+            padding-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .section-icon {
+            font-size: 32px;
+        }
+        
+        /* Enhanced Insight Boxes */
+        .insight-box {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%);
+            padding: 25px 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border-left: 4px solid var(--accent-blue);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .insight-box::before {
+            content: '💡';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            opacity: 0.2;
+        }
+        
+        .insight-box h3 {
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #ffeee9 0%, #ffebe5 100%);
+            padding: 25px 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border-left: 4px solid var(--accent-red);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .warning-box::before {
+            content: '⚠️';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            opacity: 0.2;
+        }
+        
+        .warning-box h3 {
+            color: var(--accent-red);
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        /* Enhanced Formula Display */
+        .formula-display {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border: 1px solid var(--border-light);
+            text-align: center;
+            box-shadow: 0 2px 10px var(--shadow-light);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .formula-display::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(52, 152, 219, 0.03) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .formula-main {
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 24px;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+            cursor: help;
+        }
+        
+        .formula-main:hover {
+            color: var(--accent-blue);
+        }
+        
+        /* Tooltip for formula components */
+        .formula-component {
+            position: relative;
+            display: inline-block;
+            padding: 2px 4px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .formula-component:hover {
+            background: rgba(52, 152, 219, 0.1);
+        }
+        
+        .formula-component .tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-dark);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            margin-bottom: 5px;
+        }
+        
+        .formula-component:hover .tooltip {
+            opacity: 1;
+        }
+        
+        .formula-explanation {
+            font-size: 16px;
+            color: var(--text-light);
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Enhanced Dimensions Grid */
+        .dimensions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .dimension-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dimension-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-blue) 0%, var(--accent-green) 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        
+        .dimension-card:hover {
+            box-shadow: 0 5px 20px var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+        
+        .dimension-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .dimension-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .dimension-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+        }
+        
+        .prevention-icon {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        }
+        
+        .resilience-icon {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+        }
+        
+        .dimension-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        
+        .dimension-abbr {
+            font-size: 14px;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+        
+        /* Enhanced Business Models Table */
+        .models-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 30px 0;
+            box-shadow: 0 2px 10px var(--shadow-light);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .models-table th {
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            color: white;
+            padding: 18px;
+            text-align: left;
+            font-weight: 500;
+            font-size: 14px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .models-table td {
+            padding: 18px;
+            border-bottom: 1px solid var(--border-light);
+            background: var(--bg-white);
+            font-size: 14px;
+        }
+        
+        .models-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .models-table tr {
+            transition: all 0.3s ease;
+        }
+        
+        .models-table tr:hover td {
+            background: var(--bg-light);
+            transform: scale(1.01);
+        }
+        
+        .dii-base {
+            font-weight: bold;
+            font-size: 16px;
+            color: var(--text-dark);
+        }
+        
+        .multiplier {
+            background: var(--accent-red);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        /* Trend Indicators */
+        .trend-indicator {
+            display: inline-block;
+            margin-left: 8px;
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        .trend-up {
+            color: var(--accent-green);
+            background: rgba(46, 204, 113, 0.1);
+        }
+        
+        .trend-down {
+            color: var(--accent-red);
+            background: rgba(231, 76, 60, 0.1);
+        }
+        
+        .trend-stable {
+            color: var(--accent-orange);
+            background: rgba(243, 156, 18, 0.1);
+        }
+        
+        /* Enhanced Risk Matrix Visualization */
+        .risk-matrix {
+            position: relative;
+            height: 400px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border: 2px solid #34495e;
+            border-radius: 12px;
+            margin: 30px 0;
+            box-shadow: 0 4px 20px var(--shadow-light);
+            overflow: hidden;
+        }
+        
+        .risk-matrix::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: rgba(52, 73, 94, 0.2);
+        }
+        
+        .risk-matrix::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 1px;
+            background: rgba(52, 73, 94, 0.2);
+        }
+        
+        .matrix-label {
+            position: absolute;
+            font-size: 14px;
+            font-weight: 500;
+            color: #34495e;
+            background: var(--bg-white);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+        
+        .x-label {
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .y-label {
+            left: -120px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+        }
+        
+        .matrix-item {
+            position: absolute;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .matrix-item:hover {
+            transform: scale(1.1);
+            z-index: 10;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Enhanced Maturity Stages */
+        .maturity-stages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .stage-card {
+            padding: 25px;
+            border-radius: 12px;
+            border: 2px solid;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stage-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 15s infinite;
+        }
+        
+        .stage-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px var(--shadow-hover);
+        }
+        
+        .stage-fragil {
+            background: linear-gradient(135deg, #ffeee9 0%, #ffe5e0 100%);
+            border-color: #e74c3c;
+        }
+        
+        .stage-robusto {
+            background: linear-gradient(135deg, #fff4e5 0%, #ffeddd 100%);
+            border-color: #f39c12;
+        }
+        
+        .stage-resiliente {
+            background: linear-gradient(135deg, #e8f8f5 0%, #d5f4e6 100%);
+            border-color: #2ecc71;
+        }
+        
+        .stage-adaptativo {
+            background: linear-gradient(135deg, #ebf5fb 0%, #d6eaf8 100%);
+            border-color: #3498db;
+        }
+        
+        .stage-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .stage-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        
+        .stage-range {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .stage-distribution {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Enhanced Use Cases */
+        .use-case {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 2px 10px var(--shadow-light);
+            transition: all 0.3s ease;
+        }
+        
+        .use-case:hover {
+            box-shadow: 0 4px 20px var(--shadow-hover);
+        }
+        
+        .use-case h4 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .before-after {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .before, .after {
+            padding: 15px;
+            border-radius: 8px;
+            position: relative;
+        }
+        
+        .before {
+            background: linear-gradient(135deg, #ffeee9 0%, #ffebe5 100%);
+            border: 1px solid #e74c3c;
+        }
+        
+        .after {
+            background: linear-gradient(135deg, #e8f8f5 0%, #d5f4e6 100%);
+            border: 1px solid #2ecc71;
+        }
+        
+        .before::before {
+            content: '❌';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+        }
+        
+        .after::before {
+            content: '✅';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+        }
+        
+        /* Enhanced Benchmark Table */
+        .benchmark-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            font-size: 14px;
+            box-shadow: 0 2px 10px var(--shadow-light);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .benchmark-table th {
+            background: #34495e;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 500;
+        }
+        
+        .benchmark-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border-light);
+            background: var(--bg-white);
+        }
+        
+        .benchmark-table tr:hover td {
+            background: var(--bg-light);
+        }
+        
+        /* Executive Summary Cards */
+        .executive-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .exec-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--border-light);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .exec-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-blue) 0%, var(--accent-green) 50%, var(--accent-orange) 100%);
+        }
+        
+        .exec-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px var(--shadow-hover);
+        }
+        
+        .exec-card-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        .exec-card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+        
+        .exec-card-content {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        
+        /* Quick Assessment Widget */
+        .quick-assessment {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .quick-assessment::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        .quick-assessment h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .quick-assessment p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .quick-assessment-button {
+            display: inline-block;
+            background: white;
+            color: var(--accent-blue);
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .quick-assessment-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Weekly Update Badge */
+        .weekly-update {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(52, 152, 219, 0.1);
+            color: var(--accent-blue);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+        }
+        
+        /* What's New Section */
+        .whats-new {
+            background: linear-gradient(135deg, #e8f8f5 0%, #d5f4e6 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border: 1px solid var(--accent-green);
+        }
+        
+        .whats-new h3 {
+            color: var(--accent-green);
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        .whats-new ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .whats-new li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .whats-new li::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Glossary Tooltips */
+        .glossary-term {
+            border-bottom: 1px dotted var(--accent-blue);
+            cursor: help;
+            position: relative;
+        }
+        
+        .glossary-term:hover .glossary-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .glossary-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-dark);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            margin-bottom: 5px;
+            max-width: 300px;
+            white-space: normal;
+            z-index: 1000;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            margin-top: 80px;
+            border-top: 1px solid var(--border-light);
+        }
+        
+        .footer p {
+            color: var(--text-light);
+            margin: 10px 0;
+        }
+        
+        .footer a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer a:hover {
+            color: #2980b9;
+        }
+        
+        /* Newsletter Signup */
+        .newsletter-signup {
+            background: var(--bg-white);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px auto;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 2px 10px var(--shadow-light);
+        }
+        
+        .newsletter-signup h3 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+        }
+        
+        .newsletter-signup p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px 20px;
+            border: 1px solid var(--border-light);
+            border-radius: 25px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+        
+        .newsletter-form button {
+            background: var(--accent-blue);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .newsletter-form button:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(52, 152, 219, 0.3);
+        }
+        
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Print Styles */
+        @media print {
+            .nav, .back-to-dashboard, .newsletter-signup {
+                display: none;
+            }
+            
+            .section {
+                page-break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+            
+            body {
+                background: white;
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 28px;
+            }
+            
+            .header .subtitle {
+                font-size: 18px;
+            }
+            
+            .formula-main {
+                font-size: 18px;
+            }
+            
+            .before-after {
+                grid-template-columns: 1fr;
+            }
+            
+            .models-table {
+                font-size: 12px;
+            }
+            
+            .models-table th,
+            .models-table td {
+                padding: 12px;
+            }
+            
+            .dimensions-grid,
+            .maturity-stages,
+            .executive-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                gap: 15px;
+            }
+            
+            .nav-links a {
+                font-size: 14px;
+            }
+            
+            .section {
+                padding: 25px;
+            }
+            
+            .back-to-dashboard {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                top: auto;
+            }
+            
+            .risk-matrix {
+                height: 300px;
+            }
+            
+            .matrix-item {
+                font-size: 10px;
+                padding: 6px 10px;
+            }
+        }
+        
+        /* Smooth Transitions */
+        * {
+            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Back to Dashboard Button -->
+    <a href="intelligence/outputs/dashboards/qa/immunity-dashboard-2025-07-17.html" class="back-to-dashboard">
+        ← Volver al Dashboard
+    </a>
+
+    <!-- Professional Header -->
+    <div class="header">
+        <div class="weekly-update">Actualizado: Semana 2025-07-17</div>
+        <h1>Digital Immunity Index 4.0</h1>
+        <p class="subtitle">Framework para Proteger el Valor de su Negocio en la Era Digital</p>
+        <span class="methodology-badge">Basado en 150+ evaluaciones reales en LATAM y España</span>
+    </div>
+
+    <!-- Enhanced Navigation -->
+    <nav class="nav" id="navigation">
+        <div class="container nav-content">
+            <div class="nav-links">
+                <a href="#definicion">Definición</a>
+                <a href="#formula">Fórmula</a>
+                <a href="#dimensiones">5 Dimensiones</a>
+                <a href="#modelos">8 Modelos</a>
+                <a href="#estadios">4 Estadios</a>
+                <a href="#aplicacion">Aplicación</a>
+                <a href="#casos">Casos de Uso</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- What's New in v4.0 -->
+        <div class="whats-new">
+            <h3>🚀 Novedades en DII 4.0</h3>
+            <ul>
+                <li>Enfoque holístico en protección de valor de negocio</li>
+                <li>Dimensiones refinadas con impacto en pérdidas reales</li>
+                <li>Integración con inteligencia semanal de ciberataques</li>
+                <li>Benchmarking contextual por modelo de negocio</li>
+                <li>Evidencia basada en incidentes reales verificados</li>
+            </ul>
+        </div>
+
+        <!-- Definition Section -->
+        <div class="section" id="definicion">
+            <h2 class="section-title">
+                <span class="section-icon">🎯</span>
+                Definición Central
+            </h2>
+            
+            <div class="insight-box">
+                <h3>¿Qué es el Digital Immunity Index?</h3>
+                <p>El <strong>Digital Immunity Index (DII) 4.0</strong> mide la capacidad de una organización para <strong>proteger su valor de negocio</strong> mientras opera bajo ataque cibernético activo. No solo evaluamos continuidad operacional, sino el impacto total: pérdidas financieras, multas regulatorias, daño reputacional y ventaja competitiva.</p>
+            </div>
+
+            <p><strong>Principio fundamental</strong>: Asumimos que su modelo de negocio está comprometido y nos enfocamos en que funcione. En los sistemas biológicos, la inmunidad no previene infecciones - permite al organismo funcionar mientras está infectado. En el contexto empresarial, la inmunidad digital determina qué tan bien una organización protege su valor durante incidentes de seguridad.</p>
+
+            <div class="warning-box">
+                <h3>Filosofía operacional</h3>
+                <p>"¿Qué tan bien protege su valor mientras está bajo ataque?"</p>
+            </div>
+
+            <!-- Executive Cards for Commercial Teams -->
+            <div class="executive-cards">
+                <div class="exec-card">
+                    <div class="exec-card-icon">💰</div>
+                    <div class="exec-card-title">Para el CEO</div>
+                    <div class="exec-card-content">
+                        Un índice simple que predice qué tan bien su negocio mantiene valor durante crisis digitales
+                    </div>
+                </div>
+                <div class="exec-card">
+                    <div class="exec-card-icon">📊</div>
+                    <div class="exec-card-title">Para el CFO</div>
+                    <div class="exec-card-content">
+                        ROI claro: cada punto de mejora = 15-20% menos pérdidas anuales esperadas
+                    </div>
+                </div>
+                <div class="exec-card">
+                    <div class="exec-card-icon">🛡️</div>
+                    <div class="exec-card-title">Para la Junta</div>
+                    <div class="exec-card-content">
+                        Métrica ejecutiva comparable con peers del mismo modelo de negocio
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formula Section -->
+        <div class="section" id="formula">
+            <h2 class="section-title">
+                <span class="section-icon">🔬</span>
+                La Ecuación de Inmunidad Digital
+            </h2>
+            
+            <div class="formula-display">
+                <div class="formula-main">
+                    DII Raw = (
+                    <span class="formula-component">TRD
+                        <span class="tooltip">Tiempo hasta pérdida de valor</span>
+                    </span> × 
+                    <span class="formula-component">AER
+                        <span class="tooltip">Economía del ataque</span>
+                    </span>) / (
+                    <span class="formula-component">HFP
+                        <span class="tooltip">Probabilidad fallo humano</span>
+                    </span> × 
+                    <span class="formula-component">BRI
+                        <span class="tooltip">Valor de negocio expuesto</span>
+                    </span> × 
+                    <span class="formula-component">RRG
+                        <span class="tooltip">Brecha realidad recuperación</span>
+                    </span>)
+                </div>
+                <div style="margin: 20px 0; font-size: 20px;">
+                    DII Score = (DII Raw / DII Base del Modelo) × 10
+                </div>
+                <p class="formula-explanation">
+                    Resultado: Una puntuación de 1-10 que refleja la capacidad real de proteger valor bajo ataque
+                </p>
+            </div>
+
+            <div class="insight-box">
+                <h3>Interpretación del DII Score (escala 1-10)</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li><strong>DII < 4.0</strong>: Frágil - Pérdida severa de valor bajo ataque (70%+ impacto)</li>
+                    <li><strong>DII 4.0-6.0</strong>: Robusto - Protección parcial del valor (40-70% impacto)</li>
+                    <li><strong>DII 6.0-8.0</strong>: Resiliente - Valor competitivo protegido (15-40% impacto)</li>
+                    <li><strong>DII > 8.0</strong>: Adaptativo - Crisis fortalece posición (< 15% impacto)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Dimensions Section -->
+        <div class="section" id="dimensiones">
+            <h2 class="section-title">
+                <span class="section-icon">⚡</span>
+                Las 5 Dimensiones que Determinan su Inmunidad Digital
+            </h2>
+            
+            <h3 style="margin: 30px 0 20px; color: #3498db;">CATEGORÍA A: PREVENCIÓN (Reduce la frecuencia e impacto inicial)</h3>
+            
+            <div class="dimensions-grid">
+                <div class="dimension-card">
+                    <div class="dimension-header">
+                        <div class="dimension-icon prevention-icon">💰</div>
+                        <div>
+                            <div class="dimension-title">AER - Attack Economics Ratio</div>
+                            <div class="dimension-abbr">Ratio de Economía del Ataque</div>
+                        </div>
+                    </div>
+                    <p><strong>Definición v4.0</strong>: Relación entre costo del ataque y TODO el valor en riesgo para el atacante</p>
+                    <p><strong>Incluye ahora</strong>: Dinero extraíble + multas regulatorias + pérdida de clientes + costos de recuperación</p>
+                    <p><strong>Rango típico</strong>: 1:20 (muy rentable atacar) hasta 1:200 (pérdidas catastróficas)</p>
+                    <p><strong>Ejemplo real</strong>: Banco mediano con AER 1:75 = atacante invierte $1K, banco pierde $75K</p>
+                </div>
+
+                <div class="dimension-card">
+                    <div class="dimension-header">
+                        <div class="dimension-icon prevention-icon">👥</div>
+                        <div>
+                            <div class="dimension-title">HFP - Human Failure Probability</div>
+                            <div class="dimension-abbr">Probabilidad de Fallo Humano</div>
+                        </div>
+                    </div>
+                    <p><strong>Definición</strong>: Probabilidad mensual de que al menos un empleado comprometa la seguridad</p>
+                    <p><strong>Función</strong>: Barrera primaria con "porosidad" inherente</p>
+                    <p><strong>Cálculo</strong>: 1 - (1 - tasa_individual_diaria)^(empleados × 30)</p>
+                    <p><strong>Realidad</strong>: Con 1000 empleados y 0.1% fallo diario = 95% probabilidad mensual</p>
+                </div>
+
+                <div class="dimension-card">
+                    <div class="dimension-header">
+                        <div class="dimension-icon prevention-icon">💥</div>
+                        <div>
+                            <div class="dimension-title">BRI - Blast Radius Index</div>
+                            <div class="dimension-abbr">Índice de Radio de Explosión</div>
+                        </div>
+                    </div>
+                    <p><strong>Definición v4.0</strong>: Porcentaje del VALOR DEL NEGOCIO expuesto desde punto de compromiso promedio</p>
+                    <p><strong>Cambio clave</strong>: De "sistemas alcanzables" a "valor de negocio en riesgo"</p>
+                    <p><strong>Incluye</strong>: % datos clientes + % operaciones críticas + % activos estratégicos</p>
+                    <p><strong>Ejemplo</strong>: BRI 72% = un compromiso expone $7.2M de cada $10M en valor</p>
+                </div>
+            </div>
+
+            <h3 style="margin: 40px 0 20px; color: #2ecc71;">CATEGORÍA B: RESILIENCIA (Mantiene valor durante el ataque)</h3>
+            
+            <div class="dimensions-grid">
+                <div class="dimension-card">
+                    <div class="dimension-header">
+                        <div class="dimension-icon resilience-icon">⏱️</div>
+                        <div>
+                            <div class="dimension-title">TRD - Time to Revenue Degradation</div>
+                            <div class="dimension-abbr">Tiempo hasta Degradación de Valor</div>
+                        </div>
+                    </div>
+                    <p><strong>Definición v4.0</strong>: Horas hasta pérdida del 10% del valor de negocio (no solo ingresos)</p>
+                    <p><strong>Considera ahora</strong>: Pérdida ventas + multas SLA + penalizaciones regulatorias + éxodo clientes</p>
+                    <p><strong>Rango típico</strong>: 2 horas (fintech) hasta 168 horas (manufactura tradicional)</p>
+                    <p><strong>Impacto</strong>: TRD bajo = hemorragia rápida de valor</p>
+                </div>
+
+                <div class="dimension-card">
+                    <div class="dimension-header">
+                        <div class="dimension-icon resilience-icon">📊</div>
+                        <div>
+                            <div class="dimension-title">RRG - Recovery Reality Gap</div>
+                            <div class="dimension-abbr">Brecha de Realidad en Recuperación</div>
+                        </div>
+                    </div>
+                    <p><strong>Definición</strong>: Factor multiplicador entre tiempo planeado y tiempo real de recuperación</p>
+                    <p><strong>Función</strong>: Capacidad real de restaurar valor normal del negocio</p>
+                    <p><strong>Promedio industria</strong>: 3.2x (recuperación real toma 3.2 veces más que lo documentado)</p>
+                    <p><strong>Causas comunes</strong>: Backups corruptos, forensics obligatorio, dependencias ocultas</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Business Models Section -->
+        <div class="section" id="modelos">
+            <h2 class="section-title">
+                <span class="section-icon">🏢</span>
+                Los 8 Modelos de Negocio Digital
+            </h2>
+            
+            <table class="models-table">
+                <thead>
+                    <tr>
+                        <th>MODELO</th>
+                        <th>DESCRIPCIÓN</th>
+                        <th>DII BASE</th>
+                        <th>EJEMPLOS LATAM</th>
+                        <th>FACTOR CRÍTICO</th>
+                        <th>MULTIPLICADOR</th>
+                        <th>TENDENCIA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1. Comercio Híbrido</strong></td>
+                        <td>Operaciones físicas + canal digital complementario</td>
+                        <td class="dii-base">1.5-2.0</td>
+                        <td>Falabella, Liverpool, Cencosud</td>
+                        <td>Redundancia natural</td>
+                        <td><span class="multiplier">1.0x</span></td>
+                        <td><span class="trend-indicator trend-up">↑ Mejorando</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>2. Software Crítico</strong></td>
+                        <td>Soluciones cloud esenciales para operación empresarial</td>
+                        <td class="dii-base">0.8-1.2</td>
+                        <td>Siigo, ContPAQi, Aspel</td>
+                        <td>Dependencia de terceros</td>
+                        <td><span class="multiplier">1.5x</span></td>
+                        <td><span class="trend-indicator trend-up">↑ Mejorando</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>3. Servicios de Datos</strong></td>
+                        <td>Monetización mediante análisis y gestión de información</td>
+                        <td class="dii-base">0.5-0.9</td>
+                        <td>Experian, Serasa, DataCRM</td>
+                        <td>Valor en información</td>
+                        <td><span class="multiplier">2.0x</span></td>
+                        <td><span class="trend-indicator trend-stable">→ Estable</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>4. Ecosistema Digital</strong></td>
+                        <td>Plataformas multi-actor con efectos de red</td>
+                        <td class="dii-base">0.4-0.8</td>
+                        <td>MercadoLibre, Rappi, Didi</td>
+                        <td>Complejidad de actores</td>
+                        <td><span class="multiplier">2.5x</span></td>
+                        <td><span class="trend-indicator trend-down">↓ Declinando</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>5. Servicios Financieros</strong></td>
+                        <td>Core del negocio en transacciones monetarias</td>
+                        <td class="dii-base">0.2-0.6</td>
+                        <td>Nubank, Clip, Ualá</td>
+                        <td>Regulación + dinero</td>
+                        <td><span class="multiplier">3.5x</span></td>
+                        <td><span class="trend-indicator trend-up">↑ Mejorando</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>6. Infraestructura Heredada</strong></td>
+                        <td>Sistemas legacy con capas digitales agregadas</td>
+                        <td class="dii-base">0.2-0.5</td>
+                        <td>CFE, Pemex, Gobierno</td>
+                        <td>Deuda técnica crítica</td>
+                        <td><span class="multiplier">2.8x</span></td>
+                        <td><span class="trend-indicator trend-down">↓ Declinando</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>7. Cadena de Suministro</strong></td>
+                        <td>Logística física con trazabilidad digital crítica</td>
+                        <td class="dii-base">0.4-0.8</td>
+                        <td>DHL, Estafeta, TCC</td>
+                        <td>Continuidad operacional</td>
+                        <td><span class="multiplier">1.8x</span></td>
+                        <td><span class="trend-indicator trend-down">↓ Declinando</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>8. Información Regulada</strong></td>
+                        <td>Manejo de datos sensibles bajo normativa estricta</td>
+                        <td class="dii-base">0.4-0.7</td>
+                        <td>Hospitales, Aseguradoras</td>
+                        <td>Cumplimiento + datos</td>
+                        <td><span class="multiplier">3.0x</span></td>
+                        <td><span class="trend-indicator trend-stable">→ Estable</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin: 40px 0 20px;">Matriz de Riesgo por Modelo de Negocio</h3>
+            
+            <div class="risk-matrix">
+                <span class="matrix-label x-label">← Superficie de Ataque Digital →</span>
+                <span class="matrix-label y-label">Severidad del Impacto al Valor</span>
+                
+                <!-- Matrix Items positioned based on risk -->
+                <div class="matrix-item" style="bottom: 15%; left: 20%; background: #2ecc71;">Comercio Híbrido</div>
+                <div class="matrix-item" style="bottom: 35%; left: 50%; background: #f39c12;">Software Crítico</div>
+                <div class="matrix-item" style="bottom: 20%; left: 70%; background: #f39c12;">Servicios de Datos</div>
+                <div class="matrix-item" style="bottom: 60%; left: 65%; background: #e74c3c;">Ecosistema Digital</div>
+                <div class="matrix-item" style="bottom: 85%; left: 80%; background: #c0392b;">Servicios Financieros</div>
+                <div class="matrix-item" style="bottom: 65%; left: 55%; background: #e74c3c;">Infraestructura Heredada</div>
+                <div class="matrix-item" style="bottom: 40%; left: 45%; background: #f39c12;">Cadena de Suministro</div>
+                <div class="matrix-item" style="bottom: 75%; left: 70%; background: #e74c3c;">Información Regulada</div>
+            </div>
+        </div>
+
+        <!-- Maturity Stages Section -->
+        <div class="section" id="estadios">
+            <h2 class="section-title">
+                <span class="section-icon">📈</span>
+                Los Cuatro Estadios de Inmunidad Digital
+            </h2>
+            
+            <div class="maturity-stages">
+                <div class="stage-card stage-fragil">
+                    <div class="stage-header">
+                        <span class="stage-name">FRÁGIL</span>
+                        <span class="stage-range" style="color: #e74c3c;">DII < 4.0</span>
+                    </div>
+                    <p><strong>Realidad operacional</strong>:</p>
+                    <ul>
+                        <li>Pérdida de valor: 70%+ durante incidentes</li>
+                        <li>Recuperación: 5-10x más lenta que planificado</li>
+                        <li>Contexto: "No saben que están comprometidos"</li>
+                    </ul>
+                    <div class="stage-distribution" style="color: #e74c3c;">59%</div>
+                    <p>de organizaciones LATAM + España</p>
+                    <p style="margin-top: 10px; font-size: 14px;"><strong>Síntomas</strong>: Sin visibilidad real, backup sin probar >12M, se enteran por clientes</p>
+                </div>
+
+                <div class="stage-card stage-robusto">
+                    <div class="stage-header">
+                        <span class="stage-name">ROBUSTO</span>
+                        <span class="stage-range" style="color: #f39c12;">DII 4.0-6.0</span>
+                    </div>
+                    <p><strong>Realidad operacional</strong>:</p>
+                    <ul>
+                        <li>Pérdida de valor: 40-70% durante incidentes</li>
+                        <li>Recuperación: 2-3x más lenta que planificado</li>
+                        <li>Contexto: "Se enteran cuando es tarde"</li>
+                    </ul>
+                    <div class="stage-distribution" style="color: #f39c12;">30%</div>
+                    <p>de organizaciones LATAM + España</p>
+                    <p style="margin-top: 10px; font-size: 14px;"><strong>Síntomas</strong>: Cumplimiento ISO básico, alertas cuando daño está hecho</p>
+                </div>
+
+                <div class="stage-card stage-resiliente">
+                    <div class="stage-header">
+                        <span class="stage-name">RESILIENTE</span>
+                        <span class="stage-range" style="color: #2ecc71;">DII 6.0-8.0</span>
+                    </div>
+                    <p><strong>Realidad operacional</strong>:</p>
+                    <ul>
+                        <li>Pérdida de valor: 15-40% durante incidentes</li>
+                        <li>Recuperación: ±20% del tiempo planificado</li>
+                        <li>Contexto: "Detectan rápido, limitan daño"</li>
+                    </ul>
+                    <div class="stage-distribution" style="color: #2ecc71;">10%</div>
+                    <p>de organizaciones LATAM + España</p>
+                    <p style="margin-top: 10px; font-size: 14px;"><strong>Síntomas</strong>: Detección <6h, automatización >60%, Zero Trust parcial</p>
+                </div>
+
+                <div class="stage-card stage-adaptativo">
+                    <div class="stage-header">
+                        <span class="stage-name">ADAPTATIVO</span>
+                        <span class="stage-range" style="color: #3498db;">DII > 8.0</span>
+                    </div>
+                    <p><strong>Realidad operacional</strong>:</p>
+                    <ul>
+                        <li>Pérdida de valor: <15% durante incidentes</li>
+                        <li>Recuperación: Más rápida que competidores</li>
+                        <li>Contexto: "Las crisis los fortalecen"</li>
+                    </ul>
+                    <div class="stage-distribution" style="color: #3498db;"><1%</div>
+                    <p>de organizaciones LATAM + España</p>
+                    <p style="margin-top: 10px; font-size: 14px;"><strong>Síntomas</strong>: Atacantes caen en trampas, convierte ataques en inteligencia</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Practical Application Section -->
+        <div class="section" id="aplicacion">
+            <h2 class="section-title">
+                <span class="section-icon">🔧</span>
+                Aplicación Práctica del DII
+            </h2>
+
+            <!-- Quick Assessment Widget -->
+            <div class="quick-assessment">
+                <h3>Calcule su DII en 30 minutos</h3>
+                <p>6 preguntas de clasificación + 5 preguntas de dimensiones = Su posición en el mercado</p>
+                <a href="#" class="quick-assessment-button">Iniciar Evaluación Rápida</a>
+            </div>
+            
+            <h3>Como Herramienta de Planificación</h3>
+            
+            <div class="use-case">
+                <h4>📊 Escenario: Migración de aplicación crítica a cloud</h4>
+                <div class="formula-display" style="text-align: left; background: white;">
+                    <p>Estado Actual: App on-premise (DII = 4.5)</p>
+                    <p>Opción A: Migración lift-and-shift (DII = 3.8) - Mayor exposición, misma recuperación</p>
+                    <p>Opción B: Migración + Zero Trust (DII = 6.2) - Mayor exposición, mejor aislamiento</p>
+                </div>
+                <p style="margin-top: 20px;"><strong>Decisión C-Level</strong>: "Opción B cuesta 40% más pero mejora inmunidad 38% - ROI claro"</p>
+            </div>
+
+            <h3 style="margin-top: 40px;">Benchmark por Modelo y Región</h3>
+            
+            <table class="benchmark-table">
+                <thead>
+                    <tr>
+                        <th>MODELO</th>
+                        <th>PROMEDIO LATAM+ES</th>
+                        <th>TOP 25%</th>
+                        <th>TOP 10%</th>
+                        <th>LÍDERES</th>
+                        <th>SU POSICIÓN</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Comercio Híbrido</td>
+                        <td>5.2</td>
+                        <td>6.8</td>
+                        <td>7.5</td>
+                        <td>8.2</td>
+                        <td>Calcular →</td>
+                    </tr>
+                    <tr>
+                        <td>Software Crítico</td>
+                        <td>4.8</td>
+                        <td>6.0</td>
+                        <td>7.0</td>
+                        <td>8.0</td>
+                        <td>Calcular →</td>
+                    </tr>
+                    <tr>
+                        <td>Servicios de Datos</td>
+                        <td>4.2</td>
+                        <td>5.5</td>
+                        <td>6.5</td>
+                        <td>7.8</td>
+                        <td>Calcular →</td>
+                    </tr>
+                    <tr>
+                        <td>Ecosistema Digital</td>
+                        <td>3.8</td>
+                        <td>5.0</td>
+                        <td>6.2</td>
+                        <td>7.5</td>
+                        <td>Calcular →</td>
+                    </tr>
+                    <tr>
+                        <td>Servicios Financieros</td>
+                        <td>3.5</td>
+                        <td>4.8</td>
+                        <td>6.0</td>
+                        <td>7.2</td>
+                        <td>Calcular →</td>
+                    </tr>
+                    <tr>
+                        <td>Infraestructura Heredada</td>
+                        <td>2.8</td>
+                        <td>4.0</td>
+                        <td>5.2</td>
+                        <td>6.5</td>
+                        <td>Calcular →</td>
+                    </tr>
+                    <tr>
+                        <td>Cadena de Suministro</td>
+                        <td>4.0</td>
+                        <td>5.2</td>
+                        <td>6.5</td>
+                        <td>7.8</td>
+                        <td>Calcular →</td>
+                    </tr>
+                    <tr>
+                        <td>Información Regulada</td>
+                        <td>3.7</td>
+                        <td>5.0</td>
+                        <td>6.3</td>
+                        <td>7.5</td>
+                        <td>Calcular →</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin-top: 40px;">Interpretación Ejecutiva</h3>
+            
+            <div class="insight-box">
+                <h3>Para CFO</h3>
+                <ul>
+                    <li>"DII 5.0 = Funciona al 50% durante crisis vs competidores"</li>
+                    <li>"Cada punto de mejora = 15-20% menos en pérdidas anuales"</li>
+                    <li>"ROI típico de mejoras: 6-18 meses"</li>
+                </ul>
+            </div>
+
+            <div class="insight-box">
+                <h3>Para CEO</h3>
+                <ul>
+                    <li>"DII bajo = Ventaja competitiva en riesgo"</li>
+                    <li>"DII alto = Crisis fortalece posición de mercado"</li>
+                    <li>"Benchmark: estamos en percentil X de nuestro modelo"</li>
+                </ul>
+            </div>
+
+            <div class="insight-box">
+                <h3>Para CTO/CISO</h3>
+                <ul>
+                    <li>"DII guía priorización de inversiones"</li>
+                    <li>"Foco en dimensión más débil maximiza ROI"</li>
+                    <li>"Roadmap basado en líderes del modelo"</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Use Cases Section -->
+        <div class="section" id="casos">
+            <h2 class="section-title">
+                <span class="section-icon">💼</span>
+                Casos de Uso Estratégicos
+            </h2>
+            
+            <div class="use-case">
+                <h4>1. Modernización Inteligente</h4>
+                <div class="before-after">
+                    <div class="before">
+                        <strong>Antes</strong>: "Migremos a cloud para ser más modernos"
+                    </div>
+                    <div class="after">
+                        <strong>Con DII</strong>: "Esta migración cloud con Zero Trust mejora nuestro DII de 4.2 a 6.8, reduciendo pérdidas potenciales 62%"
+                    </div>
+                </div>
+            </div>
+
+            <div class="use-case">
+                <h4>2. Justificación de Inversión</h4>
+                <div class="before-after">
+                    <div class="before">
+                        <strong>Antes</strong>: "Necesitamos SIEM para cumplir normativa"
+                    </div>
+                    <div class="after">
+                        <strong>Con DII</strong>: "SIEM + SOAR mejora TRD de 24h a 6h, elevando DII 1.5 puntos = ROI en 8 meses"
+                    </div>
+                </div>
+            </div>
+
+            <div class="use-case">
+                <h4>3. Decisiones de Negocio</h4>
+                <div class="before-after">
+                    <div class="before">
+                        <strong>Antes</strong>: "¿Lanzamos marketplace digital?"
+                    </div>
+                    <div class="after">
+                        <strong>Con DII</strong>: "Modelo Ecosistema Digital tiene DII base 0.6 - necesitamos $2M adicionales en resiliencia"
+                    </div>
+                </div>
+            </div>
+
+            <div class="use-case">
+                <h4>4. Gestión de Crisis</h4>
+                <div class="before-after">
+                    <div class="before">
+                        <strong>Antes</strong>: "Esperamos que no nos pase nada"
+                    </div>
+                    <div class="after">
+                        <strong>Con DII</strong>: "Con DII 6.5 mantendremos 75% del valor durante ataque, competidores solo 30%"
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Methodology Section -->
+        <div class="section">
+            <h2 class="section-title">
+                <span class="section-icon">📋</span>
+                Metodología de Evaluación
+            </h2>
+            
+            <div class="dimensions-grid">
+                <div class="dimension-card">
+                    <h3 style="color: #3498db; margin-bottom: 15px;">Quick Assessment (30 minutos)</h3>
+                    <ul>
+                        <li>5 preguntas clave (1 por dimensión)</li>
+                        <li>Clasificación de modelo de negocio</li>
+                        <li>DII estimado ±15% precisión</li>
+                        <li>3 recomendaciones automáticas</li>
+                    </ul>
+                </div>
+
+                <div class="dimension-card">
+                    <h3 style="color: #2ecc71; margin-bottom: 15px;">Assessment Formal (2-5 días)</h3>
+                    <ul>
+                        <li>Análisis completo de 5 dimensiones</li>
+                        <li>Validación con data histórica</li>
+                        <li>Benchmark sectorial detallado</li>
+                        <li>Roadmap de mejora priorizado</li>
+                    </ul>
+                </div>
+
+                <div class="dimension-card">
+                    <h3 style="color: #e74c3c; margin-bottom: 15px;">Evolución Continua</h3>
+                    <ul>
+                        <li>Re-evaluación trimestral</li>
+                        <li>Tracking de mejoras</li>
+                        <li>Ajuste por cambios del negocio</li>
+                        <li>Inteligencia de amenazas contextualizada</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Differentiation Section -->
+        <div class="section">
+            <h2 class="section-title">
+                <span class="section-icon">🎯</span>
+                Diferenciación Competitiva
+            </h2>
+            
+            <h3>Vs. Frameworks Tradicionales</h3>
+            
+            <table class="models-table">
+                <thead>
+                    <tr>
+                        <th>ASPECTO</th>
+                        <th>FRAMEWORKS TRADICIONALES</th>
+                        <th>DII 4.0</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Enfoque</strong></td>
+                        <td>"Qué tan seguros estamos"</td>
+                        <td>"Qué tan bien protegemos valor bajo ataque"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Métricas</strong></td>
+                        <td>Técnicas y complejas</td>
+                        <td>Una métrica ejecutiva clara</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Contexto</strong></td>
+                        <td>Genérico para todos</td>
+                        <td>Específico por modelo de negocio</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Resultado</strong></td>
+                        <td>Lista de vulnerabilidades</td>
+                        <td>Capacidad de protección de valor cuantificada</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Evidencia</strong></td>
+                        <td>Mejores prácticas teóricas</td>
+                        <td>Incidentes reales verificados</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="warning-box" style="margin-top: 30px;">
+                <h3>Propuesta de Valor Única</h3>
+                <p><strong>No vendemos miedo</strong>: Vendemos claridad operacional</p>
+                <p><strong>No prometemos invulnerabilidad</strong>: Garantizamos mejor protección de valor</p>
+                <p><strong>No cobramos por cumplimiento</strong>: Invertimos en continuidad real del negocio</p>
+            </div>
+        </div>
+
+        <!-- Newsletter Signup -->
+        <div class="newsletter-signup">
+            <h3>Reciba Inteligencia Semanal</h3>
+            <p>Incidentes reales, pérdidas verificadas y lecciones aplicables a su modelo de negocio</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="su.email@empresa.com" required>
+                <button type="submit">Suscribirse</button>
+            </form>
+        </div>
+
+        <!-- Conclusion Section -->
+        <div class="section">
+            <h2 class="section-title">
+                <span class="section-icon">🚀</span>
+                Conclusión
+            </h2>
+            
+            <p>El Digital Immunity Index 4.0 reconoce tres verdades fundamentales:</p>
+            
+            <ol style="margin: 20px 0; padding-left: 30px;">
+                <li><strong>Todos están comprometidos</strong> - La pregunta es qué tan bien protegen su valor</li>
+                <li><strong>El modelo de negocio importa</strong> - No todas las organizaciones enfrentan el mismo riesgo</li>
+                <li><strong>La resiliencia vence a la prevención</strong> - Mejor recuperarse rápido que pretender ser impenetrable</li>
+            </ol>
+
+            <p>Este framework proporciona:</p>
+            <ul style="margin: 20px 0; padding-left: 30px;">
+                <li><strong>Claridad</strong>: Un número que todos entienden</li>
+                <li><strong>Contexto</strong>: Específico para su modelo de negocio</li>
+                <li><strong>Acción</strong>: Inversiones priorizadas por impacto real</li>
+                <li><strong>Ventaja</strong>: Competir mejor durante las crisis inevitables</li>
+            </ul>
+
+            <div class="insight-box" style="margin-top: 40px;">
+                <h3 style="text-align: center; font-size: 24px;">
+                    "La inmunidad digital no es la ausencia de ataques - es la capacidad de proteger valor durante ellos."
+                </h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Professional Footer -->
+    <div class="footer">
+        <p><strong>Digital Immunity Index 4.0 - Framework de Referencia</strong></p>
+        <p>Basado en 150+ evaluaciones reales en LATAM y España</p>
+        <p>"Asumimos que está comprometido y nos enfocamos en que proteja su valor"</p>
+        <p style="margin-top: 20px;">Desarrollado por <a href="https://laberit.com" target="_blank">Lãberit Intelligence</a></p>
+    </div>
+
+    <script>
+        // Add active class to navigation on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            const nav = document.getElementById('navigation');
+            
+            // Add scrolled class to navigation
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            
+            // Update active navigation link
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Newsletter form handler
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const button = this.querySelector('button');
+            const originalText = button.textContent;
+            button.innerHTML = '<span class="loading"></span>';
+            button.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                button.textContent = '✓ Suscrito';
+                button.style.background = '#2ecc71';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '';
+                    button.disabled = false;
+                    this.reset();
+                }, 3000);
+            }, 1500);
+        });
+
+        // Add hover effect to formula components
+        document.querySelectorAll('.formula-component').forEach(component => {
+            component.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+            });
+            component.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Print function
+        function printPage() {
+            window.print();
+        }
+
+        // Add dynamic timestamp
+        const timestamp = new Date().toLocaleString('es-ES', { 
+            timeZone: 'Europe/Madrid',
+            dateStyle: 'full',
+            timeStyle: 'short'
+        });
+        
+        console.log('DII 4.0 Framework loaded:', timestamp);
+    </script>
+</body>
+</html>
