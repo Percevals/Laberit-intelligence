@@ -1135,6 +1135,220 @@
             }
         }
         
+        /* Business Model Cards and Risk Position Matrix - Matching Dashboard Style */
+        .risk-position-matrix {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 16px;
+            margin-bottom: 40px;
+            border: 1px solid var(--border-light);
+        }
+
+        .matrix-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            height: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e0e0e0;
+            padding: 40px;
+        }
+
+        .matrix-axes {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            height: 90%;
+        }
+
+        .axis-line {
+            position: absolute;
+            background: #ccc;
+        }
+
+        .axis-x {
+            width: 100%;
+            height: 1px;
+            top: 50%;
+        }
+
+        .axis-y {
+            width: 1px;
+            height: 100%;
+            left: 50%;
+        }
+
+        .axis-label {
+            position: absolute;
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .axis-label-x {
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .axis-label-y {
+            left: -100px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+        }
+
+        .matrix-quadrant {
+            position: absolute;
+            width: 45%;
+            height: 45%;
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .q1 { 
+            top: 5%;
+            left: 5%;
+            background: rgba(52, 168, 83, 0.1);
+            border: 1px solid rgba(52, 168, 83, 0.3);
+        }
+
+        .q2 { 
+            top: 5%;
+            right: 5%;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .q3 { 
+            bottom: 5%;
+            left: 5%;
+            background: rgba(52, 168, 83, 0.1);
+            border: 1px solid rgba(52, 168, 83, 0.3);
+        }
+
+        .q4 { 
+            bottom: 5%;
+            right: 5%;
+            background: rgba(251, 146, 60, 0.1);
+            border: 1px solid rgba(251, 146, 60, 0.3);
+        }
+
+        .quadrant-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .quadrant-models {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .model-chip {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 500;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .model-chip:hover {
+            background: white;
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Business Model Cards Grid */
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .model-card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .model-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .model-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .model-header h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin: 0;
+        }
+
+        .dii-badge {
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .dii-badge.critical {
+            background: #ef4444;
+        }
+
+        .dii-badge.warning {
+            background: #f59e0b;
+        }
+
+        .dii-badge.good {
+            background: #22c55e;
+        }
+
+        .model-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .model-details {
+            border-top: 1px solid #eee;
+            padding-top: 16px;
+        }
+
+        .model-details p {
+            font-size: 13px;
+            color: #555;
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+
+        .model-details strong {
+            color: #333;
+        }
+
         /* Smooth Transitions */
         * {
             transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
@@ -1143,13 +1357,13 @@
 </head>
 <body>
     <!-- Back to Dashboard Button -->
-    <a href="intelligence/outputs/dashboards/qa/immunity-dashboard-2025-07-17.html" class="back-to-dashboard">
+    <a href="intelligence/outputs/dashboards/immunity-dashboard-2025-07-18.html" class="back-to-dashboard">
         ← Volver al Dashboard
     </a>
 
     <!-- Professional Header -->
     <div class="header">
-        <div class="weekly-update">Actualizado: Semana 2025-07-17</div>
+        <div class="weekly-update">Actualizado: Semana 2025-07-18</div>
         <h1>Digital Immunity Index 4.0</h1>
         <p class="subtitle">Framework para Proteger el Valor de su Negocio en la Era Digital</p>
         <span class="methodology-badge">Basado en 150+ evaluaciones reales en LATAM y España</span>
@@ -1366,109 +1580,160 @@
                 Los 8 Modelos de Negocio Digital
             </h2>
             
-            <table class="models-table">
-                <thead>
-                    <tr>
-                        <th>MODELO</th>
-                        <th>DESCRIPCIÓN</th>
-                        <th>DII BASE</th>
-                        <th>EJEMPLOS LATAM</th>
-                        <th>FACTOR CRÍTICO</th>
-                        <th>MULTIPLICADOR</th>
-                        <th>TENDENCIA</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>1. Comercio Híbrido</strong></td>
-                        <td>Operaciones físicas + canal digital complementario</td>
-                        <td class="dii-base">1.5-2.0</td>
-                        <td>Falabella, Liverpool, Cencosud</td>
-                        <td>Redundancia natural</td>
-                        <td><span class="multiplier">1.0x</span></td>
-                        <td><span class="trend-indicator trend-up">↑ Mejorando</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>2. Software Crítico</strong></td>
-                        <td>Soluciones cloud esenciales para operación empresarial</td>
-                        <td class="dii-base">0.8-1.2</td>
-                        <td>Siigo, ContPAQi, Aspel</td>
-                        <td>Dependencia de terceros</td>
-                        <td><span class="multiplier">1.5x</span></td>
-                        <td><span class="trend-indicator trend-up">↑ Mejorando</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>3. Servicios de Datos</strong></td>
-                        <td>Monetización mediante análisis y gestión de información</td>
-                        <td class="dii-base">0.5-0.9</td>
-                        <td>Experian, Serasa, DataCRM</td>
-                        <td>Valor en información</td>
-                        <td><span class="multiplier">2.0x</span></td>
-                        <td><span class="trend-indicator trend-stable">→ Estable</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>4. Ecosistema Digital</strong></td>
-                        <td>Plataformas multi-actor con efectos de red</td>
-                        <td class="dii-base">0.4-0.8</td>
-                        <td>MercadoLibre, Rappi, Didi</td>
-                        <td>Complejidad de actores</td>
-                        <td><span class="multiplier">2.5x</span></td>
-                        <td><span class="trend-indicator trend-down">↓ Declinando</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>5. Servicios Financieros</strong></td>
-                        <td>Core del negocio en transacciones monetarias</td>
-                        <td class="dii-base">0.2-0.6</td>
-                        <td>Nubank, Clip, Ualá</td>
-                        <td>Regulación + dinero</td>
-                        <td><span class="multiplier">3.5x</span></td>
-                        <td><span class="trend-indicator trend-up">↑ Mejorando</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>6. Infraestructura Heredada</strong></td>
-                        <td>Sistemas legacy con capas digitales agregadas</td>
-                        <td class="dii-base">0.2-0.5</td>
-                        <td>CFE, Pemex, Gobierno</td>
-                        <td>Deuda técnica crítica</td>
-                        <td><span class="multiplier">2.8x</span></td>
-                        <td><span class="trend-indicator trend-down">↓ Declinando</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>7. Cadena de Suministro</strong></td>
-                        <td>Logística física con trazabilidad digital crítica</td>
-                        <td class="dii-base">0.4-0.8</td>
-                        <td>DHL, Estafeta, TCC</td>
-                        <td>Continuidad operacional</td>
-                        <td><span class="multiplier">1.8x</span></td>
-                        <td><span class="trend-indicator trend-down">↓ Declinando</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>8. Información Regulada</strong></td>
-                        <td>Manejo de datos sensibles bajo normativa estricta</td>
-                        <td class="dii-base">0.4-0.7</td>
-                        <td>Hospitales, Aseguradoras</td>
-                        <td>Cumplimiento + datos</td>
-                        <td><span class="multiplier">3.0x</span></td>
-                        <td><span class="trend-indicator trend-stable">→ Estable</span></td>
-                    </tr>
-                </tbody>
-            </table>
+            <p class="section-description">
+                Cada modelo de negocio enfrenta diferentes niveles de riesgo y requiere estrategias de inmunidad específicas. 
+                <a href="intelligence/outputs/dashboards/immunity-dashboard-2025-07-18.html#business-models" style="color: #e60000;">
+                    Ver análisis detallado en el dashboard →
+                </a>
+            </p>
 
-            <h3 style="margin: 40px 0 20px;">Matriz de Riesgo por Modelo de Negocio</h3>
-            
-            <div class="risk-matrix">
-                <span class="matrix-label x-label">← Superficie de Ataque Digital →</span>
-                <span class="matrix-label y-label">Severidad del Impacto al Valor</span>
-                
-                <!-- Matrix Items positioned based on risk -->
-                <div class="matrix-item" style="bottom: 15%; left: 20%; background: #2ecc71;">Comercio Híbrido</div>
-                <div class="matrix-item" style="bottom: 35%; left: 50%; background: #f39c12;">Software Crítico</div>
-                <div class="matrix-item" style="bottom: 20%; left: 70%; background: #f39c12;">Servicios de Datos</div>
-                <div class="matrix-item" style="bottom: 60%; left: 65%; background: #e74c3c;">Ecosistema Digital</div>
-                <div class="matrix-item" style="bottom: 85%; left: 80%; background: #c0392b;">Servicios Financieros</div>
-                <div class="matrix-item" style="bottom: 65%; left: 55%; background: #e74c3c;">Infraestructura Heredada</div>
-                <div class="matrix-item" style="bottom: 40%; left: 45%; background: #f39c12;">Cadena de Suministro</div>
-                <div class="matrix-item" style="bottom: 75%; left: 70%; background: #e74c3c;">Información Regulada</div>
+            <!-- Risk Position Matrix matching dashboard style -->
+            <div class="risk-position-matrix">
+                <h3 style="text-align: center; margin-bottom: 30px;">Matriz de Posición de Riesgo</h3>
+                <div class="matrix-container">
+                    <div class="matrix-axes">
+                        <div class="axis-line axis-x"></div>
+                        <div class="axis-line axis-y"></div>
+                        <span class="axis-label axis-label-x">Superficie de Ataque →</span>
+                        <span class="axis-label axis-label-y">Severidad de Impacto</span>
+                    </div>
+                    <div class="matrix-quadrant q1">
+                        <div class="quadrant-label">Baja Exposición, Alto Impacto</div>
+                        <div class="quadrant-models">
+                            <!-- Empty in current data -->
+                        </div>
+                    </div>
+                    <div class="matrix-quadrant q2">
+                        <div class="quadrant-label">Alta Exposición, Alto Impacto</div>
+                        <div class="quadrant-models">
+                            <span class="model-chip">SERVICIOS FINANCIEROS</span>
+                            <span class="model-chip">INFORMACIÓN REGULADA</span>
+                        </div>
+                    </div>
+                    <div class="matrix-quadrant q3">
+                        <div class="quadrant-label">Baja Exposición, Bajo Impacto</div>
+                        <div class="quadrant-models">
+                            <span class="model-chip">COMERCIO HÍBRIDO</span>
+                        </div>
+                    </div>
+                    <div class="matrix-quadrant q4">
+                        <div class="quadrant-label">Alta Exposición, Bajo Impacto</div>
+                        <div class="quadrant-models">
+                            <span class="model-chip">ECOSISTEMA DIGITAL</span>
+                            <span class="model-chip">CADENA SUMINISTRO</span>
+                            <span class="model-chip">SOFTWARE CRÍTICO</span>
+                            <span class="model-chip">SERVICIOS DATOS</span>
+                            <span class="model-chip">INFRAESTRUCTURA HEREDADA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Business Model Cards -->
+            <div class="models-grid" style="margin-top: 40px;">
+                <div class="model-card">
+                    <div class="model-header">
+                        <h4>SERVICIOS FINANCIEROS</h4>
+                        <span class="dii-badge critical">DII: 0.2-0.6</span>
+                    </div>
+                    <p class="model-description">Bancos y aseguradoras que custodian activos financieros críticos</p>
+                    <div class="model-details">
+                        <p><strong>Ejemplos:</strong> Nubank, Clip, Ualá</p>
+                        <p><strong>Factor crítico:</strong> Regulación + dinero</p>
+                        <p><strong>Multiplicador de riesgo:</strong> 3.5x</p>
+                    </div>
+                </div>
+
+                <div class="model-card">
+                    <div class="model-header">
+                        <h4>INFORMACIÓN REGULADA</h4>
+                        <span class="dii-badge critical">DII: 0.4-0.7</span>
+                    </div>
+                    <p class="model-description">Hospitales y educación que protegen datos sensibles regulados</p>
+                    <div class="model-details">
+                        <p><strong>Ejemplos:</strong> Hospitales, Aseguradoras</p>
+                        <p><strong>Factor crítico:</strong> Cumplimiento + datos</p>
+                        <p><strong>Multiplicador de riesgo:</strong> 3.0x</p>
+                    </div>
+                </div>
+
+                <div class="model-card">
+                    <div class="model-header">
+                        <h4>ECOSISTEMA DIGITAL</h4>
+                        <span class="dii-badge critical">DII: 0.4-0.8</span>
+                    </div>
+                    <p class="model-description">Marketplaces y plataformas que conectan compradores y vendedores</p>
+                    <div class="model-details">
+                        <p><strong>Ejemplos:</strong> MercadoLibre, Rappi, Didi</p>
+                        <p><strong>Factor crítico:</strong> Complejidad de actores</p>
+                        <p><strong>Multiplicador de riesgo:</strong> 2.5x</p>
+                    </div>
+                </div>
+
+                <div class="model-card">
+                    <div class="model-header">
+                        <h4>CADENA DE SUMINISTRO</h4>
+                        <span class="dii-badge critical">DII: 0.4-0.8</span>
+                    </div>
+                    <p class="model-description">Operadores logísticos que mueven productos físicos y digitales</p>
+                    <div class="model-details">
+                        <p><strong>Ejemplos:</strong> DHL, Estafeta, TCC</p>
+                        <p><strong>Factor crítico:</strong> Continuidad operacional</p>
+                        <p><strong>Multiplicador de riesgo:</strong> 1.8x</p>
+                    </div>
+                </div>
+
+                <div class="model-card">
+                    <div class="model-header">
+                        <h4>SOFTWARE CRÍTICO</h4>
+                        <span class="dii-badge warning">DII: 0.8-1.2</span>
+                    </div>
+                    <p class="model-description">Empresas SaaS cuyo producto principal es software</p>
+                    <div class="model-details">
+                        <p><strong>Ejemplos:</strong> Siigo, ContPAQi, Aspel</p>
+                        <p><strong>Factor crítico:</strong> Dependencia de terceros</p>
+                        <p><strong>Multiplicador de riesgo:</strong> 1.5x</p>
+                    </div>
+                </div>
+
+                <div class="model-card">
+                    <div class="model-header">
+                        <h4>SERVICIOS DE DATOS</h4>
+                        <span class="dii-badge critical">DII: 0.5-0.9</span>
+                    </div>
+                    <p class="model-description">Procesadores de datos y analytics como core del negocio</p>
+                    <div class="model-details">
+                        <p><strong>Ejemplos:</strong> Experian, Serasa, DataCRM</p>
+                        <p><strong>Factor crítico:</strong> Valor en información</p>
+                        <p><strong>Multiplicador de riesgo:</strong> 2.0x</p>
+                    </div>
+                </div>
+
+                <div class="model-card">
+                    <div class="model-header">
+                        <h4>COMERCIO HÍBRIDO</h4>
+                        <span class="dii-badge good">DII: 1.5-2.0</span>
+                    </div>
+                    <p class="model-description">Retailers con operaciones físicas y digitales integradas</p>
+                    <div class="model-details">
+                        <p><strong>Ejemplos:</strong> Falabella, Liverpool, Cencosud</p>
+                        <p><strong>Factor crítico:</strong> Redundancia natural</p>
+                        <p><strong>Multiplicador de riesgo:</strong> 1.0x</p>
+                    </div>
+                </div>
+
+                <div class="model-card">
+                    <div class="model-header">
+                        <h4>INFRAESTRUCTURA HEREDADA</h4>
+                        <span class="dii-badge critical">DII: 0.2-0.5</span>
+                    </div>
+                    <p class="model-description">Utilities y manufactura con sistemas legacy críticos</p>
+                    <div class="model-details">
+                        <p><strong>Ejemplos:</strong> CFE, Pemex, Gobierno</p>
+                        <p><strong>Factor crítico:</strong> Deuda técnica crítica</p>
+                        <p><strong>Multiplicador de riesgo:</strong> 2.8x</p>
+                    </div>
+                </div>
             </div>
         </div>
 
