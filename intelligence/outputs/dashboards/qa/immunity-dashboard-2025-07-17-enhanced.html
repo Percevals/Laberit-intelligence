@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard de Inmunidad Digital DII 4.0 | {{WEEK_DATE}}</title>
+<title>Dashboard de Inmunidad Digital DII 4.0 | 2025-07-17</title>
 <style>
 * {
     margin: 0;
@@ -927,7 +927,7 @@ body {
     <!-- Header Section -->
     <div class="header">
         <h1>Dashboard de Inmunidad Digital LATAM y España</h1>
-        <p class="header-subtitle">Reporte Semanal DII 4.0 | {{WEEK_DATE}}</p>
+        <p class="header-subtitle">Reporte Semanal DII 4.0 | Semana del 11 al 18 de julio, 2025</p>
     </div>
 
     <!-- DII Formula Display -->
@@ -946,25 +946,25 @@ body {
         
         <div class="summary-grid">
             <div class="summary-item">
-                <div class="summary-number">{{IMMUNITY_AVG}}</div>
+                <div class="summary-number">3.8</div>
                 <div class="summary-label">Inmunidad Promedio</div>
                 <div class="summary-sublabel">Región LATAM + España</div>
                 <div class="summary-tooltip">Las organizaciones con DII < 4.0 sufren 3x más brechas que sus pares resilientes</div>
             </div>
             <div class="summary-item">
-                <div class="summary-number business-model">{{MOST_AFFECTED_MODEL}}</div>
+                <div class="summary-number business-model">SERVICIOS FINANCIEROS</div>
                 <div class="summary-label">Modelo Más Afectado</div>
-                <div class="summary-sublabel">{{MODEL_DESCRIPTION}}</div>
+                <div class="summary-sublabel">Bancos y aseguradoras que custodian activos financieros críticos</div>
                 <div class="summary-tooltip">El sector financiero enfrenta ataques dirigidos con pérdidas promedio de €3.06M</div>
             </div>
             <div class="summary-item">
-                <div class="summary-number">{{TOP_THREAT_PCT}}</div>
-                <div class="summary-label">{{TOP_THREAT_TYPE}}</div>
+                <div class="summary-number">52%</div>
+                <div class="summary-label">Ransomware & API Attacks</div>
                 <div class="summary-sublabel">Principal amenaza esta semana</div>
                 <div class="summary-tooltip">Los ataques API crecieron 15% esta semana, superando al ransomware tradicional</div>
             </div>
             <div class="summary-item">
-                <div class="summary-number">{{VICTIMS_LOW_IMMUNITY_PCT}}</div>
+                <div class="summary-number">68%</div>
                 <div class="summary-label">Víctimas con DII < 4.0</div>
                 <div class="summary-sublabel">En estadio frágil</div>
                 <div class="summary-tooltip">2 de cada 3 víctimas carecen de capacidades básicas de resiliencia digital</div>
@@ -972,7 +972,7 @@ body {
         </div>
 
         <div style="background: rgba(180, 181, 223, 0.1); padding: 16px; border-radius: 8px; text-align: center;">
-            <p style="font-size: 16px; font-weight: 500;">{{KEY_INSIGHT}}</p>
+            <p style="font-size: 16px; font-weight: 500;">Brasil sufrió el mayor cibercrimen financiero de su historia ($108M) mientras España mantuvo su posición como la 2ª nación más atacada globalmente con 45,000 ataques diarios.</p>
         </div>
     </div>
 
@@ -985,37 +985,37 @@ body {
             <div class="dimension-card">
                 <div class="dimension-abbreviation">TRD</div>
                 <div class="dimension-name">Tiempo hasta Impacto en Ingresos</div>
-                <div class="dimension-value">{{TRD_VALUE}}</div>
-                <div class="dimension-meaning">{{TRD_MEANING}}</div>
-                <span class="dimension-trend {{TRD_TREND_CLASS}}">{{TRD_TREND}}</span>
+                <div class="dimension-value">18h</div>
+                <div class="dimension-meaning">Impacto en ingresos entre 4-24 horas</div>
+                <span class="dimension-trend trend-down">↓ Empeorando</span>
             </div>
             <div class="dimension-card">
                 <div class="dimension-abbreviation">AER</div>
                 <div class="dimension-name">Economía del Ataque</div>
-                <div class="dimension-value">{{AER_VALUE}}</div>
-                <div class="dimension-meaning">{{AER_MEANING}}</div>
-                <span class="dimension-trend {{AER_TREND_CLASS}}">{{AER_TREND}}</span>
+                <div class="dimension-value">1:75</div>
+                <div class="dimension-meaning">Ratio de pérdida entre €20-€100 por €1 invertido</div>
+                <span class="dimension-trend trend-down">↓ Empeorando</span>
             </div>
             <div class="dimension-card">
                 <div class="dimension-abbreviation">HFP</div>
                 <div class="dimension-name">Probabilidad de Error Humano</div>
-                <div class="dimension-value">{{HFP_VALUE}}</div>
-                <div class="dimension-meaning">{{HFP_MEANING}}</div>
-                <span class="dimension-trend {{HFP_TREND_CLASS}}">{{HFP_TREND}}</span>
+                <div class="dimension-value">72%</div>
+                <div class="dimension-meaning">Más del 70% de probabilidad de compromiso por empleado</div>
+                <span class="dimension-trend trend-stable">→ Estable</span>
             </div>
             <div class="dimension-card">
                 <div class="dimension-abbreviation">BRI</div>
                 <div class="dimension-name">Radio de Impacto</div>
-                <div class="dimension-value">{{BRI_VALUE}}</div>
-                <div class="dimension-meaning">{{BRI_MEANING}}</div>
-                <span class="dimension-trend {{BRI_TREND_CLASS}}">{{BRI_TREND}}</span>
+                <div class="dimension-value">55%</div>
+                <div class="dimension-meaning">Impacto contenido entre 30-60% del negocio</div>
+                <span class="dimension-trend trend-up">↑ Mejorando</span>
             </div>
             <div class="dimension-card">
                 <div class="dimension-abbreviation">RRG</div>
                 <div class="dimension-name">Brecha de Recuperación</div>
-                <div class="dimension-value">{{RRG_VALUE}}</div>
-                <div class="dimension-meaning">{{RRG_MEANING}}</div>
-                <span class="dimension-trend {{RRG_TREND_CLASS}}">{{RRG_TREND}}</span>
+                <div class="dimension-value">3.8x</div>
+                <div class="dimension-meaning">Recuperación real toma 3x+ más tiempo del planeado</div>
+                <span class="dimension-trend trend-stable">→ Estable</span>
             </div>
         </div>
     </div>
@@ -1036,31 +1036,67 @@ body {
             <div class="matrix-quadrant q1">
                 <div class="quadrant-label">Baja Exposición, Alto Impacto</div>
                 <div class="quadrant-models">
-                    {{Q1_MODELS}}
+                    <span class="model-chip">SOFTWARE CRÍTICO</span>
                 </div>
             </div>
             <div class="matrix-quadrant q2">
                 <div class="quadrant-label">Alta Exposición, Alto Impacto</div>
                 <div class="quadrant-models">
-                    {{Q2_MODELS}}
+                    <span class="model-chip">SERVICIOS FINANCIEROS</span>
+                    <span class="model-chip">INFORMACIÓN REGULADA</span>
                 </div>
             </div>
             <div class="matrix-quadrant q3">
                 <div class="quadrant-label">Baja Exposición, Bajo Impacto</div>
                 <div class="quadrant-models">
-                    {{Q3_MODELS}}
+                    <span class="model-chip">CADENA SUMINISTRO</span>
+                    <span class="model-chip">COMERCIO HÍBRIDO</span>
                 </div>
             </div>
             <div class="matrix-quadrant q4">
                 <div class="quadrant-label">Alta Exposición, Bajo Impacto</div>
                 <div class="quadrant-models">
-                    {{Q4_MODELS}}
+                    <span class="model-chip">ECOSISTEMA DIGITAL</span>
+                    <span class="model-chip">SERVICIOS DATOS</span>
+                    <span class="model-chip">INFRAESTRUCTURA HEREDADA</span>
                 </div>
             </div>
         </div>
 
         <div class="models-grid" style="margin-top: 30px;">
-            {{BUSINESS_MODELS_CARDS}}
+            <div class="model-card">
+                <div class="model-header">
+                    <div class="model-name">SERVICIOS FINANCIEROS</div>
+                    <div class="model-score">
+                        <span class="dii-badge" style="background: rgba(251, 191, 36, 0.6); color: white;">DII 4.0</span>
+                        <span class="dimension-trend trend-down">↓ Declinando</span>
+                    </div>
+                </div>
+                <p class="model-description">Bancos y aseguradoras que custodian activos financieros críticos</p>
+                <p class="model-threats"><strong>Amenazas principales:</strong> Ataques dirigidos, Insider threats</p>
+            </div>
+            <div class="model-card">
+                <div class="model-header">
+                    <div class="model-name">INFORMACIÓN REGULADA</div>
+                    <div class="model-score">
+                        <span class="dii-badge" style="background: rgba(239, 68, 68, 0.6); color: white;">DII 3.5</span>
+                        <span class="dimension-trend trend-down">↓ Declinando</span>
+                    </div>
+                </div>
+                <p class="model-description">Hospitales y educación que protegen datos sensibles regulados</p>
+                <p class="model-threats"><strong>Amenazas principales:</strong> Ransomware, Compliance risks</p>
+            </div>
+            <div class="model-card">
+                <div class="model-header">
+                    <div class="model-name">ECOSISTEMA DIGITAL</div>
+                    <div class="model-score">
+                        <span class="dii-badge" style="background: rgba(239, 68, 68, 0.6); color: white;">DII 2.0</span>
+                        <span class="dimension-trend trend-down">↓ Declinando</span>
+                    </div>
+                </div>
+                <p class="model-description">Marketplaces y plataformas que conectan compradores y vendedores</p>
+                <p class="model-threats"><strong>Amenazas principales:</strong> API attacks, DDoS</p>
+            </div>
         </div>
     </div>
 
@@ -1076,7 +1112,58 @@ body {
         </div>
         
         <div class="incident-timeline" id="incidentTimeline">
-            {{INCIDENTS_LIST}}
+            <div class="incident-card" style="border-left-color: #ef4444;" data-region="latam" data-severity="critical" onclick="toggleIncident(this)">
+                <div class="incident-header">
+                    <div>
+                        <h3 style="font-size: 16px; margin-bottom: 8px;">C&M Software / BMP Financial - Financial Services</h3>
+                        <div class="incident-meta">
+                            <span>📍 Brazil</span>
+                            <span>📅 2025-07-01</span>
+                            <span>🏢 SERVICIOS FINANCIEROS</span>
+                        </div>
+                    </div>
+                    <span class="incident-impact impact-critical">Crítico</span>
+                </div>
+                <p class="incident-description">
+                    <strong>Amenaza Interna:</strong> Mayor cibercrimen en la historia de Brasil. $108M robados vía transacciones PIX no autorizadas.
+                </p>
+                <div class="incident-details">
+                    <p style="font-size: 13px; color: #A6BBC8; margin-top: 12px;">
+                        Un empleado interno de C&M Software fue sobornado con R$15,000 para proporcionar credenciales de acceso.
+                        Esto permitió el robo de R$541 millones a través de transacciones PIX no autorizadas. Las operaciones
+                        se interrumpieron durante 3 horas, se realizó un arresto y se congelaron R$270M.
+                    </p>
+                </div>
+                <div class="incident-lesson">
+                    💡 <strong>Lección ejecutiva:</strong> El mayor riesgo viene de adentro - controles de acceso privilegiado son críticos
+                </div>
+            </div>
+            
+            <div class="incident-card" style="border-left-color: #f59e0b;" data-region="latam" data-severity="high" onclick="toggleIncident(this)">
+                <div class="incident-header">
+                    <div>
+                        <h3 style="font-size: 16px; margin-bottom: 8px;">Metalfrio - Manufacturing</h3>
+                        <div class="incident-meta">
+                            <span>📍 Brazil</span>
+                            <span>📅 2025-07-15</span>
+                            <span>🏢 CADENA SUMINISTRO</span>
+                        </div>
+                    </div>
+                    <span class="incident-impact impact-high">Alto</span>
+                </div>
+                <p class="incident-description">
+                    <strong>Ransomware:</strong> Fabricante de refrigeración comercial atacado por RansomHub. Operaciones interrumpidas en Brasil y México.
+                </p>
+                <div class="incident-details">
+                    <p style="font-size: 13px; color: #A6BBC8; margin-top: 12px;">
+                        Los sistemas IT en Brasil y México quedaron inoperables. Los sistemas fueron aislados para prevenir
+                        la propagación. No se confirmó filtración de datos pero las operaciones se interrumpieron significativamente.
+                    </p>
+                </div>
+                <div class="incident-lesson">
+                    💡 <strong>Lección ejecutiva:</strong> Sin backups verificados, el ransomware paraliza operaciones por días o semanas
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1111,7 +1198,87 @@ body {
         <h2 class="section-title">💡 Recomendaciones Priorizadas con Calculadora de Impacto</h2>
         
         <div class="recommendation-grid">
-            {{RECOMMENDATIONS_LIST}}
+            <div class="recommendation-card priority-critical">
+                <div class="recommendation-icon">🚨</div>
+                <div class="recommendation-content">
+                    <div class="recommendation-title">Establecer una gestión centralizada de identidad y acceso restringido a recursos críticos basado en lo mínimo necesario (Zero-Trust)</div>
+                    <div class="recommendation-models">
+                        Aplica a: <span class="model-chip">INFORMACIÓN REGULADA</span>
+                        <span class="model-chip">ECOSISTEMA DIGITAL</span>
+                        <span class="model-chip">CADENA SUMINISTRO</span>
+                    </div>
+                    <div class="recommendation-impact">
+                        <strong>Impacto esperado:</strong> Reducir radio de impacto 60% en 90 días
+                    </div>
+                    
+                    <div class="impact-calculator">
+                        <div class="impact-slider">
+                            <span class="slider-label">Nivel de implementación:</span>
+                            <div class="slider">
+                                <div class="slider-fill" id="ztaSlider"></div>
+                            </div>
+                            <span class="slider-value">60%</span>
+                        </div>
+                        <div class="impact-result">
+                            📈 Con 60% de implementación: DII aumentaría de 3.8 a 5.2 (+37%)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="recommendation-card priority-high">
+                <div class="recommendation-icon">⚡</div>
+                <div class="recommendation-content">
+                    <div class="recommendation-title">Realizar un inventario de APIs y establecer control, revocación y monitoreo periódico</div>
+                    <div class="recommendation-models">
+                        Aplica a: <span class="model-chip">ECOSISTEMA DIGITAL</span>
+                        <span class="model-chip">SERVICIOS FINANCIEROS</span>
+                        <span class="model-chip">SOFTWARE CRÍTICO</span>
+                    </div>
+                    <div class="recommendation-impact">
+                        <strong>Impacto esperado:</strong> Reducir ataques API 60% en 30 días
+                    </div>
+                    
+                    <div class="impact-calculator">
+                        <div class="impact-slider">
+                            <span class="slider-label">Cobertura de APIs:</span>
+                            <div class="slider">
+                                <div class="slider-fill" style="width: 40%;" id="apiSlider"></div>
+                            </div>
+                            <span class="slider-value">40%</span>
+                        </div>
+                        <div class="impact-result">
+                            📈 Con 40% de cobertura: AER mejoraría de 1:75 a 1:45 (-40%)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="recommendation-card priority-high">
+                <div class="recommendation-icon">💡</div>
+                <div class="recommendation-content">
+                    <div class="recommendation-title">Reforzar su programa de concientización con comunicación periódica a los usuarios sensibles y realizar pruebas mensuales de phishing</div>
+                    <div class="recommendation-models">
+                        Aplica a: <span class="model-chip">Todos los modelos</span>
+                    </div>
+                    <div class="recommendation-impact">
+                        <strong>Impacto esperado:</strong> Reducir clicks en phishing 40% en 60 días
+                    </div>
+                    
+                    <div class="impact-calculator">
+                        <div class="impact-slider">
+                            <span class="slider-label">Empleados entrenados:</span>
+                            <div class="slider">
+                                <div class="slider-fill" style="width: 80%;" id="trainingSlider"></div>
+                            </div>
+                            <span class="slider-value">80%</span>
+                        </div>
+                        <div class="impact-result">
+                            📈 Con 80% entrenados: HFP reduciría de 72% a 43% (-40%)
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
