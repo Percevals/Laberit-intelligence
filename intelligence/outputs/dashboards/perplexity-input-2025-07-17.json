@@ -1,0 +1,73 @@
+{
+  "week_summary": {
+    "immunity_avg": "2.8",
+    "attacks_week": "2,569",
+    "top_threat_pct": "+15%",
+    "top_threat_type": "Ransomware Surge",
+    "victims_low_immunity_pct": "68%",
+    "key_insight": "Brazil suffered largest financial cybercrime in history ($108M), while Spain maintained position as 2nd most-attacked nation globally with 45,000 daily attacks"
+  },
+  "incidents": [
+    {
+      "sector": "Financial Services / Payment Systems",
+      "description": "Largest cybercrime in Brazil's history. Insider at C&M Software paid R$15,000 for credentials, enabling theft of R$541 million ($108M USD) via unauthorized PIX transactions. Operations disrupted 3 hours, one arrest made, R$270M frozen.",
+      "source": "https://www.bleepingcomputer.com/news/security/brazil-financial-breach-2025/",
+      "immunity_score": "3.5",
+      "country": "Brazil"
+    },
+    {
+      "sector": "Manufacturing",
+      "description": "Commercial refrigeration manufacturer hit by RansomHub ransomware. IT systems in Brazil and Mexico rendered unavailable, systems isolated to prevent spread. No confirmed data leakage but operations disrupted.",
+      "source": "https://www.cybersecuritynews.com/metalfrio-ransomware-attack/",
+      "immunity_score": "3.5",
+      "country": "Brazil"
+    }
+  ],
+  "threat_actors": [
+    {
+      "name": "RansomHub",
+      "attacks_week": "15+",
+      "immunity_threshold": "4",
+      "targets": [
+        "Healthcare",
+        "Manufacturing",
+        "Education",
+        "Critical Infrastructure"
+      ]
+    },
+    {
+      "name": "LockBit 3.0",
+      "attacks_week": "10+",
+      "immunity_threshold": "4",
+      "targets": [
+        "Government",
+        "Manufacturing",
+        "Technology",
+        "Financial Services"
+      ]
+    },
+    {
+      "name": "NoName057",
+      "attacks_week": "10+",
+      "immunity_threshold": "4",
+      "targets": [
+        "Government",
+        "Critical Infrastructure"
+      ]
+    },
+    {
+      "name": "SAMBA SPIDER",
+      "attacks_week": "5+",
+      "immunity_threshold": "4",
+      "targets": [
+        "Banking",
+        "Financial Services"
+      ]
+    }
+  ],
+  "statistics": {
+    "attacks_vs_global": "40%",
+    "main_vector": "Web-based",
+    "vector_pct": "64%"
+  }
+}

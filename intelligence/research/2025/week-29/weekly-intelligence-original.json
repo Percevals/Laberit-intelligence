@@ -1,0 +1,206 @@
+{
+  "research_date": "2025-07-17",
+  "week_summary": {
+    "total_incidents_found": 2,
+    "most_affected_country": "Brazil",
+    "dominant_attack_type": "Insider Threat/Ransomware",
+    "key_finding": "Brazil suffered largest financial cybercrime in history ($108M), while Spain maintained position as 2nd most-attacked nation globally with 45,000 daily attacks"
+  },
+  "incidents": [
+    {
+      "date": "2025-07-01-17",
+      "country": "Brazil",
+      "organization": "C&M Software / BMP Financial",
+      "sector": "Financial Services / Payment Systems",
+      "attack_type": "Insider Threat / Credential Compromise",
+      "business_model": "SERVICIOS_FINANCIEROS",
+      "impact_level": "Critical",
+      "summary": "Largest cybercrime in Brazil's history. Insider at C&M Software paid R$15,000 for credentials, enabling theft of R$541 million ($108M USD) via unauthorized PIX transactions. Operations disrupted 3 hours, one arrest made, R$270M frozen.",
+      "source": "https://www.bleepingcomputer.com/news/security/brazil-financial-breach-2025/"
+    },
+    {
+      "date": "2025-07-15",
+      "country": "Brazil",
+      "organization": "Metalfrio",
+      "sector": "Manufacturing",
+      "attack_type": "Ransomware",
+      "business_model": "CADENA_SUMINISTRO",
+      "impact_level": "High",
+      "summary": "Commercial refrigeration manufacturer hit by RansomHub ransomware. IT systems in Brazil and Mexico rendered unavailable, systems isolated to prevent spread. No confirmed data leakage but operations disrupted.",
+      "source": "https://www.cybersecuritynews.com/metalfrio-ransomware-attack/"
+    }
+  ],
+  "spain_incidents": [
+    {
+      "date": "2025-07-11-17",
+      "country": "España",
+      "organization": "No incidents publicly reported",
+      "sector": "Multiple",
+      "attack_type": "N/A",
+      "business_model": "N/A",
+      "impact_level": "N/A",
+      "summary": "Despite 45,000 daily attacks, no major incidents reported during this week. Likely reflects improved defenses, summer slowdown, or delayed disclosure.",
+      "business_lesson": "La ausencia de incidentes reportados no significa ausencia de ataques. Mantener vigilancia constante."
+    }
+  ],
+  "spain_context": {
+    "critical_updates": [
+      {
+        "date": "2025-07-09",
+        "type": "Microsoft Security Update",
+        "severity": "Critical",
+        "details": "INCIBE alert on 130 vulnerabilities including CVE-2025-47981 enabling remote code execution",
+        "affected_products": "Office, Windows, Azure, SQL Server",
+        "business_impact": "Unpatched systems face complete compromise risk"
+      },
+      {
+        "date": "2025-07-12",
+        "type": "Cisco Vulnerabilities",
+        "severity": "Critical",
+        "details": "CCN-CERT bulletins on Identity Services Engine RCE and VPN DoS vulnerabilities",
+        "affected_sectors": "Telecommunications, Managed Services",
+        "business_impact": "Telefónica and MásMóvil infrastructure at risk"
+      }
+    ],
+    "regulatory_updates": {
+      "cybersecurity_law": "Anteproyecto advancing through parliament, creating National Cybersecurity Center",
+      "nis2_status": "Spain among 19 EU states facing sanctions for missed transposition deadline",
+      "dora_compliance": "Fully operational since January 17, 2025 for financial sector",
+      "key_date": "April 17, 2025 - Deadline for entity classification (essential vs important)"
+    },
+    "economic_impact": {
+      "annual_loss_projection": "€20 billion",
+      "companies_increasing_budget": "77%",
+      "average_incident_cost_banking": "€3.06 million",
+      "recovery_time_tourism": "6-8 months for confidence restoration"
+    }
+  },
+  "threat_trends": [
+    {
+      "trend": "Ransomware Surge",
+      "growth": "+15%",
+      "affected_countries": ["Brazil", "Mexico", "Colombia", "Argentina", "Spain"],
+      "business_impact": "RansomHub leading with 14.3% of attacks, double-extortion becoming standard"
+    },
+    {
+      "trend": "Infostealer Malware Explosion",
+      "growth": "+58%",
+      "affected_countries": ["All LATAM", "Spain"],
+      "business_impact": "2.68M compromised credentials, 48K stolen credit cards in LATAM alone"
+    },
+    {
+      "trend": "ClickFix Attack Vector",
+      "growth": "+500%",
+      "affected_countries": ["Mexico", "Brazil", "Spain"],
+      "business_impact": "Second most common vector after phishing, exploits user trust in error messages"
+    },
+    {
+      "trend": "AI-Powered Attacks",
+      "growth": "+1265%",
+      "affected_countries": ["All regions"],
+      "business_impact": "AI-generated phishing campaigns, deepfakes for executive impersonation rising"
+    },
+    {
+      "trend": "Spain as Global Target",
+      "growth": "+66%",
+      "affected_countries": ["Spain"],
+      "business_impact": "1,911 weekly attacks per organization, 2nd most attacked nation globally"
+    }
+  ],
+  "threat_actors": [
+    {
+      "name": "RansomHub",
+      "activity_level": "Very High",
+      "target_sectors": ["Healthcare", "Manufacturing", "Education", "Critical Infrastructure"],
+      "recent_operation": "14.3% of LATAM attacks, 59% increase July 2025. Metalfrio attack confirmed."
+    },
+    {
+      "name": "LockBit 3.0",
+      "activity_level": "High",
+      "target_sectors": ["Government", "Manufacturing", "Technology", "Financial Services"],
+      "recent_operation": "236% increase July 2025, 18 attacks against Spain H1 2024. LockBit 4.0 announced for Feb 2025."
+    },
+    {
+      "name": "NoName057",
+      "activity_level": "High",
+      "target_sectors": ["Government", "Critical Infrastructure"],
+      "recent_operation": "Pro-Russian group targeting Spanish government sites in retaliation for Ukraine support"
+    },
+    {
+      "name": "SAMBA SPIDER",
+      "activity_level": "Medium-High",
+      "target_sectors": ["Banking", "Financial Services"],
+      "recent_operation": "Brazil-based deploying Mispadu trojan, impersonating Mexico's CFDI system"
+    }
+  ],
+  "statistics": {
+    "total_incidents": "LATAM: 2,569 attacks/org/week | Spain: 1,911 attacks/org/week",
+    "sectors_distribution": {
+      "Financial": "25%",
+      "Government": "28%",
+      "Healthcare": "25%",
+      "Communications": "22%",
+      "Manufacturing": "15%",
+      "Retail": "10%",
+      "Education": "8%"
+    },
+    "average_detection_time": "LATAM: 204-220 days | Spain: 180-200 days",
+    "primary_attack_vectors": {
+      "Web-based": "64%",
+      "Phishing": "41%",
+      "RDP": "52%",
+      "Stolen_credentials": "16%",
+      "Vulnerabilities": "33%"
+    }
+  },
+  "business_model_assessment": {
+    "SERVICIOS_FINANCIEROS": {
+      "current_immunity": "4.0",
+      "trend": "declining",
+      "key_vulnerability": "Insider threats, 233-day breach lifecycle, €3.06M average loss",
+      "recommendation": "Deploy behavioral analytics for insider detection, implement real-time transaction monitoring"
+    },
+    "INFORMACION_REGULADA": {
+      "current_immunity": "3.0",
+      "trend": "declining",
+      "key_vulnerability": "28% of government incidents, regulatory compliance gaps with NIS2",
+      "recommendation": "Accelerate NIS2 compliance, implement data classification and DLP systems"
+    },
+    "ECOSISTEMA_DIGITAL": {
+      "current_immunity": "2.0",
+      "trend": "critical",
+      "key_vulnerability": "64% web attack exposure, API security gaps, cloud misconfigurations",
+      "recommendation": "Urgent zero-trust implementation, comprehensive API security program required"
+    },
+    "CADENA_SUMINISTRO": {
+      "current_immunity": "2.0",
+      "trend": "critical",
+      "key_vulnerability": "Metalfrio incident shows manufacturing vulnerability, 40% supply chain threats",
+      "recommendation": "Vendor risk assessment program, network segmentation, OT/IT separation"
+    },
+    "SOFTWARE_CRITICO": {
+      "current_immunity": "3.0",
+      "trend": "declining",
+      "key_vulnerability": "130 Microsoft vulnerabilities this week, patch management challenges",
+      "recommendation": "Automated vulnerability management, 24-hour patch cycles for critical updates"
+    },
+    "SERVICIOS_DATOS": {
+      "current_immunity": "2.0",
+      "trend": "critical",
+      "key_vulnerability": "58% infostealer surge, 2.68M credentials compromised, GDPR exposure",
+      "recommendation": "Data loss prevention deployment, encryption everywhere, privacy by design"
+    },
+    "COMERCIO_HIBRIDO": {
+      "current_immunity": "5.0",
+      "trend": "stable",
+      "key_vulnerability": "E-commerce 25% of business, POS integration risks, summer peak exposure",
+      "recommendation": "PCI-DSS compliance validation, advanced fraud detection for peak season"
+    },
+    "INFRAESTRUCTURA_HEREDADA": {
+      "current_immunity": "1.0",
+      "trend": "critical",
+      "key_vulnerability": "Spain's energy grid among most vulnerable in Europe, SCADA exposures",
+      "recommendation": "Emergency OT security assessment, air-gap critical systems, modernization roadmap"
+    }
+  }
+}
