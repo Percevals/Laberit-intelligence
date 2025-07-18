@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard de Inmunidad Digital DII 4.0 | 2025-07-17</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    background-color: #091F2C;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Section */
+.header {
+    background: linear-gradient(135deg, #1A2B3D 0%, #0D1929 100%);
+    padding: 30px;
+    border-radius: 16px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(180, 181, 223, 0.2);
+    position: relative;
+}
+
+.header h1 {
+    font-size: 32px;
+    background: linear-gradient(45deg, #B4B5DF, #6B9BD1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+}
+
+.header-subtitle {
+    color: #A6BBC8;
+    font-size: 16px;
+}
+
+/* Export Button - Removed per feedback */
+
+/* DII Formula Display */
+.dii-formula {
+    background: rgba(180, 181, 223, 0.1);
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 30px;
+    border: 1px solid rgba(180, 181, 223, 0.2);
+}
+
+.formula-text {
+    font-family: 'Courier New', monospace;
+    font-size: 20px;
+    color: #B4B5DF;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+}
+
+.formula-description {
+    font-size: 16px;
+    color: #A6BBC8;
+    margin-bottom: 20px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.methodology-button {
+    display: inline-block;
+    padding: 10px 24px;
+    background: rgba(180, 181, 223, 0.2);
+    border: 1px solid rgba(180, 181, 223, 0.4);
+    border-radius: 8px;
+    color: #B4B5DF;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.methodology-button:hover {
+    background: rgba(180, 181, 223, 0.3);
+    transform: translateY(-1px);
+}
+
+/* Executive Summary */
+.executive-summary {
+    background: linear-gradient(135deg, rgba(26, 43, 61, 0.8), rgba(13, 25, 41, 0.9));
+    padding: 30px;
+    border-radius: 16px;
+    margin-bottom: 30px;
+    border: 2px solid rgba(180, 181, 223, 0.3);
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.summary-item {
+    background: rgba(180, 181, 223, 0.05);
+    padding: 24px;
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid rgba(180, 181, 223, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.summary-item:hover {
+    background: rgba(180, 181, 223, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(180, 181, 223, 0.2);
+}
+
+.summary-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(180, 181, 223, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.summary-item:hover::after {
+    opacity: 1;
+}
+
+.summary-number {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    background: linear-gradient(45deg, #FFFFFF, #B4B5DF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.summary-number.business-model {
+    font-size: 18px;
+    line-height: 1.2;
+    margin-bottom: 12px;
+}
+
+.summary-label {
+    font-size: 14px;
+    color: #A6BBC8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.summary-sublabel {
+    font-size: 12px;
+    color: #8B9CAB;
+    margin-top: 4px;
+    font-weight: normal;
+}
+
+/* Tooltip for executive summary cards */
+.summary-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(13, 25, 41, 0.95);
+    border: 1px solid rgba(180, 181, 223, 0.3);
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #B4B5DF;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.summary-item:hover .summary-tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-8px);
+}
+
+/* Visualization Section for Attack Economics */
+.visualization-section {
+    background: rgba(26, 43, 61, 0.6);
+    padding: 30px;
+    border-radius: 16px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(180, 181, 223, 0.2);
+}
+
+/* DII Dimensions Grid */
+.dimensions-section {
+    background: rgba(26, 43, 61, 0.5);
+    padding: 30px;
+    border-radius: 16px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(180, 181, 223, 0.2);
+}
+
+.dimensions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.dimension-card {
+    background: rgba(13, 25, 41, 0.7);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid rgba(180, 181, 223, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.dimension-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(180, 181, 223, 0.3);
+    box-shadow: 0 4px 20px rgba(180, 181, 223, 0.1);
+}
+
+.dimension-abbreviation {
+    font-size: 18px;
+    font-weight: 700;
+    color: #B4B5DF;
+    margin-bottom: 4px;
+}
+
+.dimension-name {
+    font-size: 13px;
+    color: #A6BBC8;
+    margin-bottom: 12px;
+    min-height: 40px;
+}
+
+.dimension-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 8px;
+}
+
+.dimension-meaning {
+    font-size: 12px;
+    color: #8B9CAB;
+    line-height: 1.4;
+}
+
+.dimension-trend {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.trend-up { 
+    color: #22c55e; 
+    background: rgba(34, 197, 94, 0.1);
+}
+.trend-down { 
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+}
+.trend-stable { 
+    color: #fbbf24;
+    background: rgba(251, 191, 36, 0.1);
+}
+
+/* Maturity Stages */
+.maturity-indicator {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(180, 181, 223, 0.05);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+
+.stage {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 0 5px;
+    opacity: 0.4;
+    transition: all 0.3s ease;
+}
+
+.stage.active {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.stage-fragil {
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.stage-robusto {
+    background: rgba(251, 191, 36, 0.2);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.stage-resiliente {
+    background: rgba(59, 130, 246, 0.2);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.stage-adaptativo {
+    background: rgba(34, 197, 94, 0.2);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+/* Business Model Analysis */
+.business-models-section {
+    background: rgba(26, 43, 61, 0.6);
+    padding: 30px;
+    border-radius: 16px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(180, 181, 223, 0.2);
+}
+
+.section-title {
+    font-size: 24px;
+    color: #B4B5DF;
+    margin-bottom: 12px;
+}
+
+.section-subtitle {
+    font-size: 14px;
+    color: #A6BBC8;
+    margin-bottom: 24px;
+}
+
+.models-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.model-card {
+    background: rgba(13, 25, 41, 0.8);
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid rgba(180, 181, 223, 0.15);
+    transition: all 0.3s ease;
+}
+
+.model-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(180, 181, 223, 0.3);
+}
+
+.model-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.model-name {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.model-score {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dii-badge {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.model-description {
+    font-size: 13px;
+    color: #A6BBC8;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.model-threats {
+    font-size: 12px;
+    color: #8B9CAB;
+}
+
+/* Interactive Incident Timeline */
+.incidents-section {
+    background: rgba(26, 43, 61, 0.5);
+    padding: 30px;
+    border-radius: 16px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(180, 181, 223, 0.2);
+}
+
+.incident-filters {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.filter-button {
+    padding: 8px 16px;
+    background: rgba(180, 181, 223, 0.1);
+    border: 1px solid rgba(180, 181, 223, 0.2);
+    border-radius: 6px;
+    color: #A6BBC8;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.filter-button.active {
+    background: rgba(180, 181, 223, 0.3);
+    color: #FFFFFF;
+    border-color: rgba(180, 181, 223, 0.4);
+}
+
+.filter-button:hover {
+    background: rgba(180, 181, 223, 0.2);
+    color: #FFFFFF;
+}
+
+.incident-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.incident-card {
+    background: rgba(13, 25, 41, 0.7);
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.incident-card:hover {
+    transform: translateX(5px);
+    background: rgba(13, 25, 41, 0.9);
+}
+
+.incident-card.expanded {
+    background: rgba(13, 25, 41, 0.95);
+}
+
+.incident-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.incident-meta {
+    display: flex;
+    gap: 16px;
+    font-size: 13px;
+    color: #A6BBC8;
+}
+
+.incident-impact {
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.impact-critical {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+
+.impact-high {
+    background: rgba(251, 191, 36, 0.2);
+    color: #f59e0b;
+}
+
+.impact-medium {
+    background: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+}
+
+.incident-description {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.incident-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.incident-card.expanded .incident-details {
+    max-height: 200px;
+}
+
+.incident-lesson {
+    background: rgba(180, 181, 223, 0.05);
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #B4B5DF;
+    margin-top: 12px;
+}
+
+/* Threat Matrix with RiskPositionMatrix style */
+.threat-matrix {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    height: 400px;
+    margin: 24px auto;
+    background: rgba(13, 25, 41, 0.7);
+    border-radius: 12px;
+    border: 1px solid rgba(180, 181, 223, 0.2);
+    padding: 20px;
+}
+
+.matrix-axes {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 90%;
+}
+
+.axis-line {
+    position: absolute;
+    background: rgba(180, 181, 223, 0.3);
+}
+
+.axis-x {
+    width: 100%;
+    height: 1px;
+    top: 50%;
+}
+
+.axis-y {
+    width: 1px;
+    height: 100%;
+    left: 50%;
+}
+
+.axis-label {
+    position: absolute;
+    font-size: 12px;
+    color: #A6BBC8;
+}
+
+.axis-label-x {
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.axis-label-y {
+    left: -60px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+}
+
+.matrix-quadrant {
+    position: absolute;
+    width: 45%;
+    height: 45%;
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.q1 { 
+    top: 5%;
+    left: 5%;
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.q2 { 
+    top: 5%;
+    right: 5%;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.q3 { 
+    bottom: 5%;
+    left: 5%;
+    background: rgba(251, 191, 36, 0.1);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.q4 { 
+    bottom: 5%;
+    right: 5%;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.quadrant-label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.quadrant-models {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.model-chip {
+    background: rgba(180, 181, 223, 0.1);
+    padding: 4px 10px;
+    border-radius: 16px;
+    font-size: 12px;
+    border: 1px solid rgba(180, 181, 223, 0.2);
+    transition: all 0.3s ease;
+}
+
+.model-chip:hover {
+    background: rgba(180, 181, 223, 0.2);
+    transform: scale(1.05);
+}
+
+/* Recommendations with Impact Calculator */
+.recommendations-section {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(26, 43, 61, 0.6));
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.recommendation-grid {
+    display: grid;
+    gap: 16px;
+}
+
+.recommendation-card {
+    background: rgba(13, 25, 41, 0.8);
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    transition: all 0.3s ease;
+}
+
+.recommendation-card:hover {
+    transform: translateX(5px);
+    background: rgba(13, 25, 41, 0.95);
+}
+
+.priority-critical { border-color: #ef4444; }
+.priority-high { border-color: #f59e0b; }
+.priority-medium { border-color: #3b82f6; }
+
+.recommendation-icon {
+    font-size: 24px;
+}
+
+.recommendation-content {
+    flex: 1;
+}
+
+.recommendation-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.recommendation-models {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.recommendation-impact {
+    font-size: 13px;
+    color: #A6BBC8;
+    margin-bottom: 12px;
+}
+
+/* Impact Calculator */
+.impact-calculator {
+    margin-top: 16px;
+    padding: 16px;
+    background: rgba(180, 181, 223, 0.05);
+    border-radius: 8px;
+}
+
+.impact-slider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+.slider-label {
+    font-size: 12px;
+    color: #A6BBC8;
+    min-width: 140px;
+}
+
+.slider {
+    flex: 1;
+    height: 4px;
+    background: rgba(180, 181, 223, 0.2);
+    border-radius: 2px;
+    position: relative;
+    cursor: pointer;
+}
+
+.slider-fill {
+    height: 100%;
+    background: linear-gradient(45deg, #B4B5DF, #6B9BD1);
+    border-radius: 2px;
+    width: 60%;
+    transition: width 0.3s ease;
+}
+
+.slider-value {
+    font-size: 14px;
+    color: #FFFFFF;
+    min-width: 40px;
+    text-align: right;
+}
+
+.impact-result {
+    margin-top: 12px;
+    padding: 12px;
+    background: rgba(34, 197, 94, 0.1);
+    border-radius: 6px;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    font-size: 13px;
+    color: #22c55e;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .header {
+        padding: 20px;
+    }
+    
+    .header h1 {
+        font-size: 24px;
+    }
+    
+    .export-button {
+        position: static;
+        margin-top: 16px;
+        width: 100%;
+    }
+    
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .dimensions-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .models-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .visualization-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .threat-matrix {
+        height: 300px;
+    }
+    
+    .incident-filters {
+        flex-wrap: wrap;
+    }
+    
+    .maturity-indicator {
+        flex-wrap: wrap;
+    }
+    
+    .stage {
+        flex: 1 1 45%;
+        margin: 5px;
+    }
+}
+
+/* Performance optimizations */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Loading states */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    margin: -20px 0 0 -20px;
+    border: 3px solid rgba(180, 181, 223, 0.3);
+    border-top-color: #B4B5DF;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Attack Economics Visualization */
+.attack-economics-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.economics-scale {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 120px;
+    position: relative;
+    margin: 20px 0;
+}
+
+.scale-side {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.attack-cost-side {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.defense-value-side {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.scale-value {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.scale-label {
+    font-size: 14px;
+    color: #A6BBC8;
+}
+
+.scale-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: rgba(180, 181, 223, 0.2);
+    border: 2px solid #B4B5DF;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    z-index: 1;
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <!-- Header Section -->
+    <div class="header">
+        <h1>Dashboard de Inmunidad Digital LATAM y España</h1>
+        <p class="header-subtitle">Reporte Semanal DII 4.0 | 2025-07-17</p>
+    </div>
+
+    <!-- DII Formula Display -->
+    <div class="dii-formula">
+        <div class="formula-text">DII = (TRD × AER) / (HFP × BRI × RRG)</div>
+        <p class="formula-description">
+            El DII es un innovador índice que mide su capacidad de prevención y resiliencia ante ciberataques 
+            por medio de 5 indicadores relacionados con la digitalización de su modelo de negocio.
+        </p>
+        <a href="../../../immunity-framework-v2.html" class="methodology-button">Ver metodología completa →</a>
+    </div>
+
+    <!-- Executive Summary with Enhanced Cards -->
+    <div class="executive-summary">
+        <h2 class="section-title">📊 Resumen Ejecutivo</h2>
+        
+        <div class="summary-grid">
+            <div class="summary-item">
+                <div class="summary-number">2.8</div>
+                <div class="summary-label">Inmunidad Promedio</div>
+                <div class="summary-sublabel">Región LATAM + España</div>
+                <div class="summary-tooltip">Las organizaciones con DII < 4.0 sufren 3x más brechas que sus pares resilientes</div>
+            </div>
+            <div class="summary-item">
+                <div class="summary-number business-model">SERVICIOS FINANCIEROS</div>
+                <div class="summary-label">Modelo Más Afectado</div>
+                <div class="summary-sublabel">Bancos y aseguradoras que custodian activos financieros críticos</div>
+                <div class="summary-tooltip">El sector financiero enfrenta ataques dirigidos con pérdidas promedio de €3.06M</div>
+            </div>
+            <div class="summary-item">
+                <div class="summary-number">+15%</div>
+                <div class="summary-label">Ransomware Surge</div>
+                <div class="summary-sublabel">Principal amenaza esta semana</div>
+                <div class="summary-tooltip">Los ataques API crecieron 15% esta semana, superando al ransomware tradicional</div>
+            </div>
+            <div class="summary-item">
+                <div class="summary-number">50%</div>
+                <div class="summary-label">Víctimas con DII < 4.0</div>
+                <div class="summary-sublabel">En estadio frágil</div>
+                <div class="summary-tooltip">2 de cada 3 víctimas carecen de capacidades básicas de resiliencia digital</div>
+            </div>
+        </div>
+
+        <div style="background: rgba(180, 181, 223, 0.1); padding: 16px; border-radius: 8px; text-align: center;">
+            <p style="font-size: 16px; font-weight: 500;">Brazil suffered largest financial cybercrime in history ($108M), while Spain maintained position as 2nd most-attacked nation globally with 45,000 daily attacks</p>
+        </div>
+    </div>
+
+    <!-- Core Visualizations Section - Removed due to display issues -->
+
+    <!-- DII Dimensions Analysis -->
+    <div class="dimensions-section">
+        <h2 class="section-title">⚡ Las 5 Dimensiones que Determinan su Inmunidad Digital</h2>
+        <div class="dimensions-grid">
+            <div class="dimension-card">
+                <div class="dimension-abbreviation">TRD</div>
+                <div class="dimension-name">Tiempo hasta Impacto en Ingresos</div>
+                <div class="dimension-value">12</div>
+                <div class="dimension-meaning">Impacto en ingresos entre 4-24 horas</div>
+                <span class="dimension-trend trend-down">↓ Empeorando</span>
+            </div>
+            <div class="dimension-card">
+                <div class="dimension-abbreviation">AER</div>
+                <div class="dimension-name">Economía del Ataque</div>
+                <div class="dimension-value">75</div>
+                <div class="dimension-meaning">Ratio de pérdida entre €20-€100 por €1 invertido</div>
+                <span class="dimension-trend trend-down">↓ Empeorando</span>
+            </div>
+            <div class="dimension-card">
+                <div class="dimension-abbreviation">HFP</div>
+                <div class="dimension-name">Probabilidad de Error Humano</div>
+                <div class="dimension-value">72</div>
+                <div class="dimension-meaning">Más del 70% de probabilidad de compromiso por empleado</div>
+                <span class="dimension-trend trend-stable">→ Estable</span>
+            </div>
+            <div class="dimension-card">
+                <div class="dimension-abbreviation">BRI</div>
+                <div class="dimension-name">Radio de Impacto</div>
+                <div class="dimension-value">65</div>
+                <div class="dimension-meaning">Un breach puede afectar más del 60% del valor del negocio</div>
+                <span class="dimension-trend trend-stable">→ Estable</span>
+            </div>
+            <div class="dimension-card">
+                <div class="dimension-abbreviation">RRG</div>
+                <div class="dimension-name">Brecha de Recuperación</div>
+                <div class="dimension-value">3.8</div>
+                <div class="dimension-meaning">Recuperación real toma 3x+ más tiempo del planeado</div>
+                <span class="dimension-trend trend-stable">→ Estable</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Business Model Analysis with RiskPositionMatrix -->
+    <div class="business-models-section">
+        <h2 class="section-title">🏢 Análisis por Modelo de Negocio</h2>
+        <p class="section-subtitle">Inmunidad digital según el tipo de organización</p>
+        
+        <!-- Risk Position Matrix -->
+        <div class="threat-matrix">
+            <div class="matrix-axes">
+                <div class="axis-line axis-x"></div>
+                <div class="axis-line axis-y"></div>
+                <span class="axis-label axis-label-x">Superficie de Ataque →</span>
+                <span class="axis-label axis-label-y">Severidad de Impacto</span>
+            </div>
+            <div class="matrix-quadrant q1">
+                <div class="quadrant-label">Baja Exposición, Alto Impacto</div>
+                <div class="quadrant-models">
+                    
+                </div>
+            </div>
+            <div class="matrix-quadrant q2">
+                <div class="quadrant-label">Alta Exposición, Alto Impacto</div>
+                <div class="quadrant-models">
+                    
+                </div>
+            </div>
+            <div class="matrix-quadrant q3">
+                <div class="quadrant-label">Baja Exposición, Bajo Impacto</div>
+                <div class="quadrant-models">
+                    <span class="model-chip">CADENA SUMINISTRO</span>
+<span class="model-chip">SOFTWARE CRITICO</span>
+<span class="model-chip">COMERCIO HIBRIDO</span>
+<span class="model-chip">INFRAESTRUCTURA HEREDADA</span>
+                </div>
+            </div>
+            <div class="matrix-quadrant q4">
+                <div class="quadrant-label">Alta Exposición, Bajo Impacto</div>
+                <div class="quadrant-models">
+                    <span class="model-chip">SERVICIOS FINANCIEROS</span>
+<span class="model-chip">INFORMACION REGULADA</span>
+<span class="model-chip">ECOSISTEMA DIGITAL</span>
+<span class="model-chip">SERVICIOS DATOS</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="models-grid" style="margin-top: 30px;">
+            
+        <div class="model-card">
+            <div class="model-header">
+                <div class="model-name">SERVICIOS FINANCIEROS</div>
+                <div class="model-score">
+                    <span class="dii-badge" style="background: rgba(251, 191, 36, 0.6); color: white;">
+                        DII 4.0
+                    </span>
+                    <span class="dimension-trend trend-down">↓ Declinando</span>
+                </div>
+            </div>
+            <p class="model-description">Bancos y aseguradoras que custodian activos financieros críticos</p>
+            <p class="model-threats">
+                <strong>Amenazas principales:</strong> Insider threats
+            </p>
+        </div>
+        
+
+        <div class="model-card">
+            <div class="model-header">
+                <div class="model-name">INFORMACION REGULADA</div>
+                <div class="model-score">
+                    <span class="dii-badge" style="background: rgba(239, 68, 68, 0.6); color: white;">
+                        DII 3.0
+                    </span>
+                    <span class="dimension-trend trend-down">↓ Declinando</span>
+                </div>
+            </div>
+            <p class="model-description">Hospitales y educación que protegen datos sensibles regulados</p>
+            <p class="model-threats">
+                <strong>Amenazas principales:</strong> Multiple threats
+            </p>
+        </div>
+        
+
+        <div class="model-card">
+            <div class="model-header">
+                <div class="model-name">ECOSISTEMA DIGITAL</div>
+                <div class="model-score">
+                    <span class="dii-badge" style="background: rgba(239, 68, 68, 0.6); color: white;">
+                        DII 2.0
+                    </span>
+                    <span class="dimension-trend trend-down">↓ Declinando</span>
+                </div>
+            </div>
+            <p class="model-description">Marketplaces y plataformas que conectan compradores y vendedores</p>
+            <p class="model-threats">
+                <strong>Amenazas principales:</strong> API attacks
+            </p>
+        </div>
+        
+
+        <div class="model-card">
+            <div class="model-header">
+                <div class="model-name">CADENA SUMINISTRO</div>
+                <div class="model-score">
+                    <span class="dii-badge" style="background: rgba(239, 68, 68, 0.6); color: white;">
+                        DII 2.0
+                    </span>
+                    <span class="dimension-trend trend-down">↓ Declinando</span>
+                </div>
+            </div>
+            <p class="model-description">Operadores logísticos que mueven productos físicos y digitales</p>
+            <p class="model-threats">
+                <strong>Amenazas principales:</strong> Supply chain attacks
+            </p>
+        </div>
+        
+
+        <div class="model-card">
+            <div class="model-header">
+                <div class="model-name">SOFTWARE CRITICO</div>
+                <div class="model-score">
+                    <span class="dii-badge" style="background: rgba(239, 68, 68, 0.6); color: white;">
+                        DII 3.0
+                    </span>
+                    <span class="dimension-trend trend-down">↓ Declinando</span>
+                </div>
+            </div>
+            <p class="model-description">Empresas SaaS cuyo producto principal es software</p>
+            <p class="model-threats">
+                <strong>Amenazas principales:</strong> Multiple threats
+            </p>
+        </div>
+        
+
+        <div class="model-card">
+            <div class="model-header">
+                <div class="model-name">SERVICIOS DATOS</div>
+                <div class="model-score">
+                    <span class="dii-badge" style="background: rgba(239, 68, 68, 0.6); color: white;">
+                        DII 2.0
+                    </span>
+                    <span class="dimension-trend trend-down">↓ Declinando</span>
+                </div>
+            </div>
+            <p class="model-description">Procesadores de datos y analytics como core del negocio</p>
+            <p class="model-threats">
+                <strong>Amenazas principales:</strong> Multiple threats
+            </p>
+        </div>
+        
+
+        <div class="model-card">
+            <div class="model-header">
+                <div class="model-name">COMERCIO HIBRIDO</div>
+                <div class="model-score">
+                    <span class="dii-badge" style="background: rgba(251, 191, 36, 0.6); color: white;">
+                        DII 5.0
+                    </span>
+                    <span class="dimension-trend trend-stable">→ Estable</span>
+                </div>
+            </div>
+            <p class="model-description">Retailers con operaciones físicas y digitales integradas</p>
+            <p class="model-threats">
+                <strong>Amenazas principales:</strong> Multiple threats
+            </p>
+        </div>
+        
+
+        <div class="model-card">
+            <div class="model-header">
+                <div class="model-name">INFRAESTRUCTURA HEREDADA</div>
+                <div class="model-score">
+                    <span class="dii-badge" style="background: rgba(239, 68, 68, 0.6); color: white;">
+                        DII 1.0
+                    </span>
+                    <span class="dimension-trend trend-down">↓ Declinando</span>
+                </div>
+            </div>
+            <p class="model-description">Utilities y manufactura con sistemas legacy críticos</p>
+            <p class="model-threats">
+                <strong>Amenazas principales:</strong> Multiple threats
+            </p>
+        </div>
+        
+        </div>
+    </div>
+
+    <!-- Interactive Incident Timeline -->
+    <div class="incidents-section">
+        <h2 class="section-title">🔥 Incidentes Relevantes: LATAM y España</h2>
+        
+        <div class="incident-filters">
+            <button class="filter-button active" onclick="filterIncidents('all')">Todos</button>
+            <button class="filter-button" onclick="filterIncidents('spain')">🇪🇸 España</button>
+            <button class="filter-button" onclick="filterIncidents('latam')">🌎 LATAM</button>
+            <button class="filter-button" onclick="filterIncidents('critical')">Críticos</button>
+        </div>
+        
+        <div class="incident-timeline" id="incidentTimeline">
+            
+        <div class="incident-card" onclick="toggleIncident(this)" data-region="latam" data-severity="critical" style="border-left-color: #6b7280;">
+            <div class="incident-header">
+                <div>
+                    <h3 style="font-size: 16px; margin-bottom: 8px;">
+                        C&M Software / BMP Financial - Financial Services / Payment Systems
+                    </h3>
+                    <div class="incident-meta">
+                        <span>📍 Brazil</span>
+                        <span>📅 2025-07-01-17</span>
+                        <span>🏢 SERVICIOS FINANCIEROS</span>
+                    </div>
+                </div>
+                <span class="incident-impact impact-critical">
+                    Critical
+                </span>
+            </div>
+            <p class="incident-description">
+                <strong>Amenaza Interna / Compromiso de Credenciales:</strong> Mayor cibercrimen en la historia de Brasil. Insider at C&M Software paid R$15,000 for credentials, permitiendo el robo de R$541 million ($108M USD) mediante transacciones PIX no autorizadas. Operaciones interrumpidas 3 horas, one arresto realizado, R$270M congelado.
+            </p>
+            <div class="incident-lesson">
+                💡 <strong>Lección ejecutiva:</strong> El mayor riesgo viene de adentro - controles de acceso privilegiado son críticos
+            </div>
+        </div>
+        
+
+        <div class="incident-card" onclick="toggleIncident(this)" data-region="latam" data-severity="high" style="border-left-color: #6b7280;">
+            <div class="incident-header">
+                <div>
+                    <h3 style="font-size: 16px; margin-bottom: 8px;">
+                        Metalfrio - Manufacturing
+                    </h3>
+                    <div class="incident-meta">
+                        <span>📍 Brazil</span>
+                        <span>📅 2025-07-15</span>
+                        <span>🏢 CADENA SUMINISTRO</span>
+                    </div>
+                </div>
+                <span class="incident-impact impact-high">
+                    High
+                </span>
+            </div>
+            <p class="incident-description">
+                <strong>Ransomware:</strong> Fabricante de refrigeración comercial atacado por RansomHub ransomware. Sistemas IT en Brasil y México quedaron inoperables, sistemas aislados para prevenir propagación. Sin filtración de datos confirmada pero operaciones interrumpidas.
+            </p>
+            <div class="incident-lesson">
+                💡 <strong>Lección ejecutiva:</strong> Sin backups verificados, el ransomware paraliza operaciones por días o semanas
+            </div>
+        </div>
+        
+        </div>
+    </div>
+
+    <!-- Attack Economics Visualization -->
+    <div class="visualization-section">
+        <h2 class="section-title">💰 Economía del Ataque (AER)</h2>
+        <p class="section-subtitle">¿Es su organización económicamente atractiva para los atacantes?</p>
+        
+        <div class="attack-economics-container">
+            <div class="economics-scale">
+                <div class="scale-side attack-cost-side">
+                    <div class="scale-value" style="color: #ef4444;">€1</div>
+                    <div class="scale-label">Inversión del Atacante</div>
+                </div>
+                <div class="scale-indicator">⚖️</div>
+                <div class="scale-side defense-value-side">
+                    <div class="scale-value" style="color: #f59e0b;">€75</div>
+                    <div class="scale-label">Pérdida Potencial</div>
+                </div>
+            </div>
+            <p style="text-align: center; font-size: 14px; color: #f59e0b; margin-top: 20px;">
+                <strong>Ratio 1:75</strong> - Por cada €1 que invierte el atacante, usted puede perder €75
+            </p>
+            <p style="text-align: center; font-size: 13px; color: #A6BBC8; margin-top: 12px;">
+                Su organización está en el rango medio de atractividad económica para ciberataques
+            </p>
+        </div>
+    </div>
+
+    <!-- Recommendations with Impact Calculator -->
+    <div class="recommendations-section">
+        <h2 class="section-title">💡 Recomendaciones Priorizadas con Calculadora de Impacto</h2>
+        
+        <div class="recommendation-grid">
+            
+        <div class="recommendation-card priority-critical">
+            <div class="recommendation-icon">🚨</div>
+            <div class="recommendation-content">
+                <div class="recommendation-title">
+                    Implementar Zero Trust y segmentación de red urgentemente
+                </div>
+                <div class="recommendation-models">
+                    Aplica a: <span class="model-chip">INFORMACION REGULADA</span> <span class="model-chip">ECOSISTEMA DIGITAL</span> <span class="model-chip">CADENA SUMINISTRO</span>
+                </div>
+                <div class="recommendation-impact">
+                    <strong>Impacto esperado:</strong> Reducir radio de impacto 60% en 90 días
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="recommendation-card priority-high">
+            <div class="recommendation-icon">⚡</div>
+            <div class="recommendation-content">
+                <div class="recommendation-title">
+                    Implementar testing de seguridad API y rate limiting
+                </div>
+                <div class="recommendation-models">
+                    Aplica a: <span class="model-chip">ECOSISTEMA DIGITAL</span> <span class="model-chip">SERVICIOS FINANCIEROS</span> <span class="model-chip">SOFTWARE CRITICO</span>
+                </div>
+                <div class="recommendation-impact">
+                    <strong>Impacto esperado:</strong> Reducir ataques API 60% en 30 días
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="recommendation-card priority-high">
+            <div class="recommendation-icon">⚡</div>
+            <div class="recommendation-content">
+                <div class="recommendation-title">
+                    Actualizar programa de concientización contra IA-phishing
+                </div>
+                <div class="recommendation-models">
+                    Aplica a: <span class="model-chip">Todos los modelos</span>
+                </div>
+                <div class="recommendation-impact">
+                    <strong>Impacto esperado:</strong> Reducir clicks en phishing 40% en 60 días
+                </div>
+            </div>
+        </div>
+        
+        </div>
+    </div>
+</div>
+
+<script>
+// Interactive incident filtering
+function filterIncidents(filter) {
+    const buttons = document.querySelectorAll('.filter-button');
+    const incidents = document.querySelectorAll('.incident-card');
+    
+    // Update active button
+    buttons.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.textContent.toLowerCase().includes(filter) || 
+            (filter === 'all' && btn.textContent === 'Todos') ||
+            (filter === 'spain' && btn.textContent.includes('España')) ||
+            (filter === 'latam' && btn.textContent.includes('LATAM')) ||
+            (filter === 'critical' && btn.textContent.includes('Críticos'))) {
+            btn.classList.add('active');
+        }
+    });
+    
+    // Filter incidents
+    incidents.forEach(incident => {
+        if (filter === 'all') {
+            incident.style.display = 'block';
+        } else if (filter === 'spain') {
+            incident.style.display = incident.dataset.region === 'spain' ? 'block' : 'none';
+        } else if (filter === 'latam') {
+            incident.style.display = incident.dataset.region === 'latam' ? 'block' : 'none';
+        } else if (filter === 'critical') {
+            incident.style.display = incident.dataset.severity === 'critical' ? 'block' : 'none';
+        }
+    });
+}
+
+// Toggle incident details
+function toggleIncident(element) {
+    element.classList.toggle('expanded');
+}
+
+// Impact calculator interactions
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Setup slider interactions
+    const sliders = document.querySelectorAll('.slider');
+    sliders.forEach(slider => {
+        slider.addEventListener('click', function(e) {
+            const rect = slider.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const percentage = Math.round((x / rect.width) * 100);
+            
+            const fill = slider.querySelector('.slider-fill');
+            const value = slider.parentElement.querySelector('.slider-value');
+            
+            fill.style.width = percentage + '%';
+            value.textContent = percentage + '%';
+            
+            // Update impact result
+            updateImpactResult(slider.parentElement.parentElement);
+        });
+    });
+});
+
+function updateImpactResult(calculator) {
+    const percentage = parseInt(calculator.querySelector('.slider-value').textContent);
+    const result = calculator.querySelector('.impact-result');
+    
+    // Simple calculation for demo
+    const baseImpact = percentage * 0.6;
+    const newDII = (3.8 + (baseImpact / 100) * 3.8).toFixed(1);
+    const improvement = Math.round(((newDII - 3.8) / 3.8) * 100);
+    
+    result.innerHTML = `📈 Con ${percentage}% de implementación: DII aumentaría de 3.8 a ${newDII} (+${improvement}%)`;
+}
+
+// Export functionality removed per feedback
+
+// Performance optimization: Lazy load visualizations
+const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+};
+
+const observer = new IntersectionObserver(function(entries, observer) {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // Load visualization when in viewport
+            entry.target.classList.add('loaded');
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+// Observe all visualization containers
+document.querySelectorAll('.visualization-card').forEach(card => {
+    observer.observe(card);
+});
+
+// Mobile touch interactions
+let touchStartX = 0;
+let touchEndX = 0;
+
+function handleGesture() {
+    if (touchEndX < touchStartX - 50) {
+        // Swipe left - next section
+        console.log('Swipe left detected');
+    }
+    if (touchEndX > touchStartX + 50) {
+        // Swipe right - previous section
+        console.log('Swipe right detected');
+    }
+}
+
+document.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+});
+
+document.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleGesture();
+});
+</script>
+</body>
+</html>

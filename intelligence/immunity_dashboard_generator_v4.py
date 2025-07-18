@@ -214,6 +214,29 @@ class DIIv4ExecutiveDashboardGenerator:
         else:
             return "rgba(34, 197, 94, 0.6)"   # Green - Adaptativo
 
+    def translate_incident_description(self, description, attack_type):
+        """Translate common incident descriptions to Spanish"""
+        translations = {
+            "Largest cybercrime in Brazil's history": "Mayor cibercrimen en la historia de Brasil",
+            "Commercial refrigeration manufacturer hit by": "Fabricante de refrigeración comercial atacado por",
+            "IT systems in Brazil and Mexico rendered unavailable": "Sistemas IT en Brasil y México quedaron inoperables",
+            "systems isolated to prevent spread": "sistemas aislados para prevenir propagación",
+            "No confirmed data leakage but operations disrupted": "Sin filtración de datos confirmada pero operaciones interrumpidas",
+            "enabling theft of": "permitiendo el robo de",
+            "via unauthorized PIX transactions": "mediante transacciones PIX no autorizadas",
+            "Operations disrupted": "Operaciones interrumpidas",
+            "hours": "horas",
+            "arrest made": "arresto realizado",
+            "frozen": "congelado"
+        }
+        
+        # Apply translations
+        result = description
+        for eng, esp in translations.items():
+            result = result.replace(eng, esp)
+        
+        return result
+
     def format_incident_card(self, incident):
         """Format incident with business lesson focus"""
         border_color = {
@@ -223,11 +246,34 @@ class DIIv4ExecutiveDashboardGenerator:
             "Bajo": "#22c55e"
         }.get(incident.get('impact', 'Medio'), "#6b7280")
         
+        # Determine region and severity for filtering
+        country = incident.get('country', '')
+        region = 'spain' if country == 'España' else 'latam'
+        impact = incident.get('impact', 'Medio').lower()
+        severity = 'critical' if impact in ['crítico', 'critical'] else 'high'
+        
         # Highlight Spain incidents
-        country_flag = "🇪🇸 " if incident.get('country') == "España" else ""
+        country_flag = "🇪🇸 " if country == "España" else ""
+        
+        # Translate attack type
+        attack_type_translations = {
+            "Ransomware": "Ransomware",
+            "Insider Threat / Credential Compromise": "Amenaza Interna / Compromiso de Credenciales",
+            "Data Breach": "Fuga de Datos",
+            "API Attack": "Ataque API",
+            "Supply Chain": "Cadena de Suministro"
+        }
+        attack_type = incident.get('attack_type', 'Ataque')
+        attack_type_esp = attack_type_translations.get(attack_type, attack_type)
+        
+        # Translate description
+        description = self.translate_incident_description(
+            incident.get('summary', 'Sin descripción'),
+            attack_type
+        )
         
         return f'''
-        <div class="incident-card" style="border-left-color: {border_color};">
+        <div class="incident-card" onclick="toggleIncident(this)" data-region="{region}" data-severity="{severity}" style="border-left-color: {border_color};">
             <div class="incident-header">
                 <div>
                     <h3 style="font-size: 16px; margin-bottom: 8px;">
@@ -244,7 +290,7 @@ class DIIv4ExecutiveDashboardGenerator:
                 </span>
             </div>
             <p class="incident-description">
-                <strong>{incident.get('attack_type', 'Ataque')}:</strong> {incident.get('summary', 'Sin descripción')}
+                <strong>{attack_type_esp}:</strong> {description}
             </p>
             <div class="incident-lesson">
                 💡 <strong>Lección ejecutiva:</strong> {incident.get('business_lesson', 
