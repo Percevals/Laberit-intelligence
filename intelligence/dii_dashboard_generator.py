@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 """
+DEPRECATED: This file is maintained for reference only.
+Please use immunity_dashboard_generator_v4.py instead.
+Last updated: July 2025
+Deprecation date: July 18, 2025
+
+Original description:
 DII 4.0 Dashboard Generator
 Generates immunity dashboard aligned with Digital Immunity Index 4.0 framework
 """

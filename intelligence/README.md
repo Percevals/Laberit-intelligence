@@ -6,6 +6,75 @@ The DII Intelligence Platform combines historical vulnerability assessments with
 
 **Core Value**: "See how vulnerable companies like yours are, what's hitting them now, and whether you're stronger or weaker than the victims."
 
+## Current Status (Updated: July 18, 2025)
+
+### 🚀 Active Development
+- **Weekly Intelligence Dashboard Generation**: Using `immunity_dashboard_generator_v4.py`
+- **Data Collection**: Weekly intelligence reports with Spain + LATAM focus
+- **Dashboard Template**: QA-approved template with interactive features
+
+### ⚠️ Deprecated Items
+- **Directory**: `weekly-reports/` - Deprecated until August 11, 2025
+- **File**: `dii_dashboard_generator.py` - Use V4 generator instead
+- See `.deprecated` file for complete list
+
+### 📁 Current Directory Structure
+
+```
+/intelligence/
+├── README.md                          # This file
+├── immunity_dashboard_generator_v4.py # Active dashboard generator
+├── .deprecated                        # List of deprecated items
+├── archive/                          # Historical/deprecated files
+│   ├── generators/                   # Old generator versions
+│   ├── prompts/                      # Date-specific prompts
+│   └── test-files/                   # Test files
+├── research/                         
+│   └── 2025/                        # Weekly research data
+│       └── week-XX/                 
+│           ├── weekly-intelligence.json
+│           └── intelligence-data.json  # V4 generator format
+├── src/
+│   └── generators/                   # Data transformation tools
+│       ├── weekly_data_adapter.py
+│       └── weekly_data_adapter_v4.py
+├── outputs/
+│   ├── dashboards/                   # Generated dashboards
+│   │   ├── immunity-dashboard-YYYY-MM-DD.html
+│   │   └── qa/                      # QA documentation
+│   └── reports/                      # Historical reports
+├── docs/                             # Core documentation
+│   ├── business-model-mapper-implementation.md
+│   └── business-translation-spec.md
+└── templates/                        # Dashboard templates
+    └── immunity_dashboard_template_v4.html
+```
+
+## Active Workflows
+
+### 1. Weekly Intelligence Dashboard Generation
+
+```bash
+# Step 1: Ensure research data exists
+# Location: research/2025/week-XX/weekly-intelligence.json
+
+# Step 2: Transform data for V4 generator (if needed)
+python3 src/generators/weekly_data_adapter_v4.py
+
+# Step 3: Generate dashboard
+python3 immunity_dashboard_generator_v4.py
+
+# Output: outputs/dashboards/immunity-dashboard-YYYY-MM-DD.html
+```
+
+### 2. Key Features of V4 Dashboard
+- Spain-first focus with LATAM coverage
+- Executive-friendly dimension meanings
+- Interactive incident timeline with filters
+- Attack Economics (AER) visualization
+- Recommendation impact calculators
+- Mobile-responsive design
+
 ## Architecture Components
 
 ### 1. Historical Vulnerability Baseline
@@ -45,61 +114,44 @@ The DII Intelligence Platform combines historical vulnerability assessments with
 }
 ```
 
-### Breach Evidence Structure
+### Weekly Intelligence Structure (V4 Format)
 ```json
 {
-  "breach_id": "BEL-2024-W45-001",
-  "date": "2024-11-15",
-  "victim_profile": {
-    "size": "1000-5000 employees",
-    "region": "Colombia",
-    "sector": "Financial Services"
+  "week_date": "2025-07-17",
+  "week_summary": {
+    "immunity_avg": "2.8",
+    "attacks_week": "2,569",
+    "top_threat_pct": "+15%",
+    "top_threat_type": "Ransomware Surge",
+    "victims_low_immunity_pct": "50%",
+    "key_insight": "Brazil suffered largest financial cybercrime..."
   },
-  "business_model_match": 5, // Servicios Financieros
-  "attack": {
-    "vector": "Business Email Compromise",
-    "method": "Azure AD legacy protocol bypass",
-    "duration_days": 3
+  "dii_dimensions": {
+    "TRD": {"value": "12", "trend": "declining"},
+    "AER": {"value": "75", "trend": "declining"},
+    "HFP": {"value": "72", "trend": "stable"},
+    "BRI": {"value": "65", "trend": "stable"},
+    "RRG": {"value": "3.8", "trend": "stable"}
   },
-  "impact": {
-    "financial_loss_usd": 400000,
-    "downtime_hours": 72,
-    "data_compromised": "customer_records"
-  },
-  "defenses": {
-    "failed": ["MFA on legacy protocols", "Email filtering"],
-    "succeeded": ["Behavioral analytics", "Incident response plan"]
-  },
-  "recovery": {
-    "planned_hours": 24,
-    "actual_hours": 72,
-    "key_delays": ["Backup corruption", "Forensics requirements"]
-  }
+  "business_model_insights": {...},
+  "incidents": [...],
+  "spain_specific": {...},
+  "recommendations": [...]
 }
-```
-
-## Intelligence Flow
-
-```
-Weekly Intelligence → Breach Structuring → Model Mapping → Evidence Library
-                                                               ↓
-User Profile → Model Selection → Peer Comparison ← Risk Matching Engine
-                                        ↓
-                              Personalized Risk Report
 ```
 
 ## Business Model Mapping
 
-| ID | Model | Key Vulnerabilities | Common Attacks |
-|----|-------|-------------------|----------------|
-| 1 | Comercio Híbrido | POS systems, supplier access | POS malware, supply chain |
-| 2 | Software Crítico | API security, tenant isolation | API abuse, data leaks |
-| 3 | Servicios de Datos | Data exfiltration, insider threat | Data theft, ransomware |
-| 4 | Ecosistema Digital | Platform complexity, third parties | API attacks, account takeover |
-| 5 | Servicios Financieros | Financial fraud, compliance | BEC, ransomware, fraud |
-| 6 | Infraestructura Heredada | Legacy systems, patching delays | Ransomware, exploitation |
-| 7 | Cadena de Suministro | Supplier access, tracking systems | Supply chain, ransomware |
-| 8 | Información Regulada | Compliance, data privacy | Data theft, ransomware |
+| ID | Model | Spanish Name | Key Vulnerabilities | Common Attacks |
+|----|-------|--------------|-------------------|----------------|
+| 1 | COMERCIO_HIBRIDO | Comercio Híbrido | POS systems, supplier access | POS malware, supply chain |
+| 2 | SOFTWARE_CRITICO | Software Crítico | API security, tenant isolation | API abuse, data leaks |
+| 3 | SERVICIOS_DATOS | Servicios de Datos | Data exfiltration, insider threat | Data theft, ransomware |
+| 4 | ECOSISTEMA_DIGITAL | Ecosistema Digital | Platform complexity, third parties | API attacks, account takeover |
+| 5 | SERVICIOS_FINANCIEROS | Servicios Financieros | Financial fraud, compliance | BEC, ransomware, fraud |
+| 6 | INFRAESTRUCTURA_HEREDADA | Infraestructura Heredada | Legacy systems, patching delays | Ransomware, exploitation |
+| 7 | CADENA_SUMINISTRO | Cadena de Suministro | Supplier access, tracking systems | Supply chain, ransomware |
+| 8 | INFORMACION_REGULADA | Información Regulada | Compliance, data privacy | Data theft, ransomware |
 
 ## Key Differentiators
 
@@ -115,41 +167,25 @@ User Profile → Model Selection → Peer Comparison ← Risk Matching Engine
 - ✅ Identify patterns from 150 real assessments
 - ✅ Provide evidence-based recommendations
 
-## Implementation Priorities
+## Development Guidelines
 
-### Phase 1: Breach Evidence Collection
-- Structure weekly intelligence into breach cases
-- Verify costs and recovery times
-- Map each breach to business models
-- Build initial library (50+ cases)
+### Adding New Features
+1. Check `.deprecated` file before modifying old code
+2. Use `immunity_dashboard_generator_v4.py` as the base
+3. Follow the V4 data format for consistency
+4. Test with QA dashboard template
 
-### Phase 2: Vulnerability Analytics
-- Analyze 150 historical assessments
-- Create peer group benchmarks
-- Identify vulnerability patterns
-- Generate model risk profiles
+### Updating Weekly Intelligence
+1. Create new week folder: `research/2025/week-XX/`
+2. Add `weekly-intelligence.json` with required structure
+3. Run V4 adapter if format transformation needed
+4. Generate dashboard using V4 generator
 
-### Phase 3: Matching Engine
-- Develop similarity algorithms
-- Create risk comparison logic
-- Build personalized reporting
-- Enable continuous updates
-
-## API Endpoints (Planned)
-
-```
-GET /api/intelligence/models/{id}/breaches
-  → Recent breaches for specific business model
-
-GET /api/intelligence/models/{id}/vulnerabilities  
-  → Peer vulnerability statistics
-
-POST /api/intelligence/match
-  → Match user profile to relevant breaches
-
-GET /api/intelligence/breach/{id}
-  → Detailed breach information
-```
+### Important Files
+- **Current Generator**: `immunity_dashboard_generator_v4.py`
+- **Template**: `templates/immunity_dashboard_template_v4.html`
+- **Data Adapter**: `src/generators/weekly_data_adapter_v4.py`
+- **QA Guide**: `outputs/dashboards/qa/qa-review-guide.md`
 
 ## Success Metrics
 
@@ -157,30 +193,6 @@ GET /api/intelligence/breach/{id}
 2. **Match Accuracy**: Users confirming "this could be us"
 3. **Action Rate**: Users implementing recommended fixes
 4. **Update Frequency**: New breaches added weekly
-
-## Technical Requirements
-
-- **Data Storage**: JSON files for static deployment
-- **Processing**: Client-side JavaScript for matching
-- **Updates**: Weekly manual updates (automated later)
-- **Security**: No storage of client identifying data
-
-## Directory Structure
-
-```
-/intelligence/
-├── README.md                 # This file
-├── breach-evidence/         
-│   ├── index.json           # Breach catalog
-│   ├── 2024/               
-│   │   └── week-45/        # Weekly breach cases
-│   └── by-model/           # Filtered views
-├── vulnerability-baseline/  
-│   ├── model-stats.json    # Aggregated from 150 assessments
-│   └── peer-benchmarks.json
-├── weekly-reports/         # Current format (legacy)
-└── api/                    # Future API specs
-```
 
 ## For Developers
 
@@ -192,6 +204,14 @@ This intelligence platform serves as the evidence engine for the DII Assessment 
 4. **Action**: What actually works to prevent/mitigate attacks
 
 The architecture is designed to be static-first (JSON files) for the MVP, with a clear path to API-based dynamic updates as we scale.
+
+## Migration Notes
+
+As of July 18, 2025, we've completed a major cleanup:
+- Archived old generator versions (v1, v2, v3)
+- Removed duplicate files and test files
+- Consolidated to V4 generator with Spain-first focus
+- Established clear deprecation timeline for legacy systems
 
 ---
 

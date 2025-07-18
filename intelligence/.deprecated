@@ -1,0 +1,45 @@
+# Deprecated Files and Directories
+# Last updated: 2025-07-18
+
+## Deprecated Items
+
+### Directories
+- **Path**: `/intelligence/weekly-reports/`
+  - **Deprecation Date**: 2025-07-17
+  - **Removal Date**: 2025-08-11
+  - **Replacement**: Use new dashboard generation workflow with immunity_dashboard_generator_v4.py
+  - **Reason**: Legacy dashboard system being phased out
+
+### Files
+- **Path**: `/intelligence/dii_dashboard_generator.py`
+  - **Deprecation Date**: 2025-07-18
+  - **Replacement**: immunity_dashboard_generator_v4.py
+  - **Reason**: Superseded by V4 generator with Spain-first focus
+
+- **Path**: `/intelligence/index.html`
+  - **Deprecation Date**: 2025-07-18
+  - **Replacement**: Use outputs/dashboards/ for generated dashboards
+  - **Reason**: Multiple entry points causing confusion
+
+## Archived Items (Moved to /archive/)
+
+### Generators
+- immunity_dashboard_generator.py (v1)
+- immunity_dashboard_generator_v2.py
+- immunity_dashboard_generator_v3.py
+
+### Prompts
+- claude-research-prompt-2025-07-17.md
+- claude-research-spain-addendum.md
+
+### Test Files
+- test_business_mapper.py
+- quick_test_visualize.py
+- test_github_secrets.py
+
+## Deleted Items
+- service_status.html (duplicate)
+- simple_service_monitor.html (duplicate)
+- business_model_dashboard.html (duplicate)
+- outputs/dashboards/qa/immunity-dashboard-2025-07-17-backup.html
+- outputs/dashboards/qa/immunity-dashboard-2025-07-17-enhanced.html
