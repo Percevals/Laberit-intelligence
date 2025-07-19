@@ -41,6 +41,7 @@ export type {
   DIIDimension,
   BusinessModelId,
   DIIScore,
+  ImmunityScore,
   DimensionScore,
   PeerBenchmark,
   BusinessModelPosition,

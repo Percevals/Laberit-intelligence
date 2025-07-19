@@ -22,6 +22,18 @@ export interface DIIScore {
   confidence: number;
 }
 
+// Alias for backward compatibility
+export interface ImmunityScore {
+  /** Current immunity score (0-100) */
+  current: number;
+  /** Previous score for comparison */
+  previous?: number;
+  /** Maturity stage */
+  stage: DIIStage;
+  /** Trend direction */
+  trend?: 'improving' | 'declining' | 'stable';
+}
+
 export interface DimensionScore {
   dimension: DIIDimension;
   /** Normalized score (0-10) */
