@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arc Gauge CSS Rotation Solution</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .gauge-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .note {
+            margin-top: 15px;
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+        }
+        .highlight {
+            background: #e3f2fd;
+            border: 2px solid #2196f3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center;">Arc Gauge CSS Rotation Solution</h1>
+        <p style="text-align: center; color: #666;">Using CSS transform instead of recalculating arc angles</p>
+        
+        <div class="demo-grid">
+            <!-- Original (No rotation) -->
+            <div class="gauge-card">
+                <h3>1. Original (0° rotation)</h3>
+                <svg width="240" height="240" viewBox="0 0 240 240" style="transform: rotate(0deg);">
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#ef4444" />
+                            <stop offset="33%" style="stop-color:#f59e0b" />
+                            <stop offset="66%" style="stop-color:#10b981" />
+                            <stop offset="100%" style="stop-color:#3b82f6" />
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Background arc (135° to 45°) -->
+                    <path d="M 42.43 197.57 A 100 100 0 1 1 197.57 197.57" 
+                          fill="none" stroke="#e5e7eb" stroke-width="16" stroke-linecap="round" />
+                    
+                    <!-- Progress arc (75% = 202.5°) -->
+                    <path d="M 42.43 197.57 A 100 100 0 1 1 180.35 162.5" 
+                          fill="none" stroke="url(#grad1)" stroke-width="16" stroke-linecap="round" />
+                    
+                    <!-- Center text (no counter-rotation needed) -->
+                    <g transform="translate(120, 120)">
+                        <text text-anchor="middle" dominant-baseline="central" y="-5" font-size="36" font-weight="bold" fill="#333">75</text>
+                        <text text-anchor="middle" dominant-baseline="central" y="20" font-size="14" fill="#666">DII Score</text>
+                    </g>
+                </svg>
+                <div class="note">
+                    Opens at bottom (traditional gauge)<br>
+                    No rotation applied
+                </div>
+            </div>
+
+            <!-- 90° rotation -->
+            <div class="gauge-card">
+                <h3>2. 90° clockwise rotation</h3>
+                <svg width="240" height="240" viewBox="0 0 240 240" style="transform: rotate(90deg);">
+                    <defs>
+                        <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#ef4444" />
+                            <stop offset="33%" style="stop-color:#f59e0b" />
+                            <stop offset="66%" style="stop-color:#10b981" />
+                            <stop offset="100%" style="stop-color:#3b82f6" />
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Same paths as original -->
+                    <path d="M 42.43 197.57 A 100 100 0 1 1 197.57 197.57" 
+                          fill="none" stroke="#e5e7eb" stroke-width="16" stroke-linecap="round" />
+                    <path d="M 42.43 197.57 A 100 100 0 1 1 180.35 162.5" 
+                          fill="none" stroke="url(#grad2)" stroke-width="16" stroke-linecap="round" />
+                    
+                    <!-- Counter-rotated text -->
+                    <g transform="translate(120, 120) rotate(-90)">
+                        <text text-anchor="middle" dominant-baseline="central" y="-5" font-size="36" font-weight="bold" fill="#333">75</text>
+                        <text text-anchor="middle" dominant-baseline="central" y="20" font-size="14" fill="#666">DII Score</text>
+                    </g>
+                </svg>
+                <div class="note">
+                    Opens at right<br>
+                    Text stays upright
+                </div>
+            </div>
+
+            <!-- 170° rotation (your requirement) -->
+            <div class="gauge-card highlight">
+                <h3>3. 170° clockwise rotation ✓</h3>
+                <svg width="240" height="240" viewBox="0 0 240 240" style="transform: rotate(170deg);">
+                    <defs>
+                        <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#ef4444" />
+                            <stop offset="33%" style="stop-color:#f59e0b" />
+                            <stop offset="66%" style="stop-color:#10b981" />
+                            <stop offset="100%" style="stop-color:#3b82f6" />
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Same paths as original -->
+                    <path d="M 42.43 197.57 A 100 100 0 1 1 197.57 197.57" 
+                          fill="none" stroke="#e5e7eb" stroke-width="16" stroke-linecap="round" />
+                    <path d="M 42.43 197.57 A 100 100 0 1 1 180.35 162.5" 
+                          fill="none" stroke="url(#grad3)" stroke-width="16" stroke-linecap="round" />
+                    
+                    <!-- Counter-rotated text -->
+                    <g transform="translate(120, 120) rotate(-170)">
+                        <text text-anchor="middle" dominant-baseline="central" y="-5" font-size="36" font-weight="bold" fill="#333">75</text>
+                        <text text-anchor="middle" dominant-baseline="central" y="20" font-size="14" fill="#666">DII Score</text>
+                    </g>
+                </svg>
+                <div class="note">
+                    <strong>Your requested orientation</strong><br>
+                    Perfect arc alignment maintained
+                </div>
+            </div>
+
+            <!-- -90° rotation (270°) -->
+            <div class="gauge-card">
+                <h3>4. -90° rotation (270°)</h3>
+                <svg width="240" height="240" viewBox="0 0 240 240" style="transform: rotate(-90deg);">
+                    <defs>
+                        <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#ef4444" />
+                            <stop offset="33%" style="stop-color:#f59e0b" />
+                            <stop offset="66%" style="stop-color:#10b981" />
+                            <stop offset="100%" style="stop-color:#3b82f6" />
+                        </linearGradient>
+                    </defs>
+                    
+                    <path d="M 42.43 197.57 A 100 100 0 1 1 197.57 197.57" 
+                          fill="none" stroke="#e5e7eb" stroke-width="16" stroke-linecap="round" />
+                    <path d="M 42.43 197.57 A 100 100 0 1 1 180.35 162.5" 
+                          fill="none" stroke="url(#grad4)" stroke-width="16" stroke-linecap="round" />
+                    
+                    <g transform="translate(120, 120) rotate(90)">
+                        <text text-anchor="middle" dominant-baseline="central" y="-5" font-size="36" font-weight="bold" fill="#333">75</text>
+                        <text text-anchor="middle" dominant-baseline="central" y="20" font-size="14" fill="#666">DII Score</text>
+                    </g>
+                </svg>
+                <div class="note">
+                    Opens at left<br>
+                    Alternative orientation
+                </div>
+            </div>
+
+            <!-- 180° rotation -->
+            <div class="gauge-card">
+                <h3>5. 180° rotation</h3>
+                <svg width="240" height="240" viewBox="0 0 240 240" style="transform: rotate(180deg);">
+                    <defs>
+                        <linearGradient id="grad5" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#ef4444" />
+                            <stop offset="33%" style="stop-color:#f59e0b" />
+                            <stop offset="66%" style="stop-color:#10b981" />
+                            <stop offset="100%" style="stop-color:#3b82f6" />
+                        </linearGradient>
+                    </defs>
+                    
+                    <path d="M 42.43 197.57 A 100 100 0 1 1 197.57 197.57" 
+                          fill="none" stroke="#e5e7eb" stroke-width="16" stroke-linecap="round" />
+                    <path d="M 42.43 197.57 A 100 100 0 1 1 180.35 162.5" 
+                          fill="none" stroke="url(#grad5)" stroke-width="16" stroke-linecap="round" />
+                    
+                    <g transform="translate(120, 120) rotate(-180)">
+                        <text text-anchor="middle" dominant-baseline="central" y="-5" font-size="36" font-weight="bold" fill="#333">75</text>
+                        <text text-anchor="middle" dominant-baseline="central" y="20" font-size="14" fill="#666">DII Score</text>
+                    </g>
+                </svg>
+                <div class="note">
+                    Opens at top<br>
+                    Inverted gauge
+                </div>
+            </div>
+
+            <!-- Custom angle example -->
+            <div class="gauge-card">
+                <h3>6. Custom: 45° rotation</h3>
+                <svg width="240" height="240" viewBox="0 0 240 240" style="transform: rotate(45deg);">
+                    <defs>
+                        <linearGradient id="grad6" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#ef4444" />
+                            <stop offset="33%" style="stop-color:#f59e0b" />
+                            <stop offset="66%" style="stop-color:#10b981" />
+                            <stop offset="100%" style="stop-color:#3b82f6" />
+                        </linearGradient>
+                    </defs>
+                    
+                    <path d="M 42.43 197.57 A 100 100 0 1 1 197.57 197.57" 
+                          fill="none" stroke="#e5e7eb" stroke-width="16" stroke-linecap="round" />
+                    <path d="M 42.43 197.57 A 100 100 0 1 1 180.35 162.5" 
+                          fill="none" stroke="url(#grad6)" stroke-width="16" stroke-linecap="round" />
+                    
+                    <g transform="translate(120, 120) rotate(-45)">
+                        <text text-anchor="middle" dominant-baseline="central" y="-5" font-size="36" font-weight="bold" fill="#333">75</text>
+                        <text text-anchor="middle" dominant-baseline="central" y="20" font-size="14" fill="#666">DII Score</text>
+                    </g>
+                </svg>
+                <div class="note">
+                    Diagonal orientation<br>
+                    Any angle is possible
+                </div>
+            </div>
+        </div>
+
+        <div style="background: #e3f2fd; padding: 30px; border-radius: 12px; margin-top: 40px;">
+            <h2 style="text-align: center; margin-top: 0;">✅ Solution Summary</h2>
+            <ul style="max-width: 600px; margin: 0 auto; line-height: 1.8;">
+                <li><strong>Arc integrity maintained:</strong> Both grey and colored arcs always align perfectly</li>
+                <li><strong>Simple implementation:</strong> Just CSS transform on the SVG element</li>
+                <li><strong>Text stays readable:</strong> Counter-rotation keeps text upright</li>
+                <li><strong>Any angle supported:</strong> Change rotation to any degree without breaking the math</li>
+                <li><strong>Performance optimized:</strong> No complex calculations, just CSS transforms</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

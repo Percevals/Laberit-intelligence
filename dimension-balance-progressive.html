@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DimensionBalance - Progressive Build</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            padding: 40px 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 40px;
+        }
+        .step-card {
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid #333;
+            margin-bottom: 40px;
+        }
+        .step-title {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #fff;
+            font-weight: 300;
+        }
+        svg {
+            background: #000;
+            border-radius: 16px;
+            display: block;
+            margin: 0 auto;
+        }
+        .step-info {
+            background: #222;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .dimensions-list {
+            margin-top: 10px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        .resilience { color: #10b981; }
+        .vulnerability { color: #B4B5DF; }
+        .question {
+            background: #2a2a2a;
+            border-left: 4px solid #f59e0b;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+        .question h4 {
+            color: #f59e0b;
+            margin: 0 0 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DimensionBalance - Progressive Build</h1>
+        <p class="subtitle">Building the complete visualization step by step</p>
+        
+        <!-- Step 1: Coordinate System -->
+        <div class="step-card">
+            <h2 class="step-title">Step 1: Verified Coordinate System</h2>
+            <svg width="500" height="500" viewBox="0 0 500 500">
+                <circle cx="250" cy="250" r="220" fill="none" stroke="#333" stroke-width="1" />
+                <g id="step1"></g>
+            </svg>
+            
+            <div class="step-info">
+                <strong>✓ Completed:</strong> Inverted pentagon coordinate system
+                <div class="dimensions-list">
+                    <span class="resilience">TRD (Resistencia)</span>: 324° - Top-Left<br>
+                    <span class="resilience">AER (Ciber-ROI)</span>: 36° - Top-Right<br>
+                    <span class="vulnerability">RRG (Respuesta)</span>: 108° - Right<br>
+                    <span class="vulnerability">HFP (Cultura)</span>: 180° - Bottom<br>
+                    <span class="vulnerability">BRI (Exposición)</span>: 252° - Left
+                </div>
+            </div>
+        </div>
+        
+        <!-- Step 2: Yin-Yang Background -->
+        <div class="step-card">
+            <h2 class="step-title">Step 2: Add Yin-Yang Background</h2>
+            <svg width="500" height="500" viewBox="0 0 500 500">
+                <defs>
+                    <clipPath id="circle-clip">
+                        <circle cx="250" cy="250" r="220" />
+                    </clipPath>
+                </defs>
+                
+                <!-- Flowing wave background -->
+                <g clip-path="url(#circle-clip)">
+                    <path d="M 30 250 
+                             Q 140 150, 250 250
+                             T 470 250
+                             L 470 30
+                             L 30 30
+                             Z"
+                          fill="#10b98120" />
+                    
+                    <path d="M 30 250 
+                             Q 140 150, 250 250
+                             T 470 250
+                             L 470 470
+                             L 30 470
+                             Z"
+                          fill="#B4B5DF20" />
+                </g>
+                
+                <circle cx="250" cy="250" r="220" fill="none" stroke="#333" stroke-width="1" />
+                <g id="step2"></g>
+            </svg>
+            
+            <div class="step-info">
+                <strong>✓ Added:</strong> Yin-Yang flowing wave background
+                <ul>
+                    <li>Green (#10b981) on top for Resilience (TRD × AER)</li>
+                    <li>Purple (#B4B5DF) on bottom for Vulnerability (HFP × BRI × RRG)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Step 3: Pentagon Lines -->
+        <div class="step-card">
+            <h2 class="step-title">Step 3: Pentagon with Dynamic Values</h2>
+            <svg width="500" height="500" viewBox="0 0 500 500">
+                <defs>
+                    <clipPath id="circle-clip-3">
+                        <circle cx="250" cy="250" r="220" />
+                    </clipPath>
+                </defs>
+                
+                <!-- Flowing wave background -->
+                <g clip-path="url(#circle-clip-3)">
+                    <path d="M 30 250 
+                             Q 140 150, 250 250
+                             T 470 250
+                             L 470 30
+                             L 30 30
+                             Z"
+                          fill="#10b98120" />
+                    
+                    <path d="M 30 250 
+                             Q 140 150, 250 250
+                             T 470 250
+                             L 470 470
+                             L 30 470
+                             Z"
+                          fill="#B4B5DF20" />
+                </g>
+                
+                <circle cx="250" cy="250" r="220" fill="none" stroke="#333" stroke-width="1" />
+                <g id="step3"></g>
+            </svg>
+            
+            <div class="step-info">
+                <strong>Next:</strong> Add pentagon that responds to dimension values
+                <div class="question">
+                    <h4>Question 1: Pentagon Style</h4>
+                    <p>For the pentagon lines connecting the values, would you prefer:</p>
+                    <ul>
+                        <li>A. Solid filled pentagon with transparency (like variation 3)</li>
+                        <li>B. Just the outline/border</li>
+                        <li>C. Both (filled + border)</li>
+                        <li>D. No pentagon lines, just the dots</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Step 4: Visual Style -->
+        <div class="step-card">
+            <h2 class="step-title">Step 4: Visual Style for Dots and Labels</h2>
+            
+            <div class="step-info">
+                <div class="question">
+                    <h4>Question 2: Dot Style</h4>
+                    <p>For the dimension dots, which style from Phase 3 did you prefer?</p>
+                    <ul>
+                        <li>A. Clean dots with soft glow (Variation 1)</li>
+                        <li>B. Yin-Yang style with inner dots (Variation 2)</li>
+                        <li>C. Simple dots with star rays (Variation 3)</li>
+                        <li>D. Minimalist dots (Variation 4)</li>
+                    </ul>
+                </div>
+                
+                <div class="question">
+                    <h4>Question 3: Lines from Center</h4>
+                    <p>Should we include the subtle lines from center to each dimension?</p>
+                    <ul>
+                        <li>A. Yes, as subtle guides (dashed, low opacity)</li>
+                        <li>B. No, keep it clean</li>
+                        <li>C. Only show them on hover/interaction</li>
+                    </ul>
+                </div>
+                
+                <div class="question">
+                    <h4>Question 4: Value Display</h4>
+                    <p>You mentioned values inside dots. Should we also show:</p>
+                    <ul>
+                        <li>A. Just the number (e.g., "7.5")</li>
+                        <li>B. Number + unit (e.g., "7.5/10")</li>
+                        <li>C. Percentage (e.g., "75%")</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            // Helper function to convert polar to cartesian
+            function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+                const angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
+                return {
+                    x: centerX + (radius * Math.cos(angleInRadians)),
+                    y: centerY + (radius * Math.sin(angleInRadians))
+                };
+            }
+            
+            // Dimension configuration with correct angles
+            const dimensions = {
+                trd: { angle: 324, label: 'TRD', fullLabel: 'Resistencia', color: '#10b981', group: 'resilience' },
+                aer: { angle: 36, label: 'AER', fullLabel: 'Ciber-ROI', color: '#10b981', group: 'resilience' },
+                rrg: { angle: 108, label: 'RRG', fullLabel: 'Respuesta', color: '#B4B5DF', group: 'vulnerability' },
+                hfp: { angle: 180, label: 'HFP', fullLabel: 'Cultura', color: '#B4B5DF', group: 'vulnerability' },
+                bri: { angle: 252, label: 'BRI', fullLabel: 'Exposición', color: '#B4B5DF', group: 'vulnerability' }
+            };
+            
+            // Step 1: Draw coordinate system
+            function drawStep1() {
+                const container = document.getElementById('step1');
+                const centerX = 250, centerY = 250;
+                const radius = 180;
+                
+                // Draw reference lines
+                Object.keys(dimensions).forEach(key => {
+                    const dim = dimensions[key];
+                    const endPoint = polarToCartesian(centerX, centerY, radius, dim.angle);
+                    
+                    // Line from center
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', centerX);
+                    line.setAttribute('y1', centerY);
+                    line.setAttribute('x2', endPoint.x);
+                    line.setAttribute('y2', endPoint.y);
+                    line.setAttribute('stroke', dim.color);
+                    line.setAttribute('stroke-width', '1');
+                    line.setAttribute('opacity', '0.3');
+                    line.setAttribute('stroke-dasharray', '2,4');
+                    container.appendChild(line);
+                    
+                    // Dot
+                    const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    dot.setAttribute('cx', endPoint.x);
+                    dot.setAttribute('cy', endPoint.y);
+                    dot.setAttribute('r', '8');
+                    dot.setAttribute('fill', dim.color);
+                    container.appendChild(dot);
+                    
+                    // Label
+                    const labelOffset = 30;
+                    const labelPoint = polarToCartesian(centerX, centerY, radius + labelOffset, dim.angle);
+                    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    label.setAttribute('x', labelPoint.x);
+                    label.setAttribute('y', labelPoint.y);
+                    label.setAttribute('text-anchor', 'middle');
+                    label.setAttribute('dominant-baseline', 'middle');
+                    label.setAttribute('font-size', '12');
+                    label.setAttribute('fill', dim.color);
+                    label.textContent = `${dim.label} (${dim.fullLabel})`;
+                    container.appendChild(label);
+                });
+                
+                // Draw pentagon outline
+                const pentagonPath = [];
+                ['trd', 'aer', 'rrg', 'hfp', 'bri'].forEach(key => {
+                    const point = polarToCartesian(centerX, centerY, radius, dimensions[key].angle);
+                    pentagonPath.push(pentagonPath.length === 0 ? `M ${point.x} ${point.y}` : `L ${point.x} ${point.y}`);
+                });
+                pentagonPath.push('Z');
+                
+                const pentagon = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                pentagon.setAttribute('d', pentagonPath.join(' '));
+                pentagon.setAttribute('fill', 'none');
+                pentagon.setAttribute('stroke', '#666');
+                pentagon.setAttribute('stroke-width', '1');
+                pentagon.setAttribute('stroke-dasharray', '5,5');
+                pentagon.setAttribute('opacity', '0.5');
+                container.appendChild(pentagon);
+            }
+            
+            // Step 2: Show with background
+            function drawStep2() {
+                const container = document.getElementById('step2');
+                const centerX = 250, centerY = 250;
+                const radius = 180;
+                
+                // Draw the same as step 1
+                Object.keys(dimensions).forEach(key => {
+                    const dim = dimensions[key];
+                    const endPoint = polarToCartesian(centerX, centerY, radius, dim.angle);
+                    
+                    // Dot
+                    const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    dot.setAttribute('cx', endPoint.x);
+                    dot.setAttribute('cy', endPoint.y);
+                    dot.setAttribute('r', '8');
+                    dot.setAttribute('fill', dim.color);
+                    container.appendChild(dot);
+                    
+                    // Label
+                    const labelOffset = 30;
+                    const labelPoint = polarToCartesian(centerX, centerY, radius + labelOffset, dim.angle);
+                    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    label.setAttribute('x', labelPoint.x);
+                    label.setAttribute('y', labelPoint.y);
+                    label.setAttribute('text-anchor', 'middle');
+                    label.setAttribute('dominant-baseline', 'middle');
+                    label.setAttribute('font-size', '12');
+                    label.setAttribute('fill', dim.color);
+                    label.textContent = dim.fullLabel;
+                    container.appendChild(label);
+                });
+            }
+            
+            // Step 3: Show example with values
+            function drawStep3() {
+                const container = document.getElementById('step3');
+                const centerX = 250, centerY = 250;
+                const maxRadius = 180;
+                
+                // Example values
+                const values = {
+                    trd: 7.5,
+                    aer: 8.0,
+                    rrg: 4.5,
+                    hfp: 6.0,
+                    bri: 5.0
+                };
+                
+                // Draw value pentagon
+                const pentagonPath = [];
+                ['trd', 'aer', 'rrg', 'hfp', 'bri'].forEach(key => {
+                    const radius = (values[key] / 10) * maxRadius;
+                    const point = polarToCartesian(centerX, centerY, radius, dimensions[key].angle);
+                    pentagonPath.push(pentagonPath.length === 0 ? `M ${point.x} ${point.y}` : `L ${point.x} ${point.y}`);
+                });
+                pentagonPath.push('Z');
+                
+                const pentagon = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                pentagon.setAttribute('d', pentagonPath.join(' '));
+                pentagon.setAttribute('fill', '#10b98115');
+                pentagon.setAttribute('stroke', '#10b981');
+                pentagon.setAttribute('stroke-width', '2');
+                container.appendChild(pentagon);
+                
+                // Draw dots with values
+                Object.keys(dimensions).forEach(key => {
+                    const dim = dimensions[key];
+                    const radius = (values[key] / 10) * maxRadius;
+                    const point = polarToCartesian(centerX, centerY, radius, dim.angle);
+                    
+                    // Dot
+                    const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    dot.setAttribute('cx', point.x);
+                    dot.setAttribute('cy', point.y);
+                    dot.setAttribute('r', '12');
+                    dot.setAttribute('fill', dim.color);
+                    container.appendChild(dot);
+                    
+                    // Value inside dot
+                    const valueText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    valueText.setAttribute('x', point.x);
+                    valueText.setAttribute('y', point.y);
+                    valueText.setAttribute('text-anchor', 'middle');
+                    valueText.setAttribute('dominant-baseline', 'middle');
+                    valueText.setAttribute('font-size', '10');
+                    valueText.setAttribute('font-weight', 'bold');
+                    valueText.setAttribute('fill', '#fff');
+                    valueText.textContent = values[key];
+                    container.appendChild(valueText);
+                    
+                    // Label outside
+                    const labelOffset = 30;
+                    const labelPoint = polarToCartesian(centerX, centerY, maxRadius + labelOffset, dim.angle);
+                    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    label.setAttribute('x', labelPoint.x);
+                    label.setAttribute('y', labelPoint.y);
+                    label.setAttribute('text-anchor', 'middle');
+                    label.setAttribute('dominant-baseline', 'middle');
+                    label.setAttribute('font-size', '12');
+                    label.setAttribute('fill', dim.color);
+                    label.textContent = dim.fullLabel;
+                    container.appendChild(label);
+                });
+            }
+            
+            // Initialize all steps
+            drawStep1();
+            drawStep2();
+            drawStep3();
+        </script>
+    </div>
+</body>
+</html>

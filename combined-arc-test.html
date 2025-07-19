@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combined Arc Test - Foundation + Progressive</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+            padding: 40px 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 40px;
+        }
+        .demo-card {
+            background: #2a2a2a;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid #4caf50;
+        }
+        svg {
+            background: #000;
+            border-radius: 12px;
+        }
+        .info {
+            background: #333;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Combined Arc: Foundation + Progressive</h1>
+        
+        <div class="demo-card">
+            <h2>Complete DII Gauge Preview</h2>
+            <svg width="500" height="500" viewBox="0 0 500 500">
+                <!-- LAYER 1: Foundation Arc (Module 1) -->
+                <g id="foundation-layer">
+                    <!-- Grey background arc -->
+                    <path d="M 108.58 391.42 A 200 200 0 1 1 391.42 391.42" 
+                          fill="none" 
+                          stroke="#333" 
+                          stroke-width="30" 
+                          stroke-linecap="round" />
+                    
+                    <!-- Scale marks -->
+                    <g id="scale-marks"></g>
+                </g>
+                
+                <!-- LAYER 2: Progressive Arc (Module 2) -->
+                <g id="progressive-layer">
+                    <!-- This will be drawn dynamically -->
+                </g>
+                
+                <!-- LAYER 3: Center Display (Module 3 - Future) -->
+                <g id="center-display">
+                    <circle cx="250" cy="250" r="3" fill="#f00" opacity="0.5" />
+                    <text x="250" y="250" text-anchor="middle" font-size="48" font-weight="bold" fill="#fff">7.5</text>
+                    <text x="250" y="280" text-anchor="middle" font-size="18" fill="#10b981">RESILIENTE</text>
+                </g>
+            </svg>
+            
+            <div class="info">
+                <strong>Layer Architecture:</strong><br>
+                1. Foundation Arc (Module 1) ✅ - Scale, ticks, boundaries<br>
+                2. Progressive Arc (Module 2) ✅ - Dynamic value display<br>
+                3. Center Display (Module 3) 🔄 - Value & stage label<br>
+                <br>
+                <strong>Current Implementation:</strong><br>
+                • Foundation uses fixed 135° → 405° positioning<br>
+                • Progressive arc follows same coordinate system<br>
+                • Solid colors based on DII stages<br>
+                • Ready for gradient implementation
+            </div>
+        </div>
+
+        <script>
+            // Constants
+            const cx = 250, cy = 250, radius = 200, strokeWidth = 30;
+            const startAngle = 135, endAngle = 405;
+            const currentValue = 7.5;
+            
+            // Add scale marks
+            const scaleMarks = document.getElementById('scale-marks');
+            for (let value = 1; value <= 10; value++) {
+                const angle = startAngle + ((value - 1) / 9) * 270;
+                const rad = (angle * Math.PI) / 180;
+                
+                // Tick positions
+                const tickInner = radius - strokeWidth/2 - 8;
+                const tickOuter = radius + strokeWidth/2 + 8;
+                const labelRadius = radius + strokeWidth/2 + 35;
+                
+                // Create tick
+                const tick = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                tick.setAttribute('x1', cx + tickInner * Math.cos(rad));
+                tick.setAttribute('y1', cy + tickInner * Math.sin(rad));
+                tick.setAttribute('x2', cx + tickOuter * Math.cos(rad));
+                tick.setAttribute('y2', cy + tickOuter * Math.sin(rad));
+                
+                // Style key boundaries
+                let strokeColor = '#666';
+                let strokeW = '2';
+                if (value === 1) { strokeColor = '#ef4444'; strokeW = '3'; }
+                else if (value === 4) { strokeColor = '#ef4444'; strokeW = '3'; }
+                else if (value === 6) { strokeColor = '#f59e0b'; strokeW = '3'; }
+                else if (value === 8) { strokeColor = '#10b981'; strokeW = '3'; }
+                else if (value === 10) { strokeColor = '#3b82f6'; strokeW = '3'; }
+                
+                tick.setAttribute('stroke', strokeColor);
+                tick.setAttribute('stroke-width', strokeW);
+                scaleMarks.appendChild(tick);
+                
+                // Create label
+                const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                label.setAttribute('x', cx + labelRadius * Math.cos(rad));
+                label.setAttribute('y', cy + labelRadius * Math.sin(rad));
+                label.setAttribute('text-anchor', 'middle');
+                label.setAttribute('dominant-baseline', 'middle');
+                label.setAttribute('font-size', '18');
+                label.setAttribute('fill', strokeColor);
+                label.setAttribute('font-weight', value % 2 === 0 ? 'normal' : 'bold');
+                label.textContent = value;
+                scaleMarks.appendChild(label);
+            }
+            
+            // Create progressive arc
+            const progressiveLayer = document.getElementById('progressive-layer');
+            const normalized = (currentValue - 1) / 9;
+            const sweepAngle = normalized * 270;
+            
+            const startRad = (startAngle * Math.PI) / 180;
+            const endRad = ((startAngle + sweepAngle) * Math.PI) / 180;
+            
+            const x1 = cx + radius * Math.cos(startRad);
+            const y1 = cy + radius * Math.sin(startRad);
+            const x2 = cx + radius * Math.cos(endRad);
+            const y2 = cy + radius * Math.sin(endRad);
+            
+            const largeArc = sweepAngle > 180 ? 1 : 0;
+            
+            // Add glow effect
+            const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+            defs.innerHTML = `
+                <filter id="glow">
+                    <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                    <feMerge>
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+            `;
+            progressiveLayer.appendChild(defs);
+            
+            // Create the arc
+            const progressArc = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            progressArc.setAttribute('d', `M ${x1} ${y1} A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2}`);
+            progressArc.setAttribute('fill', 'none');
+            progressArc.setAttribute('stroke', '#10b981'); // Green for RESILIENTE
+            progressArc.setAttribute('stroke-width', strokeWidth);
+            progressArc.setAttribute('stroke-linecap', 'round');
+            progressArc.setAttribute('filter', 'url(#glow)');
+            progressArc.setAttribute('opacity', '0.9');
+            progressiveLayer.appendChild(progressArc);
+            
+            // Animate the arc
+            progressArc.style.strokeDasharray = progressArc.getTotalLength();
+            progressArc.style.strokeDashoffset = progressArc.getTotalLength();
+            progressArc.style.animation = 'draw 2s ease-out forwards';
+            
+            // Add CSS animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes draw {
+                    to { stroke-dashoffset: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        </script>
+    </div>
+</body>
+</html>

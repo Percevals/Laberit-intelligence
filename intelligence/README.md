@@ -1,22 +1,81 @@
-# DII Intelligence Platform - Architecture & Vision
+# DII Intelligence Platform - Weekly Report Generation Guide
 
-## Overview
+## Quick Start for Next Weekly Report
 
-The DII Intelligence Platform combines historical vulnerability assessments with real-time breach intelligence to deliver actionable cyber risk insights. Unlike predictive models, we show actual breaches happening to similar companies and compare them against assessed vulnerabilities.
+### 📅 Weekly Report Checklist
 
-**Core Value**: "See how vulnerable companies like yours are, what's hitting them now, and whether you're stronger or weaker than the victims."
+1. **Create week folder**: `research/2025/week-XX/` (use current ISO week number)
+2. **Collect intelligence data** and save as `weekly-intelligence.json`
+3. **Run generator**: `python3 immunity_dashboard_generator_v4.py`
+4. **Output**: `outputs/dashboards/immunity-dashboard-YYYY-MM-DD.html`
+
+### 🔑 Critical Requirements
+
+- **Spain incidents are mandatory** - Dashboard will warn if missing
+- **Minimum 2-3 incidents per week** - Mix of Spain + LATAM
+- **Business lessons in Spanish** - Executive-focused insights
+- **All incident descriptions in Spanish** - Generator includes translation helper
+
+### 📋 Data Template
+
+Save as `research/2025/week-XX/weekly-intelligence.json`:
+
+```json
+{
+  "week_date": "2025-MM-DD",
+  "week_summary": {
+    "immunity_avg": "X.X",
+    "attacks_week": "X,XXX",
+    "top_threat_pct": "+XX%",
+    "top_threat_type": "Threat Name",
+    "victims_low_immunity_pct": "XX%",
+    "key_insight": "Spain-specific insight + LATAM trend"
+  },
+  "dii_dimensions": {
+    "TRD": {"value": "XX", "trend": "stable|improving|declining"},
+    "AER": {"value": "XX", "trend": "stable|improving|declining"},
+    "HFP": {"value": "XX", "trend": "stable|improving|declining"},
+    "BRI": {"value": "XX", "trend": "stable|improving|declining"},
+    "RRG": {"value": "X.X", "trend": "stable|improving|declining"}
+  },
+  "incidents": [
+    {
+      "date": "2025-MM-DD",
+      "country": "España",  // At least one Spain incident required
+      "sector": "Sector Name",
+      "org_name": "Organization Name",
+      "attack_type": "Ransomware|Data Breach|API Attack|etc",
+      "business_model": "SERVICIOS_FINANCIEROS|INFORMACION_REGULADA|etc",
+      "impact": "Critical|High|Medium",
+      "summary": "Incident description in English (will be translated)",
+      "business_lesson": "Lección ejecutiva en español"
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "CRÍTICA|ALTA|MEDIA",
+      "recommendation": "Acción específica en español",
+      "business_models": ["MODEL1", "MODEL2"],
+      "expected_impact": "Resultado esperado con métricas"
+    }
+  ]
+}
+```
+
+### 🚀 Dashboard Features
+
+- **Interactive incident filtering**: Spain / LATAM / Critical
+- **Risk position matrix**: Visual business model analysis
+- **Attack economics scale**: €1 attacker vs €XX organization loss
+- **Mobile responsive**: Works on all devices
+- **Executive tooltips**: Hover for additional context
 
 ## Current Status (Updated: July 18, 2025)
 
-### 🚀 Active Development
-- **Weekly Intelligence Dashboard Generation**: Using `immunity_dashboard_generator_v4.py`
-- **Data Collection**: Weekly intelligence reports with Spain + LATAM focus
-- **Dashboard Template**: QA-approved template with interactive features
-
-### ⚠️ Deprecated Items
-- **Directory**: `weekly-reports/` - Deprecated until August 11, 2025
-- **File**: `dii_dashboard_generator.py` - Use V4 generator instead
-- See `.deprecated` file for complete list
+### Latest Dashboard
+- **File**: `outputs/dashboards/immunity-dashboard-2025-07-18.html`
+- **Framework**: `immunity-framework-v2.html` (updated with latest dashboard link)
+- **Template**: `templates/immunity_dashboard_template_v4.html`
 
 ### 📁 Current Directory Structure
 
@@ -213,6 +272,25 @@ As of July 18, 2025, we've completed a major cleanup:
 - Consolidated to V4 generator with Spain-first focus
 - Established clear deprecation timeline for legacy systems
 
+## 🏢 Business Model Reference
+
+Use these exact model names in incident data:
+
+- `SERVICIOS_FINANCIEROS` - Banks, insurance, fintech
+- `INFORMACION_REGULADA` - Healthcare, education, government
+- `ECOSISTEMA_DIGITAL` - Marketplaces, platforms, APIs
+- `CADENA_SUMINISTRO` - Logistics, supply chain, distribution
+- `SOFTWARE_CRITICO` - SaaS, critical software providers
+- `SERVICIOS_DATOS` - Data processors, analytics companies
+- `COMERCIO_HIBRIDO` - Retail with physical + digital
+- `INFRAESTRUCTURA_HEREDADA` - Utilities, manufacturing, legacy
+
+## 📞 Support
+
+- **Generator issues**: Check `immunity_dashboard_generator_v4.py`
+- **Template updates**: Edit `templates/immunity_dashboard_template_v4.html`
+- **Historical data**: See `archive/` directory
+
 ---
 
-**Remember**: Every breach we document should answer "Would our assessment have caught this?" - creating a feedback loop that continuously improves our framework.
+**Next Report Due**: Week 30 (July 25, 2025) - Remember Spain incidents!

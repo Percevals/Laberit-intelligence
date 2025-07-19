@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DimensionBalance - Phase 3: Refined Pentagon Variations</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            padding: 40px 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 40px;
+        }
+        .variations-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+        .variation-card {
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid #333;
+        }
+        .variation-title {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #fff;
+            text-align: center;
+            font-weight: 300;
+        }
+        svg {
+            background: #000;
+            border-radius: 16px;
+            display: block;
+            margin: 0 auto;
+        }
+        .controls {
+            background: #222;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+        .control-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .control-group.vulnerability {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .control-item {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-size: 14px;
+            color: #aaa;
+            margin-bottom: 5px;
+        }
+        input[type="range"] {
+            width: 100%;
+            margin: 5px 0;
+        }
+        .value-display {
+            font-size: 18px;
+            font-weight: 300;
+            text-align: center;
+        }
+        .resilience { color: #10b981; }
+        .vulnerability { color: #B4B5DF; }
+        .description {
+            background: #222;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #aaa;
+        }
+        .debug-info {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 10px;
+            color: #666;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DimensionBalance - Phase 3: Refined Pentagon</h1>
+        <p class="subtitle">Inverted Pentagon with Proper Coordinates • Values Inside • Labels Outside</p>
+        
+        <div class="variations-grid">
+            <!-- Variation 1: Clean Pentagon with Glow -->
+            <div class="variation-card">
+                <h2 class="variation-title">Variation 1: Clean Pentagon with Soft Glow</h2>
+                <svg width="500" height="500" viewBox="0 0 500 500">
+                    <defs>
+                        <clipPath id="circle-clip-1">
+                            <circle cx="250" cy="250" r="220" />
+                        </clipPath>
+                        <radialGradient id="green-glow-1">
+                            <stop offset="0%" stop-color="#10b981" stop-opacity="0.6" />
+                            <stop offset="50%" stop-color="#10b981" stop-opacity="0.2" />
+                            <stop offset="100%" stop-color="#10b981" stop-opacity="0" />
+                        </radialGradient>
+                        <radialGradient id="purple-glow-1">
+                            <stop offset="0%" stop-color="#B4B5DF" stop-opacity="0.6" />
+                            <stop offset="50%" stop-color="#B4B5DF" stop-opacity="0.2" />
+                            <stop offset="100%" stop-color="#B4B5DF" stop-opacity="0" />
+                        </radialGradient>
+                    </defs>
+                    
+                    <!-- Flowing wave background -->
+                    <g clip-path="url(#circle-clip-1)">
+                        <path d="M 30 250 
+                                 Q 140 150, 250 250
+                                 T 470 250
+                                 L 470 30
+                                 L 30 30
+                                 Z"
+                              fill="#10b98120" />
+                        
+                        <path d="M 30 250 
+                                 Q 140 150, 250 250
+                                 T 470 250
+                                 L 470 470
+                                 L 30 470
+                                 Z"
+                              fill="#B4B5DF20" />
+                    </g>
+                    
+                    <!-- Circle border -->
+                    <circle cx="250" cy="250" r="220" fill="none" stroke="#333" stroke-width="2" />
+                    
+                    <!-- Pentagon visualization -->
+                    <g id="pentagon-1">
+                        <!-- Lines will be added dynamically -->
+                    </g>
+                </svg>
+                
+                <div class="controls">
+                    <div class="control-group">
+                        <div class="control-item">
+                            <label class="resilience">Resistencia (TRD)</label>
+                            <input type="range" id="trd1" min="1" max="10" value="7" step="0.5">
+                            <div class="value-display resilience" id="trd1-val">7.0</div>
+                        </div>
+                        <div class="control-item">
+                            <label class="resilience">Ciber-ROI (AER)</label>
+                            <input type="range" id="aer1" min="1" max="10" value="8" step="0.5">
+                            <div class="value-display resilience" id="aer1-val">8.0</div>
+                        </div>
+                    </div>
+                    <div class="control-group vulnerability">
+                        <div class="control-item">
+                            <label class="vulnerability">Exposición (BRI)</label>
+                            <input type="range" id="bri1" min="1" max="10" value="5" step="0.5">
+                            <div class="value-display vulnerability" id="bri1-val">5.0</div>
+                        </div>
+                        <div class="control-item">
+                            <label class="vulnerability">Cultura (HFP)</label>
+                            <input type="range" id="hfp1" min="1" max="10" value="6" step="0.5">
+                            <div class="value-display vulnerability" id="hfp1-val">6.0</div>
+                        </div>
+                        <div class="control-item">
+                            <label class="vulnerability">Respuesta (RRG)</label>
+                            <input type="range" id="rrg1" min="1" max="10" value="4" step="0.5">
+                            <div class="value-display vulnerability" id="rrg1-val">4.0</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="description">
+                    <strong>Clean Pentagon:</strong> Soft glow effects with values inside dots, labels outside circle. Subtle connecting lines.
+                </div>
+            </div>
+            
+            <!-- Variation 2: Pentagon with Yin-Yang Dots -->
+            <div class="variation-card">
+                <h2 class="variation-title">Variation 2: Yin-Yang Style Dots</h2>
+                <svg width="500" height="500" viewBox="0 0 500 500">
+                    <defs>
+                        <clipPath id="circle-clip-2">
+                            <circle cx="250" cy="250" r="220" />
+                        </clipPath>
+                        <filter id="shadow-2">
+                            <feDropShadow dx="0" dy="0" stdDeviation="3" flood-opacity="0.3"/>
+                        </filter>
+                    </defs>
+                    
+                    <!-- Flowing wave background -->
+                    <g clip-path="url(#circle-clip-2)">
+                        <path d="M 30 250 
+                                 Q 140 150, 250 250
+                                 T 470 250
+                                 L 470 30
+                                 L 30 30
+                                 Z"
+                              fill="#10b98120" />
+                        
+                        <path d="M 30 250 
+                                 Q 140 150, 250 250
+                                 T 470 250
+                                 L 470 470
+                                 L 30 470
+                                 Z"
+                              fill="#B4B5DF20" />
+                    </g>
+                    
+                    <!-- Circle border -->
+                    <circle cx="250" cy="250" r="220" fill="none" stroke="#333" stroke-width="2" />
+                    
+                    <!-- Pentagon visualization -->
+                    <g id="pentagon-2">
+                        <!-- Lines will be added dynamically -->
+                    </g>
+                </svg>
+                
+                <div class="controls">
+                    <div class="control-group">
+                        <div class="control-item">
+                            <label class="resilience">Resistencia (TRD)</label>
+                            <input type="range" id="trd2" min="1" max="10" value="7" step="0.5">
+                            <div class="value-display resilience" id="trd2-val">7.0</div>
+                        </div>
+                        <div class="control-item">
+                            <label class="resilience">Ciber-ROI (AER)</label>
+                            <input type="range" id="aer2" min="1" max="10" value="8" step="0.5">
+                            <div class="value-display resilience" id="aer2-val">8.0</div>
+                        </div>
+                    </div>
+                    <div class="control-group vulnerability">
+                        <div class="control-item">
+                            <label class="vulnerability">Exposición (BRI)</label>
+                            <input type="range" id="bri2" min="1" max="10" value="5" step="0.5">
+                            <div class="value-display vulnerability" id="bri2-val">5.0</div>
+                        </div>
+                        <div class="control-item">
+                            <label class="vulnerability">Cultura (HFP)</label>
+                            <input type="range" id="hfp2" min="1" max="10" value="6" step="0.5">
+                            <div class="value-display vulnerability" id="hfp2-val">6.0</div>
+                        </div>
+                        <div class="control-item">
+                            <label class="vulnerability">Respuesta (RRG)</label>
+                            <input type="range" id="rrg2" min="1" max="10" value="4" step="0.5">
+                            <div class="value-display vulnerability" id="rrg2-val">4.0</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="description">
+                    <strong>Yin-Yang Dots:</strong> Larger dots with inner circles mimicking yin-yang aesthetics. Subtle shadows for depth.
+                </div>
+            </div>
+            
+            <!-- Variation 3: Pentagon with Star Rays -->
+            <div class="variation-card">
+                <h2 class="variation-title">Variation 3: Star Rays with Pentagon</h2>
+                <svg width="500" height="500" viewBox="0 0 500 500">
+                    <defs>
+                        <clipPath id="circle-clip-3">
+                            <circle cx="250" cy="250" r="220" />
+                        </clipPath>
+                        <linearGradient id="ray-gradient-3" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#fff" stop-opacity="0" />
+                            <stop offset="50%" stop-color="#fff" stop-opacity="0.1" />
+                            <stop offset="100%" stop-color="#fff" stop-opacity="0" />
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Flowing wave background -->
+                    <g clip-path="url(#circle-clip-3)">
+                        <path d="M 30 250 
+                                 Q 140 150, 250 250
+                                 T 470 250
+                                 L 470 30
+                                 L 30 30
+                                 Z"
+                              fill="#10b98120" />
+                        
+                        <path d="M 30 250 
+                                 Q 140 150, 250 250
+                                 T 470 250
+                                 L 470 470
+                                 L 30 470
+                                 Z"
+                              fill="#B4B5DF20" />
+                    </g>
+                    
+                    <!-- Circle border -->
+                    <circle cx="250" cy="250" r="220" fill="none" stroke="#333" stroke-width="2" />
+                    
+                    <!-- Pentagon visualization -->
+                    <g id="pentagon-3">
+                        <!-- Lines will be added dynamically -->
+                    </g>
+                </svg>
+                
+                <div class="controls">
+                    <div class="control-group">
+                        <div class="control-item">
+                            <label class="resilience">Resistencia (TRD)</label>
+                            <input type="range" id="trd3" min="1" max="10" value="7" step="0.5">
+                            <div class="value-display resilience" id="trd3-val">7.0</div>
+                        </div>
+                        <div class="control-item">
+                            <label class="resilience">Ciber-ROI (AER)</label>
+                            <input type="range" id="aer3" min="1" max="10" value="8" step="0.5">
+                            <div class="value-display resilience" id="aer3-val">8.0</div>
+                        </div>
+                    </div>
+                    <div class="control-group vulnerability">
+                        <div class="control-item">
+                            <label class="vulnerability">Exposición (BRI)</label>
+                            <input type="range" id="bri3" min="1" max="10" value="5" step="0.5">
+                            <div class="value-display vulnerability" id="bri3-val">5.0</div>
+                        </div>
+                        <div class="control-item">
+                            <label class="vulnerability">Cultura (HFP)</label>
+                            <input type="range" id="hfp3" min="1" max="10" value="6" step="0.5">
+                            <div class="value-display vulnerability" id="hfp3-val">6.0</div>
+                        </div>
+                        <div class="control-item">
+                            <label class="vulnerability">Respuesta (RRG)</label>
+                            <input type="range" id="rrg3" min="1" max="10" value="4" step="0.5">
+                            <div class="value-display vulnerability" id="rrg3-val">4.0</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="description">
+                    <strong>Star Rays:</strong> Subtle rays extending from center through dimension points. Creates visual hierarchy.
+                </div>
+            </div>
+            
+            <!-- Variation 4: Minimalist Pentagon -->
+            <div class="variation-card">
+                <h2 class="variation-title">Variation 4: Minimalist Zen Pentagon</h2>
+                <svg width="500" height="500" viewBox="0 0 500 500">
+                    <defs>
+                        <clipPath id="circle-clip-4">
+                            <circle cx="250" cy="250" r="220" />
+                        </clipPath>
+                    </defs>
+                    
+                    <!-- Flowing wave background -->
+                    <g clip-path="url(#circle-clip-4)">
+                        <path d="M 30 250 
+                                 Q 140 150, 250 250
+                                 T 470 250
+                                 L 470 30
+                                 L 30 30
+                                 Z"
+                              fill="#10b98120" />
+                        
+                        <path d="M 30 250 
+                                 Q 140 150, 250 250
+                                 T 470 250
+                                 L 470 470
+                                 L 30 470
+                                 Z"
+                              fill="#B4B5DF20" />
+                    </g>
+                    
+                    <!-- Circle border -->
+                    <circle cx="250" cy="250" r="220" fill="none" stroke="#333" stroke-width="2" />
+                    
+                    <!-- Pentagon visualization -->
+                    <g id="pentagon-4">
+                        <!-- Lines will be added dynamically -->
+                    </g>
+                </svg>
+                
+                <div class="controls">
+                    <div class="control-group">
+                        <div class="control-item">
+                            <label class="resilience">Resistencia (TRD)</label>
+                            <input type="range" id="trd4" min="1" max="10" value="7" step="0.5">
+                            <div class="value-display resilience" id="trd4-val">7.0</div>
+                        </div>
+                        <div class="control-item">
+                            <label class="resilience">Ciber-ROI (AER)</label>
+                            <input type="range" id="aer4" min="1" max="10" value="8" step="0.5">
+                            <div class="value-display resilience" id="aer4-val">8.0</div>
+                        </div>
+                    </div>
+                    <div class="control-group vulnerability">
+                        <div class="control-item">
+                            <label class="vulnerability">Exposición (BRI)</label>
+                            <input type="range" id="bri4" min="1" max="10" value="5" step="0.5">
+                            <div class="value-display vulnerability" id="bri4-val">5.0</div>
+                        </div>
+                        <div class="control-item">
+                            <label class="vulnerability">Cultura (HFP)</label>
+                            <input type="range" id="hfp4" min="1" max="10" value="6" step="0.5">
+                            <div class="value-display vulnerability" id="hfp4-val">6.0</div>
+                        </div>
+                        <div class="control-item">
+                            <label class="vulnerability">Respuesta (RRG)</label>
+                            <input type="range" id="rrg4" min="1" max="10" value="4" step="0.5">
+                            <div class="value-display vulnerability" id="rrg4-val">4.0</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="description">
+                    <strong>Minimalist Zen:</strong> Clean lines, no extra effects. Focus on clarity and balance. Perfect inverted pentagon.
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            // Fixed dimension configuration for inverted pentagon
+            const dimensions = {
+                trd: { angle: -54, label: 'Resistencia', color: '#10b981', group: 'resilience' },    // Top-left
+                aer: { angle: 54, label: 'Ciber-ROI', color: '#10b981', group: 'resilience' },      // Top-right
+                bri: { angle: 126, label: 'Exposición', color: '#B4B5DF', group: 'vulnerability' },  // Bottom-left
+                hfp: { angle: 270, label: 'Cultura', color: '#B4B5DF', group: 'vulnerability' },     // Bottom center
+                rrg: { angle: 234, label: 'Respuesta', color: '#B4B5DF', group: 'vulnerability' }    // Bottom-right
+            };
+            
+            // Helper function to convert polar to cartesian
+            function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+                const angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
+                return {
+                    x: centerX + (radius * Math.cos(angleInRadians)),
+                    y: centerY + (radius * Math.sin(angleInRadians))
+                };
+            }
+            
+            // Variation 1: Clean Pentagon with Glow
+            function updatePentagon1(id) {
+                const container = document.getElementById(`pentagon-${id}`);
+                const centerX = 250, centerY = 250;
+                const maxRadius = 180;
+                
+                container.innerHTML = '';
+                
+                // Create groups
+                const linesGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                const pentagonGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                const glowGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                const dotsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                const labelsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                
+                // Draw subtle lines from center
+                Object.keys(dimensions).forEach(dim => {
+                    const endPoint = polarToCartesian(centerX, centerY, maxRadius, dimensions[dim].angle);
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', centerX);
+                    line.setAttribute('y1', centerY);
+                    line.setAttribute('x2', endPoint.x);
+                    line.setAttribute('y2', endPoint.y);
+                    line.setAttribute('stroke', dimensions[dim].color);
+                    line.setAttribute('stroke-width', '0.5');
+                    line.setAttribute('opacity', '0.2');
+                    line.setAttribute('stroke-dasharray', '2,4');
+                    linesGroup.appendChild(line);
+                });
+                
+                // Draw pentagon based on values
+                const pentagonPath = [];
+                const valuePoints = {};
+                Object.keys(dimensions).forEach(dim => {
+                    const value = parseFloat(document.getElementById(`${dim}${id}`).value);
+                    const radius = (value / 10) * maxRadius;
+                    const point = polarToCartesian(centerX, centerY, radius, dimensions[dim].angle);
+                    valuePoints[dim] = point;
+                    pentagonPath.push(pentagonPath.length === 0 ? `M ${point.x} ${point.y}` : `L ${point.x} ${point.y}`);
+                });
+                pentagonPath.push('Z');
+                
+                const pentagon = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                pentagon.setAttribute('d', pentagonPath.join(' '));
+                pentagon.setAttribute('fill', '#10b98115');
+                pentagon.setAttribute('stroke', '#10b98160');
+                pentagon.setAttribute('stroke-width', '2');
+                pentagonGroup.appendChild(pentagon);
+                
+                // Draw dimension points with glow
+                Object.keys(dimensions).forEach(dim => {
+                    const point = valuePoints[dim];
+                    
+                    // Glow effect
+                    const glow = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    glow.setAttribute('cx', point.x);
+                    glow.setAttribute('cy', point.y);
+                    glow.setAttribute('r', '20');
+                    glow.setAttribute('fill', `url(#${dimensions[dim].group === 'resilience' ? 'green' : 'purple'}-glow-1)`);
+                    glowGroup.appendChild(glow);
+                    
+                    // Main dot
+                    const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    dot.setAttribute('cx', point.x);
+                    dot.setAttribute('cy', point.y);
+                    dot.setAttribute('r', '12');
+                    dot.setAttribute('fill', dimensions[dim].color);
+                    dot.setAttribute('opacity', '0.9');
+                    dotsGroup.appendChild(dot);
+                    
+                    // Value inside dot
+                    const value = parseFloat(document.getElementById(`${dim}${id}`).value);
+                    const valueText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    valueText.setAttribute('x', point.x);
+                    valueText.setAttribute('y', point.y);
+                    valueText.setAttribute('text-anchor', 'middle');
+                    valueText.setAttribute('dominant-baseline', 'middle');
+                    valueText.setAttribute('font-size', '10');
+                    valueText.setAttribute('font-weight', 'bold');
+                    valueText.setAttribute('fill', '#fff');
+                    valueText.textContent = value.toFixed(1);
+                    dotsGroup.appendChild(valueText);
+                    
+                    // Label outside circle
+                    const labelPoint = polarToCartesian(centerX, centerY, 240, dimensions[dim].angle);
+                    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    label.setAttribute('x', labelPoint.x);
+                    label.setAttribute('y', labelPoint.y);
+                    label.setAttribute('text-anchor', 'middle');
+                    label.setAttribute('dominant-baseline', 'middle');
+                    label.setAttribute('font-size', '14');
+                    label.setAttribute('fill', dimensions[dim].color);
+                    label.textContent = dimensions[dim].label;
+                    labelsGroup.appendChild(label);
+                });
+                
+                // Append all groups
+                container.appendChild(linesGroup);
+                container.appendChild(pentagonGroup);
+                container.appendChild(glowGroup);
+                container.appendChild(dotsGroup);
+                container.appendChild(labelsGroup);
+            }
+            
+            // Variation 2: Yin-Yang Style Dots
+            function updatePentagon2(id) {
+                const container = document.getElementById(`pentagon-${id}`);
+                const centerX = 250, centerY = 250;
+                const maxRadius = 180;
+                
+                container.innerHTML = '';
+                
+                // Create groups
+                const pentagonGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                const dotsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                const labelsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                
+                // Draw pentagon based on values
+                const pentagonPath = [];
+                const valuePoints = {};
+                Object.keys(dimensions).forEach(dim => {
+                    const value = parseFloat(document.getElementById(`${dim}${id}`).value);
+                    const radius = (value / 10) * maxRadius;
+                    const point = polarToCartesian(centerX, centerY, radius, dimensions[dim].angle);
+                    valuePoints[dim] = point;
+                    pentagonPath.push(pentagonPath.length === 0 ? `M ${point.x} ${point.y}` : `L ${point.x} ${point.y}`);
+                });
+                pentagonPath.push('Z');
+                
+                const pentagon = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                pentagon.setAttribute('d', pentagonPath.join(' '));
+                pentagon.setAttribute('fill', 'none');
+                pentagon.setAttribute('stroke', '#666');
+                pentagon.setAttribute('stroke-width', '1');
+                pentagon.setAttribute('stroke-dasharray', '5,5');
+                pentagon.setAttribute('opacity', '0.5');
+                pentagonGroup.appendChild(pentagon);
+                
+                // Draw yin-yang style dots
+                Object.keys(dimensions).forEach(dim => {
+                    const point = valuePoints[dim];
+                    
+                    // Outer circle
+                    const outerCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    outerCircle.setAttribute('cx', point.x);
+                    outerCircle.setAttribute('cy', point.y);
+                    outerCircle.setAttribute('r', '18');
+                    outerCircle.setAttribute('fill', dimensions[dim].color);
+                    outerCircle.setAttribute('opacity', '0.8');
+                    outerCircle.setAttribute('filter', 'url(#shadow-2)');
+                    dotsGroup.appendChild(outerCircle);
+                    
+                    // Inner yin-yang dot
+                    const innerDot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    innerDot.setAttribute('cx', point.x - 3);
+                    innerDot.setAttribute('cy', point.y - 3);
+                    innerDot.setAttribute('r', '4');
+                    innerDot.setAttribute('fill', '#000');
+                    innerDot.setAttribute('opacity', '0.3');
+                    dotsGroup.appendChild(innerDot);
+                    
+                    // Value text
+                    const value = parseFloat(document.getElementById(`${dim}${id}`).value);
+                    const valueText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    valueText.setAttribute('x', point.x);
+                    valueText.setAttribute('y', point.y + 1);
+                    valueText.setAttribute('text-anchor', 'middle');
+                    valueText.setAttribute('dominant-baseline', 'middle');
+                    valueText.setAttribute('font-size', '11');
+                    valueText.setAttribute('font-weight', 'bold');
+                    valueText.setAttribute('fill', '#fff');
+                    valueText.textContent = value.toFixed(1);
+                    dotsGroup.appendChild(valueText);
+                    
+                    // Label outside circle
+                    const labelPoint = polarToCartesian(centerX, centerY, 240, dimensions[dim].angle);
+                    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    label.setAttribute('x', labelPoint.x);
+                    label.setAttribute('y', labelPoint.y);
+                    label.setAttribute('text-anchor', 'middle');
+                    label.setAttribute('dominant-baseline', 'middle');
+                    label.setAttribute('font-size', '14');
+                    label.setAttribute('font-weight', '500');
+                    label.setAttribute('fill', dimensions[dim].color);
+                    label.textContent = dimensions[dim].label;
+                    labelsGroup.appendChild(label);
+                });
+                
+                // Append all groups
+                container.appendChild(pentagonGroup);
+                container.appendChild(dotsGroup);
+                container.appendChild(labelsGroup);
+            }
+            
+            // Variation 3: Star Rays
+            function updatePentagon3(id) {
+                const container = document.getElementById(`pentagon-${id}`);
+                const centerX = 250, centerY = 250;
+                const maxRadius = 180;
+                
+                container.innerHTML = '';
+                
+                // Create groups
+                const raysGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                const pentagonGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                const dotsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                const labelsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                
+                // Draw rays
+                Object.keys(dimensions).forEach(dim => {
+                    const endPoint = polarToCartesian(centerX, centerY, 220, dimensions[dim].angle);
+                    
+                    // Create ray path
+                    const ray = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    ray.setAttribute('d', `M ${centerX} ${centerY} L ${endPoint.x} ${endPoint.y}`);
+                    ray.setAttribute('stroke', dimensions[dim].color);
+                    ray.setAttribute('stroke-width', '20');
+                    ray.setAttribute('opacity', '0.05');
+                    ray.setAttribute('stroke-linecap', 'round');
+                    raysGroup.appendChild(ray);
+                });
+                
+                // Draw pentagon based on values
+                const pentagonPath = [];
+                const valuePoints = {};
+                Object.keys(dimensions).forEach(dim => {
+                    const value = parseFloat(document.getElementById(`${dim}${id}`).value);
+                    const radius = (value / 10) * maxRadius;
+                    const point = polarToCartesian(centerX, centerY, radius, dimensions[dim].angle);
+                    valuePoints[dim] = point;
+                    pentagonPath.push(pentagonPath.length === 0 ? `M ${point.x} ${point.y}` : `L ${point.x} ${point.y}`);
+                });
+                pentagonPath.push('Z');
+                
+                const pentagon = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                pentagon.setAttribute('d', pentagonPath.join(' '));
+                pentagon.setAttribute('fill', '#10b98110');
+                pentagon.setAttribute('stroke', '#10b981');
+                pentagon.setAttribute('stroke-width', '2');
+                pentagon.setAttribute('opacity', '0.8');
+                pentagonGroup.appendChild(pentagon);
+                
+                // Draw dimension points
+                Object.keys(dimensions).forEach(dim => {
+                    const point = valuePoints[dim];
+                    
+                    // Main dot with gradient effect
+                    const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    dot.setAttribute('cx', point.x);
+                    dot.setAttribute('cy', point.y);
+                    dot.setAttribute('r', '14');
+                    dot.setAttribute('fill', dimensions[dim].color);
+                    dotsGroup.appendChild(dot);
+                    
+                    // Value inside dot
+                    const value = parseFloat(document.getElementById(`${dim}${id}`).value);
+                    const valueText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    valueText.setAttribute('x', point.x);
+                    valueText.setAttribute('y', point.y);
+                    valueText.setAttribute('text-anchor', 'middle');
+                    valueText.setAttribute('dominant-baseline', 'middle');
+                    valueText.setAttribute('font-size', '10');
+                    valueText.setAttribute('font-weight', 'bold');
+                    valueText.setAttribute('fill', '#fff');
+                    valueText.textContent = value.toFixed(1);
+                    dotsGroup.appendChild(valueText);
+                    
+                    // Label outside circle
+                    const labelPoint = polarToCartesian(centerX, centerY, 240, dimensions[dim].angle);
+                    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    label.setAttribute('x', labelPoint.x);
+                    label.setAttribute('y', labelPoint.y);
+                    label.setAttribute('text-anchor', 'middle');
+                    label.setAttribute('dominant-baseline', 'middle');
+                    label.setAttribute('font-size', '14');
+                    label.setAttribute('fill', '#fff');
+                    label.textContent = dimensions[dim].label;
+                    labelsGroup.appendChild(label);
+                });
+                
+                // Append all groups
+                container.appendChild(raysGroup);
+                container.appendChild(pentagonGroup);
+                container.appendChild(dotsGroup);
+                container.appendChild(labelsGroup);
+            }
+            
+            // Variation 4: Minimalist Zen
+            function updatePentagon4(id) {
+                const container = document.getElementById(`pentagon-${id}`);
+                const centerX = 250, centerY = 250;
+                const maxRadius = 180;
+                
+                container.innerHTML = '';
+                
+                // Create groups
+                const pentagonGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                const dotsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                const labelsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                
+                // Draw pentagon outline at max radius
+                const outlinePath = [];
+                Object.keys(dimensions).forEach(dim => {
+                    const point = polarToCartesian(centerX, centerY, maxRadius, dimensions[dim].angle);
+                    outlinePath.push(outlinePath.length === 0 ? `M ${point.x} ${point.y}` : `L ${point.x} ${point.y}`);
+                });
+                outlinePath.push('Z');
+                
+                const outline = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                outline.setAttribute('d', outlinePath.join(' '));
+                outline.setAttribute('fill', 'none');
+                outline.setAttribute('stroke', '#333');
+                outline.setAttribute('stroke-width', '1');
+                outline.setAttribute('opacity', '0.3');
+                pentagonGroup.appendChild(outline);
+                
+                // Draw value pentagon
+                const pentagonPath = [];
+                const valuePoints = {};
+                Object.keys(dimensions).forEach(dim => {
+                    const value = parseFloat(document.getElementById(`${dim}${id}`).value);
+                    const radius = (value / 10) * maxRadius;
+                    const point = polarToCartesian(centerX, centerY, radius, dimensions[dim].angle);
+                    valuePoints[dim] = point;
+                    pentagonPath.push(pentagonPath.length === 0 ? `M ${point.x} ${point.y}` : `L ${point.x} ${point.y}`);
+                });
+                pentagonPath.push('Z');
+                
+                const pentagon = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                pentagon.setAttribute('d', pentagonPath.join(' '));
+                pentagon.setAttribute('fill', 'none');
+                pentagon.setAttribute('stroke', '#888');
+                pentagon.setAttribute('stroke-width', '2');
+                pentagonGroup.appendChild(pentagon);
+                
+                // Draw dimension points
+                Object.keys(dimensions).forEach(dim => {
+                    const point = valuePoints[dim];
+                    
+                    // Simple dot
+                    const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    dot.setAttribute('cx', point.x);
+                    dot.setAttribute('cy', point.y);
+                    dot.setAttribute('r', '10');
+                    dot.setAttribute('fill', dimensions[dim].color);
+                    dot.setAttribute('opacity', '0.8');
+                    dotsGroup.appendChild(dot);
+                    
+                    // Value inside dot
+                    const value = parseFloat(document.getElementById(`${dim}${id}`).value);
+                    const valueText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    valueText.setAttribute('x', point.x);
+                    valueText.setAttribute('y', point.y);
+                    valueText.setAttribute('text-anchor', 'middle');
+                    valueText.setAttribute('dominant-baseline', 'middle');
+                    valueText.setAttribute('font-size', '9');
+                    valueText.setAttribute('font-weight', '600');
+                    valueText.setAttribute('fill', '#fff');
+                    valueText.textContent = value.toFixed(1);
+                    dotsGroup.appendChild(valueText);
+                    
+                    // Label outside circle
+                    const labelPoint = polarToCartesian(centerX, centerY, 240, dimensions[dim].angle);
+                    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    label.setAttribute('x', labelPoint.x);
+                    label.setAttribute('y', labelPoint.y);
+                    label.setAttribute('text-anchor', 'middle');
+                    label.setAttribute('dominant-baseline', 'middle');
+                    label.setAttribute('font-size', '13');
+                    label.setAttribute('fill', '#aaa');
+                    label.textContent = dimensions[dim].label;
+                    labelsGroup.appendChild(label);
+                });
+                
+                // Append all groups
+                container.appendChild(pentagonGroup);
+                container.appendChild(dotsGroup);
+                container.appendChild(labelsGroup);
+            }
+            
+            // Initialize all variations
+            function initializeVariation(id, updateFunction) {
+                updateFunction(id);
+                
+                // Add event listeners
+                ['trd', 'aer', 'hfp', 'bri', 'rrg'].forEach(dim => {
+                    const slider = document.getElementById(`${dim}${id}`);
+                    const display = document.getElementById(`${dim}${id}-val`);
+                    
+                    slider.addEventListener('input', () => {
+                        display.textContent = parseFloat(slider.value).toFixed(1);
+                        updateFunction(id);
+                    });
+                });
+            }
+            
+            // Initialize all
+            initializeVariation(1, updatePentagon1);
+            initializeVariation(2, updatePentagon2);
+            initializeVariation(3, updatePentagon3);
+            initializeVariation(4, updatePentagon4);
+            
+            // Add debug info
+            console.log('Pentagon angles:', dimensions);
+        </script>
+    </div>
+</body>
+</html>

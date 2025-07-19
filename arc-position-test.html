@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arc Position Test - Finding the Right Orientation</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #f5f5f7;
+            padding: 40px 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+        }
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .test-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .test-card.success {
+            border: 2px solid #4caf50;
+            background: #f1f8f4;
+        }
+        h3 {
+            margin: 0 0 20px 0;
+            color: #333;
+            font-size: 18px;
+        }
+        svg {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+        }
+        .info {
+            background: #f5f5f7;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 13px;
+            font-family: monospace;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Arc Position Test - Finding the Correct Orientation</h1>
+        
+        <div class="test-grid">
+            <!-- Test 1: Current Implementation (225° to 495°) -->
+            <div class="test-card">
+                <h3>Test 1: Current (225° → 495°)</h3>
+                <svg width="300" height="300" viewBox="0 0 300 300">
+                    <!-- Visual guides -->
+                    <line x1="150" y1="0" x2="150" y2="300" stroke="#e0e0e0" stroke-width="1" />
+                    <line x1="0" y1="150" x2="300" y2="150" stroke="#e0e0e0" stroke-width="1" />
+                    
+                    <!-- Arc -->
+                    <g id="arc1"></g>
+                    
+                    <!-- Center -->
+                    <circle cx="150" cy="150" r="2" fill="#ff0000" />
+                </svg>
+                <div class="info">
+                    Start: 225° (SW)<br>
+                    End: 495° (SE)<br>
+                    Gap: Bottom
+                </div>
+            </div>
+
+            <!-- Test 2: Traditional Gauge (135° to 405°) -->
+            <div class="test-card success">
+                <h3>Test 2: Traditional (135° → 405°)</h3>
+                <svg width="300" height="300" viewBox="0 0 300 300">
+                    <line x1="150" y1="0" x2="150" y2="300" stroke="#e0e0e0" stroke-width="1" />
+                    <line x1="0" y1="150" x2="300" y2="150" stroke="#e0e0e0" stroke-width="1" />
+                    
+                    <!-- Arc -->
+                    <g id="arc2"></g>
+                    
+                    <!-- Center -->
+                    <circle cx="150" cy="150" r="2" fill="#ff0000" />
+                </svg>
+                <div class="info">
+                    Start: 135° (SW)<br>
+                    End: 405° (SE)<br>
+                    Gap: Bottom ✓
+                </div>
+            </div>
+
+            <!-- Test 3: Alternative (-45° to 225°) -->
+            <div class="test-card">
+                <h3>Test 3: Alternative (-45° → 225°)</h3>
+                <svg width="300" height="300" viewBox="0 0 300 300">
+                    <line x1="150" y1="0" x2="150" y2="300" stroke="#e0e0e0" stroke-width="1" />
+                    <line x1="0" y1="150" x2="300" y2="150" stroke="#e0e0e0" stroke-width="1" />
+                    
+                    <!-- Arc -->
+                    <g id="arc3"></g>
+                    
+                    <!-- Center -->
+                    <circle cx="150" cy="150" r="2" fill="#ff0000" />
+                </svg>
+                <div class="info">
+                    Start: -45° (NE)<br>
+                    End: 225° (SW)<br>
+                    Gap: Top
+                </div>
+            </div>
+
+            <!-- Test 4: Right Opening (45° to 315°) -->
+            <div class="test-card">
+                <h3>Test 4: Right Gap (45° → 315°)</h3>
+                <svg width="300" height="300" viewBox="0 0 300 300">
+                    <line x1="150" y1="0" x2="150" y2="300" stroke="#e0e0e0" stroke-width="1" />
+                    <line x1="0" y1="150" x2="300" y2="150" stroke="#e0e0e0" stroke-width="1" />
+                    
+                    <!-- Arc -->
+                    <g id="arc4"></g>
+                    
+                    <!-- Center -->
+                    <circle cx="150" cy="150" r="2" fill="#ff0000" />
+                </svg>
+                <div class="info">
+                    Start: 45° (NE)<br>
+                    End: 315° (NW)<br>
+                    Gap: Right
+                </div>
+            </div>
+
+            <!-- Test 5: Left Opening (225° to 135°) -->
+            <div class="test-card">
+                <h3>Test 5: Left Gap (225° → 135°)</h3>
+                <svg width="300" height="300" viewBox="0 0 300 300">
+                    <line x1="150" y1="0" x2="150" y2="300" stroke="#e0e0e0" stroke-width="1" />
+                    <line x1="0" y1="150" x2="300" y2="150" stroke="#e0e0e0" stroke-width="1" />
+                    
+                    <!-- Arc -->
+                    <g id="arc5"></g>
+                    
+                    <!-- Center -->
+                    <circle cx="150" cy="150" r="2" fill="#ff0000" />
+                </svg>
+                <div class="info">
+                    Start: 225° (SW)<br>
+                    End: 135° (NW)<br>
+                    Gap: Left
+                </div>
+            </div>
+
+            <!-- Test 6: Top Opening (135° to 45°) -->
+            <div class="test-card">
+                <h3>Test 6: Top Gap (135° → 45°)</h3>
+                <svg width="300" height="300" viewBox="0 0 300 300">
+                    <line x1="150" y1="0" x2="150" y2="300" stroke="#e0e0e0" stroke-width="1" />
+                    <line x1="0" y1="150" x2="300" y2="150" stroke="#e0e0e0" stroke-width="1" />
+                    
+                    <!-- Arc -->
+                    <g id="arc6"></g>
+                    
+                    <!-- Center -->
+                    <circle cx="150" cy="150" r="2" fill="#ff0000" />
+                </svg>
+                <div class="info">
+                    Start: 135° (NW)<br>
+                    End: 45° (NE)<br>
+                    Gap: Top
+                </div>
+            </div>
+        </div>
+
+        <!-- 170° Rotation Comparison -->
+        <h2 style="text-align: center; margin-top: 60px;">Same Arcs with 170° Rotation</h2>
+        <div class="test-grid">
+            <!-- Rotated versions of the above -->
+            <div class="test-card">
+                <h3>Test 1 Rotated</h3>
+                <svg width="300" height="300" viewBox="0 0 300 300" style="transform: rotate(170deg);">
+                    <rect width="300" height="300" fill="#fafafa" />
+                    <g id="arc1-rot"></g>
+                    <circle cx="150" cy="150" r="2" fill="#ff0000" />
+                </svg>
+            </div>
+
+            <div class="test-card success">
+                <h3>Test 2 Rotated ✓</h3>
+                <svg width="300" height="300" viewBox="0 0 300 300" style="transform: rotate(170deg);">
+                    <rect width="300" height="300" fill="#fafafa" />
+                    <g id="arc2-rot"></g>
+                    <circle cx="150" cy="150" r="2" fill="#ff0000" />
+                </svg>
+            </div>
+
+            <div class="test-card">
+                <h3>Test 3 Rotated</h3>
+                <svg width="300" height="300" viewBox="0 0 300 300" style="transform: rotate(170deg);">
+                    <rect width="300" height="300" fill="#fafafa" />
+                    <g id="arc3-rot"></g>
+                    <circle cx="150" cy="150" r="2" fill="#ff0000" />
+                </svg>
+            </div>
+        </div>
+
+        <script>
+            // Function to create arc with scale
+            function createArc(containerId, startAngle, endAngle) {
+                const container = document.getElementById(containerId);
+                const cx = 150, cy = 150, radius = 100;
+                const strokeWidth = 20;
+                
+                // Convert angles to radians
+                const startRad = (startAngle * Math.PI) / 180;
+                const endRad = (endAngle * Math.PI) / 180;
+                
+                // Calculate path points
+                const x1 = cx + radius * Math.cos(startRad);
+                const y1 = cy + radius * Math.sin(startRad);
+                const x2 = cx + radius * Math.cos(endRad);
+                const y2 = cy + radius * Math.sin(endRad);
+                
+                // Create arc path
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                const d = `M ${x1} ${y1} A ${radius} ${radius} 0 1 1 ${x2} ${y2}`;
+                path.setAttribute('d', d);
+                path.setAttribute('fill', 'none');
+                path.setAttribute('stroke', '#e5e7eb');
+                path.setAttribute('stroke-width', strokeWidth);
+                path.setAttribute('stroke-linecap', 'round');
+                container.appendChild(path);
+                
+                // Add scale marks
+                for (let value = 1; value <= 10; value++) {
+                    const progress = (value - 1) / 9;
+                    const angle = startAngle + progress * 270;
+                    const angleRad = (angle * Math.PI) / 180;
+                    
+                    // Tick positions
+                    const tickInner = radius - strokeWidth/2 - 5;
+                    const tickOuter = radius + strokeWidth/2 + 5;
+                    const labelRadius = radius + strokeWidth/2 + 20;
+                    
+                    // Create tick
+                    const tick = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    tick.setAttribute('x1', cx + tickInner * Math.cos(angleRad));
+                    tick.setAttribute('y1', cy + tickInner * Math.sin(angleRad));
+                    tick.setAttribute('x2', cx + tickOuter * Math.cos(angleRad));
+                    tick.setAttribute('y2', cy + tickOuter * Math.sin(angleRad));
+                    tick.setAttribute('stroke', value === 1 || value === 10 ? '#333' : '#666');
+                    tick.setAttribute('stroke-width', value === 1 || value === 10 ? '2' : '1');
+                    container.appendChild(tick);
+                    
+                    // Create label
+                    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    label.setAttribute('x', cx + labelRadius * Math.cos(angleRad));
+                    label.setAttribute('y', cy + labelRadius * Math.sin(angleRad));
+                    label.setAttribute('text-anchor', 'middle');
+                    label.setAttribute('dominant-baseline', 'middle');
+                    label.setAttribute('font-size', '14');
+                    label.setAttribute('fill', value === 1 ? '#ff0000' : value === 10 ? '#0000ff' : '#333');
+                    label.textContent = value;
+                    
+                    // For rotated versions, counter-rotate the text
+                    if (containerId.includes('-rot')) {
+                        const labelX = cx + labelRadius * Math.cos(angleRad);
+                        const labelY = cy + labelRadius * Math.sin(angleRad);
+                        label.setAttribute('transform', `rotate(-170 ${labelX} ${labelY})`);
+                    }
+                    
+                    container.appendChild(label);
+                }
+            }
+            
+            // Create all test arcs
+            createArc('arc1', 225, 495);  // Current implementation
+            createArc('arc2', 135, 405);  // Traditional gauge
+            createArc('arc3', -45, 225);  // Alternative
+            createArc('arc4', 45, 315);   // Right gap
+            createArc('arc5', 225, 495);  // Left gap (wraps)
+            createArc('arc6', 135, 405);  // Top gap (wraps)
+            
+            // Rotated versions
+            createArc('arc1-rot', 225, 495);
+            createArc('arc2-rot', 135, 405);
+            createArc('arc3-rot', -45, 225);
+        </script>
+
+        <!-- Recommendation -->
+        <div style="background: #e8f5e9; padding: 30px; border-radius: 16px; margin-top: 40px;">
+            <h2 style="text-align: center;">📐 Recommendation</h2>
+            <p style="text-align: center; font-size: 18px;">
+                <strong>Test 2 (135° → 405°)</strong> appears to be the traditional gauge orientation.<br>
+                This gives us the standard bottom gap that looks natural when rotated.
+            </p>
+            <div style="background: white; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                <h3>Final Formula:</h3>
+                <pre style="margin: 0;">const START_ANGLE = 135;  // degrees
+const END_ANGLE = 405;    // degrees (135 + 270)
+const TOTAL_SWEEP = 270;  // degrees
+
+function valueToAngle(value) {
+    const normalized = (value - 1) / 9;
+    return START_ANGLE + (normalized * TOTAL_SWEEP);
+}</pre>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

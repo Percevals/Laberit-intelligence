@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImmunityGaugeV2 Test - 170° Rotation</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #f5f5f7;
+            padding: 40px 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #1d1d1f;
+            margin-bottom: 20px;
+        }
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        .gauge-card {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        .gauge-card.highlight {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border: 2px solid #4caf50;
+        }
+        h3 {
+            margin: 0 0 30px 0;
+            color: #333;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .info {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f5f5f7;
+            border-radius: 12px;
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+        .success-badge {
+            display: inline-block;
+            background: #4caf50;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ImmunityGaugeV2 - Clean Implementation Test</h1>
+        <p style="text-align: center; color: #666; font-size: 18px; margin-bottom: 50px;">
+            Testing the new gauge component with configurable rotation and proper gradient alignment
+        </p>
+        
+        <div class="demo-grid">
+            <!-- Original orientation (0° rotation) -->
+            <div class="gauge-card">
+                <h3>Original Orientation (0°)</h3>
+                <svg width="320" height="320" viewBox="0 0 320 320">
+                    <defs>
+                        <linearGradient id="gradOriginal" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#ef4444" />
+                            <stop offset="33%" style="stop-color:#f59e0b" />
+                            <stop offset="66%" style="stop-color:#10b981" />
+                            <stop offset="100%" style="stop-color:#3b82f6" />
+                        </linearGradient>
+                        <filter id="gauge-shadow-1" x="-50%" y="-50%" width="200%" height="200%">
+                            <feDropShadow dx="0" dy="2" stdDeviation="3" floodOpacity="0.3"/>
+                        </filter>
+                    </defs>
+                    
+                    <!-- Background track -->
+                    <path d="M 64.45 255.55 A 120 120 0 1 1 255.55 255.55" 
+                          fill="none" stroke="#e5e7eb" stroke-width="20" stroke-linecap="round" opacity="0.3" />
+                    
+                    <!-- Main arc (75% = 202.5°) -->
+                    <path d="M 64.45 255.55 A 120 120 0 1 1 227.4 206.4" 
+                          fill="none" stroke="url(#gradOriginal)" stroke-width="20" stroke-linecap="round" 
+                          filter="url(#gauge-shadow-1)" />
+                    
+                    <!-- Center text -->
+                    <g transform="translate(160, 160)">
+                        <text text-anchor="middle" dominant-baseline="central" y="-8" font-size="48" font-weight="bold" fill="#1d1d1f">75</text>
+                        <text text-anchor="middle" dominant-baseline="central" y="28" font-size="16" font-weight="500" fill="#10b981">RESILIENTE</text>
+                    </g>
+                </svg>
+                
+                <div class="info">
+                    <strong>gaugeRotation: 0</strong><br>
+                    Default orientation with opening at bottom
+                </div>
+            </div>
+
+            <!-- 170° rotation (desired orientation) -->
+            <div class="gauge-card highlight">
+                <h3>✅ 170° Clockwise Rotation</h3>
+                <svg width="320" height="320" viewBox="0 0 320 320" style="transform: rotate(170deg);">
+                    <defs>
+                        <linearGradient id="grad170" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <!-- Colors reversed for 170° rotation -->
+                            <stop offset="0%" style="stop-color:#3b82f6" />
+                            <stop offset="33%" style="stop-color:#10b981" />
+                            <stop offset="66%" style="stop-color:#f59e0b" />
+                            <stop offset="100%" style="stop-color:#ef4444" />
+                        </linearGradient>
+                        <filter id="gauge-shadow-2" x="-50%" y="-50%" width="200%" height="200%">
+                            <feDropShadow dx="0" dy="2" stdDeviation="3" floodOpacity="0.3"/>
+                        </filter>
+                    </defs>
+                    
+                    <!-- Background track -->
+                    <path d="M 64.45 255.55 A 120 120 0 1 1 255.55 255.55" 
+                          fill="none" stroke="#e5e7eb" stroke-width="20" stroke-linecap="round" opacity="0.3" />
+                    
+                    <!-- Main arc (75% = 202.5°) -->
+                    <path d="M 64.45 255.55 A 120 120 0 1 1 227.4 206.4" 
+                          fill="none" stroke="url(#grad170)" stroke-width="20" stroke-linecap="round" 
+                          filter="url(#gauge-shadow-2)" />
+                    
+                    <!-- Counter-rotated text -->
+                    <g transform="translate(160, 160) rotate(-170)">
+                        <text text-anchor="middle" dominant-baseline="central" y="-8" font-size="48" font-weight="bold" fill="#1d1d1f">75</text>
+                        <text text-anchor="middle" dominant-baseline="central" y="28" font-size="16" font-weight="500" fill="#10b981">RESILIENTE</text>
+                    </g>
+                </svg>
+                
+                <div class="info">
+                    <strong>gaugeRotation: 170</strong><br>
+                    Gradient colors automatically reversed for rotations > 90°
+                    <br><span class="success-badge">FIXED & IMPLEMENTED ✓</span>
+                </div>
+            </div>
+
+            <!-- Different score examples -->
+            <div class="gauge-card">
+                <h3>Score Examples (170° rotation)</h3>
+                <div style="display: flex; justify-content: space-around; align-items: center; margin-bottom: 20px;">
+                    <!-- 25% -->
+                    <svg width="140" height="140" viewBox="0 0 140 140" style="transform: rotate(170deg);">
+                        <defs>
+                            <linearGradient id="grad25" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <!-- Reversed for 170° rotation -->
+                                <stop offset="0%" style="stop-color:#3b82f6" />
+                                <stop offset="33%" style="stop-color:#10b981" />
+                                <stop offset="66%" style="stop-color:#f59e0b" />
+                                <stop offset="100%" style="stop-color:#ef4444" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M 28.2 111.8 A 50 50 0 1 1 111.8 111.8" 
+                              fill="none" stroke="#e5e7eb" stroke-width="8" stroke-linecap="round" opacity="0.3" />
+                        <path d="M 28.2 111.8 A 50 50 0 0 1 70 103.5" 
+                              fill="none" stroke="url(#grad25)" stroke-width="8" stroke-linecap="round" />
+                        <g transform="translate(70, 70) rotate(-170)">
+                            <text text-anchor="middle" dominant-baseline="central" font-size="20" font-weight="bold" fill="#ef4444">25</text>
+                        </g>
+                    </svg>
+                    
+                    <!-- 50% -->
+                    <svg width="140" height="140" viewBox="0 0 140 140" style="transform: rotate(170deg);">
+                        <defs>
+                            <linearGradient id="grad50" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <!-- Reversed for 170° rotation -->
+                                <stop offset="0%" style="stop-color:#3b82f6" />
+                                <stop offset="33%" style="stop-color:#10b981" />
+                                <stop offset="66%" style="stop-color:#f59e0b" />
+                                <stop offset="100%" style="stop-color:#ef4444" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M 28.2 111.8 A 50 50 0 1 1 111.8 111.8" 
+                              fill="none" stroke="#e5e7eb" stroke-width="8" stroke-linecap="round" opacity="0.3" />
+                        <path d="M 28.2 111.8 A 50 50 0 1 1 95 86" 
+                              fill="none" stroke="url(#grad50)" stroke-width="8" stroke-linecap="round" />
+                        <g transform="translate(70, 70) rotate(-170)">
+                            <text text-anchor="middle" dominant-baseline="central" font-size="20" font-weight="bold" fill="#f59e0b">50</text>
+                        </g>
+                    </svg>
+                    
+                    <!-- 90% -->
+                    <svg width="140" height="140" viewBox="0 0 140 140" style="transform: rotate(170deg);">
+                        <defs>
+                            <linearGradient id="grad90" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <!-- Reversed for 170° rotation -->
+                                <stop offset="0%" style="stop-color:#3b82f6" />
+                                <stop offset="33%" style="stop-color:#10b981" />
+                                <stop offset="66%" style="stop-color:#f59e0b" />
+                                <stop offset="100%" style="stop-color:#ef4444" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M 28.2 111.8 A 50 50 0 1 1 111.8 111.8" 
+                              fill="none" stroke="#e5e7eb" stroke-width="8" stroke-linecap="round" opacity="0.3" />
+                        <path d="M 28.2 111.8 A 50 50 0 1 1 108 100" 
+                              fill="none" stroke="url(#grad90)" stroke-width="8" stroke-linecap="round" />
+                        <g transform="translate(70, 70) rotate(-170)">
+                            <text text-anchor="middle" dominant-baseline="central" font-size="20" font-weight="bold" fill="#3b82f6">90</text>
+                        </g>
+                    </svg>
+                </div>
+                <div class="info">
+                    Color progression maintains correct mapping:<br>
+                    • Low scores (0-30): Red<br>
+                    • Medium scores (30-60): Orange<br>
+                    • Good scores (60-80): Green<br>
+                    • Excellent scores (80-100): Blue
+                </div>
+            </div>
+        </div>
+
+        <div style="background: #e3f2fd; padding: 40px; border-radius: 16px; margin-top: 60px;">
+            <h2 style="text-align: center; margin-top: 0;">🎯 ImmunityGaugeV2 Implementation</h2>
+            <div style="max-width: 700px; margin: 0 auto;">
+                <h3>Key Features:</h3>
+                <ul style="line-height: 1.8; font-size: 16px;">
+                    <li><strong>Configurable rotation:</strong> Pass <code>gaugeRotation={170}</code> prop</li>
+                    <li><strong>Smart gradient reversal:</strong> Automatically reverses colors for rotations > 90°</li>
+                    <li><strong>Text stays upright:</strong> Counter-rotation applied to center group</li>
+                    <li><strong>Clean architecture:</strong> Simple logic, no complex transforms</li>
+                    <li><strong>Smooth animations:</strong> All Framer Motion animations preserved</li>
+                    <li><strong>Color progression maintained:</strong> Red (low) → Orange → Green → Blue (high)</li>
+                </ul>
+                
+                <h3>Usage Example:</h3>
+                <pre style="background: #1d1d1f; color: #fff; padding: 20px; border-radius: 8px; overflow-x: auto;">
+&lt;ImmunityGaugeV2
+  score={{
+    current: 75,
+    previous: 65,
+    stage: 'RESILIENTE',
+    confidence: 95,
+    percentile: 82,
+    trend: 'improving'
+  }}
+  size="medium"
+  showDetails={true}
+  gaugeRotation={170}  // 170° clockwise rotation
+/&gt;</pre>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

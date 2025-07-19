@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DimensionBalance - Final Version 1</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            padding: 40px 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 10px;
+            font-weight: 300;
+            font-size: 2.5em;
+        }
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 40px;
+            font-size: 1.2em;
+        }
+        .visualization-card {
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid #333;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        svg {
+            background: #000;
+            border-radius: 16px;
+            display: block;
+            margin: 0 auto 30px;
+        }
+        .controls {
+            background: #222;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+        .control-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .control-group.vulnerability {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .control-item {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-size: 14px;
+            color: #aaa;
+            margin-bottom: 5px;
+        }
+        input[type="range"] {
+            width: 100%;
+            margin: 5px 0;
+        }
+        .value-display {
+            font-size: 20px;
+            font-weight: 300;
+            text-align: center;
+        }
+        .resilience { color: #10b981; }
+        .vulnerability { color: #B4B5DF; }
+        
+        /* Maturity colors */
+        .fragil { color: #ef4444; }
+        .robusto { color: #f59e0b; }
+        .resiliente { color: #10b981; }
+        .adaptativo { color: #3b82f6; }
+        
+        /* Simple hover transitions */
+        .hover-line {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .dimension-dot {
+            transition: fill 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .maturity-legend {
+            background: #222;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .maturity-item {
+            text-align: center;
+            padding: 10px;
+        }
+        .maturity-range {
+            font-size: 12px;
+            color: #666;
+        }
+        .maturity-label {
+            font-size: 14px;
+            font-weight: 500;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Digital Immunity Index</h1>
+        <p class="subtitle">Signature Visualization - How Immune is Your Company?</p>
+        
+        <div class="visualization-card">
+            <svg width="600" height="600" viewBox="0 0 600 600">
+                <defs>
+                    <clipPath id="circle-clip">
+                        <circle cx="300" cy="300" r="270" />
+                    </clipPath>
+                    <!-- Maturity gradient definitions -->
+                    <radialGradient id="fragil-glow">
+                        <stop offset="0%" stop-color="#ef4444" stop-opacity="0.8" />
+                        <stop offset="50%" stop-color="#ef4444" stop-opacity="0.3" />
+                        <stop offset="100%" stop-color="#ef4444" stop-opacity="0" />
+                    </radialGradient>
+                    <radialGradient id="robusto-glow">
+                        <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.8" />
+                        <stop offset="50%" stop-color="#f59e0b" stop-opacity="0.3" />
+                        <stop offset="100%" stop-color="#f59e0b" stop-opacity="0" />
+                    </radialGradient>
+                    <radialGradient id="resiliente-glow">
+                        <stop offset="0%" stop-color="#10b981" stop-opacity="0.8" />
+                        <stop offset="50%" stop-color="#10b981" stop-opacity="0.3" />
+                        <stop offset="100%" stop-color="#10b981" stop-opacity="0" />
+                    </radialGradient>
+                    <radialGradient id="adaptativo-glow">
+                        <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.8" />
+                        <stop offset="50%" stop-color="#3b82f6" stop-opacity="0.3" />
+                        <stop offset="100%" stop-color="#3b82f6" stop-opacity="0" />
+                    </radialGradient>
+                    <!-- Default gradients -->
+                    <radialGradient id="green-glow">
+                        <stop offset="0%" stop-color="#10b981" stop-opacity="0.6" />
+                        <stop offset="50%" stop-color="#10b981" stop-opacity="0.2" />
+                        <stop offset="100%" stop-color="#10b981" stop-opacity="0" />
+                    </radialGradient>
+                    <radialGradient id="purple-glow">
+                        <stop offset="0%" stop-color="#B4B5DF" stop-opacity="0.6" />
+                        <stop offset="50%" stop-color="#B4B5DF" stop-opacity="0.2" />
+                        <stop offset="100%" stop-color="#B4B5DF" stop-opacity="0" />
+                    </radialGradient>
+                </defs>
+                
+                <!-- Flowing wave background -->
+                <g clip-path="url(#circle-clip)">
+                    <path d="M 30 300 
+                             Q 165 180, 300 300
+                             T 570 300
+                             L 570 30
+                             L 30 30
+                             Z"
+                          fill="#10b98120" />
+                    
+                    <path d="M 30 300 
+                             Q 165 180, 300 300
+                             T 570 300
+                             L 570 570
+                             L 30 570
+                             Z"
+                          fill="#B4B5DF20" />
+                </g>
+                
+                <!-- Circle border -->
+                <circle cx="300" cy="300" r="270" fill="none" stroke="#333" stroke-width="2" />
+                
+                <!-- Maturity rings (subtle) -->
+                <circle cx="300" cy="300" r="108" fill="none" stroke="#ef444420" stroke-width="1" stroke-dasharray="4,4" />
+                <circle cx="300" cy="300" r="162" fill="none" stroke="#f59e0b20" stroke-width="1" stroke-dasharray="4,4" />
+                <circle cx="300" cy="300" r="216" fill="none" stroke="#10b98120" stroke-width="1" stroke-dasharray="4,4" />
+                
+                <!-- Dimension visualization -->
+                <g id="dimension-visual"></g>
+            </svg>
+            
+            <div class="controls">
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="resilience">Resistencia (TRD)</label>
+                        <input type="range" id="trd" min="1" max="10" value="7.5" step="0.5">
+                        <div class="value-display resilience" id="trd-val">7.5</div>
+                    </div>
+                    <div class="control-item">
+                        <label class="resilience">Ciber-ROI (AER)</label>
+                        <input type="range" id="aer" min="1" max="10" value="8" step="0.5">
+                        <div class="value-display resilience" id="aer-val">8.0</div>
+                    </div>
+                </div>
+                <div class="control-group vulnerability">
+                    <div class="control-item">
+                        <label class="vulnerability">Exposición (BRI)</label>
+                        <input type="range" id="bri" min="1" max="10" value="5" step="0.5">
+                        <div class="value-display vulnerability" id="bri-val">5.0</div>
+                    </div>
+                    <div class="control-item">
+                        <label class="vulnerability">Cultura (HFP)</label>
+                        <input type="range" id="hfp" min="1" max="10" value="6" step="0.5">
+                        <div class="value-display vulnerability" id="hfp-val">6.0</div>
+                    </div>
+                    <div class="control-item">
+                        <label class="vulnerability">Respuesta (RRG)</label>
+                        <input type="range" id="rrg" min="1" max="10" value="4.5" step="0.5">
+                        <div class="value-display vulnerability" id="rrg-val">4.5</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="maturity-legend">
+                <div class="maturity-item">
+                    <div class="maturity-range fragil">< 4.0</div>
+                    <div class="maturity-label fragil">FRÁGIL 😰</div>
+                </div>
+                <div class="maturity-item">
+                    <div class="maturity-range robusto">4.0 - 6.0</div>
+                    <div class="maturity-label robusto">ROBUSTO 💪</div>
+                </div>
+                <div class="maturity-item">
+                    <div class="maturity-range resiliente">6.0 - 8.0</div>
+                    <div class="maturity-label resiliente">RESILIENTE 🛡️</div>
+                </div>
+                <div class="maturity-item">
+                    <div class="maturity-range adaptativo">> 8.0</div>
+                    <div class="maturity-label adaptativo">ADAPTATIVO 🚀</div>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            // Dimension configuration
+            const dimensions = {
+                trd: { angle: 324, label: 'Resistencia', color: '#10b981', group: 'resilience' },
+                aer: { angle: 36, label: 'Ciber-ROI', color: '#10b981', group: 'resilience' },
+                rrg: { angle: 108, label: 'Respuesta', color: '#B4B5DF', group: 'vulnerability' },
+                hfp: { angle: 180, label: 'Cultura', color: '#B4B5DF', group: 'vulnerability' },
+                bri: { angle: 252, label: 'Exposición', color: '#B4B5DF', group: 'vulnerability' }
+            };
+            
+            // Maturity stages configuration
+            const maturityStages = {
+                fragil: { min: 0, max: 4, color: '#ef4444', label: 'FRÁGIL', glow: 'fragil-glow' },
+                robusto: { min: 4, max: 6, color: '#f59e0b', label: 'ROBUSTO', glow: 'robusto-glow' },
+                resiliente: { min: 6, max: 8, color: '#10b981', label: 'RESILIENTE', glow: 'resiliente-glow' },
+                adaptativo: { min: 8, max: 10, color: '#3b82f6', label: 'ADAPTATIVO', glow: 'adaptativo-glow' }
+            };
+            
+            // Helper function to get maturity stage
+            function getMaturityStage(value) {
+                if (value < 4) return maturityStages.fragil;
+                if (value < 6) return maturityStages.robusto;
+                if (value < 8) return maturityStages.resiliente;
+                return maturityStages.adaptativo;
+            }
+            
+            // Helper function to convert polar to cartesian
+            function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+                const angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
+                return {
+                    x: centerX + (radius * Math.cos(angleInRadians)),
+                    y: centerY + (radius * Math.sin(angleInRadians))
+                };
+            }
+            
+            // Draw the visualization
+            function updateVisualization() {
+                const container = document.getElementById('dimension-visual');
+                const centerX = 300, centerY = 300;
+                const maxRadius = 220;
+                
+                // Clear previous
+                container.innerHTML = '';
+                
+                // Create groups for layering
+                const linesGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                const glowGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                const dotsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                const labelsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                
+                // Draw each dimension
+                Object.keys(dimensions).forEach(key => {
+                    const dim = dimensions[key];
+                    const value = parseFloat(document.getElementById(key).value);
+                    const radius = (value / 10) * maxRadius;
+                    const point = polarToCartesian(centerX, centerY, radius, dim.angle);
+                    const maturity = getMaturityStage(value);
+                    
+                    // Hidden line from center (shows on hover)
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', centerX);
+                    line.setAttribute('y1', centerY);
+                    line.setAttribute('x2', point.x);
+                    line.setAttribute('y2', point.y);
+                    line.setAttribute('stroke', dim.color);
+                    line.setAttribute('stroke-width', '2');
+                    line.setAttribute('stroke-dasharray', '4,8');
+                    line.classList.add('hover-line');
+                    line.id = `line-${key}`;
+                    linesGroup.appendChild(line);
+                    
+                    // Glow effect (default)
+                    const glow = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    glow.setAttribute('cx', point.x);
+                    glow.setAttribute('cy', point.y);
+                    glow.setAttribute('r', '40');
+                    glow.setAttribute('fill', `url(#${dim.group === 'resilience' ? 'green' : 'purple'}-glow)`);
+                    glow.id = `glow-${key}`;
+                    glowGroup.appendChild(glow);
+                    
+                    // Main dot - bigger for visual impact
+                    const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    dot.setAttribute('cx', point.x);
+                    dot.setAttribute('cy', point.y);
+                    dot.setAttribute('r', '20');
+                    dot.setAttribute('fill', dim.color);
+                    dot.setAttribute('opacity', '0.9');
+                    dot.classList.add('dimension-dot');
+                    dot.id = `dot-${key}`;
+                    
+                    // Simple hover effect - just color change
+                    dot.addEventListener('mouseenter', () => {
+                        // Show line
+                        document.getElementById(`line-${key}`).style.opacity = '0.5';
+                        
+                        // Change to maturity color
+                        dot.setAttribute('fill', maturity.color);
+                        
+                        // Update glow to maturity color
+                        const glowElement = document.getElementById(`glow-${key}`);
+                        glowElement.setAttribute('fill', `url(#${maturity.glow})`);
+                    });
+                    
+                    dot.addEventListener('mouseleave', () => {
+                        // Hide line
+                        document.getElementById(`line-${key}`).style.opacity = '0';
+                        
+                        // Restore original color
+                        dot.setAttribute('fill', dim.color);
+                        
+                        // Restore glow
+                        const glowElement = document.getElementById(`glow-${key}`);
+                        glowElement.setAttribute('fill', `url(#${dim.group === 'resilience' ? 'green' : 'purple'}-glow)`);
+                    });
+                    
+                    dotsGroup.appendChild(dot);
+                    
+                    // Value inside dot - bigger font
+                    const valueText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    valueText.setAttribute('x', point.x);
+                    valueText.setAttribute('y', point.y);
+                    valueText.setAttribute('text-anchor', 'middle');
+                    valueText.setAttribute('dominant-baseline', 'middle');
+                    valueText.setAttribute('font-size', '16');
+                    valueText.setAttribute('font-weight', 'bold');
+                    valueText.setAttribute('fill', '#fff');
+                    valueText.textContent = value.toFixed(1);
+                    valueText.style.pointerEvents = 'none';
+                    valueText.id = `value-${key}`;
+                    dotsGroup.appendChild(valueText);
+                    
+                    // Label outside circle
+                    const labelPoint = polarToCartesian(centerX, centerY, 295, dim.angle);
+                    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    label.setAttribute('x', labelPoint.x);
+                    label.setAttribute('y', labelPoint.y);
+                    label.setAttribute('text-anchor', 'middle');
+                    label.setAttribute('dominant-baseline', 'middle');
+                    label.setAttribute('font-size', '16');
+                    label.setAttribute('fill', dim.color);
+                    label.setAttribute('font-weight', '500');
+                    label.textContent = dim.label;
+                    labelsGroup.appendChild(label);
+                });
+                
+                // Append all groups in order
+                container.appendChild(linesGroup);
+                container.appendChild(glowGroup);
+                container.appendChild(dotsGroup);
+                container.appendChild(labelsGroup);
+            }
+            
+            // Initialize visualization
+            updateVisualization();
+            
+            // Add event listeners to sliders
+            Object.keys(dimensions).forEach(key => {
+                const slider = document.getElementById(key);
+                const display = document.getElementById(`${key}-val`);
+                
+                slider.addEventListener('input', () => {
+                    const value = parseFloat(slider.value);
+                    display.textContent = value.toFixed(1);
+                    
+                    // Update display color based on maturity
+                    const maturity = getMaturityStage(value);
+                    display.style.color = maturity.color;
+                    
+                    updateVisualization();
+                });
+            });
+        </script>
+    </div>
+</body>
+</html>

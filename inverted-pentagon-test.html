@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inverted Pentagon Coordinate Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            padding: 40px 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 40px;
+        }
+        .variations-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+        .variation-card {
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid #333;
+        }
+        .variation-title {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #fff;
+            text-align: center;
+            font-weight: 300;
+        }
+        svg {
+            background: #000;
+            border-radius: 16px;
+            display: block;
+            margin: 0 auto;
+        }
+        .coordinate-info {
+            background: #222;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: monospace;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+        .coordinate-info strong {
+            color: #10b981;
+        }
+        .success {
+            color: #10b981;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Finding the Perfect Inverted Pentagon</h1>
+        <p class="subtitle">Testing rotations to achieve a pentagon with one point facing down</p>
+        
+        <div class="variations-grid">
+            <!-- Test 1: Base Pentagon (for reference) -->
+            <div class="variation-card">
+                <h2 class="variation-title">Test 1: Base Pentagon (0° rotation)</h2>
+                <svg width="500" height="500" viewBox="0 0 500 500">
+                    <!-- Circle border -->
+                    <circle cx="250" cy="250" r="220" fill="none" stroke="#333" stroke-width="1" />
+                    
+                    <!-- Grid circles for reference -->
+                    <circle cx="250" cy="250" r="180" fill="none" stroke="#222" stroke-width="0.5" />
+                    <circle cx="250" cy="250" r="140" fill="none" stroke="#222" stroke-width="0.5" />
+                    <circle cx="250" cy="250" r="100" fill="none" stroke="#222" stroke-width="0.5" />
+                    
+                    <!-- Axis lines for reference -->
+                    <line x1="250" y1="30" x2="250" y2="470" stroke="#222" stroke-width="0.5" stroke-dasharray="2,4" />
+                    <line x1="30" y1="250" x2="470" y2="250" stroke="#222" stroke-width="0.5" stroke-dasharray="2,4" />
+                    
+                    <!-- Center point -->
+                    <circle cx="250" cy="250" r="3" fill="#fff" opacity="0.5" />
+                    
+                    <!-- Pentagon visualization -->
+                    <g id="pentagon-1"></g>
+                </svg>
+                
+                <div class="coordinate-info">
+                    <strong>Starting angles (72° intervals):</strong><br>
+                    Point 1: 0° (top)<br>
+                    Point 2: 72°<br>
+                    Point 3: 144°<br>
+                    Point 4: 216°<br>
+                    Point 5: 288°
+                </div>
+            </div>
+            
+            <!-- Test 2: Rotated 18° (your estimate) -->
+            <div class="variation-card">
+                <h2 class="variation-title">Test 2: Rotated +18°</h2>
+                <svg width="500" height="500" viewBox="0 0 500 500">
+                    <!-- Circle border -->
+                    <circle cx="250" cy="250" r="220" fill="none" stroke="#333" stroke-width="1" />
+                    
+                    <!-- Grid circles for reference -->
+                    <circle cx="250" cy="250" r="180" fill="none" stroke="#222" stroke-width="0.5" />
+                    <circle cx="250" cy="250" r="140" fill="none" stroke="#222" stroke-width="0.5" />
+                    <circle cx="250" cy="250" r="100" fill="none" stroke="#222" stroke-width="0.5" />
+                    
+                    <!-- Axis lines for reference -->
+                    <line x1="250" y1="30" x2="250" y2="470" stroke="#222" stroke-width="0.5" stroke-dasharray="2,4" />
+                    <line x1="30" y1="250" x2="470" y2="250" stroke="#222" stroke-width="0.5" stroke-dasharray="2,4" />
+                    
+                    <!-- Center point -->
+                    <circle cx="250" cy="250" r="3" fill="#fff" opacity="0.5" />
+                    
+                    <!-- Pentagon visualization -->
+                    <g id="pentagon-2"></g>
+                </svg>
+                
+                <div class="coordinate-info">
+                    <strong>Rotated +18°:</strong><br>
+                    Point 1: 18°<br>
+                    Point 2: 90° (right)<br>
+                    Point 3: 162°<br>
+                    Point 4: 234°<br>
+                    Point 5: 306°
+                </div>
+            </div>
+            
+            <!-- Test 3: Rotated 36° (half of 72°) -->
+            <div class="variation-card">
+                <h2 class="variation-title">Test 3: Rotated +36°</h2>
+                <svg width="500" height="500" viewBox="0 0 500 500">
+                    <!-- Circle border -->
+                    <circle cx="250" cy="250" r="220" fill="none" stroke="#333" stroke-width="1" />
+                    
+                    <!-- Grid circles for reference -->
+                    <circle cx="250" cy="250" r="180" fill="none" stroke="#222" stroke-width="0.5" />
+                    <circle cx="250" cy="250" r="140" fill="none" stroke="#222" stroke-width="0.5" />
+                    <circle cx="250" cy="250" r="100" fill="none" stroke="#222" stroke-width="0.5" />
+                    
+                    <!-- Axis lines for reference -->
+                    <line x1="250" y1="30" x2="250" y2="470" stroke="#222" stroke-width="0.5" stroke-dasharray="2,4" />
+                    <line x1="30" y1="250" x2="470" y2="250" stroke="#222" stroke-width="0.5" stroke-dasharray="2,4" />
+                    
+                    <!-- Center point -->
+                    <circle cx="250" cy="250" r="3" fill="#fff" opacity="0.5" />
+                    
+                    <!-- Pentagon visualization -->
+                    <g id="pentagon-3"></g>
+                </svg>
+                
+                <div class="coordinate-info">
+                    <strong>Rotated +36° (half interval):</strong><br>
+                    Point 1: 36°<br>
+                    Point 2: 108°<br>
+                    Point 3: 180° (bottom)<br>
+                    Point 4: 252°<br>
+                    Point 5: 324°<br>
+                    <span class="success">This should create an inverted pentagon!</span>
+                </div>
+            </div>
+            
+            <!-- Test 4: Fine-tuned rotation -->
+            <div class="variation-card">
+                <h2 class="variation-title">Test 4: Fine-tuned (+36° verified)</h2>
+                <svg width="500" height="500" viewBox="0 0 500 500">
+                    <!-- Circle border -->
+                    <circle cx="250" cy="250" r="220" fill="none" stroke="#333" stroke-width="1" />
+                    
+                    <!-- Grid circles for reference -->
+                    <circle cx="250" cy="250" r="180" fill="none" stroke="#222" stroke-width="0.5" />
+                    <circle cx="250" cy="250" r="140" fill="none" stroke="#222" stroke-width="0.5" />
+                    <circle cx="250" cy="250" r="100" fill="none" stroke="#222" stroke-width="0.5" />
+                    
+                    <!-- Axis lines for reference -->
+                    <line x1="250" y1="30" x2="250" y2="470" stroke="#222" stroke-width="0.5" stroke-dasharray="2,4" />
+                    <line x1="30" y1="250" x2="470" y2="250" stroke="#222" stroke-width="0.5" stroke-dasharray="2,4" />
+                    
+                    <!-- Center point -->
+                    <circle cx="250" cy="250" r="3" fill="#fff" opacity="0.5" />
+                    
+                    <!-- Pentagon visualization -->
+                    <g id="pentagon-4"></g>
+                </svg>
+                
+                <div class="coordinate-info">
+                    <strong>Perfect inverted pentagon angles:</strong><br>
+                    Top-left: 324° (-36°)<br>
+                    Top-right: 36°<br>
+                    Right: 108°<br>
+                    Bottom-left: 252°<br>
+                    Bottom (pointing down): 180°<br>
+                    <br>
+                    <strong>Order for drawing:</strong><br>
+                    1. 324° → 2. 36° → 3. 108° → 4. 180° → 5. 252°
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            // Helper function to convert polar to cartesian
+            function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+                const angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
+                return {
+                    x: centerX + (radius * Math.cos(angleInRadians)),
+                    y: centerY + (radius * Math.sin(angleInRadians))
+                };
+            }
+            
+            // Function to draw a pentagon with given rotation
+            function drawPentagon(id, rotationOffset) {
+                const container = document.getElementById(`pentagon-${id}`);
+                const centerX = 250, centerY = 250;
+                const radius = 180;
+                
+                // Calculate 5 points with 72° intervals, starting from 0° + offset
+                const angles = [];
+                for (let i = 0; i < 5; i++) {
+                    angles.push((i * 72 + rotationOffset) % 360);
+                }
+                
+                // Draw lines from center to each point
+                angles.forEach((angle, i) => {
+                    const endPoint = polarToCartesian(centerX, centerY, radius, angle);
+                    
+                    // Line from center
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', centerX);
+                    line.setAttribute('y1', centerY);
+                    line.setAttribute('x2', endPoint.x);
+                    line.setAttribute('y2', endPoint.y);
+                    line.setAttribute('stroke', '#666');
+                    line.setAttribute('stroke-width', '1');
+                    line.setAttribute('opacity', '0.5');
+                    container.appendChild(line);
+                });
+                
+                // Draw the pentagon
+                const pentagonPath = [];
+                const points = [];
+                angles.forEach(angle => {
+                    const point = polarToCartesian(centerX, centerY, radius, angle);
+                    points.push(point);
+                    pentagonPath.push(pentagonPath.length === 0 ? `M ${point.x} ${point.y}` : `L ${point.x} ${point.y}`);
+                });
+                pentagonPath.push('Z');
+                
+                const pentagon = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                pentagon.setAttribute('d', pentagonPath.join(' '));
+                pentagon.setAttribute('fill', 'none');
+                pentagon.setAttribute('stroke', '#10b981');
+                pentagon.setAttribute('stroke-width', '2');
+                container.appendChild(pentagon);
+                
+                // Draw dots at each vertex
+                points.forEach((point, i) => {
+                    // Dot
+                    const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    dot.setAttribute('cx', point.x);
+                    dot.setAttribute('cy', point.y);
+                    dot.setAttribute('r', '8');
+                    dot.setAttribute('fill', '#10b981');
+                    container.appendChild(dot);
+                    
+                    // Number label
+                    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    label.setAttribute('x', point.x);
+                    label.setAttribute('y', point.y);
+                    label.setAttribute('text-anchor', 'middle');
+                    label.setAttribute('dominant-baseline', 'middle');
+                    label.setAttribute('font-size', '12');
+                    label.setAttribute('font-weight', 'bold');
+                    label.setAttribute('fill', '#000');
+                    label.textContent = i + 1;
+                    container.appendChild(label);
+                    
+                    // Angle label
+                    const angleLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    angleLabel.setAttribute('x', point.x);
+                    angleLabel.setAttribute('y', point.y - 20);
+                    angleLabel.setAttribute('text-anchor', 'middle');
+                    angleLabel.setAttribute('font-size', '10');
+                    angleLabel.setAttribute('fill', '#888');
+                    angleLabel.textContent = `${angles[i]}°`;
+                    container.appendChild(angleLabel);
+                });
+                
+                // Add a marker for the bottom point in test 3 and 4
+                if (id === 3 || id === 4) {
+                    const bottomPoint = polarToCartesian(centerX, centerY, radius + 30, 180);
+                    const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    arrow.setAttribute('d', `M ${bottomPoint.x - 10} ${bottomPoint.y - 10} L ${bottomPoint.x} ${bottomPoint.y} L ${bottomPoint.x + 10} ${bottomPoint.y - 10}`);
+                    arrow.setAttribute('stroke', '#f59e0b');
+                    arrow.setAttribute('stroke-width', '2');
+                    arrow.setAttribute('fill', 'none');
+                    arrow.setAttribute('marker-end', 'url(#arrowhead)');
+                    container.appendChild(arrow);
+                    
+                    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    text.setAttribute('x', bottomPoint.x);
+                    text.setAttribute('y', bottomPoint.y + 15);
+                    text.setAttribute('text-anchor', 'middle');
+                    text.setAttribute('font-size', '12');
+                    text.setAttribute('fill', '#f59e0b');
+                    text.textContent = 'Bottom point';
+                    container.appendChild(text);
+                }
+            }
+            
+            // Special function for Test 4 with correct ordering
+            function drawPentagonOrdered(id) {
+                const container = document.getElementById(`pentagon-${id}`);
+                const centerX = 250, centerY = 250;
+                const radius = 180;
+                
+                // Define angles in the correct order for an inverted pentagon
+                const orderedAngles = [324, 36, 108, 180, 252]; // Top-left, Top-right, Right, Bottom, Left
+                
+                // Draw lines from center to each point
+                orderedAngles.forEach((angle, i) => {
+                    const endPoint = polarToCartesian(centerX, centerY, radius, angle);
+                    
+                    // Line from center
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', centerX);
+                    line.setAttribute('y1', centerY);
+                    line.setAttribute('x2', endPoint.x);
+                    line.setAttribute('y2', endPoint.y);
+                    line.setAttribute('stroke', '#666');
+                    line.setAttribute('stroke-width', '1');
+                    line.setAttribute('opacity', '0.5');
+                    container.appendChild(line);
+                });
+                
+                // Draw the pentagon
+                const pentagonPath = [];
+                const points = [];
+                orderedAngles.forEach(angle => {
+                    const point = polarToCartesian(centerX, centerY, radius, angle);
+                    points.push(point);
+                    pentagonPath.push(pentagonPath.length === 0 ? `M ${point.x} ${point.y}` : `L ${point.x} ${point.y}`);
+                });
+                pentagonPath.push('Z');
+                
+                const pentagon = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                pentagon.setAttribute('d', pentagonPath.join(' '));
+                pentagon.setAttribute('fill', '#10b98120');
+                pentagon.setAttribute('stroke', '#10b981');
+                pentagon.setAttribute('stroke-width', '3');
+                container.appendChild(pentagon);
+                
+                // Draw dots at each vertex with position labels
+                const positions = ['Top-L', 'Top-R', 'Right', 'Bottom', 'Left'];
+                points.forEach((point, i) => {
+                    // Dot
+                    const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    dot.setAttribute('cx', point.x);
+                    dot.setAttribute('cy', point.y);
+                    dot.setAttribute('r', '10');
+                    dot.setAttribute('fill', i === 3 ? '#f59e0b' : '#10b981'); // Highlight bottom point
+                    container.appendChild(dot);
+                    
+                    // Position label
+                    const labelOffset = 35;
+                    const labelPoint = polarToCartesian(centerX, centerY, radius + labelOffset, orderedAngles[i]);
+                    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    label.setAttribute('x', labelPoint.x);
+                    label.setAttribute('y', labelPoint.y);
+                    label.setAttribute('text-anchor', 'middle');
+                    label.setAttribute('font-size', '12');
+                    label.setAttribute('font-weight', 'bold');
+                    label.setAttribute('fill', i === 3 ? '#f59e0b' : '#10b981');
+                    label.textContent = positions[i];
+                    container.appendChild(label);
+                    
+                    // Angle label
+                    const angleLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    angleLabel.setAttribute('x', point.x);
+                    angleLabel.setAttribute('y', point.y);
+                    angleLabel.setAttribute('text-anchor', 'middle');
+                    angleLabel.setAttribute('dominant-baseline', 'middle');
+                    angleLabel.setAttribute('font-size', '10');
+                    angleLabel.setAttribute('fill', '#000');
+                    angleLabel.textContent = `${orderedAngles[i]}°`;
+                    container.appendChild(angleLabel);
+                });
+            }
+            
+            // Initialize all tests
+            drawPentagon(1, 0);    // No rotation
+            drawPentagon(2, 18);   // +18° rotation
+            drawPentagon(3, 36);   // +36° rotation (should be inverted)
+            drawPentagonOrdered(4); // Verified inverted pentagon
+        </script>
+    </div>
+</body>
+</html>

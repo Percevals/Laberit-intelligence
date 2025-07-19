@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DII Visualizations - Complete Test Suite</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            margin: 0;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            font-size: 3em;
+            font-weight: 200;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #3b82f6, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 60px;
+        }
+        .section {
+            background: #1a1a1a;
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid #333;
+        }
+        .section-title {
+            font-size: 2em;
+            font-weight: 300;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+        .viz-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+        }
+        .viz-card {
+            background: #000;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+        .viz-card:hover {
+            transform: translateY(-2px);
+            border-color: #555;
+        }
+        .viz-title {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            color: #fff;
+            font-weight: 300;
+        }
+        .viz-description {
+            color: #888;
+            font-size: 0.9em;
+            margin-top: 20px;
+            line-height: 1.5;
+        }
+        svg {
+            background: #0a0a0a;
+            border-radius: 16px;
+            margin: 10px 0;
+        }
+        .controls {
+            background: #222;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+        input[type="range"] {
+            width: 100%;
+            margin: 10px 0;
+        }
+        .value-display {
+            font-size: 24px;
+            font-weight: 200;
+            text-align: center;
+            margin: 10px 0;
+        }
+        .code-snippet {
+            background: #222;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 12px;
+            color: #10b981;
+            margin-top: 15px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DII Visualization System</h1>
+        <p class="subtitle">Complete Test Suite - All Available Components</p>
+
+        <!-- Section 1: New Immunity Gauge (Modular) -->
+        <div class="section">
+            <h2 class="section-title">1. ImmunityGauge (Definitive Version)</h2>
+            <div class="viz-grid">
+                <!-- Standard Gauge -->
+                <div class="viz-card">
+                    <h3 class="viz-title">Standard Implementation</h3>
+                    <svg width="400" height="400" viewBox="0 0 400 400">
+                        <g id="gauge-standard"></g>
+                    </svg>
+                    <p class="viz-description">
+                        Uses modular components: ArcGaugeFoundation + ProgressiveArc + IndexDisplay
+                    </p>
+                    <div class="code-snippet">
+                        &lt;ImmunityGauge score={{current: 75, stage: 'RESILIENTE'}} /&gt;
+                    </div>
+                </div>
+
+                <!-- Rotated Gauge -->
+                <div class="viz-card">
+                    <h3 class="viz-title">170° Rotation</h3>
+                    <svg width="400" height="400" viewBox="0 0 400 400" style="transform: rotate(170deg);">
+                        <g id="gauge-rotated"></g>
+                    </svg>
+                    <p class="viz-description">
+                        Perfect rotation with counter-rotated text for readability
+                    </p>
+                    <div class="code-snippet">
+                        &lt;ImmunityGauge score={score} gaugeRotation={170} /&gt;
+                    </div>
+                </div>
+
+                <!-- With Details -->
+                <div class="viz-card">
+                    <h3 class="viz-title">With Details & Benchmark</h3>
+                    <svg width="400" height="400" viewBox="0 0 400 400">
+                        <g id="gauge-detailed"></g>
+                    </svg>
+                    <div class="viz-description">
+                        Shows previous score, trend, and peer benchmark
+                    </div>
+                    <div class="code-snippet">
+                        &lt;ImmunityGauge score={score} showDetails={true} peerBenchmark={{average: 65}} /&gt;
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Individual Modular Components -->
+        <div class="section">
+            <h2 class="section-title">2. Modular Components</h2>
+            <div class="viz-grid">
+                <!-- ArcGaugeFoundation -->
+                <div class="viz-card">
+                    <h3 class="viz-title">ArcGaugeFoundation</h3>
+                    <svg width="400" height="400" viewBox="0 0 400 400">
+                        <g id="arc-foundation"></g>
+                    </svg>
+                    <p class="viz-description">
+                        Base layer with scale marks. 270° arc from 135° to 405°
+                    </p>
+                </div>
+
+                <!-- ProgressiveArc -->
+                <div class="viz-card">
+                    <h3 class="viz-title">ProgressiveArc</h3>
+                    <svg width="400" height="400" viewBox="0 0 400 400">
+                        <g id="progressive-arc-demo"></g>
+                    </svg>
+                    <div class="controls">
+                        <input type="range" id="progressiveSlider" min="1" max="10" step="0.1" value="7">
+                        <div class="value-display" id="progressiveValue">7.0</div>
+                    </div>
+                    <p class="viz-description">
+                        Dynamic arc with luminosity gradient
+                    </p>
+                </div>
+
+                <!-- IndexDisplay -->
+                <div class="viz-card">
+                    <h3 class="viz-title">IndexDisplay</h3>
+                    <svg width="400" height="200" viewBox="0 0 400 200">
+                        <g id="index-display"></g>
+                    </svg>
+                    <p class="viz-description">
+                        Zen-inspired text display with three levels
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: DimensionBalance -->
+        <div class="section">
+            <h2 class="section-title">3. DimensionBalance</h2>
+            <div class="viz-grid">
+                <div class="viz-card">
+                    <h3 class="viz-title">5 Dimensions Circle</h3>
+                    <svg width="400" height="400" viewBox="0 0 400 400">
+                        <g id="dimension-balance"></g>
+                    </svg>
+                    <p class="viz-description">
+                        Shows balance across TRD, AER, HFP, BRI, RRG dimensions with rotated background
+                    </p>
+                    <div class="code-snippet">
+                        &lt;DimensionBalance dimensions={[{id: 'TRD', value: 7.5}, ...]} /&gt;
+                    </div>
+                </div>
+
+                <div class="viz-card">
+                    <h3 class="viz-title">Interactive Version</h3>
+                    <svg width="400" height="400" viewBox="0 0 400 400">
+                        <g id="dimension-interactive"></g>
+                    </svg>
+                    <div class="controls">
+                        <label>TRD: <input type="range" id="trd" min="0" max="10" step="0.5" value="7"></label>
+                        <label>AER: <input type="range" id="aer" min="0" max="10" step="0.5" value="8"></label>
+                        <label>HFP: <input type="range" id="hfp" min="0" max="10" step="0.5" value="5"></label>
+                        <label>BRI: <input type="range" id="bri" min="0" max="10" step="0.5" value="6"></label>
+                        <label>RRG: <input type="range" id="rrg" min="0" max="10" step="0.5" value="7"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: RiskPositionMatrix -->
+        <div class="section">
+            <h2 class="section-title">4. RiskPositionMatrix</h2>
+            <div class="viz-grid">
+                <div class="viz-card" style="grid-column: span 2;">
+                    <h3 class="viz-title">Business Model Positioning</h3>
+                    <svg width="800" height="500" viewBox="0 0 800 500">
+                        <g id="risk-matrix"></g>
+                    </svg>
+                    <p class="viz-description">
+                        2D matrix showing risk vs resilience positioning for different business models
+                    </p>
+                    <div class="code-snippet">
+                        &lt;RiskPositionMatrix models={businessModels} currentModel="financial-services" /&gt;
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: AttackEconomics -->
+        <div class="section">
+            <h2 class="section-title">5. AttackEconomics</h2>
+            <div class="viz-grid">
+                <div class="viz-card" style="grid-column: span 2;">
+                    <h3 class="viz-title">Attack Cost vs Defense Investment</h3>
+                    <svg width="800" height="400" viewBox="0 0 800 400">
+                        <g id="attack-economics"></g>
+                    </svg>
+                    <p class="viz-description">
+                        Economic analysis showing ROI of security measures
+                    </p>
+                    <div class="code-snippet">
+                        &lt;AttackEconomics data={{attackCost: 50000, defenseInvestment: 100000}} /&gt;
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 6: Combined Examples -->
+        <div class="section">
+            <h2 class="section-title">6. Combined Visualizations</h2>
+            <div class="viz-grid">
+                <div class="viz-card">
+                    <h3 class="viz-title">Complete DII Dashboard</h3>
+                    <svg width="400" height="600" viewBox="0 0 400 600">
+                        <!-- Main Gauge -->
+                        <g transform="translate(0, 0)">
+                            <g id="dashboard-gauge"></g>
+                        </g>
+                        <!-- Dimension Balance -->
+                        <g transform="translate(0, 400) scale(0.5)">
+                            <g id="dashboard-dimensions"></g>
+                        </g>
+                    </svg>
+                    <p class="viz-description">
+                        Complete dashboard with gauge and dimensions
+                    </p>
+                </div>
+
+                <div class="viz-card">
+                    <h3 class="viz-title">Dimension Gauges</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <svg width="180" height="180" viewBox="0 0 300 300">
+                            <g id="dim-gauge-1"></g>
+                        </svg>
+                        <svg width="180" height="180" viewBox="0 0 300 300">
+                            <g id="dim-gauge-2"></g>
+                        </svg>
+                        <svg width="180" height="180" viewBox="0 0 300 300">
+                            <g id="dim-gauge-3"></g>
+                        </svg>
+                        <svg width="180" height="180" viewBox="0 0 300 300">
+                            <g id="dim-gauge-4"></g>
+                        </svg>
+                    </div>
+                    <p class="viz-description">
+                        Individual gauges for each dimension
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Helper functions
+            function createArcPath(cx, cy, radius, startAngle, endAngle) {
+                const startRad = (startAngle * Math.PI) / 180;
+                const endRad = (endAngle * Math.PI) / 180;
+                
+                const x1 = cx + radius * Math.cos(startRad);
+                const y1 = cy + radius * Math.sin(startRad);
+                const x2 = cx + radius * Math.cos(endRad);
+                const y2 = cy + radius * Math.sin(endRad);
+                
+                const largeArc = endAngle - startAngle > 180 ? 1 : 0;
+                
+                return `M ${x1} ${y1} A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2}`;
+            }
+
+            function createGauge(containerId, value, options = {}) {
+                const {
+                    showFoundation = true,
+                    showText = true,
+                    size = 'medium',
+                    rotation = 0,
+                    peerBenchmark = null
+                } = options;
+                
+                const sizes = {
+                    small: { cx: 150, cy: 150, radius: 100, strokeWidth: 16 },
+                    medium: { cx: 200, cy: 200, radius: 160, strokeWidth: 24 },
+                    large: { cx: 300, cy: 300, radius: 240, strokeWidth: 36 }
+                };
+                
+                const config = sizes[size];
+                const container = document.getElementById(containerId);
+                container.innerHTML = '';
+                
+                // Create gradient
+                const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+                const gradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+                gradient.setAttribute('id', `grad-${containerId}`);
+                
+                const color = value < 4 ? '#ef4444' : value < 6 ? '#f59e0b' : value < 8 ? '#10b981' : '#3b82f6';
+                const rgb = hexToRgb(color);
+                
+                const stops = [
+                    { offset: '0%', color: `rgb(${rgb.r * 0.85}, ${rgb.g * 0.85}, ${rgb.b * 0.85})` },
+                    { offset: '50%', color: color },
+                    { offset: '100%', color: `rgb(${Math.min(255, rgb.r * 1.15)}, ${Math.min(255, rgb.g * 1.15)}, ${Math.min(255, rgb.b * 1.15)})` }
+                ];
+                
+                stops.forEach(stop => {
+                    const stopEl = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+                    stopEl.setAttribute('offset', stop.offset);
+                    stopEl.setAttribute('stop-color', stop.color);
+                    gradient.appendChild(stopEl);
+                });
+                defs.appendChild(gradient);
+                container.appendChild(defs);
+                
+                // Foundation arc
+                if (showFoundation) {
+                    const foundation = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    foundation.setAttribute('d', createArcPath(config.cx, config.cy, config.radius, 135, 405));
+                    foundation.setAttribute('fill', 'none');
+                    foundation.setAttribute('stroke', '#333');
+                    foundation.setAttribute('stroke-width', config.strokeWidth);
+                    foundation.setAttribute('stroke-linecap', 'round');
+                    container.appendChild(foundation);
+                }
+                
+                // Progressive arc
+                const angle = 135 + ((value - 1) / 9) * 270;
+                const progressive = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                progressive.setAttribute('d', createArcPath(config.cx, config.cy, config.radius, 135, angle));
+                progressive.setAttribute('fill', 'none');
+                progressive.setAttribute('stroke', `url(#grad-${containerId})`);
+                progressive.setAttribute('stroke-width', config.strokeWidth);
+                progressive.setAttribute('stroke-linecap', 'round');
+                container.appendChild(progressive);
+                
+                // Peer benchmark
+                if (peerBenchmark) {
+                    const peerAngle = 135 + ((peerBenchmark - 1) / 9) * 270;
+                    const peerRad = (peerAngle * Math.PI) / 180;
+                    const inner = config.radius - config.strokeWidth / 2 - 5;
+                    const outer = config.radius + config.strokeWidth / 2 + 5;
+                    
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', config.cx + inner * Math.cos(peerRad));
+                    line.setAttribute('y1', config.cy + inner * Math.sin(peerRad));
+                    line.setAttribute('x2', config.cx + outer * Math.cos(peerRad));
+                    line.setAttribute('y2', config.cy + outer * Math.sin(peerRad));
+                    line.setAttribute('stroke', '#888');
+                    line.setAttribute('stroke-width', '2');
+                    container.appendChild(line);
+                }
+                
+                // Text
+                if (showText) {
+                    const textGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                    if (rotation !== 0) {
+                        textGroup.setAttribute('transform', `rotate(${-rotation} ${config.cx} ${config.cy})`);
+                    }
+                    
+                    const valueText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    valueText.setAttribute('x', config.cx);
+                    valueText.setAttribute('y', config.cy - 10);
+                    valueText.setAttribute('text-anchor', 'middle');
+                    valueText.setAttribute('font-size', size === 'small' ? '36' : size === 'medium' ? '72' : '96');
+                    valueText.setAttribute('font-weight', '200');
+                    valueText.setAttribute('fill', color);
+                    valueText.textContent = value.toFixed(1);
+                    textGroup.appendChild(valueText);
+                    
+                    const stage = value < 4 ? 'FRÁGIL' : value < 6 ? 'ROBUSTO' : value < 8 ? 'RESILIENTE' : 'ADAPTATIVO';
+                    const stageText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    stageText.setAttribute('x', config.cx);
+                    stageText.setAttribute('y', config.cy + 20);
+                    stageText.setAttribute('text-anchor', 'middle');
+                    stageText.setAttribute('font-size', size === 'small' ? '16' : size === 'medium' ? '24' : '32');
+                    stageText.setAttribute('fill', color);
+                    stageText.textContent = stage;
+                    textGroup.appendChild(stageText);
+                    
+                    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    label.setAttribute('x', config.cx);
+                    label.setAttribute('y', config.cy + 45);
+                    label.setAttribute('text-anchor', 'middle');
+                    label.setAttribute('font-size', size === 'small' ? '12' : size === 'medium' ? '16' : '20');
+                    label.setAttribute('fill', '#666');
+                    label.textContent = 'Índice de Inmunidad';
+                    textGroup.appendChild(label);
+                    
+                    container.appendChild(textGroup);
+                }
+            }
+
+            function hexToRgb(hex) {
+                const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+                return result ? {
+                    r: parseInt(result[1], 16),
+                    g: parseInt(result[2], 16),
+                    b: parseInt(result[3], 16)
+                } : null;
+            }
+
+            function createDimensionBalance(containerId, dimensions) {
+                const container = document.getElementById(containerId);
+                container.innerHTML = '';
+                
+                const cx = 200, cy = 200, radius = 150;
+                const anglePerDim = 360 / 5;
+                
+                // Background segments
+                const bgGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                bgGroup.setAttribute('transform', `rotate(-90 ${cx} ${cy})`);
+                
+                for (let i = 0; i < 5; i++) {
+                    const startAngle = i * anglePerDim - 90;
+                    const endAngle = (i + 1) * anglePerDim - 90;
+                    
+                    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    const largeArc = anglePerDim > 180 ? 1 : 0;
+                    
+                    const startRad = (startAngle * Math.PI) / 180;
+                    const endRad = (endAngle * Math.PI) / 180;
+                    
+                    const x1 = cx + radius * Math.cos(startRad);
+                    const y1 = cy + radius * Math.sin(startRad);
+                    const x2 = cx + radius * Math.cos(endRad);
+                    const y2 = cy + radius * Math.sin(endRad);
+                    
+                    path.setAttribute('d', `M ${cx} ${cy} L ${x1} ${y1} A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2} Z`);
+                    path.setAttribute('fill', i < 2 ? '#10b98120' : '#3b82f620');
+                    path.setAttribute('stroke', '#333');
+                    bgGroup.appendChild(path);
+                }
+                container.appendChild(bgGroup);
+                
+                // Dimension circles and labels
+                dimensions.forEach((dim, i) => {
+                    const angle = i * anglePerDim - 90;
+                    const rad = (angle * Math.PI) / 180;
+                    const dimRadius = (dim.value / 10) * radius * 0.8;
+                    const x = cx + dimRadius * Math.cos(rad);
+                    const y = cy + dimRadius * Math.sin(rad);
+                    
+                    // Circle
+                    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    circle.setAttribute('cx', x);
+                    circle.setAttribute('cy', y);
+                    circle.setAttribute('r', '8');
+                    circle.setAttribute('fill', dim.value > 6 ? '#10b981' : dim.value > 4 ? '#f59e0b' : '#ef4444');
+                    container.appendChild(circle);
+                    
+                    // Label
+                    const labelX = cx + (radius + 30) * Math.cos(rad);
+                    const labelY = cy + (radius + 30) * Math.sin(rad);
+                    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    label.setAttribute('x', labelX);
+                    label.setAttribute('y', labelY);
+                    label.setAttribute('text-anchor', 'middle');
+                    label.setAttribute('dominant-baseline', 'middle');
+                    label.setAttribute('font-size', '14');
+                    label.setAttribute('fill', '#fff');
+                    label.textContent = `${dim.name}: ${dim.value}`;
+                    container.appendChild(label);
+                });
+            }
+
+            function createRiskMatrix(containerId) {
+                const container = document.getElementById(containerId);
+                container.innerHTML = '';
+                
+                // Grid
+                for (let i = 0; i <= 10; i++) {
+                    // Vertical lines
+                    const vLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    vLine.setAttribute('x1', 50 + i * 70);
+                    vLine.setAttribute('y1', 50);
+                    vLine.setAttribute('x2', 50 + i * 70);
+                    vLine.setAttribute('y2', 450);
+                    vLine.setAttribute('stroke', '#333');
+                    vLine.setAttribute('stroke-width', i % 5 === 0 ? '2' : '1');
+                    container.appendChild(vLine);
+                    
+                    // Horizontal lines
+                    const hLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    hLine.setAttribute('x1', 50);
+                    hLine.setAttribute('y1', 50 + i * 40);
+                    hLine.setAttribute('x2', 750);
+                    hLine.setAttribute('y2', 50 + i * 40);
+                    hLine.setAttribute('stroke', '#333');
+                    hLine.setAttribute('stroke-width', i % 5 === 0 ? '2' : '1');
+                    container.appendChild(hLine);
+                }
+                
+                // Business models
+                const models = [
+                    { name: 'Financial Services', risk: 8, resilience: 3, color: '#ef4444' },
+                    { name: 'Healthcare', risk: 7, resilience: 5, color: '#f59e0b' },
+                    { name: 'Digital Platform', risk: 6, resilience: 7, color: '#10b981' },
+                    { name: 'SaaS', risk: 4, resilience: 8, color: '#3b82f6' },
+                    { name: 'Legacy Industry', risk: 9, resilience: 2, color: '#ef4444' }
+                ];
+                
+                models.forEach(model => {
+                    const x = 50 + model.resilience * 70;
+                    const y = 450 - model.risk * 40;
+                    
+                    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    circle.setAttribute('cx', x);
+                    circle.setAttribute('cy', y);
+                    circle.setAttribute('r', '20');
+                    circle.setAttribute('fill', model.color);
+                    circle.setAttribute('opacity', '0.8');
+                    container.appendChild(circle);
+                    
+                    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    text.setAttribute('x', x);
+                    text.setAttribute('y', y - 30);
+                    text.setAttribute('text-anchor', 'middle');
+                    text.setAttribute('font-size', '12');
+                    text.setAttribute('fill', '#fff');
+                    text.textContent = model.name;
+                    container.appendChild(text);
+                });
+                
+                // Axis labels
+                const xLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                xLabel.setAttribute('x', 400);
+                xLabel.setAttribute('y', 480);
+                xLabel.setAttribute('text-anchor', 'middle');
+                xLabel.setAttribute('font-size', '14');
+                xLabel.setAttribute('fill', '#888');
+                xLabel.textContent = 'Resilience →';
+                container.appendChild(xLabel);
+                
+                const yLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                yLabel.setAttribute('x', 20);
+                yLabel.setAttribute('y', 250);
+                yLabel.setAttribute('text-anchor', 'middle');
+                yLabel.setAttribute('font-size', '14');
+                yLabel.setAttribute('fill', '#888');
+                yLabel.setAttribute('transform', 'rotate(-90 20 250)');
+                yLabel.textContent = 'Risk →';
+                container.appendChild(yLabel);
+            }
+
+            function createAttackEconomics(containerId) {
+                const container = document.getElementById(containerId);
+                container.innerHTML = '';
+                
+                // Axes
+                const axisPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                axisPath.setAttribute('d', 'M 50 350 L 50 50 M 50 350 L 750 350');
+                axisPath.setAttribute('stroke', '#666');
+                axisPath.setAttribute('stroke-width', '2');
+                axisPath.setAttribute('fill', 'none');
+                container.appendChild(axisPath);
+                
+                // Data points
+                const data = [
+                    { attack: 10, defense: 50 },
+                    { attack: 25, defense: 100 },
+                    { attack: 50, defense: 150 },
+                    { attack: 100, defense: 200 },
+                    { attack: 200, defense: 250 },
+                    { attack: 400, defense: 300 }
+                ];
+                
+                // Line
+                let pathData = 'M';
+                data.forEach((point, i) => {
+                    const x = 50 + (point.attack / 400) * 700;
+                    const y = 350 - (point.defense / 350) * 300;
+                    pathData += ` ${x} ${y}`;
+                    if (i < data.length - 1) pathData += ' L';
+                    
+                    // Point
+                    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    circle.setAttribute('cx', x);
+                    circle.setAttribute('cy', y);
+                    circle.setAttribute('r', '6');
+                    circle.setAttribute('fill', '#10b981');
+                    container.appendChild(circle);
+                });
+                
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                line.setAttribute('d', pathData);
+                line.setAttribute('stroke', '#10b981');
+                line.setAttribute('stroke-width', '3');
+                line.setAttribute('fill', 'none');
+                container.appendChild(line);
+                
+                // Labels
+                const xLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                xLabel.setAttribute('x', 400);
+                xLabel.setAttribute('y', 380);
+                xLabel.setAttribute('text-anchor', 'middle');
+                xLabel.setAttribute('font-size', '14');
+                xLabel.setAttribute('fill', '#888');
+                xLabel.textContent = 'Attack Cost ($K)';
+                container.appendChild(xLabel);
+                
+                const yLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                yLabel.setAttribute('x', 20);
+                yLabel.setAttribute('y', 200);
+                yLabel.setAttribute('text-anchor', 'middle');
+                yLabel.setAttribute('font-size', '14');
+                yLabel.setAttribute('fill', '#888');
+                yLabel.setAttribute('transform', 'rotate(-90 20 200)');
+                yLabel.textContent = 'Defense Investment ($K)';
+                container.appendChild(yLabel);
+                
+                // ROI zone
+                const roiRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                roiRect.setAttribute('x', '400');
+                roiRect.setAttribute('y', '50');
+                roiRect.setAttribute('width', '350');
+                roiRect.setAttribute('height', '150');
+                roiRect.setAttribute('fill', '#10b981');
+                roiRect.setAttribute('opacity', '0.1');
+                container.appendChild(roiRect);
+                
+                const roiText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                roiText.setAttribute('x', 575);
+                roiText.setAttribute('y', 125);
+                roiText.setAttribute('text-anchor', 'middle');
+                roiText.setAttribute('font-size', '16');
+                roiText.setAttribute('fill', '#10b981');
+                roiText.textContent = 'Positive ROI Zone';
+                container.appendChild(roiText);
+            }
+
+            // Initialize all visualizations
+            
+            // Section 1: ImmunityGauge examples
+            createGauge('gauge-standard', 7.5);
+            createGauge('gauge-rotated', 7.5);
+            createGauge('gauge-detailed', 6.8, { peerBenchmark: 6.5 });
+            
+            // Section 2: Modular components
+            const foundation = document.getElementById('arc-foundation');
+            const foundationPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            foundationPath.setAttribute('d', createArcPath(200, 200, 160, 135, 405));
+            foundationPath.setAttribute('fill', 'none');
+            foundationPath.setAttribute('stroke', '#333');
+            foundationPath.setAttribute('stroke-width', '24');
+            foundationPath.setAttribute('stroke-linecap', 'round');
+            foundation.appendChild(foundationPath);
+            
+            // Add tick marks
+            for (let i = 1; i <= 10; i++) {
+                const angle = 135 + ((i - 1) / 9) * 270;
+                const rad = (angle * Math.PI) / 180;
+                const inner = 145;
+                const outer = 175;
+                
+                const tick = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                tick.setAttribute('x1', 200 + inner * Math.cos(rad));
+                tick.setAttribute('y1', 200 + inner * Math.sin(rad));
+                tick.setAttribute('x2', 200 + outer * Math.cos(rad));
+                tick.setAttribute('y2', 200 + outer * Math.sin(rad));
+                tick.setAttribute('stroke', '#666');
+                tick.setAttribute('stroke-width', i % 3 === 1 ? '2' : '1');
+                foundation.appendChild(tick);
+            }
+            
+            // Progressive arc demo
+            const progressiveSlider = document.getElementById('progressiveSlider');
+            const progressiveValue = document.getElementById('progressiveValue');
+            
+            function updateProgressiveArc() {
+                const value = parseFloat(progressiveSlider.value);
+                progressiveValue.textContent = value.toFixed(1);
+                createGauge('progressive-arc-demo', value, { showText: false });
+            }
+            
+            progressiveSlider.addEventListener('input', updateProgressiveArc);
+            updateProgressiveArc();
+            
+            // Index display
+            const indexDisplay = document.getElementById('index-display');
+            const indexValue = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            indexValue.setAttribute('x', 200);
+            indexValue.setAttribute('y', 80);
+            indexValue.setAttribute('text-anchor', 'middle');
+            indexValue.setAttribute('font-size', '72');
+            indexValue.setAttribute('font-weight', '200');
+            indexValue.setAttribute('fill', '#3b82f6');
+            indexValue.textContent = '8.5';
+            indexDisplay.appendChild(indexValue);
+            
+            const indexStage = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            indexStage.setAttribute('x', 200);
+            indexStage.setAttribute('y', 120);
+            indexStage.setAttribute('text-anchor', 'middle');
+            indexStage.setAttribute('font-size', '24');
+            indexStage.setAttribute('fill', '#3b82f6');
+            indexStage.textContent = 'ADAPTATIVO';
+            indexDisplay.appendChild(indexStage);
+            
+            const indexLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            indexLabel.setAttribute('x', 200);
+            indexLabel.setAttribute('y', 150);
+            indexLabel.setAttribute('text-anchor', 'middle');
+            indexLabel.setAttribute('font-size', '16');
+            indexLabel.setAttribute('fill', '#666');
+            indexLabel.textContent = 'Índice de Inmunidad';
+            indexDisplay.appendChild(indexLabel);
+            
+            // Section 3: DimensionBalance
+            const dimensions = [
+                { name: 'TRD', value: 7 },
+                { name: 'AER', value: 8 },
+                { name: 'HFP', value: 5 },
+                { name: 'BRI', value: 6 },
+                { name: 'RRG', value: 7 }
+            ];
+            
+            createDimensionBalance('dimension-balance', dimensions);
+            
+            // Interactive dimension balance
+            function updateInteractiveDimensions() {
+                const dims = [
+                    { name: 'TRD', value: parseFloat(document.getElementById('trd').value) },
+                    { name: 'AER', value: parseFloat(document.getElementById('aer').value) },
+                    { name: 'HFP', value: parseFloat(document.getElementById('hfp').value) },
+                    { name: 'BRI', value: parseFloat(document.getElementById('bri').value) },
+                    { name: 'RRG', value: parseFloat(document.getElementById('rrg').value) }
+                ];
+                createDimensionBalance('dimension-interactive', dims);
+            }
+            
+            ['trd', 'aer', 'hfp', 'bri', 'rrg'].forEach(id => {
+                document.getElementById(id).addEventListener('input', updateInteractiveDimensions);
+            });
+            updateInteractiveDimensions();
+            
+            // Section 4: RiskPositionMatrix
+            createRiskMatrix('risk-matrix');
+            
+            // Section 5: AttackEconomics
+            createAttackEconomics('attack-economics');
+            
+            // Section 6: Combined examples
+            createGauge('dashboard-gauge', 7.2, { size: 'medium' });
+            createDimensionBalance('dashboard-dimensions', dimensions);
+            
+            // Dimension gauges
+            const dimValues = [7.5, 6.2, 8.1, 5.5];
+            const dimLabels = ['TRD', 'AER', 'BRI', 'RRG'];
+            
+            dimValues.forEach((value, i) => {
+                const container = document.getElementById(`dim-gauge-${i + 1}`);
+                
+                // Foundation
+                const foundation = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                foundation.setAttribute('d', createArcPath(150, 150, 100, 135, 405));
+                foundation.setAttribute('fill', 'none');
+                foundation.setAttribute('stroke', '#333');
+                foundation.setAttribute('stroke-width', '16');
+                foundation.setAttribute('stroke-linecap', 'round');
+                container.appendChild(foundation);
+                
+                // Progressive
+                const angle = 135 + ((value - 1) / 9) * 270;
+                const color = value < 4 ? '#ef4444' : value < 6 ? '#f59e0b' : value < 8 ? '#10b981' : '#3b82f6';
+                const progressive = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                progressive.setAttribute('d', createArcPath(150, 150, 100, 135, angle));
+                progressive.setAttribute('fill', 'none');
+                progressive.setAttribute('stroke', color);
+                progressive.setAttribute('stroke-width', '16');
+                progressive.setAttribute('stroke-linecap', 'round');
+                container.appendChild(progressive);
+                
+                // Text
+                const valueText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                valueText.setAttribute('x', 150);
+                valueText.setAttribute('y', 145);
+                valueText.setAttribute('text-anchor', 'middle');
+                valueText.setAttribute('font-size', '48');
+                valueText.setAttribute('font-weight', '200');
+                valueText.setAttribute('fill', color);
+                valueText.textContent = value.toFixed(1);
+                container.appendChild(valueText);
+                
+                const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                label.setAttribute('x', 150);
+                label.setAttribute('y', 175);
+                label.setAttribute('text-anchor', 'middle');
+                label.setAttribute('font-size', '16');
+                label.setAttribute('fill', '#666');
+                label.textContent = dimLabels[i];
+                container.appendChild(label);
+            });
+        </script>
+    </div>
+</body>
+</html>

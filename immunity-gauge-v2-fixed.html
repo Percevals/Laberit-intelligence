@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImmunityGaugeV2 - Fixed Implementation</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #f5f5f7;
+            padding: 40px 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #1d1d1f;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 50px;
+        }
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 50px;
+        }
+        .demo-section {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .demo-section.error {
+            background: #ffebee;
+            border: 2px solid #f44336;
+        }
+        .demo-section.success {
+            background: #e8f5e9;
+            border: 2px solid #4caf50;
+        }
+        h2 {
+            margin: 0 0 30px 0;
+            color: #333;
+            font-size: 24px;
+            text-align: center;
+        }
+        .gauge-wrapper {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .score-examples {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #e0e0e0;
+        }
+        .score-item {
+            text-align: center;
+        }
+        .score-label {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+        }
+        .issue-box {
+            background: #fff3e0;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .success-box {
+            background: #c8e6c9;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .code-snippet {
+            background: #1d1d1f;
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        .implementation-details {
+            background: #e3f2fd;
+            padding: 40px;
+            border-radius: 16px;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ImmunityGaugeV2 - Before & After Fix</h1>
+        <p class="subtitle">Demonstrating the gradient reversal fix for 170° rotation</p>
+        
+        <div class="comparison-grid">
+            <!-- BEFORE: Incorrect gradient -->
+            <div class="demo-section error">
+                <h2>❌ BEFORE: Inverted Colors</h2>
+                <div class="gauge-wrapper">
+                    <svg width="320" height="320" viewBox="0 0 320 320" style="transform: rotate(170deg);">
+                        <defs>
+                            <!-- Original gradient without reversal -->
+                            <linearGradient id="gradBefore" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#ef4444" />
+                                <stop offset="33%" style="stop-color:#f59e0b" />
+                                <stop offset="66%" style="stop-color:#10b981" />
+                                <stop offset="100%" style="stop-color:#3b82f6" />
+                            </linearGradient>
+                            <filter id="shadow1" x="-50%" y="-50%" width="200%" height="200%">
+                                <feDropShadow dx="0" dy="2" stdDeviation="3" floodOpacity="0.3"/>
+                            </filter>
+                        </defs>
+                        
+                        <!-- Background track -->
+                        <path d="M 64.45 255.55 A 120 120 0 1 1 255.55 255.55" 
+                              fill="none" stroke="#e5e7eb" stroke-width="20" stroke-linecap="round" opacity="0.3" />
+                        
+                        <!-- Main arc (75%) -->
+                        <path d="M 64.45 255.55 A 120 120 0 1 1 227.4 206.4" 
+                              fill="none" stroke="url(#gradBefore)" stroke-width="20" stroke-linecap="round" 
+                              filter="url(#shadow1)" />
+                        
+                        <!-- Counter-rotated text -->
+                        <g transform="translate(160, 160) rotate(-170)">
+                            <text text-anchor="middle" dominant-baseline="central" y="-8" font-size="48" font-weight="bold" fill="#1d1d1f">75</text>
+                            <text text-anchor="middle" dominant-baseline="central" y="28" font-size="16" font-weight="500" fill="#10b981">RESILIENTE</text>
+                        </g>
+                    </svg>
+                </div>
+                
+                <div class="score-examples">
+                    <div class="score-item">
+                        <svg width="100" height="100" viewBox="0 0 100 100" style="transform: rotate(170deg);">
+                            <defs>
+                                <linearGradient id="gradBefore25" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#ef4444" />
+                                    <stop offset="100%" style="stop-color:#3b82f6" />
+                                </linearGradient>
+                            </defs>
+                            <path d="M 20.15 78.85 A 35 35 0 1 1 78.85 78.85" 
+                                  fill="none" stroke="#e5e7eb" stroke-width="6" stroke-linecap="round" opacity="0.3" />
+                            <path d="M 20.15 78.85 A 35 35 0 0 1 50 72.5" 
+                                  fill="none" stroke="url(#gradBefore25)" stroke-width="6" stroke-linecap="round" />
+                            <g transform="translate(50, 50) rotate(-170)">
+                                <text text-anchor="middle" dominant-baseline="central" font-size="16" font-weight="bold" fill="#333">25</text>
+                            </g>
+                        </svg>
+                        <div class="score-label">Low score shows BLUE ❌</div>
+                    </div>
+                    
+                    <div class="score-item">
+                        <svg width="100" height="100" viewBox="0 0 100 100" style="transform: rotate(170deg);">
+                            <defs>
+                                <linearGradient id="gradBefore90" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#ef4444" />
+                                    <stop offset="100%" style="stop-color:#3b82f6" />
+                                </linearGradient>
+                            </defs>
+                            <path d="M 20.15 78.85 A 35 35 0 1 1 78.85 78.85" 
+                                  fill="none" stroke="#e5e7eb" stroke-width="6" stroke-linecap="round" opacity="0.3" />
+                            <path d="M 20.15 78.85 A 35 35 0 1 1 75.6 70" 
+                                  fill="none" stroke="url(#gradBefore90)" stroke-width="6" stroke-linecap="round" />
+                            <g transform="translate(50, 50) rotate(-170)">
+                                <text text-anchor="middle" dominant-baseline="central" font-size="16" font-weight="bold" fill="#333">90</text>
+                            </g>
+                        </svg>
+                        <div class="score-label">High score shows RED ❌</div>
+                    </div>
+                </div>
+                
+                <div class="issue-box">
+                    <strong>🔍 Issue:</strong> When rotating 170°, the gradient direction gets inverted:
+                    <ul style="margin: 10px 0 0 20px;">
+                        <li>Red (meant for low scores) appears at the end</li>
+                        <li>Blue (meant for high scores) appears at the start</li>
+                        <li>Counter-rotation attempts didn't work properly</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- AFTER: Fixed gradient -->
+            <div class="demo-section success">
+                <h2>✅ AFTER: Correct Colors</h2>
+                <div class="gauge-wrapper">
+                    <svg width="320" height="320" viewBox="0 0 320 320" style="transform: rotate(170deg);">
+                        <defs>
+                            <!-- Reversed gradient for 170° rotation -->
+                            <linearGradient id="gradAfter" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#3b82f6" />
+                                <stop offset="33%" style="stop-color:#10b981" />
+                                <stop offset="66%" style="stop-color:#f59e0b" />
+                                <stop offset="100%" style="stop-color:#ef4444" />
+                            </linearGradient>
+                            <filter id="shadow2" x="-50%" y="-50%" width="200%" height="200%">
+                                <feDropShadow dx="0" dy="2" stdDeviation="3" floodOpacity="0.3"/>
+                            </filter>
+                        </defs>
+                        
+                        <!-- Background track -->
+                        <path d="M 64.45 255.55 A 120 120 0 1 1 255.55 255.55" 
+                              fill="none" stroke="#e5e7eb" stroke-width="20" stroke-linecap="round" opacity="0.3" />
+                        
+                        <!-- Main arc (75%) -->
+                        <path d="M 64.45 255.55 A 120 120 0 1 1 227.4 206.4" 
+                              fill="none" stroke="url(#gradAfter)" stroke-width="20" stroke-linecap="round" 
+                              filter="url(#shadow2)" />
+                        
+                        <!-- Counter-rotated text -->
+                        <g transform="translate(160, 160) rotate(-170)">
+                            <text text-anchor="middle" dominant-baseline="central" y="-8" font-size="48" font-weight="bold" fill="#1d1d1f">75</text>
+                            <text text-anchor="middle" dominant-baseline="central" y="28" font-size="16" font-weight="500" fill="#10b981">RESILIENTE</text>
+                        </g>
+                    </svg>
+                </div>
+                
+                <div class="score-examples">
+                    <div class="score-item">
+                        <svg width="100" height="100" viewBox="0 0 100 100" style="transform: rotate(170deg);">
+                            <defs>
+                                <linearGradient id="gradAfter25" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#3b82f6" />
+                                    <stop offset="100%" style="stop-color:#ef4444" />
+                                </linearGradient>
+                            </defs>
+                            <path d="M 20.15 78.85 A 35 35 0 1 1 78.85 78.85" 
+                                  fill="none" stroke="#e5e7eb" stroke-width="6" stroke-linecap="round" opacity="0.3" />
+                            <path d="M 20.15 78.85 A 35 35 0 0 1 50 72.5" 
+                                  fill="none" stroke="url(#gradAfter25)" stroke-width="6" stroke-linecap="round" />
+                            <g transform="translate(50, 50) rotate(-170)">
+                                <text text-anchor="middle" dominant-baseline="central" font-size="16" font-weight="bold" fill="#ef4444">25</text>
+                            </g>
+                        </svg>
+                        <div class="score-label">Low score shows RED ✅</div>
+                    </div>
+                    
+                    <div class="score-item">
+                        <svg width="100" height="100" viewBox="0 0 100 100" style="transform: rotate(170deg);">
+                            <defs>
+                                <linearGradient id="gradAfter90" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#3b82f6" />
+                                    <stop offset="100%" style="stop-color:#ef4444" />
+                                </linearGradient>
+                            </defs>
+                            <path d="M 20.15 78.85 A 35 35 0 1 1 78.85 78.85" 
+                                  fill="none" stroke="#e5e7eb" stroke-width="6" stroke-linecap="round" opacity="0.3" />
+                            <path d="M 20.15 78.85 A 35 35 0 1 1 75.6 70" 
+                                  fill="none" stroke="url(#gradAfter90)" stroke-width="6" stroke-linecap="round" />
+                            <g transform="translate(50, 50) rotate(-170)">
+                                <text text-anchor="middle" dominant-baseline="central" font-size="16" font-weight="bold" fill="#3b82f6">90</text>
+                            </g>
+                        </svg>
+                        <div class="score-label">High score shows BLUE ✅</div>
+                    </div>
+                </div>
+                
+                <div class="success-box">
+                    <strong>✨ Solution:</strong> Smart gradient reversal based on rotation angle:
+                    <ul style="margin: 10px 0 0 20px;">
+                        <li>Red correctly appears at low scores</li>
+                        <li>Blue correctly appears at high scores</li>
+                        <li>Clean implementation without complex transforms</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="implementation-details">
+            <h2 style="text-align: center; margin-top: 0;">🚀 Implementation Details</h2>
+            
+            <div style="max-width: 800px; margin: 0 auto;">
+                <h3>The Fix in ImmunityGaugeV2.tsx:</h3>
+                <div class="code-snippet">
+// Determine if gradient needs to be reversed based on rotation
+const shouldReverseGradient = gaugeRotation > 90 && gaugeRotation < 270;
+
+// Get gradient colors in correct order based on rotation
+const gradientColors = shouldReverseGradient 
+  ? [...theme.colors.gradient.immunity].reverse()
+  : theme.colors.gradient.immunity;
+
+// In the linearGradient definition:
+{gradientColors.map((color, index) => (
+  &lt;stop
+    key={index}
+    offset={`${(index / (gradientColors.length - 1)) * 100}%`}
+    stopColor={color}
+  /&gt;
+))}</div>
+
+                <h3>Why This Works:</h3>
+                <ul style="line-height: 1.8; font-size: 16px;">
+                    <li>When rotating the gauge more than 90°, the visual direction of the gradient gets inverted</li>
+                    <li>By reversing the color array, we compensate for this inversion</li>
+                    <li>The solution is clean and works for any rotation angle</li>
+                    <li>No complex gradient transforms or calculations needed</li>
+                </ul>
+
+                <h3>Usage:</h3>
+                <div class="code-snippet">
+&lt;ImmunityGaugeV2
+  score={{
+    current: 75,
+    previous: 65,
+    stage: 'RESILIENTE',
+    confidence: 95
+  }}
+  size="medium"
+  gaugeRotation={170}  // Automatically handles gradient reversal
+/&gt;</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

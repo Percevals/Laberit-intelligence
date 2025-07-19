@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradient Arc Test - DII Aesthetic</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #f5f5f7;
+            padding: 40px 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+        }
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        .test-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h3 {
+            margin: 0 0 20px 0;
+            color: #333;
+        }
+        svg {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+        }
+        .controls {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f5f5f7;
+            border-radius: 8px;
+        }
+        input[type="range"] {
+            width: 100%;
+            margin: 10px 0;
+        }
+        .value-display {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .stage-indicator {
+            font-size: 14px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .comparison-section {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DII Progressive Arc - Gradient Aesthetic</h1>
+        
+        <!-- Comparison Section -->
+        <div class="comparison-section">
+            <h2 style="text-align: center;">Solid Color vs Gradient Comparison</h2>
+            <div class="comparison-grid">
+                <div style="text-align: center;">
+                    <h3>Solid Color (Current)</h3>
+                    <svg width="400" height="400" viewBox="0 0 400 400">
+                        <path d="M 86.86 313.14 A 160 160 0 1 1 313.14 313.14" 
+                              fill="none" stroke="#e5e7eb" stroke-width="24" stroke-linecap="round" />
+                        <g id="solid-arc"></g>
+                    </svg>
+                </div>
+                <div style="text-align: center;">
+                    <h3>Gradient (New)</h3>
+                    <svg width="400" height="400" viewBox="0 0 400 400">
+                        <defs>
+                            <linearGradient id="dii-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#ef4444" />
+                                <stop offset="33.33%" stop-color="#ef4444" />
+                                <stop offset="33.33%" stop-color="#f59e0b" />
+                                <stop offset="55.56%" stop-color="#f59e0b" />
+                                <stop offset="55.56%" stop-color="#10b981" />
+                                <stop offset="77.78%" stop-color="#10b981" />
+                                <stop offset="77.78%" stop-color="#3b82f6" />
+                                <stop offset="100%" stop-color="#3b82f6" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M 86.86 313.14 A 160 160 0 1 1 313.14 313.14" 
+                              fill="none" stroke="#e5e7eb" stroke-width="24" stroke-linecap="round" />
+                        <g id="gradient-arc"></g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stage Examples -->
+        <div class="test-grid">
+            <div class="test-card">
+                <h3>FRÁGIL (2.5)</h3>
+                <svg width="400" height="400" viewBox="0 0 400 400">
+                    <defs>
+                        <linearGradient id="gradient-fragil" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#ef4444" />
+                            <stop offset="100%" stop-color="#ef4444" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M 86.86 313.14 A 160 160 0 1 1 313.14 313.14" 
+                          fill="none" stroke="#e5e7eb" stroke-width="24" stroke-linecap="round" />
+                    <g id="arc-fragil"></g>
+                </svg>
+                <div class="value-display" style="color: #ef4444;">2.5</div>
+                <div class="stage-indicator" style="background: #fef2f2; color: #ef4444;">FRÁGIL</div>
+            </div>
+
+            <div class="test-card">
+                <h3>ROBUSTO (5.0)</h3>
+                <svg width="400" height="400" viewBox="0 0 400 400">
+                    <defs>
+                        <linearGradient id="gradient-robusto" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#ef4444" />
+                            <stop offset="60%" stop-color="#ef4444" />
+                            <stop offset="60%" stop-color="#f59e0b" />
+                            <stop offset="100%" stop-color="#f59e0b" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M 86.86 313.14 A 160 160 0 1 1 313.14 313.14" 
+                          fill="none" stroke="#e5e7eb" stroke-width="24" stroke-linecap="round" />
+                    <g id="arc-robusto"></g>
+                </svg>
+                <div class="value-display" style="color: #f59e0b;">5.0</div>
+                <div class="stage-indicator" style="background: #fef3c7; color: #f59e0b;">ROBUSTO</div>
+            </div>
+
+            <div class="test-card">
+                <h3>RESILIENTE (7.0)</h3>
+                <svg width="400" height="400" viewBox="0 0 400 400">
+                    <defs>
+                        <linearGradient id="gradient-resiliente" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#ef4444" />
+                            <stop offset="42.86%" stop-color="#ef4444" />
+                            <stop offset="42.86%" stop-color="#f59e0b" />
+                            <stop offset="71.43%" stop-color="#f59e0b" />
+                            <stop offset="71.43%" stop-color="#10b981" />
+                            <stop offset="100%" stop-color="#10b981" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M 86.86 313.14 A 160 160 0 1 1 313.14 313.14" 
+                          fill="none" stroke="#e5e7eb" stroke-width="24" stroke-linecap="round" />
+                    <g id="arc-resiliente"></g>
+                </svg>
+                <div class="value-display" style="color: #10b981;">7.0</div>
+                <div class="stage-indicator" style="background: #f0fdf4; color: #10b981;">RESILIENTE</div>
+            </div>
+        </div>
+
+        <!-- Interactive Demo -->
+        <div style="background: white; padding: 40px; border-radius: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h2 style="text-align: center;">Interactive Gradient Arc</h2>
+            <div style="max-width: 500px; margin: 0 auto;">
+                <svg width="400" height="400" viewBox="0 0 400 400" style="display: block; margin: 0 auto;">
+                    <defs>
+                        <linearGradient id="dii-gradient-interactive" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#ef4444" />
+                            <stop offset="33.33%" stop-color="#ef4444" />
+                            <stop offset="33.33%" stop-color="#f59e0b" />
+                            <stop offset="55.56%" stop-color="#f59e0b" />
+                            <stop offset="55.56%" stop-color="#10b981" />
+                            <stop offset="77.78%" stop-color="#10b981" />
+                            <stop offset="77.78%" stop-color="#3b82f6" />
+                            <stop offset="100%" stop-color="#3b82f6" />
+                        </linearGradient>
+                        <filter id="arc-glow" x="-50%" y="-50%" width="200%" height="200%">
+                            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    
+                    <!-- Foundation arc -->
+                    <path d="M 86.86 313.14 A 160 160 0 1 1 313.14 313.14" 
+                          fill="none" stroke="#e5e7eb" stroke-width="24" stroke-linecap="round" />
+                    
+                    <!-- Progressive arc -->
+                    <g id="interactive-gradient-arc"></g>
+                    
+                    <!-- Center display -->
+                    <text x="200" y="200" text-anchor="middle" font-size="48" font-weight="bold" fill="#333" id="center-value">5.5</text>
+                    <text x="200" y="230" text-anchor="middle" font-size="18" fill="#666" id="center-stage">ROBUSTO</text>
+                </svg>
+                
+                <div class="controls">
+                    <label for="valueSlider">DII Value:</label>
+                    <input type="range" id="valueSlider" min="1" max="10" step="0.1" value="5.5">
+                    <div class="value-display" id="valueDisplay">5.5</div>
+                    <div class="stage-indicator" id="stageDisplay" style="background: #fef3c7; color: #f59e0b;">ROBUSTO</div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Helper functions
+            function createProgressiveArc(containerId, value, options = {}) {
+                const {
+                    cx = 200,
+                    cy = 200,
+                    radius = 160,
+                    strokeWidth = 24,
+                    startAngle = 135,
+                    endAngle = 405,
+                    useGradient = false,
+                    gradientId = null
+                } = options;
+                
+                const container = document.getElementById(containerId);
+                container.innerHTML = ''; // Clear previous
+                
+                // Calculate sweep
+                const totalSweep = endAngle - startAngle;
+                const normalized = (value - 1) / 9;
+                const sweepAngle = normalized * totalSweep;
+                
+                // Create path
+                const startRad = (startAngle * Math.PI) / 180;
+                const endRad = ((startAngle + sweepAngle) * Math.PI) / 180;
+                
+                const x1 = cx + radius * Math.cos(startRad);
+                const y1 = cy + radius * Math.sin(startRad);
+                const x2 = cx + radius * Math.cos(endRad);
+                const y2 = cy + radius * Math.sin(endRad);
+                
+                const largeArc = sweepAngle > 180 ? 1 : 0;
+                
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', `M ${x1} ${y1} A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2}`);
+                path.setAttribute('fill', 'none');
+                path.setAttribute('stroke', useGradient ? `url(#${gradientId})` : getColorForValue(value));
+                path.setAttribute('stroke-width', strokeWidth);
+                path.setAttribute('stroke-linecap', 'round');
+                path.setAttribute('filter', 'url(#arc-glow)');
+                
+                container.appendChild(path);
+            }
+            
+            function getColorForValue(value) {
+                if (value < 4) return '#ef4444';
+                if (value < 6) return '#f59e0b';
+                if (value < 8) return '#10b981';
+                return '#3b82f6';
+            }
+            
+            function getStageForValue(value) {
+                if (value < 4) return 'FRÁGIL';
+                if (value < 6) return 'ROBUSTO';
+                if (value < 8) return 'RESILIENTE';
+                return 'ADAPTATIVO';
+            }
+            
+            // Create comparison arcs
+            createProgressiveArc('solid-arc', 8.5, { useGradient: false });
+            createProgressiveArc('gradient-arc', 8.5, { useGradient: true, gradientId: 'dii-gradient' });
+            
+            // Create stage examples
+            createProgressiveArc('arc-fragil', 2.5, { useGradient: true, gradientId: 'gradient-fragil' });
+            createProgressiveArc('arc-robusto', 5.0, { useGradient: true, gradientId: 'gradient-robusto' });
+            createProgressiveArc('arc-resiliente', 7.0, { useGradient: true, gradientId: 'gradient-resiliente' });
+            
+            // Interactive arc
+            const slider = document.getElementById('valueSlider');
+            const valueDisplay = document.getElementById('valueDisplay');
+            const stageDisplay = document.getElementById('stageDisplay');
+            const centerValue = document.getElementById('center-value');
+            const centerStage = document.getElementById('center-stage');
+            
+            function updateInteractiveArc() {
+                const value = parseFloat(slider.value);
+                valueDisplay.textContent = value.toFixed(1);
+                centerValue.textContent = value.toFixed(1);
+                
+                const stage = getStageForValue(value);
+                stageDisplay.textContent = stage;
+                centerStage.textContent = stage;
+                
+                const color = getColorForValue(value);
+                valueDisplay.style.color = color;
+                centerValue.setAttribute('fill', color);
+                centerStage.setAttribute('fill', color);
+                
+                stageDisplay.style.backgroundColor = {
+                    'FRÁGIL': '#fef2f2',
+                    'ROBUSTO': '#fef3c7',
+                    'RESILIENTE': '#f0fdf4',
+                    'ADAPTATIVO': '#eff6ff'
+                }[stage];
+                stageDisplay.style.color = color;
+                
+                createProgressiveArc('interactive-gradient-arc', value, { 
+                    useGradient: true, 
+                    gradientId: 'dii-gradient-interactive' 
+                });
+            }
+            
+            slider.addEventListener('input', updateInteractiveArc);
+            updateInteractiveArc();
+        </script>
+    </div>
+</body>
+</html>

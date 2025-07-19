@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progressive Arc Test - Module 2</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #f5f5f7;
+            padding: 40px 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+        }
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        .test-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h3 {
+            margin: 0 0 20px 0;
+            color: #333;
+        }
+        svg {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+        }
+        .controls {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f5f5f7;
+            border-radius: 8px;
+        }
+        input[type="range"] {
+            width: 100%;
+            margin: 10px 0;
+        }
+        .value-display {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .stage-indicator {
+            font-size: 14px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Progressive Arc Test - Module 2</h1>
+        
+        <div class="test-grid">
+            <!-- Test 1: Low Value (FRÁGIL) -->
+            <div class="test-card">
+                <h3>Test 1: Low Value (2.5)</h3>
+                <svg width="400" height="400" viewBox="0 0 400 400">
+                    <!-- Foundation arc (grey) -->
+                    <path d="M 86.86 313.14 A 160 160 0 1 1 313.14 313.14" 
+                          fill="none" stroke="#e5e7eb" stroke-width="24" stroke-linecap="round" />
+                    
+                    <!-- Progressive arc -->
+                    <g id="arc1"></g>
+                    
+                    <!-- Center -->
+                    <circle cx="200" cy="200" r="2" fill="#333" />
+                </svg>
+                <div class="value-display" style="color: #ef4444;">2.5</div>
+                <div class="stage-indicator" style="background: #fef2f2; color: #ef4444;">FRÁGIL</div>
+            </div>
+
+            <!-- Test 2: Medium Value (RESILIENTE) -->
+            <div class="test-card">
+                <h3>Test 2: Medium Value (7.0)</h3>
+                <svg width="400" height="400" viewBox="0 0 400 400">
+                    <!-- Foundation arc (grey) -->
+                    <path d="M 86.86 313.14 A 160 160 0 1 1 313.14 313.14" 
+                          fill="none" stroke="#e5e7eb" stroke-width="24" stroke-linecap="round" />
+                    
+                    <!-- Progressive arc -->
+                    <g id="arc2"></g>
+                    
+                    <!-- Center -->
+                    <circle cx="200" cy="200" r="2" fill="#333" />
+                </svg>
+                <div class="value-display" style="color: #10b981;">7.0</div>
+                <div class="stage-indicator" style="background: #f0fdf4; color: #10b981;">RESILIENTE</div>
+            </div>
+
+            <!-- Test 3: High Value (ADAPTATIVO) -->
+            <div class="test-card">
+                <h3>Test 3: High Value (9.5)</h3>
+                <svg width="400" height="400" viewBox="0 0 400 400">
+                    <!-- Foundation arc (grey) -->
+                    <path d="M 86.86 313.14 A 160 160 0 1 1 313.14 313.14" 
+                          fill="none" stroke="#e5e7eb" stroke-width="24" stroke-linecap="round" />
+                    
+                    <!-- Progressive arc -->
+                    <g id="arc3"></g>
+                    
+                    <!-- Center -->
+                    <circle cx="200" cy="200" r="2" fill="#333" />
+                </svg>
+                <div class="value-display" style="color: #3b82f6;">9.5</div>
+                <div class="stage-indicator" style="background: #eff6ff; color: #3b82f6;">ADAPTATIVO</div>
+            </div>
+        </div>
+
+        <!-- Interactive Test -->
+        <div style="background: white; padding: 40px; border-radius: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h2 style="text-align: center;">Interactive Progressive Arc</h2>
+            <div style="max-width: 500px; margin: 0 auto;">
+                <svg width="400" height="400" viewBox="0 0 400 400" style="display: block; margin: 0 auto;">
+                    <!-- Foundation arc -->
+                    <path d="M 86.86 313.14 A 160 160 0 1 1 313.14 313.14" 
+                          fill="none" stroke="#e5e7eb" stroke-width="24" stroke-linecap="round" />
+                    
+                    <!-- Tick marks for reference -->
+                    <g id="ticks" opacity="0.3"></g>
+                    
+                    <!-- Progressive arc -->
+                    <g id="interactive-arc"></g>
+                    
+                    <!-- Center -->
+                    <circle cx="200" cy="200" r="3" fill="#333" />
+                </svg>
+                
+                <div class="controls">
+                    <label for="valueSlider">DII Value:</label>
+                    <input type="range" id="valueSlider" min="1" max="10" step="0.1" value="5.5">
+                    <div class="value-display" id="valueDisplay">5.5</div>
+                    <div class="stage-indicator" id="stageDisplay">ROBUSTO</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 170° Rotation Test -->
+        <div style="background: white; padding: 40px; border-radius: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-top: 40px;">
+            <h2 style="text-align: center;">With 170° Rotation</h2>
+            <div style="display: flex; justify-content: center; gap: 60px; align-items: center;">
+                <div style="text-align: center;">
+                    <h4>Normal</h4>
+                    <svg width="250" height="250" viewBox="0 0 250 250">
+                        <path d="M 54.41 196.59 A 100 100 0 1 1 195.59 196.59" 
+                              fill="none" stroke="#e5e7eb" stroke-width="16" stroke-linecap="round" />
+                        <g id="normal-arc"></g>
+                    </svg>
+                </div>
+                <div style="text-align: center;">
+                    <h4>Rotated 170°</h4>
+                    <svg width="250" height="250" viewBox="0 0 250 250" style="transform: rotate(170deg);">
+                        <rect width="250" height="250" fill="#fafafa" />
+                        <path d="M 54.41 196.59 A 100 100 0 1 1 195.59 196.59" 
+                              fill="none" stroke="#e5e7eb" stroke-width="16" stroke-linecap="round" />
+                        <g id="rotated-arc"></g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Helper functions
+            function createProgressiveArc(containerId, value, options = {}) {
+                const {
+                    cx = 150,
+                    cy = 150,
+                    radius = 120,
+                    strokeWidth = 20,
+                    startAngle = 135,
+                    endAngle = 405
+                } = options;
+                
+                const container = document.getElementById(containerId);
+                container.innerHTML = ''; // Clear previous
+                
+                // Calculate sweep
+                const totalSweep = endAngle - startAngle;
+                const normalized = (value - 1) / 9;
+                const sweepAngle = normalized * totalSweep;
+                
+                // Create path
+                const startRad = (startAngle * Math.PI) / 180;
+                const endRad = ((startAngle + sweepAngle) * Math.PI) / 180;
+                
+                const x1 = cx + radius * Math.cos(startRad);
+                const y1 = cy + radius * Math.sin(startRad);
+                const x2 = cx + radius * Math.cos(endRad);
+                const y2 = cy + radius * Math.sin(endRad);
+                
+                const largeArc = sweepAngle > 180 ? 1 : 0;
+                
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', `M ${x1} ${y1} A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2}`);
+                path.setAttribute('fill', 'none');
+                path.setAttribute('stroke', getColorForValue(value));
+                path.setAttribute('stroke-width', strokeWidth);
+                path.setAttribute('stroke-linecap', 'round');
+                path.setAttribute('filter', 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))');
+                
+                container.appendChild(path);
+            }
+            
+            function getColorForValue(value) {
+                if (value < 4) return '#ef4444';
+                if (value < 6) return '#f59e0b';
+                if (value < 8) return '#10b981';
+                return '#3b82f6';
+            }
+            
+            function getStageForValue(value) {
+                if (value < 4) return 'FRÁGIL';
+                if (value < 6) return 'ROBUSTO';
+                if (value < 8) return 'RESILIENTE';
+                return 'ADAPTATIVO';
+            }
+            
+            // Create static arcs with correct coordinates
+            createProgressiveArc('arc1', 2.5, {
+                cx: 200,
+                cy: 200,
+                radius: 160,
+                strokeWidth: 24
+            });
+            createProgressiveArc('arc2', 7.0, {
+                cx: 200,
+                cy: 200,
+                radius: 160,
+                strokeWidth: 24
+            });
+            createProgressiveArc('arc3', 9.5, {
+                cx: 200,
+                cy: 200,
+                radius: 160,
+                strokeWidth: 24
+            });
+            
+            // Create ticks for reference
+            const ticksContainer = document.getElementById('ticks');
+            for (let v = 1; v <= 10; v++) {
+                const angle = 135 + ((v - 1) / 9) * 270;
+                const rad = (angle * Math.PI) / 180;
+                const x = 200 + 160 * Math.cos(rad);
+                const y = 200 + 160 * Math.sin(rad);
+                
+                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                circle.setAttribute('cx', x);
+                circle.setAttribute('cy', y);
+                circle.setAttribute('r', '3');
+                circle.setAttribute('fill', '#999');
+                ticksContainer.appendChild(circle);
+                
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.setAttribute('x', 200 + 185 * Math.cos(rad));
+                text.setAttribute('y', 200 + 185 * Math.sin(rad));
+                text.setAttribute('text-anchor', 'middle');
+                text.setAttribute('dominant-baseline', 'middle');
+                text.setAttribute('font-size', '12');
+                text.setAttribute('fill', '#999');
+                text.textContent = v;
+                ticksContainer.appendChild(text);
+            }
+            
+            // Interactive arc
+            const slider = document.getElementById('valueSlider');
+            const valueDisplay = document.getElementById('valueDisplay');
+            const stageDisplay = document.getElementById('stageDisplay');
+            
+            function updateInteractiveArc() {
+                const value = parseFloat(slider.value);
+                valueDisplay.textContent = value.toFixed(1);
+                valueDisplay.style.color = getColorForValue(value);
+                
+                const stage = getStageForValue(value);
+                stageDisplay.textContent = stage;
+                stageDisplay.style.backgroundColor = {
+                    'FRÁGIL': '#fef2f2',
+                    'ROBUSTO': '#fef3c7',
+                    'RESILIENTE': '#f0fdf4',
+                    'ADAPTATIVO': '#eff6ff'
+                }[stage];
+                stageDisplay.style.color = getColorForValue(value);
+                
+                createProgressiveArc('interactive-arc', value, {
+                    cx: 200,
+                    cy: 200,
+                    radius: 160,
+                    strokeWidth: 24
+                });
+            }
+            
+            slider.addEventListener('input', updateInteractiveArc);
+            updateInteractiveArc();
+            
+            // Rotation test
+            createProgressiveArc('normal-arc', 7.5, {
+                cx: 125,
+                cy: 125,
+                radius: 100,
+                strokeWidth: 16
+            });
+            createProgressiveArc('rotated-arc', 7.5, {
+                cx: 125,
+                cy: 125,
+                radius: 100,
+                strokeWidth: 16
+            });
+        </script>
+    </div>
+</body>
+</html>

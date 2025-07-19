@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arc Gauge - Working Coordinate System</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #f5f5f7;
+            padding: 40px 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+        }
+        .demo-card {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        svg {
+            display: block;
+            margin: 0 auto;
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+        }
+        .formula-box {
+            background: #1d1d1f;
+            color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 40px;
+        }
+        pre {
+            background: #2d2d2f;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Arc Gauge - Working Coordinate System</h1>
+        
+        <div class="demo-card">
+            <h2>✅ Correct Implementation</h2>
+            <svg width="500" height="500" viewBox="0 0 500 500">
+                <!-- Grid for reference -->
+                <defs>
+                    <pattern id="grid" width="25" height="25" patternUnits="userSpaceOnUse">
+                        <path d="M 25 0 L 0 0 0 25" fill="none" stroke="#f0f0f0" stroke-width="0.5"/>
+                    </pattern>
+                </defs>
+                <rect width="500" height="500" fill="url(#grid)" />
+                
+                <!-- Center crosshairs -->
+                <line x1="250" y1="0" x2="250" y2="500" stroke="#e0e0e0" stroke-width="1" />
+                <line x1="0" y1="250" x2="500" y2="250" stroke="#e0e0e0" stroke-width="1" />
+                
+                <!-- Main arc (scaled up for clarity) -->
+                <g id="main-arc">
+                    <!-- Arc path -->
+                    <path id="arcPath" fill="none" stroke="#e5e7eb" stroke-width="30" stroke-linecap="round" />
+                </g>
+                
+                <!-- Scale marks and numbers -->
+                <g id="scale-marks">
+                    <!-- Will be populated by JavaScript -->
+                </g>
+                
+                <!-- Center point -->
+                <circle cx="250" cy="250" r="3" fill="#ff0000" />
+                <text x="250" y="240" text-anchor="middle" font-size="12" fill="#666">Center</text>
+            </svg>
+        </div>
+
+        <div class="formula-box">
+            <h3 style="color: #fff; text-align: center;">Working Formula</h3>
+            <pre><code>const CENTER_X = 250;
+const CENTER_Y = 250;
+const RADIUS = 200;
+const STROKE_WIDTH = 30;
+
+// Arc configuration
+const START_ANGLE = 225;  // degrees (bottom-left)
+const END_ANGLE = 495;    // degrees (bottom-right, wraps to 135°)
+const TOTAL_SWEEP = 270;  // degrees
+
+// Convert value (1-10) to position
+function getCoordinatesForValue(value) {
+    // Linear interpolation for angle
+    const normalizedValue = (value - 1) / 9;  // 0 to 1
+    const angle = START_ANGLE + (normalizedValue * TOTAL_SWEEP);
+    const angleRad = (angle * Math.PI) / 180;
+    
+    // Arc center point
+    const arcX = CENTER_X + RADIUS * Math.cos(angleRad);
+    const arcY = CENTER_Y + RADIUS * Math.sin(angleRad);
+    
+    // Tick positions (perpendicular to arc)
+    const tickInnerRadius = RADIUS - STROKE_WIDTH/2 - 5;
+    const tickOuterRadius = RADIUS + STROKE_WIDTH/2 + 10;
+    const labelRadius = RADIUS + STROKE_WIDTH/2 + 30;
+    
+    return {
+        arc: { x: arcX, y: arcY },
+        tickInner: {
+            x: CENTER_X + tickInnerRadius * Math.cos(angleRad),
+            y: CENTER_Y + tickInnerRadius * Math.sin(angleRad)
+        },
+        tickOuter: {
+            x: CENTER_X + tickOuterRadius * Math.cos(angleRad),
+            y: CENTER_Y + tickOuterRadius * Math.sin(angleRad)
+        },
+        label: {
+            x: CENTER_X + labelRadius * Math.cos(angleRad),
+            y: CENTER_Y + labelRadius * Math.sin(angleRad)
+        },
+        angle: angle
+    };
+}</code></pre>
+        </div>
+
+        <script>
+            // Implementation
+            const CENTER_X = 250;
+            const CENTER_Y = 250;
+            const RADIUS = 200;
+            const STROKE_WIDTH = 30;
+            const START_ANGLE = 225;
+            const TOTAL_SWEEP = 270;
+
+            // Create the arc path
+            function createArcPath() {
+                const startRad = (START_ANGLE * Math.PI) / 180;
+                const endRad = ((START_ANGLE + TOTAL_SWEEP) * Math.PI) / 180;
+                
+                const startX = CENTER_X + RADIUS * Math.cos(startRad);
+                const startY = CENTER_Y + RADIUS * Math.sin(startRad);
+                const endX = CENTER_X + RADIUS * Math.cos(endRad);
+                const endY = CENTER_Y + RADIUS * Math.sin(endRad);
+                
+                const path = `M ${startX} ${startY} A ${RADIUS} ${RADIUS} 0 1 1 ${endX} ${endY}`;
+                document.getElementById('arcPath').setAttribute('d', path);
+            }
+
+            // Get coordinates for a value
+            function getCoordinatesForValue(value) {
+                const normalizedValue = (value - 1) / 9;
+                const angle = START_ANGLE + (normalizedValue * TOTAL_SWEEP);
+                const angleRad = (angle * Math.PI) / 180;
+                
+                const tickInnerRadius = RADIUS - STROKE_WIDTH/2 - 5;
+                const tickOuterRadius = RADIUS + STROKE_WIDTH/2 + 10;
+                const labelRadius = RADIUS + STROKE_WIDTH/2 + 30;
+                
+                return {
+                    arc: {
+                        x: CENTER_X + RADIUS * Math.cos(angleRad),
+                        y: CENTER_Y + RADIUS * Math.sin(angleRad)
+                    },
+                    tickInner: {
+                        x: CENTER_X + tickInnerRadius * Math.cos(angleRad),
+                        y: CENTER_Y + tickInnerRadius * Math.sin(angleRad)
+                    },
+                    tickOuter: {
+                        x: CENTER_X + tickOuterRadius * Math.cos(angleRad),
+                        y: CENTER_Y + tickOuterRadius * Math.sin(angleRad)
+                    },
+                    label: {
+                        x: CENTER_X + labelRadius * Math.cos(angleRad),
+                        y: CENTER_Y + labelRadius * Math.sin(angleRad)
+                    },
+                    angle: angle
+                };
+            }
+
+            // Create scale marks
+            function createScaleMarks() {
+                const scaleGroup = document.getElementById('scale-marks');
+                
+                for (let value = 1; value <= 10; value++) {
+                    const coords = getCoordinatesForValue(value);
+                    
+                    // Debug circle on arc
+                    const arcCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    arcCircle.setAttribute('cx', coords.arc.x);
+                    arcCircle.setAttribute('cy', coords.arc.y);
+                    arcCircle.setAttribute('r', '4');
+                    arcCircle.setAttribute('fill', '#00ff00');
+                    scaleGroup.appendChild(arcCircle);
+                    
+                    // Tick mark
+                    const tick = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    tick.setAttribute('x1', coords.tickInner.x);
+                    tick.setAttribute('y1', coords.tickInner.y);
+                    tick.setAttribute('x2', coords.tickOuter.x);
+                    tick.setAttribute('y2', coords.tickOuter.y);
+                    tick.setAttribute('stroke', value % 2 === 0 ? '#333' : '#666');
+                    tick.setAttribute('stroke-width', value === 1 || value === 10 ? '3' : '2');
+                    scaleGroup.appendChild(tick);
+                    
+                    // Label
+                    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    label.setAttribute('x', coords.label.x);
+                    label.setAttribute('y', coords.label.y);
+                    label.setAttribute('text-anchor', 'middle');
+                    label.setAttribute('dominant-baseline', 'middle');
+                    label.setAttribute('font-size', '18');
+                    label.setAttribute('font-weight', value === 1 || value === 10 ? 'bold' : 'normal');
+                    label.setAttribute('fill', value === 1 ? '#ff0000' : value === 10 ? '#0000ff' : '#333');
+                    label.textContent = value;
+                    scaleGroup.appendChild(label);
+                }
+            }
+
+            // Initialize
+            createArcPath();
+            createScaleMarks();
+        </script>
+
+        <div class="demo-card" style="margin-top: 40px;">
+            <h2>With 170° Rotation</h2>
+            <svg width="500" height="500" viewBox="0 0 500 500" style="transform: rotate(170deg);">
+                <!-- Same SVG content, but rotated -->
+                <rect width="500" height="500" fill="#fafafa" />
+                
+                <!-- Arc -->
+                <path d="M 108.58 391.42 A 200 200 0 1 1 391.42 391.42" 
+                      fill="none" stroke="#e5e7eb" stroke-width="30" stroke-linecap="round" />
+                
+                <!-- Scale marks with counter-rotated labels -->
+                <g id="rotated-scale">
+                    <!-- Value 1 -->
+                    <line x1="115.65" y1="384.35" x2="101.51" y2="398.49" stroke="#333" stroke-width="3" />
+                    <text x="87.38" y="412.62" text-anchor="middle" font-size="18" fill="#ff0000" font-weight="bold"
+                          transform="rotate(-170 87.38 412.62)">1</text>
+                    
+                    <!-- Value 5 (middle) -->
+                    <line x1="234.19" y1="425.78" x2="226.41" y2="438.46" stroke="#666" stroke-width="2" />
+                    <text x="218.63" y="451.14" text-anchor="middle" font-size="18" fill="#333"
+                          transform="rotate(-170 218.63 451.14)">5</text>
+                    
+                    <!-- Value 10 -->
+                    <line x1="384.35" y1="384.35" x2="398.49" y2="398.49" stroke="#333" stroke-width="3" />
+                    <text x="412.62" y="412.62" text-anchor="middle" font-size="18" fill="#0000ff" font-weight="bold"
+                          transform="rotate(-170 412.62 412.62)">10</text>
+                </g>
+                
+                <!-- Center (counter-rotated) -->
+                <circle cx="250" cy="250" r="3" fill="#ff0000" />
+                <text x="250" y="240" text-anchor="middle" font-size="12" fill="#666"
+                      transform="rotate(-170 250 250)">Rotated 170°</text>
+            </svg>
+        </div>
+
+        <div style="background: #e8f5e9; padding: 30px; border-radius: 16px; margin-top: 40px;">
+            <h2 style="text-align: center; color: #2e7d32;">✅ Success!</h2>
+            <p style="text-align: center; font-size: 18px; color: #1b5e20;">
+                The coordinate system now correctly follows the arc curve.<br>
+                Numbers 1-10 are properly distributed along the 270° arc.<br>
+                Ready for Module 2: Progressive gradient implementation.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

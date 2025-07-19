@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DimensionBalance - Phase 2: Coordinate System Variations</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            padding: 40px 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 40px;
+        }
+        .variations-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+        .variation-card {
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid #333;
+        }
+        .variation-title {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #fff;
+            text-align: center;
+            font-weight: 300;
+        }
+        svg {
+            background: #000;
+            border-radius: 16px;
+            display: block;
+            margin: 0 auto;
+        }
+        .controls {
+            background: #222;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+        .control-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .control-group.vulnerability {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .control-item {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-size: 14px;
+            color: #aaa;
+            margin-bottom: 5px;
+        }
+        input[type="range"] {
+            width: 100%;
+            margin: 5px 0;
+        }
+        .value-display {
+            font-size: 18px;
+            font-weight: 300;
+            text-align: center;
+        }
+        .resilience { color: #10b981; }
+        .vulnerability { color: #B4B5DF; }
+        .description {
+            background: #222;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DimensionBalance - Coordinate System Variations</h1>
+        <p class="subtitle">Flowing Wave Background with #B4B5DF • Resilience (Green) vs Vulnerability (#B4B5DF)</p>
+        
+        <div class="variations-grid">
+            <!-- Variation 1: Pentagon Radar -->
+            <div class="variation-card">
+                <h2 class="variation-title">Variation 1: Pentagon Radar</h2>
+                <svg width="500" height="500" viewBox="0 0 500 500">
+                    <defs>
+                        <clipPath id="circle-clip-1">
+                            <circle cx="250" cy="250" r="220" />
+                        </clipPath>
+                    </defs>
+                    
+                    <!-- Flowing wave background -->
+                    <g clip-path="url(#circle-clip-1)">
+                        <path d="M 30 250 
+                                 Q 140 150, 250 250
+                                 T 470 250
+                                 L 470 30
+                                 L 30 30
+                                 Z"
+                              fill="#10b98120" />
+                        
+                        <path d="M 30 250 
+                                 Q 140 150, 250 250
+                                 T 470 250
+                                 L 470 470
+                                 L 30 470
+                                 Z"
+                              fill="#B4B5DF20" />
+                    </g>
+                    
+                    <!-- Circle border -->
+                    <circle cx="250" cy="250" r="220" fill="none" stroke="#333" stroke-width="2" />
+                    
+                    <!-- Pentagon radar -->
+                    <g id="pentagon-1">
+                        <!-- Radar grid -->
+                        <g opacity="0.2"></g>
+                        <!-- Pentagon shape -->
+                        <g></g>
+                        <!-- Dimension points -->
+                        <g></g>
+                    </g>
+                </svg>
+                
+                <div class="controls">
+                    <div class="control-group">
+                        <div class="control-item">
+                            <label class="resilience">Resistencia (TRD)</label>
+                            <input type="range" id="trd1" min="1" max="10" value="7" step="0.5">
+                            <div class="value-display resilience" id="trd1-val">7.0</div>
+                        </div>
+                        <div class="control-item">
+                            <label class="resilience">Ciber-ROI (AER)</label>
+                            <input type="range" id="aer1" min="1" max="10" value="8" step="0.5">
+                            <div class="value-display resilience" id="aer1-val">8.0</div>
+                        </div>
+                    </div>
+                    <div class="control-group vulnerability">
+                        <div class="control-item">
+                            <label class="vulnerability">Exposición (BRI)</label>
+                            <input type="range" id="bri1" min="1" max="10" value="5" step="0.5">
+                            <div class="value-display vulnerability" id="bri1-val">5.0</div>
+                        </div>
+                        <div class="control-item">
+                            <label class="vulnerability">Cultura (HFP)</label>
+                            <input type="range" id="hfp1" min="1" max="10" value="6" step="0.5">
+                            <div class="value-display vulnerability" id="hfp1-val">6.0</div>
+                        </div>
+                        <div class="control-item">
+                            <label class="vulnerability">Respuesta (RRG)</label>
+                            <input type="range" id="rrg1" min="1" max="10" value="4" step="0.5">
+                            <div class="value-display vulnerability" id="rrg1-val">4.0</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="description">
+                    <strong>Pentagon Radar:</strong> Classic radar chart forming an inverted pentagon. Shows all dimensions equally but may obscure the yin-yang aesthetic.
+                </div>
+            </div>
+            
+            <!-- Variation 2: Star Linear (Basic) -->
+            <div class="variation-card">
+                <h2 class="variation-title">Variation 2: Star Linear (Basic)</h2>
+                <svg width="500" height="500" viewBox="0 0 500 500">
+                    <defs>
+                        <clipPath id="circle-clip-2">
+                            <circle cx="250" cy="250" r="220" />
+                        </clipPath>
+                    </defs>
+                    
+                    <!-- Flowing wave background -->
+                    <g clip-path="url(#circle-clip-2)">
+                        <path d="M 30 250 
+                                 Q 140 150, 250 250
+                                 T 470 250
+                                 L 470 30
+                                 L 30 30
+                                 Z"
+                              fill="#10b98120" />
+                        
+                        <path d="M 30 250 
+                                 Q 140 150, 250 250
+                                 T 470 250
+                                 L 470 470
+                                 L 30 470
+                                 Z"
+                              fill="#B4B5DF20" />
+                    </g>
+                    
+                    <!-- Circle border -->
+                    <circle cx="250" cy="250" r="220" fill="none" stroke="#333" stroke-width="2" />
+                    
+                    <!-- Star linear -->
+                    <g id="star-2">
+                        <!-- Lines from center -->
+                        <g></g>
+                        <!-- Dimension points -->
+                        <g></g>
+                    </g>
+                </svg>
+                
+                <div class="controls">
+                    <div class="control-group">
+                        <div class="control-item">
+                            <label class="resilience">Resistencia (TRD)</label>
+                            <input type="range" id="trd2" min="1" max="10" value="7" step="0.5">
+                            <div class="value-display resilience" id="trd2-val">7.0</div>
+                        </div>
+                        <div class="control-item">
+                            <label class="resilience">Ciber-ROI (AER)</label>
+                            <input type="range" id="aer2" min="1" max="10" value="8" step="0.5">
+                            <div class="value-display resilience" id="aer2-val">8.0</div>
+                        </div>
+                    </div>
+                    <div class="control-group vulnerability">
+                        <div class="control-item">
+                            <label class="vulnerability">Exposición (BRI)</label>
+                            <input type="range" id="bri2" min="1" max="10" value="5" step="0.5">
+                            <div class="value-display vulnerability" id="bri2-val">5.0</div>
+                        </div>
+                        <div class="control-item">
+                            <label class="vulnerability">Cultura (HFP)</label>
+                            <input type="range" id="hfp2" min="1" max="10" value="6" step="0.5">
+                            <div class="value-display vulnerability" id="hfp2-val">6.0</div>
+                        </div>
+                        <div class="control-item">
+                            <label class="vulnerability">Respuesta (RRG)</label>
+                            <input type="range" id="rrg2" min="1" max="10" value="4" step="0.5">
+                            <div class="value-display vulnerability" id="rrg2-val">4.0</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="description">
+                    <strong>Star Linear:</strong> Subtle lines from center with dots positioned by value. Preserves yin-yang visibility.
+                </div>
+            </div>
+            
+            <!-- Variation 3: Star with Yin-Yang Dots -->
+            <div class="variation-card">
+                <h2 class="variation-title">Variation 3: Star with Yin-Yang Style Dots</h2>
+                <svg width="500" height="500" viewBox="0 0 500 500">
+                    <defs>
+                        <clipPath id="circle-clip-3">
+                            <circle cx="250" cy="250" r="220" />
+                        </clipPath>
+                        <radialGradient id="green-glow">
+                            <stop offset="0%" stop-color="#10b981" stop-opacity="0.8" />
+                            <stop offset="50%" stop-color="#10b981" stop-opacity="0.3" />
+                            <stop offset="100%" stop-color="#10b981" stop-opacity="0" />
+                        </radialGradient>
+                        <radialGradient id="purple-glow">
+                            <stop offset="0%" stop-color="#B4B5DF" stop-opacity="0.8" />
+                            <stop offset="50%" stop-color="#B4B5DF" stop-opacity="0.3" />
+                            <stop offset="100%" stop-color="#B4B5DF" stop-opacity="0" />
+                        </radialGradient>
+                    </defs>
+                    
+                    <!-- Flowing wave background -->
+                    <g clip-path="url(#circle-clip-3)">
+                        <path d="M 30 250 
+                                 Q 140 150, 250 250
+                                 T 470 250
+                                 L 470 30
+                                 L 30 30
+                                 Z"
+                              fill="#10b98120" />
+                        
+                        <path d="M 30 250 
+                                 Q 140 150, 250 250
+                                 T 470 250
+                                 L 470 470
+                                 L 30 470
+                                 Z"
+                              fill="#B4B5DF20" />
+                    </g>
+                    
+                    <!-- Circle border -->
+                    <circle cx="250" cy="250" r="220" fill="none" stroke="#333" stroke-width="2" />
+                    
+                    <!-- Star with yin-yang dots -->
+                    <g id="star-3">
+                        <!-- Lines from center -->
+                        <g></g>
+                        <!-- Dimension points with glow -->
+                        <g></g>
+                    </g>
+                </svg>
+                
+                <div class="controls">
+                    <div class="control-group">
+                        <div class="control-item">
+                            <label class="resilience">Resistencia (TRD)</label>
+                            <input type="range" id="trd3" min="1" max="10" value="7" step="0.5">
+                            <div class="value-display resilience" id="trd3-val">7.0</div>
+                        </div>
+                        <div class="control-item">
+                            <label class="resilience">Ciber-ROI (AER)</label>
+                            <input type="range" id="aer3" min="1" max="10" value="8" step="0.5">
+                            <div class="value-display resilience" id="aer3-val">8.0</div>
+                        </div>
+                    </div>
+                    <div class="control-group vulnerability">
+                        <div class="control-item">
+                            <label class="vulnerability">Exposición (BRI)</label>
+                            <input type="range" id="bri3" min="1" max="10" value="5" step="0.5">
+                            <div class="value-display vulnerability" id="bri3-val">5.0</div>
+                        </div>
+                        <div class="control-item">
+                            <label class="vulnerability">Cultura (HFP)</label>
+                            <input type="range" id="hfp3" min="1" max="10" value="6" step="0.5">
+                            <div class="value-display vulnerability" id="hfp3-val">6.0</div>
+                        </div>
+                        <div class="control-item">
+                            <label class="vulnerability">Respuesta (RRG)</label>
+                            <input type="range" id="rrg3" min="1" max="10" value="4" step="0.5">
+                            <div class="value-display vulnerability" id="rrg3-val">4.0</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="description">
+                    <strong>Yin-Yang Style:</strong> Larger dots with soft glow effect, mimicking the yin-yang dots. Single descriptive words instead of acronyms.
+                </div>
+            </div>
+            
+            <!-- Variation 4: Hybrid Pentagon-Star -->
+            <div class="variation-card">
+                <h2 class="variation-title">Variation 4: Hybrid (Subtle Pentagon + Star)</h2>
+                <svg width="500" height="500" viewBox="0 0 500 500">
+                    <defs>
+                        <clipPath id="circle-clip-4">
+                            <circle cx="250" cy="250" r="220" />
+                        </clipPath>
+                    </defs>
+                    
+                    <!-- Flowing wave background -->
+                    <g clip-path="url(#circle-clip-4)">
+                        <path d="M 30 250 
+                                 Q 140 150, 250 250
+                                 T 470 250
+                                 L 470 30
+                                 L 30 30
+                                 Z"
+                              fill="#10b98120" />
+                        
+                        <path d="M 30 250 
+                                 Q 140 150, 250 250
+                                 T 470 250
+                                 L 470 470
+                                 L 30 470
+                                 Z"
+                              fill="#B4B5DF20" />
+                    </g>
+                    
+                    <!-- Circle border -->
+                    <circle cx="250" cy="250" r="220" fill="none" stroke="#333" stroke-width="2" />
+                    
+                    <!-- Hybrid visualization -->
+                    <g id="hybrid-4">
+                        <!-- Subtle pentagon outline -->
+                        <g></g>
+                        <!-- Star lines -->
+                        <g></g>
+                        <!-- Dimension points -->
+                        <g></g>
+                    </g>
+                </svg>
+                
+                <div class="controls">
+                    <div class="control-group">
+                        <div class="control-item">
+                            <label class="resilience">Resistencia (TRD)</label>
+                            <input type="range" id="trd4" min="1" max="10" value="7" step="0.5">
+                            <div class="value-display resilience" id="trd4-val">7.0</div>
+                        </div>
+                        <div class="control-item">
+                            <label class="resilience">Ciber-ROI (AER)</label>
+                            <input type="range" id="aer4" min="1" max="10" value="8" step="0.5">
+                            <div class="value-display resilience" id="aer4-val">8.0</div>
+                        </div>
+                    </div>
+                    <div class="control-group vulnerability">
+                        <div class="control-item">
+                            <label class="vulnerability">Exposición (BRI)</label>
+                            <input type="range" id="bri4" min="1" max="10" value="5" step="0.5">
+                            <div class="value-display vulnerability" id="bri4-val">5.0</div>
+                        </div>
+                        <div class="control-item">
+                            <label class="vulnerability">Cultura (HFP)</label>
+                            <input type="range" id="hfp4" min="1" max="10" value="6" step="0.5">
+                            <div class="value-display vulnerability" id="hfp4-val">6.0</div>
+                        </div>
+                        <div class="control-item">
+                            <label class="vulnerability">Respuesta (RRG)</label>
+                            <input type="range" id="rrg4" min="1" max="10" value="4" step="0.5">
+                            <div class="value-display vulnerability" id="rrg4-val">4.0</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="description">
+                    <strong>Hybrid:</strong> Combines subtle pentagon shape with star lines. Best of both approaches with HFP (Cultura) at the bottom as the key human factor.
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            // Dimension configuration
+            const dimensions = {
+                trd: { angle: -60, label: 'Resistencia', color: '#10b981', group: 'resilience' },
+                aer: { angle: 60, label: 'Ciber-ROI', color: '#10b981', group: 'resilience' },
+                bri: { angle: 150, label: 'Exposición', color: '#B4B5DF', group: 'vulnerability' },
+                hfp: { angle: 270, label: 'Cultura', color: '#B4B5DF', group: 'vulnerability' },  // Bottom center
+                rrg: { angle: 210, label: 'Respuesta', color: '#B4B5DF', group: 'vulnerability' }
+            };
+            
+            // Helper function to convert polar to cartesian
+            function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+                const angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
+                return {
+                    x: centerX + (radius * Math.cos(angleInRadians)),
+                    y: centerY + (radius * Math.sin(angleInRadians))
+                };
+            }
+            
+            // Variation 1: Pentagon Radar
+            function updatePentagon(id) {
+                const container = document.getElementById(`pentagon-${id}`);
+                const centerX = 250, centerY = 250;
+                const maxRadius = 180;
+                
+                // Clear previous
+                container.innerHTML = '<g opacity="0.2"></g><g></g><g></g>';
+                const [gridGroup, shapeGroup, pointsGroup] = container.children;
+                
+                // Draw radar grid
+                for (let i = 1; i <= 10; i++) {
+                    const radius = (i / 10) * maxRadius;
+                    const pentagonPath = [];
+                    
+                    Object.keys(dimensions).forEach(dim => {
+                        const point = polarToCartesian(centerX, centerY, radius, dimensions[dim].angle);
+                        pentagonPath.push(pentagonPath.length === 0 ? `M ${point.x} ${point.y}` : `L ${point.x} ${point.y}`);
+                    });
+                    pentagonPath.push('Z');
+                    
+                    const grid = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    grid.setAttribute('d', pentagonPath.join(' '));
+                    grid.setAttribute('fill', 'none');
+                    grid.setAttribute('stroke', '#333');
+                    grid.setAttribute('stroke-width', i % 2 === 0 ? '1' : '0.5');
+                    gridGroup.appendChild(grid);
+                }
+                
+                // Draw dimension lines
+                Object.keys(dimensions).forEach(dim => {
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', centerX);
+                    line.setAttribute('y1', centerY);
+                    const endPoint = polarToCartesian(centerX, centerY, maxRadius, dimensions[dim].angle);
+                    line.setAttribute('x2', endPoint.x);
+                    line.setAttribute('y2', endPoint.y);
+                    line.setAttribute('stroke', '#333');
+                    line.setAttribute('stroke-width', '0.5');
+                    gridGroup.appendChild(line);
+                });
+                
+                // Draw filled pentagon based on values
+                const pentagonPath = [];
+                Object.keys(dimensions).forEach(dim => {
+                    const value = parseFloat(document.getElementById(`${dim}${id}`).value);
+                    const radius = (value / 10) * maxRadius;
+                    const point = polarToCartesian(centerX, centerY, radius, dimensions[dim].angle);
+                    pentagonPath.push(pentagonPath.length === 0 ? `M ${point.x} ${point.y}` : `L ${point.x} ${point.y}`);
+                });
+                pentagonPath.push('Z');
+                
+                const shape = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                shape.setAttribute('d', pentagonPath.join(' '));
+                shape.setAttribute('fill', '#10b98130');
+                shape.setAttribute('stroke', '#10b981');
+                shape.setAttribute('stroke-width', '2');
+                shapeGroup.appendChild(shape);
+                
+                // Draw dimension points and labels
+                Object.keys(dimensions).forEach(dim => {
+                    const value = parseFloat(document.getElementById(`${dim}${id}`).value);
+                    const radius = (value / 10) * maxRadius;
+                    const point = polarToCartesian(centerX, centerY, radius, dimensions[dim].angle);
+                    const labelPoint = polarToCartesian(centerX, centerY, maxRadius + 30, dimensions[dim].angle);
+                    
+                    // Point
+                    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    circle.setAttribute('cx', point.x);
+                    circle.setAttribute('cy', point.y);
+                    circle.setAttribute('r', '8');
+                    circle.setAttribute('fill', dimensions[dim].color);
+                    pointsGroup.appendChild(circle);
+                    
+                    // Label
+                    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    label.setAttribute('x', labelPoint.x);
+                    label.setAttribute('y', labelPoint.y);
+                    label.setAttribute('text-anchor', 'middle');
+                    label.setAttribute('dominant-baseline', 'middle');
+                    label.setAttribute('font-size', '14');
+                    label.setAttribute('fill', dimensions[dim].color);
+                    label.textContent = dimensions[dim].label;
+                    pointsGroup.appendChild(label);
+                });
+            }
+            
+            // Variation 2: Star Linear
+            function updateStar(id) {
+                const container = document.getElementById(`star-${id}`);
+                const centerX = 250, centerY = 250;
+                const maxRadius = 180;
+                
+                // Clear previous
+                container.innerHTML = '<g></g><g></g>';
+                const [linesGroup, pointsGroup] = container.children;
+                
+                // Draw lines and points
+                Object.keys(dimensions).forEach(dim => {
+                    const value = parseFloat(document.getElementById(`${dim}${id}`).value);
+                    const radius = (value / 10) * maxRadius;
+                    const point = polarToCartesian(centerX, centerY, radius, dimensions[dim].angle);
+                    
+                    // Line from center
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', centerX);
+                    line.setAttribute('y1', centerY);
+                    line.setAttribute('x2', point.x);
+                    line.setAttribute('y2', point.y);
+                    line.setAttribute('stroke', dimensions[dim].color);
+                    line.setAttribute('stroke-width', '1');
+                    line.setAttribute('opacity', '0.3');
+                    linesGroup.appendChild(line);
+                    
+                    // Point
+                    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    circle.setAttribute('cx', point.x);
+                    circle.setAttribute('cy', point.y);
+                    circle.setAttribute('r', '10');
+                    circle.setAttribute('fill', dimensions[dim].color);
+                    circle.setAttribute('opacity', '0.8');
+                    pointsGroup.appendChild(circle);
+                    
+                    // Label
+                    const labelOffset = 25;
+                    const labelX = point.x + (point.x - centerX) / radius * labelOffset;
+                    const labelY = point.y + (point.y - centerY) / radius * labelOffset;
+                    
+                    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    label.setAttribute('x', labelX);
+                    label.setAttribute('y', labelY);
+                    label.setAttribute('text-anchor', 'middle');
+                    label.setAttribute('dominant-baseline', 'middle');
+                    label.setAttribute('font-size', '12');
+                    label.setAttribute('fill', dimensions[dim].color);
+                    label.textContent = dimensions[dim].label;
+                    pointsGroup.appendChild(label);
+                });
+            }
+            
+            // Variation 3: Star with Yin-Yang dots
+            function updateYinYangStar(id) {
+                const container = document.getElementById(`star-${id}`);
+                const centerX = 250, centerY = 250;
+                const maxRadius = 180;
+                
+                // Clear previous
+                container.innerHTML = '<g></g><g></g>';
+                const [linesGroup, pointsGroup] = container.children;
+                
+                // Draw lines and points with glow
+                Object.keys(dimensions).forEach(dim => {
+                    const value = parseFloat(document.getElementById(`${dim}${id}`).value);
+                    const radius = (value / 10) * maxRadius;
+                    const point = polarToCartesian(centerX, centerY, radius, dimensions[dim].angle);
+                    
+                    // Subtle line from center
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', centerX);
+                    line.setAttribute('y1', centerY);
+                    line.setAttribute('x2', point.x);
+                    line.setAttribute('y2', point.y);
+                    line.setAttribute('stroke', dimensions[dim].color);
+                    line.setAttribute('stroke-width', '0.5');
+                    line.setAttribute('opacity', '0.2');
+                    line.setAttribute('stroke-dasharray', '2,4');
+                    linesGroup.appendChild(line);
+                    
+                    // Glow circle
+                    const glowCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    glowCircle.setAttribute('cx', point.x);
+                    glowCircle.setAttribute('cy', point.y);
+                    glowCircle.setAttribute('r', '25');
+                    glowCircle.setAttribute('fill', `url(#${dimensions[dim].group === 'resilience' ? 'green' : 'purple'}-glow)`);
+                    pointsGroup.appendChild(glowCircle);
+                    
+                    // Main circle (yin-yang style)
+                    const mainCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    mainCircle.setAttribute('cx', point.x);
+                    mainCircle.setAttribute('cy', point.y);
+                    mainCircle.setAttribute('r', '15');
+                    mainCircle.setAttribute('fill', dimensions[dim].color);
+                    mainCircle.setAttribute('opacity', '0.9');
+                    pointsGroup.appendChild(mainCircle);
+                    
+                    // Inner dot (like yin-yang)
+                    const innerDot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    innerDot.setAttribute('cx', point.x);
+                    innerDot.setAttribute('cy', point.y);
+                    innerDot.setAttribute('r', '5');
+                    innerDot.setAttribute('fill', '#000');
+                    innerDot.setAttribute('opacity', '0.3');
+                    pointsGroup.appendChild(innerDot);
+                    
+                    // Label with better positioning
+                    const labelOffset = 35;
+                    const labelX = point.x + (point.x - centerX) / radius * labelOffset;
+                    const labelY = point.y + (point.y - centerY) / radius * labelOffset;
+                    
+                    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    label.setAttribute('x', labelX);
+                    label.setAttribute('y', labelY);
+                    label.setAttribute('text-anchor', 'middle');
+                    label.setAttribute('dominant-baseline', 'middle');
+                    label.setAttribute('font-size', '14');
+                    label.setAttribute('font-weight', '500');
+                    label.setAttribute('fill', '#fff');
+                    label.textContent = dimensions[dim].label;
+                    pointsGroup.appendChild(label);
+                });
+            }
+            
+            // Variation 4: Hybrid
+            function updateHybrid(id) {
+                const container = document.getElementById(`hybrid-${id}`);
+                const centerX = 250, centerY = 250;
+                const maxRadius = 180;
+                
+                // Clear previous
+                container.innerHTML = '<g></g><g></g><g></g>';
+                const [pentagonGroup, linesGroup, pointsGroup] = container.children;
+                
+                // Draw subtle pentagon at max radius
+                const pentagonPath = [];
+                Object.keys(dimensions).forEach(dim => {
+                    const point = polarToCartesian(centerX, centerY, maxRadius, dimensions[dim].angle);
+                    pentagonPath.push(pentagonPath.length === 0 ? `M ${point.x} ${point.y}` : `L ${point.x} ${point.y}`);
+                });
+                pentagonPath.push('Z');
+                
+                const pentagon = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                pentagon.setAttribute('d', pentagonPath.join(' '));
+                pentagon.setAttribute('fill', 'none');
+                pentagon.setAttribute('stroke', '#333');
+                pentagon.setAttribute('stroke-width', '1');
+                pentagon.setAttribute('opacity', '0.3');
+                pentagon.setAttribute('stroke-dasharray', '5,5');
+                pentagonGroup.appendChild(pentagon);
+                
+                // Draw dimension values
+                const valuePath = [];
+                Object.keys(dimensions).forEach(dim => {
+                    const value = parseFloat(document.getElementById(`${dim}${id}`).value);
+                    const radius = (value / 10) * maxRadius;
+                    const point = polarToCartesian(centerX, centerY, radius, dimensions[dim].angle);
+                    valuePath.push(valuePath.length === 0 ? `M ${point.x} ${point.y}` : `L ${point.x} ${point.y}`);
+                    
+                    // Line from center
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', centerX);
+                    line.setAttribute('y1', centerY);
+                    line.setAttribute('x2', point.x);
+                    line.setAttribute('y2', point.y);
+                    line.setAttribute('stroke', dimensions[dim].color);
+                    line.setAttribute('stroke-width', '1.5');
+                    line.setAttribute('opacity', '0.4');
+                    linesGroup.appendChild(line);
+                    
+                    // Point
+                    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    circle.setAttribute('cx', point.x);
+                    circle.setAttribute('cy', point.y);
+                    circle.setAttribute('r', '12');
+                    circle.setAttribute('fill', dimensions[dim].color);
+                    circle.setAttribute('opacity', '0.8');
+                    pointsGroup.appendChild(circle);
+                    
+                    // Value inside circle
+                    const valueText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    valueText.setAttribute('x', point.x);
+                    valueText.setAttribute('y', point.y);
+                    valueText.setAttribute('text-anchor', 'middle');
+                    valueText.setAttribute('dominant-baseline', 'middle');
+                    valueText.setAttribute('font-size', '10');
+                    valueText.setAttribute('font-weight', 'bold');
+                    valueText.setAttribute('fill', '#fff');
+                    valueText.textContent = value.toFixed(1);
+                    pointsGroup.appendChild(valueText);
+                    
+                    // Label outside
+                    const labelPoint = polarToCartesian(centerX, centerY, maxRadius + 30, dimensions[dim].angle);
+                    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    label.setAttribute('x', labelPoint.x);
+                    label.setAttribute('y', labelPoint.y);
+                    label.setAttribute('text-anchor', 'middle');
+                    label.setAttribute('dominant-baseline', 'middle');
+                    label.setAttribute('font-size', '14');
+                    label.setAttribute('fill', dimensions[dim].color);
+                    label.textContent = dimensions[dim].label;
+                    pointsGroup.appendChild(label);
+                });
+                valuePath.push('Z');
+                
+                // Value shape
+                const valueShape = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                valueShape.setAttribute('d', valuePath.join(' '));
+                valueShape.setAttribute('fill', '#10b98115');
+                valueShape.setAttribute('stroke', '#10b981');
+                valueShape.setAttribute('stroke-width', '2');
+                valueShape.setAttribute('opacity', '0.6');
+                linesGroup.appendChild(valueShape);
+            }
+            
+            // Initialize all variations
+            function initializeVariation(id, updateFunction) {
+                updateFunction(id);
+                
+                // Add event listeners
+                ['trd', 'aer', 'hfp', 'bri', 'rrg'].forEach(dim => {
+                    const slider = document.getElementById(`${dim}${id}`);
+                    const display = document.getElementById(`${dim}${id}-val`);
+                    
+                    slider.addEventListener('input', () => {
+                        display.textContent = parseFloat(slider.value).toFixed(1);
+                        updateFunction(id);
+                    });
+                });
+            }
+            
+            // Initialize all
+            initializeVariation(1, updatePentagon);
+            initializeVariation(2, updateStar);
+            initializeVariation(3, updateYinYangStar);
+            initializeVariation(4, updateHybrid);
+        </script>
+    </div>
+</body>
+</html>

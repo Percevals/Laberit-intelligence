@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DimensionBalance - Phase 1: Yin-Yang Foundation</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            padding: 40px 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        .phase-section {
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            border: 1px solid #333;
+        }
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-top: 30px;
+        }
+        .test-card {
+            background: #000;
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid #333;
+        }
+        svg {
+            background: #000;
+            border-radius: 12px;
+        }
+        .controls {
+            background: #222;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+        input[type="range"] {
+            width: 100%;
+            margin: 10px 0;
+        }
+        .coordinate-info {
+            background: #222;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        .coordinate-info h4 {
+            margin: 0 0 10px 0;
+            color: #4caf50;
+        }
+        .coordinate-info ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .coordinate-info li {
+            margin: 5px 0;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DimensionBalance Redesign - Phase 1</h1>
+        
+        <!-- Phase 1: Background Options -->
+        <div class="phase-section">
+            <h2>Phase 1: Yin-Yang Background Design</h2>
+            
+            <div class="test-grid">
+                <!-- Option 1: Classic Yin-Yang Curve -->
+                <div class="test-card">
+                    <h3>Option 1: Classic S-Curve</h3>
+                    <svg width="400" height="400" viewBox="0 0 400 400">
+                        <defs>
+                            <clipPath id="yin-yang-clip">
+                                <circle cx="200" cy="200" r="180" />
+                            </clipPath>
+                        </defs>
+                        
+                        <!-- Background circle -->
+                        <circle cx="200" cy="200" r="180" fill="none" stroke="#333" stroke-width="2" />
+                        
+                        <!-- Yin-Yang halves -->
+                        <g clip-path="url(#yin-yang-clip)">
+                            <!-- Top half (green - resilience) -->
+                            <path d="M 200 20 
+                                     A 90 90 0 0 1 200 200
+                                     A 90 90 0 0 0 200 380
+                                     A 180 180 0 0 1 200 20"
+                                  fill="#10b98120" />
+                            
+                            <!-- Bottom half (blue - vulnerability) -->
+                            <path d="M 200 20 
+                                     A 90 90 0 0 0 200 200
+                                     A 90 90 0 0 1 200 380
+                                     A 180 180 0 0 0 200 20"
+                                  fill="#3b82f620" />
+                            
+                            <!-- Small circles for classic yin-yang -->
+                            <circle cx="200" cy="110" r="30" fill="#3b82f620" />
+                            <circle cx="200" cy="290" r="30" fill="#10b98120" />
+                        </g>
+                        
+                        <!-- Coordinate system points -->
+                        <g id="coord-system-1"></g>
+                    </svg>
+                    
+                    <div class="coordinate-info">
+                        <h4>Coordinate Positions:</h4>
+                        <ul>
+                            <li>TRD: (120, 80) - Top left</li>
+                            <li>AER: (280, 80) - Top right</li>
+                            <li>HFP: (100, 300) - Bottom left</li>
+                            <li>BRI: (200, 330) - Bottom center</li>
+                            <li>RRG: (300, 300) - Bottom right</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Option 2: Flowing Wave -->
+                <div class="test-card">
+                    <h3>Option 2: Flowing Wave</h3>
+                    <svg width="400" height="400" viewBox="0 0 400 400">
+                        <defs>
+                            <clipPath id="wave-clip">
+                                <circle cx="200" cy="200" r="180" />
+                            </clipPath>
+                        </defs>
+                        
+                        <!-- Background circle -->
+                        <circle cx="200" cy="200" r="180" fill="none" stroke="#333" stroke-width="2" />
+                        
+                        <!-- Wave halves -->
+                        <g clip-path="url(#wave-clip)">
+                            <!-- Top wave (green) -->
+                            <path d="M 20 200 
+                                     Q 110 100, 200 200
+                                     T 380 200
+                                     L 380 20
+                                     L 20 20
+                                     Z"
+                                  fill="#10b98120" />
+                            
+                            <!-- Bottom wave (blue) -->
+                            <path d="M 20 200 
+                                     Q 110 100, 200 200
+                                     T 380 200
+                                     L 380 380
+                                     L 20 380
+                                     Z"
+                                  fill="#3b82f620" />
+                        </g>
+                        
+                        <!-- Coordinate system points -->
+                        <g id="coord-system-2"></g>
+                    </svg>
+                    
+                    <div class="coordinate-info">
+                        <h4>Wave-Adjusted Coordinates:</h4>
+                        <ul>
+                            <li>TRD: (100, 120) - Following wave</li>
+                            <li>AER: (300, 120) - Following wave</li>
+                            <li>HFP: (80, 280) - Below wave</li>
+                            <li>BRI: (200, 320) - Below wave</li>
+                            <li>RRG: (320, 280) - Below wave</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Option 3: Angular Division -->
+                <div class="test-card">
+                    <h3>Option 3: Angular Division</h3>
+                    <svg width="400" height="400" viewBox="0 0 400 400">
+                        <defs>
+                            <clipPath id="angular-clip">
+                                <circle cx="200" cy="200" r="180" />
+                            </clipPath>
+                        </defs>
+                        
+                        <!-- Background circle -->
+                        <circle cx="200" cy="200" r="180" fill="none" stroke="#333" stroke-width="2" />
+                        
+                        <!-- Angular sections -->
+                        <g clip-path="url(#angular-clip)">
+                            <!-- Top section (144° for 2 dimensions) -->
+                            <path d="M 200 200 
+                                     L 74 126
+                                     A 180 180 0 0 1 326 126
+                                     Z"
+                                  fill="#10b98120" />
+                            
+                            <!-- Bottom section (216° for 3 dimensions) -->
+                            <path d="M 200 200 
+                                     L 326 126
+                                     A 180 180 0 1 1 74 126
+                                     Z"
+                                  fill="#3b82f620" />
+                        </g>
+                        
+                        <!-- Coordinate system points -->
+                        <g id="coord-system-3"></g>
+                    </svg>
+                    
+                    <div class="coordinate-info">
+                        <h4>Angular Coordinates:</h4>
+                        <ul>
+                            <li>TRD: 144° angle - Top section</li>
+                            <li>AER: 36° angle - Top section</li>
+                            <li>HFP: 216° angle - Bottom section</li>
+                            <li>BRI: 270° angle - Bottom section</li>
+                            <li>RRG: 324° angle - Bottom section</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Interactive Coordinate System -->
+        <div class="phase-section">
+            <h2>Interactive Coordinate System</h2>
+            
+            <div class="test-card" style="max-width: 600px; margin: 0 auto;">
+                <h3>Test Dimension Positioning</h3>
+                <svg width="500" height="500" viewBox="0 0 500 500">
+                    <defs>
+                        <clipPath id="interactive-clip">
+                            <circle cx="250" cy="250" r="220" />
+                        </clipPath>
+                        <radialGradient id="fade-gradient">
+                            <stop offset="0%" stop-color="#fff" stop-opacity="0.1" />
+                            <stop offset="100%" stop-color="#fff" stop-opacity="0" />
+                        </radialGradient>
+                    </defs>
+                    
+                    <!-- Background -->
+                    <circle cx="250" cy="250" r="220" fill="none" stroke="#333" stroke-width="2" />
+                    
+                    <!-- Yin-Yang background -->
+                    <g clip-path="url(#interactive-clip)">
+                        <path id="yang-path" 
+                              d="M 250 30 
+                                 A 110 110 0 0 1 250 250
+                                 A 110 110 0 0 0 250 470
+                                 A 220 220 0 0 1 250 30"
+                              fill="#10b98120" />
+                        
+                        <path id="yin-path"
+                              d="M 250 30 
+                                 A 110 110 0 0 0 250 250
+                                 A 110 110 0 0 1 250 470
+                                 A 220 220 0 0 0 250 30"
+                              fill="#3b82f620" />
+                        
+                        <circle cx="250" cy="140" r="40" fill="#3b82f610" />
+                        <circle cx="250" cy="360" r="40" fill="#10b98110" />
+                    </g>
+                    
+                    <!-- Grid lines for reference -->
+                    <g opacity="0.2">
+                        <line x1="250" y1="30" x2="250" y2="470" stroke="#666" stroke-dasharray="2,4" />
+                        <line x1="30" y1="250" x2="470" y2="250" stroke="#666" stroke-dasharray="2,4" />
+                        <circle cx="250" cy="250" r="100" fill="none" stroke="#666" stroke-dasharray="2,4" />
+                        <circle cx="250" cy="250" r="150" fill="none" stroke="#666" stroke-dasharray="2,4" />
+                        <circle cx="250" cy="250" r="200" fill="none" stroke="#666" stroke-dasharray="2,4" />
+                    </g>
+                    
+                    <!-- Coordinate markers -->
+                    <g id="coordinate-markers"></g>
+                    
+                    <!-- Center point -->
+                    <circle cx="250" cy="250" r="3" fill="#fff" opacity="0.5" />
+                </svg>
+                
+                <div class="controls">
+                    <h4>Adjust Coordinate System</h4>
+                    <label>
+                        Spread Factor: 
+                        <input type="range" id="spreadFactor" min="0.5" max="1.5" step="0.1" value="1">
+                        <span id="spreadValue">1.0</span>
+                    </label>
+                    <br>
+                    <label>
+                        Rotation Offset: 
+                        <input type="range" id="rotationOffset" min="-30" max="30" step="5" value="0">
+                        <span id="rotationValue">0°</span>
+                    </label>
+                </div>
+                
+                <div class="coordinate-info">
+                    <h4>Dimension Positioning Logic:</h4>
+                    <ul>
+                        <li><strong>Resilience (Top/Green):</strong> TRD × AER</li>
+                        <li><strong>Vulnerability (Bottom/Blue):</strong> HFP × BRI × RRG</li>
+                        <li>Each dimension can move radially based on its value (0-10)</li>
+                        <li>Angular positions are fixed to maintain formula grouping</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            // Helper function to add coordinate markers
+            function addCoordinateMarkers(containerId, positions, colors) {
+                const container = document.getElementById(containerId);
+                
+                positions.forEach((pos, i) => {
+                    // Outer circle (dimension position)
+                    const outerCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    outerCircle.setAttribute('cx', pos.x);
+                    outerCircle.setAttribute('cy', pos.y);
+                    outerCircle.setAttribute('r', '12');
+                    outerCircle.setAttribute('fill', colors[i]);
+                    outerCircle.setAttribute('opacity', '0.3');
+                    container.appendChild(outerCircle);
+                    
+                    // Inner dot
+                    const innerDot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    innerDot.setAttribute('cx', pos.x);
+                    innerDot.setAttribute('cy', pos.y);
+                    innerDot.setAttribute('r', '4');
+                    innerDot.setAttribute('fill', colors[i]);
+                    container.appendChild(innerDot);
+                    
+                    // Label
+                    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    label.setAttribute('x', pos.x);
+                    label.setAttribute('y', pos.y - 20);
+                    label.setAttribute('text-anchor', 'middle');
+                    label.setAttribute('font-size', '12');
+                    label.setAttribute('fill', '#fff');
+                    label.textContent = pos.name;
+                    container.appendChild(label);
+                    
+                    // Coordinate text
+                    const coordText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    coordText.setAttribute('x', pos.x);
+                    coordText.setAttribute('y', pos.y + 25);
+                    coordText.setAttribute('text-anchor', 'middle');
+                    coordText.setAttribute('font-size', '10');
+                    coordText.setAttribute('fill', '#666');
+                    coordText.textContent = `(${pos.x}, ${pos.y})`;
+                    container.appendChild(coordText);
+                });
+            }
+            
+            // Add markers for Option 1
+            const positions1 = [
+                { name: 'TRD', x: 120, y: 80 },
+                { name: 'AER', x: 280, y: 80 },
+                { name: 'HFP', x: 100, y: 300 },
+                { name: 'BRI', x: 200, y: 330 },
+                { name: 'RRG', x: 300, y: 300 }
+            ];
+            const colors1 = ['#10b981', '#10b981', '#3b82f6', '#3b82f6', '#3b82f6'];
+            addCoordinateMarkers('coord-system-1', positions1, colors1);
+            
+            // Add markers for Option 2
+            const positions2 = [
+                { name: 'TRD', x: 100, y: 120 },
+                { name: 'AER', x: 300, y: 120 },
+                { name: 'HFP', x: 80, y: 280 },
+                { name: 'BRI', x: 200, y: 320 },
+                { name: 'RRG', x: 320, y: 280 }
+            ];
+            addCoordinateMarkers('coord-system-2', positions2, colors1);
+            
+            // Add markers for Option 3 (angular)
+            const positions3 = [
+                { name: 'TRD', x: 120, y: 90 },
+                { name: 'AER', x: 280, y: 90 },
+                { name: 'HFP', x: 70, y: 250 },
+                { name: 'BRI', x: 200, y: 350 },
+                { name: 'RRG', x: 330, y: 250 }
+            ];
+            addCoordinateMarkers('coord-system-3', positions3, colors1);
+            
+            // Interactive coordinate system
+            const spreadSlider = document.getElementById('spreadFactor');
+            const rotationSlider = document.getElementById('rotationOffset');
+            const spreadValue = document.getElementById('spreadValue');
+            const rotationValue = document.getElementById('rotationValue');
+            
+            function updateInteractiveCoordinates() {
+                const spread = parseFloat(spreadSlider.value);
+                const rotation = parseFloat(rotationSlider.value);
+                
+                spreadValue.textContent = spread.toFixed(1);
+                rotationValue.textContent = rotation + '°';
+                
+                // Calculate positions based on angular distribution
+                const centerX = 250, centerY = 250;
+                const baseRadius = 150;
+                
+                // Define base angles for each dimension
+                const baseAngles = {
+                    TRD: -45 + rotation,   // Top-left
+                    AER: 45 + rotation,    // Top-right
+                    HFP: 135 + rotation,   // Bottom-left
+                    BRI: 180 + rotation,   // Bottom
+                    RRG: 225 + rotation    // Bottom-right
+                };
+                
+                const dimensions = ['TRD', 'AER', 'HFP', 'BRI', 'RRG'];
+                const dimensionColors = {
+                    TRD: '#10b981',
+                    AER: '#10b981',
+                    HFP: '#3b82f6',
+                    BRI: '#3b82f6',
+                    RRG: '#3b82f6'
+                };
+                
+                // Clear existing markers
+                const container = document.getElementById('coordinate-markers');
+                container.innerHTML = '';
+                
+                dimensions.forEach(dim => {
+                    const angle = baseAngles[dim];
+                    const rad = (angle * Math.PI) / 180;
+                    const r = baseRadius * spread;
+                    const x = centerX + r * Math.cos(rad);
+                    const y = centerY + r * Math.sin(rad);
+                    
+                    // Connection line to center
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', centerX);
+                    line.setAttribute('y1', centerY);
+                    line.setAttribute('x2', x);
+                    line.setAttribute('y2', y);
+                    line.setAttribute('stroke', dimensionColors[dim]);
+                    line.setAttribute('stroke-width', '1');
+                    line.setAttribute('opacity', '0.2');
+                    container.appendChild(line);
+                    
+                    // Dimension circle
+                    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    circle.setAttribute('cx', x);
+                    circle.setAttribute('cy', y);
+                    circle.setAttribute('r', '15');
+                    circle.setAttribute('fill', dimensionColors[dim]);
+                    circle.setAttribute('opacity', '0.8');
+                    container.appendChild(circle);
+                    
+                    // Dimension label
+                    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    label.setAttribute('x', x);
+                    label.setAttribute('y', y);
+                    label.setAttribute('text-anchor', 'middle');
+                    label.setAttribute('dominant-baseline', 'middle');
+                    label.setAttribute('font-size', '14');
+                    label.setAttribute('font-weight', 'bold');
+                    label.setAttribute('fill', '#fff');
+                    label.textContent = dim;
+                    container.appendChild(label);
+                    
+                    // Angle indicator
+                    const angleText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    angleText.setAttribute('x', x);
+                    angleText.setAttribute('y', y + 30);
+                    angleText.setAttribute('text-anchor', 'middle');
+                    angleText.setAttribute('font-size', '10');
+                    angleText.setAttribute('fill', '#888');
+                    angleText.textContent = `${angle}°`;
+                    container.appendChild(angleText);
+                });
+                
+                // Add formula visualization
+                const formulaY = 470;
+                const formula = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                formula.setAttribute('x', centerX);
+                formula.setAttribute('y', formulaY);
+                formula.setAttribute('text-anchor', 'middle');
+                formula.setAttribute('font-size', '14');
+                formula.setAttribute('fill', '#fff');
+                formula.innerHTML = '<tspan fill="#10b981">TRD × AER</tspan> <tspan fill="#888">/</tspan> <tspan fill="#3b82f6">HFP × BRI × RRG</tspan>';
+                container.appendChild(formula);
+            }
+            
+            spreadSlider.addEventListener('input', updateInteractiveCoordinates);
+            rotationSlider.addEventListener('input', updateInteractiveCoordinates);
+            updateInteractiveCoordinates();
+        </script>
+    </div>
+</body>
+</html>

@@ -11,11 +11,20 @@
  */
 
 // Core Components
-export { ImmunityGauge } from './components/ImmunityGauge';
-export type { ImmunityGaugeProps } from './components/ImmunityGauge';
+export { ImmunityGaugeV2 as ImmunityGauge } from './components/ImmunityGaugeV2';
+export type { ImmunityGaugeProps } from './components/ImmunityGaugeV2';
+
+export { ArcGaugeFoundation } from './components/ArcGaugeFoundation';
+export type { ArcGaugeFoundationProps } from './components/ArcGaugeFoundation';
+
+export { ProgressiveArc } from './components/ProgressiveArc';
+export type { ProgressiveArcProps } from './components/ProgressiveArc';
+
+export { IndexDisplay, DIMENSION_NAMES } from './components/IndexDisplay';
+export type { IndexDisplayProps, DimensionKey } from './components/IndexDisplay';
 
 export { DimensionBalance } from './components/DimensionBalance';
-export type { DimensionBalanceProps } from './components/DimensionBalance';
+export type { DimensionBalanceProps, DimensionConfig } from './components/DimensionBalance';
 
 export { RiskPositionMatrix } from './components/RiskPositionMatrix';
 export type { RiskPositionMatrixProps } from './components/RiskPositionMatrix';
@@ -73,6 +82,13 @@ export {
   prefersHighContrast,
   isScreenReaderActive
 } from './utils/accessibility';
+
+// Constants
+export { 
+  DIMENSION_LABELS, 
+  DIMENSION_DESCRIPTIONS,
+  getDimensionConfig 
+} from './constants/dimensionLabels';
 
 // Convenience exports for common use cases
 export const DIIVisualizations = {

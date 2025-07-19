@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arc Coordinate System Test - Core Scenarios</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+            padding: 40px 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 40px;
+        }
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        .test-card {
+            background: #2a2a2a;
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+        }
+        h3 {
+            margin: 0 0 20px 0;
+            color: #fff;
+        }
+        .debug-info {
+            background: #333;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: left;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        svg {
+            background: #000;
+            border: 1px solid #444;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Arc Coordinate System Test - Finding the Right Formula</h1>
+        
+        <div class="test-grid">
+            <!-- Test 1: Basic Arc with Debug Points -->
+            <div class="test-card">
+                <h3>Test 1: Arc + Debug Points at Each Value</h3>
+                <svg width="400" height="400" viewBox="0 0 400 400">
+                    <!-- Grid for reference -->
+                    <defs>
+                        <pattern id="grid1" width="20" height="20" patternUnits="userSpaceOnUse">
+                            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#333" stroke-width="0.5"/>
+                        </pattern>
+                    </defs>
+                    <rect width="400" height="400" fill="url(#grid1)" />
+                    
+                    <!-- Center crosshairs -->
+                    <line x1="200" y1="0" x2="200" y2="400" stroke="#444" stroke-width="1" />
+                    <line x1="0" y1="200" x2="400" y2="200" stroke="#444" stroke-width="1" />
+                    
+                    <!-- Main arc (225° to 495°) -->
+                    <!-- Using exact calculation for a 160px radius arc -->
+                    <path d="M 86.86 313.14 A 160 160 0 1 1 313.14 313.14" 
+                          fill="none" 
+                          stroke="#666" 
+                          stroke-width="24" 
+                          stroke-linecap="round" />
+                    
+                    <!-- Debug: Show exact points on the arc for each value -->
+                    <g id="debug-points">
+                        <!-- Calculate points for values 1-10 -->
+                        <!-- Value = 1: angle = 225° -->
+                        <circle cx="86.86" cy="313.14" r="3" fill="#ff0" />
+                        <text x="86.86" y="330" text-anchor="middle" font-size="16" fill="#ff0">1</text>
+                        
+                        <!-- Value = 2: angle = 255° -->
+                        <circle cx="112.11" cy="340.96" r="3" fill="#0ff" />
+                        <text x="112.11" y="357" text-anchor="middle" font-size="16" fill="#0ff">2</text>
+                        
+                        <!-- Value = 3: angle = 285° -->
+                        <circle cx="147.72" cy="358.78" r="3" fill="#0ff" />
+                        <text x="147.72" y="375" text-anchor="middle" font-size="16" fill="#0ff">3</text>
+                        
+                        <!-- Value = 4: angle = 315° -->
+                        <circle cx="186.86" cy="363.14" r="3" fill="#f00" />
+                        <text x="186.86" y="380" text-anchor="middle" font-size="16" fill="#f00">4</text>
+                        
+                        <!-- Value = 5: angle = 345° -->
+                        <circle cx="225.51" cy="354.09" r="3" fill="#0ff" />
+                        <text x="225.51" y="371" text-anchor="middle" font-size="16" fill="#0ff">5</text>
+                        
+                        <!-- Value = 6: angle = 375° (15° in next rotation) -->
+                        <circle cx="258.56" cy="333.21" r="3" fill="#fa0" />
+                        <text x="258.56" y="350" text-anchor="middle" font-size="16" fill="#fa0">6</text>
+                        
+                        <!-- Value = 7: angle = 405° (45°) -->
+                        <circle cx="283.14" cy="313.14" r="3" fill="#0ff" />
+                        <text x="283.14" y="330" text-anchor="middle" font-size="16" fill="#0ff">7</text>
+                        
+                        <!-- Value = 8: angle = 435° (75°) -->
+                        <circle cx="298.56" cy="278.56" r="3" fill="#0f0" />
+                        <text x="298.56" y="295" text-anchor="middle" font-size="16" fill="#0f0">8</text>
+                        
+                        <!-- Value = 9: angle = 465° (105°) -->
+                        <circle cx="304.64" cy="241.44" r="3" fill="#0ff" />
+                        <text x="304.64" y="258" text-anchor="middle" font-size="16" fill="#0ff">9</text>
+                        
+                        <!-- Value = 10: angle = 495° (135°) -->
+                        <circle cx="313.14" cy="213.14" r="3" fill="#00f" />
+                        <text x="313.14" y="197" text-anchor="middle" font-size="16" fill="#00f">10</text>
+                    </g>
+                    
+                    <!-- Center -->
+                    <circle cx="200" cy="200" r="2" fill="#f00" />
+                </svg>
+                <div class="debug-info">
+                    Points calculated with:<br>
+                    x = 200 + 160 * cos(angle)<br>
+                    y = 200 + 160 * sin(angle)<br>
+                    Value 1 = 225°, Value 10 = 495°
+                </div>
+            </div>
+
+            <!-- Test 2: Arc with Proper Tick Marks -->
+            <div class="test-card">
+                <h3>Test 2: Ticks Perpendicular to Arc</h3>
+                <svg width="400" height="400" viewBox="0 0 400 400">
+                    <rect width="400" height="400" fill="#000" />
+                    
+                    <!-- Main arc -->
+                    <path d="M 86.86 313.14 A 160 160 0 1 1 313.14 313.14" 
+                          fill="none" 
+                          stroke="#666" 
+                          stroke-width="24" 
+                          stroke-linecap="round" />
+                    
+                    <!-- Tick marks perpendicular to arc -->
+                    <g id="perpendicular-ticks">
+                        <!-- For each value, draw tick from inner to outer edge -->
+                        <!-- Value 1 (225°) -->
+                        <line x1="93.93" y1="306.07" x2="79.80" y2="320.20" stroke="#ff0" stroke-width="2" />
+                        <text x="65.67" y="334.33" text-anchor="middle" font-size="14" fill="#ff0">1</text>
+                        
+                        <!-- Value 2 (255°) -->
+                        <line x1="119.74" y1="335.13" x2="104.48" y2="346.79" stroke="#fff" stroke-width="2" />
+                        <text x="89.22" y="358.45" text-anchor="middle" font-size="14" fill="#fff">2</text>
+                        
+                        <!-- Value 3 (285°) -->
+                        <line x1="154.82" y1="353.63" x2="140.62" y2="363.93" stroke="#fff" stroke-width="2" />
+                        <text x="126.42" y="374.23" text-anchor="middle" font-size="14" fill="#fff">3</text>
+                        
+                        <!-- Value 4 (315°) -->
+                        <line x1="193.93" y1="356.07" x2="179.80" y2="370.20" stroke="#f44" stroke-width="3" />
+                        <text x="165.67" y="384.33" text-anchor="middle" font-size="14" fill="#f44">4</text>
+                        
+                        <!-- Value 5 (345°) -->
+                        <line x1="232.31" y1="347.91" x2="218.71" y2="360.27" stroke="#fff" stroke-width="2" />
+                        <text x="205.11" y="372.63" text-anchor="middle" font-size="14" fill="#fff">5</text>
+                        
+                        <!-- Value 6 (15°) -->
+                        <line x1="264.66" y1="327.46" x2="252.46" y2="338.96" stroke="#f90" stroke-width="3" />
+                        <text x="240.26" y="350.46" text-anchor="middle" font-size="14" fill="#f90">6</text>
+                        
+                        <!-- Value 7 (45°) -->
+                        <line x1="288.07" y1="306.07" x2="278.21" y2="320.20" stroke="#fff" stroke-width="2" />
+                        <text x="268.35" y="334.33" text-anchor="middle" font-size="14" fill="#fff">7</text>
+                        
+                        <!-- Value 8 (75°) -->
+                        <line x1="302.31" y1="272.67" x2="294.81" y2="284.45" stroke="#0f0" stroke-width="3" />
+                        <text x="287.31" y="296.23" text-anchor="middle" font-size="14" fill="#0f0">8</text>
+                        
+                        <!-- Value 9 (105°) -->
+                        <line x1="307.46" y1="236.34" x2="301.82" y2="246.54" stroke="#fff" stroke-width="2" />
+                        <text x="296.18" y="256.74" text-anchor="middle" font-size="14" fill="#fff">9</text>
+                        
+                        <!-- Value 10 (135°) -->
+                        <line x1="306.07" y1="206.07" x2="320.20" y2="220.20" stroke="#00f" stroke-width="3" />
+                        <text x="334.33" y="234.33" text-anchor="middle" font-size="14" fill="#00f">10</text>
+                    </g>
+                </svg>
+                <div class="debug-info">
+                    Ticks drawn perpendicular to arc tangent<br>
+                    Inner: radius - strokeWidth/2<br>
+                    Outer: radius + strokeWidth/2<br>
+                    Labels: 20px beyond outer edge
+                </div>
+            </div>
+
+            <!-- Test 3: Simplified Clean Version -->
+            <div class="test-card">
+                <h3>Test 3: Clean Implementation</h3>
+                <svg width="400" height="400" viewBox="0 0 400 400">
+                    <rect width="400" height="400" fill="#000" />
+                    
+                    <!-- Background arc -->
+                    <path d="M 86.86 313.14 A 160 160 0 1 1 313.14 313.14" 
+                          fill="none" 
+                          stroke="#333" 
+                          stroke-width="24" 
+                          stroke-linecap="round" />
+                    
+                    <!-- Scale marks and labels -->
+                    <g id="scale">
+                        <!-- Using corrected coordinates -->
+                    </g>
+                    
+                    <!-- JavaScript will populate this -->
+                    <script>
+                        // This would be the correct calculation in the component
+                        const center = 200;
+                        const radius = 160;
+                        const strokeWidth = 24;
+                        
+                        function valueToAngle(value) {
+                            // Map 1-10 to 225° - 495°
+                            return 225 + ((value - 1) / 9) * 270;
+                        }
+                        
+                        function angleToPoint(angleDeg, r) {
+                            const angleRad = (angleDeg * Math.PI) / 180;
+                            return {
+                                x: center + r * Math.cos(angleRad),
+                                y: center + r * Math.sin(angleRad)
+                            };
+                        }
+                    </script>
+                </svg>
+                <div class="debug-info">
+                    Final clean version with proper math<br>
+                    Ready for React component update
+                </div>
+            </div>
+
+            <!-- Test 4: 170° Rotation Test -->
+            <div class="test-card">
+                <h3>Test 4: With 170° Rotation</h3>
+                <svg width="400" height="400" viewBox="0 0 400 400" style="transform: rotate(170deg);">
+                    <rect width="400" height="400" fill="#000" />
+                    
+                    <!-- Same arc, rotated -->
+                    <path d="M 86.86 313.14 A 160 160 0 1 1 313.14 313.14" 
+                          fill="none" 
+                          stroke="#666" 
+                          stroke-width="24" 
+                          stroke-linecap="round" />
+                    
+                    <!-- Ticks with counter-rotated labels -->
+                    <g id="rotated-ticks">
+                        <!-- Value 1 -->
+                        <line x1="93.93" y1="306.07" x2="79.80" y2="320.20" stroke="#ff0" stroke-width="2" />
+                        <text x="65.67" y="334.33" text-anchor="middle" font-size="14" fill="#ff0"
+                              transform="rotate(-170 65.67 334.33)">1</text>
+                        
+                        <!-- Value 10 -->
+                        <line x1="306.07" y1="206.07" x2="320.20" y2="220.20" stroke="#00f" stroke-width="3" />
+                        <text x="334.33" y="234.33" text-anchor="middle" font-size="14" fill="#00f"
+                              transform="rotate(-170 334.33 234.33)">10</text>
+                    </g>
+                </svg>
+                <div class="debug-info">
+                    CSS rotation: 170deg<br>
+                    Labels counter-rotated: -170deg<br>
+                    Coordinates unchanged
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculation Reference -->
+        <div style="background: #333; padding: 30px; border-radius: 16px;">
+            <h2 style="text-align: center;">📐 Correct Calculation Reference</h2>
+            
+            <pre style="background: #222; padding: 20px; border-radius: 8px; overflow-x: auto;">
+// Constants
+const CENTER_X = 200;
+const CENTER_Y = 200;
+const ARC_RADIUS = 160;
+const STROKE_WIDTH = 24;
+const START_ANGLE = 225; // degrees
+const END_ANGLE = 495;   // degrees (225 + 270)
+
+// Convert value (1-10) to angle
+function valueToAngle(value) {
+    const normalized = (value - 1) / 9;  // 0 to 1
+    return START_ANGLE + (normalized * 270);
+}
+
+// Get point on arc
+function getArcPoint(value) {
+    const angle = valueToAngle(value);
+    const angleRad = (angle * Math.PI) / 180;
+    
+    return {
+        x: CENTER_X + ARC_RADIUS * Math.cos(angleRad),
+        y: CENTER_Y + ARC_RADIUS * Math.sin(angleRad)
+    };
+}
+
+// Get tick positions
+function getTickPositions(value) {
+    const angle = valueToAngle(value);
+    const angleRad = (angle * Math.PI) / 180;
+    
+    // Tick inner point (inside the stroke)
+    const innerRadius = ARC_RADIUS - STROKE_WIDTH/2 - 5;
+    const inner = {
+        x: CENTER_X + innerRadius * Math.cos(angleRad),
+        y: CENTER_Y + innerRadius * Math.sin(angleRad)
+    };
+    
+    // Tick outer point (outside the stroke)
+    const outerRadius = ARC_RADIUS + STROKE_WIDTH/2 + 5;
+    const outer = {
+        x: CENTER_X + outerRadius * Math.cos(angleRad),
+        y: CENTER_Y + outerRadius * Math.sin(angleRad)
+    };
+    
+    // Label position
+    const labelRadius = ARC_RADIUS + STROKE_WIDTH/2 + 20;
+    const label = {
+        x: CENTER_X + labelRadius * Math.cos(angleRad),
+        y: CENTER_Y + labelRadius * Math.sin(angleRad)
+    };
+    
+    return { inner, outer, label };
+}
+
+// Example calculations:
+// Value 1: angle = 225°
+// x = 200 + 160 * cos(225°) = 200 + 160 * (-0.7071) = 86.86
+// y = 200 + 160 * sin(225°) = 200 + 160 * (0.7071) = 313.14
+
+// Value 10: angle = 495° (135° normalized)
+// x = 200 + 160 * cos(135°) = 200 + 160 * (-0.7071) = 313.14
+// y = 200 + 160 * sin(135°) = 200 + 160 * (0.7071) = 213.14</pre>
+        </div>
+    </div>
+</body>
+</html>

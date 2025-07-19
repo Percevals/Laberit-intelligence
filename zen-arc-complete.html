@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DII Zen Arc - Complete System</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            padding: 40px 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+            font-size: 3em;
+            font-weight: 200;
+            letter-spacing: -0.02em;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 60px;
+            font-weight: 300;
+        }
+        .section {
+            background: #1a1a1a;
+            padding: 60px;
+            border-radius: 24px;
+            margin-bottom: 40px;
+            border: 1px solid #222;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2em;
+            font-weight: 300;
+            margin-bottom: 50px;
+            color: #fff;
+        }
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        .showcase-card {
+            background: #0a0a0a;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+        .showcase-card:hover {
+            border-color: #555;
+            transform: translateY(-2px);
+        }
+        .card-title {
+            font-size: 1.3em;
+            font-weight: 300;
+            color: #fff;
+            margin-bottom: 30px;
+            letter-spacing: 0.02em;
+        }
+        svg {
+            background: #000;
+            border-radius: 16px;
+        }
+        .main-demo {
+            background: #000;
+            padding: 80px;
+            border-radius: 24px;
+            text-align: center;
+            border: 1px solid #333;
+        }
+        .controls {
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .control-group {
+            margin-bottom: 30px;
+        }
+        .control-label {
+            display: block;
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+        }
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #333;
+            outline: none;
+            -webkit-appearance: none;
+            margin: 15px 0;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #fff;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+        }
+        .value-readout {
+            font-size: 24px;
+            font-weight: 200;
+            margin-top: 10px;
+        }
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .feature-box {
+            background: #222;
+            padding: 30px;
+            border-radius: 16px;
+            margin: 20px 0;
+            border-left: 3px solid #4caf50;
+        }
+        .feature-box h4 {
+            margin: 0 0 10px 0;
+            color: #4caf50;
+            font-weight: 400;
+        }
+        .feature-box p {
+            margin: 0;
+            color: #aaa;
+            line-height: 1.6;
+        }
+        .dimension-examples {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DII Visualization System</h1>
+        <p class="subtitle">Zen-Inspired Arc Gauge with Luminosity Gradient</p>
+
+        <!-- Main Interactive Demo -->
+        <div class="section">
+            <h2 class="section-title">Complete Interactive System</h2>
+            <div class="main-demo">
+                <svg width="600" height="600" viewBox="0 0 600 600">
+                    <defs>
+                        <!-- Luminosity gradient will be added dynamically -->
+                        <linearGradient id="main-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#333" />
+                            <stop offset="100%" stop-color="#333" />
+                        </linearGradient>
+                        <filter id="zen-glow" x="-50%" y="-50%" width="200%" height="200%">
+                            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    
+                    <!-- Module 1: Foundation Arc -->
+                    <path d="M 130.29 470.71 A 240 240 0 1 1 469.71 470.71" 
+                          fill="none" 
+                          stroke="#222" 
+                          stroke-width="40" 
+                          stroke-linecap="round" />
+                    
+                    <!-- Scale marks -->
+                    <g id="scale-marks" opacity="0.3"></g>
+                    
+                    <!-- Module 2: Progressive Arc with Luminosity -->
+                    <path id="main-progressive-arc"
+                          fill="none" 
+                          stroke="url(#main-gradient)" 
+                          stroke-width="40" 
+                          stroke-linecap="round"
+                          filter="url(#zen-glow)" />
+                    
+                    <!-- Module 3: Index Display -->
+                    <text id="main-value" x="300" y="290" text-anchor="middle" font-size="96" font-weight="200" fill="#fff">5.5</text>
+                    <text id="main-stage" x="300" y="350" text-anchor="middle" font-size="32" font-weight="400" fill="#f59e0b" style="letter-spacing: 0.1em;">ROBUSTO</text>
+                    <text id="main-label" x="300" y="390" text-anchor="middle" font-size="20" font-weight="300" fill="#666" style="letter-spacing: 0.05em;">Índice de Inmunidad</text>
+                </svg>
+                
+                <div class="controls">
+                    <div class="control-group">
+                        <label class="control-label">DII Value</label>
+                        <input type="range" id="mainSlider" min="1" max="10" step="0.1" value="5.5">
+                        <div class="value-readout" id="mainReadout">5.5</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Module Showcase -->
+        <div class="section">
+            <h2 class="section-title">Module Components</h2>
+            <div class="showcase-grid">
+                <!-- Module 1 -->
+                <div class="showcase-card">
+                    <h3 class="card-title">Module 1: Foundation Arc</h3>
+                    <svg width="300" height="300" viewBox="0 0 300 300">
+                        <path d="M 65.15 235.85 A 120 120 0 1 1 234.85 235.85" 
+                              fill="none" 
+                              stroke="#333" 
+                              stroke-width="20" 
+                              stroke-linecap="round" />
+                        <g id="module1-marks"></g>
+                    </svg>
+                    <div class="feature-box" style="margin-top: 30px;">
+                        <h4>Foundation Layer</h4>
+                        <p>270° arc with scale marks<br>Coordinates: 135° → 405°</p>
+                    </div>
+                </div>
+
+                <!-- Module 2 -->
+                <div class="showcase-card">
+                    <h3 class="card-title">Module 2: Progressive Arc</h3>
+                    <svg width="300" height="300" viewBox="0 0 300 300">
+                        <defs>
+                            <linearGradient id="demo-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#0d8853" />
+                                <stop offset="50%" stop-color="#10b981" />
+                                <stop offset="100%" stop-color="#34d399" />
+                            </linearGradient>
+                        </defs>
+                        <g id="module2-arc"></g>
+                    </svg>
+                    <div class="feature-box" style="margin-top: 30px;">
+                        <h4>Luminosity Gradient</h4>
+                        <p>Single color with subtle<br>light variation</p>
+                    </div>
+                </div>
+
+                <!-- Module 3 -->
+                <div class="showcase-card">
+                    <h3 class="card-title">Module 3: Index Display</h3>
+                    <svg width="300" height="300" viewBox="0 0 300 300">
+                        <text x="150" y="140" text-anchor="middle" font-size="72" font-weight="200" fill="#3b82f6">8.5</text>
+                        <text x="150" y="180" text-anchor="middle" font-size="24" font-weight="400" fill="#3b82f6" style="letter-spacing: 0.1em;">ADAPTATIVO</text>
+                        <text x="150" y="210" text-anchor="middle" font-size="16" font-weight="300" fill="#666">Índice de Inmunidad</text>
+                    </svg>
+                    <div class="feature-box" style="margin-top: 30px;">
+                        <h4>Zen Typography</h4>
+                        <p>Clean display with<br>contextual labels</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stage Examples -->
+        <div class="section">
+            <h2 class="section-title">Maturity Stages with Luminosity</h2>
+            <div class="showcase-grid">
+                <div class="showcase-card">
+                    <h3 class="card-title">FRÁGIL</h3>
+                    <svg width="300" height="300" viewBox="0 0 300 300">
+                        <defs>
+                            <linearGradient id="fragil-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#dc2626" />
+                                <stop offset="50%" stop-color="#ef4444" />
+                                <stop offset="100%" stop-color="#f87171" />
+                            </linearGradient>
+                        </defs>
+                        <g id="fragil-demo"></g>
+                    </svg>
+                </div>
+                <div class="showcase-card">
+                    <h3 class="card-title">RESILIENTE</h3>
+                    <svg width="300" height="300" viewBox="0 0 300 300">
+                        <defs>
+                            <linearGradient id="resiliente-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#059669" />
+                                <stop offset="50%" stop-color="#10b981" />
+                                <stop offset="100%" stop-color="#34d399" />
+                            </linearGradient>
+                        </defs>
+                        <g id="resiliente-demo"></g>
+                    </svg>
+                </div>
+                <div class="showcase-card">
+                    <h3 class="card-title">ADAPTATIVO</h3>
+                    <svg width="300" height="300" viewBox="0 0 300 300">
+                        <defs>
+                            <linearGradient id="adaptativo-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#2563eb" />
+                                <stop offset="50%" stop-color="#3b82f6" />
+                                <stop offset="100%" stop-color="#60a5fa" />
+                            </linearGradient>
+                        </defs>
+                        <g id="adaptativo-demo"></g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dimension Examples -->
+        <div class="section">
+            <h2 class="section-title">Dimension-Specific Usage</h2>
+            <div class="dimension-examples">
+                <div class="showcase-card">
+                    <h3 class="card-title">Attack Economics Ratio</h3>
+                    <svg width="400" height="300" viewBox="0 0 400 300">
+                        <defs>
+                            <linearGradient id="aer-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#059669" />
+                                <stop offset="50%" stop-color="#10b981" />
+                                <stop offset="100%" stop-color="#34d399" />
+                            </linearGradient>
+                        </defs>
+                        <g id="aer-demo"></g>
+                        <text x="200" y="160" text-anchor="middle" font-size="48" font-weight="200" fill="#10b981">7.2</text>
+                        <text x="200" y="195" text-anchor="middle" font-size="18" font-weight="400" fill="#10b981">RESILIENTE</text>
+                        <text x="200" y="240" text-anchor="middle" font-size="14" font-weight="300" fill="#666">Ratio de Economía del Ataque</text>
+                    </svg>
+                </div>
+                <div class="showcase-card">
+                    <h3 class="card-title">Blast Radius Index</h3>
+                    <svg width="400" height="300" viewBox="0 0 400 300">
+                        <defs>
+                            <linearGradient id="bri-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#c2410c" />
+                                <stop offset="50%" stop-color="#f59e0b" />
+                                <stop offset="100%" stop-color="#fbbf24" />
+                            </linearGradient>
+                        </defs>
+                        <g id="bri-demo"></g>
+                        <text x="200" y="160" text-anchor="middle" font-size="48" font-weight="200" fill="#f59e0b">4.8</text>
+                        <text x="200" y="195" text-anchor="middle" font-size="18" font-weight="400" fill="#f59e0b">ROBUSTO</text>
+                        <text x="200" y="240" text-anchor="middle" font-size="14" font-weight="300" fill="#666">Radio de Explosión</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Helper functions
+            function createLuminosityGradient(gradientId, baseColor) {
+                const gradient = document.getElementById(gradientId);
+                gradient.innerHTML = '';
+                
+                // Convert hex to RGB
+                const hex2rgb = (hex) => {
+                    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+                    return result ? {
+                        r: parseInt(result[1], 16),
+                        g: parseInt(result[2], 16),
+                        b: parseInt(result[3], 16)
+                    } : null;
+                };
+                
+                const rgb = hex2rgb(baseColor);
+                if (!rgb) return;
+                
+                // Create gradient stops
+                const darken = (color, factor) => {
+                    return `rgb(${Math.round(color.r * factor)}, ${Math.round(color.g * factor)}, ${Math.round(color.b * factor)})`;
+                };
+                
+                const lighten = (color, factor) => {
+                    return `rgb(${Math.min(255, Math.round(color.r + (255 - color.r) * factor))}, ${Math.min(255, Math.round(color.g + (255 - color.g) * factor))}, ${Math.min(255, Math.round(color.b + (255 - color.b) * factor))})`;
+                };
+                
+                const stops = [
+                    { offset: '0%', color: darken(rgb, 0.85) },
+                    { offset: '50%', color: baseColor },
+                    { offset: '100%', color: lighten(rgb, 0.15) }
+                ];
+                
+                stops.forEach(stop => {
+                    const stopEl = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+                    stopEl.setAttribute('offset', stop.offset);
+                    stopEl.setAttribute('stop-color', stop.color);
+                    gradient.appendChild(stopEl);
+                });
+            }
+            
+            
+            function getColorForValue(value) {
+                if (value < 4) return '#ef4444';
+                if (value < 6) return '#f59e0b';
+                if (value < 8) return '#10b981';
+                return '#3b82f6';
+            }
+            
+            function getStageForValue(value) {
+                if (value < 4) return 'FRÁGIL';
+                if (value < 6) return 'ROBUSTO';
+                if (value < 8) return 'RESILIENTE';
+                return 'ADAPTATIVO';
+            }
+            
+            // Create scale marks for Module 1 demo
+            const createScaleMarks = (containerId, cx, cy, radius) => {
+                const container = document.getElementById(containerId);
+                for (let v = 1; v <= 10; v++) {
+                    const angle = 135 + ((v - 1) / 9) * 270;
+                    const rad = (angle * Math.PI) / 180;
+                    
+                    const inner = radius - 10;
+                    const outer = radius + 10;
+                    
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', cx + inner * Math.cos(rad));
+                    line.setAttribute('y1', cy + inner * Math.sin(rad));
+                    line.setAttribute('x2', cx + outer * Math.cos(rad));
+                    line.setAttribute('y2', cy + outer * Math.sin(rad));
+                    line.setAttribute('stroke', '#444');
+                    line.setAttribute('stroke-width', v % 3 === 1 ? '2' : '1');
+                    container.appendChild(line);
+                }
+            };
+            
+            // Initialize Module 1 demo
+            createScaleMarks('module1-marks', 150, 150, 120);
+            createScaleMarks('scale-marks', 300, 300, 240);
+            
+            // Helper function to create any arc with proper coordinates
+            function createArcDemo(containerId, value, color, options = {}) {
+                const {
+                    cx = 150,
+                    cy = 150,
+                    radius = 100,
+                    strokeWidth = 16,
+                    showValue = true,
+                    gradientId = null
+                } = options;
+                
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                
+                // Clear container
+                container.innerHTML = '';
+                
+                // Constants for 135° → 405° arc
+                const START_ANGLE = 135;
+                const TOTAL_ANGLE = 270;
+                
+                // Calculate start point (always at 135°)
+                const startRad = (START_ANGLE * Math.PI) / 180;
+                const startX = cx + radius * Math.cos(startRad);
+                const startY = cy + radius * Math.sin(startRad);
+                
+                // Calculate end point for foundation (at 405°)
+                const endFoundationRad = ((START_ANGLE + TOTAL_ANGLE) * Math.PI) / 180;
+                const endFoundationX = cx + radius * Math.cos(endFoundationRad);
+                const endFoundationY = cy + radius * Math.sin(endFoundationRad);
+                
+                // Foundation arc
+                const foundation = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                foundation.setAttribute('d', `M ${startX} ${startY} A ${radius} ${radius} 0 1 1 ${endFoundationX} ${endFoundationY}`);
+                foundation.setAttribute('fill', 'none');
+                foundation.setAttribute('stroke', '#222');
+                foundation.setAttribute('stroke-width', strokeWidth);
+                foundation.setAttribute('stroke-linecap', 'round');
+                container.appendChild(foundation);
+                
+                // Progressive arc - only draw if value > 1
+                if (value > 1) {
+                    const sweepAngle = ((value - 1) / 9) * TOTAL_ANGLE;
+                    const endAngle = START_ANGLE + sweepAngle;
+                    const endRad = (endAngle * Math.PI) / 180;
+                    const endX = cx + radius * Math.cos(endRad);
+                    const endY = cy + radius * Math.sin(endRad);
+                    const largeArc = sweepAngle > 180 ? 1 : 0;
+                    
+                    const progressive = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    progressive.setAttribute('d', `M ${startX} ${startY} A ${radius} ${radius} 0 ${largeArc} 1 ${endX} ${endY}`);
+                    progressive.setAttribute('fill', 'none');
+                    progressive.setAttribute('stroke', gradientId ? `url(#${gradientId})` : color);
+                    progressive.setAttribute('stroke-width', strokeWidth);
+                    progressive.setAttribute('stroke-linecap', 'round');
+                    progressive.setAttribute('filter', 'url(#zen-glow)');
+                    container.appendChild(progressive);
+                }
+                
+                // Value display
+                if (showValue) {
+                    const valueText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    valueText.setAttribute('x', cx);
+                    valueText.setAttribute('y', cy);
+                    valueText.setAttribute('text-anchor', 'middle');
+                    valueText.setAttribute('font-size', '48');
+                    valueText.setAttribute('font-weight', '200');
+                    valueText.setAttribute('fill', color);
+                    valueText.textContent = value.toFixed(1);
+                    container.appendChild(valueText);
+                }
+            }
+            
+            // Create Module 2 demo
+            createArcDemo('module2-arc', 6.5, '#10b981', { gradientId: 'demo-gradient' });
+            
+            // Create stage demos
+            createArcDemo('fragil-demo', 2.5, '#ef4444', { gradientId: 'fragil-grad' });
+            createArcDemo('resiliente-demo', 7.0, '#10b981', { gradientId: 'resiliente-grad' });
+            createArcDemo('adaptativo-demo', 9.0, '#3b82f6', { gradientId: 'adaptativo-grad' });
+            
+            // Create dimension demos with different center position and size
+            createArcDemo('aer-demo', 7.2, '#10b981', { 
+                cx: 200, 
+                cy: 160, 
+                radius: 90, 
+                strokeWidth: 16, 
+                showValue: false,
+                gradientId: 'aer-grad' 
+            });
+            
+            createArcDemo('bri-demo', 4.8, '#f59e0b', { 
+                cx: 200, 
+                cy: 160, 
+                radius: 90, 
+                strokeWidth: 16, 
+                showValue: false,
+                gradientId: 'bri-grad' 
+            });
+            
+            // Main interactive demo
+            const mainSlider = document.getElementById('mainSlider');
+            const mainReadout = document.getElementById('mainReadout');
+            const mainValue = document.getElementById('main-value');
+            const mainStage = document.getElementById('main-stage');
+            const mainArc = document.getElementById('main-progressive-arc');
+            
+            function updateMainDemo() {
+                const value = parseFloat(mainSlider.value);
+                const color = getColorForValue(value);
+                const stage = getStageForValue(value);
+                
+                // Update text
+                mainReadout.textContent = value.toFixed(1);
+                mainValue.textContent = value.toFixed(1);
+                mainStage.textContent = stage;
+                
+                // Update colors
+                mainReadout.style.color = color;
+                mainValue.setAttribute('fill', color);
+                mainStage.setAttribute('fill', color);
+                
+                // Update gradient
+                createLuminosityGradient('main-gradient', color);
+                
+                // Update arc using consistent calculations
+                const START_ANGLE = 135;
+                const TOTAL_ANGLE = 270;
+                const cx = 300, cy = 300, radius = 240;
+                
+                // Calculate start point
+                const startRad = (START_ANGLE * Math.PI) / 180;
+                const startX = cx + radius * Math.cos(startRad);
+                const startY = cy + radius * Math.sin(startRad);
+                
+                // Calculate end point
+                const sweepAngle = ((value - 1) / 9) * TOTAL_ANGLE;
+                const endAngle = START_ANGLE + sweepAngle;
+                const endRad = (endAngle * Math.PI) / 180;
+                const endX = cx + radius * Math.cos(endRad);
+                const endY = cy + radius * Math.sin(endRad);
+                const largeArc = sweepAngle > 180 ? 1 : 0;
+                
+                mainArc.setAttribute('d', `M ${startX} ${startY} A ${radius} ${radius} 0 ${largeArc} 1 ${endX} ${endY}`);
+            }
+            
+            mainSlider.addEventListener('input', updateMainDemo);
+            updateMainDemo();
+        </script>
+    </div>
+</body>
+</html>

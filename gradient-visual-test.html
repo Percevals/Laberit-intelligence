@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DII Arc Gradient - Visual Validation</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+            padding: 40px 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 40px;
+        }
+        .section {
+            background: #2a2a2a;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px solid #333;
+        }
+        .section-title {
+            color: #fff;
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .test-card {
+            background: #000;
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid #444;
+        }
+        .test-card h4 {
+            margin: 0 0 15px 0;
+            color: #fff;
+            font-size: 1.1em;
+        }
+        svg {
+            background: #000;
+            border-radius: 12px;
+        }
+        .value-display {
+            font-size: 36px;
+            font-weight: bold;
+            margin: 15px 0 10px 0;
+        }
+        .stage-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        .feature-list li {
+            padding: 10px 0;
+            color: #ccc;
+            display: flex;
+            align-items: center;
+        }
+        .feature-list li:before {
+            content: "✓";
+            color: #4caf50;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        .controls {
+            background: #333;
+            padding: 30px;
+            border-radius: 16px;
+            margin-top: 30px;
+        }
+        input[type="range"] {
+            width: 100%;
+            margin: 15px 0;
+            height: 8px;
+            border-radius: 4px;
+            background: #555;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #fff;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .info-box {
+            background: #333;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 4px solid #4caf50;
+        }
+        .color-legend {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .color-item {
+            display: flex;
+            align-items: center;
+            margin: 10px;
+        }
+        .color-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            margin-right: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DII Progressive Arc - Gradient Visual Validation</h1>
+        <p class="subtitle">Validating gradient implementation across all DII stages and values</p>
+
+        <!-- Color Legend -->
+        <div class="section">
+            <h2 class="section-title">DII Stage Color Mapping</h2>
+            <div class="color-legend">
+                <div class="color-item">
+                    <div class="color-dot" style="background: #ef4444;"></div>
+                    <span>FRÁGIL (1-4)</span>
+                </div>
+                <div class="color-item">
+                    <div class="color-dot" style="background: #f59e0b;"></div>
+                    <span>ROBUSTO (4-6)</span>
+                </div>
+                <div class="color-item">
+                    <div class="color-dot" style="background: #10b981;"></div>
+                    <span>RESILIENTE (6-8)</span>
+                </div>
+                <div class="color-item">
+                    <div class="color-dot" style="background: #3b82f6;"></div>
+                    <span>ADAPTATIVO (8-10)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stage Boundary Tests -->
+        <div class="section">
+            <h2 class="section-title">Stage Boundary Validation</h2>
+            <div class="test-grid">
+                <!-- FRÁGIL Examples -->
+                <div class="test-card">
+                    <h4>Value: 1.0 (Min)</h4>
+                    <svg width="250" height="250" viewBox="0 0 250 250">
+                        <defs>
+                            <linearGradient id="grad-1" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#ef4444" />
+                                <stop offset="33.33%" stop-color="#ef4444" />
+                                <stop offset="33.33%" stop-color="#f59e0b" />
+                                <stop offset="55.56%" stop-color="#f59e0b" />
+                                <stop offset="55.56%" stop-color="#10b981" />
+                                <stop offset="77.78%" stop-color="#10b981" />
+                                <stop offset="77.78%" stop-color="#3b82f6" />
+                                <stop offset="100%" stop-color="#3b82f6" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M 54.29 195.71 A 100 100 0 1 1 195.71 195.71" 
+                              fill="none" stroke="#333" stroke-width="20" stroke-linecap="round" />
+                        <g id="arc-1"></g>
+                    </svg>
+                    <div class="value-display" style="color: #ef4444;">1.0</div>
+                    <div class="stage-badge" style="background: #ef4444; color: #fff;">FRÁGIL</div>
+                </div>
+
+                <div class="test-card">
+                    <h4>Value: 3.9 (Near boundary)</h4>
+                    <svg width="250" height="250" viewBox="0 0 250 250">
+                        <defs>
+                            <linearGradient id="grad-39" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#ef4444" />
+                                <stop offset="33.33%" stop-color="#ef4444" />
+                                <stop offset="33.33%" stop-color="#f59e0b" />
+                                <stop offset="55.56%" stop-color="#f59e0b" />
+                                <stop offset="55.56%" stop-color="#10b981" />
+                                <stop offset="77.78%" stop-color="#10b981" />
+                                <stop offset="77.78%" stop-color="#3b82f6" />
+                                <stop offset="100%" stop-color="#3b82f6" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M 54.29 195.71 A 100 100 0 1 1 195.71 195.71" 
+                              fill="none" stroke="#333" stroke-width="20" stroke-linecap="round" />
+                        <g id="arc-39"></g>
+                    </svg>
+                    <div class="value-display" style="color: #ef4444;">3.9</div>
+                    <div class="stage-badge" style="background: #ef4444; color: #fff;">FRÁGIL</div>
+                </div>
+
+                <!-- ROBUSTO Examples -->
+                <div class="test-card">
+                    <h4>Value: 4.1 (Boundary)</h4>
+                    <svg width="250" height="250" viewBox="0 0 250 250">
+                        <defs>
+                            <linearGradient id="grad-41" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#ef4444" />
+                                <stop offset="33.33%" stop-color="#ef4444" />
+                                <stop offset="33.33%" stop-color="#f59e0b" />
+                                <stop offset="55.56%" stop-color="#f59e0b" />
+                                <stop offset="55.56%" stop-color="#10b981" />
+                                <stop offset="77.78%" stop-color="#10b981" />
+                                <stop offset="77.78%" stop-color="#3b82f6" />
+                                <stop offset="100%" stop-color="#3b82f6" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M 54.29 195.71 A 100 100 0 1 1 195.71 195.71" 
+                              fill="none" stroke="#333" stroke-width="20" stroke-linecap="round" />
+                        <g id="arc-41"></g>
+                    </svg>
+                    <div class="value-display" style="color: #f59e0b;">4.1</div>
+                    <div class="stage-badge" style="background: #f59e0b; color: #fff;">ROBUSTO</div>
+                </div>
+
+                <div class="test-card">
+                    <h4>Value: 5.9 (Near boundary)</h4>
+                    <svg width="250" height="250" viewBox="0 0 250 250">
+                        <defs>
+                            <linearGradient id="grad-59" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#ef4444" />
+                                <stop offset="33.33%" stop-color="#ef4444" />
+                                <stop offset="33.33%" stop-color="#f59e0b" />
+                                <stop offset="55.56%" stop-color="#f59e0b" />
+                                <stop offset="55.56%" stop-color="#10b981" />
+                                <stop offset="77.78%" stop-color="#10b981" />
+                                <stop offset="77.78%" stop-color="#3b82f6" />
+                                <stop offset="100%" stop-color="#3b82f6" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M 54.29 195.71 A 100 100 0 1 1 195.71 195.71" 
+                              fill="none" stroke="#333" stroke-width="20" stroke-linecap="round" />
+                        <g id="arc-59"></g>
+                    </svg>
+                    <div class="value-display" style="color: #f59e0b;">5.9</div>
+                    <div class="stage-badge" style="background: #f59e0b; color: #fff;">ROBUSTO</div>
+                </div>
+
+                <!-- RESILIENTE Examples -->
+                <div class="test-card">
+                    <h4>Value: 6.1 (Boundary)</h4>
+                    <svg width="250" height="250" viewBox="0 0 250 250">
+                        <defs>
+                            <linearGradient id="grad-61" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#ef4444" />
+                                <stop offset="33.33%" stop-color="#ef4444" />
+                                <stop offset="33.33%" stop-color="#f59e0b" />
+                                <stop offset="55.56%" stop-color="#f59e0b" />
+                                <stop offset="55.56%" stop-color="#10b981" />
+                                <stop offset="77.78%" stop-color="#10b981" />
+                                <stop offset="77.78%" stop-color="#3b82f6" />
+                                <stop offset="100%" stop-color="#3b82f6" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M 54.29 195.71 A 100 100 0 1 1 195.71 195.71" 
+                              fill="none" stroke="#333" stroke-width="20" stroke-linecap="round" />
+                        <g id="arc-61"></g>
+                    </svg>
+                    <div class="value-display" style="color: #10b981;">6.1</div>
+                    <div class="stage-badge" style="background: #10b981; color: #fff;">RESILIENTE</div>
+                </div>
+
+                <div class="test-card">
+                    <h4>Value: 7.9 (Near boundary)</h4>
+                    <svg width="250" height="250" viewBox="0 0 250 250">
+                        <defs>
+                            <linearGradient id="grad-79" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#ef4444" />
+                                <stop offset="33.33%" stop-color="#ef4444" />
+                                <stop offset="33.33%" stop-color="#f59e0b" />
+                                <stop offset="55.56%" stop-color="#f59e0b" />
+                                <stop offset="55.56%" stop-color="#10b981" />
+                                <stop offset="77.78%" stop-color="#10b981" />
+                                <stop offset="77.78%" stop-color="#3b82f6" />
+                                <stop offset="100%" stop-color="#3b82f6" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M 54.29 195.71 A 100 100 0 1 1 195.71 195.71" 
+                              fill="none" stroke="#333" stroke-width="20" stroke-linecap="round" />
+                        <g id="arc-79"></g>
+                    </svg>
+                    <div class="value-display" style="color: #10b981;">7.9</div>
+                    <div class="stage-badge" style="background: #10b981; color: #fff;">RESILIENTE</div>
+                </div>
+
+                <!-- ADAPTATIVO Examples -->
+                <div class="test-card">
+                    <h4>Value: 8.1 (Boundary)</h4>
+                    <svg width="250" height="250" viewBox="0 0 250 250">
+                        <defs>
+                            <linearGradient id="grad-81" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#ef4444" />
+                                <stop offset="33.33%" stop-color="#ef4444" />
+                                <stop offset="33.33%" stop-color="#f59e0b" />
+                                <stop offset="55.56%" stop-color="#f59e0b" />
+                                <stop offset="55.56%" stop-color="#10b981" />
+                                <stop offset="77.78%" stop-color="#10b981" />
+                                <stop offset="77.78%" stop-color="#3b82f6" />
+                                <stop offset="100%" stop-color="#3b82f6" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M 54.29 195.71 A 100 100 0 1 1 195.71 195.71" 
+                              fill="none" stroke="#333" stroke-width="20" stroke-linecap="round" />
+                        <g id="arc-81"></g>
+                    </svg>
+                    <div class="value-display" style="color: #3b82f6;">8.1</div>
+                    <div class="stage-badge" style="background: #3b82f6; color: #fff;">ADAPTATIVO</div>
+                </div>
+
+                <div class="test-card">
+                    <h4>Value: 10.0 (Max)</h4>
+                    <svg width="250" height="250" viewBox="0 0 250 250">
+                        <defs>
+                            <linearGradient id="grad-10" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#ef4444" />
+                                <stop offset="33.33%" stop-color="#ef4444" />
+                                <stop offset="33.33%" stop-color="#f59e0b" />
+                                <stop offset="55.56%" stop-color="#f59e0b" />
+                                <stop offset="55.56%" stop-color="#10b981" />
+                                <stop offset="77.78%" stop-color="#10b981" />
+                                <stop offset="77.78%" stop-color="#3b82f6" />
+                                <stop offset="100%" stop-color="#3b82f6" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M 54.29 195.71 A 100 100 0 1 1 195.71 195.71" 
+                              fill="none" stroke="#333" stroke-width="20" stroke-linecap="round" />
+                        <g id="arc-10"></g>
+                    </svg>
+                    <div class="value-display" style="color: #3b82f6;">10.0</div>
+                    <div class="stage-badge" style="background: #3b82f6; color: #fff;">ADAPTATIVO</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparison Section -->
+        <div class="section">
+            <h2 class="section-title">Solid vs Gradient Comparison</h2>
+            <div class="comparison-grid">
+                <div>
+                    <h3 style="text-align: center; margin-bottom: 30px;">Solid Color Mode</h3>
+                    <svg width="400" height="400" viewBox="0 0 400 400">
+                        <path d="M 86.86 313.14 A 160 160 0 1 1 313.14 313.14" 
+                              fill="none" stroke="#333" stroke-width="24" stroke-linecap="round" />
+                        <g id="solid-comparison"></g>
+                        <text x="200" y="200" text-anchor="middle" font-size="48" font-weight="bold" fill="#10b981">7.5</text>
+                        <text x="200" y="230" text-anchor="middle" font-size="18" fill="#10b981">RESILIENTE</text>
+                    </svg>
+                    <ul class="feature-list">
+                        <li>Clear stage identification</li>
+                        <li>Simple and clean aesthetic</li>
+                        <li>Instant color recognition</li>
+                        <li>No transition ambiguity</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="text-align: center; margin-bottom: 30px;">Gradient Mode</h3>
+                    <svg width="400" height="400" viewBox="0 0 400 400">
+                        <defs>
+                            <linearGradient id="comparison-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#ef4444" />
+                                <stop offset="33.33%" stop-color="#ef4444" />
+                                <stop offset="33.33%" stop-color="#f59e0b" />
+                                <stop offset="55.56%" stop-color="#f59e0b" />
+                                <stop offset="55.56%" stop-color="#10b981" />
+                                <stop offset="77.78%" stop-color="#10b981" />
+                                <stop offset="77.78%" stop-color="#3b82f6" />
+                                <stop offset="100%" stop-color="#3b82f6" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M 86.86 313.14 A 160 160 0 1 1 313.14 313.14" 
+                              fill="none" stroke="#333" stroke-width="24" stroke-linecap="round" />
+                        <g id="gradient-comparison"></g>
+                        <text x="200" y="200" text-anchor="middle" font-size="48" font-weight="bold" fill="#10b981">7.5</text>
+                        <text x="200" y="230" text-anchor="middle" font-size="18" fill="#10b981">RESILIENTE</text>
+                    </svg>
+                    <ul class="feature-list">
+                        <li>Shows progression history</li>
+                        <li>Visual journey through stages</li>
+                        <li>Enhanced data visualization</li>
+                        <li>Premium aesthetic</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Demo -->
+        <div class="section">
+            <h2 class="section-title">Interactive Gradient Validation</h2>
+            <svg width="600" height="600" viewBox="0 0 600 600" style="display: block; margin: 0 auto;">
+                <defs>
+                    <linearGradient id="interactive-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#ef4444" />
+                        <stop offset="33.33%" stop-color="#ef4444" />
+                        <stop offset="33.33%" stop-color="#f59e0b" />
+                        <stop offset="55.56%" stop-color="#f59e0b" />
+                        <stop offset="55.56%" stop-color="#10b981" />
+                        <stop offset="77.78%" stop-color="#10b981" />
+                        <stop offset="77.78%" stop-color="#3b82f6" />
+                        <stop offset="100%" stop-color="#3b82f6" />
+                    </linearGradient>
+                    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+                
+                <!-- Grey foundation arc -->
+                <path d="M 130.29 470.71 A 240 240 0 1 1 469.71 470.71" 
+                      fill="none" stroke="#333" stroke-width="36" stroke-linecap="round" />
+                
+                <!-- Stage labels -->
+                <text x="130" y="500" text-anchor="middle" font-size="14" fill="#666">1</text>
+                <text x="190" y="380" text-anchor="middle" font-size="14" fill="#666">4</text>
+                <text x="300" y="320" text-anchor="middle" font-size="14" fill="#666">6</text>
+                <text x="410" y="380" text-anchor="middle" font-size="14" fill="#666">8</text>
+                <text x="470" y="500" text-anchor="middle" font-size="14" fill="#666">10</text>
+                
+                <!-- Progressive arc -->
+                <g id="interactive-arc"></g>
+                
+                <!-- Center display -->
+                <text x="300" y="290" text-anchor="middle" font-size="72" font-weight="bold" fill="#fff" id="big-value">5.5</text>
+                <text x="300" y="340" text-anchor="middle" font-size="24" fill="#888" id="big-stage">ROBUSTO</text>
+            </svg>
+            
+            <div class="controls">
+                <label for="interactiveSlider" style="font-size: 18px;">DII Value:</label>
+                <input type="range" id="interactiveSlider" min="1" max="10" step="0.1" value="5.5">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+                    <div class="value-display" id="sliderValue" style="font-size: 48px;">5.5</div>
+                    <div class="stage-badge" id="sliderStage" style="font-size: 18px; background: #f59e0b; color: #fff;">ROBUSTO</div>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <strong>Gradient Behavior:</strong> The gradient shows the complete journey from FRÁGIL to your current position. 
+                Stage transitions occur exactly at values 4, 6, and 8. The visual representation helps stakeholders understand 
+                not just where they are, but the path they've traveled and what lies ahead.
+            </div>
+        </div>
+
+        <!-- 170° Rotation Test -->
+        <div class="section">
+            <h2 class="section-title">170° Rotation Validation</h2>
+            <div style="display: flex; justify-content: center; gap: 80px;">
+                <div style="text-align: center;">
+                    <h3 style="margin-bottom: 20px;">Standard Orientation</h3>
+                    <svg width="300" height="300" viewBox="0 0 300 300">
+                        <defs>
+                            <linearGradient id="rot-grad-1" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#ef4444" />
+                                <stop offset="33.33%" stop-color="#ef4444" />
+                                <stop offset="33.33%" stop-color="#f59e0b" />
+                                <stop offset="55.56%" stop-color="#f59e0b" />
+                                <stop offset="55.56%" stop-color="#10b981" />
+                                <stop offset="77.78%" stop-color="#10b981" />
+                                <stop offset="77.78%" stop-color="#3b82f6" />
+                                <stop offset="100%" stop-color="#3b82f6" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M 65.07 234.93 A 120 120 0 1 1 234.93 234.93" 
+                              fill="none" stroke="#333" stroke-width="24" stroke-linecap="round" />
+                        <g id="rot-normal"></g>
+                    </svg>
+                </div>
+                <div style="text-align: center;">
+                    <h3 style="margin-bottom: 20px;">Rotated 170°</h3>
+                    <svg width="300" height="300" viewBox="0 0 300 300" style="transform: rotate(170deg);">
+                        <defs>
+                            <linearGradient id="rot-grad-2" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#ef4444" />
+                                <stop offset="33.33%" stop-color="#ef4444" />
+                                <stop offset="33.33%" stop-color="#f59e0b" />
+                                <stop offset="55.56%" stop-color="#f59e0b" />
+                                <stop offset="55.56%" stop-color="#10b981" />
+                                <stop offset="77.78%" stop-color="#10b981" />
+                                <stop offset="77.78%" stop-color="#3b82f6" />
+                                <stop offset="100%" stop-color="#3b82f6" />
+                            </linearGradient>
+                        </defs>
+                        <rect width="300" height="300" fill="#000" />
+                        <path d="M 65.07 234.93 A 120 120 0 1 1 234.93 234.93" 
+                              fill="none" stroke="#333" stroke-width="24" stroke-linecap="round" />
+                        <g id="rot-rotated"></g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Helper function to create arc
+            function createArc(containerId, value, options = {}) {
+                const {
+                    cx = 125,
+                    cy = 125,
+                    radius = 100,
+                    strokeWidth = 20,
+                    startAngle = 135,
+                    endAngle = 405,
+                    useGradient = true,
+                    gradientId = null
+                } = options;
+                
+                const container = document.getElementById(containerId);
+                container.innerHTML = '';
+                
+                const totalSweep = endAngle - startAngle;
+                const normalized = (value - 1) / 9;
+                const sweepAngle = normalized * totalSweep;
+                
+                const startRad = (startAngle * Math.PI) / 180;
+                const endRad = ((startAngle + sweepAngle) * Math.PI) / 180;
+                
+                const x1 = cx + radius * Math.cos(startRad);
+                const y1 = cy + radius * Math.sin(startRad);
+                const x2 = cx + radius * Math.cos(endRad);
+                const y2 = cy + radius * Math.sin(endRad);
+                
+                const largeArc = sweepAngle > 180 ? 1 : 0;
+                
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', `M ${x1} ${y1} A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2}`);
+                path.setAttribute('fill', 'none');
+                path.setAttribute('stroke', useGradient ? `url(#${gradientId})` : getColorForValue(value));
+                path.setAttribute('stroke-width', strokeWidth);
+                path.setAttribute('stroke-linecap', 'round');
+                path.setAttribute('filter', 'url(#glow)');
+                
+                container.appendChild(path);
+            }
+            
+            function getColorForValue(value) {
+                if (value < 4) return '#ef4444';
+                if (value < 6) return '#f59e0b';
+                if (value < 8) return '#10b981';
+                return '#3b82f6';
+            }
+            
+            function getStageForValue(value) {
+                if (value < 4) return 'FRÁGIL';
+                if (value < 6) return 'ROBUSTO';
+                if (value < 8) return 'RESILIENTE';
+                return 'ADAPTATIVO';
+            }
+            
+            // Create all boundary test arcs
+            const testValues = [1.0, 3.9, 4.1, 5.9, 6.1, 7.9, 8.1, 10.0];
+            testValues.forEach(value => {
+                const id = value.toString().replace('.', '');
+                createArc(`arc-${id}`, value, { gradientId: `grad-${id}` });
+            });
+            
+            // Comparison arcs
+            createArc('solid-comparison', 7.5, { 
+                cx: 200, cy: 200, radius: 160, strokeWidth: 24, 
+                useGradient: false 
+            });
+            createArc('gradient-comparison', 7.5, { 
+                cx: 200, cy: 200, radius: 160, strokeWidth: 24, 
+                gradientId: 'comparison-grad' 
+            });
+            
+            // Rotation test arcs
+            createArc('rot-normal', 8.5, { 
+                cx: 150, cy: 150, radius: 120, strokeWidth: 24,
+                gradientId: 'rot-grad-1' 
+            });
+            createArc('rot-rotated', 8.5, { 
+                cx: 150, cy: 150, radius: 120, strokeWidth: 24,
+                gradientId: 'rot-grad-2' 
+            });
+            
+            // Interactive arc
+            const slider = document.getElementById('interactiveSlider');
+            const sliderValue = document.getElementById('sliderValue');
+            const sliderStage = document.getElementById('sliderStage');
+            const bigValue = document.getElementById('big-value');
+            const bigStage = document.getElementById('big-stage');
+            
+            function updateInteractive() {
+                const value = parseFloat(slider.value);
+                sliderValue.textContent = value.toFixed(1);
+                bigValue.textContent = value.toFixed(1);
+                
+                const stage = getStageForValue(value);
+                sliderStage.textContent = stage;
+                bigStage.textContent = stage;
+                
+                const color = getColorForValue(value);
+                sliderValue.style.color = color;
+                bigValue.setAttribute('fill', color);
+                bigStage.setAttribute('fill', color);
+                
+                sliderStage.style.backgroundColor = color;
+                
+                createArc('interactive-arc', value, { 
+                    cx: 300, cy: 300, radius: 240, strokeWidth: 36,
+                    gradientId: 'interactive-grad' 
+                });
+            }
+            
+            slider.addEventListener('input', updateInteractive);
+            updateInteractive();
+        </script>
+    </div>
+</body>
+</html>

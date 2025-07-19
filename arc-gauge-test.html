@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arc Gauge Angle Tests</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .gauge-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h3 {
+            margin-top: 0;
+            font-size: 16px;
+        }
+        .note {
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Arc Gauge Orientation Tests</h1>
+    <div class="container">
+        <!-- Test 1: Original (135° to 45°) -->
+        <div class="gauge-card">
+            <h3>1. Original: 135° → 45°</h3>
+            <svg width="200" height="200" viewBox="0 0 200 200">
+                <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#ef4444" />
+                        <stop offset="50%" style="stop-color:#10b981" />
+                        <stop offset="100%" style="stop-color:#3b82f6" />
+                    </linearGradient>
+                </defs>
+                <!-- Background -->
+                <path d="M 35.36 164.64 A 80 80 0 1 1 164.64 164.64" 
+                      fill="none" stroke="#e5e7eb" stroke-width="12" stroke-linecap="round" />
+                <!-- Progress (75%) -->
+                <path d="M 35.36 164.64 A 80 80 0 1 1 144.28 130.0" 
+                      fill="none" stroke="url(#grad1)" stroke-width="12" stroke-linecap="round" />
+                <text x="100" y="105" text-anchor="middle" font-size="24" font-weight="bold">75</text>
+            </svg>
+            <div class="note">Opens at bottom (traditional)</div>
+        </div>
+
+        <!-- Test 2: 225° to 135° (attempting right opening) -->
+        <div class="gauge-card">
+            <h3>2. Modified: 225° → 135°</h3>
+            <svg width="200" height="200" viewBox="0 0 200 200">
+                <defs>
+                    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#ef4444" />
+                        <stop offset="50%" style="stop-color:#10b981" />
+                        <stop offset="100%" style="stop-color:#3b82f6" />
+                    </linearGradient>
+                </defs>
+                <!-- Background -->
+                <path d="M 164.64 164.64 A 80 80 0 1 1 35.36 35.36" 
+                      fill="none" stroke="#e5e7eb" stroke-width="12" stroke-linecap="round" />
+                <!-- Progress (75%) -->
+                <path d="M 164.64 164.64 A 80 80 0 1 1 55.72 130.0" 
+                      fill="none" stroke="url(#grad2)" stroke-width="12" stroke-linecap="round" />
+                <text x="100" y="105" text-anchor="middle" font-size="24" font-weight="bold">75</text>
+            </svg>
+            <div class="note">Opens at right</div>
+        </div>
+
+        <!-- Test 3: -45° to 225° (alternative right opening) -->
+        <div class="gauge-card">
+            <h3>3. Alternative: -45° → 225°</h3>
+            <svg width="200" height="200" viewBox="0 0 200 200">
+                <defs>
+                    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#ef4444" />
+                        <stop offset="50%" style="stop-color:#10b981" />
+                        <stop offset="100%" style="stop-color:#3b82f6" />
+                    </linearGradient>
+                </defs>
+                <!-- Background -->
+                <path d="M 164.64 35.36 A 80 80 0 1 1 164.64 164.64" 
+                      fill="none" stroke="#e5e7eb" stroke-width="12" stroke-linecap="round" />
+                <!-- Progress (75%) -->
+                <path d="M 164.64 35.36 A 80 80 0 1 1 130.0 144.28" 
+                      fill="none" stroke="url(#grad3)" stroke-width="12" stroke-linecap="round" />
+                <text x="100" y="105" text-anchor="middle" font-size="24" font-weight="bold">75</text>
+            </svg>
+            <div class="note">Opens at right (clean)</div>
+        </div>
+
+        <!-- Test 4: 45° to 315° (top opening) -->
+        <div class="gauge-card">
+            <h3>4. Top: 45° → 315°</h3>
+            <svg width="200" height="200" viewBox="0 0 200 200">
+                <defs>
+                    <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#ef4444" />
+                        <stop offset="50%" style="stop-color:#10b981" />
+                        <stop offset="100%" style="stop-color:#3b82f6" />
+                    </linearGradient>
+                </defs>
+                <!-- Background -->
+                <path d="M 164.64 35.36 A 80 80 0 1 1 35.36 35.36" 
+                      fill="none" stroke="#e5e7eb" stroke-width="12" stroke-linecap="round" />
+                <!-- Progress (75%) -->
+                <path d="M 164.64 35.36 A 80 80 0 1 1 55.72 70.0" 
+                      fill="none" stroke="url(#grad4)" stroke-width="12" stroke-linecap="round" />
+                <text x="100" y="105" text-anchor="middle" font-size="24" font-weight="bold">75</text>
+            </svg>
+            <div class="note">Opens at top</div>
+        </div>
+
+        <!-- Test 5: 315° to 225° (left opening) -->
+        <div class="gauge-card">
+            <h3>5. Left: 315° → 225°</h3>
+            <svg width="200" height="200" viewBox="0 0 200 200">
+                <defs>
+                    <linearGradient id="grad5" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#ef4444" />
+                        <stop offset="50%" style="stop-color:#10b981" />
+                        <stop offset="100%" style="stop-color:#3b82f6" />
+                    </linearGradient>
+                </defs>
+                <!-- Background -->
+                <path d="M 35.36 35.36 A 80 80 0 1 1 164.64 164.64" 
+                      fill="none" stroke="#e5e7eb" stroke-width="12" stroke-linecap="round" />
+                <!-- Progress (75%) -->
+                <path d="M 35.36 35.36 A 80 80 0 1 1 144.28 70.0" 
+                      fill="none" stroke="url(#grad5)" stroke-width="12" stroke-linecap="round" />
+                <text x="100" y="105" text-anchor="middle" font-size="24" font-weight="bold">75</text>
+            </svg>
+            <div class="note">Opens at left</div>
+        </div>
+
+        <!-- Test 6: Your requested 170° rotation -->
+        <div class="gauge-card">
+            <h3>6. 170° Rotated: ~305° → 215°</h3>
+            <svg width="200" height="200" viewBox="0 0 200 200">
+                <defs>
+                    <linearGradient id="grad6" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#ef4444" />
+                        <stop offset="50%" style="stop-color:#10b981" />
+                        <stop offset="100%" style="stop-color:#3b82f6" />
+                    </linearGradient>
+                </defs>
+                <!-- Calculate points for 305° and 215° -->
+                <!-- 305° = -55° from 0, 215° = 215° -->
+                <path d="M 70.71 29.29 A 80 80 0 1 1 154.14 154.14" 
+                      fill="none" stroke="#e5e7eb" stroke-width="12" stroke-linecap="round" />
+                <!-- Progress (75%) -->
+                <path d="M 70.71 29.29 A 80 80 0 1 1 125.0 155.0" 
+                      fill="none" stroke="url(#grad6)" stroke-width="12" stroke-linecap="round" />
+                <text x="100" y="105" text-anchor="middle" font-size="24" font-weight="bold">75</text>
+            </svg>
+            <div class="note">Your requested 170° rotation</div>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px;">
+        <h2>Which orientation do you prefer?</h2>
+        <p>Options 3 and 6 seem closest to your requirement of a 170° clockwise rotation</p>
+    </div>
+</body>
+</html>
