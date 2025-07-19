@@ -58,5 +58,5 @@ git push origin main
 ## URLs
 
 - Production: https://percevals.github.io/Laberit-intelligence/
-- Demo: https://percevals.github.io/Laberit-intelligence/demo
-- Archive: https://percevals.github.io/Laberit-intelligence/archive
+- Demo: https://percevals.github.io/Laberit-intelligence/#/demo
+- Archive: https://percevals.github.io/Laberit-intelligence/#/archive

@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { SimpleDashboard } from './components/SimpleDashboard';
 import { Demo } from './pages/Demo';
 import { Archive } from './pages/Archive';
@@ -22,14 +22,14 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter basename="/Laberit-intelligence">
+      <HashRouter>
         <Routes>
           <Route path="/" element={<SimpleDashboard />} />
           <Route path="/demo" element={<Demo />} />
           <Route path="/archive" element={<Archive />} />
           <Route path="/week/:year/:week" element={<SimpleDashboard />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </QueryClientProvider>
   );
 }
