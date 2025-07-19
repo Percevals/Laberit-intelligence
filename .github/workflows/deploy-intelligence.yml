@@ -31,7 +31,11 @@ jobs:
           cache-dependency-path: package-lock.json
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
+          # Fix for rollup optional dependencies issue
+          cd apps/intelligence-app
+          npm install --force
 
       - name: Build intelligence app
         run: |
