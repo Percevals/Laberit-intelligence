@@ -128,7 +128,7 @@ jobs:
           ls _site/intelligence/weekly-reports/*.html 2>/dev/null | head -3 || echo "No reports found"
           
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
 
   deploy:
     environment:
